@@ -1,0 +1,82 @@
+name: PR Preview
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+
+concurrency:
+  group: preview-${{ github.event.number }}
+  cancel-in-progress: true
+
+jobs:
+  preview:
+    name: Manage PR Preview
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Handle PR Closed
+        if: github.event.action == 'closed'
+        run: |
+          git fetch origin gh-pages || true
+          git checkout gh-pages || exit 0
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ -d "preview/pr-${{ github.event.number }}" ]; then
+            git rm -rf "preview/pr-${{ github.event.number }}"
+            git commit -m "chore: cleanup preview for PR #${{ github.event.number }}"
+            git push origin gh-pages
+          else
+            echo "No preview folder found to clean up."
+          fi
+
+      - name: Install pnpm
+        if: github.event.action != 'closed'
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.28.2
+
+      - name: Set up Node.js
+        if: github.event.action != 'closed'
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.node-version'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        if: github.event.action != 'closed'
+        run: pnpm install --frozen-lockfile
+
+      - name: Build Preview
+        if: github.event.action != 'closed'
+        run: pnpm run build
+        env:
+          VITE_BASE_PATH: /portfolio/preview/pr-${{ github.event.number }}/
+
+      - name: Deploy Preview to gh-pages branch
+        if: github.event.action != 'closed'
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist
+          branch: gh-pages
+          target-folder: preview/pr-${{ github.event.number }}
+          commit-message: "deploy: preview for PR #${{ github.event.number }}"
+
+      - name: Comment on PR with Preview Link
+        if: github.event.action != 'closed'
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: pr-preview-url
+          message: |
+            ### 🚀 Branch Preview Deployed!
+
+            Your changes have been successfully built and deployed as a preview branch:
+            🔗 **[View Preview](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/preview/pr-${{ github.event.number }}/)**
+
+            _Built with base path: `/portfolio/preview/pr-${{ github.event.number }}/`_
