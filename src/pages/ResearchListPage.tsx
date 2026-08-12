@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { getAllResearchPosts } from '@/data/research';
 import ResearchCard from '@/components/ResearchCard';
+import { ShieldCheck, Cpu, HardDrive } from 'lucide-react';
 
 export interface ResearchListPageProps {
   onNavigate: (slug: string) => void;
@@ -22,39 +23,65 @@ const ResearchListPage: React.FC<ResearchListPageProps> = ({ onNavigate }) => {
   }, [posts, selectedTag]);
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12">
-      <header className="mb-10 text-center">
-        <h1 className="text-4xl font-extrabold tracking-tight text-primary sm:text-5xl">
-          DevAI & Technical Research
+    <div className="mx-auto max-w-6xl px-4 py-8 space-y-10">
+      {/* DevAI Diagnostic Header Bar */}
+      <div className="bg-brand-bg-darker border border-slate-900 rounded-lg p-4 flex flex-wrap items-center justify-between gap-4 font-mono text-xs text-slate-500">
+        <div className="flex items-center space-x-3">
+          <span className="flex h-2 w-2 relative">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-green opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-green"></span>
+          </span>
+          <span className="text-slate-300">CONSOLE STATE: ONLINE</span>
+        </div>
+        <div className="flex items-center space-x-6">
+          <span className="hidden sm:flex items-center space-x-1.5">
+            <Cpu className="h-3.5 w-3.5 text-brand-green" />
+            <span>SYS_CPU: 12.4%</span>
+          </span>
+          <span className="hidden sm:flex items-center space-x-1.5">
+            <HardDrive className="h-3.5 w-3.5 text-brand-cyan-light" />
+            <span>MEM: 4.12 / 16 GB</span>
+          </span>
+          <span className="flex items-center space-x-1.5">
+            <ShieldCheck className="h-3.5 w-3.5 text-brand-accent" />
+            <span>SECURE SHELL</span>
+          </span>
+        </div>
+      </div>
+
+      <header className="text-center space-y-4">
+        <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight text-white font-mono flex items-center justify-center space-x-2">
+          <span className="text-brand-green">&gt;</span>
+          <span>DevAI & Technical Research</span>
         </h1>
-        <p className="mt-4 text-lg text-secondary">
-          Autonomous systems, robotics software architecture, and developer workflow automation.
+        <p className="mt-4 text-base text-slate-400 max-w-2xl mx-auto leading-relaxed">
+          Autonomous systems, robotics software architecture, and developer workflow automation. Migrated directly from the boomtick & tech-dancer stacks.
         </p>
       </header>
 
-      {/* Filter Bar */}
-      <div className="mb-8 flex flex-wrap items-center justify-center gap-2">
+      {/* Retro Command Filters Bar */}
+      <div className="flex flex-wrap items-center justify-center gap-2 font-mono">
         <button
           onClick={() => setSelectedTag(null)}
-          className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
+          className={`rounded border px-4 py-1.5 text-xs font-semibold transition-all ${
             selectedTag === null
-              ? 'bg-primary text-white'
-              : 'bg-surface border border-border text-secondary hover:text-primary'
+              ? 'bg-brand-green/20 border-brand-green text-brand-green-light shadow-[0_0_8px_rgba(34,197,94,0.15)]'
+              : 'bg-brand-bg-darker border-slate-800 text-slate-400 hover:text-white hover:border-slate-700'
           }`}
         >
-          All Topics
+          $ ls -all
         </button>
         {allTags.map((tag) => (
           <button
             key={tag}
             onClick={() => setSelectedTag(tag)}
-            className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
+            className={`rounded border px-4 py-1.5 text-xs font-semibold transition-all ${
               selectedTag === tag
-                ? 'bg-primary text-white'
-                : 'bg-surface border border-border text-secondary hover:text-primary'
+                ? 'bg-brand-green/20 border-brand-green text-brand-green-light shadow-[0_0_8px_rgba(34,197,94,0.15)]'
+                : 'bg-brand-bg-darker border-slate-800 text-slate-400 hover:text-white hover:border-slate-700'
             }`}
           >
-            {tag}
+            $ grep "{tag.toLowerCase()}"
           </button>
         ))}
       </div>
