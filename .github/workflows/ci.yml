@@ -36,26 +36,14 @@ jobs:
     needs: build-and-test
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/arii/boomtick/ai-workspace-runner:latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Restore Workspace Paths from Container
-        run: |
-          if [ -d "/workspace/mcp" ]; then
-            cp -r /workspace/mcp ./mcp
-          fi
-          if [ -d "/workspace/cli" ]; then
-            cp -r /workspace/cli ./cli
-          fi
-        shell: bash
-
       - name: Run BoomTick Impact Analysis
-        uses: arii/boomtick/mcp/actions/impact-analysis@main
+        uses: arii/boomtick/.github/actions/impact-analysis@feat/composite-action-impact-analysis-5988946707609229732
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
