@@ -1,38 +1,22 @@
-name: CI
+name: CI & Impact Analysis Gate
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
-  ci:
-    name: Build, Lint, Type-Check, Test & Impact Analysis
+  build-and-test:
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: write
-      pull-requests: write
-
     steps:
-      - name: Checkout repository
+      - name: Checkout Code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10.28.2
+      - name: Setup Node.js & pnpm
+        uses: ./.github/actions/setup-workspace
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: '.node-version'
-          cache: 'pnpm'
-
-      - name: Install dependencies
+      - name: Install Dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Run Lint
@@ -47,34 +31,20 @@ jobs:
       - name: Build Application
         run: pnpm run build
 
-      - name: Run Impact Analysis
-        run: node scripts/impact-analysis.js
-
-      - name: Generate GitHub App Token
-        uses: actions/create-github-app-token@v1
-        id: app-token
-        with:
-          app-id: ${{ secrets.APP_ID }}
-          private-key: ${{ secrets.APP_PRIVATE_KEY }}
-
-      - name: Checkout Boomtick Repository
+  impact-analysis:
+    name: Run Remote Impact Analysis
+    needs: build-and-test
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
         uses: actions/checkout@v4
         with:
-          repository: arii/boomtick
-          token: ${{ steps.app-token.outputs.token }}
-          path: boomtick
+          fetch-depth: 0
 
-      - name: Copy Boomtick Assets for Action Execution
-        run: |
-          cp -r boomtick/mcp ./
-          mkdir -p .github/actions
-          cp -r boomtick/.github/actions/* .github/actions/ 2>/dev/null || true
-        shell: bash
-
-      - name: Run Boomtick Deployment Impact Analysis
-        uses: ./mcp/actions/impact-analysis
+      - name: Run BoomTick Impact Analysis
+        uses: arii/boomtick/.github/actions/impact-analysis@main
         with:
-          github_token: ${{ steps.app-token.outputs.token }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
-          pr_number: ${{ github.event.pull_request.number || '1' }}
           jules_api_key: ${{ secrets.JULES_API_KEY }}
