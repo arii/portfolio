@@ -43,7 +43,7 @@ jobs:
           fetch-depth: 0
 
       - name: Run BoomTick Impact Analysis
-        uses: arii/boomtick/.github/actions/impact-analysis@main
+        uses: arii/boomtick/mcp/actions/impact-analysis@main
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
