@@ -6,4 +6,36 @@ export interface ResearchPost {
   tags: string[];
   summary: string;
   content: string;
+  category?: string;
+  author?: string;
+  readTime?: number;
+  status?: string;
+}
+
+export interface ResearchTool {
+  id: string;
+  title: string;
+  subtitle?: string;
+  description: string;
+  category: string;
+  taxonomyBucket?: 'flagship' | 'engineering' | 'data-content' | 'e-commerce';
+  status: string;
+  tags: string[];
+  canonicalPath?: string;
+  externalUrl?: string;
+  externalLinkDisplayLabel?: string;
+  sourceUrl?: string;
+  isFlagship?: boolean;
+  excludeFromEngineeringTools?: boolean;
+  image?: string;
+  imageAlt?: string;
+  inDevMessage?: {
+    highlight: string;
+    rest: string;
+  };
+  customPreview?: {
+    logo: { prefix: string; accent: string; suffix: string };
+    headline: { text: string; accent?: string }[];
+    tagline: string;
+  };
 }
