@@ -52,6 +52,8 @@ jobs:
         run: |
           ln -s boomtick-repo/mcp ./mcp
           ln -s boomtick-repo/cli ./cli
+          rm -rf .github/actions/setup-workspace
+          ln -s ../../boomtick-repo/.github/actions/setup-workspace .github/actions/setup-workspace
         shell: bash
 
       - name: Run BoomTick Impact Analysis
