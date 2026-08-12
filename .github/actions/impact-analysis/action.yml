@@ -29,7 +29,7 @@ runs:
           -e GEMINI_API_KEY="${GEMINI_API_KEY}" \
           -e JULES_API_KEY="${JULES_API_KEY}" \
           -e PR_NUMBER="${PR_NUMBER}" \
-          -v "${{ github.workspace }}":/workspace \
-          -w /workspace \
+          -v "${{ github.workspace }}":/github/workspace \
+          -w /github/workspace \
           ghcr.io/arii/boomtick:latest \
-          td-cli ai review "${PR_NUMBER}"
+          ai review "${PR_NUMBER}"
