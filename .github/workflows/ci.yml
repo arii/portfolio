@@ -50,7 +50,7 @@ jobs:
 
       - name: Run Remote BoomTick Impact Analysis
         if: github.event_name == 'pull_request'
-        uses: arii/boomtick/.github/actions/impact-analysis@main
+        uses: ./.github/actions/impact-analysis
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
