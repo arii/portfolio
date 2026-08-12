@@ -29,6 +29,13 @@ const config: Config = {
           },
           accent: 'var(--brand-accent, #6366f1)', // Indigo/cyber highlight
         },
+        // Flat top-level theme aliases for the research/DevAI component suite
+        primary: 'var(--brand-cyan, #0ea5e9)',
+        'primary-accent': 'var(--brand-cyan-light, #38bdf8)',
+        secondary: '#94a3b8', // slate-400 secondary text
+        muted: '#64748b',     // slate-500 muted text/icons
+        surface: 'var(--brand-bg-surface, #1e293b)',
+        border: '#1e293b',    // slate-800 border style
       },
       fontFamily: {
         mono: ['JetBrains Mono', 'Fira Code', 'ui-monospace', 'monospace'],

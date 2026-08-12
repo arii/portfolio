@@ -22,6 +22,10 @@ const router = createHashRouter([
         element: <Research />,
       },
       {
+        path: 'research/:slug',
+        element: <Research />,
+      },
+      {
         path: 'resume',
         element: <Resume />,
       },
