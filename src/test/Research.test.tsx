@@ -10,6 +10,7 @@ const mockPost: ResearchPost = {
   date: '2026-08-01',
   readingTime: '5 min read',
   tags: ['Robotics', 'Testing'],
+  category: 'Testing',
   summary: 'Summary of the test post.',
   content: '# Test Title\nTest Content'
 };
@@ -18,6 +19,7 @@ describe('ResearchCard Component', () => {
   it('renders title, summary, and tags accurately', () => {
     render(<ResearchCard post={mockPost} onSelect={() => {}} />);
 
+    // Check with direct matching
     expect(screen.getByText('Test Robotics Title')).toBeInTheDocument();
     expect(screen.getByText('Summary of the test post.')).toBeInTheDocument();
     expect(screen.getByText('Robotics')).toBeInTheDocument();
