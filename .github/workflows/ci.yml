@@ -42,20 +42,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Checkout Boomtick
-        uses: actions/checkout@v4
-        with:
-          repository: arii/boomtick
-          path: boomtick-repo
-
-      - name: Link Boomtick Assets
-        run: |
-          ln -s boomtick-repo/mcp ./mcp
-          ln -s boomtick-repo/cli ./cli
-          rm -rf .github/actions/setup-workspace
-          ln -s ../../boomtick-repo/.github/actions/setup-workspace .github/actions/setup-workspace
-        shell: bash
-
       - name: Run BoomTick Impact Analysis
         uses: arii/boomtick/mcp/actions/impact-analysis@main
         with:

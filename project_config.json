@@ -1,0 +1,6 @@
+{
+  "packageName": "portfolio",
+  "github_repo": "arii/portfolio",
+  "vite_base_path": "/portfolio/",
+  "version": "1.0.0"
+}
