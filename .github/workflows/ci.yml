@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: read
+      contents: write
       pull-requests: write
 
     steps:
@@ -49,3 +49,32 @@ jobs:
 
       - name: Run Impact Analysis
         run: node scripts/impact-analysis.js
+
+      - name: Generate GitHub App Token
+        uses: actions/create-github-app-token@v1
+        id: app-token
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+
+      - name: Checkout Boomtick Repository
+        uses: actions/checkout@v4
+        with:
+          repository: arii/boomtick
+          token: ${{ steps.app-token.outputs.token }}
+          path: boomtick
+
+      - name: Copy Boomtick Assets for Action Execution
+        run: |
+          cp -r boomtick/mcp ./
+          mkdir -p .github/actions
+          cp -r boomtick/.github/actions/* .github/actions/ 2>/dev/null || true
+        shell: bash
+
+      - name: Run Boomtick Deployment Impact Analysis
+        uses: ./mcp/actions/impact-analysis
+        with:
+          github_token: ${{ steps.app-token.outputs.token }}
+          gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
+          pr_number: ${{ github.event.pull_request.number || '1' }}
+          jules_api_key: ${{ secrets.JULES_API_KEY }}
