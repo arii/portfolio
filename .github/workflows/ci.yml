@@ -13,7 +13,7 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Setup Workspace
+      - name: Setup Node.js & pnpm
         uses: ./.github/actions/setup-workspace
 
       - name: Install Dependencies
@@ -32,7 +32,7 @@ jobs:
         run: pnpm run build
 
   impact-analysis:
-    name: Run Remote Impact Analysis
+    name: Run Remote BoomTick Impact Analysis
     needs: build-and-test
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
@@ -43,7 +43,7 @@ jobs:
           fetch-depth: 0
 
       - name: Run BoomTick Impact Analysis
-        uses: arii/boomtick/.github/actions/impact-analysis@feat/composite-action-impact-analysis-5988946707609229732
+        uses: arii/boomtick/.github/actions/impact-analysis@main
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
