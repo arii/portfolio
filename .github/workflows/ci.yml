@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  ci:
+    name: Build, Lint, Type-Check, Test & Impact Analysis
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Workspace
+        uses: ./.github/actions/setup-workspace
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run Lint
+        run: pnpm run lint
+
+      - name: Run Type Check
+        run: pnpm run type-check
+
+      - name: Run Tests
+        run: pnpm run test
+
+      - name: Build Application
+        run: pnpm run build
+
+      - name: Run Ported BoomTick Impact Analysis
+        if: github.event_name == 'pull_request'
+        uses: ./.github/actions/impact-analysis
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
+          jules_api_key: ${{ secrets.JULES_API_KEY }}
