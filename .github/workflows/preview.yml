@@ -36,18 +36,9 @@ jobs:
             echo "No preview folder found to clean up."
           fi
 
-      - name: Install pnpm
+      - name: Setup Workspace
         if: github.event.action != 'closed'
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10.28.2
-
-      - name: Set up Node.js
-        if: github.event.action != 'closed'
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: '.node-version'
-          cache: 'pnpm'
+        uses: ./.github/actions/setup-workspace
 
       - name: Install dependencies
         if: github.event.action != 'closed'
