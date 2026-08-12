@@ -31,7 +31,6 @@ runs:
           -e GEMINI_API_KEY="${GEMINI_API_KEY}" \
           -e JULES_API_KEY="${JULES_API_KEY}" \
           -e PR_NUMBER="${PR_NUMBER}" \
-          -e PYTHONPATH="/github/workspace/.github/actions/impact-analysis/python_packages" \
           -v "${{ github.workspace }}":/github/workspace \
           -w /github/workspace \
           ghcr.io/arii/boomtick:latest \
