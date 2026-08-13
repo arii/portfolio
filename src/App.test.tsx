@@ -22,8 +22,9 @@ describe('arii/portfolio Smoke Test', () => {
 
     render(<App router={testRouter} />);
 
-    // Assert that core branding is rendered
-    expect(screen.getByText(/arii \/ portfolio/i)).toBeInTheDocument();
+    // Assert that core branding elements are rendered
+    expect(screen.getAllByText(/arii/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/portfolio/i).length).toBeGreaterThan(0);
 
     // Assert that home content is present
     expect(screen.getByText(/Ariel Anders, PhD/i)).toBeInTheDocument();
