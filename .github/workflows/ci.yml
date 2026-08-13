@@ -40,18 +40,18 @@ jobs:
         run: pnpm run build
 
       - name: Create GitHub App Token
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' && secrets.BOOMTICK_APP_ID != ''
         uses: actions/create-github-app-token@v1
         id: app-token
         with:
-          app-id: ${{ secrets.BOOMTICK_APP_ID || secrets.APP_ID }}
-          private-key: ${{ secrets.BOOMTICK_APP_PRIVATE_KEY || secrets.APP_PRIVATE_KEY || secrets.PRIVATE_KEY }}
+          app-id: ${{ secrets.BOOMTICK_APP_ID }}
+          private-key: ${{ secrets.BOOMTICK_APP_PRIVATE_KEY || secrets.BOOMTICK_PRIVATE_KEY }}
 
       - name: Run Ported BoomTick Impact Analysis
         if: github.event_name == 'pull_request'
         uses: ./.github/actions/impact-analysis
         with:
-          github_token: ${{ steps.app-token.outputs.token }}
+          github_token: ${{ steps.app-token.outputs.token || secrets.GITHUB_TOKEN }}
           gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
           openai_api_key: ${{ secrets.OPENAI_API_KEY }}
           jules_api_key: ${{ secrets.JULES_API_KEY }}
