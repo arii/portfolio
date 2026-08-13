@@ -5,6 +5,7 @@ import ResearchListPage from '@/pages/ResearchListPage';
 import { ResearchPost } from '@/data/research';
 
 const mockPost: ResearchPost = {
+  id: 'test-post',
   slug: 'test-post',
   title: 'Test Robotics Title',
   date: '2026-08-01',

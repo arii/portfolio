@@ -1,0 +1,90 @@
+export const SPACING_MAP: Record<string | number, string> = {
+  0: '0',
+  0.5: '0.5',
+  1: '1',
+  1.5: '1.5',
+  2: '2',
+  2.5: '2.5',
+  3: '3',
+  3.5: '3.5',
+  4: '4',
+  5: '5',
+  6: '6',
+  8: '8',
+  10: '10',
+  11: '11',
+  12: '12',
+  16: '16',
+  20: '20',
+  24: '24',
+  32: '32',
+  40: '40',
+  48: '48',
+  64: '64',
+  80: '80',
+  'section-spacing': 'section-spacing',
+  auto: 'auto',
+};
+
+export const RADIUS_MAP: Record<string, string> = {
+  none: 'rounded-none',
+  sm: 'rounded-sm',
+  md: 'rounded-md',
+  lg: 'rounded-lg',
+  xl: 'rounded-xl',
+  '2xl': 'rounded-2xl',
+  '3xl': 'rounded-3xl',
+  full: 'rounded-full',
+};
+
+export const SHADOW_MAP: Record<string, string> = {
+  none: 'shadow-none',
+  sm: 'shadow-sm',
+  md: 'shadow-md',
+  lg: 'shadow-lg',
+  xl: 'shadow-xl',
+  '2xl': 'shadow-2xl',
+  inner: 'shadow-inner',
+  outline: 'shadow-outline',
+  glow: 'shadow-glow',
+};
+
+export const COLS_MAP: Record<string | number, string> = {
+  1: 'grid-cols-1',
+  2: 'grid-cols-2',
+  3: 'grid-cols-3',
+  4: 'grid-cols-4',
+  5: 'grid-cols-5',
+  6: 'grid-cols-6',
+  7: 'grid-cols-7',
+  8: 'grid-cols-8',
+  9: 'grid-cols-9',
+  10: 'grid-cols-10',
+  11: 'grid-cols-11',
+  12: 'grid-cols-12',
+};
+
+export const SPAN_MAP: Record<string | number, string> = {
+  1: 'col-span-1',
+  2: 'col-span-2',
+  3: 'col-span-3',
+  4: 'col-span-4',
+  5: 'col-span-5',
+  6: 'col-span-6',
+  7: 'col-span-7',
+  8: 'col-span-8',
+  9: 'col-span-9',
+  10: 'col-span-10',
+  11: 'col-span-11',
+  12: 'col-span-12',
+  full: 'col-span-full',
+};
+
+export const ROWS_MAP: Record<string | number, string> = {
+  1: 'grid-rows-1',
+  2: 'grid-rows-2',
+  3: 'grid-rows-3',
+  4: 'grid-rows-4',
+  5: 'grid-rows-5',
+  6: 'grid-rows-6',
+};

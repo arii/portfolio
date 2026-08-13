@@ -1,4 +1,5 @@
 export interface ResearchPost {
+  id: string;
   slug: string;
   title: string;
   date: string;
@@ -11,6 +12,7 @@ export interface ResearchPost {
 
 export const RESEARCH_POSTS: ResearchPost[] = [
   {
+    id: 'model-context-protocol-robotics',
     slug: 'model-context-protocol-robotics',
     title: 'Model Context Protocol Integrations in Production Robotics',
     date: '2026-07-14',
@@ -41,6 +43,7 @@ const mcpServer = new Server({
 `.trim()
   },
   {
+    id: 'github-actions-workflow-optimization',
     slug: 'github-actions-workflow-optimization',
     title: 'Optimizing Heterogeneous CI/CD Pipelines with GitHub Actions',
     date: '2026-04-18',
@@ -61,6 +64,7 @@ Automated repair agents require deterministic feedback loops to prevent hallucin
 `.trim()
   },
   {
+    id: 'hrm-flagship',
     slug: 'hrm-flagship',
     title: 'HRM (Heart Rate Monitor)',
     date: '2026-08-10',
@@ -88,6 +92,7 @@ Biometric telemetry is parsed in real time and broadcast to a lightweight WebSoc
 `.trim()
   },
   {
+    id: 'repo-auditor-ai',
     slug: 'repo-auditor-ai',
     title: 'RepoAuditor AI',
     date: '2026-07-28',
@@ -110,6 +115,7 @@ An independent showcase project highlighting autonomous engineering, RepoAuditor
 `.trim()
   },
   {
+    id: 'deployment-impact-analyzer',
     slug: 'deployment-impact-analyzer',
     title: 'Deployment Impact Analyzer',
     date: '2026-06-05',
@@ -134,6 +140,7 @@ By mapping modified source files to individual routes, the CI runner targets onl
 `.trim()
   },
   {
+    id: 'wcs-scraper',
     slug: 'wcs-scraper',
     title: 'High-Scale Telemetry Ingestion ETL',
     date: '2026-05-12',
@@ -154,6 +161,7 @@ This enables super-fast analytical RAG indexing and complex analytics queries ov
 `.trim()
   },
   {
+    id: 'blog-drafter',
     slug: 'blog-drafter',
     title: 'AI Blog Drafter',
     date: '2026-03-22',
@@ -174,6 +182,7 @@ A human-in-the-loop editorial platform designed for brand-consistent content gen
 `.trim()
   },
   {
+    id: 'ecommerce-automation',
     slug: 'ecommerce-automation',
     title: 'Ecommerce Automation Experiments',
     date: '2026-02-15',
