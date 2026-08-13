@@ -18,11 +18,11 @@ const Layout: React.FC<LayoutProps> = ({ className }) => {
   };
 
   return (
-    <Box
-      display="flex"
+    <Stack
       direction="col"
       minHeight="screen"
       width="full"
+      gap={0}
       className={cn("bg-brand-bg-dark text-slate-100", className)}
     >
       {/* Global Header */}
@@ -33,14 +33,15 @@ const Layout: React.FC<LayoutProps> = ({ className }) => {
         zIndex="sticky"
         className="border-b border-slate-800 bg-brand-bg-darker/80 backdrop-blur-md"
       >
-        <Box
+        <Stack
+          direction={{ base: "col", md: "row" }}
+          align="center"
+          justify="between"
+          gap={4}
           maxWidth="6xl"
           marginX="auto"
           paddingX={4}
           paddingY={4}
-          display="flex"
-          align="center"
-          justify="between"
         >
           {/* Logo / Branding */}
           <Link to="/" className="group no-underline">
@@ -103,7 +104,7 @@ const Layout: React.FC<LayoutProps> = ({ className }) => {
               Resume
             </Link>
           </Box>
-        </Box>
+        </Stack>
       </Box>
 
       {/* Main Content Area */}
@@ -126,14 +127,14 @@ const Layout: React.FC<LayoutProps> = ({ className }) => {
         className="border-t border-slate-900 bg-brand-bg-darker"
         paddingY={6}
       >
-        <Box
-          maxWidth="6xl"
-          marginX="auto"
-          paddingX={4}
-          display="flex"
+        <Stack
           direction={{ base: "col", md: "row" }}
           align="center"
           justify="between"
+          gap={2}
+          maxWidth="6xl"
+          marginX="auto"
+          paddingX={4}
           className="text-slate-500 text-xs"
         >
           <Text size="xs">
@@ -144,9 +145,9 @@ const Layout: React.FC<LayoutProps> = ({ className }) => {
               DevAI / Resume Consolidation
             </Text>
           </Stack>
-        </Box>
+        </Stack>
       </Box>
-    </Box>
+    </Stack>
   );
 };
 
