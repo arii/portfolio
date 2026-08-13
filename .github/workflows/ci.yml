@@ -10,6 +10,8 @@ jobs:
   ci:
     name: Build, Lint, Type-Check, Test & Impact Analysis
     runs-on: ubuntu-latest
+    env:
+      BOOMTICK_APP_ID: ${{ secrets.BOOMTICK_APP_ID }}
 
     permissions:
       contents: write
@@ -40,7 +42,7 @@ jobs:
         run: pnpm run build
 
       - name: Create GitHub App Token
-        if: github.event_name == 'pull_request' && secrets.BOOMTICK_APP_ID != ''
+        if: github.event_name == 'pull_request' && env.BOOMTICK_APP_ID != ''
         uses: actions/create-github-app-token@v1
         id: app-token
         with:
