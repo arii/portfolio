@@ -4,8 +4,10 @@ import { createHashRouter } from 'react-router-dom';
 import App from '@/App';
 import Layout from '@/components/Layout';
 import Home from '@/pages/Home';
-import Research from '@/pages/Research';
+import ResearchListPage from '@/pages/ResearchListPage';
+import ResearchDetailPage from '@/pages/ResearchDetailPage';
 import Resume from '@/pages/Resume';
+import About from '@/pages/About';
 import '@/index.css';
 
 const router = createHashRouter([
@@ -19,15 +21,19 @@ const router = createHashRouter([
       },
       {
         path: 'research',
-        element: <Research />,
+        element: <ResearchListPage />,
       },
       {
         path: 'research/:slug',
-        element: <Research />,
+        element: <ResearchDetailPage />,
       },
       {
         path: 'resume',
         element: <Resume />,
+      },
+      {
+        path: 'about',
+        element: <About />,
       },
     ],
   },

@@ -1,14 +1,21 @@
 import React from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import { ArrowLeft, Calendar, Clock } from 'lucide-react';
 import { getResearchPostBySlug } from '@/data/research';
 
 export interface ResearchDetailPageProps {
-  slug: string;
-  onBack: () => void;
+  slug?: string;
+  onBack?: () => void;
 }
 
-const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack }) => {
+const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug: propSlug, onBack: propOnBack }) => {
+  const { slug: paramSlug } = useParams<{ slug?: string }>();
+  const navigate = useNavigate();
+
+  const slug = propSlug || paramSlug || '';
+  const onBack = propOnBack || (() => navigate('/research'));
+
   const post = getResearchPostBySlug(slug);
 
   if (!post) {

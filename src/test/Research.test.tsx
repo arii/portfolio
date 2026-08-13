@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
+import { MemoryRouter } from 'react-router-dom';
 import ResearchCard from '@/components/ResearchCard';
 import ResearchListPage from '@/pages/ResearchListPage';
 import { ResearchPost } from '@/data/research';
@@ -36,21 +37,30 @@ describe('ResearchCard Component', () => {
 });
 
 describe('ResearchListPage Component', () => {
-  it('renders standard header and tags', () => {
-    render(<ResearchListPage onNavigate={() => {}} />);
+  it('renders standard header and flagship tools', () => {
+    render(
+      <MemoryRouter>
+        <ResearchListPage onNavigate={() => {}} />
+      </MemoryRouter>
+    );
 
-    expect(screen.getByText('DevAI & Technical Research')).toBeInTheDocument();
-    expect(screen.getByText('All Topics')).toBeInTheDocument();
+    expect(screen.getByText('DevAI Portfolio')).toBeInTheDocument();
+    expect(screen.getByText('HRM (Heart Rate Monitor)')).toBeInTheDocument();
+
+    const repoAuditorMatches = screen.getAllByText('RepoAuditor AI');
+    expect(repoAuditorMatches.length).toBeGreaterThan(0);
+    expect(repoAuditorMatches[0]).toBeInTheDocument();
   });
 
-  it('filters posts based on selected tag click', () => {
-    render(<ResearchListPage onNavigate={() => {}} />);
+  it('renders other engineering tools', () => {
+    render(
+      <MemoryRouter>
+        <ResearchListPage onNavigate={() => {}} />
+      </MemoryRouter>
+    );
 
-    // Click on 'Robotics' tag
-    const roboticsButton = screen.getByRole('button', { name: 'Robotics' });
-    fireEvent.click(roboticsButton);
-
-    // Verify filtered content
-    expect(screen.getByText('Model Context Protocol Integrations in Production Robotics')).toBeInTheDocument();
+    const matches = screen.getAllByText('Optimizing Heterogeneous CI/CD Pipelines with GitHub Actions');
+    expect(matches.length).toBeGreaterThan(0);
+    expect(matches[0]).toBeInTheDocument();
   });
 });

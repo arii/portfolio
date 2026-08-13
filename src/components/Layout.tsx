@@ -46,6 +46,16 @@ const Layout: React.FC<LayoutProps> = ({ className }) => {
               Research (Boomtick)
             </Link>
             <Link
+              to="/about"
+              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                isCurrent('/about')
+                  ? 'bg-slate-800 text-brand-cyan-light font-semibold'
+                  : 'text-slate-400 hover:text-slate-100 hover:bg-slate-900'
+              }`}
+            >
+              About
+            </Link>
+            <Link
               to="/resume"
               className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                 isCurrent('/resume')
