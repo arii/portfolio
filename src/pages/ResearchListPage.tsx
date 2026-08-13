@@ -89,7 +89,7 @@ const ResearchListPage: React.FC<ResearchListPageProps> = ({ onNavigate: propOnN
         </Box>
         <Grid cols={{ base: 1, sm: 2, lg: 3 }} gap={6} width="full">
           {flagshipTools.map((tool) => (
-            <FlagshipCard key={tool.id} tool={tool} onImageClick={setLightboxImage} onNavigate={onNavigate} />
+            <FlagshipCard key={tool.id} tool={tool} onNavigate={onNavigate} />
           ))}
         </Grid>
       </Stack>

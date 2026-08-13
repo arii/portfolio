@@ -66,11 +66,10 @@ export const ToolImage: React.FC<ToolImageProps> = ({ tool }) => {
 
 interface FlagshipCardProps {
   tool: ResearchPost;
-  onImageClick?: (src: string) => void;
   onNavigate: (slug: string) => void;
 }
 
-export const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onImageClick, onNavigate }) => {
+export const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleExpand = (e: React.MouseEvent) => {
@@ -82,7 +81,7 @@ export const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onImageClick, 
   return (
     <BaseCard padding={0} gap={0} surface="surface" height="full" overflow="hidden">
       <Stack gap={0} height="full">
-        <ToolImage tool={tool} onImageClick={onImageClick} />
+        <ToolImage tool={tool} />
         <Stack flex={1} paddingTop={3.5} paddingX={4} paddingBottom={4} gap={0}>
           <Box display="flex" justify="between" align="start" width="full" marginBottom={3}>
             <Box width={12} height={12} surface="muted" radius="md" display="flex" align="center" justify="center">
