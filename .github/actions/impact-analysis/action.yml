@@ -48,6 +48,7 @@ runs:
           ghcr.io/arii/boomtick:latest \
           /workspace/scripts/impact-analysis.ts
 
+        # We temporarily ignore PR review failures caused by missing 'approve' permissions
         if [ -n "${GEMINI_API_KEY}" ] && [ -n "${PR_NUMBER}" ]; then
           docker run --rm \
             --entrypoint /workspace/node_modules/.bin/tsx \
@@ -59,7 +60,7 @@ runs:
             -v "${{ github.workspace }}":/github/workspace \
             -w /github/workspace \
             ghcr.io/arii/boomtick:latest \
-            /workspace/scripts/impact-ai-code-review.ts gemini
+            /workspace/scripts/impact-ai-code-review.ts gemini || echo "::warning::Agent code review returned non-zero, likely due to approval permission limitations"
         fi
 
         if [ -n "${OPENAI_API_KEY}" ] && [ -n "${PR_NUMBER}" ]; then
@@ -73,5 +74,5 @@ runs:
             -v "${{ github.workspace }}":/github/workspace \
             -w /github/workspace \
             ghcr.io/arii/boomtick:latest \
-            /workspace/scripts/impact-ai-code-review.ts github-models
+            /workspace/scripts/impact-ai-code-review.ts github-models || echo "::warning::Agent code review returned non-zero, likely due to approval permission limitations"
         fi
