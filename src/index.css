@@ -16,19 +16,23 @@
   --brand-accent: #8b5cf6; /* Cyber purple accent */
 }
 
+/*
+  Enforce strict dark theme variables even if system prefers light mode.
+  This maintains the immersive high-contrast terminal console aesthetic
+  exactly as designed in tech-dancer across all client browser preferences.
+*/
 @media (prefers-color-scheme: light) {
-  /* Standard modern fallback, but default to dark for the developer/boomtick aesthetic */
   :root {
-    --brand-bg-darker: #f8fafc;
-    --brand-bg-dark: #f1f5f9;
-    --brand-bg-surface: #ffffff;
-    --brand-cyan-light: #06b6d4;
-    --brand-cyan: #0891b2;
-    --brand-cyan-dark: #0e7490;
-    --brand-green-light: #10b981;
-    --brand-green: #059669;
-    --brand-green-dark: #047857;
-    --brand-accent: #6d28d9;
+    --brand-bg-darker: #05070c;
+    --brand-bg-dark: #0a0e17;
+    --brand-bg-surface: #131b2e;
+    --brand-cyan-light: #67e8f9;
+    --brand-cyan: #06b6d4;
+    --brand-cyan-dark: #0891b2;
+    --brand-green-light: #86efac;
+    --brand-green: #10b981;
+    --brand-green-dark: #059669;
+    --brand-accent: #8b5cf6;
   }
 }
 
@@ -39,4 +43,14 @@ body {
   background-color: var(--brand-bg-dark);
   color: #f8fafc;
   min-height: 100vh;
+}
+
+@layer utilities {
+  /* Technical Grid Backdrop from tech-dancer styling system */
+  .grid-pattern {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
 }
