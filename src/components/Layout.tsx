@@ -1,5 +1,7 @@
 import React from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
+import { Box, Stack, Text } from '@/layouts/Primitives';
+import { cn } from '@/lib/utils';
 
 export interface LayoutProps {
   className?: string;
@@ -16,74 +18,135 @@ const Layout: React.FC<LayoutProps> = ({ className }) => {
   };
 
   return (
-    <div className={`min-h-screen flex flex-col bg-brand-bg-dark text-slate-100 ${className || ''}`}>
-      <header className="border-b border-slate-800 bg-brand-bg-darker/80 backdrop-blur-md sticky top-0 z-50">
-        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Link to="/" className="flex items-center space-x-2 group">
-            <span className="text-xl font-bold tracking-tight bg-gradient-to-r from-brand-cyan to-brand-green bg-clip-text text-transparent group-hover:opacity-80 transition-opacity">
+    <Box
+      display="flex"
+      direction="col"
+      minHeight="screen"
+      width="full"
+      className={cn("bg-brand-bg-dark text-slate-100", className)}
+    >
+      {/* Global Header */}
+      <Box
+        as="header"
+        position="sticky"
+        top={0}
+        zIndex="sticky"
+        className="border-b border-slate-800 bg-brand-bg-darker/80 backdrop-blur-md"
+      >
+        <Box
+          maxWidth="6xl"
+          marginX="auto"
+          paddingX={4}
+          paddingY={4}
+          display="flex"
+          align="center"
+          justify="between"
+        >
+          {/* Logo / Branding */}
+          <Link to="/" className="group no-underline">
+            <Text
+              as="span"
+              variant="display"
+              size="xl"
+              weight="font-bold"
+              tracking="tight"
+              className="bg-gradient-to-r from-brand-cyan to-brand-green bg-clip-text text-transparent group-hover:opacity-80 transition-opacity"
+            >
               arii / portfolio
-            </span>
+            </Text>
           </Link>
-          <nav className="flex space-x-1 sm:space-x-4">
+
+          {/* Navigation Bar / Toolbar */}
+          <Box as="nav" display="flex" align="center" gap={{ base: 1, sm: 4 }}>
             <Link
               to="/"
-              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+              className={cn(
+                "px-3 py-2 rounded-md text-sm font-medium transition-colors no-underline",
                 isCurrent('/')
                   ? 'bg-slate-800 text-brand-cyan-light font-semibold'
                   : 'text-slate-400 hover:text-slate-100 hover:bg-slate-900'
-              }`}
+              )}
             >
               Home
             </Link>
             <Link
               to="/research"
-              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+              className={cn(
+                "px-3 py-2 rounded-md text-sm font-medium transition-colors no-underline",
                 isCurrent('/research')
                   ? 'bg-slate-800 text-brand-cyan-light font-semibold'
                   : 'text-slate-400 hover:text-slate-100 hover:bg-slate-900'
-              }`}
+              )}
             >
               Research (Boomtick)
             </Link>
             <Link
               to="/about"
-              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+              className={cn(
+                "px-3 py-2 rounded-md text-sm font-medium transition-colors no-underline",
                 isCurrent('/about')
                   ? 'bg-slate-800 text-brand-cyan-light font-semibold'
                   : 'text-slate-400 hover:text-slate-100 hover:bg-slate-900'
-              }`}
+              )}
             >
               About
             </Link>
             <Link
               to="/resume"
-              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+              className={cn(
+                "px-3 py-2 rounded-md text-sm font-medium transition-colors no-underline",
                 isCurrent('/resume')
                   ? 'bg-slate-800 text-brand-cyan-light font-semibold'
                   : 'text-slate-400 hover:text-slate-100 hover:bg-slate-900'
-              }`}
+              )}
             >
               Resume
             </Link>
-          </nav>
-        </div>
-      </header>
+          </Box>
+        </Box>
+      </Box>
 
-      <main className="flex-grow max-w-6xl w-full mx-auto px-4 py-8">
+      {/* Main Content Area */}
+      <Box
+        as="main"
+        flex={1}
+        width="full"
+        maxWidth="6xl"
+        marginX="auto"
+        paddingX={4}
+        paddingY={8}
+      >
         <Outlet />
-      </main>
+      </Box>
 
-      <footer className="border-t border-slate-900 bg-brand-bg-darker py-6">
-        <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between text-slate-500 text-xs">
-          <div>
+      {/* Global Footer */}
+      <Box
+        as="footer"
+        width="full"
+        className="border-t border-slate-900 bg-brand-bg-darker"
+        paddingY={6}
+      >
+        <Box
+          maxWidth="6xl"
+          marginX="auto"
+          paddingX={4}
+          display="flex"
+          direction={{ base: "col", md: "row" }}
+          align="center"
+          justify="between"
+          className="text-slate-500 text-xs"
+        >
+          <Text size="xs">
             &copy; {new Date().getFullYear()} arii. All rights reserved.
-          </div>
-          <div className="flex space-x-4 mt-2 md:mt-0">
-            <span className="text-slate-600">DevAI / Resume Consolidation</span>
-          </div>
-        </div>
-      </footer>
-    </div>
+          </Text>
+          <Stack direction="row" gap={4} className="mt-2 md:mt-0">
+            <Text size="xs" color="dim">
+              DevAI / Resume Consolidation
+            </Text>
+          </Stack>
+        </Box>
+      </Box>
+    </Box>
   );
 };
 

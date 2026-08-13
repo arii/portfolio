@@ -1,5 +1,6 @@
 import React from 'react';
 import { Cpu, Terminal, Layers, Award, ShieldCheck } from 'lucide-react';
+import { Box, Stack, Grid, Text } from '@/layouts/Primitives';
 
 export interface AboutProps {
   className?: string;
@@ -7,91 +8,91 @@ export interface AboutProps {
 
 const About: React.FC<AboutProps> = ({ className = '' }) => {
   return (
-    <div className={`space-y-12 max-w-4xl mx-auto py-6 ${className}`}>
+    <Stack gap={12} maxWidth="4xl" marginX="auto" paddingY={6} className={className}>
       {/* Header section */}
-      <section className="space-y-4">
-        <h1 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight">
+      <Stack gap={4}>
+        <Text as="h1" variant="display" size="5xl" weight="font-extrabold" tracking="tight">
           About Me
-        </h1>
-        <p className="text-lg text-brand-cyan-light font-mono">
+        </Text>
+        <Text variant="mono" size="lg" color="accent">
           Robotics & DevAI Infrastructure Engineer
-        </p>
-      </section>
+        </Text>
+      </Stack>
 
       {/* Intro section */}
-      <section className="bg-brand-bg-surface/30 border border-slate-800 rounded-xl p-8 space-y-6">
-        <h2 className="text-xl font-bold text-white flex items-center space-x-2">
+      <Stack gap={6} padding={8} className="bg-brand-bg-surface/30 border border-slate-800 rounded-xl">
+        <Box display="flex" align="center" gap={2}>
           <Terminal className="h-5 w-5 text-brand-cyan-light" />
-          <span>Professional Background</span>
-        </h2>
-        <p className="text-slate-300 text-sm leading-relaxed">
+          <Text as="h2" size="xl" weight="font-bold">Professional Background</Text>
+        </Box>
+        <Text size="sm" color="dim" leading="relaxed">
           I am a senior engineering specialist focused on connecting autonomous physical systems, robotic hardware execution nodes, and advanced AI-assisted agentic software development pipelines. My work bridges the gap between low-latency hardware/middleware controls and modern, developer-first tooling systems.
-        </p>
-        <p className="text-slate-300 text-sm leading-relaxed">
+        </Text>
+        <Text size="sm" color="dim" leading="relaxed">
           Throughout my career, I have dedicated myself to optimizing engineering developer experience, building reliable continuous integration loops, and architecting robust, highly-predictable automated workflows.
-        </p>
-      </section>
+        </Text>
+      </Stack>
 
       {/* Focus Areas */}
-      <section className="grid md:grid-cols-2 gap-6">
-        <div className="bg-brand-bg-surface/30 border border-slate-800 rounded-xl p-6 space-y-3">
-          <div className="h-10 w-10 rounded-lg bg-brand-cyan/10 flex items-center justify-center text-brand-cyan">
+      <Grid cols={{ base: 1, md: 2 }} gap={6}>
+        <Stack gap={3} padding={6} className="bg-brand-bg-surface/30 border border-slate-800 rounded-xl">
+          <Box width={10} height={10} radius="lg" display="flex" align="center" justify="center" className="bg-brand-cyan/10 text-brand-cyan">
             <Cpu className="h-5 w-5" />
-          </div>
-          <h3 className="text-lg font-bold text-white">Robotics Engineering</h3>
-          <p className="text-xs text-slate-400 leading-relaxed">
+          </Box>
+          <Text as="h3" size="lg" weight="font-bold">Robotics Engineering</Text>
+          <Text size="xs" color="dim" leading="relaxed">
             Architecting safety-critical execution nodes, sensor-telemetry streams, and middleware configurations with ROS/ROS2, C++, and Python. Focused on deterministic, isolated control environments.
-          </p>
-        </div>
+          </Text>
+        </Stack>
 
-        <div className="bg-brand-bg-surface/30 border border-slate-800 rounded-xl p-6 space-y-3">
-          <div className="h-10 w-10 rounded-lg bg-brand-green/10 flex items-center justify-center text-brand-green">
+        <Stack gap={3} padding={6} className="bg-brand-bg-surface/30 border border-slate-800 rounded-xl">
+          <Box width={10} height={10} radius="lg" display="flex" align="center" justify="center" className="bg-brand-green/10 text-brand-green">
             <Layers className="h-5 w-5" />
-          </div>
-          <h3 className="text-lg font-bold text-white">DevAI Infrastructure</h3>
-          <p className="text-xs text-slate-400 leading-relaxed">
+          </Box>
+          <Text as="h3" size="lg" weight="font-bold">DevAI Infrastructure</Text>
+          <Text size="xs" color="dim" leading="relaxed">
             Constructing agentic code generation, continuous audit, and automated layout-regression systems. Bringing production LLMs directly into the build pipeline with deterministic validation loops.
-          </p>
-        </div>
-      </section>
+          </Text>
+        </Stack>
+      </Grid>
 
       {/* Principles */}
-      <section className="border-t border-slate-900 pt-8 space-y-6">
-        <h2 className="text-xl font-bold text-white flex items-center space-x-2">
+      <Stack gap={6} className="border-t border-slate-900 pt-8">
+        <Box display="flex" align="center" gap={2}>
           <ShieldCheck className="h-5 w-5 text-brand-green" />
-          <span>Engineering Philosophy</span>
-        </h2>
-        <div className="grid sm:grid-cols-3 gap-4 text-xs">
-          <div className="bg-brand-bg-surface/20 p-4 rounded-lg border border-slate-850">
-            <h4 className="font-bold text-white mb-2 flex items-center gap-1.5">
+          <Text as="h2" size="xl" weight="font-bold">Engineering Philosophy</Text>
+        </Box>
+        <Grid cols={{ base: 1, sm: 3 }} gap={4}>
+          <Stack gap={2} padding={4} className="bg-brand-bg-surface/20 rounded-lg border border-slate-850">
+            <Box display="flex" align="center" gap={1.5}>
               <Award className="h-4 w-4 text-brand-cyan-light" />
-              <span>Reliability First</span>
-            </h4>
-            <p className="text-slate-400 leading-relaxed">
+              <Text as="h4" weight="font-bold">Reliability First</Text>
+            </Box>
+            <Text size="xs" color="dim" leading="relaxed">
               Every system, whether physical or digital, must fail gracefully and provide deterministic telemetry for prompt diagnostics.
-            </p>
-          </div>
-          <div className="bg-brand-bg-surface/20 p-4 rounded-lg border border-slate-850">
-            <h4 className="font-bold text-white mb-2 flex items-center gap-1.5">
+            </Text>
+          </Stack>
+          <Stack gap={2} padding={4} className="bg-brand-bg-surface/20 rounded-lg border border-slate-850">
+            <Box display="flex" align="center" gap={1.5}>
               <Award className="h-4 w-4 text-brand-green" />
-              <span>Developer UX</span>
-            </h4>
-            <p className="text-slate-400 leading-relaxed">
+              <Text as="h4" weight="font-bold">Developer UX</Text>
+            </Box>
+            <Text size="xs" color="dim" leading="relaxed">
               Frictionless, fully-automated continuous integration is the bedrock of rapid, high-confidence engineering output.
-            </p>
-          </div>
-          <div className="bg-brand-bg-surface/20 p-4 rounded-lg border border-slate-850">
-            <h4 className="font-bold text-white mb-2 flex items-center gap-1.5">
+            </Text>
+          </Stack>
+          <Stack gap={2} padding={4} className="bg-brand-bg-surface/20 rounded-lg border border-slate-850">
+            <Box display="flex" align="center" gap={1.5}>
               <Award className="h-4 w-4 text-brand-accent" />
-              <span>Pragmatic Innovation</span>
-            </h4>
-            <p className="text-slate-400 leading-relaxed">
+              <Text as="h4" weight="font-bold">Pragmatic Innovation</Text>
+            </Box>
+            <Text size="xs" color="dim" leading="relaxed">
               Adopting state-of-the-art AI-orchestrated tools only when backed by reproducible metrics and deterministic sandboxes.
-            </p>
-          </div>
-        </div>
-      </section>
-    </div>
+            </Text>
+          </Stack>
+        </Grid>
+      </Stack>
+    </Stack>
   );
 };
 
