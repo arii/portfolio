@@ -60,19 +60,19 @@ const ResearchListPage: React.FC<ResearchListPageProps> = ({ onNavigate }) => {
   return (
     <div className="relative min-h-screen bg-brand-bg-dark text-slate-100 overflow-hidden grid-pattern px-4 sm:px-6 md:px-8 py-10 rounded-2xl border border-slate-900 shadow-2xl space-y-16">
       {/* DevAI Diagnostic Header Bar */}
-      <div className="border border-slate-800 bg-brand-bg-darker/95 backdrop-blur-md rounded-xl px-6 py-4 flex flex-wrap gap-4 items-center justify-between text-xs text-slate-400 font-mono shadow-lg">
-        <div className="flex items-center space-x-2">
+      <div className="border border-slate-800 bg-brand-bg-darker/95 backdrop-blur-md rounded-xl px-4 sm:px-6 py-3.5 sm:py-4 flex flex-col sm:flex-row gap-3 sm:gap-4 items-start sm:items-center justify-between text-[11px] sm:text-xs text-slate-400 font-mono shadow-lg">
+        <div className="flex items-center space-x-2 whitespace-nowrap">
           <span className="h-2 w-2 rounded-full bg-brand-green animate-pulse shadow-[0_0_8px_#10b981]"></span>
           <span className="text-slate-200 font-semibold uppercase tracking-wider">CONSOLE STATE: ACTIVE</span>
         </div>
-        <div className="flex flex-wrap gap-x-6 gap-y-2">
-          <span className="flex items-center space-x-1.5 text-brand-green">
+        <div className="flex flex-wrap items-center gap-x-4 sm:gap-x-6 gap-y-1.5 w-full sm:w-auto">
+          <span className="inline-flex items-center space-x-1.5 text-brand-green whitespace-nowrap">
             <span className="opacity-65">SYS_CPU:</span> <span className="font-bold text-slate-100">11.4%</span>
           </span>
-          <span className="flex items-center space-x-1.5 text-brand-cyan-light">
+          <span className="inline-flex items-center space-x-1.5 text-brand-cyan-light whitespace-nowrap">
             <span className="opacity-65">MEM:</span> <span className="font-bold text-slate-100">3.82 / 16 GB</span>
           </span>
-          <span className="flex items-center space-x-1.5 text-brand-green">
+          <span className="inline-flex items-center space-x-1.5 text-brand-green whitespace-nowrap">
             <span className="opacity-65">SHELL:</span> <span className="font-bold text-slate-100">secure-shell (v3)</span>
           </span>
         </div>
@@ -80,10 +80,10 @@ const ResearchListPage: React.FC<ResearchListPageProps> = ({ onNavigate }) => {
 
       {/* Page Title */}
       <header className="space-y-4 max-w-3xl border-b border-slate-900 pb-8">
-        <div className="inline-flex items-center space-x-2 bg-brand-green/10 border border-brand-green/30 px-3 py-1 rounded-full text-xs text-brand-green font-mono uppercase tracking-widest">
+        <div className="inline-flex items-center space-x-2 bg-brand-green/10 border border-brand-green/30 px-3 py-1 rounded-full text-xs text-brand-green font-mono uppercase tracking-widest whitespace-nowrap">
           <span>{`$ show --research`}</span>
         </div>
-        <h1 className="text-3xl md:text-5xl font-black tracking-tight text-white bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent font-mono">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent font-mono">
           DevAI &amp; Technical Research
         </h1>
         <p className="text-slate-400 max-w-2xl text-base leading-relaxed">
