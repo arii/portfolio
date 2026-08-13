@@ -13,7 +13,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
 
   if (!post) {
     return (
-      <div className="mx-auto max-w-3xl px-4 py-16 text-center border border-dashed border-red-500/30 rounded-xl bg-brand-bg-darker">
+      <div className="mx-auto max-w-3xl px-4 py-16 text-center border border-dashed border-red-500/30 rounded-xl bg-brand-bg-darker/95 backdrop-blur-md">
         <h2 className="text-2xl font-bold font-mono text-red-500">404: FILE NOT FOUND</h2>
         <p className="mt-2 text-slate-400 font-mono">The requested console module '{slug}' could not be loaded.</p>
         <button
@@ -38,13 +38,13 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
       </button>
 
       {/* Console Frame */}
-      <div className="rounded-xl border border-slate-800 bg-brand-bg-darker overflow-hidden shadow-2xl">
+      <div className="rounded-xl border border-slate-800 bg-brand-bg-darker/95 backdrop-blur-md overflow-hidden shadow-2xl">
         {/* Console Header bar */}
-        <div className="flex items-center justify-between px-4 py-2 border-b border-slate-900 bg-brand-bg-dark font-mono text-xs text-slate-500">
+        <div className="flex items-center justify-between px-4 py-2.5 border-b border-slate-900 bg-brand-bg-dark/80 font-mono text-xs text-slate-500">
           <div className="flex items-center space-x-1.5">
-            <span className="h-2.5 w-2.5 rounded-full bg-red-500/80"></span>
-            <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/80"></span>
-            <span className="h-2.5 w-2.5 rounded-full bg-brand-green/80"></span>
+            <span className="h-2.5 w-2.5 rounded-full bg-red-500/80 shadow-[0_0_6px_rgba(239,68,68,0.4)]"></span>
+            <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/80 shadow-[0_0_6px_rgba(234,179,8,0.4)]"></span>
+            <span className="h-2.5 w-2.5 rounded-full bg-brand-green/80 shadow-[0_0_6px_rgba(16,185,129,0.4)]"></span>
           </div>
           <span className="flex items-center space-x-1">
             <Terminal className="h-3.5 w-3.5 text-slate-600" />
@@ -52,7 +52,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
           </span>
         </div>
 
-        <div className="p-6 md:p-8 space-y-6">
+        <div className="p-6 md:p-10 space-y-6">
           <header className="border-b border-slate-900 pb-6 space-y-4">
             <div className="flex flex-wrap gap-2">
               {post.tags.map((tag) => (
@@ -64,11 +64,11 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
                 </span>
               ))}
             </div>
-            <h1 className="text-2xl md:text-4xl font-extrabold font-mono text-white flex items-start space-x-1.5">
+            <h1 className="text-2xl md:text-4xl font-extrabold font-mono text-white flex items-start space-x-1.5 leading-tight">
               <span className="text-brand-green select-none">#</span>
               <span>{post.title}</span>
             </h1>
-            <div className="flex items-center space-x-6 text-xs text-slate-500 font-mono">
+            <div className="flex items-center space-x-6 text-xs text-slate-500 font-mono pt-1">
               <span className="flex items-center space-x-1.5">
                 <Calendar className="h-4 w-4 text-slate-600" />
                 <time dateTime={post.date}>{post.date}</time>
@@ -82,7 +82,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
 
           {/* Markdown renderer styling for code/headings/lists */}
           <div className="prose prose-invert max-w-none text-slate-300 font-sans leading-relaxed space-y-4
-            prose-headings:font-mono prose-headings:text-white prose-h2:text-xl prose-h2:border-b prose-h2:border-slate-900 prose-h2:pb-2 prose-h2:mt-6
+            prose-headings:font-mono prose-headings:text-white prose-h2:text-xl prose-h2:border-b prose-h2:border-slate-900 prose-h2:pb-2 prose-h2:mt-8 prose-h2:mb-4
             prose-p:text-slate-400 prose-p:text-sm prose-p:leading-relaxed
             prose-a:text-brand-cyan-light hover:prose-a:underline
             prose-code:text-brand-green-light prose-code:bg-brand-bg-dark/40 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:font-mono prose-code:text-xs

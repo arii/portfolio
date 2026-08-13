@@ -26,6 +26,6 @@ describe('arii/portfolio Smoke Test', () => {
     expect(screen.getByText(/arii \/ portfolio/i)).toBeInTheDocument();
 
     // Assert that home content is present
-    expect(screen.getByText(/DevAI & Resume Consolidation/i)).toBeInTheDocument();
+    expect(screen.getByText(/Ariel Anders, PhD/i)).toBeInTheDocument();
   });
 });
