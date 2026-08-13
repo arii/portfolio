@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Outlet, Link, useLocation } from 'react-router-dom';
-import { Terminal, Cpu, Layers, Menu, X } from 'lucide-react';
+import { Outlet, NavLink, useLocation } from 'react-router-dom';
+import { Home as HomeIcon, User, Layers, FileText, Menu, X, ArrowRight } from 'lucide-react';
 
 export interface LayoutProps {
   className?: string;
@@ -18,135 +18,134 @@ const Layout: React.FC<LayoutProps> = ({ className }) => {
   };
 
   const navItems = [
-    { path: '/', label: 'Home' },
-    { path: '/about', label: 'About' },
-    { path: '/research', label: 'Research (Boomtick)' },
-    { path: '/resume', label: 'Resume' },
+    { path: '/', label: 'Home', icon: HomeIcon },
+    { path: '/about', label: 'About', icon: User },
+    { path: '/research', label: 'DevAI Portfolio', icon: Layers },
+    { path: '/resume', label: 'Resume', icon: FileText },
   ];
 
   return (
-    <div className={`min-h-screen flex flex-col bg-raw-color-bg text-raw-color-text-body ${className || ''}`}>
-      {/* Immersive Scanline Glow Effect on Header */}
-      <header className="border-b border-raw-color-line/30 bg-raw-color-bg/90 backdrop-blur-xl sticky top-0 z-[99999]">
-        <div className="max-w-6xl mx-auto px-4 py-3.5 flex items-center justify-between">
+    <div className={`min-h-screen flex flex-col bg-[#020617] text-[#e2e8f0] relative ${className || ''}`}>
 
-          {/* Logo / Console System Status indicator */}
-          <Link to="/" className="flex items-center space-x-2.5 group focus:outline-none" onClick={() => setIsMobileMenuOpen(false)}>
-            <div className="w-6 h-6 rounded-md bg-gradient-to-br from-raw-color-accent to-raw-color-accent-purple flex items-center justify-center text-raw-color-bg font-black text-xs shadow-[0_0_10px_rgba(34,211,238,0.3)] group-hover:scale-105 transition-transform">
-              <Terminal className="h-3.5 w-3.5 stroke-[2.5]" />
-            </div>
-            <div className="flex flex-col">
-              <span className="text-sm font-black tracking-wider uppercase font-mono text-raw-color-text-main group-hover:text-raw-color-accent transition-colors flex items-center gap-1.5">
-                arii<span className="text-raw-color-accent font-light">/</span>portfolio
-              </span>
-              <span className="text-[9px] font-mono text-raw-color-accent-sky tracking-widest uppercase leading-none opacity-80">
-                v2.16-stable
-              </span>
-            </div>
-          </Link>
+      {/* 1. Header Navigation Bar (Identical layout to boomtick.blog) */}
+      <nav aria-label="Main Navigation" className="border-b border-[#334155]/20 bg-[#020617]/90 backdrop-blur-xl sticky top-0 z-[99999] h-16 w-full">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-full">
 
-          {/* Desktop Responsive Navigation Links */}
-          <nav className="hidden md:flex items-center space-x-1">
+          {/* Logo Brand Wordmark matching boomtick.blog */}
+          <NavLink to="/" className="flex items-center space-x-2 group focus:outline-none" onClick={() => setIsMobileMenuOpen(false)}>
+            <span className="font-extrabold text-white tracking-[0.05em] text-sm md:text-base uppercase font-display">
+              boom<span className="text-[#22d3ee]">tick</span><span className="text-slate-400 font-light">.blog</span>
+            </span>
+          </NavLink>
+
+          {/* Desktop Navigation Links */}
+          <ul className="hidden lg:flex items-center space-x-6">
             {navItems.map((item) => {
               const active = isCurrent(item.path);
               return (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold uppercase tracking-wider transition-all relative ${
-                    active
-                      ? 'text-raw-color-accent bg-raw-color-surface-alt/50 border border-raw-color-accent/20 shadow-[0_0_12px_rgba(34,211,238,0.05)]'
-                      : 'text-raw-color-text-dim hover:text-raw-color-text-main hover:bg-raw-color-surface/40 border border-transparent'
-                  }`}
-                >
-                  <span className="relative z-10 flex items-center gap-1">
-                    {active && <span className="w-1 h-1 rounded-full bg-raw-color-accent animate-ping" />}
+                <li key={item.path}>
+                  <NavLink
+                    to={item.path}
+                    className={`relative text-xs font-semibold uppercase tracking-wide transition-colors py-1 ${
+                      active ? 'text-[#22d3ee]' : 'text-[#cbd5e1] hover:text-[#22d3ee]'
+                    }`}
+                  >
                     {item.label}
-                  </span>
-                </Link>
+                  </NavLink>
+                </li>
               );
             })}
-          </nav>
+          </ul>
 
-          {/* High-Tech Diagnostic Widget (Desktop only) */}
-          <div className="hidden lg:flex items-center space-x-4 border-l border-raw-color-line/20 pl-4">
-            <div className="flex items-center gap-1.5 text-[10px] font-mono text-raw-color-text-dim">
-              <Cpu className="h-3 w-3 text-raw-color-accent-purple animate-pulse" />
-              <span>CORE_STABLE</span>
-            </div>
-            <div className="flex items-center gap-1.5 text-[10px] font-mono text-raw-color-text-dim">
-              <Layers className="h-3 w-3 text-raw-color-accent animate-pulse" />
-              <span>PORT: 3000</span>
-            </div>
-          </div>
-
-          {/* Mobile Menu Hamburger Button */}
+          {/* Mobile Menu Burger Toggle */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg bg-raw-color-surface border border-raw-color-line/30 text-raw-color-text-main hover:text-raw-color-accent focus:outline-none transition-all"
-            aria-label="Toggle navigation menu"
+            className="lg:hidden p-2 rounded-full hover:bg-slate-900 active:bg-cyan-500/10 text-white transition-colors focus:outline-none"
+            aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={isMobileMenuOpen}
           >
-            {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
+      </nav>
 
-        {/* Mobile Menu Dropdown */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden border-t border-raw-color-line/20 bg-raw-color-bg/95 backdrop-blur-xl py-4 px-4 space-y-2 animate-fadeIn">
+      {/* 2. Mobile Menu Overlay (Slides down below header) */}
+      {isMobileMenuOpen && (
+        <div className="lg:hidden fixed inset-x-0 bottom-0 top-16 bg-[#020617] z-[99998] p-8 overflow-y-auto animate-fadeIn border-t border-slate-900">
+          <ul className="space-y-6">
             {navItems.map((item) => {
               const active = isCurrent(item.path);
+              const Icon = item.icon;
               return (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className={`block w-full px-4 py-3 rounded-lg text-xs font-mono font-bold uppercase tracking-wider transition-all ${
-                    active
-                      ? 'text-raw-color-accent bg-raw-color-surface-alt border border-raw-color-accent/30'
-                      : 'text-raw-color-text-dim hover:text-raw-color-text-main hover:bg-raw-color-surface border border-transparent'
-                  }`}
-                >
-                  <span className="flex items-center gap-2">
-                    {active && <span className="w-1.5 h-1.5 rounded-full bg-raw-color-accent animate-pulse" />}
-                    {item.label}
-                  </span>
-                </Link>
+                <li key={item.path} className="group">
+                  <NavLink
+                    to={item.path}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`flex items-center justify-between py-4 px-6 rounded-2xl border transition-all ${
+                      active
+                        ? 'text-[#22d3ee] border-[#22d3ee]/20 bg-[#22d3ee]/5'
+                        : 'text-[#cbd5e1] border-transparent hover:text-white hover:bg-slate-900'
+                    }`}
+                  >
+                    <div className="flex items-center space-x-4">
+                      <Icon className="w-5 h-5 stroke-[1.5]" />
+                      <span className="text-sm font-bold uppercase tracking-wide">{item.label}</span>
+                    </div>
+                    <ArrowRight className="w-4 h-4 opacity-50 group-hover:translate-x-1 transition-transform" />
+                  </NavLink>
+                </li>
               );
             })}
+          </ul>
+        </div>
+      )}
 
-            {/* Micro telemetry widgets inside mobile nav */}
-            <div className="pt-4 border-t border-raw-color-line/10 flex items-center justify-between text-[10px] font-mono text-raw-color-text-dim px-2">
-              <span className="flex items-center gap-1">
-                <Cpu className="h-3 w-3 text-raw-color-accent-purple" /> CPU: OK
-              </span>
-              <span className="flex items-center gap-1">
-                <Layers className="h-3 w-3 text-raw-color-accent" /> MEM: OK
-              </span>
-              <span className="text-raw-color-accent-sky">v2.16-stable</span>
-            </div>
-          </div>
-        )}
-      </header>
-
-      {/* Main Container with Grid Background Backdrop */}
-      <main className="flex-grow max-w-6xl w-full mx-auto px-4 py-8 relative grid-pattern">
-        <Outlet />
+      {/* 3. Main Outlet Page Container with responsive bottom padding to prevent overlap with sticky mobile nav */}
+      <main id="main-content" className="flex-grow w-full relative grid-pattern pb-24 lg:pb-12">
+        <div className="max-w-6xl mx-auto px-4 py-8">
+          <Outlet />
+        </div>
       </main>
 
-      {/* Immersive Footer with tech info */}
-      <footer className="border-t border-raw-color-line/20 bg-raw-color-bg/80 py-6">
-        <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between text-raw-color-text-dim text-xs font-mono">
+      {/* 4. Adaptive Mobile Bottom Navigation Bar (Sticky at bottom on mobile/tablet) */}
+      <nav aria-label="Mobile Bottom Navigation" className="lg:hidden fixed bottom-0 inset-x-0 z-[99997] border-t border-slate-800 bg-[#0f172a]/90 backdrop-blur-xl pb-safe">
+        <ul className="flex justify-around items-center h-16 w-full">
+          {navItems.map((item) => {
+            const active = isCurrent(item.path);
+            const Icon = item.icon;
+            return (
+              <li key={item.path} className="flex-1">
+                <NavLink
+                  to={item.path}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`flex flex-col items-center justify-center h-full transition-colors ${
+                    active ? 'text-[#22d3ee]' : 'text-slate-400 hover:text-[#22d3ee]'
+                  }`}
+                >
+                  <Icon className="w-5 h-5 stroke-[1.5]" />
+                  <span className="text-[9px] font-bold uppercase tracking-wider mt-1.5 font-sans">
+                    {item.label.split(' ')[0]}
+                  </span>
+                </NavLink>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+
+      {/* 5. Clean Editorial Footer matching boomtick.blog */}
+      <footer className="border-t border-[#334155]/20 bg-[#020617] py-8 z-10">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between text-[#cbd5e1] text-xs font-mono space-y-4 md:space-y-0">
           <div className="flex items-center space-x-2">
-            <span className="w-2 h-2 rounded-full bg-raw-color-accent animate-pulse" />
-            <span>&copy; {new Date().getFullYear()} arii. All systems active.</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-[#22d3ee] animate-pulse shadow-[0_0_8px_#22d3ee]" />
+            <span>© 2026 BOOMTICK.BLOG</span>
           </div>
-          <div className="flex items-center space-x-4 mt-3 md:mt-0">
-            <span className="text-[10px] uppercase tracking-widest text-raw-color-accent-purple">DevAI / Resume Consolidation</span>
-            <span className="text-raw-color-line">|</span>
-            <span className="text-[10px] text-raw-color-text-dim">SECURE_SHELL</span>
+          <div className="flex items-center space-x-4">
+            <span className="text-[10px] uppercase tracking-wider text-slate-500">Ariel Anders, PhD · DevAI &amp; Robotics</span>
           </div>
         </div>
       </footer>
+
     </div>
   );
 };
