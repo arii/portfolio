@@ -5,7 +5,7 @@ import { StatusBadge } from '@/components/ui/StatusBadge';
 import { Icon } from '@/components/ui/Icon';
 import { cn } from '@/lib/utils';
 import { ResearchPost } from '@/data/research';
-import { getToolIcon } from '@/components/FlagshipCard';
+import { getToolIcon } from '@/components/ui/ToolPreview';
 
 interface ToolCardProps {
   tool: ResearchPost;
