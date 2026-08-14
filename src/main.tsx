@@ -6,6 +6,7 @@ import Layout from '@/components/Layout';
 import Home from '@/pages/Home';
 import Research from '@/pages/Research';
 import Resume from '@/pages/Resume';
+import About from '@/pages/About';
 import '@/index.css';
 
 const router = createHashRouter([
@@ -18,7 +19,15 @@ const router = createHashRouter([
         element: <Home />,
       },
       {
+        path: 'about',
+        element: <About />,
+      },
+      {
         path: 'research',
+        element: <Research />,
+      },
+      {
+        path: 'research/:slug',
         element: <Research />,
       },
       {

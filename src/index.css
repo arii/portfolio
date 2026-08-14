@@ -3,32 +3,98 @@
 @tailwind utilities;
 
 :root {
-  /* Boomtick professional developer AI / tech-dancer theme colors */
-  --brand-bg-darker: #05070c;
-  --brand-bg-dark: #0a0e17;
-  --brand-bg-surface: #131b2e;
-  --brand-cyan-light: #67e8f9;
-  --brand-cyan: #06b6d4;
+  /* Colors - High-Tech Dark Theme Refined from tech-dancer tokens.css */
+  --raw-color-bg: #020617;
+  --raw-color-surface: #0f172a;
+  --raw-color-surface-alt: #1e293b;
+  --raw-color-line: #334155;
+  --raw-color-accent: #22d3ee; /* Cyan 400 for WCAG AA contrast on dark surfaces */
+  --raw-color-accent-sky: #38bdf8;
+  --raw-color-accent-purple: #a78bfa;
+  --raw-color-accent-magenta: #e879f9;
+  --raw-color-accent-shadow: rgba(8, 145, 178, 0.3);
+  --raw-color-accent-navy: #f1f5f9;
+  --raw-color-accent-brand: #22d3ee;
+  --raw-color-text-main: #f1f5f9;
+  --raw-color-text-body: #e2e8f0;
+  --raw-color-text-dim: #cbd5e1; /* Slate 300 for better contrast against surface */
+  --raw-color-error: #ef4444;
+  --raw-color-error-bg: #1a0a0a;
+
+  /* Boomtick specific custom styling variables */
+  --brand-bg-darker: #020617;
+  --brand-bg-dark: #0f172a;
+  --brand-bg-surface: #1e293b;
+  --brand-cyan-light: #38bdf8;
+  --brand-cyan: #22d3ee;
   --brand-cyan-dark: #0891b2;
   --brand-green-light: #86efac;
-  --brand-green: #10b981;
+  --brand-green: #34d399;
   --brand-green-dark: #059669;
-  --brand-accent: #8b5cf6; /* Cyber purple accent */
+  --brand-accent: #a78bfa; /* Purple */
+
+  /* In-dev-banner support */
+  --color-background-secondary: var(--raw-color-surface-alt);
+  --color-text-primary: var(--raw-color-text-main);
+  --color-text-secondary: var(--raw-color-text-body);
+  --color-text-tertiary: var(--raw-color-text-dim);
+
+  /* Radius */
+  --raw-radius-none: 0px;
+  --raw-radius-subtle: 4px;
+  --raw-radius-standard: 8px;
+  --raw-radius-sm: 6px;
+  --raw-radius-md: 12px;
+  --raw-radius-lg: 16px;
+  --raw-radius-xl: 16px;
+  --raw-radius-full: 9999px;
+
+  /* Animation */
+  --raw-duration-fast: 150ms;
+  --raw-duration-normal: 300ms;
+  --raw-ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --raw-reveal-distance: 20px;
+  --raw-leading-tightest: 0.95;
+
+  /* Shadows */
+  --shadow-top-overlay: 0 -10px 40px rgba(0,0,0,0.3);
+  --shadow-glow: 0 0 15px var(--raw-color-accent-shadow);
+
+  /* Hero Section Settings */
+  --hero-bg: var(--raw-color-bg);
+  --hero-accent: var(--raw-color-accent-brand);
+  --hero-slash-gradient: linear-gradient(180deg, var(--raw-color-accent-brand) 0%, var(--raw-color-accent-purple) 100%);
+  --logo-muted-text: color-mix(in srgb, var(--raw-color-text-main) 60%, transparent);
 }
 
+/* Enforce dark theme variables even if system prefers light mode */
 @media (prefers-color-scheme: light) {
-  /* Standard modern fallback, but default to dark for the developer/boomtick aesthetic */
   :root {
-    --brand-bg-darker: #f8fafc;
-    --brand-bg-dark: #f1f5f9;
-    --brand-bg-surface: #ffffff;
-    --brand-cyan-light: #06b6d4;
-    --brand-cyan: #0891b2;
-    --brand-cyan-dark: #0e7490;
-    --brand-green-light: #10b981;
-    --brand-green: #059669;
-    --brand-green-dark: #047857;
-    --brand-accent: #6d28d9;
+    --raw-color-bg: #020617;
+    --raw-color-surface: #0f172a;
+    --raw-color-surface-alt: #1e293b;
+    --raw-color-line: #334155;
+    --raw-color-accent: #22d3ee;
+    --raw-color-accent-sky: #38bdf8;
+    --raw-color-accent-purple: #a78bfa;
+    --raw-color-accent-magenta: #e879f9;
+    --raw-color-accent-shadow: rgba(8, 145, 178, 0.3);
+    --raw-color-text-main: #f1f5f9;
+    --raw-color-text-body: #e2e8f0;
+    --raw-color-text-dim: #cbd5e1;
+    --raw-color-error: #ef4444;
+    --raw-color-error-bg: #1a0a0a;
+
+    --brand-bg-darker: #020617;
+    --brand-bg-dark: #0f172a;
+    --brand-bg-surface: #1e293b;
+    --brand-cyan-light: #38bdf8;
+    --brand-cyan: #22d3ee;
+    --brand-cyan-dark: #0891b2;
+    --brand-green-light: #86efac;
+    --brand-green: #34d399;
+    --brand-green-dark: #059669;
+    --brand-accent: #a78bfa;
   }
 }
 
@@ -36,7 +102,150 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background-color: var(--brand-bg-dark);
-  color: #f8fafc;
+  background-color: var(--raw-color-bg);
+  color: var(--raw-color-text-body);
   min-height: 100vh;
+}
+
+@layer utilities {
+  /* Technical Grid Backdrop from tech-dancer styling system */
+  .grid-pattern {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  /* Glass Panel utility */
+  .glass-panel {
+    background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0,0,0,0.2);
+  }
+
+  /* Text glow */
+  .text-glow {
+    text-shadow: 0 0 20px rgba(8, 145, 178, 0.4);
+  }
+
+  /* Flagship Tag */
+  .flagship-tag {
+    font-size: 11px !important;
+    padding: 2px 8px !important;
+    border-radius: 4px !important;
+    background: rgba(255, 255, 255, 0.06) !important;
+    color: var(--raw-color-text-body) !important;
+    border: 0.5px solid rgba(255, 255, 255, 0.1) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+  }
+
+  /* Card Screenshot Wrapper */
+  .card-screenshot-wrapper {
+    height: 200px !important;
+    overflow: hidden !important;
+    border-radius: 12px 12px 0 0 !important;
+  }
+
+  .card-screenshot-wrapper img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: top !important;
+    display: block !important;
+    transform: scale(1.1) !important;
+    transform-origin: top !important;
+  }
+
+  /* Why This Matters */
+  .why-this-matters {
+    padding: 0 !important;
+    background: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    margin: 32px 0 !important;
+  }
+
+  .why-this-matters .label {
+    font-size: 11px !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+    color: var(--raw-color-text-dim) !important;
+    margin-bottom: 8px !important;
+    font-family: monospace !important;
+    font-weight: bold !important;
+  }
+
+  .why-this-matters p {
+    font-size: 15px !important;
+    color: var(--raw-color-text-body) !important;
+    line-height: 1.7 !important;
+    max-width: 640px !important;
+  }
+
+  /* BoomTick Blog mock screenshot styling */
+  .boomtick-blog-preview {
+    background-color: #020617 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    padding: 24px !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+
+  .boomtick-blog-preview::before {
+    content: "" !important;
+    position: absolute !important;
+    inset: 0 !important;
+    opacity: 0.08 !important;
+    background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0) !important;
+    background-size: 16px 16px !important;
+    pointer-events: none !important;
+  }
+
+  .boomtick-blog-preview .preview-content {
+    position: relative !important;
+    z-index: 10 !important;
+  }
+
+  .boomtick-blog-preview .preview-logo {
+    font-size: 18px !important;
+    font-weight: 800 !important;
+    color: #ffffff !important;
+    line-height: 1 !important;
+    margin-bottom: 12px !important;
+    letter-spacing: -0.03em !important;
+  }
+
+  .boomtick-blog-preview .preview-logo .logo-accent {
+    color: #22d3ee !important; /* cyan 400 */
+  }
+
+  .boomtick-blog-preview .preview-logo .logo-dot {
+    color: var(--raw-color-text-dim) !important;
+    font-weight: 300 !important;
+  }
+
+  .boomtick-blog-preview .preview-headline {
+    font-size: 20px !important;
+    font-weight: 900 !important;
+    color: #ffffff !important;
+    line-height: 1.2 !important;
+    letter-spacing: -0.02em !important;
+  }
+
+  .boomtick-blog-preview .preview-headline .headline-accent {
+    color: #22d3ee !important;
+  }
+
+  .boomtick-blog-preview .preview-tagline {
+    font-size: 11px !important;
+    color: var(--raw-color-text-dim) !important;
+    line-height: 1.5 !important;
+    margin-top: 6px !important;
+    max-width: 240px !important;
+  }
 }

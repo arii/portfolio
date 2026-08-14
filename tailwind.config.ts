@@ -8,31 +8,50 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Design tokens matching the "boomtick" developer AI / technical console palette
+        // Direct mappings to tech-dancer CSS color tokens
+        bg: 'var(--raw-color-bg, #020617)',
+        surface: 'var(--raw-color-surface, #0f172a)',
+        'surface-alt': 'var(--raw-color-surface-alt, #1e293b)',
+        line: 'var(--raw-color-line, #334155)',
+        accent: 'var(--raw-color-accent, #22d3ee)',
+        'accent-sky': 'var(--raw-color-accent-sky, #38bdf8)',
+        'accent-purple': 'var(--raw-color-accent-purple, #a78bfa)',
+        'accent-magenta': 'var(--raw-color-accent-magenta, #e879f9)',
+        'text-main': 'var(--raw-color-text-main, #f1f5f9)',
+        'text-body': 'var(--raw-color-text-body, #e2e8f0)',
+        'text-dim': 'var(--raw-color-text-dim, #cbd5e1)',
+        error: 'var(--raw-color-error, #ef4444)',
+
+        // Legacy mapping support for existing portfolio elements
         brand: {
-          // Dark backgrounds and surfaces
           bg: {
-            darker: 'var(--brand-bg-darker, #0a0e17)',
-            dark: 'var(--brand-bg-dark, #0f172a)',
-            surface: 'var(--brand-bg-surface, #1e293b)',
+            darker: 'var(--raw-color-bg, #020617)',
+            dark: 'var(--raw-color-surface, #0f172a)',
+            surface: 'var(--raw-color-surface-alt, #1e293b)',
           },
-          // Custom neon/cyber accents
           cyan: {
-            light: 'var(--brand-cyan-light, #38bdf8)',
-            DEFAULT: 'var(--brand-cyan, #0ea5e9)',
-            dark: 'var(--brand-cyan-dark, #0284c7)',
+            light: 'var(--raw-color-accent-sky, #38bdf8)',
+            DEFAULT: 'var(--raw-color-accent, #22d3ee)',
+            dark: '#0891b2',
           },
           green: {
-            light: 'var(--brand-green-light, #4ade80)',
-            DEFAULT: 'var(--brand-green, #22c55e)',
-            dark: 'var(--brand-green-dark, #16a34a)',
+            light: '#86efac',
+            DEFAULT: '#34d399',
+            dark: '#059669',
           },
-          accent: 'var(--brand-accent, #6366f1)', // Indigo/cyber highlight
+          accent: 'var(--raw-color-accent-purple, #a78bfa)',
         },
+        primary: 'var(--raw-color-accent, #22d3ee)',
+        'primary-accent': 'var(--raw-color-accent-sky, #38bdf8)',
+        secondary: 'var(--raw-color-text-dim, #cbd5e1)',
+        muted: '#64748b',
+        border: 'var(--raw-color-line, #334155)',
       },
       fontFamily: {
-        mono: ['JetBrains Mono', 'Fira Code', 'ui-monospace', 'monospace'],
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['"Albert Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: ['"Bricolage Grotesque"', '"Albert Sans"', 'sans-serif'],
+        serif: ['"Playfair Display"', 'Georgia', 'serif'],
+        mono: ['"Space Mono"', 'monospace'],
       },
     },
   },
