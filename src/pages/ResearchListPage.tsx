@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { getAllResearchPosts, RESEARCH_TOOLS } from '@/data/research';
 import ResearchCard from '@/components/ResearchCard';
+import ToolCard from '@/components/ToolCard';
 import { Cpu, Layers, ExternalLink, Activity, Server, FileText, ShoppingBag, X, FlaskConical, ArrowRight } from 'lucide-react';
 import { ResearchTool } from '@/types/research';
 
@@ -229,22 +230,7 @@ const ResearchListPage: React.FC<ResearchListPageProps> = ({ onNavigate }) => {
             </h3>
           </div>
           <div className="space-y-4">
-            {engineeringTools.map(tool => (
-              <div key={tool.id} className="p-4 bg-surface/50 border border-line rounded-2xl hover:border-accent transition-all space-y-2">
-                <div className="flex justify-between items-start">
-                  <h4 className="font-bold text-text-main text-sm font-display">{tool.title}</h4>
-                  <span className="text-[8px] bg-accent/10 text-accent px-1.5 py-0.5 rounded border border-accent/20">
-                    {tool.status}
-                  </span>
-                </div>
-                <p className="text-xs text-text-dim leading-relaxed">{tool.description}</p>
-                <div className="flex flex-wrap gap-1.5 pt-1">
-                  {tool.tags.map(tag => (
-                    <span key={tag} className="text-[9px] bg-[#0f172a] px-2 py-0.5 text-text-dim border border-line rounded-full">{tag}</span>
-                  ))}
-                </div>
-              </div>
-            ))}
+            {engineeringTools.map(tool => (<ToolCard key={tool.id} tool={tool} onNavigate={onNavigate} />))}
           </div>
         </div>
 
@@ -257,22 +243,7 @@ const ResearchListPage: React.FC<ResearchListPageProps> = ({ onNavigate }) => {
             </h3>
           </div>
           <div className="space-y-4">
-            {dataContentTools.map(tool => (
-              <div key={tool.id} className="p-4 bg-surface/50 border border-line rounded-2xl hover:border-accent transition-all space-y-2">
-                <div className="flex justify-between items-start">
-                  <h4 className="font-bold text-text-main text-sm font-display">{tool.title}</h4>
-                  <span className="text-[8px] bg-accent/10 text-accent px-1.5 py-0.5 rounded border border-accent/20">
-                    {tool.status}
-                  </span>
-                </div>
-                <p className="text-xs text-text-dim leading-relaxed">{tool.description}</p>
-                <div className="flex flex-wrap gap-1.5 pt-1">
-                  {tool.tags.map(tag => (
-                    <span key={tag} className="text-[9px] bg-[#0f172a] px-2 py-0.5 text-text-dim border border-line rounded-full">{tag}</span>
-                  ))}
-                </div>
-              </div>
-            ))}
+            {dataContentTools.map(tool => (<ToolCard key={tool.id} tool={tool} onNavigate={onNavigate} />))}
           </div>
         </div>
 
@@ -285,22 +256,7 @@ const ResearchListPage: React.FC<ResearchListPageProps> = ({ onNavigate }) => {
             </h3>
           </div>
           <div className="space-y-4">
-            {ecommerceTools.map(tool => (
-              <div key={tool.id} className="p-4 bg-surface/50 border border-line rounded-2xl hover:border-accent transition-all space-y-2">
-                <div className="flex justify-between items-start">
-                  <h4 className="font-bold text-text-main text-sm font-display">{tool.title}</h4>
-                  <span className="text-[8px] bg-accent/10 text-accent px-1.5 py-0.5 rounded border border-accent/20">
-                    {tool.status}
-                  </span>
-                </div>
-                <p className="text-xs text-text-dim leading-relaxed">{tool.description}</p>
-                <div className="flex flex-wrap gap-1.5 pt-1">
-                  {tool.tags.map(tag => (
-                    <span key={tag} className="text-[9px] bg-[#0f172a] px-2 py-0.5 text-text-dim border border-line rounded-full">{tag}</span>
-                  ))}
-                </div>
-              </div>
-            ))}
+            {ecommerceTools.map(tool => (<ToolCard key={tool.id} tool={tool} onNavigate={onNavigate} />))}
           </div>
         </div>
       </section>
