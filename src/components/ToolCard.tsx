@@ -45,6 +45,7 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
           tabIndex={0}
           onKeyDown={(e) => {
             if (e.key === 'Enter' || e.key === ' ') {
+      if (e.key === ' ') e.preventDefault();
               isResearch ? onNavigate(targetSlug) : window.open(targetSlug, '_blank', 'noopener,noreferrer');
             }
           }}
