@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Cpu, Terminal, FileText, User } from 'lucide-react';
+import { Menu, X, Cpu, Terminal, User } from 'lucide-react';
 
 const Navigation: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -8,25 +8,24 @@ const Navigation: React.FC = () => {
 
   const navLinks = [
     { name: 'Overview', path: '/', icon: Cpu },
-    { name: 'DevAI Portfolio', path: '/lab', icon: Terminal },
-    { name: 'Research', path: '/research', icon: FileText },
+    { name: 'DevAI Portfolio', path: '/research', icon: Terminal },
     { name: 'About Ariel', path: '/about', icon: User },
   ];
 
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-bg/95 backdrop-blur-md">
+    <header className="sticky top-0 z-50 w-full border-b border-line/60 bg-bg/95 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link to="/" className="flex items-center space-x-3 group">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-bg">
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent/10 text-accent transition-colors group-hover:bg-accent group-hover:text-bg">
             <Cpu className="h-5 w-5" />
           </div>
           <div className="flex flex-col">
             <span className="text-base font-bold tracking-tight text-text-main">
               Ariel Anders Portfolio
             </span>
-            <span className="text-xs text-secondary">
+            <span className="text-xs text-text-dim">
               Robotics &amp; Autonomous Systems
             </span>
           </div>
@@ -43,8 +42,8 @@ const Navigation: React.FC = () => {
                 to={link.path}
                 className={`flex items-center space-x-2 rounded-md px-3.5 py-2 text-sm font-medium transition-colors ${
                   active
-                    ? 'bg-secondary text-text-main'
-                    : 'text-secondary hover:bg-muted hover:text-text-main'
+                    ? 'bg-surface-alt text-text-main'
+                    : 'text-text-dim hover:bg-surface hover:text-text-main'
                 }`}
               >
                 <Icon className="h-4 w-4" />
@@ -57,7 +56,7 @@ const Navigation: React.FC = () => {
         {/* Mobile Menu Toggle */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="flex h-10 w-10 items-center justify-center rounded-md border border-border p-2 text-secondary hover:text-text-main md:hidden"
+          className="flex h-10 w-10 items-center justify-center rounded-md border border-line p-2 text-text-dim hover:text-text-main md:hidden"
           aria-label="Toggle navigation menu"
         >
           {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -66,7 +65,7 @@ const Navigation: React.FC = () => {
 
       {/* Mobile Drawer */}
       {isOpen && (
-        <div className="border-b border-border bg-bg px-4 pt-2 pb-4 md:hidden">
+        <div className="border-b border-line bg-bg px-4 pt-2 pb-4 md:hidden">
           <div className="flex flex-col space-y-1">
             {navLinks.map((link) => {
               const Icon = link.icon;
@@ -78,8 +77,8 @@ const Navigation: React.FC = () => {
                   onClick={() => setIsOpen(false)}
                   className={`flex items-center space-x-3 rounded-md px-3 py-2.5 text-sm font-medium ${
                     active
-                      ? 'bg-secondary text-text-main'
-                      : 'text-secondary hover:bg-muted hover:text-text-main'
+                      ? 'bg-surface-alt text-text-main'
+                      : 'text-text-dim hover:bg-surface hover:text-text-main'
                   }`}
                 >
                   <Icon className="h-4 w-4" />

@@ -25,6 +25,6 @@ describe('Home Page', () => {
     );
 
     expect(screen.getByText('Explore DevAI Portfolio')).toBeInTheDocument();
-    expect(screen.getByText('Read Technical Deep Dives')).toBeInTheDocument();
+    expect(screen.getByText('View CI Tooling Portfolio')).toBeInTheDocument();
   });
 });

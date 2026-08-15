@@ -1,5 +1,5 @@
 import React from 'react';
-import { Zap, Globe, MapPin, Briefcase, ExternalLink } from 'lucide-react';
+import { Briefcase, MapPin, Globe, Zap, ExternalLink } from 'lucide-react';
 import roboticistPhoto from '@/assets/roboticist.jpg';
 
 // Simple, beautiful, type-safe inline SVG icons for LinkedIn and GitHub
@@ -37,7 +37,7 @@ const About: React.FC = () => {
   const profileData = {
     name: "Ariel Anders, PhD",
     role: "Senior roboticist · DevAI engineer",
-    bio: "MIT PhD and former senior engineer at Waymo and Robust.AI. I bridge the gap between shipping production robotics software and building the agentic engineering workflows that scale robotics teams. Below is a breakdown of my professional experience and independent projects.",
+    bio: "MIT PhD and former senior engineer at Waymo and Robust.AI. I bridge the gap between shipping production robotics software and building the agentic engineering workflows that scale robotics teams. Note: While my core background is in robotics, this portfolio is explicitly dedicated to showcasing my DevAI engineering work—features, pipelines, and products built via agentic orchestration, LLM integration, and AI-assisted workflows.",
     details: [
       { label: "Location", value: "San Francisco, CA", icon: MapPin },
       { label: "Portfolio", value: "View Portfolio", url: "#/research", icon: Globe },
@@ -45,14 +45,14 @@ const About: React.FC = () => {
     ],
     experience: [
       {
+        icon: Zap,
+        title: "DevAI tooling & Agentic Development",
+        content: "I am not a traditional full-stack web developer. The products in this portfolio (like HRM, RepoAuditor AI, and BoomTick.blog) were built using autonomous coding agents, custom LangChain tools, and LLM orchestration workflows. I specialize in designing the agentic pipelines, writing the tools that AI agents use to accomplish tasks, and integrating them into production-ready software."
+      },
+      {
         icon: Briefcase,
         title: "Robotics & Engineering",
         content: "Senior roboticist with production experience at Waymo and Robust.AI. I work across navigation, localization, motion planning, and behavior for autonomous systems. At startups, that means owning the full stack — from algorithm to Docker to deployment. Stack: ROS1/ROS2, C++, Python."
-      },
-      {
-        icon: Zap,
-        title: "DevAI tooling (independent projects)",
-        content: "I build agentic CI/CD pipelines, LLM-assisted code review, and developer tooling as self-directed projects — the tools I wish robotics teams had. Current work: RepoAuditor AI (Gemini-driven PR auditing) and BoomTick.blog (live RAG + LLM testbed in active development). Code at github.com/arii."
       },
       {
         icon: Globe,
@@ -142,7 +142,7 @@ const About: React.FC = () => {
         <aside className="lg:col-span-4 space-y-8 order-1 lg:order-2">
           {/* Portrait Image */}
           <div className="relative group mx-auto lg:mx-0 max-w-sm rounded-3xl overflow-hidden border border-line bg-surface p-2 transition-all duration-300">
-            <div className="aspect-square rounded-2xl overflow-hidden bg-slate-950">
+            <div className="aspect-square rounded-2xl overflow-hidden bg-bg">
               <img
                 src={roboticistPhoto}
                 alt="Ariel Anders, PhD - Roboticist and DevAI Engineer"
@@ -200,7 +200,7 @@ const About: React.FC = () => {
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center space-x-3 text-text-dim hover:text-text-main border border-line bg-[#0f172a] hover:bg-slate-900 p-3.5 rounded-2xl transition-all"
+                    className="flex items-center space-x-3 text-text-dim hover:text-text-main border border-line bg-surface-alt hover:bg-line p-3.5 rounded-2xl transition-all"
                   >
                     <Icon className="h-4 w-4 text-accent shrink-0" />
                     <span className="text-sm font-bold">{social.label}</span>

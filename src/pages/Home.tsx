@@ -2,29 +2,28 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Bot, Code2, ShieldCheck, Terminal, FileCode2 } from 'lucide-react';
 import { Button } from '@/layouts/Button';
+import { Box, Stack, Grid, Text } from '@/layouts/Primitives';
 
 const Home: React.FC = () => {
   return (
-    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 space-y-16">
+    <Box className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 space-y-16">
       {/* Hero Header Section */}
-      <section className="relative overflow-hidden rounded-2xl border border-border bg-surface p-8 sm:p-12 shadow-sm">
-        <div className="max-w-3xl space-y-6">
-          <div className="inline-flex items-center space-x-2 rounded-full border border-amber-500/20 bg-amber-500/10 px-3 py-1 text-xs font-semibold text-amber-600 dark:text-amber-400">
+      <section className="relative overflow-hidden rounded-2xl border border-line bg-surface p-8 sm:p-12 shadow-sm">
+        <Stack gap="6" className="max-w-3xl">
+          <Box className="inline-flex items-center space-x-2 rounded-full border border-accent/20 bg-accent/10 px-3 py-1 text-xs font-semibold text-accent w-fit">
             <Bot className="h-3.5 w-3.5" />
             <span>Senior Roboticist &amp; DevAI Engineer</span>
-          </div>
+          </Box>
 
-          <h1 className="text-4xl font-extrabold tracking-tight text-text-main sm:text-5xl lg:text-6xl">
-            Ariel Anders, PhD
-          </h1>
+          <Text variant="heading">Ariel Anders, PhD</Text>
 
-          <p className="text-lg leading-relaxed text-text-dim">
+          <Text variant="body" className="text-lg text-text-dim">
             I engineer autonomous robotics software, Behavior-Tree navigation loops, and
             agentic developer platform tooling. Explore my technical research, DevAI automation
             pipelines, and software architecture records.
-          </p>
+          </Text>
 
-          <div className="flex flex-wrap gap-4 pt-2">
+          <Stack direction="row" gap="4" className="pt-2 flex-wrap" align="center">
             <Link to="/research">
               <Button variant="primary" size="md" className="flex items-center space-x-2">
                 <span>Explore DevAI Portfolio</span>
@@ -36,98 +35,94 @@ const Home: React.FC = () => {
                 <span>View Engineering Credentials</span>
               </Button>
             </Link>
-          </div>
-        </div>
+          </Stack>
+        </Stack>
       </section>
 
       {/* Main Focus Cards Section */}
-      <section className="grid gap-8 md:grid-cols-2">
+      <Grid cols="1 md:grid-cols-2" gap="8">
         {/* Card 1: DevAI & Tooling */}
-        <div className="flex flex-col justify-between rounded-xl border border-border bg-surface p-8 shadow-sm transition-all hover:border-primary/50 hover:shadow-md">
-          <div className="space-y-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
+        <Stack justify="between" className="rounded-xl border border-line bg-surface p-8 shadow-sm transition-all hover:border-accent/50 hover:shadow-md h-full">
+          <Stack gap="4">
+            <Box className="flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10 text-accent">
               <Terminal className="h-6 w-6" />
-            </div>
-            <h2 className="text-2xl font-bold text-text-main">
-              Autonomous DevAI &amp; Tooling
-            </h2>
-            <p className="text-sm leading-relaxed text-text-dim">
+            </Box>
+            <Text variant="subheading">Autonomous DevAI &amp; Tooling</Text>
+            <Text variant="dim">
               Review custom CLI utilities (`td-cli`), multi-agent feedback daemons, Model Context
               Protocol servers, and automated code review pipelines designed to keep engineers in
               direct control.
-            </p>
-          </div>
-          <div className="mt-8 pt-4 border-t border-border">
+            </Text>
+          </Stack>
+          <Box className="mt-8 pt-4 border-t border-line">
             <Link
               to="/research"
-              className="inline-flex items-center space-x-2 text-sm font-semibold text-primary hover:underline"
+              className="inline-flex items-center space-x-2 text-sm font-semibold text-accent hover:underline"
             >
               <span>Inspect DevAI Systems</span>
               <ArrowRight className="h-4 w-4" />
             </Link>
-          </div>
-        </div>
+          </Box>
+        </Stack>
 
-        {/* Card 2: Robotics & Research */}
-        <div className="flex flex-col justify-between rounded-xl border border-border bg-surface p-8 shadow-sm transition-all hover:border-primary/50 hover:shadow-md">
-          <div className="space-y-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
+        {/* Card 2: RepoAuditor AI & CI/CD Pipelines */}
+        <Stack justify="between" className="rounded-xl border border-line bg-surface p-8 shadow-sm transition-all hover:border-accent/50 hover:shadow-md h-full">
+          <Stack gap="4">
+            <Box className="flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10 text-accent">
               <Code2 className="h-6 w-6" />
-            </div>
-            <h2 className="text-2xl font-bold text-text-main">
-              Robotics Research &amp; Motion Planning
-            </h2>
-            <p className="text-sm leading-relaxed text-text-dim">
-              Examine autonomous vehicle motion planning, localization, Behavior Trees, and
-              industrial robotics software architectures built during PhD research at MIT and senior
-              industry roles.
-            </p>
-          </div>
-          <div className="mt-8 pt-4 border-t border-border">
+            </Box>
+            <Text variant="subheading">RepoAuditor AI &amp; CI/CD Pipelines</Text>
+            <Text variant="dim">
+              Explore automated GitHub PR auditing built on a Gemini-driven CI/CD pipeline.
+              Review the implementation details of the RepoAuditor AI dashboard, multi-agent workflows,
+              and the Deployment Impact Analyzer tool.
+            </Text>
+          </Stack>
+          <Box className="mt-8 pt-4 border-t border-line">
             <Link
               to="/research"
-              className="inline-flex items-center space-x-2 text-sm font-semibold text-primary hover:underline"
+              className="inline-flex items-center space-x-2 text-sm font-semibold text-accent hover:underline"
             >
-              <span>Read Technical Deep Dives</span>
+              <span>View CI Tooling Portfolio</span>
               <ArrowRight className="h-4 w-4" />
             </Link>
-          </div>
-        </div>
-      </section>
+          </Box>
+        </Stack>
+      </Grid>
 
       {/* Engineering Highlights Banner */}
-      <section className="rounded-xl border border-border bg-muted/40 p-6 sm:p-8">
-        <div className="grid gap-6 md:grid-cols-3">
-          <div className="flex items-start space-x-3">
-            <ShieldCheck className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-            <div>
+      <Box className="rounded-xl border border-line bg-surface-alt p-6 sm:p-8">
+        <Grid cols="1 md:grid-cols-3" gap="6">
+          <Stack direction="row" gap="3" align="start">
+            <ShieldCheck className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+            <Box>
               <h3 className="font-semibold text-text-main text-sm">Strict Quality Gates</h3>
               <p className="text-xs text-text-dim mt-1">
                 Automated Semgrep static analysis, secret detection, and linting.
               </p>
-            </div>
-          </div>
-          <div className="flex items-start space-x-3">
-            <FileCode2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-            <div>
+            </Box>
+          </Stack>
+          <Stack direction="row" gap="3" align="start">
+            <FileCode2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+            <Box>
               <h3 className="font-semibold text-text-main text-sm">Deterministic CLI</h3>
               <p className="text-xs text-text-dim mt-1">
                 Custom `td-cli` orchestrator managing local and CI agent workflows.
               </p>
-            </div>
-          </div>
-          <div className="flex items-start space-x-3">
-            <Bot className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-            <div>
+            </Box>
+          </Stack>
+          <Stack direction="row" gap="3" align="start">
+            <Bot className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+            <Box>
               <h3 className="font-semibold text-text-main text-sm">Agentic Workflows</h3>
               <p className="text-xs text-text-dim mt-1">
                 Jules feedback daemons and LLM orchestration with token budget constraints.
               </p>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
+            </Box>
+          </Stack>
+        </Grid>
+      </Box>
+    </Box>
   );
 };
 
