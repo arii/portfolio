@@ -37,7 +37,7 @@ const About: React.FC = () => {
   const profileData = {
     name: "Ariel Anders, PhD",
     role: "Senior roboticist · DevAI engineer",
-    bio: "MIT PhD and former senior engineer at Waymo and Robust.AI. I bridge the gap between shipping production robotics software and building the agentic engineering workflows that scale robotics teams. Note: While my core background is in robotics, this portfolio is explicitly dedicated to showcasing my DevAI engineering work—features, pipelines, and products built via agentic orchestration, LLM integration, and AI-assisted workflows.",
+    bio: "I'm an MIT PhD and former senior engineer at Waymo and Robust.AI. My background is in robotics—specifically navigation, motion planning, and behavior systems. But recently, I've been focused on something slightly different: the developer experience. This portfolio is a deep dive into my work building AI-assisted engineering workflows, autonomous agents, and the infrastructure that supports them.",
     details: [
       { label: "Location", value: "San Francisco, CA", icon: MapPin },
       { label: "Portfolio", value: "View Portfolio", url: "#/research", icon: Globe },
@@ -46,18 +46,18 @@ const About: React.FC = () => {
     experience: [
       {
         icon: Zap,
-        title: "DevAI tooling & Agentic Development",
-        content: "I am not a traditional full-stack web developer. The products in this portfolio (like HRM, RepoAuditor AI, and BoomTick.blog) were built using autonomous coding agents, custom LangChain tools, and LLM orchestration workflows. I specialize in designing the agentic pipelines, writing the tools that AI agents use to accomplish tasks, and integrating them into production-ready software."
+        title: "Building with Agents",
+        content: "To be clear, I'm not a traditional web developer. The projects on this site (HRM, RepoAuditor, BoomTick) are experiments in agentic orchestration. I didn't hand-write every React component; instead, I built the LangChain tools, wrote the GitHub Actions, and designed the workflows that allowed autonomous agents to build them for me."
       },
       {
         icon: Briefcase,
         title: "Robotics & Engineering",
-        content: "Senior roboticist with production experience at Waymo and Robust.AI. I work across navigation, localization, motion planning, and behavior for autonomous systems. At startups, that means owning the full stack — from algorithm to Docker to deployment. Stack: ROS1/ROS2, C++, Python."
+        content: "My day job is shipping production robotics software. I've worked across the full stack at startups, from algorithms down to Docker and deployment (ROS1/ROS2, C++, Python)."
       },
       {
         icon: Globe,
-        title: "DevAI for robotics",
-        content: "Most DevAI practitioners don't know ROS. Most roboticists aren't building agentic pipelines. I work at that intersection, helping robotics teams adopt AI-assisted engineering practices: automated code review, agentic CI/CD, and LLM tooling built by someone who has shipped production robotics software."
+        title: "The Intersection",
+        content: "There's a massive gap right now: most DevAI researchers don't know ROS, and most roboticists aren't experimenting with agentic CI/CD. I'm building tools at that intersection—practical AI workflows designed by someone who actually has to ship hardware."
       }
     ],
     availability: "Open to Staff/Senior SWE roles, robotics contracts, and DevAI consulting — especially where robotics and AI-assisted engineering overlap.",

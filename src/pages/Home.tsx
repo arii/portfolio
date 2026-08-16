@@ -18,9 +18,9 @@ const Home: React.FC = () => {
           <Text variant="heading">Ariel Anders, PhD</Text>
 
           <Text variant="body" className="text-lg text-text-dim">
-            I engineer autonomous robotics software, Behavior-Tree navigation loops, and
-            agentic developer platform tooling. Explore my technical research, DevAI automation
-            pipelines, and software architecture records.
+            I build autonomous robotics software and the developer tools that make shipping it easier.
+            This site is a collection of my work exploring AI-assisted engineering—specifically how we can
+            use agents, LLMs, and custom CI pipelines to write better code, faster.
           </Text>
 
           <Stack direction="row" gap="4" className="pt-2 flex-wrap" align="center">
@@ -49,9 +49,8 @@ const Home: React.FC = () => {
             </Box>
             <Text variant="subheading">Autonomous DevAI &amp; Tooling</Text>
             <Text variant="dim">
-              Review custom CLI utilities (`td-cli`), multi-agent feedback daemons, Model Context
-              Protocol servers, and automated code review pipelines designed to keep engineers in
-              direct control.
+              A look at the custom CLI tools, multi-agent feedback loops, and Model Context Protocol servers
+              I've built to keep engineers in control while actively leveraging AI.
             </Text>
           </Stack>
           <Box className="mt-8 pt-4 border-t border-line">
@@ -73,9 +72,8 @@ const Home: React.FC = () => {
             </Box>
             <Text variant="subheading">RepoAuditor AI &amp; CI/CD Pipelines</Text>
             <Text variant="dim">
-              Explore automated GitHub PR auditing built on a Gemini-driven CI/CD pipeline.
-              Review the implementation details of the RepoAuditor AI dashboard, multi-agent workflows,
-              and the Deployment Impact Analyzer tool.
+              How I built an automated GitHub PR reviewer using Gemini and integrated it directly
+              into a standard CI/CD pipeline, plus deep dives into the surrounding test infrastructure.
             </Text>
           </Stack>
           <Box className="mt-8 pt-4 border-t border-line">
@@ -98,7 +96,7 @@ const Home: React.FC = () => {
             <Box>
               <h3 className="font-semibold text-text-main text-sm">Strict Quality Gates</h3>
               <p className="text-xs text-text-dim mt-1">
-                Automated Semgrep static analysis, secret detection, and linting.
+                Automated Semgrep static analysis, secret detection, and strict linting to catch issues early.
               </p>
             </Box>
           </Stack>
@@ -107,7 +105,7 @@ const Home: React.FC = () => {
             <Box>
               <h3 className="font-semibold text-text-main text-sm">Deterministic CLI</h3>
               <p className="text-xs text-text-dim mt-1">
-                Custom `td-cli` orchestrator managing local and CI agent workflows.
+                Custom `td-cli` orchestrators managing both local and remote agent workflows.
               </p>
             </Box>
           </Stack>
@@ -116,7 +114,7 @@ const Home: React.FC = () => {
             <Box>
               <h3 className="font-semibold text-text-main text-sm">Agentic Workflows</h3>
               <p className="text-xs text-text-dim mt-1">
-                Jules feedback daemons and LLM orchestration with token budget constraints.
+                Practical applications of LLMs and autonomous agents to real-world engineering problems.
               </p>
             </Box>
           </Stack>
