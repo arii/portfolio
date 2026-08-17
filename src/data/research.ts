@@ -145,7 +145,7 @@ export const RESEARCH_TOOLS: ResearchTool[] = [
     category: 'Data Engineering',
     status: 'Active',
     tags: ['ETL', 'Apache Parquet', 'Scraping', 'Data Pipelines'],
-    canonicalPath: '/research/wcs-scraper'
+    canonicalPath: '/research/wcs-scraper-initial-sync'
   },
   {
     id: 'blog-drafter',
