@@ -18,7 +18,7 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ experience
           <div key={idx} className="relative pl-4 sm:pl-6 border-l-2 border-border print:border-black print:pl-4">
             <div className="absolute w-3 h-3 bg-primary rounded-full -left-[7px] top-1.5 print:bg-black" />
             <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-1 print:flex-row print:justify-between print:mb-0.5">
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 flex-wrap">
                 <h3 className="text-lg font-bold text-foreground print:text-black leading-tight">{exp.title}</h3>
                 {exp.link && (
                   <a href={exp.link} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors print:hidden">
@@ -32,8 +32,10 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ experience
             {exp.description && (
               <p className="text-sm text-muted-foreground mb-3 leading-relaxed print:text-gray-800 print:mb-2">{exp.description}</p>
             )}
+
+            {/* Direct Points */}
             {exp.points && (
-              <ul className="space-y-1.5 print:space-y-1">
+              <ul className="space-y-1.5 print:space-y-1 mb-3">
                 {exp.points.map((point, pIdx) => (
                   <li key={pIdx} className="flex gap-2 text-sm text-muted-foreground leading-relaxed print:text-gray-800 print:text-[13px]">
                     <span className="text-primary print:text-black mt-0.5 opacity-70">•</span>
@@ -41,6 +43,28 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ experience
                   </li>
                 ))}
               </ul>
+            )}
+
+            {/* Grouped Sub-Roles (e.g. Robust.AI multi-role) */}
+            {exp.subRoles && exp.subRoles.length > 0 && (
+              <div className="mt-3 space-y-4 pt-2 border-t border-border/40 print:border-gray-300">
+                {exp.subRoles.map((subRole, sIdx) => (
+                  <div key={sIdx} className="space-y-1.5">
+                    <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
+                      <span className="text-sm font-bold text-foreground print:text-black">{subRole.title}</span>
+                      <span className="text-xs font-mono text-muted-foreground print:text-gray-700">{subRole.period}</span>
+                    </div>
+                    <ul className="space-y-1">
+                      {subRole.points.map((point, pIdx) => (
+                        <li key={pIdx} className="flex gap-2 text-sm text-muted-foreground leading-relaxed print:text-gray-800 print:text-[13px]">
+                          <span className="text-primary print:text-black mt-0.5 opacity-70">•</span>
+                          <span>{point}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
             )}
           </div>
         ))}
