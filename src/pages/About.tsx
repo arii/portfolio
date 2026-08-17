@@ -146,7 +146,7 @@ const About: React.FC = () => {
               <img
                 src={roboticistPhoto}
                 alt="Ariel Anders, PhD - Roboticist and DevAI Engineer"
-                className="w-full h-full object-cover mix-blend-luminosity grayscale hover:grayscale-0 transition-all duration-500"
+                className="w-full h-full object-cover transition-all duration-500"
               />
             </div>
           </div>
