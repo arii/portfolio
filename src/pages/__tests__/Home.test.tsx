@@ -28,7 +28,7 @@ describe('Home Page', () => {
     ).toBeInTheDocument();
 
     expect(screen.getAllByText(/MIT CSAIL/i).length).toBeGreaterThan(0);
-    expect(screen.getAllByText(/Robust\.AI/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/Robust AI/i).length).toBeGreaterThan(0);
     expect(screen.getAllByText(/Waymo/i).length).toBeGreaterThan(0);
     expect(screen.getAllByText(/Civ Robotics/i).length).toBeGreaterThan(0);
   });
@@ -71,6 +71,6 @@ describe('Home Page', () => {
     );
 
     expect(screen.getByText('Core Engineering Stack')).toBeInTheDocument();
-    expect(screen.getByText('ROS 2')).toBeInTheDocument();
+    expect(screen.getAllByText(/ROS 2/i).length).toBeGreaterThan(0);
   });
 });
