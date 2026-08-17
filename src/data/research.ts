@@ -45,7 +45,7 @@ export const RESEARCH_TOOLS: ResearchTool[] = [
       highlight: 'Intended to run locally on your own server.',
       rest: ' No live site available.'
     },
-    taxonomyBucket: 'flagship',
+    taxonomyBucket: 'product',
     title: 'HRM (Heart Rate Monitor)',
     description: 'Web Bluetooth heart-rate telemetry synced across multiple clients via persistent WebSocket server, with Spotify API integration and a synchronized timer. Built end-to-end as a DevAI-assisted engineering project.',
     category: 'Product Development',
@@ -61,7 +61,7 @@ export const RESEARCH_TOOLS: ResearchTool[] = [
       highlight: 'Available now for testing',
       rest: ' with your own repository.'
     },
-    taxonomyBucket: 'flagship',
+    taxonomyBucket: 'product',
     title: 'RepoAuditor',
     description: 'Automated GitHub PR auditing built on a Gemini-driven CI/CD pipeline with Jules autonomous coding agent integration. An independent project demonstrating agentic engineering workflow — not prior paid work.',
     category: 'DevAI Tooling',
@@ -79,7 +79,7 @@ export const RESEARCH_TOOLS: ResearchTool[] = [
       highlight: 'RAG + LLM tooling in active development.',
       rest: ' This site is the production environment where those pipelines are being built and validated.'
     },
-    taxonomyBucket: 'flagship',
+    taxonomyBucket: 'product',
     title: 'BoomTick.blog',
     subtitle: 'LIVE DEVELOPMENT ENVIRONMENT',
     description: 'West Coast Swing community platform and active testbed for RAG pipelines and LLM-assisted content workflows currently in development. Includes SEO-optimized publishing, analytics, and Printful API integration for automated merch listing generation.',
@@ -101,7 +101,7 @@ export const RESEARCH_TOOLS: ResearchTool[] = [
   },
   {
     id: 'gitops-pr-reviewer',
-    taxonomyBucket: 'engineering',
+    taxonomyBucket: 'infrastructure',
     title: 'GitOps Code Review Agent',
     subtitle: 'Automated PR Auditing',
     description: 'LLM-powered PR auditing using GitHub Actions. Reviews code style and pattern consistency on every pull request. The foundation for the RAG-grounded review pipeline being built into RepoAuditor.',
@@ -113,7 +113,7 @@ export const RESEARCH_TOOLS: ResearchTool[] = [
   },
   {
     id: 'deployment-impact-analyzer',
-    taxonomyBucket: 'flagship',
+    taxonomyBucket: 'infrastructure',
     title: 'Blast-Radius Analyzer',
     subtitle: 'VISUAL IMPACT ANALYSIS PIPELINE',
     description: 'CI pipeline that determines which pages are visually affected by a pull request. Uses dependency-cruiser to trace changed files through the import graph, then captures Playwright screenshots of affected routes, runs pixelmatch pixel diffs, crops changed regions, and generates a deployment review report with severity scores. Agent integration in progress.',
@@ -126,7 +126,7 @@ export const RESEARCH_TOOLS: ResearchTool[] = [
   },
   {
     id: 'ux-auditor',
-    taxonomyBucket: 'engineering',
+    taxonomyBucket: 'infrastructure',
     title: 'Visual Regression & UX Auditor',
     subtitle: 'PLAYWRIGHT VISUAL REGRESSION',
     description: 'Automated visual regression testing using Playwright and pixelmatch. Captures full-page screenshots before and after a PR, computes pixel-level diffs, crops the bounding box of changed regions, and scores severity by percentage of changed pixels. Part of the Blast-Radius Analyzer pipeline.',
@@ -138,7 +138,7 @@ export const RESEARCH_TOOLS: ResearchTool[] = [
   },
   {
     id: 'wcs-scraper',
-    taxonomyBucket: 'data-content',
+    taxonomyBucket: 'infrastructure',
     title: 'High-Scale Telemetry Ingestion ETL',
     subtitle: 'Scraper-to-Parquet Pipeline',
     description: 'A data engineering showcase for Dev AI systems, transforming raw competitive dance records into compressed Parquet formats. This enables efficient RAG indexing and complex analytical queries.',
@@ -149,7 +149,7 @@ export const RESEARCH_TOOLS: ResearchTool[] = [
   },
   {
     id: 'blog-drafter',
-    taxonomyBucket: 'data-content',
+    taxonomyBucket: 'infrastructure',
     title: 'AI Blog Drafter',
     subtitle: 'Human-in-the-Loop Content Engine',
     description: 'A prompt engineering platform designed for brand-consistent content generation. It combines RAG over existing blog posts with a human-in-the-loop workflow to maintain editorial quality.',
@@ -160,7 +160,7 @@ export const RESEARCH_TOOLS: ResearchTool[] = [
   },
   {
     id: 'ecommerce-automation',
-    taxonomyBucket: 'e-commerce',
+    taxonomyBucket: 'infrastructure',
     title: 'Ecommerce Automation Experiments',
     subtitle: 'Printful & Merch Pipeline',
     description: 'Automated merch operations including programmatic design generation, Printful API storefront sync, and incoming Amazon affiliate integration workflows.',
@@ -171,7 +171,7 @@ export const RESEARCH_TOOLS: ResearchTool[] = [
   },
   {
     id: 'versiontruth',
-    taxonomyBucket: 'engineering',
+    taxonomyBucket: 'infrastructure',
     title: 'VersionTruth',
     subtitle: 'The antidote to version hallucinations',
     description: 'The antidote to version hallucinations: real-time ground-truth for npm, Node, and GitHub Actions.',

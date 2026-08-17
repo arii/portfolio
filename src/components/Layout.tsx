@@ -9,7 +9,7 @@ export interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ className }) => {
   return (
-    <div className={`min-h-screen flex flex-col bg-bg text-text-body relative ${className || ''}`}>
+    <div className={`min-h-screen flex flex-col bg-background text-muted-foreground relative ${className || ''}`}>
       <Navigation />
 
       {/* Main Outlet Page Container */}

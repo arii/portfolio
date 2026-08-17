@@ -18,7 +18,7 @@ export interface ResearchTool {
   subtitle?: string;
   description: string;
   category: string;
-  taxonomyBucket?: 'flagship' | 'engineering' | 'data-content' | 'e-commerce';
+  taxonomyBucket?: 'product' | 'infrastructure';
   status: string;
   tags: string[];
   canonicalPath?: string;
