@@ -39,9 +39,10 @@ describe('ResumePage Component', () => {
       </BrowserRouter>
     );
 
+    expect(screen.getByText('Civ Robotics')).toBeInTheDocument();
+    expect(screen.getByText('Senior Algorithms Developer')).toBeInTheDocument();
     expect(screen.getByText('Waymo')).toBeInTheDocument();
-    expect(screen.getByText('Senior Robotics Engineer')).toBeInTheDocument();
-    expect(screen.getByText('Robust.AI')).toBeInTheDocument();
+    expect(screen.getAllByText('Robust.AI').length).toBeGreaterThan(0);
   });
 
   it('renders education details correctly', () => {
@@ -52,11 +53,11 @@ describe('ResumePage Component', () => {
     );
 
     expect(
-      screen.getByText('Ph.D. in Computer Science & Artificial Intelligence')
+      screen.getByText('PhD & SM in Computer Science and Electrical Engineering')
     ).toBeInTheDocument();
     expect(
-      screen.getAllByText('Massachusetts Institute of Technology (MIT)').length
-    ).toBeGreaterThan(0);
+      screen.getByText('University of California, Santa Cruz')
+    ).toBeInTheDocument();
   });
 
   it('triggers window.print on print button click', () => {
