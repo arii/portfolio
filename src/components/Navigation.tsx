@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Layers, Activity, User } from 'lucide-react';
+import { Menu, X, Layers, Activity, User, FileText } from 'lucide-react';
 
 const Navigation: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,6 +9,7 @@ const Navigation: React.FC = () => {
   const navLinks = [
     { name: 'Overview', path: '/', icon: Activity },
     { name: 'Portfolio', path: '/research', icon: Layers },
+    { name: 'Resume', path: '/resume', icon: FileText },
     { name: 'About Ariel', path: '/about', icon: User },
   ];
 

@@ -143,6 +143,31 @@ const About: React.FC = () => {
             </div>
           </div>
 
+
+          {/* Resume Scaffold Sections (Coming Soon) */}
+          <div className="space-y-6 pt-8 border-t border-line/30">
+            <h2 className="text-2xl font-bold text-text-main pb-3 border-b border-line/30">
+              Experience
+            </h2>
+            <div className="border border-line border-dashed bg-surface/50 p-6 sm:p-8 rounded-3xl text-center">
+              <span className="text-sm text-text-dim">Experience details coming soon.</span>
+            </div>
+
+            <h2 className="text-2xl font-bold text-text-main pb-3 border-b border-line/30 mt-8">
+              Education
+            </h2>
+            <div className="border border-line border-dashed bg-surface/50 p-6 sm:p-8 rounded-3xl text-center">
+              <span className="text-sm text-text-dim">Education details coming soon.</span>
+            </div>
+
+            <h2 className="text-2xl font-bold text-text-main pb-3 border-b border-line/30 mt-8">
+              Publications & Honors
+            </h2>
+            <div className="border border-line border-dashed bg-surface/50 p-6 sm:p-8 rounded-3xl text-center">
+              <span className="text-sm text-text-dim">Publications and Honors coming soon.</span>
+            </div>
+          </div>
+
           {/* Availability Banner */}
           <div className="border border-accent/20 bg-accent/5 rounded-3xl p-6 sm:p-8 space-y-3">
             <span className="text-xs font-semibold text-accent uppercase tracking-widest flex items-center space-x-1.5">

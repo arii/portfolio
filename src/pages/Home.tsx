@@ -17,6 +17,14 @@ const Home: React.FC = () => {
 
             <Text variant="heading">Ariel Anders, PhD</Text>
 
+            <div className="flex flex-wrap items-center gap-3 text-sm font-medium text-muted-foreground pb-2">
+              <span className="flex items-center space-x-1.5"><span className="h-1.5 w-1.5 rounded-full bg-primary/70"></span><span>MIT PhD</span></span>
+              <span>&middot;</span>
+              <span className="flex items-center space-x-1.5"><span className="h-1.5 w-1.5 rounded-full bg-primary/70"></span><span>ex-Waymo</span></span>
+              <span>&middot;</span>
+              <span className="flex items-center space-x-1.5"><span className="h-1.5 w-1.5 rounded-full bg-primary/70"></span><span>ex-Robust.AI</span></span>
+            </div>
+
             <Text variant="body" className="text-lg text-text-main">
               I use AI-orchestrated engineering to rapidly ship production software across domains — robotics, consumer web platforms, and data pipelines — regardless of whether I have years of prior domain experience.
             </Text>

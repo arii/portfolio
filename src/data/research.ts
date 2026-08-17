@@ -133,7 +133,7 @@ export const RESEARCH_TOOLS: ResearchTool[] = [
     category: 'Perception Debugging',
     status: 'Active',
     tags: ['Playwright', 'Pixelmatch', 'Screenshot Diff', 'CI/CD'],
-    canonicalPath: '/ux-auditor',
+    canonicalPath: '/research/ux-auditor',
     sourceUrl: 'https://github.com/arii/tech-dancer/tree/main/dev-tools'
   },
   {
