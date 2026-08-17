@@ -62,18 +62,18 @@ const About: React.FC = () => {
     experience: [
       {
         icon: Zap,
-        title: "Building with Agents",
-        content: "To be clear, I'm not a traditional web developer. The projects on this site (HRM, RepoAuditor, BoomTick) are experiments in agentic orchestration. I didn't hand-write every React component; instead, I built the LangChain tools, wrote the GitHub Actions, and designed the workflows that allowed autonomous agents to build them for me."
-      },
-      {
-        icon: Briefcase,
-        title: "Robotics & Engineering",
-        content: "My day job is shipping production robotics software. I've worked across the full stack at startups, from algorithms down to Docker and deployment (ROS1/ROS2, C++, Python)."
+        title: "AI-Accelerated Rigor",
+        content: "AI should raise the bar, not lower it. I develop agentic CI/CD workflows and automated code reviews to code-gen patches, resolve architecture guidelines, and triage and prevent technical debt faster."
       },
       {
         icon: Globe,
-        title: "The Intersection",
-        content: "There's a massive gap right now: most DevAI researchers don't know ROS, and most roboticists aren't experimenting with agentic CI/CD. I'm building tools at that intersection—practical AI workflows designed by someone who actually has to ship hardware."
+        title: "Reliable Robot Behavior",
+        content: "Developing onboard motion planning, reactive social navigation, and behavior software across autonomous vehicles, indoor robots in unstructured environments, and robotic manipulation."
+      },
+      {
+        icon: Briefcase,
+        title: "Production Robot Software",
+        content: "Authoring production-quality C++, Python, and ROS 2 software using Docker and AWS IoT to build automated pipelines and containerized robotics applications for high fleet uptime."
       }
     ],
     availability: "Open to Staff/Senior SWE roles, robotics contracts, and DevAI consulting — especially where robotics and AI-assisted engineering overlap.",
