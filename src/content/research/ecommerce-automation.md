@@ -1,33 +1,21 @@
 ---
+type: study
 title: "Ecommerce Automation Experiments"
-date: "2026-08-15"
-readTime: 7
-tags:
-  - Printful API
-  - Image Gen
-  - Amazon Sync
-  - Workflow
-category: "Business Automation"
-summary: "Automated merch operations including programmatic design generation, Printful API storefront sync, and incoming Amazon affiliate integration workflows."
+date: "2026-05-01"
+author: "Ariel Anders"
+category: "Ecommerce"
+tags: ["Printful API", "Image Gen", "Amazon Sync", "Workflow"]
+excerpt: "Automated merch operations including programmatic design generation, Printful API storefront sync, and incoming Amazon affiliate integration workflows."
+readTime: 4
+status: "published"
 ---
 
 # Ecommerce Automation Experiments
 
-## Programmatic Merch Operations
+Automating print-on-demand merchandising and e-commerce product pipelines using modern REST APIs and autonomous content pipelines.
 
-This project showcases a suite of automated workflows designed to streamline the operation of a modern e-commerce storefront. By integrating programmatic design generation with print-on-demand services, the system reduces the manual overhead of launching new merchandise.
+## Architecture
 
-## Key Integrations
-
-### Printful API Storefront Sync
-The core of the automation relies on the Printful API. Designs generated programmatically are automatically synced to the storefront, complete with mockups and product descriptions. This allows for rapid iteration and deployment of new merchandise collections without manual data entry.
-
-### Automated Design Generation
-Using AI image generation models and programmatic compositing, new designs can be drafted in bulk. These designs are then fed into the Printful pipeline, dynamically mapped to specific products (e.g., t-shirts, mugs, tote bags).
-
-### Amazon Affiliate Integration
-An incoming feature involves syncing and displaying Amazon affiliate products seamlessly within the storefront, providing a unified shopping experience while diversifying revenue streams.
-
-## Impact
-
-By treating merchandise operations as an engineering problem, we can scale product offerings rapidly while maintaining low operational costs. This experiment serves as a template for future autonomous business operations.
+1. **Programmatic Design Generation**: Custom artwork and graphic automation tailored for community gear.
+2. **Printful API Sync**: Automated creation of product variants, mockups, and inventory synchronization across storefronts.
+3. **Affiliate & Catalog Ingestion**: Incoming pipelines connecting Amazon affiliate listings directly into site catalog nodes.
