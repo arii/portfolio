@@ -1,140 +1,90 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowRight, Cpu, Layers } from 'lucide-react';
-import { Button } from '@/layouts/Button';
-import { Box, Stack, Grid, Text } from '@/layouts/Primitives';
-import {
-  HERO_SUBHEADING,
-  HERO_BIO,
-  EXPERIENCE_BADGES,
-  PHILOSOPHY_TENETS,
-  FOCUS_CARDS,
-  SKILL_CATEGORIES
-} from '@/data/home';
+import { ArrowRight, Cpu, Sparkles } from 'lucide-react';
+import { HERO_DATA, PHILOSOPHY_TENETS, FOCUS_AREAS } from '@/data/home';
 
-const Home: React.FC = () => {
+interface HomeProps {
+  onNavigate?: (tab: string) => void;
+}
+
+export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
+  const handleNav = (tab: string) => {
+    if (onNavigate) {
+      onNavigate(tab);
+    }
+  };
   return (
-    <Box className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 space-y-16">
-      {/* Hero Header Section */}
-      <section className="relative overflow-hidden rounded-2xl border border-line bg-surface p-8 sm:p-12 shadow-sm space-y-8">
-        <Stack gap="6">
-          <Box className="inline-flex items-center space-x-2 text-xs font-semibold text-text-dim w-fit">
-            <span>Robotics &amp; DevAI — Autonomous Systems &amp; AI-Orchestrated Software Engineering</span>
-          </Box>
+    <main className="space-y-10 max-w-5xl mx-auto px-4 sm:px-6 py-8">
+      {/* Hero Header */}
+      <section className="bg-slate-900/40 border border-slate-800/80 rounded-xl p-6 sm:p-8 space-y-5">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold tracking-wide">
+          <Sparkles className="w-3.5 h-3.5" />
+          <span>{HERO_DATA.badge}</span>
+        </div>
 
-          <Text variant="heading">Ariel Anders, PhD</Text>
+        <div className="space-y-3">
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-100 tracking-tight">{HERO_DATA.name}</h1>
+          <p className="text-base sm:text-lg font-medium text-slate-200 leading-snug">{HERO_DATA.subheading}</p>
+        </div>
 
-          <Text variant="body" className="text-xl text-text-main font-medium leading-snug">
-            {HERO_SUBHEADING}
-          </Text>
+        <div className="space-y-3 text-slate-300 text-sm sm:text-base leading-relaxed border-t border-slate-800/80 pt-5">
+          {HERO_DATA.bioParagraphs.map((para, idx) => (
+            <p key={idx}>{para}</p>
+          ))}
+        </div>
 
-          <div className="space-y-3 text-sm text-text-dim leading-relaxed max-w-4xl">
-            {HERO_BIO.map((paragraph, idx) => (
-              <p key={idx}>{paragraph}</p>
-            ))}
+        <div>
+          <button
+            onClick={() => handleNav('portfolio')}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-semibold transition-all duration-200 shadow text-sm"
+          >
+            <span>View portfolio</span>
+            <ArrowRight className="w-4 h-4" />
+          </button>
+        </div>
+      </section>
+
+      {/* Engineering Philosophy */}
+      <section className="space-y-4">
+        <div className="flex items-center gap-2 border-b border-slate-800 pb-2">
+          <Cpu className="w-4 h-4 text-amber-400" />
+          <h2 className="text-lg sm:text-xl font-bold text-slate-100 tracking-tight">Engineering Philosophy</h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {PHILOSOPHY_TENETS.map((tenet) => (
+            <div
+              key={tenet.id}
+              className="bg-slate-900/30 border border-slate-800/80 rounded-lg p-5 space-y-2"
+            >
+              <h3 className="text-base font-bold text-slate-100">{tenet.title}</h3>
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">{tenet.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Quick Navigation Focus Areas */}
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {FOCUS_AREAS.map((item) => (
+          <div
+            key={item.id}
+            onClick={() => handleNav(item.id)}
+            className="group bg-slate-900/30 hover:bg-slate-900/60 border border-slate-800/80 hover:border-amber-500/40 rounded-lg p-5 cursor-pointer transition-all duration-200 flex flex-col justify-between space-y-3"
+          >
+            <div className="space-y-1">
+              <h3 className="text-base font-bold text-slate-100 group-hover:text-amber-400 transition-colors">
+                {item.title}
+              </h3>
+              <p className="text-xs text-slate-400">{item.description}</p>
+            </div>
+            <div className="inline-flex items-center gap-1 text-xs font-semibold text-amber-400 group-hover:translate-x-1 transition-transform">
+              <span>{item.actionText}</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </div>
           </div>
-
-          <Stack direction="row" gap="4" className="pt-2 flex-wrap" align="center">
-            <Link to="/research">
-              <Button variant="primary" size="md" className="flex items-center space-x-2">
-                <span>View portfolio</span>
-                <ArrowRight className="h-4 w-4" />
-              </Button>
-            </Link>
-          </Stack>
-        </Stack>
-
-        {/* Experience Badges Strip */}
-        <Box className="pt-6 border-t border-line">
-          <Text variant="subheading" className="text-xs uppercase tracking-wider text-text-dim mb-4">
-            Proven Industry Track Record
-          </Text>
-          <Grid cols="1 sm:grid-cols-2 lg:grid-cols-4" gap="4">
-            {EXPERIENCE_BADGES.map((item, idx) => (
-              <div key={idx} className="rounded-xl border border-line/60 bg-bg p-4 space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="font-bold text-text-main text-sm">{item.company}</span>
-                </div>
-                <p className="text-xs text-accent font-medium">{item.role}</p>
-                <div className="flex flex-wrap gap-1.5 pt-1">
-                  {item.tags.map((tag, tIdx) => (
-                    <span key={tIdx} className="px-2 py-0.5 rounded bg-surface border border-line text-[10px] text-text-dim font-mono">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </Grid>
-        </Box>
-      </section>
-
-      {/* Engineering Philosophy Dedicated Section */}
-      <section className="space-y-6">
-        <Box className="border-b border-line pb-4">
-          <Text variant="subheading" className="text-2xl font-bold">Engineering Philosophy</Text>
-          <Text variant="dim" className="text-sm mt-1">Autonomous systems principles applied to full-stack software development.</Text>
-        </Box>
-        <Grid cols="1 md:grid-cols-3" gap="6">
-          {PHILOSOPHY_TENETS.map((tenet, idx) => (
-            <div key={idx} className="rounded-xl border border-line bg-surface p-6 shadow-sm space-y-3">
-              <h3 className="font-bold text-text-main text-lg border-b border-line/40 pb-2">{tenet.title}</h3>
-              <p className="text-sm text-text-dim leading-relaxed">{tenet.desc}</p>
-            </div>
-          ))}
-        </Grid>
-      </section>
-
-      {/* Main Focus Cards Section */}
-      <Grid cols="1 md:grid-cols-3" gap="8">
-        {FOCUS_CARDS.map((card, idx) => (
-          <Stack key={idx} justify="between" className="rounded-xl border border-line bg-surface p-8 shadow-sm transition-all hover:border-accent/50 hover:shadow-md h-full">
-            <Stack gap="4">
-              <Text variant="subheading" className="text-xl">{card.title}</Text>
-              <Text variant="dim" className="text-sm">{card.desc}</Text>
-              <div className="flex flex-wrap gap-2 pt-2">
-                {card.tags.map((tag, tIdx) => (
-                  <span key={tIdx} className="px-2.5 py-1 rounded-md bg-surface-alt border border-line text-xs font-mono text-accent">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </Stack>
-            <Box className="mt-8 pt-4 border-t border-line">
-              <Link to={card.link} className="inline-flex items-center space-x-2 text-sm font-semibold text-accent hover:underline">
-                <span>{card.linkText}</span>
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </Box>
-          </Stack>
         ))}
-      </Grid>
-
-      {/* Technical Stack Grid Banner */}
-      <Box className="rounded-xl border border-line bg-surface-alt p-6 sm:p-8 space-y-4">
-        <Text variant="subheading" className="text-base font-bold flex items-center space-x-2">
-          <Cpu className="h-5 w-5 text-accent" />
-          <span>Core Engineering Stack</span>
-        </Text>
-        <Grid cols="1 md:grid-cols-2" gap="6">
-          {SKILL_CATEGORIES.map((cat, idx) => (
-            <div key={idx} className="space-y-2">
-              <span className="text-xs font-semibold uppercase tracking-wider text-text-dim flex items-center space-x-1.5">
-                <Layers className="h-3.5 w-3.5 text-accent" />
-                <span>{cat.category}</span>
-              </span>
-              <div className="flex flex-wrap gap-2">
-                {cat.items.map((item, iIdx) => (
-                  <span key={iIdx} className="px-3 py-1 rounded-lg bg-surface border border-line text-xs font-medium text-text-main">
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </Grid>
-      </Box>
-    </Box>
+      </section>
+    </main>
   );
 };
 
