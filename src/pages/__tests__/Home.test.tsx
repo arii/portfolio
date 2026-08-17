@@ -14,7 +14,27 @@ describe('Home Page', () => {
     expect(screen.getByText('Ariel Anders, PhD')).toBeInTheDocument();
     expect(screen.getByText(/Robotics & DevAI/i)).toBeInTheDocument();
     expect(screen.queryByText(/Build smart\. Ship more\./i)).not.toBeInTheDocument();
+  });
 
+  it('renders updated subheading, bio, and engineering philosophy', () => {
+    render(
+      <BrowserRouter>
+        <Home />
+      </BrowserRouter>
+    );
+
+    expect(
+      screen.getByText(/I architect reliable autonomous systems for physical robots and build agentic workflows/i)
+    ).toBeInTheDocument();
+
+    expect(screen.getByText(/MIT CSAIL roboticist/i)).toBeInTheDocument();
+    expect(screen.getByText(/Robust AI/i)).toBeInTheDocument();
+    expect(screen.getByText(/Waymo/i)).toBeInTheDocument();
+    expect(screen.getByText(/CIV/i)).toBeInTheDocument();
+
+    expect(screen.getByText(/AI-Accelerated Rigor:/i)).toBeInTheDocument();
+    expect(screen.getByText(/Reliable Robot Behavior:/i)).toBeInTheDocument();
+    expect(screen.getByText(/Production Robot Software:/i)).toBeInTheDocument();
   });
 
   it('renders action links to Products, Infrastructure and Research sections', () => {

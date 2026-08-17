@@ -25,13 +25,18 @@ const Home: React.FC = () => {
               <span className="flex items-center space-x-1.5"><span className="h-1.5 w-1.5 rounded-full bg-primary/70"></span><span>DevAI</span></span>
             </div>
 
-            <Text variant="body" className="text-lg text-text-main">
-              I architect and build reliable autonomous systems for physical robots — spanning onboard motion planning, real-time localization, sensor fusion, and robust production software.
+            <Text variant="body" className="text-lg text-text-main font-medium">
+              I architect reliable autonomous systems for physical robots and build agentic workflows that autonomously engineer full-stack software.
             </Text>
 
-            <Text variant="dim" className="text-sm">
-              With a PhD from MIT CSAIL and years of leadership across industry-leading robotics teams (autonomous forklifts, self-driving vehicles, mobile manipulators), I turn complex planning algorithms into scalable, high-uptime production code.
-            </Text>
+            <div className="space-y-3 text-sm text-text-dim leading-relaxed">
+              <p>
+                I am an MIT CSAIL roboticist and have worked in the industry since completing my PhD on reliable robot manipulation combining learning and planning techniques. At Robust AI, I was the tech lead for the behavior team, developing reactive social navigation behaviors. At Waymo, I worked on the planning team to reduce traffic congestion during passenger pickup and drop-off. Most recently at CIV, I built and optimized production state estimation pipelines to increase fleet uptime.
+              </p>
+              <p>
+                I have spent the past year building stateful, multi-agent orchestrations. Because autonomous systems require strict code health, I use these workflows to engineer feature-rich applications and enforce continuous architectural standards—bringing robotics-grade reliability to DevAI.
+              </p>
+            </div>
 
             <Stack direction="row" gap="4" className="pt-2 flex-wrap" align="center">
               <Link to="/research">
@@ -46,10 +51,19 @@ const Home: React.FC = () => {
           <Box className="hidden lg:block lg:col-span-4">
              <div className="rounded-xl border border-line/50 bg-bg p-6 space-y-4">
                <Text variant="subheading" className="text-sm border-b border-line pb-2">Engineering Philosophy</Text>
-               <ul className="space-y-2 text-sm text-text-dim">
-                 <li><span className="text-text-main font-medium">Deterministic Autonomy:</span> predictable motion planning and behavior trees under edge-case load.</li>
-                 <li><span className="text-text-main font-medium">DevAI Velocity:</span> AI-orchestrated code reviews, RAG documentation tools, and automated CI/CD agents.</li>
-                 <li><span className="text-text-main font-medium">Clean Production Systems:</span> robust C++, ROS 2, and scalable software architectures built for long-term maintainability.</li>
+               <ul className="space-y-3 text-sm text-text-dim">
+                 <li>
+                   <span className="text-text-main font-medium block">AI-Accelerated Rigor:</span>
+                   AI should raise the bar, not lower it. I develop agentic CI/CD workflows and automated code reviews to code-gen patches, resolve architecture guidelines, and triage and prevent technical debt faster.
+                 </li>
+                 <li>
+                   <span className="text-text-main font-medium block">Reliable Robot Behavior:</span>
+                   Developing onboard motion planning, reactive social navigation, and behavior software across autonomous vehicles, indoor robots in unstructured environments, and robotic manipulation.
+                 </li>
+                 <li>
+                   <span className="text-text-main font-medium block">Production Robot Software:</span>
+                   Authoring production-quality C++, Python, and ROS 2 software using Docker and AWS IoT to build automated pipelines and containerized robotics applications for high fleet uptime.
+                 </li>
                </ul>
              </div>
           </Box>
