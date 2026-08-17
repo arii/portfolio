@@ -1,8 +1,24 @@
 import React from 'react';
-import { Zap, Globe, MapPin, Briefcase, ExternalLink } from 'lucide-react';
+import { Briefcase, MapPin, Globe, Zap, ExternalLink } from 'lucide-react';
 import roboticistPhoto from '@/assets/roboticist.jpg';
 
 // Simple, beautiful, type-safe inline SVG icons for LinkedIn and GitHub
+
+const MailIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <rect width="20" height="16" x="2" y="4" rx="2" />
+    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+  </svg>
+);
+
 const LinkedinIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   <svg
     viewBox="0 0 24 24"
@@ -37,7 +53,7 @@ const About: React.FC = () => {
   const profileData = {
     name: "Ariel Anders, PhD",
     role: "Senior roboticist · DevAI engineer",
-    bio: "MIT PhD and former senior engineer at Waymo and Robust.AI. I bridge the gap between shipping production robotics software and building the agentic engineering workflows that scale robotics teams. Below is a breakdown of my professional experience and independent projects.",
+    bio: "I'm an MIT PhD and former senior engineer at Waymo and Robust.AI. My background is in robotics—specifically navigation, motion planning, and behavior systems. But recently, I've been focused on something slightly different: the developer experience. This portfolio is a deep dive into my work building AI-assisted engineering workflows, autonomous agents, and the infrastructure that supports them.",
     details: [
       { label: "Location", value: "San Francisco, CA", icon: MapPin },
       { label: "Portfolio", value: "View Portfolio", url: "#/research", icon: Globe },
@@ -45,23 +61,24 @@ const About: React.FC = () => {
     ],
     experience: [
       {
-        icon: Briefcase,
-        title: "Robotics & Engineering",
-        content: "Senior roboticist with production experience at Waymo and Robust.AI. I work across navigation, localization, motion planning, and behavior for autonomous systems. At startups, that means owning the full stack — from algorithm to Docker to deployment. Stack: ROS1/ROS2, C++, Python."
+        icon: Zap,
+        title: "Building with Agents",
+        content: "To be clear, I'm not a traditional web developer. The projects on this site (HRM, RepoAuditor, BoomTick) are experiments in agentic orchestration. I didn't hand-write every React component; instead, I built the LangChain tools, wrote the GitHub Actions, and designed the workflows that allowed autonomous agents to build them for me."
       },
       {
-        icon: Zap,
-        title: "DevAI tooling (independent projects)",
-        content: "I build agentic CI/CD pipelines, LLM-assisted code review, and developer tooling as self-directed projects — the tools I wish robotics teams had. Current work: RepoAuditor AI (Gemini-driven PR auditing) and BoomTick.blog (live RAG + LLM testbed in active development). Code at github.com/arii."
+        icon: Briefcase,
+        title: "Robotics & Engineering",
+        content: "My day job is shipping production robotics software. I've worked across the full stack at startups, from algorithms down to Docker and deployment (ROS1/ROS2, C++, Python)."
       },
       {
         icon: Globe,
-        title: "DevAI for robotics",
-        content: "Most DevAI practitioners don't know ROS. Most roboticists aren't building agentic pipelines. I work at that intersection, helping robotics teams adopt AI-assisted engineering practices: automated code review, agentic CI/CD, and LLM tooling built by someone who has shipped production robotics software."
+        title: "The Intersection",
+        content: "There's a massive gap right now: most DevAI researchers don't know ROS, and most roboticists aren't experimenting with agentic CI/CD. I'm building tools at that intersection—practical AI workflows designed by someone who actually has to ship hardware."
       }
     ],
     availability: "Open to Staff/Senior SWE roles, robotics contracts, and DevAI consulting — especially where robotics and AI-assisted engineering overlap.",
     socials: [
+      { label: "Email", url: "mailto:anders.ariel@gmail.com", icon: MailIcon },
       { label: "LinkedIn", url: "https://linkedin.com/in/arielanders", icon: LinkedinIcon },
       { label: "GitHub", url: "https://github.com/arii", icon: GithubIcon }
     ]
@@ -126,6 +143,31 @@ const About: React.FC = () => {
             </div>
           </div>
 
+
+          {/* Resume Scaffold Sections (Coming Soon) */}
+          <div className="space-y-6 pt-8 border-t border-line/30">
+            <h2 className="text-2xl font-bold text-text-main pb-3 border-b border-line/30">
+              Experience
+            </h2>
+            <div className="border border-line border-dashed bg-surface/50 p-6 sm:p-8 rounded-3xl text-center">
+              <span className="text-sm text-text-dim">Experience details coming soon.</span>
+            </div>
+
+            <h2 className="text-2xl font-bold text-text-main pb-3 border-b border-line/30 mt-8">
+              Education
+            </h2>
+            <div className="border border-line border-dashed bg-surface/50 p-6 sm:p-8 rounded-3xl text-center">
+              <span className="text-sm text-text-dim">Education details coming soon.</span>
+            </div>
+
+            <h2 className="text-2xl font-bold text-text-main pb-3 border-b border-line/30 mt-8">
+              Publications & Honors
+            </h2>
+            <div className="border border-line border-dashed bg-surface/50 p-6 sm:p-8 rounded-3xl text-center">
+              <span className="text-sm text-text-dim">Publications and Honors coming soon.</span>
+            </div>
+          </div>
+
           {/* Availability Banner */}
           <div className="border border-accent/20 bg-accent/5 rounded-3xl p-6 sm:p-8 space-y-3">
             <span className="text-xs font-semibold text-accent uppercase tracking-widest flex items-center space-x-1.5">
@@ -142,11 +184,11 @@ const About: React.FC = () => {
         <aside className="lg:col-span-4 space-y-8 order-1 lg:order-2">
           {/* Portrait Image */}
           <div className="relative group mx-auto lg:mx-0 max-w-sm rounded-3xl overflow-hidden border border-line bg-surface p-2 transition-all duration-300">
-            <div className="aspect-square rounded-2xl overflow-hidden bg-slate-950">
+            <div className="aspect-square rounded-2xl overflow-hidden bg-bg">
               <img
                 src={roboticistPhoto}
                 alt="Ariel Anders, PhD - Roboticist and DevAI Engineer"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-all duration-500"
               />
             </div>
           </div>
@@ -200,7 +242,7 @@ const About: React.FC = () => {
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center space-x-3 text-text-dim hover:text-text-main border border-line bg-[#0f172a] hover:bg-slate-900 p-3.5 rounded-2xl transition-all"
+                    className="flex items-center space-x-3 text-text-dim hover:text-text-main border border-line bg-surface-alt hover:bg-line p-3.5 rounded-2xl transition-all"
                   >
                     <Icon className="h-4 w-4 text-accent shrink-0" />
                     <span className="text-sm font-bold">{social.label}</span>
