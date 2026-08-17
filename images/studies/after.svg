@@ -8,7 +8,8 @@
   <rect x="40" y="100" width="125" height="12" fill="#cbd5e1" rx="3" opacity="0.5"/>
   <rect x="40" y="125" width="125" height="8" fill="#cbd5e1" rx="2" opacity="0.2"/>
   <rect x="40" y="140" width="90" height="8" fill="#cbd5e1" rx="2" opacity="0.2"/>
-  <rect x="200" y="80" width="180" height="190" fill="#0f172a" rx="8" stroke="#334155" stroke-width="1"/>
-  <rect x="220" y="100" width="140" height="12" fill="#cbd5e1" rx="3" opacity="0.5"/>
-  <rect x="220" y="125" width="140" height="8" fill="#cbd5e1" rx="2" opacity="0.2"/>
+  <!-- After: Left-aligned shifted card -->
+  <rect x="200" y="90" width="180" height="180" fill="#0f172a" rx="8" stroke="#ef4444" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="220" y="110" width="140" height="12" fill="#cbd5e1" rx="3" opacity="0.5"/>
+  <rect x="220" y="135" width="140" height="8" fill="#cbd5e1" rx="2" opacity="0.2"/>
 </svg>
