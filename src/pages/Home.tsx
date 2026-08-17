@@ -12,7 +12,7 @@ const Home: React.FC = () => {
         <Grid cols="1 lg:grid-cols-12" gap="12" className="items-center">
           <Stack gap="6" className="lg:col-span-8">
             <Box className="inline-flex items-center space-x-2 text-xs font-semibold text-text-dim w-fit">
-              <span>Applied AI Engineer — Shipping Production Software Across Domains</span>
+              <span>Robotics &amp; DevAI — Autonomous Systems &amp; AI-Orchestrated Software Engineering</span>
             </Box>
 
             <Text variant="heading">Ariel Anders, PhD</Text>
@@ -20,23 +20,23 @@ const Home: React.FC = () => {
             <div className="flex flex-wrap items-center gap-3 text-sm font-medium text-muted-foreground pb-2">
               <span className="flex items-center space-x-1.5"><span className="h-1.5 w-1.5 rounded-full bg-primary/70"></span><span>MIT PhD</span></span>
               <span>&middot;</span>
-              <span className="flex items-center space-x-1.5"><span className="h-1.5 w-1.5 rounded-full bg-primary/70"></span><span>ex-Waymo</span></span>
+              <span className="flex items-center space-x-1.5"><span className="h-1.5 w-1.5 rounded-full bg-primary/70"></span><span>Roboticist</span></span>
               <span>&middot;</span>
-              <span className="flex items-center space-x-1.5"><span className="h-1.5 w-1.5 rounded-full bg-primary/70"></span><span>ex-Robust.AI</span></span>
+              <span className="flex items-center space-x-1.5"><span className="h-1.5 w-1.5 rounded-full bg-primary/70"></span><span>DevAI</span></span>
             </div>
 
             <Text variant="body" className="text-lg text-text-main">
-              I use AI-orchestrated engineering to rapidly ship production software across domains — robotics, consumer web platforms, and data pipelines — regardless of whether I have years of prior domain experience.
+              I architect and build reliable autonomous systems for physical robots — spanning onboard motion planning, real-time localization, sensor fusion, and robust production software.
             </Text>
 
             <Text variant="dim" className="text-sm">
-              I orchestrate AI agents and custom tooling to build and ship real products fast — from CI pipelines for autonomous robots, to a live community platform (boomtick.blog), to a Bluetooth fitness app. Same method, different domains.
+              With a PhD from MIT CSAIL and years of leadership across industry-leading robotics teams (autonomous forklifts, self-driving vehicles, mobile manipulators), I turn complex planning algorithms into scalable, high-uptime production code.
             </Text>
 
             <Stack direction="row" gap="4" className="pt-2 flex-wrap" align="center">
-              <Link to="/about">
+              <Link to="/research">
                 <Button variant="primary" size="md" className="flex items-center space-x-2">
-                  <span>How I Work</span>
+                  <span>View portfolio</span>
                   <ArrowRight className="h-4 w-4" />
                 </Button>
               </Link>
@@ -45,10 +45,12 @@ const Home: React.FC = () => {
 
           <Box className="hidden lg:block lg:col-span-4">
              <div className="rounded-xl border border-line/50 bg-bg p-6 space-y-4">
-               <Text variant="subheading" className="text-sm border-b border-line pb-2">The Mechanism</Text>
-               <Text variant="dim" className="text-sm">
-                 I treat AI agents as a force multiplier that lets me ramp into domains I don't have years of experience in. This isn't just theory—it's how I ship cross-domain code.
-               </Text>
+               <Text variant="subheading" className="text-sm border-b border-line pb-2">Engineering Philosophy</Text>
+               <ul className="space-y-2 text-sm text-text-dim">
+                 <li><span className="text-text-main font-medium">Deterministic Autonomy:</span> predictable motion planning and behavior trees under edge-case load.</li>
+                 <li><span className="text-text-main font-medium">DevAI Velocity:</span> AI-orchestrated code reviews, RAG documentation tools, and automated CI/CD agents.</li>
+                 <li><span className="text-text-main font-medium">Clean Production Systems:</span> robust C++, ROS 2, and scalable software architectures built for long-term maintainability.</li>
+               </ul>
              </div>
           </Box>
         </Grid>
@@ -121,27 +123,27 @@ const Home: React.FC = () => {
           <Stack direction="row" gap="3" align="start">
             <Rocket className="h-5 w-5 text-accent shrink-0 mt-0.5" />
             <Box>
-              <h3 className="font-semibold text-text-main text-sm">Cross-Domain Delivery</h3>
+              <h3 className="font-semibold text-text-main text-sm">Algorithmic Motion Planning</h3>
               <p className="text-xs text-text-dim mt-1">
-                Same orchestration method shipped a robotics pipeline, a consumer SaaS, and a fitness app.
+                Behavior trees, conformant planning under uncertainty, and dynamic obstacle avoidance built for real-time robot safety.
               </p>
             </Box>
           </Stack>
           <Stack direction="row" gap="3" align="start">
             <ShieldCheck className="h-5 w-5 text-accent shrink-0 mt-0.5" />
             <Box>
-              <h3 className="font-semibold text-text-main text-sm">Strict Quality Gates</h3>
+              <h3 className="font-semibold text-text-main text-sm">DevAI &amp; AI Workflows</h3>
               <p className="text-xs text-text-dim mt-1">
-                Automated Semgrep static analysis, secret detection, and strict linting to catch issues early.
+                Leveraging LLMs, RAG context systems, and automated PR review agents to accelerate engineering cycles and technical debt cleanup.
               </p>
             </Box>
           </Stack>
           <Stack direction="row" gap="3" align="start">
             <LayoutTemplate className="h-5 w-5 text-accent shrink-0 mt-0.5" />
             <Box>
-              <h3 className="font-semibold text-text-main text-sm">Deterministic CLI</h3>
+              <h3 className="font-semibold text-text-main text-sm">Production Systems Architecture</h3>
               <p className="text-xs text-text-dim mt-1">
-                Custom orchestrators managing both local and remote agent workflows safely.
+                Production C++, ROS 2, Python, and cloud/IoT pipelines engineered for high uptime, maintainability, and clean system design.
               </p>
             </Box>
           </Stack>

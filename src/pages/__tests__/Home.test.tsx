@@ -12,7 +12,7 @@ describe('Home Page', () => {
     );
 
     expect(screen.getByText('Ariel Anders, PhD')).toBeInTheDocument();
-    expect(screen.getByText(/Shipping Production Software Across Domains/i)).toBeInTheDocument();
+    expect(screen.getByText(/Robotics & DevAI/i)).toBeInTheDocument();
     expect(screen.queryByText(/Build smart\. Ship more\./i)).not.toBeInTheDocument();
 
   });
@@ -24,7 +24,7 @@ describe('Home Page', () => {
       </BrowserRouter>
     );
 
-    expect(screen.getByText('How I Work')).toBeInTheDocument();
+    expect(screen.getByText('View portfolio')).toBeInTheDocument();
     expect(screen.getByText('View Live Products')).toBeInTheDocument();
     expect(screen.getByText('Inspect Infrastructure')).toBeInTheDocument();
     expect(screen.getByText('Read Architecture Studies')).toBeInTheDocument();

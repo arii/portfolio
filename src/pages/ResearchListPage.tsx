@@ -40,11 +40,39 @@ const ResearchListPage: React.FC<ResearchListPageProps> = ({ onNavigate }) => {
     return posts.filter((p) => p.tags.includes(selectedTag));
   }, [posts, selectedTag]);
 
-  // Group tools by taxonomy bucket
-  const flagshipTools = useMemo(() => RESEARCH_TOOLS.filter(t => t.taxonomyBucket === 'flagship'), []);
-  const engineeringTools = useMemo(() => RESEARCH_TOOLS.filter(t => t.taxonomyBucket === 'engineering'), []);
-  const dataContentTools = useMemo(() => RESEARCH_TOOLS.filter(t => t.taxonomyBucket === 'data-content'), []);
-  const ecommerceTools = useMemo(() => RESEARCH_TOOLS.filter(t => t.taxonomyBucket === 'e-commerce'), []);
+  // Group tools by section using canonical metadata from RESEARCH_TOOLS
+  const flagshipTools = useMemo(() => RESEARCH_TOOLS.filter((t) => t.isFlagship), []);
+  const engineeringTools = useMemo(
+    () =>
+      RESEARCH_TOOLS.filter(
+        (t) =>
+          t.taxonomyBucket === 'infrastructure' &&
+          !t.isFlagship &&
+          t.category !== 'Data Engineering' &&
+          t.category !== 'Content Tools' &&
+          t.category !== 'Business Automation' &&
+          !t.excludeFromEngineeringTools
+      ),
+    []
+  );
+  const dataContentTools = useMemo(
+    () =>
+      RESEARCH_TOOLS.filter(
+        (t) =>
+          t.taxonomyBucket === 'infrastructure' &&
+          (t.category === 'Data Engineering' || t.category === 'Content Tools')
+      ),
+    []
+  );
+  const ecommerceTools = useMemo(
+    () =>
+      RESEARCH_TOOLS.filter(
+        (t) =>
+          t.taxonomyBucket === 'infrastructure' &&
+          (t.category === 'Business Automation' || t.id.includes('ecommerce'))
+      ),
+    []
+  );
 
   const getToolIcon = (tool: ResearchTool) => {
     if (tool.id.includes('hrm')) return Activity;
@@ -181,7 +209,7 @@ const ResearchListPage: React.FC<ResearchListPageProps> = ({ onNavigate }) => {
                         </a>
                       ) : tool.canonicalPath && (
                         <button
-                          onClick={() => onNavigate(tool.id)}
+                          onClick={() => onNavigate(tool.canonicalPath?.replace('/research/', '') || '')}
                           className="inline-flex items-center space-x-1.5 bg-accent/10 border border-accent/20 px-3 py-1.5 rounded-xl text-xs font-semibold text-accent hover:bg-accent/20 transition-colors"
                         >
                           <span>Read Deep-Dive</span>
