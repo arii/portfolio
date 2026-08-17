@@ -62,16 +62,16 @@ export const RESEARCH_TOOLS: ResearchTool[] = [
       rest: ' with your own repository.'
     },
     taxonomyBucket: 'flagship',
-    title: 'RepoAuditor AI',
+    title: 'RepoAuditor',
     description: 'Automated GitHub PR auditing built on a Gemini-driven CI/CD pipeline with Jules autonomous coding agent integration. An independent project demonstrating agentic engineering workflow — not prior paid work.',
     category: 'DevAI Tooling',
     status: 'Active',
     tags: ['DevAI', 'GitHub API', 'Multi-Agent', 'Workflow'],
     externalUrl: 'https://repo-auditor-ai.vercel.app/',
-    externalLinkDisplayLabel: 'Open RepoAuditor AI',
+    externalLinkDisplayLabel: 'View Details',
     sourceUrl: 'https://github.com/arii/hrm-project-management',
     isFlagship: true,
-    imageAlt: 'Screenshot of the RepoAuditor AI workflow console displaying multi-repo pull request audit findings and issue prioritization'
+    imageAlt: 'Screenshot of the RepoAuditor workflow console displaying multi-repo pull request audit findings and issue prioritization'
   },
   {
     id: 'boomtick-blog',
@@ -87,7 +87,7 @@ export const RESEARCH_TOOLS: ResearchTool[] = [
     status: 'Active dev',
     tags: ['Next.js', 'LLM Workflows', 'SEO'],
     externalUrl: 'https://boomtick.blog',
-    externalLinkDisplayLabel: 'Visit Site',
+    externalLinkDisplayLabel: 'View Details',
     sourceUrl: 'https://github.com/arii/tech-dancer',
     isFlagship: true,
     customPreview: {
@@ -104,7 +104,7 @@ export const RESEARCH_TOOLS: ResearchTool[] = [
     taxonomyBucket: 'engineering',
     title: 'GitOps Code Review Agent',
     subtitle: 'Automated PR Auditing',
-    description: 'LLM-powered PR auditing using GitHub Actions. Reviews code style and pattern consistency on every pull request. The foundation for the RAG-grounded review pipeline being built into RepoAuditor AI.',
+    description: 'LLM-powered PR auditing using GitHub Actions. Reviews code style and pattern consistency on every pull request. The foundation for the RAG-grounded review pipeline being built into RepoAuditor.',
     category: 'DevAI System',
     status: 'Active',
     tags: ['GitHub Actions', 'LLM', 'PR Automation'],
@@ -114,7 +114,7 @@ export const RESEARCH_TOOLS: ResearchTool[] = [
   {
     id: 'deployment-impact-analyzer',
     taxonomyBucket: 'flagship',
-    title: 'Deployment Impact Analyzer',
+    title: 'Blast-Radius Analyzer',
     subtitle: 'VISUAL IMPACT ANALYSIS PIPELINE',
     description: 'CI pipeline that determines which pages are visually affected by a pull request. Uses dependency-cruiser to trace changed files through the import graph, then captures Playwright screenshots of affected routes, runs pixelmatch pixel diffs, crops changed regions, and generates a deployment review report with severity scores. Agent integration in progress.',
     category: 'DevAI System',
@@ -129,7 +129,7 @@ export const RESEARCH_TOOLS: ResearchTool[] = [
     taxonomyBucket: 'engineering',
     title: 'Visual Regression & UX Auditor',
     subtitle: 'PLAYWRIGHT VISUAL REGRESSION',
-    description: 'Automated visual regression testing using Playwright and pixelmatch. Captures full-page screenshots before and after a PR, computes pixel-level diffs, crops the bounding box of changed regions, and scores severity by percentage of changed pixels. Part of the Deployment Impact Analyzer pipeline.',
+    description: 'Automated visual regression testing using Playwright and pixelmatch. Captures full-page screenshots before and after a PR, computes pixel-level diffs, crops the bounding box of changed regions, and scores severity by percentage of changed pixels. Part of the Blast-Radius Analyzer pipeline.',
     category: 'Perception Debugging',
     status: 'Active',
     tags: ['Playwright', 'Pixelmatch', 'Screenshot Diff', 'CI/CD'],

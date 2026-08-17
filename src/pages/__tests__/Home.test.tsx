@@ -24,7 +24,7 @@ describe('Home Page', () => {
       </BrowserRouter>
     );
 
-    expect(screen.getByText('Explore DevAI Portfolio')).toBeInTheDocument();
-    expect(screen.getByText('View CI Tooling Portfolio')).toBeInTheDocument();
+    expect(screen.getByText('Read the Intersection')).toBeInTheDocument();
+    expect(screen.getByText('View Research Studies')).toBeInTheDocument();
   });
 });

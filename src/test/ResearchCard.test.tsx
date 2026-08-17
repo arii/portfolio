@@ -19,7 +19,7 @@ describe('ResearchCard Component', () => {
 
     expect(screen.getByText('Test Robotics Title')).toBeInTheDocument();
     expect(screen.getByText('Summary of the test post.')).toBeInTheDocument();
-    expect(screen.getByText('$robotics')).toBeInTheDocument();
+    expect(screen.getByText('robotics')).toBeInTheDocument();
   });
 
   it('triggers onSelect when clicked', () => {

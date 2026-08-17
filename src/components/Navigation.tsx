@@ -26,7 +26,7 @@ const Navigation: React.FC = () => {
               Ariel Anders Portfolio
             </span>
             <span className="text-xs text-text-dim">
-              Robotics &amp; Autonomous Systems
+              Robotics Engineer building AI-assisted dev tooling
             </span>
           </div>
         </Link>

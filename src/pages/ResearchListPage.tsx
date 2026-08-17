@@ -220,6 +220,11 @@ const ResearchListPage: React.FC<ResearchListPageProps> = ({ onNavigate }) => {
 
       {/* Auxiliary Columns Section */}
       <section className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="col-span-1 md:col-span-3 flex items-center justify-end space-x-4 text-[10px] text-text-dim pb-2">
+          <span className="flex items-center space-x-1.5"><span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span><span>Active</span></span>
+          <span className="flex items-center space-x-1.5"><span className="w-1.5 h-1.5 rounded-full bg-yellow-500"></span><span>In Progress</span></span>
+          <span className="flex items-center space-x-1.5"><span className="w-1.5 h-1.5 rounded-full bg-purple-500"></span><span>Flagship</span></span>
+        </div>
         {/* Engineering Systems */}
         <div className="space-y-4">
           <div className="border-b border-line pb-2">

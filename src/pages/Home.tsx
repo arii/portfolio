@@ -18,21 +18,21 @@ const Home: React.FC = () => {
           <Text variant="heading">Ariel Anders, PhD</Text>
 
           <Text variant="body" className="text-lg text-text-dim">
-            I build autonomous robotics software and the developer tools that make shipping it easier.
-            This site is a collection of my work exploring AI-assisted engineering—specifically how we can
-            use agents, LLMs, and custom CI pipelines to write better code, faster.
+            I'm a senior roboticist building at the intersection of autonomous systems and developer tools.
+            This portfolio explores practical AI orchestration—custom CLI tools, multi-agent feedback loops,
+            and deterministic CI pipelines designed to scale robotics and engineering teams.
+          </Text>
+
+          <Text variant="dim" className="text-sm">
+            Shipping high-fidelity systems requires practical AI orchestration, not hype. I focus on
+            deterministic feedback loops and isolated execution boundaries.
           </Text>
 
           <Stack direction="row" gap="4" className="pt-2 flex-wrap" align="center">
-            <Link to="/research">
-              <Button variant="primary" size="md" className="flex items-center space-x-2">
-                <span>Explore DevAI Portfolio</span>
-                <ArrowRight className="h-4 w-4" />
-              </Button>
-            </Link>
             <Link to="/about">
-              <Button variant="outline" size="md">
-                <span>View Engineering Credentials</span>
+              <Button variant="primary" size="md" className="flex items-center space-x-2">
+                <span>Read the Intersection</span>
+                <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>
           </Stack>
@@ -41,16 +41,15 @@ const Home: React.FC = () => {
 
       {/* Main Focus Cards Section */}
       <Grid cols="1 md:grid-cols-2" gap="8">
-        {/* Card 1: DevAI & Tooling */}
+        {/* Card 1: Flagship DevAI Systems */}
         <Stack justify="between" className="rounded-xl border border-line bg-surface p-8 shadow-sm transition-all hover:border-accent/50 hover:shadow-md h-full">
           <Stack gap="4">
             <Box className="flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10 text-accent">
               <Terminal className="h-6 w-6" />
             </Box>
-            <Text variant="subheading">Autonomous DevAI &amp; Tooling</Text>
+            <Text variant="subheading">Flagship DevAI Systems</Text>
             <Text variant="dim">
-              A look at the custom CLI tools, multi-agent feedback loops, and Model Context Protocol servers
-              I've built to keep engineers in control while actively leveraging AI.
+              Deep dives into active tooling: autonomous code review agents, web-bluetooth hardware integrations, and end-to-end data pipelines.
             </Text>
           </Stack>
           <Box className="mt-8 pt-4 border-t border-line">
@@ -64,24 +63,23 @@ const Home: React.FC = () => {
           </Box>
         </Stack>
 
-        {/* Card 2: RepoAuditor AI & CI/CD Pipelines */}
+        {/* Card 2: Articles & Research Studies */}
         <Stack justify="between" className="rounded-xl border border-line bg-surface p-8 shadow-sm transition-all hover:border-accent/50 hover:shadow-md h-full">
           <Stack gap="4">
             <Box className="flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10 text-accent">
               <Code2 className="h-6 w-6" />
             </Box>
-            <Text variant="subheading">RepoAuditor AI &amp; CI/CD Pipelines</Text>
+            <Text variant="subheading">Articles &amp; Research Studies</Text>
             <Text variant="dim">
-              How I built an automated GitHub PR reviewer using Gemini and integrated it directly
-              into a standard CI/CD pipeline, plus deep dives into the surrounding test infrastructure.
+              Technical essays, system architecture breakdowns, and post-mortems on migrating production systems.
             </Text>
           </Stack>
           <Box className="mt-8 pt-4 border-t border-line">
             <Link
-              to="/research"
+              to="/research#articles"
               className="inline-flex items-center space-x-2 text-sm font-semibold text-accent hover:underline"
             >
-              <span>View CI Tooling Portfolio</span>
+              <span>View Research Studies</span>
               <ArrowRight className="h-4 w-4" />
             </Link>
           </Box>
