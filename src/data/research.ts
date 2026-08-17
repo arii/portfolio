@@ -180,6 +180,43 @@ export const RESEARCH_TOOLS: ResearchTool[] = [
     tags: ['versions', 'ci', 'dependencies', 'hallucination-mitigation', 'npm', 'node', 'github-actions', 'agents'],
     canonicalPath: '/research/versiontruth',
     sourceUrl: 'https://github.com/arii/tech-dancer/tree/main/api'
+  },
+  {
+    id: 'phd-thesis',
+    taxonomyBucket: 'product',
+    title: 'Reliable Robotic Manipulation (PhD Thesis)',
+    description: 'Focused on reliable robotic manipulation under uncertainty. Aimed to bridge the gap between theoretical AI and practical challenges of deploying helpful robots in complex household environments.',
+    category: 'Robotics & AI',
+    status: 'Completed (2019)',
+    tags: ['Robotics', 'Manipulation', 'AI', 'TAMP', 'Conformant Planning'],
+    isFlagship: true
+  },
+  {
+    id: 'accessible-tech-boop',
+    taxonomyBucket: 'product',
+    title: 'Accessible Tech (Boop iOS App)',
+    description: 'Developed "Boop Light Detector" iOS app to assist people with vision impairment. Over 6000 downloads.',
+    category: 'Mobile Application',
+    status: 'Completed',
+    tags: ['iOS', 'Accessibility', 'Mobile']
+  },
+  {
+    id: 'campus-wellness',
+    taxonomyBucket: 'infrastructure',
+    title: 'Campus Wellness Initiative',
+    description: 'Secured grants to install therapy lamps across MIT campus to combat Seasonal Affective Disorder (SAD).',
+    category: 'Community Health',
+    status: 'Completed',
+    tags: ['Grants', 'Community', 'Wellness']
+  },
+  {
+    id: 'lab-sustainability',
+    taxonomyBucket: 'infrastructure',
+    title: 'Lab Sustainability',
+    description: 'Research on improving laboratory fume hood efficiency and safety feedback.',
+    category: 'Hardware & Safety',
+    status: 'Completed',
+    tags: ['Sustainability', 'Hardware', 'Research']
   }
 ];
 
