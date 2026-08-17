@@ -145,7 +145,7 @@ export const RESEARCH_TOOLS: ResearchTool[] = [
     category: 'Data Engineering',
     status: 'Active',
     tags: ['ETL', 'Apache Parquet', 'Scraping', 'Data Pipelines'],
-    canonicalPath: '/research/wcs-scraper'
+    canonicalPath: '/research/wcs-scraper-initial-sync'
   },
   {
     id: 'blog-drafter',
@@ -178,7 +178,7 @@ export const RESEARCH_TOOLS: ResearchTool[] = [
     category: 'DevAI Tooling',
     status: 'Active',
     tags: ['versions', 'ci', 'dependencies', 'hallucination-mitigation', 'npm', 'node', 'github-actions', 'agents'],
-    canonicalPath: '/versiontruth',
+    canonicalPath: '/research/versiontruth',
     sourceUrl: 'https://github.com/arii/tech-dancer/tree/main/api'
   }
 ];
