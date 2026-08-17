@@ -1,0 +1,50 @@
+import React from 'react';
+import { Briefcase, ExternalLink } from 'lucide-react';
+import { ResumeExperience } from '@/data/resume';
+
+export interface ExperienceSectionProps {
+  experiences: ResumeExperience[];
+}
+
+export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ experiences }) => {
+  return (
+    <section className="mb-12 print:mb-8">
+      <div className="flex items-center space-x-3 mb-6 border-b border-border/40 pb-2 print:border-b-2 print:border-black">
+        <Briefcase className="h-6 w-6 text-primary print:text-black" />
+        <h2 className="text-2xl font-bold text-foreground print:text-black uppercase tracking-wider">Experience</h2>
+      </div>
+      <div className="space-y-8 print:space-y-6">
+        {experiences.map((exp, idx) => (
+          <div key={idx} className="relative pl-4 sm:pl-6 border-l-2 border-border print:border-black print:pl-4">
+            <div className="absolute w-3 h-3 bg-primary rounded-full -left-[7px] top-1.5 print:bg-black" />
+            <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-1 print:flex-row print:justify-between print:mb-0.5">
+              <div className="flex items-center gap-2">
+                <h3 className="text-lg font-bold text-foreground print:text-black leading-tight">{exp.title}</h3>
+                {exp.link && (
+                  <a href={exp.link} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors print:hidden">
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+                )}
+              </div>
+              <span className="text-sm font-mono text-muted-foreground print:text-gray-700 whitespace-nowrap mt-1 sm:mt-0">{exp.period}</span>
+            </div>
+            <div className="text-primary font-semibold mb-2 text-base print:text-black print:mb-1">{exp.company}</div>
+            {exp.description && (
+              <p className="text-sm text-muted-foreground mb-3 leading-relaxed print:text-gray-800 print:mb-2">{exp.description}</p>
+            )}
+            {exp.points && (
+              <ul className="space-y-1.5 print:space-y-1">
+                {exp.points.map((point, pIdx) => (
+                  <li key={pIdx} className="flex gap-2 text-sm text-muted-foreground leading-relaxed print:text-gray-800 print:text-[13px]">
+                    <span className="text-primary print:text-black mt-0.5 opacity-70">•</span>
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
