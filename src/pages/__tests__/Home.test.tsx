@@ -16,7 +16,7 @@ describe('Home Page', () => {
     expect(screen.queryByText(/Build smart\. Ship more\./i)).not.toBeInTheDocument();
   });
 
-  it('renders updated subheading, bio, and engineering philosophy', () => {
+  it('renders updated subheading, bio, and company track record', () => {
     render(
       <BrowserRouter>
         <Home />
@@ -24,20 +24,29 @@ describe('Home Page', () => {
     );
 
     expect(
-      screen.getByText(/I architect reliable autonomous systems for physical robots and build agentic workflows/i)
+      screen.getByText(/I architect reliable autonomous systems/i)
     ).toBeInTheDocument();
 
-    expect(screen.getByText(/MIT CSAIL roboticist/i)).toBeInTheDocument();
-    expect(screen.getByText(/Robust AI/i)).toBeInTheDocument();
-    expect(screen.getByText(/Waymo/i)).toBeInTheDocument();
-    expect(screen.getByText(/CIV/i)).toBeInTheDocument();
-
-    expect(screen.getByText(/AI-Accelerated Rigor:/i)).toBeInTheDocument();
-    expect(screen.getByText(/Reliable Robot Behavior:/i)).toBeInTheDocument();
-    expect(screen.getByText(/Production Robot Software:/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/MIT CSAIL/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/Robust\.AI/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/Waymo/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/Civ Robotics/i).length).toBeGreaterThan(0);
   });
 
-  it('renders action links to Products, Infrastructure and Research sections', () => {
+  it('renders engineering philosophy section and tenets', () => {
+    render(
+      <BrowserRouter>
+        <Home />
+      </BrowserRouter>
+    );
+
+    expect(screen.getByText('Engineering Philosophy')).toBeInTheDocument();
+    expect(screen.getByText('AI-Accelerated Rigor')).toBeInTheDocument();
+    expect(screen.getByText('Reliable Robot Behavior')).toBeInTheDocument();
+    expect(screen.getByText('Production Robot Software')).toBeInTheDocument();
+  });
+
+  it('renders focus cards with tech tags and action links', () => {
     render(
       <BrowserRouter>
         <Home />
@@ -48,5 +57,20 @@ describe('Home Page', () => {
     expect(screen.getByText('View Live Products')).toBeInTheDocument();
     expect(screen.getByText('Inspect Infrastructure')).toBeInTheDocument();
     expect(screen.getByText('Read Architecture Studies')).toBeInTheDocument();
+
+    expect(screen.getByText('WebSockets')).toBeInTheDocument();
+    expect(screen.getAllByText('Playwright').length).toBeGreaterThan(0);
+    expect(screen.getByText('ICRA')).toBeInTheDocument();
+  });
+
+  it('renders core engineering stack grid', () => {
+    render(
+      <BrowserRouter>
+        <Home />
+      </BrowserRouter>
+    );
+
+    expect(screen.getByText('Core Engineering Stack')).toBeInTheDocument();
+    expect(screen.getByText('ROS 2')).toBeInTheDocument();
   });
 });

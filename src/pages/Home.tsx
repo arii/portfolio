@@ -1,166 +1,137 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ShieldCheck, Rocket, LayoutTemplate } from 'lucide-react';
+import { ArrowRight, Cpu, Layers } from 'lucide-react';
 import { Button } from '@/layouts/Button';
 import { Box, Stack, Grid, Text } from '@/layouts/Primitives';
+import {
+  HERO_SUBHEADING,
+  HERO_BIO,
+  EXPERIENCE_BADGES,
+  PHILOSOPHY_TENETS,
+  FOCUS_CARDS,
+  SKILL_CATEGORIES
+} from '@/data/home';
 
 const Home: React.FC = () => {
   return (
     <Box className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 space-y-16">
       {/* Hero Header Section */}
-      <section className="relative overflow-hidden rounded-2xl border border-line bg-surface p-8 sm:p-12 shadow-sm">
-        <Grid cols="1 lg:grid-cols-12" gap="12" className="items-center">
-          <Stack gap="6" className="lg:col-span-8">
-            <Box className="inline-flex items-center space-x-2 text-xs font-semibold text-text-dim w-fit">
-              <span>Robotics &amp; DevAI — Autonomous Systems &amp; AI-Orchestrated Software Engineering</span>
-            </Box>
-
-            <Text variant="heading">Ariel Anders, PhD</Text>
-
-            <div className="flex flex-wrap items-center gap-3 text-sm font-medium text-muted-foreground pb-2">
-              <span className="flex items-center space-x-1.5"><span className="h-1.5 w-1.5 rounded-full bg-primary/70"></span><span>MIT PhD</span></span>
-              <span>&middot;</span>
-              <span className="flex items-center space-x-1.5"><span className="h-1.5 w-1.5 rounded-full bg-primary/70"></span><span>Roboticist</span></span>
-              <span>&middot;</span>
-              <span className="flex items-center space-x-1.5"><span className="h-1.5 w-1.5 rounded-full bg-primary/70"></span><span>DevAI</span></span>
-            </div>
-
-            <Text variant="body" className="text-lg text-text-main font-medium">
-              I architect reliable autonomous systems for physical robots and build agentic workflows that autonomously engineer full-stack software.
-            </Text>
-
-            <div className="space-y-3 text-sm text-text-dim leading-relaxed">
-              <p>
-                I am an MIT CSAIL roboticist and have worked in the industry since completing my PhD on reliable robot manipulation combining learning and planning techniques. At Robust AI, I was the tech lead for the behavior team, developing reactive social navigation behaviors. At Waymo, I worked on the planning team to reduce traffic congestion during passenger pickup and drop-off. Most recently at CIV, I built and optimized production state estimation pipelines to increase fleet uptime.
-              </p>
-              <p>
-                I have spent the past year building stateful, multi-agent orchestrations. Because autonomous systems require strict code health, I use these workflows to engineer feature-rich applications and enforce continuous architectural standards—bringing robotics-grade reliability to DevAI.
-              </p>
-            </div>
-
-            <Stack direction="row" gap="4" className="pt-2 flex-wrap" align="center">
-              <Link to="/research">
-                <Button variant="primary" size="md" className="flex items-center space-x-2">
-                  <span>View portfolio</span>
-                  <ArrowRight className="h-4 w-4" />
-                </Button>
-              </Link>
-            </Stack>
-          </Stack>
-
-          <Box className="hidden lg:block lg:col-span-4">
-             <div className="rounded-xl border border-line/50 bg-bg p-6 space-y-4">
-               <Text variant="subheading" className="text-sm border-b border-line pb-2">Engineering Philosophy</Text>
-               <ul className="space-y-3 text-sm text-text-dim">
-                 <li>
-                   <span className="text-text-main font-medium block">AI-Accelerated Rigor:</span>
-                   AI should raise the bar, not lower it. I develop agentic CI/CD workflows and automated code reviews to code-gen patches, resolve architecture guidelines, and triage and prevent technical debt faster.
-                 </li>
-                 <li>
-                   <span className="text-text-main font-medium block">Reliable Robot Behavior:</span>
-                   Developing onboard motion planning, reactive social navigation, and behavior software across autonomous vehicles, indoor robots in unstructured environments, and robotic manipulation.
-                 </li>
-                 <li>
-                   <span className="text-text-main font-medium block">Production Robot Software:</span>
-                   Authoring production-quality C++, Python, and ROS 2 software using Docker and AWS IoT to build automated pipelines and containerized robotics applications for high fleet uptime.
-                 </li>
-               </ul>
-             </div>
+      <section className="relative overflow-hidden rounded-2xl border border-line bg-surface p-8 sm:p-12 shadow-sm space-y-8">
+        <Stack gap="6">
+          <Box className="inline-flex items-center space-x-2 text-xs font-semibold text-text-dim w-fit">
+            <span>Robotics &amp; DevAI — Autonomous Systems &amp; AI-Orchestrated Software Engineering</span>
           </Box>
+
+          <Text variant="heading">Ariel Anders, PhD</Text>
+
+          <Text variant="body" className="text-xl text-text-main font-medium leading-snug">
+            {HERO_SUBHEADING}
+          </Text>
+
+          <div className="space-y-3 text-sm text-text-dim leading-relaxed max-w-4xl">
+            {HERO_BIO.map((paragraph, idx) => (
+              <p key={idx}>{paragraph}</p>
+            ))}
+          </div>
+
+          <Stack direction="row" gap="4" className="pt-2 flex-wrap" align="center">
+            <Link to="/research">
+              <Button variant="primary" size="md" className="flex items-center space-x-2">
+                <span>View portfolio</span>
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+            </Link>
+          </Stack>
+        </Stack>
+
+        {/* Experience Badges Strip */}
+        <Box className="pt-6 border-t border-line">
+          <Text variant="subheading" className="text-xs uppercase tracking-wider text-text-dim mb-4">
+            Proven Industry Track Record
+          </Text>
+          <Grid cols="1 sm:grid-cols-2 lg:grid-cols-4" gap="4">
+            {EXPERIENCE_BADGES.map((item, idx) => (
+              <div key={idx} className="rounded-xl border border-line/60 bg-bg p-4 space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="font-bold text-text-main text-sm">{item.company}</span>
+                </div>
+                <p className="text-xs text-accent font-medium">{item.role}</p>
+                <div className="flex flex-wrap gap-1.5 pt-1">
+                  {item.tags.map((tag, tIdx) => (
+                    <span key={tIdx} className="px-2 py-0.5 rounded bg-surface border border-line text-[10px] text-text-dim font-mono">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </Grid>
+        </Box>
+      </section>
+
+      {/* Engineering Philosophy Dedicated Section */}
+      <section className="space-y-6">
+        <Box className="border-b border-line pb-4">
+          <Text variant="subheading" className="text-2xl font-bold">Engineering Philosophy</Text>
+          <Text variant="dim" className="text-sm mt-1">Autonomous systems principles applied to full-stack software development.</Text>
+        </Box>
+        <Grid cols="1 md:grid-cols-3" gap="6">
+          {PHILOSOPHY_TENETS.map((tenet, idx) => (
+            <div key={idx} className="rounded-xl border border-line bg-surface p-6 shadow-sm space-y-3">
+              <h3 className="font-bold text-text-main text-lg border-b border-line/40 pb-2">{tenet.title}</h3>
+              <p className="text-sm text-text-dim leading-relaxed">{tenet.desc}</p>
+            </div>
+          ))}
         </Grid>
       </section>
 
       {/* Main Focus Cards Section */}
       <Grid cols="1 md:grid-cols-3" gap="8">
-
-        {/* Card 1: Shipped Products */}
-        <Stack justify="between" className="rounded-xl border border-line bg-surface p-8 shadow-sm transition-all hover:border-accent/50 hover:shadow-md h-full">
-          <Stack gap="4">
-            <Text variant="subheading" className="text-xl">Products I've Shipped</Text>
-            <Text variant="dim">
-              Live consumer applications, fitness trackers, and full-stack community platforms built via AI orchestration. Proof the method transfers to any client's domain.
-            </Text>
+        {FOCUS_CARDS.map((card, idx) => (
+          <Stack key={idx} justify="between" className="rounded-xl border border-line bg-surface p-8 shadow-sm transition-all hover:border-accent/50 hover:shadow-md h-full">
+            <Stack gap="4">
+              <Text variant="subheading" className="text-xl">{card.title}</Text>
+              <Text variant="dim" className="text-sm">{card.desc}</Text>
+              <div className="flex flex-wrap gap-2 pt-2">
+                {card.tags.map((tag, tIdx) => (
+                  <span key={tIdx} className="px-2.5 py-1 rounded-md bg-surface-alt border border-line text-xs font-mono text-accent">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </Stack>
+            <Box className="mt-8 pt-4 border-t border-line">
+              <Link to={card.link} className="inline-flex items-center space-x-2 text-sm font-semibold text-accent hover:underline">
+                <span>{card.linkText}</span>
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </Box>
           </Stack>
-          <Box className="mt-8 pt-4 border-t border-line">
-            <Link
-              to="/research#products"
-              className="inline-flex items-center space-x-2 text-sm font-semibold text-accent hover:underline"
-            >
-              <span>View Live Products</span>
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </Box>
-        </Stack>
-
-        {/* Card 2: Engineering Infrastructure */}
-        <Stack justify="between" className="rounded-xl border border-line bg-surface p-8 shadow-sm transition-all hover:border-accent/50 hover:shadow-md h-full">
-          <Stack gap="4">
-            <Text variant="subheading" className="text-xl">Engineering Infrastructure</Text>
-            <Text variant="dim">
-              Deep dives into active tooling: autonomous code review agents, CI pipelines, and strict quality gates for real-world engineering teams.
-            </Text>
-          </Stack>
-          <Box className="mt-8 pt-4 border-t border-line">
-            <Link
-              to="/research#infrastructure"
-              className="inline-flex items-center space-x-2 text-sm font-semibold text-accent hover:underline"
-            >
-              <span>Inspect Infrastructure</span>
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </Box>
-        </Stack>
-
-        {/* Card 3: Articles & Research Studies */}
-        <Stack justify="between" className="rounded-xl border border-line bg-surface p-8 shadow-sm transition-all hover:border-accent/50 hover:shadow-md h-full">
-          <Stack gap="4">
-            <Text variant="subheading" className="text-xl">Articles &amp; Research</Text>
-            <Text variant="dim">
-              Technical essays, system architecture breakdowns, and post-mortems on migrating production systems.
-            </Text>
-          </Stack>
-          <Box className="mt-8 pt-4 border-t border-line">
-            <Link
-              to="/research#articles"
-              className="inline-flex items-center space-x-2 text-sm font-semibold text-accent hover:underline"
-            >
-              <span>Read Architecture Studies</span>
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </Box>
-        </Stack>
+        ))}
       </Grid>
 
-      {/* Engineering Highlights Banner */}
-      <Box className="rounded-xl border border-line bg-surface-alt p-6 sm:p-8">
-        <Grid cols="1 md:grid-cols-3" gap="6">
-          <Stack direction="row" gap="3" align="start">
-            <Rocket className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-            <Box>
-              <h3 className="font-semibold text-text-main text-sm">Algorithmic Motion Planning</h3>
-              <p className="text-xs text-text-dim mt-1">
-                Behavior trees, conformant planning under uncertainty, and dynamic obstacle avoidance built for real-time robot safety.
-              </p>
-            </Box>
-          </Stack>
-          <Stack direction="row" gap="3" align="start">
-            <ShieldCheck className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-            <Box>
-              <h3 className="font-semibold text-text-main text-sm">DevAI &amp; AI Workflows</h3>
-              <p className="text-xs text-text-dim mt-1">
-                Leveraging LLMs, RAG context systems, and automated PR review agents to accelerate engineering cycles and technical debt cleanup.
-              </p>
-            </Box>
-          </Stack>
-          <Stack direction="row" gap="3" align="start">
-            <LayoutTemplate className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-            <Box>
-              <h3 className="font-semibold text-text-main text-sm">Production Systems Architecture</h3>
-              <p className="text-xs text-text-dim mt-1">
-                Production C++, ROS 2, Python, and cloud/IoT pipelines engineered for high uptime, maintainability, and clean system design.
-              </p>
-            </Box>
-          </Stack>
+      {/* Technical Stack Grid Banner */}
+      <Box className="rounded-xl border border-line bg-surface-alt p-6 sm:p-8 space-y-4">
+        <Text variant="subheading" className="text-base font-bold flex items-center space-x-2">
+          <Cpu className="h-5 w-5 text-accent" />
+          <span>Core Engineering Stack</span>
+        </Text>
+        <Grid cols="1 md:grid-cols-2" gap="6">
+          {SKILL_CATEGORIES.map((cat, idx) => (
+            <div key={idx} className="space-y-2">
+              <span className="text-xs font-semibold uppercase tracking-wider text-text-dim flex items-center space-x-1.5">
+                <Layers className="h-3.5 w-3.5 text-accent" />
+                <span>{cat.category}</span>
+              </span>
+              <div className="flex flex-wrap gap-2">
+                {cat.items.map((item, iIdx) => (
+                  <span key={iIdx} className="px-3 py-1 rounded-lg bg-surface border border-line text-xs font-medium text-text-main">
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
         </Grid>
       </Box>
     </Box>
