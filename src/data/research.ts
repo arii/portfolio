@@ -145,7 +145,7 @@ export const RESEARCH_TOOLS: ResearchTool[] = [
     category: 'Data Engineering',
     status: 'Active',
     tags: ['ETL', 'Apache Parquet', 'Scraping', 'Data Pipelines'],
-    canonicalPath: '/research/wcs-scraper-initial-sync'
+    canonicalPath: '/research/wcs-scraper'
   },
   {
     id: 'blog-drafter',
@@ -184,7 +184,10 @@ export const RESEARCH_TOOLS: ResearchTool[] = [
 ];
 
 export const getAllResearchPosts = (): ResearchPost[] => {
-  return [...RESEARCH_POSTS].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const uniquePosts = Array.from(
+    new Map(RESEARCH_POSTS.map(post => [post.title, post])).values()
+  );
+  return uniquePosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 };
 
 export const getResearchPostBySlug = (slug: string): ResearchPost | undefined => {

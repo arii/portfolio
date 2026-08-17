@@ -25,7 +25,13 @@ export interface ResearchListPageProps {
 }
 
 const ResearchListPage: React.FC<ResearchListPageProps> = ({ onNavigate }) => {
-  const posts = useMemo(() => getAllResearchPosts(), []);
+  const posts = useMemo(() => {
+    const allPosts = getAllResearchPosts();
+    const uniquePosts = Array.from(
+      new Map(allPosts.map(post => [post.slug || post.title, post])).values()
+    );
+    return uniquePosts;
+  }, []);
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
 
