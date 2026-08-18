@@ -37,12 +37,16 @@ runs:
           ghcr.io/arii/boomtick:latest \
           ai review "${PR_NUMBER}" || echo "::warning::Agent code review returned non-zero, likely due to approval permission limitations"
 
-        TASK_ID=$(echo "${PR_BODY}" | grep -oP 'jules\.google\.com/task/\K[0-9]+' || true)
+        TASK_ID=$(echo "${PR_BODY}" | grep -oP 'jules\.google\.com/task/\K[0-9]+' | head -n 1 || true)
 
         if [[ -n "${TASK_ID}" && -n "${JULES_API_KEY}" ]]; then
           docker run --rm \
             --entrypoint jules \
             -e JULES_API_KEY="${JULES_API_KEY}" \
+            -e GITHUB_TOKEN="${GITHUB_TOKEN}" \
+            -e GITHUB_REPOSITORY="${GITHUB_REPOSITORY}" \
+            -e GEMINI_API_KEY="${GEMINI_API_KEY}" \
+            -e PR_NUMBER="${PR_NUMBER}" \
             -v "${{ github.workspace }}":/github/workspace \
             -w /github/workspace \
             ghcr.io/arii/boomtick:latest \
