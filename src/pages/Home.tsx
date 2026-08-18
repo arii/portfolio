@@ -1,9 +1,3 @@
-/**
- * CONTENT OWNERSHIP RULE:
- * Overview's teaser cards and icon-feature rows must stay concise (1-2 sentences)
- * and must never be edited to match full text on Portfolio/Resume/About.
- */
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Cpu, Sparkles, Compass, Bot, Server } from 'lucide-react';

@@ -1,14 +1,3 @@
-/**
- * SINGLE SOURCE OF TRUTH & CONTENT OWNERSHIP RULE:
- * - OVERVIEW (this page/data) is the pitch: Philosophy + short teasers (1-2 sentences).
- *   Teaser cards and icon-feature rows must stay short (1-2 sentences) and MUST NEVER
- *   be edited to match full text on Portfolio/Resume/About. If a teaser and its target page
- *   ever share a verbatim sentence, shorten the teaser.
- * - PORTFOLIO is the project catalog (sole owner of project/article full descriptions).
- * - RESUME is the professional record (sole owner of publications, credentials, dissertation abstracts).
- * - ABOUT is the person (narrative bio + credibility lines + outlinks to Portfolio & Resume).
- */
-
 export interface PhilosophyTenet {
   id: string;
   title: string;

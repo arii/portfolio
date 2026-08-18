@@ -124,6 +124,7 @@ def main():
         logger.warning(f"Artifacts directory '{artifacts_dir}' not found. Checking `.boomtick/logs/reviews`.")
 
     # Also check Python CLI review files in .boomtick/logs/
+    # In the container, the workspace is mounted to /github/workspace so we check that relative path.
     for search_dir in [".boomtick/logs/reviews", ".boomtick/logs/logs/reviews"]:
         if os.path.isdir(search_dir):
             for filepath in glob.glob(os.path.join(search_dir, "pr-review-*.md")):
