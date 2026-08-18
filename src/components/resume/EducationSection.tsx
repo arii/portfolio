@@ -13,21 +13,20 @@ export const EducationSection: React.FC<EducationSectionProps> = ({ education })
         <GraduationCap className="h-6 w-6 text-primary print:text-black" />
         <h2 className="text-2xl font-bold text-foreground print:text-black uppercase tracking-wider">Education</h2>
       </div>
-      <div className="space-y-8 print:space-y-6">
+      <div className="space-y-6 print:space-y-4">
         {education.map((edu, idx) => (
-          <div key={idx} className="space-y-2">
-            <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between print:flex-row print:justify-between">
-              <h3 className="text-lg font-bold text-foreground print:text-black leading-tight">{edu.degree}</h3>
-              <span className="text-sm font-mono text-muted-foreground print:text-gray-700 whitespace-nowrap mt-1 sm:mt-0">{edu.period}</span>
+          <div key={idx} className="space-y-1.5">
+            <div className="flex flex-col justify-between gap-1">
+              <h3 className="text-sm font-bold text-foreground print:text-black leading-snug">{edu.degree}</h3>
+              <span className="text-xs font-mono text-slate-400 print:text-gray-700">{edu.period}</span>
             </div>
-            <div className="text-base font-semibold text-primary print:text-black">{edu.institution}</div>
+            <div className="text-xs font-semibold text-primary print:text-black">{edu.institution}</div>
             {edu.details && (
-              <p className="text-sm text-muted-foreground italic print:text-gray-800">{edu.details}</p>
+              <p className="text-xs text-slate-400 italic print:text-gray-800">{edu.details}</p>
             )}
             {edu.researchFocus && (
-              <div className="mt-3 p-4 bg-secondary/30 rounded-xl border border-border print:bg-transparent print:border-l-2 print:border-black print:rounded-none print:p-0 print:pl-3 print:mt-2">
-                <h4 className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-1.5 print:text-black print:font-bold">Research Focus</h4>
-                <p className="text-sm text-muted-foreground leading-relaxed print:text-gray-800 print:text-[13px]">{edu.researchFocus}</p>
+              <div className="mt-2 p-3 bg-secondary/30 rounded-xl border border-border/60 print:bg-transparent print:border-l-2 print:border-black print:rounded-none print:p-0 print:pl-3">
+                <p className="text-xs text-muted-foreground leading-relaxed print:text-gray-800">{edu.researchFocus}</p>
               </div>
             )}
           </div>
