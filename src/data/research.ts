@@ -188,8 +188,7 @@ export const RESEARCH_TOOLS: ResearchTool[] = [
     description: 'Focused on reliable robotic manipulation under uncertainty. Aimed to bridge the gap between theoretical AI and practical challenges of deploying helpful robots in complex household environments.',
     category: 'Robotics & AI',
     status: 'Completed (2019)',
-    tags: ['Robotics', 'Manipulation', 'AI', 'TAMP', 'Conformant Planning'],
-    isFlagship: true
+    tags: ['Robotics', 'Manipulation', 'AI', 'TAMP', 'Conformant Planning']
   },
   {
     id: 'accessible-tech-boop',
