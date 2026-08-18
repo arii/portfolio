@@ -1,6 +1,5 @@
 import { parse } from 'yaml';
 import { ResearchPost } from '@/types/research';
-
 export { RESEARCH_TOOLS } from './researchTools';
 
 export function parseFrontmatter(content: string) {
@@ -39,8 +38,6 @@ export const RESEARCH_POSTS: ResearchPost[] = Object.entries(modules).map(([path
     status: String(data.status || 'published')
   };
 });
-
-
 
 export const getAllResearchPosts = (): ResearchPost[] => {
   const uniquePosts = Array.from(
