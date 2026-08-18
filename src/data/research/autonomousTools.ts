@@ -38,30 +38,60 @@ export const autonomousTools: ResearchTool[] = [
     tags: ['Robotics & Autonomy', 'Control Systems', 'Computer Vision', 'Drones']
   },
   {
-    id: 'accessible-tech-boop',
+    id: 'boop-light-detector',
     taxonomyBucket: 'product',
-    title: 'Accessible Tech (Boop iOS App)',
-    description: 'Developed "Boop Light Detector" iOS app to assist people with vision impairment. Over 6000 downloads.',
-    category: 'Mobile Application',
+    title: 'Boop Light Detector',
+    description: 'iOS accessibility utility translating ambient light intensity into audible frequencies for visually impaired users (6,000+ downloads).',
+    category: 'Accessibility & Mobile',
     status: 'Completed',
-    tags: ['iOS', 'Accessibility', 'Mobile']
+    tags: ['iOS', 'Accessibility', 'Audio', 'Mobile'],
+    canonicalPath: '/research/boop-light-detector',
+    externalUrl: 'https://arii.github.io/boop/',
+    sourceUrl: 'https://github.com/arii/boop'
   },
   {
-    id: 'campus-wellness',
+    id: 'light-therapy-mit',
     taxonomyBucket: 'infrastructure',
-    title: 'Campus Wellness Initiative',
-    description: 'Secured grants to install therapy lamps across MIT campus to combat Seasonal Affective Disorder (SAD).',
-    category: 'Community Health',
+    title: 'Light Therapy at MIT',
+    description: 'Campus-wide seasonal affective disorder (SAD) wellness initiative funded by the MindHandHeart Innovation Fund.',
+    category: 'Community Health & Wellness',
     status: 'Completed',
-    tags: ['Grants', 'Community', 'Wellness']
+    tags: ['MindHandHeart', 'Community', 'Wellness', 'MIT'],
+    canonicalPath: '/research/light-therapy-mit',
+    externalUrl: 'https://arii.github.io/SAD/',
+    sourceUrl: 'https://github.com/arii/SAD'
   },
   {
-    id: 'lab-sustainability',
+    id: 'leac-monitoring-software',
     taxonomyBucket: 'infrastructure',
-    title: 'Lab Sustainability',
-    description: 'Research on improving laboratory fume hood efficiency and safety feedback.',
-    category: 'Hardware & Safety',
+    title: 'Lab Energy Assessment Center (LEAC) Monitoring Software',
+    description: 'Network monitoring software and energy audit infrastructure for fume hood efficiency (MIT Green Labs Innovation Award).',
+    category: 'Sustainability & Energy',
     status: 'Completed',
-    tags: ['Sustainability', 'Hardware', 'Research']
+    tags: ['Sustainability', 'Hardware', 'Energy Audit', 'MIT Green Labs'],
+    canonicalPath: '/research/leac-monitoring-software',
+    externalUrl: 'https://github.com/arii'
+  },
+  {
+    id: 'robocon-mit',
+    taxonomyBucket: 'infrastructure',
+    title: 'RoboCon MIT',
+    description: 'Cross-departmental robotics research conference organization and web platform.',
+    category: 'Robotics Community',
+    status: 'Completed',
+    tags: ['Robotics', 'Conference', 'Web Platform', 'MIT'],
+    canonicalPath: '/research/robocon-mit',
+    externalUrl: 'https://github.com/arii'
+  },
+  {
+    id: 'cad-cam-dental-workflow',
+    taxonomyBucket: 'product',
+    title: 'CAD/CAM Robotic Dental Crowning Workflow',
+    description: 'Robotic UI and verified experimental workflows for autonomous dental crowning.',
+    category: 'Medical Robotics',
+    status: 'Completed',
+    tags: ['Robotics', 'Medical UI', 'CAD/CAM', 'Bionics Lab UCSC'],
+    canonicalPath: '/research/cad-cam-dental-workflow',
+    externalUrl: 'https://github.com/arii'
   }
 ];
