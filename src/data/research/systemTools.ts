@@ -6,12 +6,16 @@ export const systemTools: ResearchTool[] = [
     taxonomyBucket: 'infrastructure',
     title: 'GitOps Code Review Agent',
     subtitle: 'Automated PR Auditing',
-    description: 'LLM-powered PR auditing using GitHub Actions. Reviews code style and pattern consistency on every pull request. The foundation for the RAG-grounded review pipeline being built into RepoAuditor.',
+    description: 'LLM-powered PR auditing pipeline that performs automated review and structured feedback on pull requests.',
     category: 'DevAI System',
     status: 'Active',
     tags: ['GitHub Actions', 'LLM', 'PR Automation'],
     canonicalPath: '/research/gitops-pr-reviewer',
-    sourceUrl: 'https://github.com/arii/tech-dancer/tree/main/dev-tools'
+    sourceUrl: 'https://github.com/arii/tech-dancer/tree/main/dev-tools',
+    parentFlagship: {
+      id: 'repo-auditor-ai',
+      title: 'RepoAuditor'
+    }
   },
   {
     id: 'deployment-impact-analyzer',
@@ -31,12 +35,16 @@ export const systemTools: ResearchTool[] = [
     taxonomyBucket: 'infrastructure',
     title: 'Visual Regression & UX Auditor',
     subtitle: 'PLAYWRIGHT VISUAL REGRESSION',
-    description: 'Automated visual regression testing using Playwright and pixelmatch. Captures full-page screenshots before and after a PR, computes pixel-level diffs, crops the bounding box of changed regions, and scores severity by percentage of changed pixels. Part of the Blast-Radius Analyzer pipeline.',
+    description: 'Automated visual regression testing using Playwright and pixelmatch to capture screenshot diffs and score visual severity.',
     category: 'Perception Debugging',
     status: 'Active',
     tags: ['Playwright', 'Pixelmatch', 'Screenshot Diff', 'CI/CD'],
     canonicalPath: '/research/ux-auditor',
-    sourceUrl: 'https://github.com/arii/tech-dancer/tree/main/dev-tools'
+    sourceUrl: 'https://github.com/arii/tech-dancer/tree/main/dev-tools',
+    parentFlagship: {
+      id: 'deployment-impact-analyzer',
+      title: 'Blast-Radius Analyzer'
+    }
   },
   {
     id: 'wcs-scraper',

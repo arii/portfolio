@@ -9,14 +9,38 @@ interface ToolCardProps {
 const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
   const isClickable = !!tool.externalUrl || !!tool.canonicalPath;
 
+  const handleParentClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const el = document.getElementById('flagship');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      window.location.hash = '#flagship';
+    }
+  };
+
   const content = (
     <div className={`p-4 bg-surface/50 border border-line rounded-2xl transition-all space-y-2 ${isClickable ? 'hover:border-accent cursor-pointer group' : ''}`}>
-      <div className="flex justify-between items-start">
+      <div className="flex justify-between items-start gap-2">
         <h4 className="font-bold text-text-main text-sm font-display group-hover:text-accent transition-colors">{tool.title}</h4>
-        <span className="text-[8px] bg-accent/10 text-accent px-1.5 py-0.5 rounded border border-accent/20">
+        <span className="text-[8px] bg-accent/10 text-accent px-1.5 py-0.5 rounded border border-accent/20 shrink-0">
           {tool.status}
         </span>
       </div>
+
+      {tool.parentFlagship && (
+        <div className="pt-0.5">
+          <a
+            href="#flagship"
+            onClick={handleParentClick}
+            className="inline-flex items-center gap-1 text-[10px] bg-accent/10 text-accent hover:bg-accent/20 border border-accent/20 px-2 py-0.5 rounded-full font-medium transition-colors focus:outline-none focus:ring-1 focus:ring-accent"
+            aria-label={`Part of ${tool.parentFlagship.title} flagship project`}
+          >
+            <span>Part of <strong className="font-semibold">{tool.parentFlagship.title}</strong></span>
+          </a>
+        </div>
+      )}
+
       <p className="text-xs text-text-dim leading-relaxed">{tool.description}</p>
       <div className="flex flex-wrap gap-1.5 pt-1">
         {tool.tags.map(tag => (
