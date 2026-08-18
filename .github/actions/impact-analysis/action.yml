@@ -41,7 +41,6 @@ runs:
 
         if [[ -n "${TASK_ID}" && -n "${JULES_API_KEY}" ]]; then
           docker run --rm \
-            --entrypoint jules \
             -e JULES_API_KEY="${JULES_API_KEY}" \
             -e GITHUB_TOKEN="${GITHUB_TOKEN}" \
             -e GITHUB_REPOSITORY="${GITHUB_REPOSITORY}" \
@@ -50,5 +49,5 @@ runs:
             -v "${{ github.workspace }}":/github/workspace \
             -w /github/workspace \
             ghcr.io/arii/boomtick:latest \
-            trigger-feedback "${TASK_ID}" || echo "::warning::Jules trigger-feedback failed"
+            jules trigger-feedback "${TASK_ID}" || echo "::warning::Jules trigger-feedback failed"
         fi
