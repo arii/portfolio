@@ -11,6 +11,13 @@ export interface FocusArea {
   actionText: string;
 }
 
+export interface FeatureCallout {
+  id: string;
+  title: string;
+  description: string;
+  iconName: 'compass' | 'workflow' | 'server';
+}
+
 export interface HeroData {
   badge: string;
   name: string;
@@ -70,5 +77,29 @@ export const FOCUS_AREAS: FocusArea[] = [
     title: 'Articles & Research',
     description: 'System architecture breakdowns, engineering post-mortems, and DevAI case studies.',
     actionText: 'Read Studies',
+  },
+];
+
+export const FEATURE_CALLOUTS: FeatureCallout[] = [
+  {
+    id: 'motion-planning',
+    title: 'Algorithmic Motion Planning',
+    description:
+      'Behavior trees, conformant planning under uncertainty, and dynamic obstacle avoidance built for real-time robot safety.',
+    iconName: 'compass',
+  },
+  {
+    id: 'devai-workflows',
+    title: 'DevAI & AI Workflows',
+    description:
+      'Leveraging LLMs, RAG context systems, and automated PR review agents to accelerate engineering cycles and technical debt cleanup.',
+    iconName: 'workflow',
+  },
+  {
+    id: 'production-systems',
+    title: 'Production Systems Architecture',
+    description:
+      'Production C++, ROS 2, Python, and cloud/IoT pipelines engineered for high uptime, maintainability, and clean system design.',
+    iconName: 'server',
   },
 ];

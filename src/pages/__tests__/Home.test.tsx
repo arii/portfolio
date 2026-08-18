@@ -37,6 +37,15 @@ describe('Home Page', () => {
     expect(screen.getByText('Production Robot Software')).toBeInTheDocument();
   });
 
+  it('renders bottom feature callouts row', () => {
+    const handleNavigate = vi.fn();
+    render(<Home onNavigate={handleNavigate} />);
+
+    expect(screen.getByText('Algorithmic Motion Planning')).toBeInTheDocument();
+    expect(screen.getByText('DevAI & AI Workflows')).toBeInTheDocument();
+    expect(screen.getByText('Production Systems Architecture')).toBeInTheDocument();
+  });
+
   it('triggers navigation callback when focus area cards or portfolio button are clicked', () => {
     const handleNavigate = vi.fn();
     render(<Home onNavigate={handleNavigate} />);
