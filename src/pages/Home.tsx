@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Cpu, Sparkles, Compass, Bot, Server } from 'lucide-react';
 import { HERO_DATA, PHILOSOPHY_TENETS, FOCUS_AREAS, FEATURE_CALLOUTS } from '@/data/home';
 
@@ -7,9 +8,13 @@ interface HomeProps {
 }
 
 export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
+  const navigate = useNavigate();
+
   const handleNav = (tab: string) => {
     if (onNavigate) {
       onNavigate(tab);
+    } else {
+      navigate('/research');
     }
   };
 
@@ -27,7 +32,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
   };
 
   return (
-    <main className="space-y-10 sm:space-y-12 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    <main className="space-y-8 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
       {/* 2-Column Surfaced Hero Card Grid */}
       <section className="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 sm:p-10 lg:p-12 shadow-xl backdrop-blur-sm">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
@@ -91,13 +96,13 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
           <button
             key={item.id}
             onClick={() => handleNav(item.id)}
-            className="text-left w-full group bg-slate-900/40 hover:bg-slate-900/80 border border-slate-800 hover:border-amber-500/40 rounded-xl p-6 sm:p-8 cursor-pointer transition-all duration-200 flex flex-col justify-between space-y-5 shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500/50"
+            className="text-left w-full group bg-slate-900/60 hover:bg-slate-900/90 border border-slate-800 hover:border-amber-500/40 rounded-xl p-6 sm:p-8 cursor-pointer transition-all duration-200 flex flex-col justify-between space-y-5 shadow-md focus:outline-none focus:ring-2 focus:ring-amber-500/50"
           >
             <div className="space-y-2.5">
               <h3 className="text-lg sm:text-xl font-bold text-slate-100 group-hover:text-amber-400 transition-colors">
                 {item.title}
               </h3>
-              <p className="text-sm text-slate-400 leading-relaxed">{item.description}</p>
+              <p className="text-sm text-slate-300 leading-relaxed">{item.description}</p>
             </div>
             <div className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-amber-400 group-hover:translate-x-1 transition-transform">
               <span>{item.actionText}</span>
@@ -108,14 +113,14 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
       </section>
 
       {/* Bottom Feature Callouts Row */}
-      <section className="bg-slate-900/30 border border-slate-800/80 rounded-xl p-6 sm:p-8">
+      <section className="bg-slate-900/60 border border-slate-800 rounded-xl p-6 sm:p-8 shadow-md backdrop-blur-sm">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {FEATURE_CALLOUTS.map((feature) => (
             <div key={feature.id} className="flex gap-3.5 items-start">
               {getCalloutIcon(feature.iconName)}
               <div className="space-y-1">
                 <h4 className="text-sm sm:text-base font-bold text-slate-100">{feature.title}</h4>
-                <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">{feature.description}</p>
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">{feature.description}</p>
               </div>
             </div>
           ))}

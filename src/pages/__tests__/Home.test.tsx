@@ -1,11 +1,16 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import { Home } from '../Home';
 
 describe('Home Page', () => {
   it('renders hero title, role, and exact subheading', () => {
     const handleNavigate = vi.fn();
-    render(<Home onNavigate={handleNavigate} />);
+    render(
+      <MemoryRouter>
+        <Home onNavigate={handleNavigate} />
+      </MemoryRouter>
+    );
 
     expect(screen.getByText('Ariel Anders, PhD')).toBeInTheDocument();
     expect(screen.getByText('Roboticist & Senior Software Engineer')).toBeInTheDocument();
@@ -18,7 +23,11 @@ describe('Home Page', () => {
 
   it('renders bio paragraphs in hero card', () => {
     const handleNavigate = vi.fn();
-    render(<Home onNavigate={handleNavigate} />);
+    render(
+      <MemoryRouter>
+        <Home onNavigate={handleNavigate} />
+      </MemoryRouter>
+    );
 
     expect(
       screen.getByText((content) =>
@@ -29,7 +38,11 @@ describe('Home Page', () => {
 
   it('renders engineering philosophy callout and tenets', () => {
     const handleNavigate = vi.fn();
-    render(<Home onNavigate={handleNavigate} />);
+    render(
+      <MemoryRouter>
+        <Home onNavigate={handleNavigate} />
+      </MemoryRouter>
+    );
 
     expect(screen.getByText('Engineering Philosophy')).toBeInTheDocument();
     expect(screen.getByText('AI-Accelerated Rigor')).toBeInTheDocument();
@@ -39,7 +52,11 @@ describe('Home Page', () => {
 
   it('renders bottom feature callouts row', () => {
     const handleNavigate = vi.fn();
-    render(<Home onNavigate={handleNavigate} />);
+    render(
+      <MemoryRouter>
+        <Home onNavigate={handleNavigate} />
+      </MemoryRouter>
+    );
 
     expect(screen.getByText('Algorithmic Motion Planning')).toBeInTheDocument();
     expect(screen.getByText('DevAI & AI Workflows')).toBeInTheDocument();
@@ -48,7 +65,11 @@ describe('Home Page', () => {
 
   it('triggers navigation callback when focus area cards or portfolio button are clicked', () => {
     const handleNavigate = vi.fn();
-    render(<Home onNavigate={handleNavigate} />);
+    render(
+      <MemoryRouter>
+        <Home onNavigate={handleNavigate} />
+      </MemoryRouter>
+    );
 
     const portfolioBtn = screen.getByRole('button', { name: /view portfolio/i });
     fireEvent.click(portfolioBtn);
