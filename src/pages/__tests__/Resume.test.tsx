@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import Resume from '../Resume';
 import { describe, it, expect } from 'vitest';
 
@@ -14,8 +14,9 @@ describe('Resume Page', () => {
   it('renders all sections and updated content correctly', () => {
     render(<Resume />);
 
-    // Header name, summary & PDF button
+    // Header name, title, summary & PDF button
     expect(screen.getByText('Ariel Anders, PhD')).toBeInTheDocument();
+    expect(screen.getByText('Roboticist & Senior Software Engineer')).toBeInTheDocument();
     expect(screen.getByText(/Roboticist and Senior Software Engineer with an MIT CSAIL PhD/i)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /Export PDF/i })).toBeInTheDocument();
 
@@ -39,25 +40,25 @@ describe('Resume Page', () => {
     expect(screen.getByText('Civ Robotics')).toBeInTheDocument();
     expect(screen.getByText('Senior Roboticist / Tech Lead')).toBeInTheDocument();
     expect(screen.getByText('Robust.AI')).toBeInTheDocument();
-    expect(screen.getByText(/Real-Time Telemetry: Built Web Bluetooth/i)).toBeInTheDocument();
 
-    // Publications & Google Scholar link
-    expect(screen.getByText(/Reliably Arranging Objects: A Conformant Planning Approach/i)).toBeInTheDocument();
-
-    // Skills badge pills
+    // Skills badge pills (including newly added Matlab, Gemini API, Unix/Mac/Windows)
     expect(screen.getByText('Motion Planning')).toBeInTheDocument();
     expect(screen.getByText('C++')).toBeInTheDocument();
-    expect(screen.getByText('ROS 1 / 2')).toBeInTheDocument();
+    expect(screen.getByText('Matlab')).toBeInTheDocument();
+    expect(screen.getByText('Gemini API')).toBeInTheDocument();
+    expect(screen.getByText('Unix / Mac / Windows')).toBeInTheDocument();
 
-    // Honors & Recognition
-    expect(screen.getByText(/Robohub’s 30 Women in Robotics/i)).toBeInTheDocument();
-    expect(screen.getByText(/MIT Graduate Women of Excellence/i)).toBeInTheDocument();
+    // Education capstone SSE keyword
+    expect(screen.getByText(/vectorized hardware instructions \(SSE\)/i)).toBeInTheDocument();
 
-    // Teaching & Leadership
-    expect(screen.getByText(/Frederick C. Hennie III Teaching Award/i)).toBeInTheDocument();
+    // Publications & Expandable Thesis Abstract
+    expect(screen.getByText(/Reliably Arranging Objects: A Conformant Planning Approach/i)).toBeInTheDocument();
+    const abstractToggle = screen.getByRole('button', { name: /View Research Abstract & Breakdown/i });
+    expect(abstractToggle).toBeInTheDocument();
 
-    // Impact projects & metric tags
-    expect(screen.getByText(/Accessible Tech: Boop Light Detector/i)).toBeInTheDocument();
-    expect(screen.getByText('6,000+ App Store Downloads')).toBeInTheDocument();
+    // Expand abstract
+    fireEvent.click(abstractToggle);
+    expect(screen.getByText(/Plan Improvement with Fixture Placement:/i)).toBeInTheDocument();
+    expect(screen.getByText(/Action Noise Characterization:/i)).toBeInTheDocument();
   });
 });

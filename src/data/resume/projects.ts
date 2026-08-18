@@ -3,7 +3,7 @@ import { ResumeProject } from './types';
 export const projectsData: ResumeProject[] = [
   {
     title: "Accessible Tech: Boop Light Detector",
-    description: "Developed 'Boop Light Detector' iOS app to assist people with vision impairment detect light sources using auditory and haptic feedback.",
+    description: "Developed 'Boop Light Detector' iOS app to assist people with vision impairment detect light sources using auditory and haptic feedback. Downloaded over 6,000 times on the App Store.",
     link: "https://apps.apple.com/app/boop-light-detector/id1527712398",
     metric: "6,000+ App Store Downloads"
   },

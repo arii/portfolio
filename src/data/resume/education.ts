@@ -12,6 +12,6 @@ export const educationData: ResumeEducation[] = [
     degree: "BS in Computer Engineering",
     period: "2008 – 2012",
     institution: "University of California, Santa Cruz",
-    details: "Regents Scholar. Capstone: improving performance of arithmetic functions for Oracle Database using C and vectorized SIMD instructions. GPA: 3.96/4.0"
+    details: "Regents Scholar. Capstone: improving performance of arithmetic functions for Oracle Database using C and vectorized hardware instructions (SSE). GPA: 3.96/4.0"
   }
 ];
