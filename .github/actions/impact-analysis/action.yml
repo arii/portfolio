@@ -16,6 +16,21 @@ inputs:
 runs:
   using: 'composite'
   steps:
+    - name: Parse Jules session ID from PR description
+      if: always()
+      id: parse_jules
+      env:
+        PR_BODY: ${{ github.event.pull_request.body }}
+      run: |
+        TASK_ID=$(echo "$PR_BODY" | grep -oP 'jules\.google\.com/task/\K[0-9]+' | head -1 | tr -cd '0-9' || true)
+        if [ -z "$TASK_ID" ]; then
+          echo "No Jules task ID found in PR description. Skipping."
+        else
+          echo "Found Jules task ID: $TASK_ID"
+          echo "task_id=$TASK_ID" >> "$GITHUB_OUTPUT"
+        fi
+      shell: bash
+
     - name: Run Impact Analysis via Docker Container
       shell: bash
       env:
@@ -37,20 +52,28 @@ runs:
           ghcr.io/arii/boomtick:latest \
           ai review "${PR_NUMBER}" || echo "::warning::Agent code review returned non-zero, likely due to approval permission limitations"
 
-        # Attempt to trigger Jules feedback if TASK_ID is found in the PR body
-        if [ -n "$JULES_API_KEY" ]; then
-          TASK_ID=$(echo "$PR_BODY" | grep -oP 'jules\.google\.com/task/\K[0-9]+' || echo "")
-          if [ -n "$TASK_ID" ]; then
-            echo "Found Jules task ID: $TASK_ID. Triggering feedback..."
-            docker run --rm \
-              -e JULES_API_KEY="${JULES_API_KEY}" \
-              -v "${{ github.workspace }}":/github/workspace \
-              -w /github/workspace \
-              ghcr.io/arii/boomtick:latest \
-              jules trigger-feedback "${TASK_ID}" || echo "::warning::Failed to trigger Jules feedback"
-          else
-            echo "No Jules task ID found in PR description."
-          fi
+    - name: Send impact analysis to Jules session
+      if: always() && steps.parse_jules.outputs.task_id != ''
+      env:
+        TASK_ID: ${{ steps.parse_jules.outputs.task_id }}
+        JULES_API_KEY: ${{ inputs.jules_api_key }}
+        GITHUB_TOKEN: ${{ inputs.github_token }}
+        PR_NUMBER: ${{ github.event.pull_request.number }}
+        GITHUB_REPOSITORY: ${{ github.repository }}
+      run: |
+        if [ -f "scripts/send-jules-impact.py" ]; then
+          echo "Executing send-jules-impact.py from current workspace via container to inherit dev_tools."
+          docker run --rm \
+            --entrypoint /workspace/scripts/resolve-cli.sh \
+            -e GITHUB_TOKEN="${GITHUB_TOKEN}" \
+            -e GITHUB_REPOSITORY="${GITHUB_REPOSITORY}" \
+            -e JULES_API_KEY="${JULES_API_KEY}" \
+            -e TASK_ID="${TASK_ID}" \
+            -v "${{ github.workspace }}":/github/workspace \
+            -w /github/workspace \
+            ghcr.io/arii/boomtick:latest \
+            python3 /github/workspace/scripts/send-jules-impact.py || echo "::warning::Failed to send impact to Jules"
         else
-          echo "JULES_API_KEY not set. Skipping feedback trigger."
+          echo "⚠️ Skipping: send-jules-impact.py script not found."
         fi
+      shell: bash
