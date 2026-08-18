@@ -1,32 +1,82 @@
-import { render, screen } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
-import { describe, it, expect } from 'vitest';
-import Home from '../Home';
+import { describe, it, expect, vi } from 'vitest';
+import { render, screen, fireEvent } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
+import { Home } from '../Home';
 
 describe('Home Page', () => {
-  it('renders Ariel Anders Portfolio hero heading without AI slop taglines', () => {
+  it('renders hero title, role, and exact subheading', () => {
+    const handleNavigate = vi.fn();
     render(
-      <BrowserRouter>
-        <Home />
-      </BrowserRouter>
+      <MemoryRouter>
+        <Home onNavigate={handleNavigate} />
+      </MemoryRouter>
     );
 
     expect(screen.getByText('Ariel Anders, PhD')).toBeInTheDocument();
-    expect(screen.getByText(/Robotics & DevAI/i)).toBeInTheDocument();
-    expect(screen.queryByText(/Build smart\. Ship more\./i)).not.toBeInTheDocument();
-
+    expect(screen.getByText('Roboticist & Senior Software Engineer')).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        'I architect reliable autonomous systems for physical robots and build agentic workflows that autonomously engineer full-stack software.'
+      )
+    ).toBeInTheDocument();
   });
 
-  it('renders action links to Products, Infrastructure and Research sections', () => {
+  it('renders bio paragraphs in hero card', () => {
+    const handleNavigate = vi.fn();
     render(
-      <BrowserRouter>
-        <Home />
-      </BrowserRouter>
+      <MemoryRouter>
+        <Home onNavigate={handleNavigate} />
+      </MemoryRouter>
     );
 
-    expect(screen.getByText('View portfolio')).toBeInTheDocument();
-    expect(screen.getByText('View Live Products')).toBeInTheDocument();
-    expect(screen.getByText('Inspect Infrastructure')).toBeInTheDocument();
-    expect(screen.getByText('Read Architecture Studies')).toBeInTheDocument();
+    expect(
+      screen.getByText((content) =>
+        content.includes('I am an MIT CSAIL roboticist and have worked in the industry')
+      )
+    ).toBeInTheDocument();
+  });
+
+  it('renders engineering philosophy callout and tenets', () => {
+    const handleNavigate = vi.fn();
+    render(
+      <MemoryRouter>
+        <Home onNavigate={handleNavigate} />
+      </MemoryRouter>
+    );
+
+    expect(screen.getByText('Engineering Philosophy')).toBeInTheDocument();
+    expect(screen.getByText('AI-Accelerated Rigor')).toBeInTheDocument();
+    expect(screen.getByText('Reliable Robot Behavior')).toBeInTheDocument();
+    expect(screen.getByText('Production Robot Software')).toBeInTheDocument();
+  });
+
+  it('renders bottom feature callouts row', () => {
+    const handleNavigate = vi.fn();
+    render(
+      <MemoryRouter>
+        <Home onNavigate={handleNavigate} />
+      </MemoryRouter>
+    );
+
+    expect(screen.getByText('Algorithmic Motion Planning')).toBeInTheDocument();
+    expect(screen.getByText('DevAI & AI Workflows')).toBeInTheDocument();
+    expect(screen.getByText('Production Systems Architecture')).toBeInTheDocument();
+  });
+
+  it('triggers navigation callback when focus area cards or portfolio button are clicked', () => {
+    const handleNavigate = vi.fn();
+    render(
+      <MemoryRouter>
+        <Home onNavigate={handleNavigate} />
+      </MemoryRouter>
+    );
+
+    const portfolioBtn = screen.getByRole('button', { name: /view portfolio/i });
+    fireEvent.click(portfolioBtn);
+    expect(handleNavigate).toHaveBeenCalledWith('portfolio');
+
+    const productsCard = screen.getByText("Products I've Shipped");
+    fireEvent.click(productsCard);
+    expect(handleNavigate).toHaveBeenCalledWith('products');
   });
 });

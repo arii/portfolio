@@ -1,155 +1,132 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowRight, ShieldCheck, Rocket, LayoutTemplate } from 'lucide-react';
-import { Button } from '@/layouts/Button';
-import { Box, Stack, Grid, Text } from '@/layouts/Primitives';
+import { useNavigate } from 'react-router-dom';
+import { ArrowRight, Cpu, Sparkles, Compass, Bot, Server } from 'lucide-react';
+import { HERO_DATA, PHILOSOPHY_TENETS, FOCUS_AREAS, FEATURE_CALLOUTS } from '@/data/home';
 
-const Home: React.FC = () => {
+interface HomeProps {
+  onNavigate?: (tab: string) => void;
+}
+
+export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
+  const navigate = useNavigate();
+
+  const handleNav = (tab: string) => {
+    if (onNavigate) {
+      onNavigate(tab);
+    } else {
+      navigate('/research');
+    }
+  };
+
+  const getCalloutIcon = (iconName: string) => {
+    switch (iconName) {
+      case 'compass':
+        return <Compass className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />;
+      case 'workflow':
+        return <Bot className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />;
+      case 'server':
+        return <Server className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />;
+      default:
+        return <Cpu className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />;
+    }
+  };
+
   return (
-    <Box className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 space-y-16">
-      {/* Hero Header Section */}
-      <section className="relative overflow-hidden rounded-2xl border border-line bg-surface p-8 sm:p-12 shadow-sm">
-        <Grid cols="1 lg:grid-cols-12" gap="12" className="items-center">
-          <Stack gap="6" className="lg:col-span-8">
-            <Box className="inline-flex items-center space-x-2 text-xs font-semibold text-text-dim w-fit">
-              <span>Robotics &amp; DevAI — Autonomous Systems &amp; AI-Orchestrated Software Engineering</span>
-            </Box>
-
-            <Text variant="heading">Ariel Anders, PhD</Text>
-
-            <div className="flex flex-wrap items-center gap-3 text-sm font-medium text-muted-foreground pb-2">
-              <span className="flex items-center space-x-1.5"><span className="h-1.5 w-1.5 rounded-full bg-primary/70"></span><span>MIT PhD</span></span>
-              <span>&middot;</span>
-              <span className="flex items-center space-x-1.5"><span className="h-1.5 w-1.5 rounded-full bg-primary/70"></span><span>Roboticist</span></span>
-              <span>&middot;</span>
-              <span className="flex items-center space-x-1.5"><span className="h-1.5 w-1.5 rounded-full bg-primary/70"></span><span>DevAI</span></span>
+    <main className="space-y-8 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+      {/* 2-Column Surfaced Hero Card Grid */}
+      <section className="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 sm:p-10 lg:p-12 shadow-xl backdrop-blur-sm">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+          {/* Left Column (8 cols): Bio & Intro */}
+          <div className="lg:col-span-8 space-y-6">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs sm:text-sm font-semibold tracking-wide">
+              <Sparkles className="w-4 h-4" />
+              <span>{HERO_DATA.badge}</span>
             </div>
 
-            <Text variant="body" className="text-lg text-text-main">
-              I architect and build reliable autonomous systems for physical robots — spanning onboard motion planning, real-time localization, sensor fusion, and robust production software.
-            </Text>
+            <div className="space-y-2">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-100 tracking-tight leading-tight">
+                {HERO_DATA.name}
+              </h1>
+              <p className="text-amber-400 font-semibold text-lg sm:text-xl">{HERO_DATA.title}</p>
+            </div>
 
-            <Text variant="dim" className="text-sm">
-              With a PhD from MIT CSAIL and years of leadership across industry-leading robotics teams (autonomous forklifts, self-driving vehicles, mobile manipulators), I turn complex planning algorithms into scalable, high-uptime production code.
-            </Text>
+            <p className="text-lg sm:text-xl font-medium text-slate-200 leading-relaxed">
+              {HERO_DATA.subheading}
+            </p>
 
-            <Stack direction="row" gap="4" className="pt-2 flex-wrap" align="center">
-              <Link to="/research">
-                <Button variant="primary" size="md" className="flex items-center space-x-2">
-                  <span>View portfolio</span>
-                  <ArrowRight className="h-4 w-4" />
-                </Button>
-              </Link>
-            </Stack>
-          </Stack>
+            <div className="space-y-4 text-slate-300 text-base leading-relaxed border-t border-slate-800/80 pt-6">
+              {HERO_DATA.bioParagraphs.map((para, idx) => (
+                <p key={idx}>{para}</p>
+              ))}
+            </div>
 
-          <Box className="hidden lg:block lg:col-span-4">
-             <div className="rounded-xl border border-line/50 bg-bg p-6 space-y-4">
-               <Text variant="subheading" className="text-sm border-b border-line pb-2">Engineering Philosophy</Text>
-               <ul className="space-y-2 text-sm text-text-dim">
-                 <li><span className="text-text-main font-medium">Deterministic Autonomy:</span> predictable motion planning and behavior trees under edge-case load.</li>
-                 <li><span className="text-text-main font-medium">DevAI Velocity:</span> AI-orchestrated code reviews, RAG documentation tools, and automated CI/CD agents.</li>
-                 <li><span className="text-text-main font-medium">Clean Production Systems:</span> robust C++, ROS 2, and scalable software architectures built for long-term maintainability.</li>
-               </ul>
-             </div>
-          </Box>
-        </Grid>
+            <div className="pt-2">
+              <button
+                onClick={() => handleNav('portfolio')}
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold transition-all duration-200 shadow-md text-sm sm:text-base cursor-pointer"
+              >
+                <span>View portfolio</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+
+          {/* Right Column (4 cols): Engineering Philosophy Box */}
+          <div className="lg:col-span-4 bg-slate-950/60 border border-slate-800/80 rounded-xl p-6 space-y-5">
+            <div className="flex items-center gap-2 border-b border-slate-800 pb-3">
+              <Cpu className="w-5 h-5 text-amber-400" />
+              <h2 className="text-base sm:text-lg font-bold text-slate-100 tracking-tight">Engineering Philosophy</h2>
+            </div>
+
+            <div className="space-y-5">
+              {PHILOSOPHY_TENETS.map((tenet) => (
+                <div key={tenet.id} className="space-y-1.5">
+                  <h3 className="text-sm sm:text-base font-bold text-amber-400">{tenet.title}</h3>
+                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">{tenet.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </section>
 
-      {/* Main Focus Cards Section */}
-      <Grid cols="1 md:grid-cols-3" gap="8">
+      {/* Middle Grid: 3 Focus Area Cards */}
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+        {FOCUS_AREAS.map((item) => (
+          <button
+            key={item.id}
+            onClick={() => handleNav(item.id)}
+            className="text-left w-full group bg-slate-900/60 hover:bg-slate-900/90 border border-slate-800 hover:border-amber-500/40 rounded-xl p-6 sm:p-8 cursor-pointer transition-all duration-200 flex flex-col justify-between space-y-5 shadow-md focus:outline-none focus:ring-2 focus:ring-amber-500/50"
+          >
+            <div className="space-y-2.5">
+              <h3 className="text-lg sm:text-xl font-bold text-slate-100 group-hover:text-amber-400 transition-colors">
+                {item.title}
+              </h3>
+              <p className="text-sm text-slate-300 leading-relaxed">{item.description}</p>
+            </div>
+            <div className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-amber-400 group-hover:translate-x-1 transition-transform">
+              <span>{item.actionText}</span>
+              <ArrowRight className="w-4 h-4" />
+            </div>
+          </button>
+        ))}
+      </section>
 
-        {/* Card 1: Shipped Products */}
-        <Stack justify="between" className="rounded-xl border border-line bg-surface p-8 shadow-sm transition-all hover:border-accent/50 hover:shadow-md h-full">
-          <Stack gap="4">
-            <Text variant="subheading" className="text-xl">Products I've Shipped</Text>
-            <Text variant="dim">
-              Live consumer applications, fitness trackers, and full-stack community platforms built via AI orchestration. Proof the method transfers to any client's domain.
-            </Text>
-          </Stack>
-          <Box className="mt-8 pt-4 border-t border-line">
-            <Link
-              to="/research#products"
-              className="inline-flex items-center space-x-2 text-sm font-semibold text-accent hover:underline"
-            >
-              <span>View Live Products</span>
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </Box>
-        </Stack>
-
-        {/* Card 2: Engineering Infrastructure */}
-        <Stack justify="between" className="rounded-xl border border-line bg-surface p-8 shadow-sm transition-all hover:border-accent/50 hover:shadow-md h-full">
-          <Stack gap="4">
-            <Text variant="subheading" className="text-xl">Engineering Infrastructure</Text>
-            <Text variant="dim">
-              Deep dives into active tooling: autonomous code review agents, CI pipelines, and strict quality gates for real-world engineering teams.
-            </Text>
-          </Stack>
-          <Box className="mt-8 pt-4 border-t border-line">
-            <Link
-              to="/research#infrastructure"
-              className="inline-flex items-center space-x-2 text-sm font-semibold text-accent hover:underline"
-            >
-              <span>Inspect Infrastructure</span>
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </Box>
-        </Stack>
-
-        {/* Card 3: Articles & Research Studies */}
-        <Stack justify="between" className="rounded-xl border border-line bg-surface p-8 shadow-sm transition-all hover:border-accent/50 hover:shadow-md h-full">
-          <Stack gap="4">
-            <Text variant="subheading" className="text-xl">Articles &amp; Research</Text>
-            <Text variant="dim">
-              Technical essays, system architecture breakdowns, and post-mortems on migrating production systems.
-            </Text>
-          </Stack>
-          <Box className="mt-8 pt-4 border-t border-line">
-            <Link
-              to="/research#articles"
-              className="inline-flex items-center space-x-2 text-sm font-semibold text-accent hover:underline"
-            >
-              <span>Read Architecture Studies</span>
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </Box>
-        </Stack>
-      </Grid>
-
-      {/* Engineering Highlights Banner */}
-      <Box className="rounded-xl border border-line bg-surface-alt p-6 sm:p-8">
-        <Grid cols="1 md:grid-cols-3" gap="6">
-          <Stack direction="row" gap="3" align="start">
-            <Rocket className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-            <Box>
-              <h3 className="font-semibold text-text-main text-sm">Algorithmic Motion Planning</h3>
-              <p className="text-xs text-text-dim mt-1">
-                Behavior trees, conformant planning under uncertainty, and dynamic obstacle avoidance built for real-time robot safety.
-              </p>
-            </Box>
-          </Stack>
-          <Stack direction="row" gap="3" align="start">
-            <ShieldCheck className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-            <Box>
-              <h3 className="font-semibold text-text-main text-sm">DevAI &amp; AI Workflows</h3>
-              <p className="text-xs text-text-dim mt-1">
-                Leveraging LLMs, RAG context systems, and automated PR review agents to accelerate engineering cycles and technical debt cleanup.
-              </p>
-            </Box>
-          </Stack>
-          <Stack direction="row" gap="3" align="start">
-            <LayoutTemplate className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-            <Box>
-              <h3 className="font-semibold text-text-main text-sm">Production Systems Architecture</h3>
-              <p className="text-xs text-text-dim mt-1">
-                Production C++, ROS 2, Python, and cloud/IoT pipelines engineered for high uptime, maintainability, and clean system design.
-              </p>
-            </Box>
-          </Stack>
-        </Grid>
-      </Box>
-    </Box>
+      {/* Bottom Feature Callouts Row */}
+      <section className="bg-slate-900/60 border border-slate-800 rounded-xl p-6 sm:p-8 shadow-md backdrop-blur-sm">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+          {FEATURE_CALLOUTS.map((feature) => (
+            <div key={feature.id} className="flex gap-3.5 items-start">
+              {getCalloutIcon(feature.iconName)}
+              <div className="space-y-1">
+                <h4 className="text-sm sm:text-base font-bold text-slate-100">{feature.title}</h4>
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">{feature.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </main>
   );
 };
 
