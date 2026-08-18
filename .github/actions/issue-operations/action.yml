@@ -61,9 +61,6 @@ runs:
     - name: Setup Workspace for Quality Validation
       if: inputs.operation == 'validate-quality'
       uses: ./.github/actions/setup-workspace # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
-      with:
-        setup-node: 'false'
-
     - name: Validate Issue
       if: inputs.operation == 'validate-quality'
       env:
@@ -76,7 +73,6 @@ runs:
     - name: Set up Python for PR Creation
       if: inputs.operation == 'create-pr'
       uses: actions/setup-python@v5 # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
-      with:
         python-version: '3.x'
 
     - name: Parse Issue and Generate Markdown File
@@ -131,7 +127,6 @@ runs:
     - name: Create Pull Request
       if: inputs.operation == 'create-pr'
       uses: peter-evans/create-pull-request@v5 # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
-      with:
         token: ${{ inputs.github_token }}
         commit-message: "docs: add content from issue #${{ inputs.issue_number }}"
         title: "Content: ${{ github.event.issue.title }}"
@@ -144,7 +139,6 @@ runs:
     - name: AI Review
       if: inputs.operation == 'ai-review'
       uses: ./.github/actions/ai-review # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
-      with:
         pr_number: ${{ inputs.issue_number }}
       env:
         GEMINI_API_KEY: ${{ inputs.gemini_api_key }}
@@ -155,7 +149,6 @@ runs:
     - name: Setup Workspace for Conflict Resolution
       if: inputs.operation == 'resolve-conflicts'
       uses: ./.github/actions/setup-workspace # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
-
     - name: Find and Resolve Conflicts
       if: inputs.operation == 'resolve-conflicts'
       run: |
@@ -173,7 +166,6 @@ runs:
     - name: Commit Conflict Changes
       if: inputs.operation == 'resolve-conflicts'
       uses: stefanzweifel/git-auto-commit-action@v5 # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
-      with:
         commit_message: "chore: auto-resolved merge conflicts using AI"
         file_pattern: '.'
 
@@ -181,7 +173,6 @@ runs:
     - name: Setup Workspace for Snapshots Update
       if: inputs.operation == 'update-snapshots'
       uses: ./.github/actions/setup-workspace # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
-
     - name: Install Snapshot Dependencies
       if: inputs.operation == 'update-snapshots'
       run: pnpm install --frozen-lockfile
@@ -211,6 +202,5 @@ runs:
     - name: Commit Snapshot Changes
       if: inputs.operation == 'update-snapshots' && steps.status.outputs.changed == 'true'
       uses: stefanzweifel/git-auto-commit-action@v5 # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
-      with:
         commit_message: "chore: update playwright snapshots"
         file_pattern: '**/snapshots/*'
