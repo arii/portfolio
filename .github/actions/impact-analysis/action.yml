@@ -12,6 +12,9 @@ inputs:
   jules_api_key:
     description: 'Jules API key for agent execution'
     required: false
+  openai_api_key:
+    description: 'OpenAI API key for review fallback'
+    required: false
 
 runs:
   using: 'composite'
@@ -23,6 +26,7 @@ runs:
         GITHUB_REPOSITORY: ${{ github.repository }}
         GEMINI_API_KEY: ${{ inputs.gemini_api_key }}
         JULES_API_KEY: ${{ inputs.jules_api_key }}
+        OPENAI_API_KEY: ${{ inputs.openai_api_key }}
         PR_NUMBER: ${{ github.event.pull_request.number }}
         PR_BODY: ${{ github.event.pull_request.body }}
       run: |
@@ -31,6 +35,7 @@ runs:
           -e GITHUB_REPOSITORY="${GITHUB_REPOSITORY}" \
           -e GEMINI_API_KEY="${GEMINI_API_KEY}" \
           -e JULES_API_KEY="${JULES_API_KEY}" \
+          -e OPENAI_API_KEY="${OPENAI_API_KEY}" \
           -e PR_NUMBER="${PR_NUMBER}" \
           -v "${{ github.workspace }}":/github/workspace \
           -w /github/workspace \
@@ -40,14 +45,6 @@ runs:
         TASK_ID=$(echo "${PR_BODY}" | grep -oP 'jules\.google\.com/task/\K[0-9]+' | head -n 1 || true)
 
         if [[ -n "${TASK_ID}" && -n "${JULES_API_KEY}" ]]; then
-          docker run --rm \
-            -e JULES_API_KEY="${JULES_API_KEY}" \
-            -e GITHUB_TOKEN="${GITHUB_TOKEN}" \
-            -e GITHUB_REPOSITORY="${GITHUB_REPOSITORY}" \
-            -e GEMINI_API_KEY="${GEMINI_API_KEY}" \
-            -e PR_NUMBER="${PR_NUMBER}" \
-            -v "${{ github.workspace }}":/github/workspace \
-            -w /github/workspace \
-            ghcr.io/arii/boomtick:latest \
-            jules trigger-feedback "${TASK_ID}" || echo "::warning::Jules trigger-feedback failed"
+          export PYTHONPATH="${{ github.workspace }}/cli"
+          python3 ${{ github.workspace }}/scripts/send-jules-impact.py "${TASK_ID}" || echo "::warning::Jules trigger-feedback failed"
         fi
