@@ -4,17 +4,20 @@ export const honorsData: ResumeHonor[] = [
   {
     title: "Robohub’s 30 Women in Robotics You Need to Know About",
     year: "2020",
-    organization: "Robohub"
+    organization: "Robohub",
+    link: "https://robohub.org/30-women-in-robotics-you-need-to-know-about-2020/"
   },
   {
     title: "MIT Graduate Women of Excellence",
     year: "2017",
-    organization: "MIT Office of Graduate Education"
+    organization: "MIT Office of Graduate Education",
+    link: "https://oge.mit.edu/community/gwmit/"
   },
   {
     title: "MIT Green Labs Innovation Award ($5,000 grant)",
     year: "2017",
-    organization: "MIT Office of Sustainability"
+    organization: "MIT Office of Sustainability",
+    link: "https://sustainability.mit.edu/"
   },
   {
     title: "UC Santa Cruz Regents Scholarship",

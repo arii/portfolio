@@ -33,6 +33,7 @@ describe('Resume Page', () => {
     expect(screen.getByRole('heading', { name: /^Technical Skills$/i })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: /^Education$/i })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: /^Honors & Recognition$/i })).toBeInTheDocument();
+    expect(screen.getByText(/Robohub’s 30 Women in Robotics You Need to Know About/i)).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: /^Teaching & Leadership$/i })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: /^Impact Projects$/i })).toBeInTheDocument();
 

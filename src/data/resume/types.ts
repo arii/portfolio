@@ -44,6 +44,7 @@ export interface ResumeHonor {
   year: string;
   organization?: string;
   details?: string;
+  link?: string;
 }
 
 export interface ResumeTeaching {

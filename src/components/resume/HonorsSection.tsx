@@ -1,5 +1,5 @@
 import React from 'react';
-import { Award } from 'lucide-react';
+import { Award, ExternalLink } from 'lucide-react';
 import { ResumeHonor } from '@/data/resume';
 
 export interface HonorsSectionProps {
@@ -17,7 +17,14 @@ export const HonorsSection: React.FC<HonorsSectionProps> = ({ honors }) => {
         {honors.map((honor, idx) => (
           <div key={idx} className="flex items-start justify-between gap-3 text-sm">
             <div className="space-y-0.5">
-              <span className="font-semibold text-foreground print:text-black block leading-snug">{honor.title}</span>
+              <div className="flex items-center gap-1.5 flex-wrap">
+                <span className="font-semibold text-foreground print:text-black block leading-snug">{honor.title}</span>
+                {honor.link && (
+                  <a href={honor.link} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors print:hidden">
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                )}
+              </div>
               {honor.organization && (
                 <span className="text-xs text-muted-foreground print:text-gray-700 block">{honor.organization}</span>
               )}
