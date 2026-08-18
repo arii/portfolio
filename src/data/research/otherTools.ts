@@ -77,7 +77,9 @@ export const OTHER_TOOLS: ResearchTool[] = [
     description: 'iOS accessibility utility translating ambient light intensity into audible frequencies for visually impaired users (6,000+ downloads).',
     category: 'Accessibility & Mobile',
     status: 'Completed',
-    tags: ['iOS', 'Accessibility', 'Audio', 'Mobile']
+    tags: ['iOS', 'Accessibility', 'Audio', 'Mobile'],
+    externalUrl: 'https://arii.github.io/boop/',
+    sourceUrl: 'https://github.com/arii/boop'
   },
   {
     id: 'light-therapy-mit',
@@ -86,7 +88,9 @@ export const OTHER_TOOLS: ResearchTool[] = [
     description: 'Campus-wide seasonal affective disorder (SAD) wellness initiative funded by the MindHandHeart Innovation Fund.',
     category: 'Community Health & Wellness',
     status: 'Completed',
-    tags: ['MindHandHeart', 'Community', 'Wellness', 'MIT']
+    tags: ['MindHandHeart', 'Community', 'Wellness', 'MIT'],
+    externalUrl: 'https://arii.github.io/SAD/',
+    sourceUrl: 'https://github.com/arii/SAD'
   },
   {
     id: 'leac-monitoring-software',
@@ -95,7 +99,8 @@ export const OTHER_TOOLS: ResearchTool[] = [
     description: 'Network monitoring software and energy audit infrastructure for fume hood efficiency (MIT Green Labs Innovation Award).',
     category: 'Sustainability & Energy',
     status: 'Completed',
-    tags: ['Sustainability', 'Hardware', 'Energy Audit', 'MIT Green Labs']
+    tags: ['Sustainability', 'Hardware', 'Energy Audit', 'MIT Green Labs'],
+    externalUrl: 'https://github.com/arii'
   },
   {
     id: 'robocon-mit',
@@ -104,7 +109,8 @@ export const OTHER_TOOLS: ResearchTool[] = [
     description: 'Cross-departmental robotics research conference organization and web platform.',
     category: 'Robotics Community',
     status: 'Completed',
-    tags: ['Robotics', 'Conference', 'Web Platform', 'MIT']
+    tags: ['Robotics', 'Conference', 'Web Platform', 'MIT'],
+    externalUrl: 'https://github.com/arii'
   },
   {
     id: 'cad-cam-dental-workflow',
@@ -113,6 +119,7 @@ export const OTHER_TOOLS: ResearchTool[] = [
     description: 'Robotic UI and verified experimental workflows for autonomous dental crowning.',
     category: 'Medical Robotics',
     status: 'Completed',
-    tags: ['Robotics', 'Medical UI', 'CAD/CAM', 'Bionics Lab UCSC']
+    tags: ['Robotics', 'Medical UI', 'CAD/CAM', 'Bionics Lab UCSC'],
+    externalUrl: 'https://github.com/arii'
   }
 ];
