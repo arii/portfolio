@@ -8,8 +8,8 @@ describe('ResearchListPage Deduplication', () => {
     render(<ResearchListPage onNavigate={handleNavigate} />);
 
     expect(screen.getByText('DevAI & Technical Research')).toBeInTheDocument();
-    expect(screen.getByText('Flagship Projects')).toBeInTheDocument();
-    expect(screen.getByText('Articles & Research Studies')).toBeInTheDocument();
+    expect(screen.getByText('Flagship Systems & Projects')).toBeInTheDocument();
+    expect(screen.getByText('Technical Articles & Deep Dives')).toBeInTheDocument();
 
     // Verify 3-column section titles are removed
     expect(screen.queryByText('Engineering Systems')).not.toBeInTheDocument();
