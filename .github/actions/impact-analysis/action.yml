@@ -60,14 +60,19 @@ runs:
         PR_NUMBER: ${{ github.event.pull_request.number }}
         GITHUB_REPOSITORY: ${{ github.repository }}
       run: |
-        docker run --rm \
-          --entrypoint /workspace/scripts/resolve-cli.sh \
-          -e GITHUB_TOKEN="${GITHUB_TOKEN}" \
-          -e GITHUB_REPOSITORY="${GITHUB_REPOSITORY}" \
-          -e JULES_API_KEY="${JULES_API_KEY}" \
-          -e TASK_ID="${TASK_ID}" \
-          -v "${{ github.workspace }}":/github/workspace \
-          -w /github/workspace \
-          ghcr.io/arii/boomtick:latest \
-          python3 /workspace/scripts/send-jules-impact.py || echo "::warning::Failed to send impact to Jules"
+        if [ -f "scripts/send-jules-impact.py" ]; then
+          echo "Executing send-jules-impact.py from current workspace via container to inherit dev_tools."
+          docker run --rm \
+            --entrypoint /workspace/scripts/resolve-cli.sh \
+            -e GITHUB_TOKEN="${GITHUB_TOKEN}" \
+            -e GITHUB_REPOSITORY="${GITHUB_REPOSITORY}" \
+            -e JULES_API_KEY="${JULES_API_KEY}" \
+            -e TASK_ID="${TASK_ID}" \
+            -v "${{ github.workspace }}":/github/workspace \
+            -w /github/workspace \
+            ghcr.io/arii/boomtick:latest \
+            python3 /github/workspace/scripts/send-jules-impact.py || echo "::warning::Failed to send impact to Jules"
+        else
+          echo "⚠️ Skipping: send-jules-impact.py script not found."
+        fi
       shell: bash
