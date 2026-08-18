@@ -39,8 +39,8 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
           <div className="text-xs text-text-dim">{tool.customPreview.tagline}</div>
         </div>
       ) : imageSrc ? (
-        <div onClick={() => onImageClick(imageSrc)} className="relative aspect-[16/10] overflow-hidden bg-[#020617] border-b border-line cursor-zoom-in group">
-          <img src={imageSrc} alt={tool.imageAlt || tool.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-102" />
+        <div onClick={() => onImageClick(imageSrc)} className="relative aspect-[16/10] max-h-48 sm:max-h-64 overflow-hidden bg-[#020617] border-b border-line cursor-zoom-in group">
+          <img src={imageSrc} alt={tool.imageAlt || tool.title} className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-102" />
         </div>
       ) : null}
 
@@ -75,16 +75,16 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
 
           <div className="flex flex-wrap gap-3">
             {tool.externalUrl ? (
-              <a href={tool.externalUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center space-x-1.5 bg-accent/10 border border-accent/20 px-3 py-1.5 rounded-xl text-xs font-semibold text-accent hover:bg-accent/20 transition-colors">
+              <a href={tool.externalUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center space-x-1.5 bg-accent/10 border border-accent/20 px-3.5 py-2 rounded-xl text-xs font-semibold text-accent hover:bg-accent/20 transition-colors min-h-[44px]">
                 <span>{tool.externalLinkDisplayLabel || 'Open Link'}</span><ExternalLink className="h-3.5 w-3.5" />
               </a>
             ) : tool.canonicalPath ? (
-              <button onClick={() => onNavigate(tool.canonicalPath?.replace('/research/', '') || '')} className="inline-flex items-center space-x-1.5 bg-accent/10 border border-accent/20 px-3 py-1.5 rounded-xl text-xs font-semibold text-accent hover:bg-accent/20 transition-colors">
+              <button onClick={() => onNavigate(tool.canonicalPath?.replace('/research/', '') || '')} className="inline-flex items-center space-x-1.5 bg-accent/10 border border-accent/20 px-3.5 py-2 rounded-xl text-xs font-semibold text-accent hover:bg-accent/20 transition-colors min-h-[44px] cursor-pointer">
                 <span>Read Deep-Dive</span><ArrowRight className="h-3.5 w-3.5" />
               </button>
             ) : null}
             {tool.sourceUrl && (
-              <a href={tool.sourceUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center space-x-1.5 bg-[#0f172a] border border-line px-3 py-1.5 rounded-xl text-xs font-semibold text-text-dim hover:bg-slate-900 hover:text-text-main transition-colors">
+              <a href={tool.sourceUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center space-x-1.5 bg-[#0f172a] border border-line px-3.5 py-2 rounded-xl text-xs font-semibold text-text-dim hover:bg-slate-900 hover:text-text-main transition-colors min-h-[44px]">
                 <span>Source Repo</span><GithubIcon className="h-3.5 w-3.5" />
               </a>
             )}
