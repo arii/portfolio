@@ -7,7 +7,7 @@ export interface ResumeHeaderProps {
   title: string;
   summary: string;
   socials: ResumeSocialLink[];
-  onPrint: () => void;
+  pdfUrl: string;
 }
 
 const SocialIcon: React.FC<{ type: ResumeSocialLink['type'] }> = ({ type }) => {
@@ -47,7 +47,7 @@ export const ResumeHeader: React.FC<ResumeHeaderProps> = ({
   title,
   summary,
   socials,
-  onPrint
+  pdfUrl
 }) => {
   return (
     <header className="space-y-4 border-b border-border/60 pb-8 print:border-b-2 print:border-black print:pb-6">
@@ -65,13 +65,15 @@ export const ResumeHeader: React.FC<ResumeHeaderProps> = ({
         </div>
 
         <div className="print:hidden shrink-0">
-          <button
-            onClick={onPrint}
+          <a
+            href={pdfUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex items-center space-x-2 bg-foreground text-background hover:bg-foreground/90 transition-colors px-4 py-2 rounded-lg text-sm font-semibold cursor-pointer"
           >
             <Download className="w-4 h-4" />
             <span>Export PDF</span>
-          </button>
+          </a>
         </div>
       </div>
 

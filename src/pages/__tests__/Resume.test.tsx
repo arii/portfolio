@@ -18,7 +18,8 @@ describe('Resume Page', () => {
     expect(screen.getByText('Ariel Anders, PhD')).toBeInTheDocument();
     expect(screen.getByText('Roboticist & Senior Software Engineer')).toBeInTheDocument();
     expect(screen.getByText(/Roboticist and Senior Software Engineer with an MIT CSAIL PhD/i)).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /Export PDF/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /Export PDF/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /Export PDF/i })).toHaveAttribute('href', 'https://drive.google.com/file/d/14V6KjfEMO12uwNQAhY1OMy2d-_vkGXK_/view');
 
     // Social header links (Google Scholar link appears in header & publications section)
     const scholarLinks = screen.getAllByRole('link', { name: /Google Scholar/i });
