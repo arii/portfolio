@@ -27,6 +27,7 @@ export interface ResumeProject {
   description: string;
   link?: string;
   metric?: string;
+  techStack?: string[];
 }
 
 export interface ResumeSkillGroup {
@@ -54,11 +55,15 @@ export interface ResumeTeaching {
 }
 
 export interface ResumePublication {
+  id: string;
   title: string;
   type: string;
   year: string;
+  authors?: string[];
   venue?: string;
   link?: string;
+  highlight?: string;
+  category?: 'dissertation' | 'journal_conference' | 'symposium_other';
 }
 
 export interface ResumeSocialLink {

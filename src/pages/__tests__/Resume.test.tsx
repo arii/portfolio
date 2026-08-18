@@ -42,24 +42,29 @@ describe('Resume Page', () => {
     expect(screen.getByText('Senior Roboticist / Tech Lead')).toBeInTheDocument();
     expect(screen.getByText('Robust.AI')).toBeInTheDocument();
 
-    // Skills badge pills (including newly added Matlab, Gemini API, Unix/Mac/Windows)
+    // Skills badge pills
     expect(screen.getByText('Motion Planning')).toBeInTheDocument();
     expect(screen.getByText('C++')).toBeInTheDocument();
     expect(screen.getByText('Matlab')).toBeInTheDocument();
     expect(screen.getByText('Gemini API')).toBeInTheDocument();
     expect(screen.getByText('Unix / Mac / Windows')).toBeInTheDocument();
 
-    // Education capstone SSE keyword
-    expect(screen.getByText(/vectorized hardware instructions \(SSE\)/i)).toBeInTheDocument();
+    // Impact Project Tech Stack Badge Tags
+    expect(screen.getByText('Swift / Objective-C')).toBeInTheDocument();
+    expect(screen.getByText('MindHandHeart Grant')).toBeInTheDocument();
+    expect(screen.getByText('Acoustic Feedback')).toBeInTheDocument();
 
-    // Publications & Expandable Thesis Abstract
+    // Publications & Detailed Paper Entries
     expect(screen.getByText(/Reliably Arranging Objects: A Conformant Planning Approach/i)).toBeInTheDocument();
-    const abstractToggle = screen.getByRole('button', { name: /View Research Abstract & Breakdown/i });
+    expect(screen.getByText(/Policy Search for Multi-Robot Coordination under Uncertainty/i)).toBeInTheDocument();
+    expect(screen.getByText(/Active Fume Hood Sash Height Monitoring/i)).toBeInTheDocument();
+
+    const abstractToggle = screen.getByRole('button', { name: /View PhD Abstract & Findings/i });
     expect(abstractToggle).toBeInTheDocument();
 
     // Expand abstract
     fireEvent.click(abstractToggle);
-    expect(screen.getByText(/Plan Improvement with Fixture Placement:/i)).toBeInTheDocument();
-    expect(screen.getByText(/Action Noise Characterization:/i)).toBeInTheDocument();
+    expect(screen.getByText(/Fixture Placement:/i)).toBeInTheDocument();
+    expect(screen.getByText(/Noise Characterization:/i)).toBeInTheDocument();
   });
 });

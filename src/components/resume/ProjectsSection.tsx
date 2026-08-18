@@ -8,19 +8,19 @@ export interface ProjectsSectionProps {
 
 export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ projects }) => {
   return (
-    <section className="mb-12 print:mb-8 print:break-inside-avoid">
-      <div className="flex items-center space-x-3 mb-6 border-b border-border/40 pb-2 print:border-b-2 print:border-black">
-        <FolderGit2 className="h-6 w-6 text-primary print:text-black" />
-        <h2 className="text-2xl font-bold text-foreground print:text-black uppercase tracking-wider">Impact Projects</h2>
+    <section className="mb-10 print:mb-6 print:break-inside-avoid">
+      <div className="flex items-center space-x-2.5 mb-4 border-b border-border/40 pb-2 print:border-b-2 print:border-black">
+        <FolderGit2 className="h-5 w-5 text-primary print:text-black" />
+        <h2 className="text-xl font-bold text-foreground print:text-black uppercase tracking-wider">Impact Projects</h2>
       </div>
-      <div className="space-y-4">
+      <div className="space-y-3.5">
         {projects.map((project, idx) => (
-          <div key={idx} className="bg-card border border-border/80 p-4 rounded-xl space-y-2 hover:border-primary/50 transition-colors print:border-none print:p-0 print:bg-transparent">
+          <div key={idx} className="bg-card border border-border/80 p-3.5 rounded-xl space-y-2 hover:border-primary/50 transition-colors print:border-none print:p-0 print:bg-transparent">
             <div className="flex items-start justify-between gap-2">
               <div className="flex items-center gap-1.5 flex-wrap">
-                <h3 className="text-sm font-bold text-foreground print:text-black">{project.title}</h3>
+                <h3 className="text-xs font-bold text-foreground print:text-black">{project.title}</h3>
                 {project.link && (
-                  <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors print:hidden">
+                  <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors print:hidden" title="Direct Outbound Link">
                     <ExternalLink className="w-3.5 h-3.5" />
                   </a>
                 )}
@@ -31,7 +31,16 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ projects }) =>
                 </span>
               )}
             </div>
-            <p className="text-xs text-muted-foreground leading-relaxed print:text-gray-800">{project.description}</p>
+            <p className="text-[11px] text-muted-foreground leading-relaxed print:text-gray-800">{project.description}</p>
+            {project.techStack && (
+              <div className="flex flex-wrap gap-1 pt-1 print:hidden">
+                {project.techStack.map((tech, tIdx) => (
+                  <span key={tIdx} className="px-1.5 py-0.5 text-[9px] font-mono rounded bg-secondary/80 text-foreground border border-border/50">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
         ))}
       </div>

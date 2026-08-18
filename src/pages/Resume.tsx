@@ -29,22 +29,22 @@ const Resume: React.FC<ResumeProps> = ({ version = 'v2.1' }) => {
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 print:block print:gap-0">
-        {/* Left Column: Experience & Publications */}
+        {/* Left Column: Experience & Impact Projects */}
         <div className="lg:col-span-7 print:col-span-12 space-y-10 print:space-y-6">
           <ExperienceSection experiences={resumeData.experience} />
-          <PublicationsSection
-            publications={resumeData.publications}
-            scholarUrl={resumeData.scholarUrl}
-          />
+          <ProjectsSection projects={resumeData.projects} />
         </div>
 
-        {/* Right Sidebar: Skills, Education, Honors, Teaching, Impact Projects */}
+        {/* Right Sidebar: Skills, Education, Honors, Teaching, Publications */}
         <div className="lg:col-span-5 print:col-span-12 space-y-10 print:space-y-6">
           <SkillsSection skills={resumeData.skills} />
           <EducationSection education={resumeData.education} />
           <HonorsSection honors={resumeData.honors} />
           <TeachingSection teaching={resumeData.teaching} />
-          <ProjectsSection projects={resumeData.projects} />
+          <PublicationsSection
+            publications={resumeData.publications}
+            scholarUrl={resumeData.scholarUrl}
+          />
         </div>
       </div>
 
