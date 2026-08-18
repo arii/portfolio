@@ -3,8 +3,10 @@ import ReactDOM from 'react-dom/client';
 import { createHashRouter } from 'react-router-dom';
 import App from '@/App';
 import Layout from '@/components/Layout';
+import { Navigate } from 'react-router-dom';
 import Home from '@/pages/Home';
 import Research from '@/pages/Research';
+import DevAI from '@/pages/DevAI';
 import Resume from '@/pages/Resume';
 import About from '@/pages/About';
 import '@/index.css';
@@ -19,8 +21,20 @@ const router = createHashRouter([
         element: <Home />,
       },
       {
+        path: 'portfolio',
+        element: <Navigate to="/devai" replace />,
+      },
+      {
         path: 'about',
         element: <About />,
+      },
+      {
+        path: 'devai',
+        element: <DevAI />,
+      },
+      {
+        path: 'devai/:slug',
+        element: <DevAI />,
       },
       {
         path: 'research',

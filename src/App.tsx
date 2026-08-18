@@ -1,5 +1,6 @@
 import React from 'react';
 import { RouterProvider } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import type { createHashRouter } from 'react-router-dom';
 
 export interface AppProps {
@@ -7,7 +8,11 @@ export interface AppProps {
 }
 
 const App: React.FC<AppProps> = ({ router }) => {
-  return <RouterProvider router={router} />;
+  return (
+    <HelmetProvider>
+      <RouterProvider router={router} />
+    </HelmetProvider>
+  );
 };
 
 export default App;
