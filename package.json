@@ -24,7 +24,7 @@
     "impact:gemini-code-review": "tsx boomtick-pkg/scripts/impact-ai-code-review.ts gemini",
     "impact:github-models-code-review": "tsx boomtick-pkg/scripts/impact-ai-code-review.ts github-models",
     "preinstall": "node -e \"if (process.env.SKIP_BOOMTICK_PKG !== 'true' && process.env.VERCEL !== '1') { try { require('node:child_process').execSync('td-cli doctor', {stdio: 'inherit'}); } catch (e) {} }\"",
-    "postinstall": "python3 boomtick-pkg/scripts/sync-python-deps.py"
+    "postinstall": "if [ -f boomtick-pkg/scripts/sync-python-deps.py ]; then python3 boomtick-pkg/scripts/sync-python-deps.py; fi"
   },
   "dependencies": {
     "lucide-react": "^1.31.0",
