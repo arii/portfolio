@@ -24,7 +24,7 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
   };
 
   const ToolIcon = getToolIcon(tool);
-  const imageSrc = tool.id === 'hrm-flagship' ? 'assets/research/hrm-flagship.png' : tool.id === 'repo-auditor-ai' ? 'assets/research/repo-auditor-ai.png' : null;
+  const imageSrc = tool.id === 'hrm-flagship' ? 'assets/research/hrm-flagship.png' : tool.id === 'repo-auditor-ai' ? 'assets/research/repo-auditor-ai.png' : tool.image || null;
 
   return (
     <div className="rounded-3xl border border-line bg-surface p-0 flex flex-col justify-between overflow-hidden transition-all hover:border-accent hover:shadow-glow">

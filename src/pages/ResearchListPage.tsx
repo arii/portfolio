@@ -33,6 +33,7 @@ const ResearchListPage: React.FC<ResearchListPageProps> = ({ onNavigate }) => {
     });
   }, [posts, selectedTag]);
 
+
   return (
     <div className="space-y-16">
       <header className="space-y-4 max-w-3xl border-b border-line/20 pb-8">
