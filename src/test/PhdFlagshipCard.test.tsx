@@ -8,7 +8,7 @@ describe('PhD Thesis Flagship Project', () => {
     const phdTool = RESEARCH_TOOLS.find((t) => t.id === 'phd-thesis');
     expect(phdTool).toBeDefined();
     expect(phdTool?.isFlagship).toBe(true);
-    expect(phdTool?.image).toBe('assets/research/phd-thesis.svg');
+    expect(phdTool?.image).toBe('assets/research/phd/sixblock.png');
     expect(phdTool?.externalUrl).toBe('https://dspace.mit.edu/handle/1721.1/122822');
     expect(phdTool?.externalLinkDisplayLabel).toBe('MIT DSpace Thesis');
     expect(phdTool?.description).toContain('1.9% to 80.7%');
@@ -17,12 +17,12 @@ describe('PhD Thesis Flagship Project', () => {
   it('renders PhD Thesis as a flagship project card with media and external link on ResearchListPage', () => {
     render(<ResearchListPage onNavigate={() => {}} />);
 
-    expect(screen.getByText('Reliable Robotic Manipulation')).toBeInTheDocument();
+    expect(screen.getByText('Reliably Arranging Objects (PhD Thesis)')).toBeInTheDocument();
     expect(screen.getByText('MIT CSAIL PH.D. THESIS')).toBeInTheDocument();
     expect(screen.getByText('MIT DSpace Thesis')).toBeInTheDocument();
 
-    const phdImage = screen.getByAltText(/PR2 robotic manipulation, belief state probability distribution/i);
+    const phdImage = screen.getByAltText(/PR2 robot reliably arranging blocks/i);
     expect(phdImage).toBeInTheDocument();
-    expect(phdImage).toHaveAttribute('src', 'assets/research/phd-thesis.svg');
+    expect(phdImage).toHaveAttribute('src', 'assets/research/phd/sixblock.png');
   });
 });
