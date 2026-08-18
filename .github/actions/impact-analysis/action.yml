@@ -44,6 +44,8 @@ runs:
             echo "Found Jules task ID: $TASK_ID. Triggering feedback..."
             docker run --rm \
               -e JULES_API_KEY="${JULES_API_KEY}" \
+              -v "${{ github.workspace }}":/github/workspace \
+              -w /github/workspace \
               ghcr.io/arii/boomtick:latest \
               jules trigger-feedback "${TASK_ID}" || echo "::warning::Failed to trigger Jules feedback"
           else
