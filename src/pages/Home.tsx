@@ -21,9 +21,9 @@ export const Home: React.FC<{ onNavigate?: (tab: string) => void }> = ({ onNavig
   return (
     <main className="space-y-12 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
       {/* 1. Hero Section (2-Column Split) */}
-      <section className="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 sm:p-10 lg:p-12 shadow-xl backdrop-blur-sm">
+      <section className="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 sm:p-8 lg:p-10 shadow-xl backdrop-blur-sm">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-          <div className="lg:col-span-8 space-y-6">
+          <div className="lg:col-span-8 lg:pr-8 space-y-6">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs sm:text-sm font-semibold tracking-wide">
               <Sparkles className="w-4 h-4" /> <span>{HERO_DATA.badge}</span>
             </div>
@@ -49,7 +49,7 @@ export const Home: React.FC<{ onNavigate?: (tab: string) => void }> = ({ onNavig
             </div>
           </div>
           <div className="lg:col-span-4 space-y-6">
-            <div className="relative group mx-auto lg:mx-0 max-w-sm rounded-3xl overflow-hidden border border-slate-800 bg-slate-900 shadow-lg">
+            <div className="relative group mx-auto lg:mx-0 max-w-sm rounded-2xl overflow-hidden border border-slate-800 bg-slate-900 shadow-lg">
               <div className="aspect-square w-full overflow-hidden">
                 <img src={roboticistPhoto} alt="Ariel Anders" className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105" />
               </div>
