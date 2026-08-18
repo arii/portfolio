@@ -72,7 +72,7 @@ export const ResumeHeader: React.FC<ResumeHeaderProps> = ({
             className="flex items-center space-x-2 bg-foreground text-background hover:bg-foreground/90 transition-colors px-4 py-2 rounded-lg text-sm font-semibold cursor-pointer"
           >
             <Download className="w-4 h-4" />
-            <span>Export PDF</span>
+            <span>View PDF</span>
           </a>
         </div>
       </div>
