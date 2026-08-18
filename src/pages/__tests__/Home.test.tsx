@@ -36,19 +36,6 @@ describe('Home Page', () => {
     ).toBeInTheDocument();
   });
 
-  it('renders engineering philosophy callout and tenets', () => {
-    const handleNavigate = vi.fn();
-    render(
-      <MemoryRouter>
-        <Home onNavigate={handleNavigate} />
-      </MemoryRouter>
-    );
-
-    expect(screen.getByText('Engineering Philosophy')).toBeInTheDocument();
-    expect(screen.getByText('AI-Accelerated Rigor')).toBeInTheDocument();
-    expect(screen.getByText('Reliable Robot Behavior')).toBeInTheDocument();
-    expect(screen.getByText('Production Robot Software')).toBeInTheDocument();
-  });
 
   it('renders bottom feature callouts row', () => {
     const handleNavigate = vi.fn();
@@ -71,8 +58,8 @@ describe('Home Page', () => {
       </MemoryRouter>
     );
 
-    const portfolioBtn = screen.getByRole('button', { name: /view portfolio/i });
-    fireEvent.click(portfolioBtn);
+    const viewWorkBtn = screen.getByRole('button', { name: /view work/i });
+    fireEvent.click(viewWorkBtn);
     expect(handleNavigate).toHaveBeenCalledWith('portfolio');
 
     const productsCard = screen.getByText("Products I've Shipped");
