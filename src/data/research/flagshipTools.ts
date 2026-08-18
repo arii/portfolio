@@ -52,11 +52,17 @@ export const flagshipTools: ResearchTool[] = [
   {
     id: 'phd-thesis',
     taxonomyBucket: 'product',
-    title: 'Reliable Robotic Manipulation (PhD Thesis)',
-    description: 'Focused on reliable robotic manipulation under uncertainty. Aimed to bridge the gap between theoretical AI and practical challenges of deploying helpful robots in complex household environments.',
+    title: 'Reliably Arranging Objects (PhD Thesis)',
+    subtitle: 'MIT CSAIL PH.D. THESIS',
+    description: 'Conformant planning approach to reliable robot manipulation under severe sensing and control uncertainty. Combines fixture-augmented plan optimization and physics-driven belief state transitions to elevate assembly reliability from 1.9% to 80.7% on a PR2 robot.',
     category: 'Robotics & AI',
     status: 'Completed (2019)',
-    tags: ['Robotics', 'Manipulation', 'AI', 'TAMP', 'Conformant Planning'],
-    isFlagship: true
+    tags: ['PR2', 'Conformant Planning', 'Belief State', 'Manipulation', 'MIT CSAIL'],
+    isFlagship: true,
+    image: 'assets/research/phd/sixblock.png',
+    imageAlt: 'PR2 robot reliably arranging blocks using conformant planning without external sensing feedback',
+    externalUrl: 'https://dspace.mit.edu/handle/1721.1/122822',
+    externalLinkDisplayLabel: 'MIT DSpace Thesis',
+    sourceUrl: 'https://scholar.google.com/citations?user=NM6SfiEAAAAJ&hl=en'
   }
 ];
