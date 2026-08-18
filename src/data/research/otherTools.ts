@@ -78,6 +78,7 @@ export const OTHER_TOOLS: ResearchTool[] = [
     category: 'Accessibility & Mobile',
     status: 'Completed',
     tags: ['iOS', 'Accessibility', 'Audio', 'Mobile'],
+    canonicalPath: '/research/boop-light-detector',
     externalUrl: 'https://arii.github.io/boop/',
     sourceUrl: 'https://github.com/arii/boop'
   },
@@ -89,6 +90,7 @@ export const OTHER_TOOLS: ResearchTool[] = [
     category: 'Community Health & Wellness',
     status: 'Completed',
     tags: ['MindHandHeart', 'Community', 'Wellness', 'MIT'],
+    canonicalPath: '/research/light-therapy-mit',
     externalUrl: 'https://arii.github.io/SAD/',
     sourceUrl: 'https://github.com/arii/SAD'
   },
@@ -100,6 +102,7 @@ export const OTHER_TOOLS: ResearchTool[] = [
     category: 'Sustainability & Energy',
     status: 'Completed',
     tags: ['Sustainability', 'Hardware', 'Energy Audit', 'MIT Green Labs'],
+    canonicalPath: '/research/leac-monitoring-software',
     externalUrl: 'https://github.com/arii'
   },
   {
@@ -110,6 +113,7 @@ export const OTHER_TOOLS: ResearchTool[] = [
     category: 'Robotics Community',
     status: 'Completed',
     tags: ['Robotics', 'Conference', 'Web Platform', 'MIT'],
+    canonicalPath: '/research/robocon-mit',
     externalUrl: 'https://github.com/arii'
   },
   {
@@ -120,6 +124,7 @@ export const OTHER_TOOLS: ResearchTool[] = [
     category: 'Medical Robotics',
     status: 'Completed',
     tags: ['Robotics', 'Medical UI', 'CAD/CAM', 'Bionics Lab UCSC'],
+    canonicalPath: '/research/cad-cam-dental-workflow',
     externalUrl: 'https://github.com/arii'
   }
 ];
