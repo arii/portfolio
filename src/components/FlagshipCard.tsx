@@ -79,7 +79,7 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
                 <span>{tool.externalLinkDisplayLabel || 'Open Link'}</span><ExternalLink className="h-3.5 w-3.5" />
               </a>
             ) : tool.canonicalPath ? (
-              <button onClick={() => onNavigate(tool.canonicalPath?.replace('/research/', '') || '')} className="inline-flex items-center space-x-1.5 bg-accent/10 border border-accent/20 px-3.5 py-2 rounded-xl text-xs font-semibold text-accent hover:bg-accent/20 transition-colors min-h-[44px] cursor-pointer">
+              <button onClick={() => onNavigate(tool.canonicalPath?.replace('/research/', '') || '')} className="inline-flex items-center space-x-1.5 bg-accent/10 border border-accent/20 px-3.5 py-2 rounded-xl text-xs font-semibold text-accent hover:bg-accent/20 transition-colors min-h-[44px]">
                 <span>Read Deep-Dive</span><ArrowRight className="h-3.5 w-3.5" />
               </button>
             ) : null}

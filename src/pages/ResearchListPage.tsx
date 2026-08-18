@@ -65,7 +65,7 @@ const ResearchListPage: React.FC<ResearchListPageProps> = ({ onNavigate }) => {
 
       {lightboxImage && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 cursor-zoom-out p-4 backdrop-blur-sm" onClick={() => setLightboxImage(null)}>
-          <button className="absolute top-4 right-4 text-white hover:text-accent p-2 transition-colors focus:outline-none cursor-pointer" onClick={() => setLightboxImage(null)}>
+          <button className="absolute top-4 right-4 text-white hover:text-accent p-2 transition-colors focus:outline-none" onClick={() => setLightboxImage(null)}>
             <X className="h-8 w-8" />
           </button>
           <img src={lightboxImage} alt="Enlarged screenshot preview" className="max-w-full max-h-[90vh] object-contain rounded-3xl border border-line shadow-2xl" />

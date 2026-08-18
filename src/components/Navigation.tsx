@@ -77,7 +77,7 @@ const Navigation: React.FC = () => {
           {/* Mobile Menu Toggle */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="flex h-11 w-11 items-center justify-center rounded-md border border-border text-muted-foreground hover:text-foreground md:hidden cursor-pointer"
+            className="flex h-11 w-11 items-center justify-center rounded-md border border-border text-muted-foreground hover:text-foreground md:hidden"
             aria-label="Toggle navigation menu"
             aria-expanded={isOpen}
           >
@@ -104,7 +104,7 @@ const Navigation: React.FC = () => {
                 <span className="text-sm font-bold text-slate-100">Navigation</span>
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="flex h-11 w-11 items-center justify-center rounded-md border border-slate-800 text-slate-300 hover:text-slate-100 cursor-pointer"
+                  className="flex h-11 w-11 items-center justify-center rounded-md border border-slate-800 text-slate-300 hover:text-slate-100"
                   aria-label="Close menu"
                 >
                   <X className="h-5 w-5" />
