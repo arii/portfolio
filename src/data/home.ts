@@ -7,7 +7,7 @@ export interface PhilosophyTenet {
 export interface FocusArea {
   id: string;
   title: string;
-  items: string[];
+  description: string;
   actionText: string;
 }
 
@@ -17,7 +17,6 @@ export interface HeroData {
   title: string;
   subheading: string;
   bioParagraphs: string[];
-  careerBadges: string[];
 }
 
 export const HERO_DATA: HeroData = {
@@ -30,7 +29,6 @@ export const HERO_DATA: HeroData = {
     'I am an MIT CSAIL roboticist and have worked in the industry since completing my PhD on reliable robot manipulation combining learning and planning techniques. At Robust AI, I was the tech lead for the behavior team, developing reactive social navigation behaviors. At Waymo, I worked on the planning team to reduce traffic congestion during passenger pickup and drop-off. Most recently at CIV, I built and optimized production state estimation pipelines to increase fleet uptime.',
     'I have spent the past year building stateful, multi-agent orchestrations. Because autonomous systems require strict code health, I use these workflows to engineer feature-rich applications and enforce continuous architectural standards—bringing robotics-grade reliability to DevAI.',
   ],
-  careerBadges: ['MIT CSAIL PhD', 'Civ Robotics', 'Waymo', 'Robust.AI'],
 };
 
 export const PHILOSOPHY_TENETS: PhilosophyTenet[] = [
@@ -57,20 +55,20 @@ export const PHILOSOPHY_TENETS: PhilosophyTenet[] = [
 export const FOCUS_AREAS: FocusArea[] = [
   {
     id: 'products',
-    title: 'Shipped Products',
-    items: ['BoomTick.blog', 'Real-time HRM Tracker'],
+    title: "Products I've Shipped",
+    description: 'Live full-stack consumer apps and platforms built with autonomous agent workflows.',
     actionText: 'View Products',
   },
   {
     id: 'infrastructure',
-    title: 'DevAI Infrastructure',
-    items: ['RepoAuditor (PR Agent)', 'Blast-Radius Visual Diff'],
+    title: 'Engineering Infrastructure',
+    description: 'Autonomous code-review agents, CI pipelines, and quality gates enforcing strict software standards.',
     actionText: 'Inspect Tooling',
   },
   {
     id: 'research',
     title: 'Articles & Research',
-    items: ['Conformant Manipulation (PhD)', 'Multi-Robot Coordination'],
+    description: 'System architecture breakdowns, engineering post-mortems, and DevAI case studies.',
     actionText: 'Read Studies',
   },
 ];

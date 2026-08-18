@@ -16,17 +16,18 @@ describe('Home Page', () => {
     ).toBeInTheDocument();
   });
 
-  it('renders career badge strip', () => {
+  it('renders bio paragraphs in hero card', () => {
     const handleNavigate = vi.fn();
     render(<Home onNavigate={handleNavigate} />);
 
-    expect(screen.getByText('MIT CSAIL PhD')).toBeInTheDocument();
-    expect(screen.getByText('Civ Robotics')).toBeInTheDocument();
-    expect(screen.getByText('Waymo')).toBeInTheDocument();
-    expect(screen.getByText('Robust.AI')).toBeInTheDocument();
+    expect(
+      screen.getByText((content) =>
+        content.includes('I am an MIT CSAIL roboticist and have worked in the industry')
+      )
+    ).toBeInTheDocument();
   });
 
-  it('renders engineering philosophy section and tenets', () => {
+  it('renders engineering philosophy callout and tenets', () => {
     const handleNavigate = vi.fn();
     render(<Home onNavigate={handleNavigate} />);
 
@@ -36,7 +37,7 @@ describe('Home Page', () => {
     expect(screen.getByText('Production Robot Software')).toBeInTheDocument();
   });
 
-  it('triggers navigation callback when cards or portfolio button are clicked', () => {
+  it('triggers navigation callback when focus area cards or portfolio button are clicked', () => {
     const handleNavigate = vi.fn();
     render(<Home onNavigate={handleNavigate} />);
 
@@ -44,7 +45,7 @@ describe('Home Page', () => {
     fireEvent.click(portfolioBtn);
     expect(handleNavigate).toHaveBeenCalledWith('portfolio');
 
-    const productsCard = screen.getByText('Shipped Products');
+    const productsCard = screen.getByText("Products I've Shipped");
     fireEvent.click(productsCard);
     expect(handleNavigate).toHaveBeenCalledWith('products');
   });
