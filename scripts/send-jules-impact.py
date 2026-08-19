@@ -24,20 +24,22 @@ def is_skipped_verdict(data: dict) -> bool:
     )
 
 
+import urllib.request
+import urllib.error
+
 def main():
     task_id = os.environ.get("TASK_ID")
     if not task_id:
-        logger.info("No TASK_ID provided in environment. Exiting.")
-        sys.exit(0)
-
-    session_id = f"sessions/{task_id}"
-    logger.info(f"Targeting session: {session_id}")
-
-    try:
-        client = JulesClient()
-    except Exception as e:
-        logger.error(f"Failed to initialize JulesClient: {e}")
-        sys.exit(1)
+        logger.info("No TASK_ID provided in environment. Will skip sending to Jules API.")
+        client = None
+    else:
+        session_id = f"sessions/{task_id}"
+        logger.info(f"Targeting session: {session_id}")
+        try:
+            client = JulesClient()
+        except Exception as e:
+            logger.error(f"Failed to initialize JulesClient: {e}")
+            sys.exit(1)
 
     artifacts_dir = "artifacts"
 
@@ -128,16 +130,41 @@ def main():
         logger.info("No valid reviews found in artifacts or logs. Skipping sending impact analysis.")
         sys.exit(0)
 
-    # Send the message
-    try:
-        result = client.send_message(session_id, body)
-        if result.get("status") != "success":
-            logger.warning(f"⚠️ Failed to send message to Jules API (non-blocking): {result}")
-            sys.exit(0)
-        logger.info(f"✅ Sent impact analysis to {session_id}")
-    except Exception as e:
-        logger.warning(f"⚠️ Exception while sending message to Jules API (non-blocking): {e}")
-        sys.exit(0)
+    # Send the message to Jules
+    if client:
+        try:
+            result = client.send_message(session_id, body)
+            if result.get("status") != "success":
+                logger.warning(f"⚠️ Failed to send message to Jules API (non-blocking): {result}")
+            else:
+                logger.info(f"✅ Sent impact analysis to {session_id}")
+        except Exception as e:
+            logger.warning(f"⚠️ Exception while sending message to Jules API (non-blocking): {e}")
+
+    # Post comment to GitHub PR
+    github_token = os.environ.get("GITHUB_TOKEN")
+    github_repo = os.environ.get("GITHUB_REPOSITORY")
+    pr_number = os.environ.get("PR_NUMBER")
+
+    if github_token and github_repo and pr_number:
+        url = f"https://api.github.com/repos/{github_repo}/issues/{pr_number}/comments"
+        headers = {
+            "Authorization": f"Bearer {github_token}",
+            "Accept": "application/vnd.github.v3+json",
+            "Content-Type": "application/json"
+        }
+        data = json.dumps({"body": body}).encode("utf-8")
+        req = urllib.request.Request(url, data=data, headers=headers, method="POST")
+        try:
+            with urllib.request.urlopen(req) as response:
+                if response.status == 201:
+                    logger.info("✅ Successfully posted impact analysis to GitHub PR.")
+                else:
+                    logger.warning(f"⚠️ Failed to post to GitHub PR. Status code: {response.status}")
+        except urllib.error.URLError as e:
+            logger.warning(f"⚠️ Failed to post comment to GitHub PR: {e}")
+    else:
+        logger.warning("⚠️ Missing GITHUB_TOKEN, GITHUB_REPOSITORY, or PR_NUMBER. Skipping GitHub PR comment.")
 
 
 if __name__ == "__main__":

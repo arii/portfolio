@@ -52,7 +52,7 @@ runs:
           ai review "${PR_NUMBER}" || echo "::warning::Agent code review returned non-zero, likely due to approval permission limitations"
 
     - name: Send impact analysis to Jules session
-      if: always() && steps.parse_jules.outputs.task_id != ''
+      if: always()
       env:
         TASK_ID: ${{ steps.parse_jules.outputs.task_id }}
         JULES_API_KEY: ${{ inputs.jules_api_key }}
@@ -68,6 +68,7 @@ runs:
             -e GITHUB_REPOSITORY="${GITHUB_REPOSITORY}" \
             -e JULES_API_KEY="${JULES_API_KEY}" \
             -e TASK_ID="${TASK_ID}" \
+            -e PR_NUMBER="${PR_NUMBER}" \
             -v "${{ github.workspace }}":/github/workspace \
             -w /github/workspace \
             ghcr.io/arii/boomtick:latest \
