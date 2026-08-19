@@ -58,23 +58,6 @@ const About: React.FC = () => {
           <div className="border border-line bg-surface p-6 rounded-3xl space-y-4">
             <h3 className="text-xs font-semibold text-accent uppercase tracking-widest flex items-center space-x-1.5 font-sans">
               <span className="h-1 w-1 bg-accent rounded-full"></span>
-              <span>Currently Exploring</span>
-            </h3>
-            <div className="flex flex-wrap gap-2">
-              {profileData.exploring.map((topic, idx) => (
-                <span
-                  key={idx}
-                  className="px-2.5 py-1 rounded-full text-xs font-semibold bg-surface-alt border border-line text-text-dim"
-                >
-                  {topic}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <div className="border border-line bg-surface p-6 rounded-3xl space-y-4">
-            <h3 className="text-xs font-semibold text-accent uppercase tracking-widest flex items-center space-x-1.5 font-sans">
-              <span className="h-1 w-1 bg-accent rounded-full"></span>
               <span>Connect</span>
             </h3>
             <div className="flex flex-col gap-3">

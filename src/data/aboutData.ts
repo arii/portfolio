@@ -22,7 +22,6 @@ export interface ProfileData {
   details: ProfileDetail[];
   availability: string;
   highlights: HighlightItem[];
-  exploring: string[];
   socials: { label: string; url: string; icon: React.FC<{ className?: string }> }[];
 }
 
@@ -39,12 +38,13 @@ export const profileData: ProfileData = {
   ],
   availability: "Open to Staff/Senior SWE roles, robotics contracts, and DevAI consulting — especially where robotics and AI-assisted engineering overlap.",
   highlights: [
-    { period: "2014 – 2020", title: "MIT CSAIL (PhD)", detail: "Integrated task and motion planning for reliable robotic manipulation under uncertainty." },
-    { period: "2020 – 2021", title: "Waymo", detail: "Behavior systems and motion planning algorithms for autonomous vehicle fleets." },
-    { period: "2021 – 2023", title: "Robust.AI", detail: "Software architecture and navigation autonomy for collaborative industrial mobile robots." },
-    { period: "2023 – Present", title: "Civ Robotics & DevAI", detail: "Field robotics software and AI-accelerated developer infrastructure automation." }
+    { period: "2008 – 2012", title: "UCSC (Computer Engineering, BS)", detail: "Computer Engineering, BS including 2 years of independent research at the Bionics Lab." },
+    { period: "2012 – 2020", title: "MIT CSAIL (PhD)", detail: "Integrated task and motion planning for reliable robotic manipulation under uncertainty." },
+    { period: "2019 – 2023", title: "Robust.AI", detail: "Software architecture and navigation autonomy for collaborative industrial mobile robots." },
+    { period: "2022 – 2024", title: "Waymo", detail: "Behavior systems and motion planning algorithms for autonomous vehicle fleets." },
+    { period: "2025 – 2026", title: "Civ Robotics", detail: "Field robotics software, navigation, and localization for autonomous forklifts." },
+    { period: "2026 – Present", title: "DevAI", detail: "AI-assisted developer infrastructure, agentic CI/CD pipelines, and independent projects like boomtick.blog." }
   ],
-  exploring: ["Agentic Workflows", "Motion Planning", "CI/CD Autonomy", "Software Rigor", "Field Robotics"],
   socials: [
     { label: "Email", url: "mailto:anders.ariel@gmail.com", icon: MailIcon },
     { label: "LinkedIn", url: "https://linkedin.com/in/arielanders", icon: LinkedinIcon },
