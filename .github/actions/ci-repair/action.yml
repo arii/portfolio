@@ -38,20 +38,7 @@ runs:
         } >> "$GITHUB_ENV"
       shell: bash
 
-    - name: Set up Python
-      uses: actions/setup-python@v5 # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
-      with:
-        python-version: '3.x'
 
-    - name: Install PyGithub and dependencies
-      run: |
-        pip install PyGithub requests click --break-system-packages || pip install PyGithub requests click
-      shell: bash
-
-    - name: Setup Workspace
-      uses: ./.github/actions/setup-workspace # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
-      with:
-        setup-node: 'false'
 
     # --- AUTO REPAIR MODE ---
     - name: Collect Failure Context
@@ -229,7 +216,7 @@ runs:
         fi
 
         # Use td-cli to dispatch Jules
-        td-cli jules fix-ci --issue-number "$ISSUE_NUMBER" --execute
+        docker run --rm -e JULES_API_KEY="$JULES_API_KEY" -e GITHUB_TOKEN="$GITHUB_TOKEN" -e GITHUB_REPOSITORY="${{ github.repository }}" ghcr.io/arii/boomtick:latest td-cli jules fix-ci --issue-number "$ISSUE_NUMBER" --execute
       shell: bash
 
     # --- MANUAL REPAIR MODE ---
@@ -260,5 +247,5 @@ runs:
           echo "::error::Invalid issue_number: must be numeric."
           exit 1
         fi
-        td-cli jules fix-ci --pr-number "$ISSUE_NUMBER" --execute
+        docker run --rm -e JULES_API_KEY="$JULES_API_KEY" -e GITHUB_TOKEN="$GITHUB_TOKEN" -e GITHUB_REPOSITORY="${{ github.repository }}" ghcr.io/arii/boomtick:latest td-cli jules fix-ci --pr-number "$ISSUE_NUMBER" --execute
       shell: bash

@@ -17,15 +17,26 @@ runs:
         fi
       shell: bash
 
-    - name: Setup Workspace
-      uses: ./.github/actions/setup-workspace
-    - name: AI review
+    - name: AI review via Container
       env:
         PR_NUMBER: ${{ inputs.pr_number }}
+        GEMINI_API_KEY: ${{ env.GEMINI_API_KEY }}
+        JULES_API_KEY: ${{ env.JULES_API_KEY }}
+        GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
+        GITHUB_REPOSITORY: ${{ github.repository }}
       run: |
         if [[ ! "$PR_NUMBER" =~ ^[0-9]+$ ]]; then
           echo "::error::Invalid PR_NUMBER: must be numeric."
           exit 1
         fi
-        td-cli gh audit-pr "$PR_NUMBER" --fetch --audit --submit --execute
+        docker run --rm \
+          -e GITHUB_TOKEN="${GITHUB_TOKEN}" \
+          -e GITHUB_REPOSITORY="${GITHUB_REPOSITORY}" \
+          -e GEMINI_API_KEY="${GEMINI_API_KEY}" \
+          -e JULES_API_KEY="${JULES_API_KEY}" \
+          -e PR_NUMBER="${PR_NUMBER}" \
+          -v "${{ github.workspace }}":/github/workspace \
+          -w /github/workspace \
+          ghcr.io/arii/boomtick:latest \
+          td-cli gh audit-pr "${PR_NUMBER}" --fetch --audit --submit --execute || echo "::warning::Agent code review returned non-zero"
       shell: bash

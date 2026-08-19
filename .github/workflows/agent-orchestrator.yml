@@ -90,9 +90,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Workspace
-        uses: ./.github/actions/setup-workspace # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
-
       - name: Resolve Environment
         id: resolve_env
         env:
@@ -153,7 +150,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           JULES_API_KEY: ${{ secrets.JULES_API_KEY }}
         run: |
-          td-cli agent dispatch main "$AUDIT_PROMPT"
+          docker run --rm -e GITHUB_TOKEN="$GITHUB_TOKEN" -e JULES_API_KEY="$JULES_API_KEY" ghcr.io/arii/boomtick:latest td-cli agent dispatch main "$AUDIT_PROMPT"
         shell: bash
 
       - name: Run Local Orchestrator
@@ -165,10 +162,10 @@ jobs:
         run: |
           if [ -z "$PR_NUMBER" ]; then
             echo "No PR number provided. Running local orchestrator for all open PRs..."
-            td-cli agent run-local
+            docker run --rm -v "${{ github.workspace }}":/github/workspace -w /github/workspace -e GITHUB_TOKEN="$GITHUB_TOKEN" -e GEMINI_API_KEY="$GEMINI_API_KEY" -e JULES_API_KEY="$JULES_API_KEY" ghcr.io/arii/boomtick:latest td-cli agent run-local
           else
             echo "Running local orchestrator for PR #$PR_NUMBER..."
-            td-cli agent run-local --pr "$PR_NUMBER"
+            docker run --rm -v "${{ github.workspace }}":/github/workspace -w /github/workspace -e GITHUB_TOKEN="$GITHUB_TOKEN" -e GEMINI_API_KEY="$GEMINI_API_KEY" -e JULES_API_KEY="$JULES_API_KEY" ghcr.io/arii/boomtick:latest td-cli agent run-local --pr "$PR_NUMBER"
           fi
         shell: bash
 
@@ -262,10 +259,6 @@ jobs:
           fi
         shell: bash
 
-      - name: Setup Workspace
-        uses: ./.github/actions/setup-workspace # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
-        with:
-          setup-python: 'true'
 
       - name: Generate Issue Body
         id: generate_body
@@ -457,5 +450,5 @@ jobs:
           ISSUE_NUMBER: ${{ steps.create_issue.outputs.issue_number }}
         run: |
           set -eo pipefail
-          td-cli jules dispatch main "Upgrade dependency to fix security vulnerability in issue #$ISSUE_NUMBER"
+          docker run --rm -e GITHUB_TOKEN="$GITHUB_TOKEN" -e GITHUB_REPOSITORY="${{ github.repository }}" -e JULES_API_KEY="${{ secrets.JULES_API_KEY }}" ghcr.io/arii/boomtick:latest td-cli jules dispatch main "Upgrade dependency to fix security vulnerability in issue #$ISSUE_NUMBER"
         shell: bash
