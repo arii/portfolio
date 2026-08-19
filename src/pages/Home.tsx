@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ArrowRight, Cpu, Compass, Bot, Server } from 'lucide-react';
 import { HERO_DATA, PHILOSOPHY_TENETS, FOCUS_AREAS, FEATURE_CALLOUTS } from '@/data/home';
 
@@ -20,7 +20,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
     if (onNavigate) {
       onNavigate(tab);
     } else {
-      navigate(tab === 'portfolio' ? '/devai' : `/${tab}`);
+      navigate(tab.startsWith('/') ? tab : `/${tab}`);
     }
   };
 
@@ -61,14 +61,35 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
               ))}
             </div>
 
-            <div className="pt-2">
-              <button
-                onClick={() => handleNav('portfolio')}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold transition-all duration-200 shadow-md text-sm sm:text-base cursor-pointer min-h-[44px]"
+            <div className="flex flex-col sm:flex-row items-center gap-3 pt-2">
+              <Link
+                to="/devai"
+                onClick={(e) => {
+                  if (onNavigate) {
+                    e.preventDefault();
+                    handleNav('devai');
+                  }
+                }}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-md bg-amber-500 hover:bg-amber-400 text-slate-950 px-5 py-2.5 text-sm font-medium shadow transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 min-h-[44px]"
               >
-                <span>View portfolio</span>
+                <Bot className="w-4 h-4" />
+                <span>View Agentic AI Work</span>
                 <ArrowRight className="w-4 h-4" />
-              </button>
+              </Link>
+
+              <Link
+                to="/research"
+                onClick={(e) => {
+                  if (onNavigate) {
+                    e.preventDefault();
+                    handleNav('research');
+                  }
+                }}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-md bg-amber-500 hover:bg-amber-400 text-slate-950 px-5 py-2.5 text-sm font-medium shadow transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 min-h-[44px]"
+              >
+                <Cpu className="w-4 h-4" />
+                <span>View Robotics Research</span>
+              </Link>
             </div>
           </div>
 

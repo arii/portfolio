@@ -63,7 +63,7 @@ describe('Home Page', () => {
     expect(screen.getByText('Production Systems Architecture')).toBeInTheDocument();
   });
 
-  it('triggers navigation callback when focus area cards or portfolio button are clicked', () => {
+  it('renders both Agentic AI and Robotics Research CTA buttons with correct attributes', () => {
     const handleNavigate = vi.fn();
     render(
       <MemoryRouter>
@@ -71,9 +71,40 @@ describe('Home Page', () => {
       </MemoryRouter>
     );
 
-    const portfolioBtn = screen.getByRole('button', { name: /view portfolio/i });
-    fireEvent.click(portfolioBtn);
-    expect(handleNavigate).toHaveBeenCalledWith('portfolio');
+    const aiBtn = screen.getByRole('link', { name: /view agentic ai work/i });
+    const roboticsBtn = screen.getByRole('link', { name: /view robotics research/i });
+
+    expect(aiBtn).toBeInTheDocument();
+    expect(aiBtn).toHaveAttribute('href', '/devai');
+
+    expect(roboticsBtn).toBeInTheDocument();
+    expect(roboticsBtn).toHaveAttribute('href', '/research');
+
+    fireEvent.click(aiBtn);
+    expect(handleNavigate).toHaveBeenCalledWith('devai');
+
+    fireEvent.click(roboticsBtn);
+    expect(handleNavigate).toHaveBeenCalledWith('research');
+  });
+
+  it('does not render outdated single portfolio CTA', () => {
+    render(
+      <MemoryRouter>
+        <Home />
+      </MemoryRouter>
+    );
+
+    expect(screen.queryByRole('link', { name: /^view portfolio/i })).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /^view portfolio/i })).not.toBeInTheDocument();
+  });
+
+  it('triggers navigation callback when focus area cards are clicked', () => {
+    const handleNavigate = vi.fn();
+    render(
+      <MemoryRouter>
+        <Home onNavigate={handleNavigate} />
+      </MemoryRouter>
+    );
 
     const productsCard = screen.getByText("Products I've Shipped");
     fireEvent.click(productsCard);
