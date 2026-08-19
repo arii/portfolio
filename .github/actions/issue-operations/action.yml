@@ -18,10 +18,7 @@ inputs:
   gemini_api_key:
     description: 'Gemini API Key'
     required: false
-  openai_api_key:
-    description: 'OpenAI API Key'
-    required: false
-  google_jules_api_key:
+  jules_api_key:
     description: 'Google Jules API Key'
     required: false
 
@@ -148,8 +145,7 @@ runs:
         pr_number: ${{ inputs.issue_number }}
       env:
         GEMINI_API_KEY: ${{ inputs.gemini_api_key }}
-        OPENAI_API_KEY: ${{ inputs.openai_api_key }}
-        GOOGLE_JULES_API_KEY: ${{ inputs.google_jules_api_key }}
+        JULES_API_KEY: ${{ inputs.jules_api_key }}
 
     # --- RESOLVE CONFLICTS ---
     - name: Setup Workspace for Conflict Resolution
