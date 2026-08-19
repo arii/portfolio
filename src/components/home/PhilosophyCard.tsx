@@ -46,8 +46,8 @@ export const PhilosophyCard: React.FC<PhilosophyCardProps> = ({
       </div>
 
       <div className="space-y-5">
-        {pillars.map((pillar, idx) => (
-          <div key={idx} className="space-y-1.5">
+        {pillars.map((pillar) => (
+          <div key={pillar.title} className="space-y-1.5">
             <h4 className="text-sm font-semibold text-amber-400">
               {pillar.title}
             </h4>
