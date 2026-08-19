@@ -15,10 +15,13 @@ describe('Footer Component', () => {
     ).toBeInTheDocument();
   });
 
-  it('renders only LinkedIn and GitHub social links and excludes email', () => {
+  it('renders LinkedIn, GitHub, and BoomTick social links and excludes email', () => {
     render(<Footer />);
     expect(screen.getByRole('link', { name: /linkedin/i })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /github/i })).toBeInTheDocument();
+    const boomtickLink = screen.getByRole('link', { name: /boomtick/i });
+    expect(boomtickLink).toBeInTheDocument();
+    expect(boomtickLink).toHaveAttribute('href', 'https://boomtick.blog');
     expect(screen.queryByRole('link', { name: /email/i })).not.toBeInTheDocument();
   });
 
