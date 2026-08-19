@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, Cpu, Sparkles, Compass, Bot, Server } from 'lucide-react';
+import { ArrowRight, Cpu, Compass, Bot, Server } from 'lucide-react';
 import { HERO_DATA, PHILOSOPHY_TENETS, FOCUS_AREAS, FEATURE_CALLOUTS } from '@/data/home';
 
 interface HomeProps {
@@ -44,11 +44,6 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           {/* Left Column (8 cols): Bio & Intro */}
           <div className="lg:col-span-8 space-y-6">
-            <div className="inline-flex items-start sm:items-center gap-2 px-3.5 py-2 sm:py-1.5 rounded-xl sm:rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs sm:text-sm font-semibold tracking-wide text-left">
-              <Sparkles className="w-4 h-4 shrink-0 mt-0.5 sm:mt-0" />
-              <span>{HERO_DATA.badge}</span>
-            </div>
-
             <div className="space-y-2">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-100 tracking-tight leading-tight">
                 {HERO_DATA.name}

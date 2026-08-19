@@ -27,9 +27,6 @@ const ResearchListPage: React.FC<ResearchListPageProps> = ({ onNavigate }) => {
       </Helmet>
 
       <header className="space-y-4 max-w-3xl border-b border-line/20 pb-8">
-        <div className="inline-flex items-center space-x-2 bg-accent/10 border border-accent/20 px-3.5 py-1.5 rounded-full text-xs text-accent font-semibold uppercase tracking-wider">
-          <span>ACADEMIC &amp; DEEP-TECH ROBOTICS</span>
-        </div>
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-text-main leading-tight">Robotics &amp; Algorithmic Research</h1>
         <p className="text-text-dim max-w-2xl text-sm sm:text-base leading-relaxed">Planning under uncertainty, conformant belief-state manipulation, multi-robot coordination, and hardware automation systems.</p>
       </header>
