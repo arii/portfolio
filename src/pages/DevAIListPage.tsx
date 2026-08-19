@@ -38,7 +38,7 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
   }, [posts, selectedTag]);
 
   return (
-    <div className="space-y-16">
+    <div className="space-y-12 sm:space-y-16">
       <Helmet>
         <title>DevAI &amp; Software Systems | Ariel Anders</title>
         <meta name="description" content="System architectures, agentic CI/CD pipelines, autonomous developer tooling, and shipped production applications." />
@@ -47,16 +47,16 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
       </Helmet>
 
       <header className="space-y-4 max-w-3xl border-b border-line/20 pb-8">
-        <div className="inline-flex items-center space-x-2 bg-accent/10 border border-accent/20 px-3 py-1 rounded-full text-xs text-accent font-semibold uppercase tracking-wider">
-          <span>APPLIED AI & PRODUCTION ENGINEERING</span>
+        <div className="inline-flex items-center space-x-2 bg-accent/10 border border-accent/20 px-3.5 py-1.5 rounded-full text-xs text-accent font-semibold uppercase tracking-wider">
+          <span>APPLIED AI &amp; PRODUCTION ENGINEERING</span>
         </div>
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-text-main leading-none">DevAI &amp; Software Systems</h1>
-        <p className="text-text-dim max-w-2xl text-base leading-relaxed">System architectures, agentic CI/CD pipelines, autonomous developer tooling, and shipped production applications.</p>
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-text-main leading-tight">DevAI &amp; Software Systems</h1>
+        <p className="text-text-dim max-w-2xl text-sm sm:text-base leading-relaxed">System architectures, agentic CI/CD pipelines, autonomous developer tooling, and shipped production applications.</p>
       </header>
 
       <section className="space-y-8" id="flagship">
         <div className="border-b border-line pb-3 flex items-center justify-between">
-          <h2 className="text-xl md:text-2xl font-bold text-text-main flex items-center space-x-2"><Layers className="h-5 w-5 text-accent" /><span>Flagship Applications &amp; Tooling</span></h2>
+          <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-text-main flex items-center space-x-2"><Layers className="h-5 w-5 text-accent" /><span>Flagship Applications &amp; Tooling</span></h2>
           <span className="text-xs text-text-dim uppercase tracking-widest">CASE STUDIES</span>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -64,8 +64,8 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      <section className="border border-accent/20 bg-accent/5 rounded-3xl p-8 space-y-3">
-        <h3 className="text-lg font-bold text-text-main flex items-center space-x-2"><Layers className="h-5 w-5 text-accent" /><span>Why this matters</span></h3>
+      <section className="border border-accent/20 bg-accent/5 rounded-3xl p-6 sm:p-8 space-y-3">
+        <h3 className="text-base sm:text-lg font-bold text-text-main flex items-center space-x-2"><Layers className="h-5 w-5 text-accent" /><span>Why this matters</span></h3>
         <p className="text-text-dim leading-relaxed text-sm max-w-3xl font-sans">
           Shipping high-fidelity autonomous systems and developer workflows requires <span className="text-accent font-bold">practical AI orchestration</span>, not hype. I focus on engineering deterministic state-verification feedback loops and isolated execution boundaries to scale development teams with absolute safety.
         </p>
@@ -73,17 +73,18 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
 
       <section className="space-y-8" id="articles">
         <div className="border-b border-line pb-3 flex items-center justify-between">
-          <h2 className="text-xl md:text-2xl font-bold text-text-main flex items-center space-x-2 font-display"><Layers className="h-5 w-5 text-accent" /><span>Technical Articles &amp; Deep Dives</span></h2>
+          <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-text-main flex items-center space-x-2 font-display"><Layers className="h-5 w-5 text-accent" /><span>Technical Articles &amp; Deep Dives</span></h2>
           <span className="text-xs text-text-dim uppercase tracking-widest">{filteredPosts.length} Articles</span>
         </div>
 
-        <div className="flex flex-wrap items-center justify-start gap-2">
+        {/* Full-width segmented filter control */}
+        <div className="flex flex-wrap items-center justify-start gap-2 bg-surface p-1.5 rounded-2xl border border-line">
           {PRIMARY_TAGS.map((tag) => (
             <button
               key={tag}
               onClick={() => setSelectedTag(tag)}
-              className={`rounded-xl border px-4 py-2 text-xs font-semibold transition-all ${
-                selectedTag === tag ? 'bg-accent/10 border-accent/30 text-accent shadow-sm' : 'bg-surface border-line text-text-dim hover:text-text-main hover:border-slate-700'
+              className={`flex-1 min-w-[140px] rounded-xl px-4 py-2.5 text-xs sm:text-sm font-semibold transition-all cursor-pointer min-h-[44px] flex items-center justify-center text-center ${
+                selectedTag === tag ? 'bg-accent/15 border border-accent/30 text-accent shadow-sm' : 'bg-transparent text-text-dim hover:text-text-main hover:bg-surface-alt'
               }`}
             >
               {tag}
@@ -98,7 +99,7 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
 
       {lightboxImage && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 cursor-zoom-out p-4 backdrop-blur-sm" onClick={() => setLightboxImage(null)}>
-          <button className="absolute top-4 right-4 text-white hover:text-accent p-2 transition-colors focus:outline-none" onClick={() => setLightboxImage(null)}>
+          <button className="absolute top-4 right-4 text-white hover:text-accent p-2 transition-colors focus:outline-none cursor-pointer" onClick={() => setLightboxImage(null)}>
             <X className="h-8 w-8" />
           </button>
           <img src={lightboxImage} alt="Enlarged screenshot preview" className="max-w-full max-h-[90vh] object-contain rounded-3xl border border-line shadow-2xl" />
