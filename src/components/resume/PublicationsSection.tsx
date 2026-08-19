@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FileText, ExternalLink, ChevronDown, ChevronUp } from 'lucide-react';
 import { ResumePublication } from '@/data/resume';
+import { Box, Stack } from '@/layouts/Primitives';
 
 export interface PublicationsSectionProps {
   publications: ResumePublication[];
@@ -13,10 +14,7 @@ const CATEGORIES = [
   { key: 'symposium_other', label: 'Symposia & Other Works' }
 ] as const;
 
-export const PublicationsSection: React.FC<PublicationsSectionProps> = ({
-  publications,
-  scholarUrl
-}) => {
+export const PublicationsSection: React.FC<PublicationsSectionProps> = ({ publications, scholarUrl }) => {
   const [showAll, setShowAll] = useState(false);
   const [showPhdAbstract, setShowPhdAbstract] = useState(false);
 
@@ -24,24 +22,31 @@ export const PublicationsSection: React.FC<PublicationsSectionProps> = ({
 
   return (
     <section className="mb-10 print:mb-6 print:break-inside-avoid">
-      <div className="flex items-center justify-between mb-4 border-b border-border/40 pb-2 print:border-b-2 print:border-black">
-        <div className="flex items-center space-x-2.5">
+      <Box className="flex items-center justify-between mb-4 border-b border-border/40 pb-2 print:border-b-2 print:border-black">
+        <Box className="flex items-center space-x-2.5">
           <FileText className="h-5 w-5 text-primary print:text-black" />
           <h2 className="text-xl font-bold text-foreground print:text-black uppercase tracking-wider">
             Publications & Theses
           </h2>
-        </div>
-      </div>
+        </Box>
+        <a
+          href={scholarUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline print:hidden"
+        >
+          <span>Google Scholar</span>
+          <ExternalLink className="w-3 h-3" />
+        </a>
+      </Box>
 
-      <div id="publications-list" className="space-y-6">
+      <Stack gap="6" id="publications-list">
         {CATEGORIES.map(({ key, label }) => {
-          const groupPubs = displayedPubs.filter(
-            (p) => p.category === key || (!p.category && key === 'symposium_other')
-          );
+          const groupPubs = displayedPubs.filter((p) => p.category === key || (!p.category && key === 'symposium_other'));
           if (groupPubs.length === 0) return null;
 
           return (
-            <div key={key} className="space-y-2">
+            <Stack key={key} gap="2">
               <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-primary border-b border-primary/20 pb-1">
                 {label}
               </h3>
@@ -50,16 +55,14 @@ export const PublicationsSection: React.FC<PublicationsSectionProps> = ({
                   const isPhd = pub.id === 'phd-thesis-2019';
                   return (
                     <li key={pub.id} className="py-2.5 first:pt-1 last:pb-1 space-y-1">
-                      <div className="flex items-start justify-between gap-2">
-                        <div className="space-y-0.5">
-                          <p className="text-xs font-semibold text-foreground print:text-black leading-snug">
-                            {pub.title}
-                          </p>
+                      <Box className="flex items-start justify-between gap-2">
+                        <Box className="space-y-0.5">
+                          <p className="text-xs font-semibold text-foreground print:text-black leading-snug">{pub.title}</p>
                           <p className="text-[11px] text-muted-foreground">{pub.authors?.join(', ')}</p>
                           <p className="text-[11px] text-muted-foreground/80 italic print:text-gray-800">
                             {pub.venue} ({pub.year})
                           </p>
-                        </div>
+                        </Box>
                         {pub.link && (
                           <a
                             href={pub.link}
@@ -71,7 +74,7 @@ export const PublicationsSection: React.FC<PublicationsSectionProps> = ({
                             <ExternalLink className="w-3.5 h-3.5" />
                           </a>
                         )}
-                      </div>
+                      </Box>
 
                       {pub.highlight && (
                         <p className="text-[11px] text-slate-300 print:text-black leading-normal bg-secondary/30 p-2 rounded border border-border/40">
@@ -81,7 +84,7 @@ export const PublicationsSection: React.FC<PublicationsSectionProps> = ({
                       )}
 
                       {isPhd && (
-                        <div className="pt-0.5 print:hidden">
+                        <Box className="pt-0.5 print:hidden">
                           <button
                             onClick={() => setShowPhdAbstract(!showPhdAbstract)}
                             className="inline-flex items-center gap-1 text-[11px] font-semibold text-primary hover:underline cursor-pointer"
@@ -91,7 +94,7 @@ export const PublicationsSection: React.FC<PublicationsSectionProps> = ({
                           </button>
 
                           {showPhdAbstract && (
-                            <div className="mt-2 p-3 bg-secondary/50 border border-border/80 rounded-lg space-y-2 text-[11px] text-muted-foreground leading-relaxed animate-in fade-in duration-200">
+                            <Box className="mt-2 p-3 bg-secondary/50 border border-border/80 rounded-lg space-y-2 text-[11px] text-muted-foreground leading-relaxed animate-in fade-in duration-200">
                               <p className="font-semibold text-foreground">
                                 Reliably Arranging Objects: A Conformant Planning Approach to Robot Manipulation
                               </p>
@@ -106,20 +109,20 @@ export const PublicationsSection: React.FC<PublicationsSectionProps> = ({
                                   <strong className="text-foreground">Conformant Planning:</strong> Robust belief-state estimation without mid-course vision sensing.
                                 </li>
                               </ul>
-                            </div>
+                            </Box>
                           )}
-                        </div>
+                        </Box>
                       )}
                     </li>
                   );
                 })}
               </ul>
-            </div>
+            </Stack>
           );
         })}
-      </div>
+      </Stack>
 
-      <div className="mt-6 pt-3 border-t border-border/40 flex flex-wrap items-center justify-between gap-3 print:hidden">
+      <Box className="mt-6 pt-3 border-t border-border/40 flex flex-wrap items-center justify-between gap-3 print:hidden">
         <button
           onClick={() => setShowAll(!showAll)}
           aria-expanded={showAll}
@@ -139,7 +142,7 @@ export const PublicationsSection: React.FC<PublicationsSectionProps> = ({
           <span>Full Google Scholar Profile</span>
           <ExternalLink className="w-3 h-3" />
         </a>
-      </div>
+      </Box>
     </section>
   );
 };
