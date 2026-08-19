@@ -20,7 +20,7 @@ const AcademicCard: React.FC<AcademicCardProps> = ({ paper }) => {
       <Stack gap="3">
         {/* Header - Title, Type, Venue, Year */}
         <Stack gap="2">
-          <div className="flex items-center justify-between gap-2 flex-wrap">
+          <Stack direction="row" align="center" justify="between" className="flex-wrap gap-2">
             <Stack direction="row" gap="2" align="center">
               <Box className="h-7 w-7 rounded-lg bg-accent/10 flex items-center justify-center border border-accent/20 shrink-0">
                 {isThesis ? <GraduationCap className="h-4 w-4 text-accent" /> : <Award className="h-4 w-4 text-accent" />}
@@ -35,7 +35,7 @@ const AcademicCard: React.FC<AcademicCardProps> = ({ paper }) => {
                 {paper.year}
               </span>
             </Stack>
-          </div>
+          </Stack>
 
           <h3 className="text-base font-bold text-text-main font-display leading-snug">
             {paper.title}
@@ -55,7 +55,7 @@ const AcademicCard: React.FC<AcademicCardProps> = ({ paper }) => {
           )}
 
           {/* Tags with Progressive Disclosure */}
-          <div className="flex flex-wrap items-center gap-1.5 pt-1">
+          <Stack direction="row" align="center" className="flex-wrap gap-1.5 pt-1">
             {visibleTags.map((tag) => (
               <span
                 key={tag}
@@ -72,10 +72,10 @@ const AcademicCard: React.FC<AcademicCardProps> = ({ paper }) => {
                 +{hiddenTagsCount} more
               </button>
             )}
-          </div>
+          </Stack>
 
           {/* Action Controls */}
-          <div className="flex items-center justify-between gap-2 pt-1">
+          <Stack direction="row" align="center" justify="between" gap="2" className="pt-1">
             <button
               onClick={() => setIsExpanded(!isExpanded)}
               className="inline-flex items-center space-x-1 text-xs font-semibold text-accent hover:underline focus:outline-none"
@@ -96,7 +96,7 @@ const AcademicCard: React.FC<AcademicCardProps> = ({ paper }) => {
                 <ExternalLink className="h-3 w-3" />
               </a>
             )}
-          </div>
+          </Stack>
         </Stack>
       </Stack>
     </Box>

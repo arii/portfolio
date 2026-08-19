@@ -18,6 +18,7 @@ export interface ResearchTool {
   subtitle?: string;
   description: string;
   category: string;
+  domainGroup?: string;
   taxonomyBucket?: 'product' | 'infrastructure';
   status: string;
   tags: string[];

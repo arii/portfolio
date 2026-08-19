@@ -2,7 +2,7 @@ import { ResearchTool } from '@/types/research';
 
 export type DomainGroup = 'Autonomous Systems & Robotics' | 'Accessibility & Tools' | 'MIT Initiatives & Community';
 
-export const autonomousTools: (ResearchTool & { domainGroup: DomainGroup })[] = [
+export const autonomousTools: ResearchTool[] = [
   {
     id: 'bwsi-racecar',
     taxonomyBucket: 'infrastructure',

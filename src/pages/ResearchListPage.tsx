@@ -29,8 +29,7 @@ const ResearchListPage: React.FC<ResearchListPageProps> = ({ onNavigate }) => {
   }, [activeFilter]);
 
   const autonomousTools = useMemo(() => {
-    return (RESEARCH_AUTONOMOUS as (typeof RESEARCH_AUTONOMOUS[number] & { domainGroup?: DomainGroup })[])
-      .filter((tool) => matchesCategory(tool.tags, tool.category, activeFilter));
+    return RESEARCH_AUTONOMOUS.filter((tool) => matchesCategory(tool.tags, tool.category, activeFilter));
   }, [activeFilter]);
 
   const domainGroups = useMemo(() => {
@@ -56,7 +55,7 @@ const ResearchListPage: React.FC<ResearchListPageProps> = ({ onNavigate }) => {
         <p className="text-text-dim max-w-2xl text-sm sm:text-base leading-relaxed">Planning under uncertainty, conformant belief-state manipulation, multi-robot coordination, and hardware automation systems.</p>
 
         {/* Filter Bar */}
-        <Box className="pt-2 sticky top-16 z-30 bg-slate-950/80 backdrop-blur-md py-2 -mx-2 px-2 border-y border-line/30 flex items-center gap-2 overflow-x-auto no-scrollbar">
+        <Stack direction="row" align="center" gap="2" className="pt-2 sticky top-16 z-30 bg-slate-950/80 backdrop-blur-md py-2 -mx-2 px-2 border-y border-line/30 overflow-x-auto no-scrollbar">
           <Filter className="h-4 w-4 text-accent shrink-0 ml-1" />
           <span className="text-xs font-bold text-text-dim uppercase tracking-wider shrink-0 mr-1">Filter:</span>
           {FILTER_CATEGORIES.map((cat) => (
@@ -72,7 +71,7 @@ const ResearchListPage: React.FC<ResearchListPageProps> = ({ onNavigate }) => {
               {cat}
             </button>
           ))}
-        </Box>
+        </Stack>
       </header>
 
       {/* Flagship Section: Doctoral & Graduate Theses */}
