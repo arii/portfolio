@@ -35,7 +35,84 @@ runs:
         fi
       shell: bash
 
+    - name: Check Max Reviews Limit
+      id: check_reviews
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.github_token }}
+        PR_NUMBER: ${{ github.event.pull_request.number }}
+        GITHUB_REPOSITORY: ${{ github.repository }}
+        MAX_REVIEWS: ${{ inputs.max_reviews || '3' }}
+      run: |
+        if [ -z "$PR_NUMBER" ]; then
+          echo "Not a pull request. Skipping max reviews check."
+          echo "skip=false" >> "$GITHUB_OUTPUT"
+          exit 0
+        fi
+
+        cat << 'EOF' > check_reviews.py
+        import os
+        import json
+        import urllib.request
+        import re
+        import sys
+
+        github_token = os.environ.get('GH_TOKEN')
+        github_repo = os.environ.get('GITHUB_REPOSITORY')
+        pr_number = os.environ.get('PR_NUMBER')
+        try:
+            max_reviews = int(os.environ.get('MAX_REVIEWS', '3'))
+        except ValueError:
+            max_reviews = 3
+
+        fetch_url = f"https://api.github.com/repos/{github_repo}/issues/{pr_number}/comments?per_page=100"
+        existing_body = ''
+
+        while fetch_url:
+            req = urllib.request.Request(fetch_url, headers={
+                'Authorization': f'Bearer {github_token}',
+                'Accept': 'application/vnd.github.v3+json'
+            })
+            try:
+                with urllib.request.urlopen(req) as response:
+                    comments = json.loads(response.read().decode('utf-8'))
+                    for c in comments:
+                        if c.get('user', {}).get('type') == 'Bot' and '## Deployment Impact Analysis' in c.get('body', ''):
+                            existing_body = c.get('body', '')
+
+                    link_header = response.headers.get('Link')
+                    fetch_url = None
+                    if link_header:
+                        links = link_header.split(',')
+                        for link in links:
+                            if 'rel="next"' in link:
+                                fetch_url = link[link.find('<')+1 : link.find('>')]
+                                break
+            except Exception as e:
+                print(f"Error fetching comments: {e}")
+                break
+
+        if existing_body:
+            match = re.search(r'<!-- ai-review-count: (\d+) -->', existing_body)
+            if match:
+                current_count = int(match.group(1))
+                if current_count >= max_reviews:
+                    print(f"Max reviews ({max_reviews}) reached. Current count: {current_count}.")
+                    with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+                        f.write('skip=true\n')
+                    sys.exit(0)
+                else:
+                    print(f"Review count is {current_count} (max {max_reviews}).")
+
+        with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+            f.write('skip=false\n')
+        EOF
+
+        python3 check_reviews.py
+        rm check_reviews.py
+
     - name: Run Impact Analysis via Docker Container
+      if: steps.check_reviews.outputs.skip != 'true'
       shell: bash
       env:
         GITHUB_TOKEN: ${{ inputs.github_token }}
@@ -56,7 +133,7 @@ runs:
           ai review "${PR_NUMBER}" || echo "::warning::Agent code review returned non-zero, likely due to approval permission limitations"
 
     - name: Send impact analysis to Jules session
-      if: always()
+      if: always() && steps.check_reviews.outputs.skip != 'true'
       env:
         TASK_ID: ${{ steps.parse_jules.outputs.task_id }}
         JULES_API_KEY: ${{ inputs.jules_api_key }}
