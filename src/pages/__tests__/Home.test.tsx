@@ -31,7 +31,7 @@ describe('Home Page', () => {
 
     expect(
       screen.getByText((content) =>
-        content.includes('I am an MIT CSAIL roboticist and have worked in the industry')
+        content.includes('MIT CSAIL PhD with industry experience')
       )
     ).toBeInTheDocument();
   });

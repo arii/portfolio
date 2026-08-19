@@ -20,6 +20,7 @@ export interface FocusArea {
   title: string;
   description: string;
   actionText: string;
+  discipline: 'robotics' | 'devai' | 'both';
 }
 
 export interface FeatureCallout {
@@ -29,12 +30,18 @@ export interface FeatureCallout {
   iconName: 'compass' | 'workflow' | 'server';
 }
 
+export interface CompanyBadge {
+  name: string;
+  role: string;
+}
+
 export interface HeroData {
   badge: string;
   name: string;
   title: string;
   subheading: string;
   bioParagraphs: string[];
+  companies: CompanyBadge[];
 }
 
 export const HERO_DATA: HeroData = {
@@ -43,9 +50,14 @@ export const HERO_DATA: HeroData = {
   title: 'Roboticist & Senior Software Engineer',
   subheading:
     'I architect reliable autonomous systems for physical robots and build agentic workflows that autonomously engineer full-stack software.',
+  companies: [
+    { name: 'MIT CSAIL', role: 'PhD Robotics' },
+    { name: 'Robust AI', role: 'Behavior Lead' },
+    { name: 'Waymo', role: 'Planning Eng' },
+    { name: 'Civ Robotics', role: 'State Est Lead' },
+  ],
   bioParagraphs: [
-    'I am an MIT CSAIL roboticist and have worked in the industry since completing my PhD on reliable robot manipulation combining learning and planning techniques. At Robust AI, I was the tech lead for the behavior team, developing reactive social navigation behaviors. At Waymo, I worked on the planning team to reduce traffic congestion during passenger pickup and drop-off. Most recently at CIV, I built and optimized production state estimation pipelines to increase fleet uptime.',
-    'I have spent the past year building stateful, multi-agent orchestrations. Because autonomous systems require strict code health, I use these workflows to engineer feature-rich applications and enforce continuous architectural standards—bringing robotics-grade reliability to DevAI.',
+    'MIT CSAIL PhD with industry experience leading behavior, motion planning, and state estimation across autonomous vehicles and industrial fleets. Currently applying robotics-grade software reliability to stateful multi-agent systems and DevAI tooling.',
   ],
 };
 
@@ -76,18 +88,21 @@ export const FOCUS_AREAS: FocusArea[] = [
     title: "Products I've Shipped",
     description: 'Live full-stack consumer apps and platforms built with autonomous agent workflows.',
     actionText: 'View Products',
+    discipline: 'devai',
   },
   {
     id: 'infrastructure',
     title: 'Engineering Infrastructure',
     description: 'Autonomous code-review agents, CI pipelines, and quality gates enforcing strict software standards.',
     actionText: 'Inspect Tooling',
+    discipline: 'devai',
   },
   {
     id: 'research',
     title: 'Articles & Research',
     description: 'System architecture breakdowns, engineering post-mortems, and DevAI case studies.',
     actionText: 'Read Studies',
+    discipline: 'robotics',
   },
 ];
 

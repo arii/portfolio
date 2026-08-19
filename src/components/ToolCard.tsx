@@ -1,4 +1,5 @@
 import React from 'react';
+import { ArrowRight } from 'lucide-react';
 import { ResearchTool } from '@/types/research';
 
 interface ToolCardProps {
@@ -20,9 +21,12 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
   };
 
   const content = (
-    <div className={`p-4 bg-surface/50 border border-line rounded-2xl transition-all space-y-2 ${isClickable ? 'hover:border-accent cursor-pointer group' : ''}`}>
+    <div className={`p-4 bg-surface/50 border border-line rounded-2xl transition-all duration-200 space-y-2 ${isClickable ? 'hover:border-accent hover:-translate-y-0.5 cursor-pointer group' : ''}`}>
       <div className="flex justify-between items-start gap-2">
-        <h4 className="font-bold text-text-main text-sm font-display group-hover:text-accent transition-colors">{tool.title}</h4>
+        <div className="flex items-center gap-1.5">
+          <h4 className="font-bold text-text-main text-sm font-display group-hover:text-accent transition-colors">{tool.title}</h4>
+          {isClickable && <ArrowRight className="w-3.5 h-3.5 text-accent opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />}
+        </div>
         <span className="text-[8px] bg-accent/10 text-accent px-1.5 py-0.5 rounded border border-accent/20 shrink-0">
           {tool.status}
         </span>

@@ -27,7 +27,7 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
   const imageSrc = tool.id === 'hrm-flagship' ? 'assets/research/hrm-flagship.png' : tool.id === 'repo-auditor-ai' ? 'assets/research/repo-auditor-ai.png' : tool.image || null;
 
   return (
-    <div className="rounded-3xl border border-line bg-surface p-0 flex flex-col justify-between overflow-hidden transition-all hover:border-accent hover:shadow-glow">
+    <div className="rounded-3xl border border-line bg-surface p-0 flex flex-col justify-between overflow-hidden transition-all duration-200 hover:border-accent hover:-translate-y-0.5 hover:shadow-glow group">
       {tool.customPreview ? (
         <div className="p-6 bg-[#020617] border-b border-line min-h-[140px] flex flex-col justify-center space-y-2">
           <div className="text-accent font-extrabold text-sm tracking-wider font-display">
