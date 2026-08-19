@@ -24,6 +24,7 @@ def is_skipped_verdict(data: dict) -> bool:
     )
 
 
+import re
 import urllib.request
 import urllib.error
 
@@ -147,22 +148,73 @@ def main():
     pr_number = os.environ.get("PR_NUMBER")
 
     if github_token and github_repo and pr_number:
-        url = f"https://api.github.com/repos/{github_repo}/issues/{pr_number}/comments"
+        # First, try to find an existing comment
+        existing_comment_id = None
+        existing_body = ""
+        fetch_url = f"https://api.github.com/repos/{github_repo}/issues/{pr_number}/comments?per_page=100"
+
+        while fetch_url:
+            req_get = urllib.request.Request(fetch_url, headers={
+                "Authorization": f"Bearer {github_token}",
+                "Accept": "application/vnd.github.v3+json"
+            })
+            try:
+                with urllib.request.urlopen(req_get) as response:
+                    comments = json.loads(response.read().decode("utf-8"))
+                    for c in comments:
+                        if c.get("user", {}).get("type") == "Bot" and "## Deployment Impact Analysis" in c.get("body", ""):
+                            existing_comment_id = c.get("id")
+                            existing_body = c.get("body", "")
+                            break
+
+                    if existing_comment_id:
+                        break
+
+                    link_header = response.headers.get("Link")
+                    fetch_url = None
+                    if link_header:
+                        links = link_header.split(",")
+                        for link in links:
+                            if 'rel="next"' in link:
+                                fetch_url = link[link.find("<")+1 : link.find(">")]
+                                break
+            except urllib.error.URLError as e:
+                logger.warning(f"⚠️ Failed to fetch PR comments: {e}")
+                break
+            except Exception as e:
+                logger.warning(f"⚠️ Exception fetching PR comments: {e}")
+                break
+
+        new_count = 1
+        if existing_comment_id:
+            match = re.search(r'<!-- ai-review-count: (\d+) -->', existing_body)
+            if match:
+                new_count = int(match.group(1)) + 1
+
+        final_body = f"<!-- ai-review-count: {new_count} -->\n{body}"
+
+        if existing_comment_id:
+            url = f"https://api.github.com/repos/{github_repo}/issues/comments/{existing_comment_id}"
+            method = "PATCH"
+        else:
+            url = f"https://api.github.com/repos/{github_repo}/issues/{pr_number}/comments"
+            method = "POST"
+
         headers = {
             "Authorization": f"Bearer {github_token}",
             "Accept": "application/vnd.github.v3+json",
             "Content-Type": "application/json"
         }
-        data = json.dumps({"body": body}).encode("utf-8")
-        req = urllib.request.Request(url, data=data, headers=headers, method="POST")
+        data = json.dumps({"body": final_body}).encode("utf-8")
+        req = urllib.request.Request(url, data=data, headers=headers, method=method)
         try:
             with urllib.request.urlopen(req) as response:
-                if response.status == 201:
-                    logger.info("✅ Successfully posted impact analysis to GitHub PR.")
+                if response.status in (200, 201):
+                    logger.info(f"✅ Successfully {'updated' if existing_comment_id else 'posted'} impact analysis to GitHub PR.")
                 else:
-                    logger.warning(f"⚠️ Failed to post to GitHub PR. Status code: {response.status}")
+                    logger.warning(f"⚠️ Failed to {'update' if existing_comment_id else 'post'} to GitHub PR. Status code: {response.status}")
         except urllib.error.URLError as e:
-            logger.warning(f"⚠️ Failed to post comment to GitHub PR: {e}")
+            logger.warning(f"⚠️ Failed to {'update' if existing_comment_id else 'post'} comment to GitHub PR: {e}")
     else:
         logger.warning("⚠️ Missing GITHUB_TOKEN, GITHUB_REPOSITORY, or PR_NUMBER. Skipping GitHub PR comment.")
 
