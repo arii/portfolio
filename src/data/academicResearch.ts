@@ -25,7 +25,7 @@ export const ACADEMIC_PAPERS: AcademicPaper[] = [
   },
   {
     id: 'masters-thesis-2014',
-    title: 'Learning a Strategy for Whole-Arm Grasping',
+    title: 'Learning a Strategy for Whole-Arm Grasping (SWAG)',
     type: "Master's Thesis",
     year: '2014',
     authors: ['Ariel S. Anders'],
@@ -47,7 +47,7 @@ export const ACADEMIC_PAPERS: AcademicPaper[] = [
   },
   {
     id: 'ijrr-2016',
-    title: 'Policy Search for Multi-Robot Coordination under Uncertainty',
+    title: 'Policy Search for Multi-Robot Coordination under Uncertainty (Delivery Bots)',
     type: 'Journal Paper (RSS Best Paper Finalist)',
     year: '2016',
     authors: ['C. Amato', 'G. Konidaris', 'A. Anders', 'G. Cruz', 'J.P. How', 'L.P. Kaelbling'],

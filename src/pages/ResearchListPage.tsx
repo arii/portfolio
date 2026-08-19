@@ -3,65 +3,129 @@ import { ACADEMIC_PAPERS } from '@/data/academicResearch';
 import { RESEARCH_AUTONOMOUS, RESEARCH_THESIS } from '@/data/research-papers';
 import AcademicCard from '@/components/AcademicCard';
 import FlagshipCard from '@/components/FlagshipCard';
-import ToolCard from '@/components/ToolCard';
-import { BookOpen, X, Layers, Wrench } from 'lucide-react';
+import DomainAccordion from '@/components/research/DomainAccordion';
+import { BookOpen, X, Layers, Wrench, Filter } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
+import { DomainGroup } from '@/data/research/autonomousTools';
+import { FilterCategory, FILTER_CATEGORIES, matchesCategory } from '@/utils/researchFilter';
 
 export interface ResearchListPageProps {
   onNavigate: (slug: string) => void;
 }
 
 const ResearchListPage: React.FC<ResearchListPageProps> = ({ onNavigate }) => {
+  const [activeFilter, setActiveFilter] = useState<FilterCategory>('All');
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
 
-  const autonomousTools = useMemo(() => RESEARCH_AUTONOMOUS, []);
-  const thesisTools = useMemo(() => RESEARCH_THESIS, []);
+  const filteredThesis = useMemo(() => {
+    return RESEARCH_THESIS.filter((tool) => matchesCategory(tool.tags, tool.category, activeFilter));
+  }, [activeFilter]);
+
+  const filteredPapers = useMemo(() => {
+    return ACADEMIC_PAPERS.filter((p) => !p.title.includes('PhD Thesis')).filter((paper) =>
+      matchesCategory(paper.tags, paper.type, activeFilter)
+    );
+  }, [activeFilter]);
+
+  const autonomousTools = useMemo(() => {
+    return (RESEARCH_AUTONOMOUS as (typeof RESEARCH_AUTONOMOUS[number] & { domainGroup?: DomainGroup })[])
+      .filter((tool) => matchesCategory(tool.tags, tool.category, activeFilter));
+  }, [activeFilter]);
+
+  const domainGroups = useMemo(() => {
+    const groups: DomainGroup[] = ['Autonomous Systems & Robotics', 'Accessibility & Tools', 'MIT Initiatives & Community'];
+    return groups.map((domain) => ({
+      domain,
+      tools: autonomousTools.filter((t) => t.domainGroup === domain)
+    })).filter((g) => g.tools.length > 0);
+  }, [autonomousTools]);
 
   return (
-    <div className="space-y-12 sm:space-y-16">
+    <div className="space-y-10 sm:space-y-12">
       <Helmet>
         <title>Robotics &amp; Algorithmic Research | Ariel Anders</title>
         <meta name="description" content="Planning under uncertainty, conformant belief-state manipulation, multi-robot coordination, and hardware automation systems." />
-        <meta property="og:title" content="Robotics &amp; Algorithmic Research | Ariel Anders" />
-        <meta property="og:description" content="Planning under uncertainty, conformant belief-state manipulation, multi-robot coordination, and hardware automation systems." />
       </Helmet>
 
-      <header className="space-y-4 max-w-3xl border-b border-line/20 pb-8">
+      <header className="space-y-4 max-w-3xl border-b border-line/20 pb-6">
         <div className="inline-flex items-center space-x-2 bg-accent/10 border border-accent/20 px-3.5 py-1.5 rounded-full text-xs text-accent font-semibold uppercase tracking-wider">
           <span>ACADEMIC &amp; DEEP-TECH ROBOTICS</span>
         </div>
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-text-main leading-tight">Robotics &amp; Algorithmic Research</h1>
         <p className="text-text-dim max-w-2xl text-sm sm:text-base leading-relaxed">Planning under uncertainty, conformant belief-state manipulation, multi-robot coordination, and hardware automation systems.</p>
+
+        {/* Filter Bar */}
+        <div className="pt-2 sticky top-16 z-30 bg-slate-950/80 backdrop-blur-md py-2 -mx-2 px-2 border-y border-line/30 flex items-center gap-2 overflow-x-auto no-scrollbar">
+          <Filter className="h-4 w-4 text-accent shrink-0 ml-1" />
+          <span className="text-xs font-bold text-text-dim uppercase tracking-wider shrink-0 mr-1">Filter:</span>
+          {FILTER_CATEGORIES.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveFilter(cat)}
+              className={`px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
+                activeFilter === cat
+                  ? 'bg-accent text-slate-950 shadow-md font-bold'
+                  : 'bg-surface/80 text-text-dim border border-line hover:text-text-main hover:border-accent'
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
       </header>
 
-      <section className="space-y-8" id="thesis">
-        <div className="border-b border-line pb-3 flex items-center justify-between">
-          <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-text-main flex items-center space-x-2 font-display"><Layers className="h-5 w-5 text-accent" /><span>Doctoral &amp; Graduate Theses</span></h2>
-          <span className="text-xs text-text-dim uppercase tracking-widest">MIT CSAIL</span>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {thesisTools.map((tool) => (<FlagshipCard key={tool.id} tool={tool} onNavigate={onNavigate} onImageClick={setLightboxImage} />))}
-        </div>
-      </section>
+      {/* Flagship Section: Doctoral & Graduate Theses */}
+      {filteredThesis.length > 0 && (
+        <section className="space-y-6" id="thesis">
+          <div className="border-b border-line pb-3 flex items-center justify-between">
+            <h2 className="text-lg sm:text-xl font-bold text-text-main flex items-center space-x-2 font-display">
+              <Layers className="h-5 w-5 text-accent" />
+              <span>Doctoral &amp; Graduate Theses</span>
+            </h2>
+            <span className="text-xs text-text-dim uppercase tracking-widest">MIT CSAIL</span>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredThesis.map((tool) => (
+              <FlagshipCard key={tool.id} tool={tool} onNavigate={onNavigate} onImageClick={setLightboxImage} />
+            ))}
+          </div>
+        </section>
+      )}
 
-      <section className="space-y-8" id="academic">
-        <div className="border-b border-line pb-3 flex items-center justify-between">
-          <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-text-main flex items-center space-x-2 font-display"><BookOpen className="h-5 w-5 text-accent" /><span>Peer-Reviewed Publications</span></h2>
-          <span className="text-xs text-text-dim uppercase tracking-widest">ICRA, IJRR, ISEC</span>
-        </div>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {ACADEMIC_PAPERS.filter(p => !p.title.includes('PhD Thesis')).map((paper) => (<AcademicCard key={paper.id} paper={paper} />))}
-        </div>
-      </section>
+      {/* Publications Section */}
+      {filteredPapers.length > 0 && (
+        <section className="space-y-6" id="academic">
+          <div className="border-b border-line pb-3 flex items-center justify-between">
+            <h2 className="text-lg sm:text-xl font-bold text-text-main flex items-center space-x-2 font-display">
+              <BookOpen className="h-5 w-5 text-accent" />
+              <span>Peer-Reviewed Publications</span>
+            </h2>
+            <span className="text-xs text-text-dim uppercase tracking-widest">ICRA, IJRR, ISEC</span>
+          </div>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {filteredPapers.map((paper) => (
+              <AcademicCard key={paper.id} paper={paper} />
+            ))}
+          </div>
+        </section>
+      )}
 
-      <section className="space-y-8" id="autonomous">
-        <div className="border-b border-line pb-3 flex items-center justify-between">
-          <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-text-main flex items-center space-x-2 font-display"><Wrench className="h-5 w-5 text-accent" /><span>Applied Systems &amp; Infrastructure Projects</span></h2>
-        </div>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {autonomousTools.map((tool) => (<ToolCard key={tool.id} tool={tool} onNavigate={onNavigate} />))}
-        </div>
-      </section>
+      {/* Collapsible Applied Systems Accordions */}
+      {domainGroups.length > 0 && (
+        <section className="space-y-6" id="autonomous">
+          <div className="border-b border-line pb-3 flex items-center justify-between">
+            <h2 className="text-lg sm:text-xl font-bold text-text-main flex items-center space-x-2 font-display">
+              <Wrench className="h-5 w-5 text-accent" />
+              <span>Applied Systems &amp; Infrastructure Projects</span>
+            </h2>
+          </div>
+          <div className="space-y-4">
+            {domainGroups.map(({ domain, tools }) => (
+              <DomainAccordion key={domain} title={domain} tools={tools} onNavigate={onNavigate} forceOpen={activeFilter !== 'All'} />
+            ))}
+          </div>
+        </section>
+      )}
 
       {lightboxImage && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 cursor-zoom-out p-4 backdrop-blur-sm" onClick={() => setLightboxImage(null)}>
