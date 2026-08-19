@@ -5,26 +5,26 @@ import { CareerHighlightsSection, AtAGlanceSidebar } from '@/components/about/Ab
 
 const About: React.FC = () => {
   return (
-    <div className="space-y-12">
-      <header className="space-y-4 border-b border-line/20 pb-8">
-        <div className="inline-flex items-center space-x-2 bg-accent/10 border border-accent/20 px-3 py-1 rounded-full text-xs text-accent font-semibold uppercase tracking-wider">
+    <div className="space-y-8 sm:space-y-12">
+      <header className="space-y-3 border-b border-line/20 pb-6 sm:pb-8">
+        <div className="inline-flex items-center space-x-2 bg-accent/10 border border-accent/20 px-3.5 py-1.5 rounded-full text-xs text-accent font-semibold uppercase tracking-wider">
           <span>Biography</span>
         </div>
-        <h1 className="text-4xl sm:text-5xl font-black tracking-tight text-text-main leading-none">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-text-main leading-tight">
           {profileData.name}
         </h1>
-        <p className="text-xl text-accent font-bold tracking-tight">
+        <p className="text-lg sm:text-xl text-accent font-bold tracking-tight">
           {profileData.role}
         </p>
       </header>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-        <section className="lg:col-span-8 space-y-10 order-2 lg:order-1">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+        <section className="lg:col-span-8 space-y-8 sm:space-y-10 order-2 lg:order-1">
           <div className="space-y-4 bg-surface p-6 sm:p-8 rounded-3xl border border-line">
-            <h2 className="text-2xl font-bold text-text-main pb-3 border-b border-line/30">
+            <h2 className="text-xl sm:text-2xl font-bold text-text-main pb-3 border-b border-line/30">
               Professional Summary
             </h2>
-            <p className="text-text-body leading-relaxed text-base">
+            <p className="text-text-body leading-relaxed text-sm sm:text-base">
               {profileData.bio}
             </p>
           </div>
@@ -42,13 +42,13 @@ const About: React.FC = () => {
           <CareerHighlightsSection highlights={profileData.highlights} />
         </section>
 
-        <aside className="lg:col-span-4 space-y-8 order-1 lg:order-2">
+        <aside className="lg:col-span-4 space-y-6 sm:space-y-8 order-1 lg:order-2">
           <div className="relative group mx-auto lg:mx-0 max-w-sm rounded-3xl overflow-hidden border border-line bg-surface transition-all duration-300">
-            <div className="aspect-square w-full overflow-hidden">
+            <div className="aspect-[4/3] sm:aspect-square max-h-72 sm:max-h-none w-full overflow-hidden">
               <img
                 src={roboticistPhoto}
                 alt="Ariel Anders, PhD - Roboticist and DevAI Engineer"
-                className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
+                className="w-full h-full object-cover object-top transition-all duration-500 group-hover:scale-105"
               />
             </div>
           </div>
@@ -86,7 +86,7 @@ const About: React.FC = () => {
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center space-x-3 text-text-dim hover:text-text-main border border-line bg-surface-alt hover:bg-line p-3.5 rounded-2xl transition-all"
+                    className="flex items-center space-x-3 text-text-dim hover:text-text-main border border-line bg-surface-alt hover:bg-line p-3.5 rounded-2xl transition-all min-h-[44px]"
                   >
                     <Icon className="h-4 w-4 text-accent shrink-0" />
                     <span className="text-sm font-bold">{social.label}</span>

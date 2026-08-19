@@ -52,14 +52,14 @@ export const ResumeHeader: React.FC<ResumeHeaderProps> = ({
   return (
     <header className="space-y-4 border-b border-border/60 pb-8 print:border-b-2 print:border-black print:pb-6">
       <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
-        <div>
-          <div className="inline-flex items-center space-x-2 bg-secondary border border-border px-3 py-1 rounded-full text-xs text-foreground font-semibold uppercase tracking-wider print:hidden mb-4">
+        <div className="space-y-2">
+          <div className="inline-flex items-center space-x-2 bg-secondary border border-border px-3.5 py-1.5 rounded-full text-xs text-foreground font-semibold uppercase tracking-wider print:hidden mb-2">
             <span>Interactive Resume</span>
           </div>
-          <h1 className="text-4xl sm:text-5xl font-black tracking-tight text-foreground leading-none print:text-black">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-foreground leading-tight print:text-black">
             {name}
           </h1>
-          <p className="text-xl text-primary font-bold tracking-tight mt-2 print:text-gray-800">
+          <p className="text-lg sm:text-xl text-primary font-bold tracking-tight print:text-gray-800">
             {title}
           </p>
         </div>
@@ -69,7 +69,7 @@ export const ResumeHeader: React.FC<ResumeHeaderProps> = ({
             href={pdfUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center space-x-2 bg-foreground text-background hover:bg-foreground/90 transition-colors px-4 py-2 rounded-lg text-sm font-semibold cursor-pointer"
+            className="inline-flex items-center space-x-2 bg-foreground text-background hover:bg-foreground/90 transition-colors px-4 py-2.5 rounded-lg text-sm font-semibold cursor-pointer min-h-[44px]"
           >
             <Download className="w-4 h-4" />
             <span>View PDF</span>
@@ -89,7 +89,7 @@ export const ResumeHeader: React.FC<ResumeHeaderProps> = ({
             href={social.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-secondary/80 text-foreground border border-border/60 hover:border-primary hover:text-primary transition-all"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2.5 text-xs font-semibold rounded-lg bg-secondary/80 text-foreground border border-border/60 hover:border-primary hover:text-primary transition-all min-h-[44px]"
           >
             <SocialIcon type={social.type} />
             <span>{social.label}</span>

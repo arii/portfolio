@@ -69,7 +69,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
             <div className="pt-2">
               <button
                 onClick={() => handleNav('portfolio')}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold transition-all duration-200 shadow-md text-sm sm:text-base cursor-pointer"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold transition-all duration-200 shadow-md text-sm sm:text-base cursor-pointer min-h-[44px]"
               >
                 <span>View portfolio</span>
                 <ArrowRight className="w-4 h-4" />
