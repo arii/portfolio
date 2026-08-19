@@ -67,6 +67,7 @@ runs:
             -e GITHUB_TOKEN="${GITHUB_TOKEN}" \
             -e GITHUB_REPOSITORY="${GITHUB_REPOSITORY}" \
             -e JULES_API_KEY="${JULES_API_KEY}" \
+            -e PR_NUMBER="${PR_NUMBER}" \
             -e TASK_ID="${TASK_ID}" \
             -e PR_NUMBER="${PR_NUMBER}" \
             -v "${{ github.workspace }}":/github/workspace \

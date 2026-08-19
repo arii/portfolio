@@ -1,14 +1,19 @@
 # pylint: disable=invalid-name,logging-fstring-interpolation,missing-docstring,too-many-branches,too-many-locals,too-many-statements,wrong-import-order
-from dev_tools.services.jules import JulesClient
 import glob
 import json
 import logging
 import os
 import sys
+import urllib.request
+import urllib.error
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+try:
+    from dev_tools.services.jules import JulesClient
+except ImportError:
+    JulesClient = None
 
 def is_skipped_review(content: str) -> bool:
     lines = [line.strip() for line in content.splitlines() if line.strip()]
@@ -23,23 +28,59 @@ def is_skipped_verdict(data: dict) -> bool:
         and data.get("passed") is True
     )
 
+def has_existing_comment(repo: str, pr_number: str, token: str) -> bool:
+    url = f"https://api.github.com/repos/{repo}/issues/{pr_number}/comments"
+    req = urllib.request.Request(url, headers={
+        "Authorization": f"Bearer {token}",
+        "Accept": "application/vnd.github.v3+json",
+        "X-GitHub-Api-Version": "2022-11-28"
+    })
+    try:
+        with urllib.request.urlopen(req) as response:
+            if response.status == 200:
+                comments = json.loads(response.read().decode('utf-8'))
+                for comment in comments:
+                    if comment.get("body", "").startswith("## Deployment Impact Analysis"):
+                        return True
+    except Exception as e:
+        logger.error(f"Failed to fetch PR comments: {e}")
+    return False
 
-import urllib.request
-import urllib.error
+def post_pr_comment(repo: str, pr_number: str, token: str, body: str):
+    url = f"https://api.github.com/repos/{repo}/issues/{pr_number}/comments"
+    data = json.dumps({"body": body}).encode('utf-8')
+    req = urllib.request.Request(url, data=data, headers={
+        "Authorization": f"Bearer {token}",
+        "Accept": "application/vnd.github.v3+json",
+        "X-GitHub-Api-Version": "2022-11-28",
+        "Content-Type": "application/json"
+    }, method="POST")
+    try:
+        with urllib.request.urlopen(req) as response:
+            if response.status == 201:
+                logger.info("Successfully posted impact analysis to PR.")
+            else:
+                logger.warning(f"Failed to post PR comment, status: {response.status}")
+    except Exception as e:
+        logger.error(f"Failed to post PR comment: {e}")
+
 
 def main():
     task_id = os.environ.get("TASK_ID")
-    if not task_id:
-        logger.info("No TASK_ID provided in environment. Will skip sending to Jules API.")
-        client = None
+    repo = os.environ.get("GITHUB_REPOSITORY")
+    pr_number = os.environ.get("PR_NUMBER")
+    token = os.environ.get("GITHUB_TOKEN")
+
+    already_reviewed = False
+    if repo and pr_number and token:
+        if has_existing_comment(repo, pr_number, token):
+            logger.info("PR already has a Deployment Impact Analysis comment. Skipping further sending.")
+            already_reviewed = True
     else:
-        session_id = f"sessions/{task_id}"
-        logger.info(f"Targeting session: {session_id}")
-        try:
-            client = JulesClient()
-        except Exception as e:
-            logger.error(f"Failed to initialize JulesClient: {e}")
-            sys.exit(1)
+        logger.warning("Missing GITHUB_REPOSITORY, PR_NUMBER, or GITHUB_TOKEN environment variables. Cannot check for existing comments.")
+
+    if already_reviewed:
+        sys.exit(0)
 
     artifacts_dir = "artifacts"
 
@@ -130,41 +171,26 @@ def main():
         logger.info("No valid reviews found in artifacts or logs. Skipping sending impact analysis.")
         sys.exit(0)
 
-    # Send the message to Jules
-    if client:
-        try:
-            result = client.send_message(session_id, body)
-            if result.get("status") != "success":
-                logger.warning(f"⚠️ Failed to send message to Jules API (non-blocking): {result}")
-            else:
-                logger.info(f"✅ Sent impact analysis to {session_id}")
-        except Exception as e:
-            logger.warning(f"⚠️ Exception while sending message to Jules API (non-blocking): {e}")
-
     # Post comment to GitHub PR
-    github_token = os.environ.get("GITHUB_TOKEN")
-    github_repo = os.environ.get("GITHUB_REPOSITORY")
-    pr_number = os.environ.get("PR_NUMBER")
+    if repo and pr_number and token:
+        post_pr_comment(repo, pr_number, token, body)
 
-    if github_token and github_repo and pr_number:
-        url = f"https://api.github.com/repos/{github_repo}/issues/{pr_number}/comments"
-        headers = {
-            "Authorization": f"Bearer {github_token}",
-            "Accept": "application/vnd.github.v3+json",
-            "Content-Type": "application/json"
-        }
-        data = json.dumps({"body": body}).encode("utf-8")
-        req = urllib.request.Request(url, data=data, headers=headers, method="POST")
-        try:
-            with urllib.request.urlopen(req) as response:
-                if response.status == 201:
-                    logger.info("✅ Successfully posted impact analysis to GitHub PR.")
+    # Send the message to Jules
+    if task_id:
+        session_id = f"sessions/{task_id}"
+        logger.info(f"Targeting session: {session_id}")
+        if JulesClient:
+            try:
+                client = JulesClient()
+                result = client.send_message(session_id, body)
+                if result.get("status") != "success":
+                    logger.warning(f"⚠️ Failed to send message to Jules API (non-blocking): {result}")
                 else:
-                    logger.warning(f"⚠️ Failed to post to GitHub PR. Status code: {response.status}")
-        except urllib.error.URLError as e:
-            logger.warning(f"⚠️ Failed to post comment to GitHub PR: {e}")
-    else:
-        logger.warning("⚠️ Missing GITHUB_TOKEN, GITHUB_REPOSITORY, or PR_NUMBER. Skipping GitHub PR comment.")
+                    logger.info(f"✅ Sent impact analysis to {session_id}")
+            except Exception as e:
+                logger.warning(f"⚠️ Exception while sending message to Jules API (non-blocking): {e}")
+        else:
+            logger.warning("JulesClient could not be imported. Cannot send to Jules.")
 
 
 if __name__ == "__main__":
