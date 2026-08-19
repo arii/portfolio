@@ -40,8 +40,8 @@ describe('About Page Content Ownership', () => {
 
     expect(screen.getByText('UCSC (Computer Engineering, BS)')).toBeInTheDocument();
     expect(screen.getByText('2008 – 2012')).toBeInTheDocument();
-    expect(screen.getByText('2012 – 2020')).toBeInTheDocument();
-    expect(screen.getByText('2025 – 2026')).toBeInTheDocument();
+    expect(screen.getByText('2012 – 2019')).toBeInTheDocument();
+    expect(screen.getByText('2019 – 2022')).toBeInTheDocument();
     expect(screen.getByText('2026 – Present')).toBeInTheDocument();
 
     expect(screen.getByText('Civ Robotics')).toBeInTheDocument();
