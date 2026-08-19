@@ -8,7 +8,7 @@ import { BookOpen, X, Layers, Wrench, Filter } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import { DomainGroup } from '@/data/research/autonomousTools';
 import { FilterCategory, FILTER_CATEGORIES, matchesCategory } from '@/utils/researchFilter';
-import { Box, Stack, Grid } from '@/layouts/Primitives';
+import { Box, Stack } from '@/layouts/Primitives';
 
 export interface ResearchListPageProps {
   onNavigate: (slug: string) => void;
@@ -41,7 +41,7 @@ const ResearchListPage: React.FC<ResearchListPageProps> = ({ onNavigate }) => {
   }, [autonomousTools]);
 
   return (
-    <Stack gap="10" className="sm:space-y-12">
+    <Stack gap="10" className="sm:space-y-12 max-w-6xl mx-auto w-full px-4 sm:px-6">
       <Helmet>
         <title>Robotics &amp; Algorithmic Research | Ariel Anders</title>
         <meta name="description" content="Planning under uncertainty, conformant belief-state manipulation, multi-robot coordination, and hardware automation systems." />
@@ -84,11 +84,11 @@ const ResearchListPage: React.FC<ResearchListPageProps> = ({ onNavigate }) => {
             </h2>
             <span className="text-xs text-text-dim uppercase tracking-widest">MIT CSAIL</span>
           </Box>
-          <Grid cols="1 md:grid-cols-2 lg:grid-cols-3" gap="6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {filteredThesis.map((tool) => (
               <FlagshipCard key={tool.id} tool={tool} onNavigate={onNavigate} onImageClick={setLightboxImage} />
             ))}
-          </Grid>
+          </div>
         </Stack>
       )}
 
@@ -102,11 +102,11 @@ const ResearchListPage: React.FC<ResearchListPageProps> = ({ onNavigate }) => {
             </h2>
             <span className="text-xs text-text-dim uppercase tracking-widest">ICRA, IJRR, ISEC</span>
           </Box>
-          <Grid cols="1 md:grid-cols-2 lg:grid-cols-3" gap="4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {filteredPapers.map((paper) => (
               <AcademicCard key={paper.id} paper={paper} />
             ))}
-          </Grid>
+          </div>
         </Stack>
       )}
 

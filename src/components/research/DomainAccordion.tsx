@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ChevronDown, ChevronUp, Folder } from 'lucide-react';
 import ToolCard from '@/components/ToolCard';
 import { ResearchTool } from '@/types/research';
-import { Box, Stack, Grid } from '@/layouts/Primitives';
+import { Box, Stack } from '@/layouts/Primitives';
 
 interface DomainAccordionProps {
   title: string;
@@ -52,11 +52,11 @@ const DomainAccordion: React.FC<DomainAccordionProps> = ({
 
       {expanded && (
         <Box className="p-4 pt-0 border-t border-line/50 mt-1">
-          <Grid cols="1 md:grid-cols-2 lg:grid-cols-3" gap="4" className="pt-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-3">
             {tools.map((tool) => (
               <ToolCard key={tool.id} tool={tool} onNavigate={onNavigate} />
             ))}
-          </Grid>
+          </div>
         </Box>
       )}
     </Box>
