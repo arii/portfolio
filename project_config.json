@@ -1,6 +1,10 @@
 {
   "packageName": "portfolio",
   "github_repo": "arii/portfolio",
-  "vite_base_path": "/portfolio/",
-  "version": "1.0.0"
+  "vite_base_path": "/",
+  "code-review-chain": {
+    "primary": "gpt-4o",
+    "fallbacks": ["deepseek-r1", "llama-3.3-70b-instruct"],
+    "max_retries": 3
+  }
 }

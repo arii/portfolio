@@ -1,0 +1,52 @@
+name: CI Repair Orchestrator
+on:
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: 'PR or Issue number to repair manually'
+        required: false
+      mode:
+        description: 'Execution Mode (auto or manual)'
+        required: true
+        default: 'manual'
+        type: choice
+        options:
+          - manual
+          - auto
+  workflow_run:
+    workflows: ["CI Pipeline"]
+    types: [completed]
+    branches:
+      - main
+
+jobs:
+  repair:
+    name: Execute Repair
+    runs-on: ubuntu-latest
+    if: |
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.mode == 'manual') ||
+      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'failure')
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Resolve Execution Mode
+        id: resolve
+        env:
+          INPUT_MODE: ${{ github.event.inputs.mode }}
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          if [ "$EVENT_NAME" == "workflow_dispatch" ]; then
+            echo "mode=$INPUT_MODE" >> "$GITHUB_OUTPUT"
+          else
+            echo "mode=auto" >> "$GITHUB_OUTPUT"
+          fi
+        shell: bash
+
+      - name: CI Repair Action
+        uses: ./.github/actions/ci-repair
+        with:
+          mode: ${{ steps.resolve.outputs.mode }}
+          issue_number: ${{ github.event.inputs.issue_number }}
+          jules_api_key: ${{ secrets.JULES_API_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
