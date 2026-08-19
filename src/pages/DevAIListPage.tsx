@@ -47,9 +47,6 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
       </Helmet>
 
       <header className="space-y-4 max-w-3xl border-b border-line/20 pb-8">
-        <div className="inline-flex items-center space-x-2 bg-accent/10 border border-accent/20 px-3.5 py-1.5 rounded-full text-xs text-accent font-semibold uppercase tracking-wider">
-          <span>APPLIED AI &amp; PRODUCTION ENGINEERING</span>
-        </div>
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-text-main leading-tight">DevAI &amp; Software Systems</h1>
         <p className="text-text-dim max-w-2xl text-sm sm:text-base leading-relaxed">System architectures, agentic CI/CD pipelines, autonomous developer tooling, and shipped production applications.</p>
       </header>
