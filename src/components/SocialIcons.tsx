@@ -37,18 +37,26 @@ export const GithubIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
 
 export const BoomTickIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   <svg
-    viewBox="0 0 24 24"
+    viewBox="0 0 100 100"
     fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
+    xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
-    <path d="M5 4v16" />
-    <path d="M5 12c2.5 0 4.5 1.8 4.5 4s-2 4-4.5 4H5" />
-    <path d="M16 6v10c0 2 1.5 3 3.5 3" />
-    <path d="M13 10h6" />
+    <rect width="100" height="100" rx="22" fill="#090d16" />
+    <text
+      x="16"
+      y="76"
+      fill="#ffffff"
+      fontSize="72"
+      fontWeight="900"
+      fontFamily="system-ui, -apple-system, sans-serif"
+    >
+      b
+    </text>
+    <path
+      d="M62 25 L76 15 V35 H88 V48 H76 V68 C76 76 79 79 85 79 C87 79 89 78.5 91 78 V89 C88 90 83 91 78 91 C67 91 62 83 62 69 V48 H53 V35 H62 V25 Z"
+      fill="#06b6d4"
+    />
   </svg>
 );
 
