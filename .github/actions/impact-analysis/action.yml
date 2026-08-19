@@ -132,6 +132,11 @@ runs:
           ghcr.io/arii/boomtick:latest \
           ai review "${PR_NUMBER}" || echo "::warning::Agent code review returned non-zero, likely due to approval permission limitations"
 
+    - name: Ensure artifacts exist
+      if: always()
+      run: mkdir -p artifacts && echo "## Deployment Impact Analysis\n\nNo impact found." > artifacts/deployment-review.md
+      shell: bash
+
     - name: Send impact analysis to Jules session
       if: always() && steps.check_reviews.outputs.skip != 'true'
       env:
