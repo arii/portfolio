@@ -153,16 +153,37 @@ def main():
             "Accept": "application/vnd.github.v3+json",
             "Content-Type": "application/json"
         }
-        data = json.dumps({"body": body}).encode("utf-8")
-        req = urllib.request.Request(url, data=data, headers=headers, method="POST")
+
+        MAX_REVIEWS = 1
+        existing_reviews = 0
+
+        # Check existing comments
         try:
-            with urllib.request.urlopen(req) as response:
-                if response.status == 201:
-                    logger.info("✅ Successfully posted impact analysis to GitHub PR.")
+            get_req = urllib.request.Request(url, headers=headers, method="GET")
+            with urllib.request.urlopen(get_req) as response:
+                if response.status == 200:
+                    comments = json.loads(response.read().decode("utf-8"))
+                    for comment in comments:
+                        if "## Deployment Impact Analysis" in comment.get("body", ""):
+                            existing_reviews += 1
                 else:
-                    logger.warning(f"⚠️ Failed to post to GitHub PR. Status code: {response.status}")
+                    logger.warning(f"⚠️ Failed to fetch existing comments. Status code: {response.status}")
         except urllib.error.URLError as e:
-            logger.warning(f"⚠️ Failed to post comment to GitHub PR: {e}")
+            logger.warning(f"⚠️ Failed to fetch comments from GitHub PR: {e}")
+
+        if existing_reviews >= MAX_REVIEWS:
+            logger.info(f"⏭️ Skipping GitHub PR comment: Found {existing_reviews} existing Deployment Impact Analysis comments (limit is {MAX_REVIEWS}).")
+        else:
+            data = json.dumps({"body": body}).encode("utf-8")
+            req = urllib.request.Request(url, data=data, headers=headers, method="POST")
+            try:
+                with urllib.request.urlopen(req) as response:
+                    if response.status == 201:
+                        logger.info("✅ Successfully posted impact analysis to GitHub PR.")
+                    else:
+                        logger.warning(f"⚠️ Failed to post to GitHub PR. Status code: {response.status}")
+            except urllib.error.URLError as e:
+                logger.warning(f"⚠️ Failed to post comment to GitHub PR: {e}")
     else:
         logger.warning("⚠️ Missing GITHUB_TOKEN, GITHUB_REPOSITORY, or PR_NUMBER. Skipping GitHub PR comment.")
 
