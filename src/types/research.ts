@@ -38,4 +38,8 @@ export interface ResearchTool {
     headline: { text: string; accent?: string }[];
     tagline: string;
   };
+  parentFlagship?: {
+    id: string;
+    title: string;
+  };
 }
