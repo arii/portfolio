@@ -46,5 +46,12 @@ describe('About Page Content Ownership', () => {
 
     expect(screen.getByText('Civ Robotics')).toBeInTheDocument();
     expect(screen.getByText('DevAI')).toBeInTheDocument();
+
+    expect(
+      screen.getByText((content) => content.includes('First roboticist and behavior team lead'))
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText((content) => content.includes('motion generation platform team'))
+    ).toBeInTheDocument();
   });
 });
