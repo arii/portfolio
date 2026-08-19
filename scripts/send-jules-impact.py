@@ -12,7 +12,25 @@ logger = logging.getLogger(__name__)
 
 def is_skipped_review(content: str) -> bool:
     lines = [line.strip() for line in content.splitlines() if line.strip()]
-    return len(lines) == 2 and lines[1].startswith("Skipped:")
+    if len(lines) == 2 and lines[1].startswith("Skipped:"):
+        return True
+    if "Failed to get a parseable response from AI" in content:
+        return True
+    
+    # Skip Not Approved reviews that have no comments/issues
+    import re
+    try:
+        match = re.search(r'```json\s*(.*?)\s*```', content, re.DOTALL)
+        if match:
+            data = json.loads(match.group(1))
+            recommendation = data.get("recommendation", "")
+            comments = data.get("comments", [])
+            if recommendation == "Not Approved" and not comments:
+                return True
+    except Exception:
+        pass
+        
+    return False
 
 
 def is_skipped_verdict(data: dict) -> bool:

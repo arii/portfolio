@@ -59,7 +59,7 @@ export const flagshipTools: ResearchTool[] = [
     status: 'Completed (2019)',
     tags: ['PR2', 'Conformant Planning', 'Belief State', 'Manipulation', 'MIT CSAIL'],
     isFlagship: true,
-    image: 'assets/research/phd/sixblock.png',
+    image: '/assets/research/phd/sixblock.png',
     imageAlt: 'PR2 robot reliably arranging blocks using conformant planning without external sensing feedback',
     externalUrl: 'https://dspace.mit.edu/handle/1721.1/122822',
     externalLinkDisplayLabel: 'MIT DSpace Thesis',

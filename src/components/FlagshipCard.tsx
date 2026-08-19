@@ -1,6 +1,7 @@
 import React from 'react';
 import { ExternalLink, ArrowRight, FlaskConical, Activity, Server, FileText, ShoppingBag, Cpu } from 'lucide-react';
 import { ResearchTool } from '@/types/research';
+import SafeImage from '@/components/ui/SafeImage';
 
 const GithubIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" {...props}>
@@ -24,7 +25,7 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
   };
 
   const ToolIcon = getToolIcon(tool);
-  const imageSrc = tool.id === 'hrm-flagship' ? 'assets/research/hrm-flagship.png' : tool.id === 'repo-auditor-ai' ? 'assets/research/repo-auditor-ai.png' : tool.image || null;
+  const imageSrc = tool.id === 'hrm-flagship' ? '/assets/research/hrm-flagship.png' : tool.id === 'repo-auditor-ai' ? '/assets/research/repo-auditor-ai.png' : tool.image || null;
 
   return (
     <div className="rounded-3xl border border-line bg-surface p-0 flex flex-col justify-between overflow-hidden transition-all hover:border-accent hover:shadow-glow">
@@ -40,7 +41,12 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
         </div>
       ) : imageSrc ? (
         <div onClick={() => onImageClick(imageSrc)} className="relative aspect-[16/10] max-h-48 sm:max-h-64 overflow-hidden bg-[#020617] border-b border-line cursor-zoom-in group">
-          <img src={imageSrc} alt={tool.imageAlt || tool.title} className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-102" />
+          <SafeImage
+            src={imageSrc}
+            alt={tool.imageAlt || tool.title}
+            className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-102"
+            containerClassName="w-full h-full"
+          />
         </div>
       ) : null}
 

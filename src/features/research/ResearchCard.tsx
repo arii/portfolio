@@ -1,5 +1,6 @@
 import React from 'react';
 import type { ResearchProject } from '@/config/researchProjects';
+import SafeImage from '@/components/ui/SafeImage';
 
 export interface ResearchCardProps {
   project: ResearchProject;
@@ -9,10 +10,11 @@ export const ResearchCard: React.FC<ResearchCardProps> = ({ project }) => {
   return (
     <article className="flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-all hover:shadow-md">
       <div className="relative aspect-video w-full overflow-hidden bg-muted">
-        <img
+        <SafeImage
           src={project.imageSrc}
           alt={project.imageAlt}
           className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+          containerClassName="w-full h-full"
           loading="lazy"
         />
       </div>

@@ -53,9 +53,6 @@ export const ResumeHeader: React.FC<ResumeHeaderProps> = ({
     <header className="space-y-4 border-b border-border/60 pb-8 print:border-b-2 print:border-black print:pb-6">
       <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
         <div className="space-y-2">
-          <div className="inline-flex items-center space-x-2 bg-secondary border border-border px-3.5 py-1.5 rounded-full text-xs text-foreground font-semibold uppercase tracking-wider print:hidden mb-2">
-            <span>Interactive Resume</span>
-          </div>
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-foreground leading-tight print:text-black">
             {name}
           </h1>

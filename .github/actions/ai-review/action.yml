@@ -1,0 +1,42 @@
+name: BoomTick AI Review
+description: Runs AI code review via td-cli CLI
+inputs:
+  pr_number:
+    description: PR number to review
+    required: true
+runs:
+  using: composite
+  steps:
+    - name: Validate Inputs
+      env:
+        INPUT_PR_NUMBER: ${{ inputs.pr_number }}
+      run: |
+        if [[ ! "$INPUT_PR_NUMBER" =~ ^[0-9]+$ ]]; then
+          echo "::error::Invalid pr_number: must be numeric."
+          exit 1
+        fi
+      shell: bash
+
+    - name: AI review via Container
+      env:
+        PR_NUMBER: ${{ inputs.pr_number }}
+        GEMINI_API_KEY: ${{ env.GEMINI_API_KEY }}
+        JULES_API_KEY: ${{ env.JULES_API_KEY }}
+        GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
+        GITHUB_REPOSITORY: ${{ github.repository }}
+      run: |
+        if [[ ! "$PR_NUMBER" =~ ^[0-9]+$ ]]; then
+          echo "::error::Invalid PR_NUMBER: must be numeric."
+          exit 1
+        fi
+        docker run --rm \
+          -e GITHUB_TOKEN="${GITHUB_TOKEN}" \
+          -e GITHUB_REPOSITORY="${GITHUB_REPOSITORY}" \
+          -e GEMINI_API_KEY="${GEMINI_API_KEY}" \
+          -e JULES_API_KEY="${JULES_API_KEY}" \
+          -e PR_NUMBER="${PR_NUMBER}" \
+          -v "${{ github.workspace }}":/github/workspace \
+          -w /github/workspace \
+          ghcr.io/arii/boomtick:latest \
+          td-cli gh audit-pr "${PR_NUMBER}" --fetch --audit --submit --execute || echo "::warning::Agent code review returned non-zero"
+      shell: bash
