@@ -63,7 +63,7 @@ runs:
         GITHUB_TOKEN: ${{ inputs.github_token }}
         PR_NUMBER: ${{ github.event.pull_request.number }}
         GITHUB_REPOSITORY: ${{ github.repository }}
-        MAX_REVIEWS: ${{ vars.MAX_REVIEWS || inputs.max_reviews || '3' }}
+        MAX_REVIEWS: ${{ inputs.max_reviews || '3' }}
       run: |
         if [ -f "scripts/send-jules-impact.py" ]; then
           echo "Executing send-jules-impact.py from current workspace via container to inherit dev_tools."
