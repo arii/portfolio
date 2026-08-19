@@ -90,7 +90,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                     handleNav('research');
                   }
                 }}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-md border border-amber-500/40 bg-transparent text-amber-400 hover:bg-amber-500/10 hover:border-amber-500/60 hover:text-amber-300 px-5 py-2.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 min-h-[44px]"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-md bg-amber-500 hover:bg-amber-400 text-slate-950 px-5 py-2.5 text-sm font-medium shadow transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 min-h-[44px]"
               >
                 <Cpu className="w-4 h-4" />
                 <span>View Robotics Research</span>
