@@ -59,7 +59,7 @@ const AcademicCard: React.FC<AcademicCardProps> = ({ paper }) => {
             {visibleTags.map((tag) => (
               <span
                 key={tag}
-                className="px-2 py-0.5 rounded-full text-[10px] font-sans bg-[#0f172a] text-text-dim border border-line"
+                className="px-2 py-0.5 rounded-full text-[10px] font-sans bg-slate-900 text-text-dim border border-line"
               >
                 {tag}
               </span>
