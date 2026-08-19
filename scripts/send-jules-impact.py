@@ -154,7 +154,7 @@ def main():
             "Content-Type": "application/json"
         }
 
-        MAX_REVIEWS = 1
+        MAX_REVIEWS = int(os.environ.get("MAX_REVIEWS", 3))
         existing_reviews = 0
 
         # Check existing comments

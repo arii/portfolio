@@ -12,6 +12,10 @@ inputs:
   jules_api_key:
     description: 'Jules API key for agent execution'
     required: false
+  max_reviews:
+    description: 'Max PR comments for impact analysis'
+    required: false
+    default: '3'
 
 runs:
   using: 'composite'
@@ -59,6 +63,7 @@ runs:
         GITHUB_TOKEN: ${{ inputs.github_token }}
         PR_NUMBER: ${{ github.event.pull_request.number }}
         GITHUB_REPOSITORY: ${{ github.repository }}
+        MAX_REVIEWS: ${{ inputs.max_reviews }}
       run: |
         if [ -f "scripts/send-jules-impact.py" ]; then
           echo "Executing send-jules-impact.py from current workspace via container to inherit dev_tools."
@@ -69,6 +74,7 @@ runs:
             -e JULES_API_KEY="${JULES_API_KEY}" \
             -e TASK_ID="${TASK_ID}" \
             -e PR_NUMBER="${PR_NUMBER}" \
+            -e MAX_REVIEWS="${MAX_REVIEWS}" \
             -v "${{ github.workspace }}":/github/workspace \
             -w /github/workspace \
             ghcr.io/arii/boomtick:latest \
