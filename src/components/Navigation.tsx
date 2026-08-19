@@ -8,7 +8,8 @@ const Navigation: React.FC = () => {
 
   const navLinks = [
     { name: 'Overview', path: '/', icon: Activity },
-    { name: 'Portfolio', path: '/research', icon: Layers },
+    { name: 'DevAI', path: '/devai', icon: Layers },
+    { name: 'Research', path: '/research', icon: Layers },
     { name: 'Resume', path: '/resume', icon: FileText },
     { name: 'About Ariel', path: '/about', icon: User },
   ];

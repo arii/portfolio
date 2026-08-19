@@ -20,7 +20,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
     if (onNavigate) {
       onNavigate(tab);
     } else {
-      navigate('/research');
+      navigate(tab === 'portfolio' ? '/devai' : `/${tab}`);
     }
   };
 
