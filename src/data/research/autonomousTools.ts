@@ -81,7 +81,7 @@ export const autonomousTools: ResearchTool[] = [
     image: '/assets/research/leac.jpg',
     imageAlt: 'LEAC server network monitoring interface',
     canonicalPath: '/research/leac-monitoring-software',
-    externalUrl: 'http://leac.mit.edu'
+    externalUrl: 'https://leac-mit.github.io/'
   },
   {
     id: 'robocon-mit',
