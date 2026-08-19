@@ -114,14 +114,14 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
       </section>
 
       {/* Bottom Feature Callouts Row */}
-      <section className="bg-slate-900/60 border border-slate-800 rounded-xl p-6 sm:p-8 shadow-md backdrop-blur-sm">
+      <section className="bg-surface-alt border border-line rounded-xl p-6 sm:p-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {FEATURE_CALLOUTS.map((feature) => (
             <div key={feature.id} className="flex gap-3.5 items-start">
               {getCalloutIcon(feature.iconName)}
               <div className="space-y-1">
                 <h4 className="text-sm sm:text-base font-bold text-slate-100">{feature.title}</h4>
-                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">{feature.description}</p>
+                <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">{feature.description}</p>
               </div>
             </div>
           ))}
