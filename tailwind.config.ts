@@ -39,9 +39,6 @@ const config: Config = {
         serif: ['"Georgia"', 'serif'],
         mono: ['"SFMono-Regular"', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
       },
-      animation: {
-        'spin-slow': 'spin 12s linear infinite',
-      },
     },
   },
   plugins: [],
