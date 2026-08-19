@@ -4,11 +4,14 @@ export const autonomousTools: ResearchTool[] = [
   {
     id: 'bwsi-racecar',
     taxonomyBucket: 'infrastructure',
-    title: 'BeaverWorks Summer Institute: RACECAR',
-    description: 'Autonomous miniature racecar curriculum covering computer vision, visual servoing, motion planning, and obstacle avoidance.',
-    category: 'Robotics & Autonomy',
+    title: 'BeaverWorks Summer Institute (RACECAR)',
+    description: 'Instructional curricula and course lead for autonomous miniature racecars utilizing visual servoing, motion planning, and ROS.',
+    category: 'Education',
     status: 'Completed',
-    tags: ['Robotics & Autonomy', 'Computer Vision', 'Visual Servoing', 'Motion Planning', 'Obstacle Avoidance']
+    tags: ['Robotics & Autonomy', 'Computer Vision', 'Visual Servoing', 'Motion Planning', 'ROS'],
+    image: '/assets/research/bw.jpg',
+    imageAlt: 'Students programming miniature autonomous vehicles',
+    externalUrl: 'https://beaverworks.ll.mit.edu/CMS/bw/bwsi'
   },
   {
     id: 'delivery-bots',
@@ -31,22 +34,28 @@ export const autonomousTools: ResearchTool[] = [
   {
     id: 'autonomous-drone-line-following',
     taxonomyBucket: 'infrastructure',
-    title: 'Autonomous Drone Line Following',
-    description: 'Feedback and control systems (16.31) with visual line tracking on a Parrot Rolling Spider drone.',
-    category: 'Robotics & Autonomy',
+    title: 'Drone Line Following Autonomous Controller',
+    description: 'Feedback and Control Systems implementation using an onboard camera on a Rolling Spider Parrot drone to autonomously follow floor-marked paths.',
+    category: 'Robotics',
     status: 'Completed',
-    tags: ['Robotics & Autonomy', 'Control Systems', 'Computer Vision', 'Drones']
+    tags: ['Robotics & Autonomy', 'Control Systems', 'Computer Vision', 'Drones'],
+    image: '/assets/research/drone.jpg',
+    imageAlt: 'Parrot Rolling Spider Drone hovering over path',
+    externalUrl: 'https://github.com/arii/FollowTheYellowBrickRoad'
   },
   {
     id: 'boop-light-detector',
     taxonomyBucket: 'product',
     title: 'Boop Light Detector',
-    description: 'iOS accessibility utility translating ambient light intensity into audible frequencies for visually impaired users (6,000+ downloads).',
-    category: 'Accessibility & Mobile',
+    description: 'An iOS app developed for blind and visually impaired users to detect light levels (from daylight to router indicators) and interpret values through sound.',
+    category: 'Software',
     status: 'Completed',
+    metrics: '6,000+ Downloads',
     tags: ['iOS', 'Accessibility', 'Audio', 'Mobile'],
+    image: '/assets/research/app_testing.jpg',
+    imageAlt: 'User testing the Boop Light Detector mobile app',
     canonicalPath: '/research/boop-light-detector',
-    externalUrl: 'https://arii.github.io/boop/',
+    externalUrl: 'http://arii.github.io/boop/',
     sourceUrl: 'https://github.com/arii/boop'
   },
   {
@@ -64,24 +73,28 @@ export const autonomousTools: ResearchTool[] = [
   {
     id: 'leac-monitoring-software',
     taxonomyBucket: 'infrastructure',
-    title: 'Lab Energy Assessment Center (LEAC) Monitoring Software',
-    description: 'Network monitoring software and energy audit infrastructure for fume hood efficiency (MIT Green Labs Innovation Award).',
-    category: 'Sustainability & Energy',
+    title: 'Lab Energy Assessment Center (LEAC)',
+    description: 'Lead Technology Developer creating network monitoring software to analyze lab energy consumption in collaboration with MIT Green Labs and MIT Sustainability.',
+    category: 'Software',
     status: 'Completed',
     tags: ['Sustainability', 'Hardware', 'Energy Audit', 'MIT Green Labs'],
+    image: '/assets/research/leac.jpg',
+    imageAlt: 'LEAC server network monitoring interface',
     canonicalPath: '/research/leac-monitoring-software',
-    externalUrl: 'https://github.com/arii'
+    externalUrl: 'http://leac.mit.edu'
   },
   {
     id: 'robocon-mit',
     taxonomyBucket: 'infrastructure',
-    title: 'RoboCon MIT',
-    description: 'Cross-departmental robotics research conference organization and web platform.',
-    category: 'Robotics Community',
+    title: 'RoboCon Technical Workshop Platform',
+    description: 'Committee chairperson and lead web designer for the inaugural cross-departmental robotics workshop at MIT.',
+    category: 'Web',
     status: 'Completed',
     tags: ['Robotics', 'Conference', 'Web Platform', 'MIT'],
+    image: '/assets/research/robocon.jpg',
+    imageAlt: 'RoboCon event portal showcase',
     canonicalPath: '/research/robocon-mit',
-    externalUrl: 'https://github.com/arii'
+    externalUrl: 'http://robocon.mit.edu'
   },
   {
     id: 'cad-cam-dental-workflow',

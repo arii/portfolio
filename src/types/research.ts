@@ -29,6 +29,7 @@ export interface ResearchTool {
   excludeFromEngineeringTools?: boolean;
   image?: string;
   imageAlt?: string;
+  metrics?: string;
   inDevMessage?: {
     highlight: string;
     rest: string;

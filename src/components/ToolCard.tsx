@@ -21,12 +21,31 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
 
   const content = (
     <div className={`p-4 bg-surface/50 border border-line rounded-2xl transition-all space-y-2 ${isClickable ? 'hover:border-accent cursor-pointer group' : ''}`}>
+      {tool.image && (
+        <div className="relative mb-3 aspect-video w-full overflow-hidden rounded-lg bg-muted border border-line/50">
+          <img
+            src={tool.image}
+            alt={tool.imageAlt || tool.title}
+            className="h-full w-full object-cover"
+            loading="lazy"
+          />
+          <span className="absolute top-2 right-2 rounded-full bg-black/70 px-2.5 py-0.5 text-[10px] font-semibold text-white backdrop-blur-sm border border-line">
+            {tool.category}
+          </span>
+        </div>
+      )}
       <div className="flex justify-between items-start gap-2">
         <h4 className="font-bold text-text-main text-sm font-display group-hover:text-accent transition-colors">{tool.title}</h4>
         <span className="text-[8px] bg-accent/10 text-accent px-1.5 py-0.5 rounded border border-accent/20 shrink-0">
           {tool.status}
         </span>
       </div>
+
+      {tool.metrics && (
+        <div className="text-[11px] font-semibold text-accent">
+          {tool.metrics}
+        </div>
+      )}
 
       {tool.parentFlagship && (
         <div className="pt-0.5">
