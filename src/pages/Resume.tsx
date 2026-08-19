@@ -31,17 +31,21 @@ const Resume: React.FC<ResumeProps> = ({ version = 'v2.1' }) => {
           <ProjectsSection projects={resumeData.projects} />
         </div>
 
-        {/* Right Sidebar: Skills, Education, Honors, Teaching, Publications */}
+        {/* Right Sidebar: Skills, Education, Honors, Teaching */}
         <div className="lg:col-span-5 print:col-span-12 space-y-10 print:space-y-6">
           <SkillsSection skills={resumeData.skills} />
           <EducationSection education={resumeData.education} />
           <HonorsSection honors={resumeData.honors} />
           <TeachingSection teaching={resumeData.teaching} />
-          <PublicationsSection
-            publications={resumeData.publications}
-            scholarUrl={resumeData.scholarUrl}
-          />
         </div>
+      </div>
+
+      {/* Full Width Publications & Theses Section */}
+      <div className="pt-4 border-t border-border/40 print:pt-0 print:border-none">
+        <PublicationsSection
+          publications={resumeData.publications}
+          scholarUrl={resumeData.scholarUrl}
+        />
       </div>
 
       <div className="hidden print:block text-center pt-8 text-xs text-gray-500 font-mono">

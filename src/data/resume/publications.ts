@@ -33,7 +33,7 @@ export const publicationsData: ResumePublication[] = [
     authors: ['Ariel S. Anders', 'Leslie P. Kaelbling', 'Tomas Lozano-Perez'],
     venue: 'IEEE International Conference on Robotics and Automation (ICRA), pp. 1603–1610',
     category: 'journal_conference',
-    link: 'https://scholar.google.com/citations?user=NM6SfiEAAAAJ&hl=en'
+    link: 'https://doi.org/10.1109/ICRA.2018.8460621'
   },
   {
     id: 'ijrr-2016',
@@ -43,7 +43,7 @@ export const publicationsData: ResumePublication[] = [
     authors: ['C. Amato', 'G. Konidaris', 'A. Anders', 'G. Cruz', 'J.P. How', 'L.P. Kaelbling'],
     venue: 'The International Journal of Robotics Research (IJRR), 35(14) (RSS Best Paper Finalist)',
     category: 'journal_conference',
-    link: 'https://scholar.google.com/citations?user=NM6SfiEAAAAJ&hl=en'
+    link: 'https://doi.org/10.1177/0278364916666243'
   },
   {
     id: 'apl-2016',
@@ -53,7 +53,7 @@ export const publicationsData: ResumePublication[] = [
     authors: ['D.J. Preston', 'A. Anders', 'B. Barabadi', 'E. Tio', 'Y. Zhu', 'D.R.A. Dai', 'E.N. Wang'],
     venue: 'Applied Physics Letters, 109(24), 244102',
     category: 'journal_conference',
-    link: 'https://scholar.google.com/citations?user=NM6SfiEAAAAJ&hl=en'
+    link: 'https://doi.org/10.1063/1.4971408'
   },
   {
     id: 'mems-2017',
@@ -63,7 +63,7 @@ export const publicationsData: ResumePublication[] = [
     authors: ['D.J. Preston', 'A. Anders', 'B. Barabadi', 'E. Tio', 'Y. Zhu', 'D.R.A. Dai', 'E.N. Wang'],
     venue: 'IEEE 30th International Conference on Micro Electro Mechanical Systems (MEMS)',
     category: 'journal_conference',
-    link: 'https://scholar.google.com/citations?user=NM6SfiEAAAAJ&hl=en'
+    link: 'https://doi.org/10.1109/MEMSYS.2017.7863579'
   },
   {
     id: 'energy-reports-2018',
@@ -83,7 +83,7 @@ export const publicationsData: ResumePublication[] = [
     authors: ['S. Karaman', 'A. Anders', 'M. Boulet', 'J. Connor', 'K. Gregson', 'W. Guerra', 'et al.'],
     venue: 'IEEE Integrated STEM Education Conference (ISEC) / MIT BeaverWorks',
     category: 'journal_conference',
-    link: 'https://scholar.google.com/citations?user=NM6SfiEAAAAJ&hl=en'
+    link: 'https://doi.org/10.1109/ISECon.2017.7910243'
   },
   {
     id: 'eaai-2017',
@@ -93,7 +93,7 @@ export const publicationsData: ResumePublication[] = [
     authors: ['A. Anders', 'S. Karaman'],
     venue: 'EAAI-17: 7th Symposium on Educational Advances in Artificial Intelligence',
     category: 'symposium_other',
-    link: 'https://scholar.google.com/citations?user=NM6SfiEAAAAJ&hl=en'
+    link: 'https://doi.org/10.1609/aaai.v31i1.11140'
   },
   {
     id: 'nsbe-dental-2012',

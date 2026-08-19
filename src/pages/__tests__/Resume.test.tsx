@@ -55,9 +55,19 @@ describe('Resume Page', () => {
     expect(screen.getByText('MindHandHeart Grant')).toBeInTheDocument();
     expect(screen.getByText('Acoustic Feedback')).toBeInTheDocument();
 
-    // Publications & Detailed Paper Entries
+    // Top Publications show by default
     expect(screen.getByText(/Reliably Arranging Objects: A Conformant Planning Approach/i)).toBeInTheDocument();
     expect(screen.getByText(/Policy Search for Multi-Robot Coordination under Uncertainty/i)).toBeInTheDocument();
+
+    // Toggle button for showing all publications
+    const toggleShowAll = screen.getByRole('button', { name: /Show All 11 Publications/i });
+    expect(toggleShowAll).toBeInTheDocument();
+
+    // Initially hidden publication
+    expect(screen.queryByText(/Active Fume Hood Sash Height Monitoring/i)).not.toBeInTheDocument();
+
+    // Expand all publications
+    fireEvent.click(toggleShowAll);
     expect(screen.getByText(/Active Fume Hood Sash Height Monitoring/i)).toBeInTheDocument();
 
     const abstractToggle = screen.getByRole('button', { name: /View PhD Abstract & Findings/i });
