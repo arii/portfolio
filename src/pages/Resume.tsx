@@ -14,10 +14,6 @@ export interface ResumeProps {
 }
 
 const Resume: React.FC<ResumeProps> = ({ version = 'v2.1' }) => {
-  const handlePrint = () => {
-    window.print();
-  };
-
   return (
     <div className="max-w-5xl mx-auto space-y-10 pb-16 print:space-y-6 print:pb-0 print:max-w-none">
       <ResumeHeader
@@ -25,7 +21,7 @@ const Resume: React.FC<ResumeProps> = ({ version = 'v2.1' }) => {
         title={resumeData.title}
         summary={resumeData.summary}
         socials={resumeData.socials}
-        onPrint={handlePrint}
+        pdfUrl="https://drive.google.com/file/d/14V6KjfEMO12uwNQAhY1OMy2d-_vkGXK_/view"
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 print:block print:gap-0">
