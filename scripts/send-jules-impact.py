@@ -185,11 +185,20 @@ def main():
                 logger.warning(f"⚠️ Exception fetching PR comments: {e}")
                 break
 
+        try:
+            max_reviews = int(os.environ.get("MAX_REVIEWS", "3"))
+        except ValueError:
+            max_reviews = 3
+
         new_count = 1
         if existing_comment_id:
             match = re.search(r'<!-- ai-review-count: (\d+) -->', existing_body)
             if match:
-                new_count = int(match.group(1)) + 1
+                current_count = int(match.group(1))
+                if current_count >= max_reviews:
+                    logger.info(f"Skipping PR comment update: existing review count ({current_count}) has reached MAX_REVIEWS ({max_reviews}).")
+                    sys.exit(0)
+                new_count = current_count + 1
 
         final_body = f"<!-- ai-review-count: {new_count} -->\n{body}"
 
