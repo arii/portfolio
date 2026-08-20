@@ -29,24 +29,40 @@ export interface FeatureCallout {
   iconName: 'compass' | 'workflow' | 'server' | 'laptop' | 'cloud';
 }
 
-export interface HeroData {
-  badge: string;
+export interface HeroContent {
+  brandTitle: string;
+  brandRole: string;
   name: string;
   title: string;
-  subheading: string;
   bioParagraphs: string[];
 }
 
-export const HERO_DATA: HeroData = {
-  badge: 'Robotics & DevAI — Autonomous Systems & AI Orchestration',
+export interface HeroData {
+  badge?: string;
+  name: string;
+  title: string;
+  subheading?: string;
+  bioParagraphs: string[];
+}
+
+export const heroContent: HeroContent = {
+  brandTitle: 'Ariel Anders Portfolio',
+  brandRole: 'Roboticist & Agentic Orchestration Architect',
   name: 'Ariel Anders, PhD',
   title: 'Roboticist & Senior Software Engineer',
-  subheading:
-    'I architect reliable autonomous systems for physical robots and build agentic workflows that autonomously engineer full-stack software.',
   bioParagraphs: [
-    'I am an MIT CSAIL roboticist and have worked in the industry since completing my PhD on reliable robot manipulation combining learning and planning techniques. At Robust AI, I was the tech lead for the behavior team, developing reactive social navigation behaviors. At Waymo, I worked on the planning team to reduce traffic congestion during passenger pickup and drop-off. Most recently at CIV, I built and optimized production state estimation pipelines to increase fleet uptime.',
-    'I have spent the past year building stateful, multi-agent orchestrations. Because autonomous systems require strict code health, I use these workflows to engineer feature-rich applications and enforce continuous architectural standards—bringing robotics-grade reliability to DevAI.',
+    'I architect reliable autonomous systems for physical robots and build agentic workflows that autonomously engineer full-stack software.',
+    'I am an MIT CSAIL roboticist whose work focuses on building reliable autonomous systems. My research focused on learning physics-based models for planning under uncertainty. I bring deep experience across research and industry, from robot manipulation to social navigation in dynamic indoor environments and autonomous driving.',
+    'Over the past year, I’ve built stateful, multi-agent workflows for software development, using AI to engineer feature-rich applications while maintaining code quality and architectural standards, bringing robotics-grade reliability to DevAI.',
   ],
+};
+
+// Retain HERO_DATA alias for compatibility if referenced elsewhere
+export const HERO_DATA: HeroData = {
+  name: heroContent.name,
+  title: heroContent.title,
+  subheading: heroContent.bioParagraphs[0],
+  bioParagraphs: heroContent.bioParagraphs,
 };
 
 export const PHILOSOPHY_TENETS: PhilosophyTenet[] = [

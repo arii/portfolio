@@ -7,7 +7,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowRight, Cpu, Compass, Bot, Server, Cloud, Laptop } from 'lucide-react';
-import { HERO_DATA, PHILOSOPHY_TENETS, FEATURE_CALLOUTS } from '@/data/home';
+import { heroContent, PHILOSOPHY_TENETS, FEATURE_CALLOUTS } from '@/data/home';
 import { FEATURED_CARDS } from '@/config/content';
 import HeroPathCard from '@/components/ui/HeroPathCard';
 
@@ -52,17 +52,15 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
           <div className="lg:col-span-8 space-y-6">
             <div className="space-y-2">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-text-main tracking-tight leading-tight">
-                {HERO_DATA.name}
+                {heroContent.name}
               </h1>
-              <p className="text-accent font-semibold text-lg sm:text-xl">{HERO_DATA.title}</p>
+              <p className="text-accent font-semibold text-lg sm:text-xl font-mono">
+                {heroContent.title}
+              </p>
             </div>
 
-            <p className="text-lg sm:text-xl font-medium text-text-main leading-relaxed">
-               {HERO_DATA.subheading}
-            </p>
-
-            <div className="space-y-4 text-text-body text-base leading-relaxed border-t border-slate-800/80 pt-6">
-              {HERO_DATA.bioParagraphs.map((para, idx) => (
+            <div className="space-y-4 text-text-body text-base sm:text-lg leading-relaxed">
+              {heroContent.bioParagraphs.map((para, idx) => (
                 <p key={idx}>{para}</p>
               ))}
             </div>
