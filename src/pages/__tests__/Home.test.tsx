@@ -113,8 +113,8 @@ describe('Home Page', () => {
       </MemoryRouter>
     );
 
-    const productsCard = screen.getByText('Shipped Products');
+    const productsCard = screen.getByText('Products built with DevAI');
     fireEvent.click(productsCard);
-    expect(handleNavigate).toHaveBeenCalledWith('products');
+    expect(handleNavigate).toHaveBeenCalledWith('/gear');
   });
 });

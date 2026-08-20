@@ -7,7 +7,9 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowRight, Cpu, Compass, Bot, Server, Cloud, Laptop } from 'lucide-react';
-import { HERO_DATA, PHILOSOPHY_TENETS, FOCUS_AREAS, FEATURE_CALLOUTS } from '@/data/home';
+import { HERO_DATA, PHILOSOPHY_TENETS, FEATURE_CALLOUTS } from '@/data/home';
+import { FEATURED_CARDS } from '@/config/content';
+import HeroPathCard from '@/components/ui/HeroPathCard';
 
 interface HomeProps {
   onNavigate?: (tab: string) => void;
@@ -70,8 +72,8 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                 to="/devai"
                 onClick={(e) => {
                   if (onNavigate) {
-                    e.preventDefault();
-                    handleNav('devai');
+                     e.preventDefault();
+                     handleNav('devai');
                   }
                 }}
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-md bg-accent hover:opacity-90 text-bg px-5 py-2.5 text-sm font-medium shadow transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent min-h-[44px]"
@@ -116,25 +118,10 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* Middle Grid: 3 Focus Area Cards */}
+      {/* Middle Grid: 3 Featured Cards */}
       <section className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-        {FOCUS_AREAS.map((item) => (
-          <button
-            key={item.id}
-            onClick={() => handleNav(item.id)}
-            className="text-left w-full group bg-slate-900/60 hover:bg-slate-900/90 border border-slate-800 hover:border-accent/40 rounded-xl p-6 sm:p-8 cursor-pointer transition-all duration-200 flex flex-col justify-between space-y-5 shadow-md focus:outline-none focus:ring-2 focus:ring-accent/50"
-          >
-            <div className="space-y-2.5">
-              <h3 className="text-lg sm:text-xl font-bold text-text-main group-hover:text-accent transition-colors">
-                {item.title}
-              </h3>
-              <p className="text-sm text-text-body leading-relaxed">{item.description}</p>
-            </div>
-            <div className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-accent group-hover:translate-x-1 transition-transform">
-              <span>{item.actionText}</span>
-              <ArrowRight className="w-4 h-4" />
-            </div>
-          </button>
+        {FEATURED_CARDS.map((card) => (
+          <HeroPathCard key={card.id} card={card} onNavigate={handleNav} />
         ))}
       </section>
 

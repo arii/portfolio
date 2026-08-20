@@ -88,3 +88,36 @@ export const portfolioItems: PortfolioItem[] = [
     status: 'In Progress'
   }
 ];
+
+export interface FeaturedCardItem {
+  id: string;
+  title: string;
+  description: string;
+  ctaText: string;
+  href: string;
+  badge?: string;
+}
+
+export const FEATURED_CARDS: FeaturedCardItem[] = [
+  {
+    id: 'devai-products',
+    title: "Products built with DevAI",
+    description: "Live full-stack consumer apps and platforms built with autonomous agent workflows.",
+    ctaText: "View Products →",
+    href: "/gear",
+  },
+  {
+    id: 'devai-tools',
+    title: "Building DevAI Tools",
+    description: "Agentic CI/CD workflows, automated code-auditing bots, and RAG-driven infrastructure for modern software engineering",
+    ctaText: "See How It's Built →",
+    href: "/blog",
+  },
+  {
+    id: 'robotics-research',
+    title: "Robotics Research & Publications",
+    description: "Academic contributions in robotic manipulation, task and motion planning (TAMP) under uncertainty, multi-robot coordination, and robotics education.",
+    ctaText: "Read Research →",
+    href: "/research",
+  },
+];
