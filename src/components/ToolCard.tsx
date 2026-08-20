@@ -63,6 +63,15 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
       )}
 
       <p className="text-xs text-text-dim leading-relaxed">{tool.description}</p>
+
+      {tool.pdfUrl && (
+        <div className="pt-1">
+          <span className="inline-flex items-center gap-1 text-[10px] bg-accent/10 text-accent border border-accent/20 px-2 py-0.5 rounded font-medium">
+            📄 PDF Report Available
+          </span>
+        </div>
+      )}
+
       <div className="flex flex-wrap gap-1.5 pt-1">
         {tool.tags.map(tag => (
           <span key={tag} className="text-[9px] bg-surface px-2 py-0.5 text-text-dim border border-line rounded-full">{tag}</span>

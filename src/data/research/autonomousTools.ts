@@ -96,6 +96,51 @@ export const autonomousTools: ResearchTool[] = [
     status: 'Completed',
     tags: ['Robotics', 'Medical UI', 'CAD/CAM', 'Bionics Lab UCSC'],
     canonicalPath: '/research/cad-cam-dental-workflow',
-    externalUrl: 'https://github.com/arii'
+    pdfUrl: '/reports/report_dental.pdf',
+    externalUrl: '/reports/report_dental.pdf'
+  },
+  {
+    id: 'report-ml-lis',
+    taxonomyBucket: 'infrastructure',
+    title: 'Applying Machine Learning Techniques to Improve LIS Object Detection',
+    description: 'Evaluated ordinal regression and P-norm push algorithms to optimize object detection confidence scores for household robotic manipulation.',
+    category: 'Machine Learning',
+    status: 'Completed',
+    tags: ['Machine Learning', 'Computer Vision', 'Ranking', 'MIT CSAIL'],
+    canonicalPath: '/research/report-ml-lis',
+    pdfUrl: '/reports/report_ml.pdf'
+  },
+  {
+    id: 'report-6375-rsa',
+    taxonomyBucket: 'infrastructure',
+    title: 'Hardware RSA Accelerator',
+    description: 'Designed and implemented a high-performance hardware RSA encryption accelerator in Bluespec SystemVerilog.',
+    category: 'Hardware',
+    status: 'Completed',
+    tags: ['Hardware', 'Cryptography', 'BSV', 'MIT'],
+    canonicalPath: '/research/report-6375-rsa',
+    pdfUrl: '/reports/report_6375.pdf'
+  },
+  {
+    id: 'report-ce118-mechatronics',
+    taxonomyBucket: 'infrastructure',
+    title: 'Autonomous Mechatronic Systems (MAK Attack)',
+    description: 'Autonomous mobile robot designed for navigation, event detection state machines, and obstacle engagement.',
+    category: 'Mechatronics',
+    status: 'Completed',
+    tags: ['Mechatronics', 'Embedded C', 'Robotics', 'UCSC'],
+    canonicalPath: '/research/report-ce118-mechatronics',
+    pdfUrl: '/reports/report_ce118.pdf'
+  },
+  {
+    id: 'report-ce121-microprocessor',
+    taxonomyBucket: 'infrastructure',
+    title: 'Microprocessor System Design (68HC11E1 Board)',
+    description: 'Hardware interface and embedded firmware for 68HC11E1 microcontroller board with external SRAM, ROM, and serial communication.',
+    category: 'Embedded Systems',
+    status: 'Completed',
+    tags: ['Embedded Systems', 'Microcontrollers', 'Assembly', 'UCSC'],
+    canonicalPath: '/research/report-ce121-microprocessor',
+    pdfUrl: '/reports/report_ce121.pdf'
   }
 ];

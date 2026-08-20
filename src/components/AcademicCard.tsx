@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExternalLink, GraduationCap, Award } from 'lucide-react';
+import { ExternalLink, GraduationCap, Award, FileText } from 'lucide-react';
 import { AcademicPaper } from '@/data/academicResearch';
 
 export interface AcademicCardProps {
@@ -52,19 +52,30 @@ const AcademicCard: React.FC<AcademicCardProps> = ({ paper }) => {
           ))}
         </div>
 
-        {paper.link && (
-          <div>
+        <div className="flex flex-wrap gap-2">
+          {paper.pdfUrl && (
             <a
-              href={paper.link}
+              href={paper.pdfUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center space-x-1.5 bg-accent/10 border border-accent/20 px-3 py-1.5 rounded-xl text-xs font-semibold text-accent hover:bg-accent/20 transition-colors"
             >
+              <FileText className="h-3.5 w-3.5" />
+              <span>Download PDF Report</span>
+            </a>
+          )}
+          {paper.link && (
+            <a
+              href={paper.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center space-x-1.5 bg-surface border border-line px-3 py-1.5 rounded-xl text-xs font-semibold text-text-dim hover:text-text-main transition-colors"
+            >
               <span>View Publication</span>
               <ExternalLink className="h-3.5 w-3.5" />
             </a>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );

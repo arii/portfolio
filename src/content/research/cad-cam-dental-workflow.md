@@ -44,6 +44,12 @@ Ariel engineered key control UI software and trajectory validation scripts:
 
 ---
 
+## Downloadable Technical Report
+
+- 📄 [Download Dynamic Registration for Dental Robotics Report (PDF)](/reports/report_dental.pdf)
+
+---
+
 ## Research Significance
 
 - Demonstrated the feasibility of semi-autonomous robotic assistance in chairside dental restoration.
