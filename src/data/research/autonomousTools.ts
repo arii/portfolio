@@ -23,15 +23,6 @@ export const autonomousTools: ResearchTool[] = [
     tags: ['Robotics & Autonomy', 'Multi-Agent', 'RSS 2015 Finalist', 'IJRR']
   },
   {
-    id: 'swag-grasping',
-    taxonomyBucket: 'infrastructure',
-    title: 'Learning Strategy for Whole-Arm Grasping (SWAG)',
-    description: 'Master’s thesis utilizing reinforcement learning for bulky and irregular dynamic whole-arm manipulation.',
-    category: 'Robotics & Autonomy',
-    status: 'Completed',
-    tags: ['Robotics & Autonomy', 'Reinforcement Learning', 'Manipulation', "Master's Thesis"]
-  },
-  {
     id: 'autonomous-drone-line-following',
     taxonomyBucket: 'infrastructure',
     title: 'Drone Line Following Autonomous Controller',

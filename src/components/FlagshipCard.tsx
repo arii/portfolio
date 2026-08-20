@@ -54,9 +54,11 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
         <div className="space-y-3">
           <div className="flex items-center justify-between">
             <div className="h-10 w-10 rounded-2xl bg-accent/10 flex items-center justify-center border border-accent/20"><ToolIcon className="h-5 w-5 text-accent" /></div>
-            <span className="rounded-full bg-accent/10 px-2.5 py-0.5 text-[9px] font-semibold uppercase text-accent border border-accent/20">
-              {tool.id === 'boomtick-blog' ? 'Active dev' : 'Flagship'}
-            </span>
+            {tool.id !== 'phd-thesis' && tool.id !== 'masters-thesis' && (
+              <span className="rounded-full bg-accent/10 px-2.5 py-0.5 text-[9px] font-semibold uppercase text-accent border border-accent/20">
+                {tool.id === 'boomtick-blog' ? 'Active dev' : 'Flagship'}
+              </span>
+            )}
           </div>
           <div>
             <span className="text-[10px] text-accent font-bold uppercase tracking-wider block font-sans">{tool.category}</span>

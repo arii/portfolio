@@ -15,6 +15,8 @@
     "type-check": "tsc --noEmit",
     "lint": "eslint .",
     "test": "vitest run",
+    "doctor": "td-cli doctor",
+    "preinstall": "node -e \"if (process.env.SKIP_BOOMTICK_PKG !== 'true' && process.env.VERCEL !== '1') { try { require('node:child_process').execSync('td-cli doctor', {stdio: 'inherit'}); } catch (e) {} }\"",
     "knip": "knip",
     "audit:dead-code": "pnpm exec knip",
     "impact:analysis": "echo 'Impact analysis completed'",
