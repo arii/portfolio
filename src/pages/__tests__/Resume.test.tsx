@@ -51,7 +51,7 @@ describe('Resume Page', () => {
     expect(screen.getByText('Acoustic Feedback')).toBeInTheDocument();
 
     // Publications & Detailed Paper Entries
-    expect(screen.getByText(/Reliably Arranging Objects: A Conformant Planning Approach/i)).toBeInTheDocument();
+    expect(screen.getByText(/Reliably Arranging Objects in Uncertain Domains/i)).toBeInTheDocument();
     expect(screen.getByText(/Policy Search for Multi-Robot Coordination under Uncertainty/i)).toBeInTheDocument();
     expect(screen.getByText(/Active Fume Hood Sash Height Monitoring/i)).toBeInTheDocument();
   });
