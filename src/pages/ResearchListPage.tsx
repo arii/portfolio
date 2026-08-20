@@ -1,7 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { ACADEMIC_PAPERS } from '@/data/academicResearch';
 import { RESEARCH_AUTONOMOUS, RESEARCH_THESIS } from '@/data/research-papers';
-import { systemTools } from '@/data/research/systemTools';
 import AcademicCard from '@/components/AcademicCard';
 import FlagshipCard from '@/components/FlagshipCard';
 import ToolCard from '@/components/ToolCard';
@@ -24,7 +23,7 @@ const ResearchListPage: React.FC<ResearchListPageProps> = ({ onNavigate }) => {
     const seen = new Set<string>();
     const list: ResearchTool[] = [];
 
-    [...autonomousTools, ...systemTools].forEach((tool) => {
+    autonomousTools.forEach((tool) => {
       if (!thesisIds.has(tool.id) && !seen.has(tool.id) && !seen.has(tool.title)) {
         seen.add(tool.id);
         seen.add(tool.title);

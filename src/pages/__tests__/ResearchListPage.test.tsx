@@ -18,7 +18,7 @@ describe('DevAI and Research List Page Deduplication', () => {
     expect(screen.getByText('Technical Articles & Deep Dives')).toBeInTheDocument();
   });
 
-  it('renders ResearchListPage correctly and ensures target systems appear exactly once', () => {
+  it('renders ResearchListPage correctly and excludes DevAI system tools', () => {
     const handleNavigate = vi.fn();
     render(
       <HelmetProvider>
@@ -31,15 +31,19 @@ describe('DevAI and Research List Page Deduplication', () => {
     expect(screen.getByText('Peer-Reviewed Publications')).toBeInTheDocument();
     expect(screen.getByText('Applied Systems & Infrastructure Projects')).toBeInTheDocument();
 
-    const targetTitles = [
+    // Verify robotics autonomous tools render properly
+    expect(screen.getByText(/BeaverWorks Summer Institute/)).toBeInTheDocument();
+    expect(screen.getByText(/Boop Light Detector/)).toBeInTheDocument();
+
+    // DevAI tools should NOT be rendered on the Robotics Research page
+    const devAiTitles = [
       'Visual Regression & UX Auditor',
       'AI Blog Drafter',
       'Ecommerce Automation Experiments'
     ];
 
-    targetTitles.forEach((title) => {
-      const elements = screen.getAllByText((content) => content.includes(title));
-      expect(elements.length).toBe(1);
+    devAiTitles.forEach((title) => {
+      expect(screen.queryByText((content) => content.includes(title))).toBeNull();
     });
   });
 });
