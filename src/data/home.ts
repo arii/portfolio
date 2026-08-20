@@ -93,7 +93,7 @@ export const FOCUS_AREAS: FocusArea[] = [
   },
   {
     id: 'robotics-research',
-    title: "Robotics Research & Publications",
+    title: "Robotics Research",
     description: "Research and publications spanning robotics, motion planning, autonomy, and real-world systems.",
     actionText: "Read Research →",
   },

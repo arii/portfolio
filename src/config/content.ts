@@ -115,7 +115,7 @@ export const FEATURED_CARDS: FeaturedCardItem[] = [
   },
   {
     id: 'robotics-research',
-    title: "Robotics Research & Publications",
+    title: "Robotics Research",
     description: "Research and publications spanning robotics, motion planning, autonomy, and real-world systems.",
     ctaText: "Read Research",
     href: "/research",

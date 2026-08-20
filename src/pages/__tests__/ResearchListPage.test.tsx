@@ -14,8 +14,8 @@ describe('DevAI and Research List Page Deduplication', () => {
     );
 
     expect(screen.getByText('DevAI & Software Systems')).toBeInTheDocument();
-    expect(screen.getByText('Flagship Applications & Tooling')).toBeInTheDocument();
-    expect(screen.getByText('Technical Articles & Deep Dives')).toBeInTheDocument();
+    expect(screen.getByText('Products built with DevAI')).toBeInTheDocument();
+    expect(screen.getByText('DevAI Orchestration')).toBeInTheDocument();
   });
 
   it('renders ResearchListPage correctly', () => {

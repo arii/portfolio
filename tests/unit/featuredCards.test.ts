@@ -20,10 +20,10 @@ describe('FEATURED_CARDS Configuration', () => {
     expect(card?.ctaText).toBe('Read Articles');
   });
 
-  it('renders updated copy for Robotics Research & Publications', () => {
+  it('renders updated copy for Robotics Research', () => {
     const card = FEATURED_CARDS.find((c) => c.id === 'robotics-research');
     expect(card).toBeDefined();
-    expect(card?.title).toBe('Robotics Research & Publications');
+    expect(card?.title).toBe('Robotics Research');
     expect(card?.ctaText).toBe('Read Research');
   });
 });
