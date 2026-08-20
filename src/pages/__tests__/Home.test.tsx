@@ -46,8 +46,14 @@ describe('Home Page', () => {
 
     expect(screen.getByText('Engineering Philosophy')).toBeInTheDocument();
     expect(screen.getByText('AI-Accelerated Rigor')).toBeInTheDocument();
-    expect(screen.getByText('Reliable Robot Behavior')).toBeInTheDocument();
-    expect(screen.getByText('Production Robot Software')).toBeInTheDocument();
+    expect(
+      screen.getByText(/AI should raise the bar, not lower it/i)
+    ).toBeInTheDocument();
+    expect(screen.getByText('Make Robots Behave')).toBeInTheDocument();
+    expect(
+      screen.getByText(/Robots operate in environments that are uncertain and hard to model/i)
+    ).toBeInTheDocument();
+    expect(screen.queryByText('Production Robot Software')).not.toBeInTheDocument();
   });
 
   it('renders bottom feature callouts row with all 4 domain pillars', () => {
