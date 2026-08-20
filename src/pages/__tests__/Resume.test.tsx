@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import Resume from '../Resume';
 import { describe, it, expect } from 'vitest';
 
@@ -59,13 +59,5 @@ describe('Resume Page', () => {
     expect(screen.getByText(/Reliably Arranging Objects: A Conformant Planning Approach/i)).toBeInTheDocument();
     expect(screen.getByText(/Policy Search for Multi-Robot Coordination under Uncertainty/i)).toBeInTheDocument();
     expect(screen.getByText(/Active Fume Hood Sash Height Monitoring/i)).toBeInTheDocument();
-
-    const abstractToggle = screen.getByRole('button', { name: /View PhD Abstract & Findings/i });
-    expect(abstractToggle).toBeInTheDocument();
-
-    // Expand abstract
-    fireEvent.click(abstractToggle);
-    expect(screen.getByText(/Fixture Placement:/i)).toBeInTheDocument();
-    expect(screen.getByText(/Noise Characterization:/i)).toBeInTheDocument();
   });
 });

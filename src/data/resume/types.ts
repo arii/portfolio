@@ -62,7 +62,6 @@ export interface ResumePublication {
   authors?: string[];
   venue?: string;
   link?: string;
-  highlight?: string;
   category?: 'dissertation' | 'journal_conference' | 'symposium_other';
 }
 

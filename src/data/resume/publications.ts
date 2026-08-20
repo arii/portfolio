@@ -11,7 +11,6 @@ export const publicationsData: ResumePublication[] = [
     authors: ['Ariel S. Anders'],
     venue: 'MIT CSAIL (advised by Leslie P. Kaelbling & Tomas Lozano-Perez)',
     category: 'dissertation',
-    highlight: 'Conformant belief-state planning & fixture optimization under pose uncertainty (improving assembly success from 1.9% to 80.7%).',
     link: 'https://dspace.mit.edu/handle/1721.1/122822'
   },
   {
@@ -22,7 +21,6 @@ export const publicationsData: ResumePublication[] = [
     authors: ['Ariel S. Anders'],
     venue: 'MIT CSAIL',
     category: 'dissertation',
-    highlight: 'Reinforcement learning policies for bimanual and whole-arm grasping of bulky, irregular objects.',
     link: 'https://dspace.mit.edu/handle/1721.1/92629'
   },
   {
