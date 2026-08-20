@@ -41,9 +41,22 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
   const posts = useMemo(() => Array.from(new Map(getAllResearchPosts().map((p) => [p.slug || p.title, p])).values()), []);
   const flagshipTools = useMemo(() => DEVAI_FLAGSHIPS, []);
 
+  const flagshipSlugs = useMemo(() => {
+    const slugs = new Set<string>();
+    flagshipTools.forEach((t) => {
+      slugs.add(t.id);
+      if (t.canonicalPath) {
+        const parts = t.canonicalPath.split('/');
+        const lastPart = parts[parts.length - 1];
+        if (lastPart) slugs.add(lastPart);
+      }
+    });
+    return slugs;
+  }, [flagshipTools]);
+
   const filteredPosts = useMemo(() => {
     const researchOnlySlugs = ['leac-monitoring-software', 'light-therapy-mit', 'boop-light-detector'];
-    const devAiPosts = posts.filter((p) => !researchOnlySlugs.includes(p.slug));
+    const devAiPosts = posts.filter((p) => !researchOnlySlugs.includes(p.slug) && !flagshipSlugs.has(p.slug));
 
     if (selectedTag === 'All Topics') return devAiPosts.filter((p) => {
         const cat = (p.category || '').toLowerCase();

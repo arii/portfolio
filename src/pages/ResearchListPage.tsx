@@ -1,11 +1,13 @@
 import React, { useState, useMemo } from 'react';
 import { ACADEMIC_PAPERS } from '@/data/academicResearch';
 import { RESEARCH_AUTONOMOUS, RESEARCH_THESIS } from '@/data/research-papers';
+import { systemTools } from '@/data/research/systemTools';
 import AcademicCard from '@/components/AcademicCard';
 import FlagshipCard from '@/components/FlagshipCard';
 import ToolCard from '@/components/ToolCard';
 import { BookOpen, X, Layers, Wrench } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
+import { ResearchTool } from '@/types/research';
 
 export interface ResearchListPageProps {
   onNavigate: (slug: string) => void;
@@ -16,6 +18,22 @@ const ResearchListPage: React.FC<ResearchListPageProps> = ({ onNavigate }) => {
 
   const autonomousTools = useMemo(() => RESEARCH_AUTONOMOUS, []);
   const thesisTools = useMemo(() => RESEARCH_THESIS, []);
+
+  const appliedTools = useMemo(() => {
+    const thesisIds = new Set(thesisTools.map((t) => t.id));
+    const seen = new Set<string>();
+    const list: ResearchTool[] = [];
+
+    [...autonomousTools, ...systemTools].forEach((tool) => {
+      if (!thesisIds.has(tool.id) && !seen.has(tool.id) && !seen.has(tool.title)) {
+        seen.add(tool.id);
+        seen.add(tool.title);
+        list.push(tool);
+      }
+    });
+
+    return list;
+  }, [autonomousTools, thesisTools]);
 
   return (
     <div className="space-y-12 sm:space-y-16">
@@ -58,7 +76,7 @@ const ResearchListPage: React.FC<ResearchListPageProps> = ({ onNavigate }) => {
           <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-text-main flex items-center space-x-2 font-display"><Wrench className="h-5 w-5 text-accent" /><span>Applied Systems &amp; Infrastructure Projects</span></h2>
         </div>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {autonomousTools.map((tool) => (<ToolCard key={tool.id} tool={tool} onNavigate={onNavigate} />))}
+          {appliedTools.map((tool) => (<ToolCard key={tool.id} tool={tool} onNavigate={onNavigate} />))}
         </div>
       </section>
 

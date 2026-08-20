@@ -18,7 +18,7 @@ describe('DevAI and Research List Page Deduplication', () => {
     expect(screen.getByText('Technical Articles & Deep Dives')).toBeInTheDocument();
   });
 
-  it('renders ResearchListPage correctly', () => {
+  it('renders ResearchListPage correctly and ensures target systems appear exactly once', () => {
     const handleNavigate = vi.fn();
     render(
       <HelmetProvider>
@@ -30,5 +30,16 @@ describe('DevAI and Research List Page Deduplication', () => {
     expect(screen.getByText('Doctoral & Graduate Theses')).toBeInTheDocument();
     expect(screen.getByText('Peer-Reviewed Publications')).toBeInTheDocument();
     expect(screen.getByText('Applied Systems & Infrastructure Projects')).toBeInTheDocument();
+
+    const targetTitles = [
+      'Visual Regression & UX Auditor',
+      'AI Blog Drafter',
+      'Ecommerce Automation Experiments'
+    ];
+
+    targetTitles.forEach((title) => {
+      const elements = screen.getAllByText((content) => content.includes(title));
+      expect(elements.length).toBe(1);
+    });
   });
 });
