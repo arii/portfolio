@@ -73,7 +73,7 @@ export const PHILOSOPHY_TENETS: PhilosophyTenet[] = [
 export const FOCUS_AREAS: FocusArea[] = [
   {
     id: 'products',
-    title: "Products I've Shipped",
+    title: 'Shipped Products',
     description: 'Live full-stack consumer apps and platforms built with autonomous agent workflows.',
     actionText: 'View Products',
   },
@@ -112,7 +112,7 @@ export const FEATURE_CALLOUTS: FeatureCallout[] = [
   },
   {
     id: 'deployment-edge',
-    title: 'Deployment & Edge Infra',
+    title: 'Deployment & Edge Infrastructure',
     description: 'Containerized ROS 2 middleware, cloud/IoT pipelines, CI/CD automation.',
     iconName: 'cloud',
   },

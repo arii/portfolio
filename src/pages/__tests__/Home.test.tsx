@@ -61,7 +61,7 @@ describe('Home Page', () => {
     expect(screen.getByText('Motion Planning & Autonomy')).toBeInTheDocument();
     expect(screen.getByText('Agentic DevAI')).toBeInTheDocument();
     expect(screen.getByText('Production Software')).toBeInTheDocument();
-    expect(screen.getByText('Deployment & Edge Infra')).toBeInTheDocument();
+    expect(screen.getByText('Deployment & Edge Infrastructure')).toBeInTheDocument();
   });
 
   it('renders both Agentic AI and Robotics Research CTA buttons with correct attributes', () => {
@@ -107,7 +107,7 @@ describe('Home Page', () => {
       </MemoryRouter>
     );
 
-    const productsCard = screen.getByText("Products I've Shipped");
+    const productsCard = screen.getByText('Shipped Products');
     fireEvent.click(productsCard);
     expect(handleNavigate).toHaveBeenCalledWith('products');
   });

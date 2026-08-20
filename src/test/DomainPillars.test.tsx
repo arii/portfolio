@@ -14,6 +14,6 @@ describe('Domain Pillars Component', () => {
     expect(screen.getByText(/Motion Planning & Autonomy/i)).toBeInTheDocument();
     expect(screen.getByText(/Agentic DevAI/i)).toBeInTheDocument();
     expect(screen.getByText(/Production Software/i)).toBeInTheDocument();
-    expect(screen.getByText(/Deployment & Edge Infra/i)).toBeInTheDocument();
+    expect(screen.getByText(/Deployment & Edge Infrastructure/i)).toBeInTheDocument();
   });
 });
