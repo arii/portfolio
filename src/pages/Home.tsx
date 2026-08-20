@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowRight, Cpu, Compass, Bot, Server } from 'lucide-react';
+import { ArrowRight, Cpu, Compass, Bot, Server, Cloud, Laptop } from 'lucide-react';
 import { HERO_DATA, PHILOSOPHY_TENETS, FOCUS_AREAS, FEATURE_CALLOUTS } from '@/data/home';
 
 interface HomeProps {
@@ -30,8 +30,12 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
         return <Compass className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />;
       case 'workflow':
         return <Bot className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />;
+      case 'laptop':
+        return <Laptop className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />;
       case 'server':
         return <Server className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />;
+      case 'cloud':
+        return <Cloud className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />;
       default:
         return <Cpu className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />;
     }
@@ -136,7 +140,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
 
       {/* Bottom Feature Callouts Row */}
       <section className="bg-surface-alt border border-line rounded-xl p-6 sm:p-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {FEATURE_CALLOUTS.map((feature) => (
             <div key={feature.id} className="flex gap-3.5 items-start">
               {getCalloutIcon(feature.iconName)}

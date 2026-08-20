@@ -63,6 +63,6 @@ export const flagshipTools: ResearchTool[] = [
     imageAlt: 'PR2 robot reliably arranging blocks using conformant planning without external sensing feedback',
     externalUrl: 'https://dspace.mit.edu/handle/1721.1/122822',
     externalLinkDisplayLabel: 'MIT DSpace Thesis',
-    sourceUrl: 'https://scholar.google.com/citations?user=NM6SfiEAAAAJ&hl=en'
+    sourceUrl: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=NM6SfiEAAAAJ&citation_for_view=NM6SfiEAAAAJ:4DMP91E08xMC'
   }
 ];

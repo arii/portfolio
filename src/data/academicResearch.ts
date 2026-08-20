@@ -43,7 +43,7 @@ export const ACADEMIC_PAPERS: AcademicPaper[] = [
     venue: 'IEEE International Conference on Robotics and Automation (ICRA)',
     summary: 'Introduced an efficient belief-state planning algorithm that optimizes physical fixture placements to guarantee reliable object manipulation in uncertain physical environments.',
     tags: ['ICRA', 'Robotics', 'Manipulation', 'Uncertainty'],
-    link: 'https://scholar.google.com/citations?user=NM6SfiEAAAAJ&hl=en'
+    link: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=NM6SfiEAAAAJ&citation_for_view=NM6SfiEAAAAJ:MXK_kJrjxJIC'
   },
   {
     id: 'ijrr-2016',
@@ -54,7 +54,7 @@ export const ACADEMIC_PAPERS: AcademicPaper[] = [
     venue: 'The International Journal of Robotics Research (IJRR)',
     summary: 'Formulated scalable decentralized POMDP policy search methods for multi-robot team coordination under stochastic motion and communication uncertainty.',
     tags: ['IJRR', 'Multi-Robot', 'POMDP', 'Decentralized AI'],
-    link: 'https://scholar.google.com/citations?user=NM6SfiEAAAAJ&hl=en'
+    link: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=NM6SfiEAAAAJ&citation_for_view=NM6SfiEAAAAJ:zYLM7Y9cAGgC'
   },
   {
     id: 'isec-racecar-2017',
@@ -65,6 +65,6 @@ export const ACADEMIC_PAPERS: AcademicPaper[] = [
     venue: 'IEEE Integrated STEM Education Conference (ISEC)',
     summary: 'Designed hands-on algorithmic robotics curriculum for 1/10th scale autonomous race cars, teaching perception, obstacle avoidance, and control.',
     tags: ['Self-Driving', 'ROS', 'Autonomy', 'Education'],
-    link: 'https://scholar.google.com/citations?user=NM6SfiEAAAAJ&hl=en'
+    link: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=NM6SfiEAAAAJ&citation_for_view=NM6SfiEAAAAJ:W7OEmFMy1HYC'
   }
 ];

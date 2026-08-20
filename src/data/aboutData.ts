@@ -73,7 +73,7 @@ export const profileData: ProfileData = {
   ],
   socials: [
     { label: "Email", url: "mailto:anders.ariel@gmail.com", icon: MailIcon },
-    { label: "LinkedIn", url: "https://linkedin.com/in/arielanders", icon: LinkedinIcon },
+    { label: "LinkedIn", url: "https://www.linkedin.com/in/ariel-anders/", icon: LinkedinIcon },
     { label: "GitHub", url: "https://github.com/arii", icon: GithubIcon }
   ]
 };
