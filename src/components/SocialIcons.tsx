@@ -37,18 +37,17 @@ export const GithubIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
 
 export const BoomTickIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   <svg
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
+    viewBox="0 0 100 100"
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
-    <path d="M4 4v16" />
-    <path d="M4 12c2.2 0 4 1.8 4 4s-1.8 4-4 4" />
-    <path d="M14 6l3-2v12a3 3 0 0 0 3 3" />
-    <path d="M12 10h7" />
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M12 15H26V43C29.5 38 35 35.5 42.5 35.5C56 35.5 65 45 65 62.5C65 80 56 89.5 42.5 89.5C35 89.5 29.5 87 26 82V89.5H12V15ZM26 62.5C26 72.5 31.5 77.5 38.5 77.5C45.5 77.5 51 72.5 51 62.5C51 52.5 45.5 47.5 38.5 47.5C31.5 47.5 26 52.5 26 62.5Z"
+    />
+    <path d="M62 25 L76 15 V35 H88 V48 H76 V68 C76 76 79 79 85 79 C87 79 89 78.5 91 78 V89 C88 90 83 91 78 91 C67 91 62 83 62 69 V48 H53 V35 H62 V25 Z" />
   </svg>
 );
 
