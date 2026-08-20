@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { Home } from '../Home';
+import Home from '../Home';
 
 describe('Home Page', () => {
   it('renders hero title and role hierarchy correctly', () => {
