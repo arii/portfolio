@@ -66,22 +66,22 @@ export const PHILOSOPHY_TENETS: PhilosophyTenet[] = [
 
 export const FOCUS_AREAS: FocusArea[] = [
   {
-    id: 'products',
-    title: 'Shipped Products',
-    description: 'Live full-stack consumer apps and platforms built with autonomous agent workflows.',
-    actionText: 'View Products',
+    id: 'devai-products',
+    title: "Products built with DevAI",
+    description: "Live full-stack consumer apps and platforms built with autonomous agent workflows.",
+    actionText: "View Products →",
   },
   {
-    id: 'infrastructure',
-    title: 'Engineering Infrastructure',
-    description: 'Autonomous code-review agents, CI pipelines, and quality gates enforcing strict software standards.',
-    actionText: 'Inspect Tooling',
+    id: 'devai-tools',
+    title: "Building DevAI Tools",
+    description: "Agentic CI/CD workflows, automated code-auditing bots, and RAG-driven infrastructure for modern software engineering",
+    actionText: "See How It's Built →",
   },
   {
-    id: 'research',
-    title: 'Articles & Research',
-    description: 'System architecture breakdowns, engineering post-mortems, and DevAI case studies.',
-    actionText: 'Read Studies',
+    id: 'robotics-research',
+    title: "Robotics Research & Publications",
+    description: "Academic contributions in robotic manipulation, task and motion planning (TAMP) under uncertainty, multi-robot coordination, and robotics education.",
+    actionText: "Read Research →",
   },
 ];
 

@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { getAllResearchPosts } from '@/data/research';
 import { DEVAI_FLAGSHIPS } from '@/data/devai-projects';
 import ResearchCard from '@/components/ResearchCard';
@@ -16,6 +16,27 @@ export type PrimaryTag = (typeof PRIMARY_TAGS)[number];
 const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
   const [selectedTag, setSelectedTag] = useState<PrimaryTag>('All Topics');
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
+
+  useEffect(() => {
+    const handleHashScroll = () => {
+      const hash = window.location.hash;
+      const lastHashIndex = hash.lastIndexOf('#');
+      if (lastHashIndex > 0) {
+        const id = hash.substring(lastHashIndex + 1);
+        const el = document.getElementById(id);
+        if (el) {
+          const timer = setTimeout(() => {
+            el.scrollIntoView({ behavior: 'smooth' });
+          }, 100);
+          return () => clearTimeout(timer);
+        }
+      }
+    };
+
+    handleHashScroll();
+    window.addEventListener('hashchange', handleHashScroll);
+    return () => window.removeEventListener('hashchange', handleHashScroll);
+  }, []);
 
   const posts = useMemo(() => Array.from(new Map(getAllResearchPosts().map((p) => [p.slug || p.title, p])).values()), []);
   const flagshipTools = useMemo(() => DEVAI_FLAGSHIPS, []);

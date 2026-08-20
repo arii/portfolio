@@ -18,6 +18,9 @@ const config: Config = {
         'text-main': '#f8fafc', // slate-50
         'text-body': '#cbd5e1', // slate-300
         'text-dim': '#94a3b8', // slate-400
+        'text-primary': '#f8fafc',
+        'text-secondary': '#cbd5e1',
+        'surface-elevated': '#1e293b',
         error: '#ef4444',
 
         background: '#020617', // slate-950
