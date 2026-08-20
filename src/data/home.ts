@@ -26,7 +26,7 @@ export interface FeatureCallout {
   id: string;
   title: string;
   description: string;
-  iconName: 'compass' | 'workflow' | 'server' | 'cloud';
+  iconName: 'compass' | 'workflow' | 'server' | 'laptop' | 'cloud';
 }
 
 export interface HeroData {
@@ -94,30 +94,26 @@ export const FOCUS_AREAS: FocusArea[] = [
 export const FEATURE_CALLOUTS: FeatureCallout[] = [
   {
     id: 'motion-planning',
-    title: 'Algorithmic Motion Planning',
-    description:
-      'Behavior trees, conformant planning under uncertainty, and dynamic obstacle avoidance built for real-time robot safety.',
+    title: 'Motion Planning & Autonomy',
+    description: 'Behavior trees, conformant planning under uncertainty, real-time obstacle avoidance.',
     iconName: 'compass',
   },
   {
     id: 'devai-workflows',
-    title: 'DevAI & AI Workflows',
-    description:
-      'Leveraging LLMs, RAG context systems, and automated PR review agents to accelerate engineering cycles and technical debt cleanup.',
+    title: 'Agentic DevAI',
+    description: 'LLM-driven CI/CD, RAG context systems, automated PR review.',
     iconName: 'workflow',
   },
   {
     id: 'production-systems',
-    title: 'Production Systems Architecture',
-    description:
-      'Authoring production-quality C++, Python, and ROS 2 middleware for robust state estimation and real-time robot software.',
-    iconName: 'server',
+    title: 'Production Software',
+    description: 'C++/Python robot software engineered for reliability, not just research code.',
+    iconName: 'laptop',
   },
   {
     id: 'deployment-edge',
-    title: 'Deployment & Edge Infrastructure Experience',
-    description:
-      'Building containerized robotics applications and automated cloud/IoT pipelines using Docker, AWS IoT, and CI/CD automation.',
+    title: 'Deployment & Edge Infra',
+    description: 'Containerized ROS 2 middleware, cloud/IoT pipelines, CI/CD automation.',
     iconName: 'cloud',
   },
 ];

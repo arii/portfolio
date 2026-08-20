@@ -58,10 +58,10 @@ describe('Home Page', () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByText('Algorithmic Motion Planning')).toBeInTheDocument();
-    expect(screen.getByText('DevAI & AI Workflows')).toBeInTheDocument();
-    expect(screen.getByText('Production Systems Architecture')).toBeInTheDocument();
-    expect(screen.getByText('Deployment & Edge Infrastructure Experience')).toBeInTheDocument();
+    expect(screen.getByText('Motion Planning & Autonomy')).toBeInTheDocument();
+    expect(screen.getByText('Agentic DevAI')).toBeInTheDocument();
+    expect(screen.getByText('Production Software')).toBeInTheDocument();
+    expect(screen.getByText('Deployment & Edge Infra')).toBeInTheDocument();
   });
 
   it('renders both Agentic AI and Robotics Research CTA buttons with correct attributes', () => {

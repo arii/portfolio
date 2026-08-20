@@ -11,9 +11,9 @@ describe('Domain Pillars Component', () => {
         <Home />
       </MemoryRouter>
     );
-    expect(screen.getByText(/Algorithmic Motion Planning/i)).toBeInTheDocument();
-    expect(screen.getByText(/DevAI & AI Workflows/i)).toBeInTheDocument();
-    expect(screen.getByText(/Production Systems Architecture/i)).toBeInTheDocument();
-    expect(screen.getByText(/Deployment & Edge Infrastructure Experience/i)).toBeInTheDocument();
+    expect(screen.getByText(/Motion Planning & Autonomy/i)).toBeInTheDocument();
+    expect(screen.getByText(/Agentic DevAI/i)).toBeInTheDocument();
+    expect(screen.getByText(/Production Software/i)).toBeInTheDocument();
+    expect(screen.getByText(/Deployment & Edge Infra/i)).toBeInTheDocument();
   });
 });

@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowRight, Cpu, Compass, Bot, Server, Cloud } from 'lucide-react';
+import { ArrowRight, Cpu, Compass, Bot, Server, Cloud, Laptop } from 'lucide-react';
 import { HERO_DATA, PHILOSOPHY_TENETS, FOCUS_AREAS, FEATURE_CALLOUTS } from '@/data/home';
 
 interface HomeProps {
@@ -30,6 +30,8 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
         return <Compass className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />;
       case 'workflow':
         return <Bot className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />;
+      case 'laptop':
+        return <Laptop className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />;
       case 'server':
         return <Server className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />;
       case 'cloud':
