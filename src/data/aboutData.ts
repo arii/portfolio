@@ -39,8 +39,6 @@ export const profileData: ProfileData = {
       value: "MIT EECS PhD 2019 · SM 2014",
       icon: GraduationCap
     },
-    { label: "PhD Focus", value: "Motion planning under uncertainty for robot manipulation", icon: GraduationCap },
-    { label: "PhD Advisors", value: "Leslie Kaelbling & Tomas Lozano-Perez", icon: GraduationCap },
     {
       label: "Honors",
       value: [

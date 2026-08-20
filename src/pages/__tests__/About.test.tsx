@@ -8,19 +8,11 @@ describe('About Page Content Ownership', () => {
 
     expect(screen.getByText('Ariel Anders, PhD')).toBeInTheDocument();
     expect(screen.getByText('Education')).toBeInTheDocument();
-    expect(screen.getByText('PhD Focus')).toBeInTheDocument();
-    expect(screen.getByText('PhD Advisors')).toBeInTheDocument();
     expect(screen.getByText('Honors')).toBeInTheDocument();
-    expect(screen.getByText('Motion planning under uncertainty for robot manipulation')).toBeInTheDocument();
-    expect(screen.getByText('Leslie Kaelbling & Tomas Lozano-Perez')).toBeInTheDocument();
     expect(
       screen.getByText((content) =>
         content.includes('applying robotics-grade software rigor to autonomous AI engineering agents')
       )
-    ).toBeInTheDocument();
-
-    expect(
-      screen.getByText('Leslie Kaelbling & Tomas Lozano-Perez')
     ).toBeInTheDocument();
 
     expect(
