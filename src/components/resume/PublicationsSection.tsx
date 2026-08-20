@@ -74,7 +74,7 @@ export const PublicationsSection: React.FC<PublicationsSectionProps> = ({
               )}
 
               {pub.highlight && (
-                <p className="text-[11px] text-slate-300 print:text-black leading-normal bg-secondary/30 p-2 rounded border border-border/40">
+                <p className="text-[11px] text-muted-foreground print:text-black leading-normal bg-secondary/30 p-2 rounded border border-border/40">
                   <strong className="text-primary font-mono text-[10px] mr-1 uppercase">Key Focus:</strong>
                   {pub.highlight}
                 </p>

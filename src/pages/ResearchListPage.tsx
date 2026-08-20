@@ -26,9 +26,11 @@ const ResearchListPage: React.FC<ResearchListPageProps> = ({ onNavigate }) => {
         <meta property="og:description" content="Planning under uncertainty, conformant belief-state manipulation, multi-robot coordination, and hardware automation systems." />
       </Helmet>
 
-      <header className="space-y-4 max-w-3xl border-b border-line/20 pb-8">
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-text-main leading-tight">Robotics &amp; Algorithmic Research</h1>
-        <p className="text-text-dim max-w-2xl text-sm sm:text-base leading-relaxed">Planning under uncertainty, conformant belief-state manipulation, multi-robot coordination, and hardware automation systems.</p>
+      <header className="space-y-4 border-b border-line/20 pb-8">
+        <div className="max-w-3xl space-y-4">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-text-main leading-tight">Robotics &amp; Algorithmic Research</h1>
+          <p className="text-text-dim max-w-2xl text-sm sm:text-base leading-relaxed">Planning under uncertainty, conformant belief-state manipulation, multi-robot coordination, and hardware automation systems.</p>
+        </div>
       </header>
 
       <section className="space-y-8" id="thesis">
@@ -61,8 +63,8 @@ const ResearchListPage: React.FC<ResearchListPageProps> = ({ onNavigate }) => {
       </section>
 
       {lightboxImage && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 cursor-zoom-out p-4 backdrop-blur-sm" onClick={() => setLightboxImage(null)}>
-          <button className="absolute top-4 right-4 text-white hover:text-accent p-2 transition-colors focus:outline-none" onClick={() => setLightboxImage(null)}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-bg/95 cursor-zoom-out p-4 backdrop-blur-sm" onClick={() => setLightboxImage(null)}>
+          <button className="absolute top-4 right-4 text-text-main hover:text-accent p-2 transition-colors focus:outline-none" onClick={() => setLightboxImage(null)}>
             <X className="h-8 w-8" />
           </button>
           <img src={lightboxImage} alt="Enlarged screenshot preview" className="max-w-full max-h-[90vh] object-contain rounded-3xl border border-line shadow-2xl" />

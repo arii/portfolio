@@ -26,7 +26,7 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ experience
                   </a>
                 )}
               </div>
-              <span className="text-xs font-mono text-slate-400 print:text-gray-700 whitespace-nowrap mt-1 sm:mt-0">{exp.period}</span>
+              <span className="text-xs font-mono text-muted-foreground print:text-gray-700 whitespace-nowrap mt-1 sm:mt-0">{exp.period}</span>
             </div>
             <div className="text-primary font-semibold mb-2 text-base print:text-black print:mb-1">{exp.company}</div>
             {exp.description && (
@@ -49,10 +49,10 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ experience
             {exp.subRoles && exp.subRoles.length > 0 && (
               <div className="mt-3 space-y-4 pt-2 border-t border-border/40 print:border-gray-300">
                 {exp.subRoles.map((subRole, sIdx) => (
-                  <div key={sIdx} className="space-y-1.5 pl-3 border-l-2 border-slate-700/60 print:border-gray-400">
+                  <div key={sIdx} className="space-y-1.5 pl-3 border-l-2 border-border/60 print:border-gray-400">
                     <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
                       <span className="text-sm font-bold text-foreground print:text-black">{subRole.title}</span>
-                      <span className="text-xs font-mono text-slate-400 print:text-gray-700">{subRole.period}</span>
+                      <span className="text-xs font-mono text-muted-foreground print:text-gray-700">{subRole.period}</span>
                     </div>
                     <ul className="space-y-1">
                       {subRole.points.map((point, pIdx) => (
