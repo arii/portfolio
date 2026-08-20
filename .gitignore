@@ -113,7 +113,8 @@ dist/
 *.sln
 *.sw?
 
-# Vite build output
+# Build artifacts
+artifacts/
 dist/
 
 # OS files

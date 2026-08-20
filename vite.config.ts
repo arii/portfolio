@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
+import { visualizer } from 'rollup-plugin-visualizer';
 import { fileURLToPath } from 'url';
 
 export default defineConfig(() => {
@@ -8,6 +9,12 @@ export default defineConfig(() => {
   return {
     plugins: [
       react(),
+      visualizer({
+        filename: 'artifacts/stats.html',
+        open: false,
+        gzipSize: true,
+        brotliSize: true,
+      }),
       {
         name: 'spa-preview-fallback',
         configurePreviewServer(server) {

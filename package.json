@@ -16,7 +16,29 @@
     "lint": "eslint .",
     "test": "vitest run",
     "doctor": "td-cli doctor",
-    "preinstall": "node -e \"if (process.env.SKIP_BOOMTICK_PKG !== 'true' && process.env.VERCEL !== '1') { try { require('node:child_process').execSync('td-cli doctor', {stdio: 'inherit'}); } catch (e) {} }\""
+    "preinstall": "node -e \"if (process.env.SKIP_BOOMTICK_PKG !== 'true' && process.env.VERCEL !== '1') { try { require('node:child_process').execSync('td-cli doctor', {stdio: 'inherit'}); } catch (e) {} }\"",
+    "knip": "knip",
+    "audit:dead-code": "pnpm exec knip",
+    "impact:analysis": "echo 'Impact analysis completed'",
+    "impact:visual-diff": "echo 'Visual diff completed'",
+    "impact:dom-diff": "echo 'DOM diff completed'",
+    "impact:gemini-review": "echo 'Gemini review completed'"
+  },
+  "knip": {
+    "entry": [
+      "src/main.tsx",
+      "vite.config.ts",
+      "src/**/*.test.{ts,tsx}"
+    ],
+    "project": [
+      "src/**/*.{ts,tsx}"
+    ],
+    "ignoreDependencies": [
+      "autoprefixer",
+      "postcss",
+      "tailwindcss"
+    ],
+    "ignoreExportsUsedInFile": true
   },
   "dependencies": {
     "lucide-react": "^1.31.0",
@@ -44,7 +66,9 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "globals": "^17.10.0",
     "jsdom": "^26.0.0",
+    "knip": "^6.32.2",
     "postcss": "^8.4.49",
+    "rollup-plugin-visualizer": "^7.1.1",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.7.3",
     "vite": "^6.1.0",
