@@ -26,28 +26,33 @@ export const CareerHighlightsSection: React.FC<{ highlights: ProfileData['highli
 export const AtAGlanceSidebar: React.FC<{ details: ProfileData['details'] }> = ({ details }) => (
   <div className="border border-line bg-surface p-6 rounded-3xl space-y-4">
     <h3 className="text-xs font-semibold text-accent uppercase tracking-widest flex items-center space-x-1.5 font-sans">
-      <span className="h-1 w-1 bg-accent rounded-full"></span>
       <span>At a Glance</span>
     </h3>
     <div className="space-y-4">
       {details.map((detail, idx) => {
         const Icon = detail.icon;
         return (
-          <div key={idx} className="flex items-center justify-between border-b border-line/30 pb-3 last:border-0 last:pb-0">
-            <span className="text-xs text-text-dim flex items-center space-x-1.5 shrink-0 mr-2">
-              <Icon className="h-4 w-4 text-text-dim" />
+          <div key={idx} className="flex flex-col border-b border-line/30 pb-3 last:border-0 last:pb-0 gap-1">
+            <span className="text-[10px] text-text-dim flex items-center space-x-1.5 shrink-0 font-bold uppercase tracking-wider">
+              {Icon && <Icon className="h-3.5 w-3.5 text-text-dim shrink-0" />}
               <span>{detail.label}</span>
             </span>
             {detail.url ? (
               <a
                 href={detail.url}
-                className="text-xs sm:text-sm font-bold text-accent hover:opacity-80 transition-opacity flex items-center space-x-1 text-right"
+                className="text-xs sm:text-sm font-medium text-accent hover:opacity-80 transition-opacity flex items-center space-x-1"
               >
                 <span>{detail.value}</span>
                 <ExternalLink className="h-3 w-3 shrink-0 ml-1" />
               </a>
+            ) : Array.isArray(detail.value) ? (
+              <ul className="text-xs sm:text-sm font-medium text-text-main space-y-1 list-disc list-inside">
+                {detail.value.map((item, itemIdx) => (
+                  <li key={itemIdx}>{item}</li>
+                ))}
+              </ul>
             ) : (
-              <span className="text-xs sm:text-sm font-bold text-text-main text-right">
+              <span className="text-xs sm:text-sm font-medium text-text-main">
                 {detail.value}
               </span>
             )}

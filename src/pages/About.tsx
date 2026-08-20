@@ -20,13 +20,19 @@ const About: React.FC = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
         <section className="lg:col-span-8 space-y-8 sm:space-y-10 order-2 lg:order-1">
-          <div className="space-y-4 bg-surface p-6 sm:p-8 rounded-3xl border border-line">
+          <div className="space-y-6 bg-surface p-6 sm:p-8 rounded-3xl border border-line">
             <h2 className="text-xl sm:text-2xl font-bold text-text-main pb-3 border-b border-line/30">
-              Professional Summary
+              Biography
             </h2>
-            <p className="text-text-body leading-relaxed text-sm sm:text-base">
-              {profileData.bio}
-            </p>
+            <div className="space-y-4 text-text-body leading-relaxed text-sm sm:text-base">
+              <p>
+                {profileData.bio[0]}
+              </p>
+              <p>
+                <strong className="font-bold text-text-main">Beyond the Code</strong>{" "}
+                {profileData.bio[1]}
+              </p>
+            </div>
           </div>
 
           <div className="border border-accent/20 bg-accent/5 rounded-3xl p-6 sm:p-8 space-y-3">
@@ -57,24 +63,6 @@ const About: React.FC = () => {
 
           <div className="border border-line bg-surface p-6 rounded-3xl space-y-4">
             <h3 className="text-xs font-semibold text-accent uppercase tracking-widest flex items-center space-x-1.5 font-sans">
-              <span className="h-1 w-1 bg-accent rounded-full"></span>
-              <span>Currently Exploring</span>
-            </h3>
-            <div className="flex flex-wrap gap-2">
-              {profileData.exploring.map((topic, idx) => (
-                <span
-                  key={idx}
-                  className="px-2.5 py-1 rounded-full text-xs font-semibold bg-surface-alt border border-line text-text-dim"
-                >
-                  {topic}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <div className="border border-line bg-surface p-6 rounded-3xl space-y-4">
-            <h3 className="text-xs font-semibold text-accent uppercase tracking-widest flex items-center space-x-1.5 font-sans">
-              <span className="h-1 w-1 bg-accent rounded-full"></span>
               <span>Connect</span>
             </h3>
             <div className="flex flex-col gap-3">
