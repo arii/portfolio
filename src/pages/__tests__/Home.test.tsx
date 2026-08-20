@@ -115,6 +115,6 @@ describe('Home Page', () => {
 
     const productsCard = screen.getByText('Products built with DevAI');
     fireEvent.click(productsCard);
-    expect(handleNavigate).toHaveBeenCalledWith('/gear');
+    expect(handleNavigate).toHaveBeenCalledWith('/devai');
   });
 });
