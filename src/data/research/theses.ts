@@ -25,7 +25,7 @@ export const mastersThesisData: ThesisEntry = {
   subtitle: "MIT S.M. THESIS — COMPUTER SCIENCE & ARTIFICIAL INTELLIGENCE LABORATORY",
   description:
     'Investigated tactile-driven, sensorimotor reinforcement learning policies for bimanual and whole-arm grasping of bulky, irregular objects under real-world physical uncertainty. Formulated contact-rich control strategies that leverage compliant arm surfaces and multi-modal feedback to stabilize grasping without prior geometric part models.',
-  imageSrc: '/assets/research/phd/sixblock.png',
+  imageSrc: '/assets/research/masters-thesis.png',
   imageAlt: 'Robot manipulator executing whole-arm contact and grasping strategy on irregular objects',
   tags: [
     'Whole-Arm Grasping',
