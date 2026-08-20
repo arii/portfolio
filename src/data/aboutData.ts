@@ -18,7 +18,7 @@ export interface HighlightItem {
 export interface ProfileData {
   name: string;
   role: string;
-  bio: string;
+  bio: string[];
   details: ProfileDetail[];
   availability: string;
   highlights: HighlightItem[];
@@ -28,26 +28,24 @@ export interface ProfileData {
 export const profileData: ProfileData = {
   name: "Ariel Anders, PhD",
   role: "Senior roboticist · DevAI engineer",
-  bio: "I'm an MIT PhD and former senior engineer at Waymo and Robust.AI. My background is in robotics—specifically navigation, motion planning, and behavior systems. Across my career at MIT CSAIL, Robust.AI, Waymo, and Civ Robotics, I've focused on bridging complex algorithmic reasoning with robust production software. Currently, I am applying robotics-grade software rigor to autonomous AI engineering agents and developer infrastructure.",
+  bio: [
+    "I'm an MIT PhD roboticist and senior software engineer with deep expertise in AI, motion planning, and autonomous systems. Most recently, I've been applying robotics-grade software rigor to autonomous AI engineering agents, agentic CI/CD pipelines, and developer infrastructure.",
+    "Outside of robotics and AI, you’ll usually find me on the dance floor or in a theater. I am an active West Coast Swing dancer who travels for regional events, and I practice improv comedy. Recently, I combined my technical background with these creative outlets to build boomtick.blog, a lifestyle and community platform featuring West Coast Swing guides, gear recommendations, and custom merchandise."
+  ],
   details: [
     { label: "Location", value: "San Francisco, CA", icon: MapPin },
     {
       label: "Education",
-      value: [
-        "2008 – 2012: UCSC Computer Engineering (BS)",
-        "2012 – 2014: MIT EECS SM",
-        "2014 – 2019: MIT EECS PhD"
-      ],
+      value: "MIT EECS PhD 2019 · SM 2014",
       icon: GraduationCap
     },
     { label: "PhD Focus", value: "Motion planning under uncertainty for robot manipulation", icon: GraduationCap },
     { label: "PhD Advisors", value: "Leslie Kaelbling & Tomas Lozano-Perez", icon: GraduationCap },
     {
-      label: "Awards & Honors",
+      label: "Honors",
       value: [
         "Robohub's 30 Women in Robotics (2020)",
-        "MIT Graduate Women of Excellence (2017)",
-        "MIT EECS Frederick C. Hennie III Teaching Award (2017)"
+        "MIT Graduate Women of Excellence (2017)"
       ],
       icon: Award
     }
@@ -55,34 +53,24 @@ export const profileData: ProfileData = {
   availability: "Open to Staff/Senior SWE roles, robotics contracts, and DevAI consulting — especially where robotics and AI-assisted engineering overlap.",
   highlights: [
     {
-      period: "2008 – 2012",
-      title: "UCSC (Bionics Lab)",
-      detail: "Computer Engineering (BS), including 2 years of independent research at the Bionics Lab."
-    },
-    {
       period: "2012 – 2019",
       title: "MIT CSAIL",
-      detail: "Researcher in the Learning and Intelligent Systems (LIS) group; focused on robot manipulation for household helper robots under uncertainty from inaccurate sensing, imperfect actuation, and unknown object properties."
+      detail: "Researcher Learning and Intelligent Systems (LIS) group — robot manipulation under sensing/actuation uncertainty."
     },
     {
       period: "2019 – 2022",
       title: "Robust.AI",
-      detail: "First roboticist and behavior team lead; developed robust real-time robot behaviors related to indoor navigation in dynamic environments focused on contextual and social awareness."
+      detail: "First roboticist & behavior lead — real-time indoor social navigation."
     },
     {
       period: "2022 – 2024",
       title: "Waymo",
-      detail: "Senior software engineer in the Planning team; developed onboard motion planning and decision-making software, focused on improving pullover performance, user walking distance, and congestion reduction."
+      detail: "Senior SWE, Planning team — onboard motion planning & decision-making."
     },
     {
       period: "2025 – 2026",
       title: "Civ Robotics",
-      detail: "Developed navigation and localization software for autonomous forklifts using C++, Python, and ROS 2, including IMU drivers, GPS filtering, and tilt-compensation for pose estimation."
-    },
-    {
-      period: "2026 – Present",
-      title: "DevAI",
-      detail: "AI-assisted developer infrastructure, agentic CI/CD pipelines, and independent projects like boomtick.blog."
+      detail: "Navigation & localization for autonomous forklifts (C++, Python, ROS 2)."
     }
   ],
   socials: [

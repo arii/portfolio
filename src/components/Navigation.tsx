@@ -44,7 +44,7 @@ const Navigation: React.FC = () => {
           <Link to="/" className="flex items-center space-x-3 group">
             <div className="flex flex-col">
               <span className="text-sm sm:text-base font-bold tracking-tight text-foreground">
-                Ariel Anders Portfolio
+                Portfolio
               </span>
               <span className="hidden sm:block text-xs text-muted-foreground">
                 Roboticist &amp; Senior Software Engineer
