@@ -19,7 +19,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
         <p className="mt-2 text-slate-400">The requested research paper could not be found.</p>
         <button
           onClick={onBack}
-          className="mt-6 inline-flex items-center space-x-2 rounded-xl bg-cyan-500 hover:bg-cyan-600 text-slate-950 px-4 py-2 text-sm font-semibold transition-colors"
+          className="mt-6 inline-flex items-center space-x-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 px-4 py-2 text-sm font-semibold transition-colors min-h-[44px]"
         >
           <ArrowLeft className="h-4 w-4" />
           <span>Back to Research</span>
@@ -32,7 +32,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
     <article className="mx-auto max-w-3xl px-4 py-12 space-y-8">
       <button
         onClick={onBack}
-        className="inline-flex items-center space-x-2 text-sm font-semibold text-slate-400 hover:text-cyan-400 transition-colors"
+        className="inline-flex items-center space-x-2 text-sm font-semibold text-slate-400 hover:text-amber-400 transition-colors"
       >
         <ArrowLeft className="h-4 w-4" />
         <span>Back to Articles</span>
@@ -43,7 +43,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
           {post.tags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full bg-cyan-500/10 px-2.5 py-0.5 text-xs font-semibold text-cyan-400 border border-cyan-500/15"
+              className="rounded-full bg-amber-500/10 px-2.5 py-0.5 text-xs font-semibold text-amber-400 border border-amber-500/20"
             >
               {tag}
             </span>
@@ -84,14 +84,14 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
                         {language}
                       </div>
                     )}
-                    <pre className="p-4 overflow-x-auto text-sm font-mono text-cyan-400/90 leading-relaxed bg-slate-950">
+                    <pre className="p-4 overflow-x-auto text-sm font-mono text-amber-400/90 leading-relaxed bg-slate-950">
                       <code>{children}</code>
                     </pre>
                   </div>
                 );
               }
               return (
-                <code className="bg-slate-900 text-cyan-400 px-1.5 py-0.5 rounded font-mono text-xs border border-slate-800 normal-case" {...props}>
+                <code className="bg-slate-900 text-amber-400 px-1.5 py-0.5 rounded font-mono text-xs border border-slate-800 normal-case" {...props}>
                   {children}
                 </code>
               );
