@@ -43,15 +43,18 @@ describe('About Page Content Ownership', () => {
   it('renders simplified career highlights and abbreviated education entries', () => {
     render(<About />);
 
+    expect(screen.getByText('2008 – 2012: UCSC Computer Engineering (BS)')).toBeInTheDocument();
     expect(screen.getByText('2012 – 2014: MIT EECS SM')).toBeInTheDocument();
     expect(screen.getByText('2014 – 2019: MIT EECS PhD')).toBeInTheDocument();
 
+    expect(screen.getByText('2008 – 2012')).toBeInTheDocument();
     expect(screen.getByText('2012 – 2019')).toBeInTheDocument();
     expect(screen.getByText('2019 – 2022')).toBeInTheDocument();
     expect(screen.getByText('2022 – 2024')).toBeInTheDocument();
     expect(screen.getByText('2025 – 2026')).toBeInTheDocument();
     expect(screen.getByText('2026 – Present')).toBeInTheDocument();
 
+    expect(screen.getByText('UCSC (Bionics Lab)')).toBeInTheDocument();
     expect(screen.getByText('MIT CSAIL')).toBeInTheDocument();
     expect(screen.getByText('Robust.AI')).toBeInTheDocument();
     expect(screen.getByText('Waymo')).toBeInTheDocument();

@@ -55,6 +55,11 @@ export const profileData: ProfileData = {
   availability: "Open to Staff/Senior SWE roles, robotics contracts, and DevAI consulting — especially where robotics and AI-assisted engineering overlap.",
   highlights: [
     {
+      period: "2008 – 2012",
+      title: "UCSC (Bionics Lab)",
+      detail: "Computer Engineering (BS), including 2 years of independent research at the Bionics Lab."
+    },
+    {
       period: "2012 – 2019",
       title: "MIT CSAIL",
       detail: "Researcher in the Learning and Intelligent Systems (LIS) group; focused on robot manipulation for household helper robots under uncertainty from inaccurate sensing, imperfect actuation, and unknown object properties."
