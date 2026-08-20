@@ -32,7 +32,7 @@ For NandaHack I packaged the same live-registry-lookup logic as a small public A
 
 ![VersionTruth Solution](/images/studies/AI_Version_Hallucination_Solution.webp)
 
-```
+```http
 GET /api/latest-version?ecosystem=gh-action&name=actions/checkout
 → { "ecosystem": "gh-action", "name": "actions/checkout", "latest": "v6.0.1", ... }
 
