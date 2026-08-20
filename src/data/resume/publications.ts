@@ -52,5 +52,25 @@ export const publicationsData: ResumePublication[] = [
     venue: 'IEEE Integrated STEM Education Conference (ISEC) / MIT BeaverWorks',
     category: 'journal_conference',
     link: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=NM6SfiEAAAAJ&citation_for_view=NM6SfiEAAAAJ:W7OEmFMy1HYC'
+  },
+  {
+    id: 'eaai-2017',
+    title: 'Visual Servoing',
+    type: 'Symposium Paper',
+    year: '2017',
+    authors: ['A. Anders', 'S. Karaman'],
+    venue: 'EAAI-17: 7th Symposium on Educational Advances in Artificial Intelligence',
+    category: 'symposium_other',
+    link: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=NM6SfiEAAAAJ&citation_for_view=NM6SfiEAAAAJ:UeHWp8X0CEIC'
+  },
+  {
+    id: 'nsbe-dental-2012',
+    title: 'Dynamic Registration for Dental Robotics',
+    type: 'Conference Paper',
+    year: '2012',
+    authors: ['A.S. Anders', 'J. Rosen'],
+    venue: 'National Society of Black Engineers (NSBE) Technical Proceedings (UC Santa Cruz Bionics Lab)',
+    category: 'symposium_other',
+    link: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=NM6SfiEAAAAJ&citation_for_view=NM6SfiEAAAAJ:YsMSGLbcyi4C'
   }
 ];
