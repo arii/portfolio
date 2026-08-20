@@ -40,23 +40,29 @@ describe('About Page Content Ownership', () => {
     expect(screen.queryByText('Agentic Workflows')).not.toBeInTheDocument();
   });
 
-  it('renders updated career highlights including UCSC, MIT 2012–2020, Civ Robotics, and DevAI', () => {
+  it('renders simplified career highlights and abbreviated education entries', () => {
     render(<About />);
 
-    expect(screen.getByText('UCSC (Computer Engineering, BS)')).toBeInTheDocument();
-    expect(screen.getByText('2008 – 2012')).toBeInTheDocument();
+    expect(screen.getByText('2012 – 2014: MIT EECS SM')).toBeInTheDocument();
+    expect(screen.getByText('2014 – 2019: MIT EECS PhD')).toBeInTheDocument();
+
     expect(screen.getByText('2012 – 2019')).toBeInTheDocument();
     expect(screen.getByText('2019 – 2022')).toBeInTheDocument();
+    expect(screen.getByText('2022 – 2024')).toBeInTheDocument();
+    expect(screen.getByText('2025 – 2026')).toBeInTheDocument();
     expect(screen.getByText('2026 – Present')).toBeInTheDocument();
 
+    expect(screen.getByText('MIT CSAIL')).toBeInTheDocument();
+    expect(screen.getByText('Robust.AI')).toBeInTheDocument();
+    expect(screen.getByText('Waymo')).toBeInTheDocument();
     expect(screen.getByText('Civ Robotics')).toBeInTheDocument();
     expect(screen.getByText('DevAI')).toBeInTheDocument();
 
     expect(
-      screen.getByText((content) => content.includes('First roboticist and behavior team lead'))
+      screen.getByText((content) => content.includes('Learning and Intelligent Systems (LIS) group'))
     ).toBeInTheDocument();
     expect(
-      screen.getByText((content) => content.includes('motion generation platform team'))
+      screen.getByText((content) => content.includes('Senior software engineer in the Planning team'))
     ).toBeInTheDocument();
   });
 });
