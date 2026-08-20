@@ -6,13 +6,11 @@ describe('About Page Content Ownership', () => {
   it('renders bio, advisor credibility line, and resume outlink', () => {
     render(<About />);
 
-    expect(screen.getByText('Ariel Anders, PhD')).toBeInTheDocument();
+    expect(screen.getByText('About Ariel')).toBeInTheDocument();
     expect(screen.getByText('Education')).toBeInTheDocument();
     expect(screen.getByText('Honors')).toBeInTheDocument();
     expect(
-      screen.getByText((content) =>
-        content.includes('applying robotics-grade software rigor to autonomous AI engineering agents')
-      )
+      screen.getByText('robotics-grade reliability to DevAI')
     ).toBeInTheDocument();
 
     expect(

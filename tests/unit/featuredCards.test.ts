@@ -13,17 +13,17 @@ describe('FEATURED_CARDS Configuration', () => {
     expect(card?.ctaText).toBe('View Products');
   });
 
-  it('renders updated copy for Engineering Writing', () => {
+  it('renders updated copy for DevAI Orchestration', () => {
     const card = FEATURED_CARDS.find((c) => c.id === 'devai-tools');
     expect(card).toBeDefined();
-    expect(card?.title).toBe('Engineering Writing');
+    expect(card?.title).toBe('DevAI Orchestration');
     expect(card?.ctaText).toBe('Read Articles');
   });
 
-  it('renders updated copy for Robotics Research & Publications', () => {
+  it('renders updated copy for Robotics Research', () => {
     const card = FEATURED_CARDS.find((c) => c.id === 'robotics-research');
     expect(card).toBeDefined();
-    expect(card?.title).toBe('Robotics Research & Publications');
+    expect(card?.title).toBe('Robotics Research');
     expect(card?.ctaText).toBe('Read Research');
   });
 });
