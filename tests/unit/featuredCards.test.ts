@@ -13,11 +13,11 @@ describe('FEATURED_CARDS Configuration', () => {
     expect(card?.ctaText).toBe('View Products');
   });
 
-  it('renders updated copy for Building DevAI Tools', () => {
+  it('renders updated copy for Engineering Writing', () => {
     const card = FEATURED_CARDS.find((c) => c.id === 'devai-tools');
     expect(card).toBeDefined();
-    expect(card?.title).toBe('Building DevAI Tools');
-    expect(card?.ctaText).toBe("See How It's Built");
+    expect(card?.title).toBe('Engineering Writing');
+    expect(card?.ctaText).toBe('Read Articles');
   });
 
   it('renders updated copy for Robotics Research & Publications', () => {
