@@ -22,7 +22,7 @@ export const resumeData: ResumeData = {
   socials: [
     { label: "Google Scholar", url: scholarUrl, type: "scholar" },
     { label: "Email", url: "mailto:anders.ariel@gmail.com", type: "mail" },
-    { label: "LinkedIn", url: "https://linkedin.com/in/arielanders", type: "linkedin" },
+    { label: "LinkedIn", url: "https://www.linkedin.com/in/ariel-anders/", type: "linkedin" },
     { label: "GitHub", url: "https://github.com/arii", type: "github" }
   ],
   experience: experienceData,

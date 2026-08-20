@@ -73,7 +73,7 @@ const SocialIcons: React.FC<SocialIconsProps> = ({
   return (
     <div className={className}>
       <a
-        href="https://linkedin.com/in/arii"
+        href="https://www.linkedin.com/in/ariel-anders/"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="LinkedIn"
