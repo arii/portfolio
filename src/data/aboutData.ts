@@ -1,12 +1,12 @@
 import React from 'react';
-import { MapPin, Globe, Briefcase, GraduationCap, Award, LucideIcon } from 'lucide-react';
+import { MapPin, GraduationCap, Award, LucideIcon } from 'lucide-react';
 import { MailIcon, LinkedinIcon, GithubIcon } from '@/components/SocialIcons';
 
 export interface ProfileDetail {
   label: string;
-  value: string;
+  value: string | string[];
   url?: string;
-  icon: LucideIcon;
+  icon?: LucideIcon;
 }
 
 export interface HighlightItem {
@@ -31,10 +31,26 @@ export const profileData: ProfileData = {
   bio: "I'm an MIT PhD and former senior engineer at Waymo and Robust.AI. My background is in robotics—specifically navigation, motion planning, and behavior systems. Across my career at MIT CSAIL, Robust.AI, Waymo, and Civ Robotics, I've focused on bridging complex algorithmic reasoning with robust production software. Currently, I am applying robotics-grade software rigor to autonomous AI engineering agents and developer infrastructure.",
   details: [
     { label: "Location", value: "San Francisco, CA", icon: MapPin },
-    { label: "PhD Focus", value: "Advised by Leslie Kaelbling & Tomas Lozano-Perez", icon: GraduationCap },
-    { label: "Portfolio", value: "View Portfolio", url: "#/research", icon: Globe },
-    { label: "Resume", value: "View Resume", url: "#/resume", icon: Briefcase },
-    { label: "Publications", value: "View full publications & experience →", url: "#/resume", icon: Award }
+    {
+      label: "Education",
+      value: [
+        "2008 – 2012: UCSC (Computer Engineering, BS)",
+        "2012 – 2014: MIT Electrical Engineering & Computer Science (SM)",
+        "2014 – 2019: MIT Electrical Engineering & Computer Science (PhD)"
+      ],
+      icon: GraduationCap
+    },
+    { label: "PhD Focus", value: "Motion planning under uncertainty for robot manipulation", icon: GraduationCap },
+    { label: "PhD Advisors", value: "Leslie Kaelbling & Tomas Lozano-Perez", icon: GraduationCap },
+    {
+      label: "Awards & Honors",
+      value: [
+        "Robohub's 30 Women in Robotics (2020)",
+        "MIT Graduate Women of Excellence (2017)",
+        "MIT EECS Frederick C. Hennie III Teaching Award (2017)"
+      ],
+      icon: Award
+    }
   ],
   availability: "Open to Staff/Senior SWE roles, robotics contracts, and DevAI consulting — especially where robotics and AI-assisted engineering overlap.",
   highlights: [

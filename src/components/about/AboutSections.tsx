@@ -33,21 +33,27 @@ export const AtAGlanceSidebar: React.FC<{ details: ProfileData['details'] }> = (
       {details.map((detail, idx) => {
         const Icon = detail.icon;
         return (
-          <div key={idx} className="flex items-center justify-between border-b border-line/30 pb-3 last:border-0 last:pb-0">
-            <span className="text-xs text-text-dim flex items-center space-x-1.5 shrink-0 mr-2">
-              <Icon className="h-4 w-4 text-text-dim" />
+          <div key={idx} className="flex flex-col sm:flex-row sm:items-start justify-between border-b border-line/30 pb-3 last:border-0 last:pb-0 gap-1 sm:gap-2">
+            <span className="text-xs text-text-dim flex items-center space-x-1.5 shrink-0 mr-2 font-medium">
+              {Icon && <Icon className="h-4 w-4 text-text-dim shrink-0" />}
               <span>{detail.label}</span>
             </span>
             {detail.url ? (
               <a
                 href={detail.url}
-                className="text-xs sm:text-sm font-bold text-accent hover:opacity-80 transition-opacity flex items-center space-x-1 text-right"
+                className="text-xs sm:text-sm font-bold text-accent hover:opacity-80 transition-opacity flex items-center space-x-1 sm:text-right"
               >
                 <span>{detail.value}</span>
                 <ExternalLink className="h-3 w-3 shrink-0 ml-1" />
               </a>
+            ) : Array.isArray(detail.value) ? (
+              <ul className="text-xs sm:text-sm font-bold text-text-main sm:text-right space-y-1 list-disc list-inside sm:list-none">
+                {detail.value.map((item, itemIdx) => (
+                  <li key={itemIdx}>{item}</li>
+                ))}
+              </ul>
             ) : (
-              <span className="text-xs sm:text-sm font-bold text-text-main text-right">
+              <span className="text-xs sm:text-sm font-bold text-text-main sm:text-right">
                 {detail.value}
               </span>
             )}

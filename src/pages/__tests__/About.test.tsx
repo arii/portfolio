@@ -7,7 +7,12 @@ describe('About Page Content Ownership', () => {
     render(<About />);
 
     expect(screen.getByText('Ariel Anders, PhD')).toBeInTheDocument();
-    expect(screen.getByText('Professional Summary')).toBeInTheDocument();
+    expect(screen.getByText('Education')).toBeInTheDocument();
+    expect(screen.getByText('PhD Focus')).toBeInTheDocument();
+    expect(screen.getByText('PhD Advisors')).toBeInTheDocument();
+    expect(screen.getByText('Awards & Honors')).toBeInTheDocument();
+    expect(screen.getByText('Motion planning under uncertainty for robot manipulation')).toBeInTheDocument();
+    expect(screen.getByText('Leslie Kaelbling & Tomas Lozano-Perez')).toBeInTheDocument();
     expect(
       screen.getByText((content) =>
         content.includes('applying robotics-grade software rigor to autonomous AI engineering agents')
@@ -15,11 +20,11 @@ describe('About Page Content Ownership', () => {
     ).toBeInTheDocument();
 
     expect(
-      screen.getByText('Advised by Leslie Kaelbling & Tomas Lozano-Perez')
+      screen.getByText('Leslie Kaelbling & Tomas Lozano-Perez')
     ).toBeInTheDocument();
 
     expect(
-      screen.getByText('View full publications & experience →')
+      screen.getByText('San Francisco, CA')
     ).toBeInTheDocument();
   });
 
