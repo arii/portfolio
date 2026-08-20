@@ -11,6 +11,7 @@ export const autonomousTools: ResearchTool[] = [
     tags: ['Robotics & Autonomy', 'Computer Vision', 'Visual Servoing', 'Motion Planning', 'ROS'],
     image: '/assets/research/bw.jpg',
     imageAlt: 'Students programming miniature autonomous vehicles',
+    canonicalPath: '/research/bwsi-racecar',
     externalUrl: 'https://beaverworks.ll.mit.edu/CMS/bw/bwsi'
   },
   {
@@ -20,7 +21,8 @@ export const autonomousTools: ResearchTool[] = [
     description: 'Decentralized multi-agent package delivery in dynamic human environments (RSS 2015 Best Paper Finalist & IJRR journal publication).',
     category: 'Robotics & Autonomy',
     status: 'Completed',
-    tags: ['Robotics & Autonomy', 'Multi-Agent', 'RSS 2015 Finalist', 'IJRR']
+    tags: ['Robotics & Autonomy', 'Multi-Agent', 'RSS 2015 Finalist', 'IJRR'],
+    canonicalPath: '/research/delivery-bots'
   },
   {
     id: 'autonomous-drone-line-following',
@@ -32,6 +34,7 @@ export const autonomousTools: ResearchTool[] = [
     tags: ['Robotics & Autonomy', 'Control Systems', 'Computer Vision', 'Drones'],
     image: '/assets/research/drone.jpg',
     imageAlt: 'Parrot Rolling Spider Drone hovering over path',
+    canonicalPath: '/research/autonomous-drone-line-following',
     externalUrl: 'https://github.com/arii/FollowTheYellowBrickRoad'
   },
   {
