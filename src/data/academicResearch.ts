@@ -32,7 +32,7 @@ export const ACADEMIC_PAPERS: AcademicPaper[] = [
     venue: 'MIT CSAIL',
     summary: 'Developed reinforcement learning policies and sensorimotor frameworks for bimanual and whole-arm grasping of bulky, irregular objects under real-world clutter.',
     tags: ['Robotics', 'Manipulation', 'Reinforcement Learning', 'Whole-Arm Grasping'],
-    link: 'https://dspace.mit.edu/handle/1721.1/92629'
+    link: 'https://dspace.mit.edu/entities/publication/ead0c10d-3401-46a1-bcc5-42f5a56fe0b8'
   },
   {
     id: 'icra-2018',
