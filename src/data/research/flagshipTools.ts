@@ -54,7 +54,7 @@ export const flagshipTools: ResearchTool[] = [
   {
     id: 'phd-thesis',
     taxonomyBucket: 'product',
-    title: 'Reliably Arranging Objects (PhD Thesis)',
+    title: 'Reliably Arranging Objects',
     subtitle: 'MIT CSAIL PH.D. THESIS',
     description: 'Conformant planning approach to reliable robot manipulation under severe sensing and control uncertainty. Combines fixture-augmented plan optimization and physics-driven belief state transitions to elevate assembly reliability from 1.9% to 80.7% on a PR2 robot.',
     category: 'Robotics & AI',
@@ -66,5 +66,20 @@ export const flagshipTools: ResearchTool[] = [
     externalUrl: 'https://dspace.mit.edu/handle/1721.1/122822',
     externalLinkDisplayLabel: 'MIT DSpace Thesis',
     sourceUrl: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=NM6SfiEAAAAJ&citation_for_view=NM6SfiEAAAAJ:4DMP91E08xMC'
+  },
+  {
+    id: 'masters-thesis',
+    taxonomyBucket: 'product',
+    title: 'Learning a Strategy for Whole-Arm Grasping',
+    subtitle: 'MIT S.M. THESIS — CSAIL',
+    description: 'Investigated tactile-driven, sensorimotor reinforcement learning policies for bimanual and whole-arm grasping of bulky, irregular objects under real-world physical uncertainty. Formulated contact-rich control strategies that leverage compliant arm surfaces and multi-modal feedback to stabilize grasping without prior geometric part models.',
+    category: 'Robotics & AI',
+    status: 'Completed (2014)',
+    tags: ['Whole-Arm Grasping', 'Bimanual Manipulation', 'Reinforcement Learning', 'Sensorimotor Control', 'Tactile Feedback', 'MIT CSAIL'],
+    isFlagship: true,
+    image: '/assets/research/masters-thesis.png',
+    imageAlt: 'Robot manipulator executing whole-arm contact and grasping strategy on irregular objects',
+    externalUrl: 'https://dspace.mit.edu/entities/publication/ead0c10d-3401-46a1-bcc5-42f5a56fe0b8',
+    externalLinkDisplayLabel: 'MIT DSpace Thesis'
   }
 ];

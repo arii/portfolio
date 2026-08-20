@@ -27,8 +27,8 @@ describe('DevAI and Research List Page Deduplication', () => {
     );
 
     expect(screen.getByText('Robotics & Algorithmic Research')).toBeInTheDocument();
-    expect(screen.getByText('Doctoral & Graduate Theses')).toBeInTheDocument();
+    expect(screen.getByText('Graduate Theses')).toBeInTheDocument();
     expect(screen.getByText('Peer-Reviewed Publications')).toBeInTheDocument();
-    expect(screen.getByText('Applied Systems & Infrastructure Projects')).toBeInTheDocument();
+    expect(screen.getByText('Robotics and Academic Projects')).toBeInTheDocument();
   });
 });

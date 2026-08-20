@@ -14,7 +14,9 @@
     "preview": "vite preview --port 3000",
     "type-check": "tsc --noEmit",
     "lint": "eslint .",
-    "test": "vitest run"
+    "test": "vitest run",
+    "doctor": "td-cli doctor",
+    "preinstall": "node -e \"if (process.env.SKIP_BOOMTICK_PKG !== 'true' && process.env.VERCEL !== '1') { try { require('node:child_process').execSync('td-cli doctor', {stdio: 'inherit'}); } catch (e) {} }\""
   },
   "dependencies": {
     "lucide-react": "^1.31.0",
