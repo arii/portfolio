@@ -38,14 +38,18 @@ const HeroPathCard: React.FC<HeroPathCardProps> = ({ card, onNavigate }) => {
     >
       <div className="space-y-2.5">
         {badge && (
-          <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-bold tracking-wider bg-slate-blue/10 text-slate-blue-light uppercase">
+          <span className={`inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-bold tracking-wider uppercase ${
+            card.id === 'robotics-research'
+              ? 'bg-accent/10 text-accent'
+              : 'bg-slate-blue/10 text-slate-blue-light'
+          }`}>
             {badge}
           </span>
         )}
         <h3 className="text-xl sm:text-2xl font-extrabold text-text-main group-hover:text-accent transition-colors tracking-tight">
           {card.title}
         </h3>
-        <p className="text-sm text-text-dim leading-relaxed">
+        <p className="text-sm text-text-body leading-relaxed">
           {card.description}
         </p>
       </div>

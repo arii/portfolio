@@ -10,7 +10,7 @@ const About: React.FC = () => {
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-text-main leading-tight">
           {profileData.name}
         </h1>
-        <p className="text-lg sm:text-xl text-accent font-bold tracking-tight">
+        <p className="text-lg sm:text-xl text-text-body font-bold tracking-tight">
           {profileData.role}
         </p>
       </header>
