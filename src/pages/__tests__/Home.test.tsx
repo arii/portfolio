@@ -49,9 +49,9 @@ describe('Home Page', () => {
     expect(
       screen.getByText(/AI should raise the bar, not lower it/i)
     ).toBeInTheDocument();
-    expect(screen.getByText('Reliable Robot Behavior')).toBeInTheDocument();
+    expect(screen.getByText('Make Robots Behave')).toBeInTheDocument();
     expect(
-      screen.getByText(/Robots operate in environments that are uncertain, dynamic/i)
+      screen.getByText(/Robots operate in environments that are uncertain and hard to model/i)
     ).toBeInTheDocument();
     expect(screen.queryByText('Production Robot Software')).not.toBeInTheDocument();
   });

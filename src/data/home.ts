@@ -54,13 +54,13 @@ export const PHILOSOPHY_TENETS: PhilosophyTenet[] = [
     id: 'ai-rigor',
     title: 'AI-Accelerated Rigor',
     description:
-      'AI should raise the bar, not lower it. I build agentic CI/CD workflows and automated code reviews that use AI to generate patches, enforce architectural guidelines, and identify and prevent technical debt—accelerating development without compromising engineering rigor.',
+      'AI should raise the bar, not lower it. I build agentic CI/CD workflows and automated reviews that enforce architecture guidelines and catch technical debt — accelerating development without compromising rigor.',
   },
   {
     id: 'robot-behavior',
-    title: 'Reliable Robot Behavior',
+    title: 'Make Robots Behave',
     description:
-      'Robots operate in environments that are uncertain, dynamic, and difficult to model completely. However, we can design predictable behavior through careful system design, combining learning, planning, and engineering to build systems that remain reliable in the real world.',
+      'Robots operate in environments that are uncertain and hard to model. I combine learning, planning, and careful system design to make their behavior reliable in the real world.',
   },
 ];
 
