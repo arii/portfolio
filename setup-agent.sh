@@ -47,7 +47,7 @@ log "Installing Python dependencies..."
 "$VENV_PATH/bin/pip" install --upgrade pip setuptools wheel
 
 # Install required python tools
-"$VENV_PATH/bin/pip" install requests python-dotenv pydantic click PyGithub
+"$VENV_PATH/bin/pip" install requests python-dotenv pydantic click PyGithub boomtick-cli
 
 # 4. Install Playwright browsers if needed
 if [ "$SKIP_PLAYWRIGHT" = "1" ]; then
