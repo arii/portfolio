@@ -11,6 +11,7 @@ export const autonomousTools: ResearchTool[] = [
     tags: ['Robotics', 'Planning', 'PhD Thesis'],
     image: '/assets/research/phd/tetris1.png',
     imageAlt: 'Willow Garage PR2 robot arranging Tetris blocks using conformant planning',
+    canonicalPath: '/research/conformant-planning-manipulation',
     externalUrl: 'https://dspace.mit.edu/handle/1721.1/122822'
   },
   {
@@ -23,6 +24,7 @@ export const autonomousTools: ResearchTool[] = [
     tags: ['Robotics', 'Research'],
     image: '/assets/research/phd/beliefoverlay.png',
     imageAlt: 'Algorithm belief-state overlay visualization and experimental noise characterization of robot grasping and placing',
+    canonicalPath: '/research/belief-state-visualization',
     externalUrl: 'https://dspace.mit.edu/handle/1721.1/122822'
   },
   {
