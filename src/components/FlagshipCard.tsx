@@ -80,17 +80,35 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
           </div>
 
           <div className="flex flex-wrap gap-3">
-            {tool.externalUrl ? (
-              <a href={tool.externalUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center space-x-1.5 bg-accent/10 border border-accent/20 px-3.5 py-2 rounded-xl text-xs font-semibold text-accent hover:bg-accent/20 transition-colors min-h-[44px]">
-                <span>{tool.externalLinkDisplayLabel || 'Open Link'}</span><ExternalLink className="h-3.5 w-3.5" />
-              </a>
-            ) : tool.canonicalPath ? (
-              <button onClick={() => onNavigate(tool.canonicalPath?.replace('/research/', '') || '')} className="inline-flex items-center space-x-1.5 bg-accent/10 border border-accent/20 px-3.5 py-2 rounded-xl text-xs font-semibold text-accent hover:bg-accent/20 transition-colors min-h-[44px]">
+            {tool.canonicalPath && (
+              <button
+                onClick={() => onNavigate(tool.canonicalPath?.replace('/research/', '') || '')}
+                className="inline-flex items-center space-x-1.5 bg-accent/10 border border-accent/20 px-3.5 py-2 rounded-xl text-xs font-semibold text-accent hover:bg-accent/20 transition-colors min-h-[44px] cursor-pointer"
+              >
                 <span>Read Deep-Dive</span><ArrowRight className="h-3.5 w-3.5" />
               </button>
-            ) : null}
+            )}
+            {tool.externalUrl && (
+              <a
+                href={tool.externalUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`inline-flex items-center space-x-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold transition-colors min-h-[44px] ${
+                  tool.canonicalPath
+                    ? 'bg-surface border border-line text-text-dim hover:bg-surface-alt hover:text-text-main'
+                    : 'bg-accent/10 border border-accent/20 text-accent hover:bg-accent/20'
+                }`}
+              >
+                <span>{tool.externalLinkDisplayLabel || 'Open Link'}</span><ExternalLink className="h-3.5 w-3.5" />
+              </a>
+            )}
             {tool.sourceUrl && (
-              <a href={tool.sourceUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center space-x-1.5 bg-surface border border-line px-3.5 py-2 rounded-xl text-xs font-semibold text-text-dim hover:bg-surface-alt hover:text-text-main transition-colors min-h-[44px]">
+              <a
+                href={tool.sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center space-x-1.5 bg-surface border border-line px-3.5 py-2 rounded-xl text-xs font-semibold text-text-dim hover:bg-surface-alt hover:text-text-main transition-colors min-h-[44px]"
+              >
                 <span>Source Repo</span><GithubIcon className="h-3.5 w-3.5" />
               </a>
             )}
