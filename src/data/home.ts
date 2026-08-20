@@ -44,7 +44,7 @@ export const HERO_DATA: HeroData = {
   subheading:
     'I architect reliable autonomous systems for physical robots and build agentic workflows that autonomously engineer full-stack software.',
   bioParagraphs: [
-    'I am an MIT CSAIL roboticist and have worked in the industry since completing my PhD on reliable robot manipulation combining learning and planning techniques. At Robust AI, I was the tech lead for the behavior team, developing reactive social navigation behaviors. At Waymo, I worked on the planning team to reduce traffic congestion during passenger pickup and drop-off. Most recently at CIV, I built and optimized production state estimation pipelines to increase fleet uptime.',
+    'I am an MIT CSAIL roboticist and have worked in the industry since completing my PhD on reliable robot manipulation combining learning and planning techniques. At Robust AI, I was the tech lead for the behavior team, developing reactive social navigation behaviors. At Waymo, I worked on the planning team to reduce traffic congestion during passenger pickup and drop-off. Most recently at Civ Robotics, I built and optimized production state estimation pipelines to increase fleet uptime.',
     'I have spent the past year building stateful, multi-agent orchestrations. Because autonomous systems require strict code health, I use these workflows to engineer feature-rich applications and enforce continuous architectural standards—bringing robotics-grade reliability to DevAI.',
   ],
 };
