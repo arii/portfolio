@@ -73,9 +73,9 @@ export const FOCUS_AREAS: FocusArea[] = [
   },
   {
     id: 'devai-tools',
-    title: "Building DevAI Tools",
-    description: "Agentic CI/CD workflows, automated code-auditing bots, and RAG-driven infrastructure for modern software engineering",
-    actionText: "See How It's Built →",
+    title: "Engineering Writing",
+    description: "Agentic CI/CD workflows, automated code-auditing bots, and technical deep dives on modern software engineering.",
+    actionText: "Read Articles →",
   },
   {
     id: 'robotics-research',
