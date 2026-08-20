@@ -7,9 +7,6 @@ const About: React.FC = () => {
   return (
     <div className="space-y-8 sm:space-y-12">
       <header className="space-y-3 border-b border-line/20 pb-6 sm:pb-8">
-        <div className="inline-flex items-center space-x-2 bg-accent/10 border border-accent/20 px-3.5 py-1.5 rounded-full text-xs text-accent font-semibold uppercase tracking-wider">
-          <span>Biography</span>
-        </div>
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-text-main leading-tight">
           {profileData.name}
         </h1>
@@ -25,13 +22,16 @@ const About: React.FC = () => {
               Biography
             </h2>
             <div className="space-y-4 text-text-body leading-relaxed text-sm sm:text-base">
-              <p>
-                {profileData.bio[0]}
-              </p>
-              <p>
-                <strong className="font-bold text-text-main">Beyond the Code</strong>{" "}
-                {profileData.bio[1]}
-              </p>
+              {profileData.bio.slice(0, -1).map((para, index) => (
+                <p key={index}>{para}</p>
+              ))}
+            </div>
+
+            <div className="mt-6 p-5 rounded-xl bg-slate-800/50 border border-slate-700/50">
+              <h3 className="text-sm font-bold uppercase tracking-wider text-accent mb-3">🎨 Beyond the Code</h3>
+              <div className="text-sm text-slate-300 leading-relaxed">
+                {profileData.bio[profileData.bio.length - 1]}
+              </div>
             </div>
           </div>
 
