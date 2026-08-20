@@ -444,7 +444,7 @@ async function init() {
         let metadata = {};
         try {
             metadata = JSON.parse(text);
-        } catch (err) {
+        } catch {
             console.error('data.json parse failed');
             console.error('URL:', dataRes.url);
             console.error('Response starts with:', text.slice(0, 500));
