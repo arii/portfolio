@@ -20,6 +20,12 @@ export const honorsData: ResumeHonor[] = [
     link: "https://sustainability.mit.edu/"
   },
   {
+    title: "Beer Bots - CSAIL Research Highlights",
+    year: "2015",
+    organization: "MIT CSAIL",
+    details: "Awarded 2nd place for interactive multi-robot demonstration."
+  },
+  {
     title: "UC Santa Cruz Regents Scholarship",
     year: "2008 – 2012",
     organization: "UC Santa Cruz"
@@ -41,10 +47,5 @@ export const teachingData: ResumeTeaching[] = [
     title: "Educational Outreach & Technical Instructor",
     period: "2015 – 2019",
     details: "Instructor for MIT BeaverWorks Summer Institute and mentor for undergraduate robotics laboratories."
-  },
-  {
-    title: "Beer Bots - CSAIL Research Highlights",
-    period: "Spring 2015",
-    details: "Awarded 2nd place at MIT CSAIL Research Highlights for interactive multi-robot demonstration."
   }
 ];
