@@ -122,7 +122,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
           <button
             key={item.id}
             onClick={() => handleNav(item.id)}
-            className="text-left w-full group bg-surface/60 hover:bg-surface/90 border border-line hover:border-accent/40 rounded-xl p-6 sm:p-8 cursor-pointer transition-all duration-200 flex flex-col justify-between space-y-5 shadow-md focus:outline-none focus:ring-2 focus:ring-accent/50"
+            className="text-left w-full group bg-slate-900/60 hover:bg-slate-900/90 border border-slate-800 hover:border-accent/40 rounded-xl p-6 sm:p-8 cursor-pointer transition-all duration-200 flex flex-col justify-between space-y-5 shadow-md focus:outline-none focus:ring-2 focus:ring-accent/50"
           >
             <div className="space-y-2.5">
               <h3 className="text-lg sm:text-xl font-bold text-text-main group-hover:text-accent transition-colors">
@@ -139,7 +139,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
       </section>
 
       {/* Bottom Feature Callouts Row */}
-      <section className="bg-surface-alt border border-line rounded-xl p-6 sm:p-8">
+      <section className="bg-slate-900/40 border border-slate-800/60 rounded-xl p-6 sm:p-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {FEATURE_CALLOUTS.map((feature) => (
             <div key={feature.id} className="flex gap-3.5 items-start">
