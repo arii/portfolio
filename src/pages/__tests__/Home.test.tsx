@@ -50,7 +50,7 @@ describe('Home Page', () => {
     expect(screen.getByText('Production Robot Software')).toBeInTheDocument();
   });
 
-  it('renders bottom feature callouts row', () => {
+  it('renders bottom feature callouts row with all 4 domain pillars', () => {
     const handleNavigate = vi.fn();
     render(
       <MemoryRouter>
@@ -61,6 +61,7 @@ describe('Home Page', () => {
     expect(screen.getByText('Algorithmic Motion Planning')).toBeInTheDocument();
     expect(screen.getByText('DevAI & AI Workflows')).toBeInTheDocument();
     expect(screen.getByText('Production Systems Architecture')).toBeInTheDocument();
+    expect(screen.getByText('Deployment & Edge Infrastructure Experience')).toBeInTheDocument();
   });
 
   it('renders both Agentic AI and Robotics Research CTA buttons with correct attributes', () => {

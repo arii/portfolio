@@ -26,7 +26,7 @@ export interface FeatureCallout {
   id: string;
   title: string;
   description: string;
-  iconName: 'compass' | 'workflow' | 'server';
+  iconName: 'compass' | 'workflow' | 'server' | 'cloud';
 }
 
 export interface HeroData {
@@ -54,7 +54,7 @@ export const PHILOSOPHY_TENETS: PhilosophyTenet[] = [
     id: 'ai-rigor',
     title: 'AI-Accelerated Rigor',
     description:
-      'AI should raise the bar, not lower it. I develop agentic CI/CD workflows and automated code reviews to code-gen patches, resolve architecture guidelines, and triage and prevent technical debt faster.',
+      'AI should raise the bar, not lower it. I develop agentic CI/CD workflows and automated code reviews to code-gen patches, resolve architecture guidelines, and triage technical debt faster.',
   },
   {
     id: 'robot-behavior',
@@ -66,7 +66,7 @@ export const PHILOSOPHY_TENETS: PhilosophyTenet[] = [
     id: 'production-software',
     title: 'Production Robot Software',
     description:
-      'Authoring production-quality C++, Python, and ROS 2 software using Docker and AWS IoT to build automated pipelines and containerized robotics applications for high fleet uptime.',
+      'Delivering maintainable, production-ready software built with rigorous engineering standards, automated verification, and clean architectural design.',
   },
 ];
 
@@ -110,7 +110,14 @@ export const FEATURE_CALLOUTS: FeatureCallout[] = [
     id: 'production-systems',
     title: 'Production Systems Architecture',
     description:
-      'Production C++, ROS 2, Python, and cloud/IoT pipelines engineered for high uptime, maintainability, and clean system design.',
+      'Authoring production-quality C++, Python, and ROS 2 middleware for robust state estimation and real-time robot software.',
     iconName: 'server',
+  },
+  {
+    id: 'deployment-edge',
+    title: 'Deployment & Edge Infrastructure Experience',
+    description:
+      'Building containerized robotics applications and automated cloud/IoT pipelines using Docker, AWS IoT, and CI/CD automation.',
+    iconName: 'cloud',
   },
 ];
