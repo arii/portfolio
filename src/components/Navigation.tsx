@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Layers, Activity, User, FileText } from 'lucide-react';
+import { heroContent } from '@/data/home';
 
 const Navigation: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -44,10 +45,10 @@ const Navigation: React.FC = () => {
           <Link to="/" className="flex items-center space-x-3 group">
             <div className="flex flex-col">
               <span className="text-sm sm:text-base font-bold tracking-tight text-foreground">
-                Portfolio
+                {heroContent.brandTitle}
               </span>
-              <span className="hidden sm:block text-xs text-muted-foreground">
-                Roboticist &amp; Senior Software Engineer
+              <span className="hidden sm:block text-xs text-muted-foreground font-mono">
+                {heroContent.brandRole}
               </span>
             </div>
           </Link>

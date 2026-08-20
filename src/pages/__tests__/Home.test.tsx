@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { Home } from '../Home';
 
 describe('Home Page', () => {
-  it('renders hero title, role, and exact subheading', () => {
+  it('renders hero title and role hierarchy correctly', () => {
     const handleNavigate = vi.fn();
     render(
       <MemoryRouter>
@@ -12,16 +12,11 @@ describe('Home Page', () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByText('Ariel Anders, PhD')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 1, name: /Ariel Anders, PhD/i })).toBeInTheDocument();
     expect(screen.getByText('Roboticist & Senior Software Engineer')).toBeInTheDocument();
-    expect(
-      screen.getByText(
-        'I architect reliable autonomous systems for physical robots and build agentic workflows that autonomously engineer full-stack software.'
-      )
-    ).toBeInTheDocument();
   });
 
-  it('renders bio paragraphs in hero card', () => {
+  it('renders all three distilled bio paragraphs without outdated employer listings', () => {
     const handleNavigate = vi.fn();
     render(
       <MemoryRouter>
@@ -30,10 +25,29 @@ describe('Home Page', () => {
     );
 
     expect(
-      screen.getByText((content) =>
-        content.includes('I am an MIT CSAIL roboticist and have worked in the industry')
-      )
+      screen.getByText(/I architect reliable autonomous systems for physical robots and build agentic workflows that autonomously engineer full-stack software\./i)
     ).toBeInTheDocument();
+    expect(
+      screen.getByText(/I am an MIT CSAIL roboticist whose work focuses on building reliable autonomous systems\./i)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/Over the past year, I’ve built stateful, multi-agent workflows for software development/i)
+    ).toBeInTheDocument();
+
+    // Verify removed employer list is absent from the hero
+    expect(screen.queryByText(/At Robust AI, I was the tech lead/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/At Waymo, I worked on the planning team/i)).not.toBeInTheDocument();
+  });
+
+  it('does not render the removed hero badge', () => {
+    render(
+      <MemoryRouter>
+        <Home />
+      </MemoryRouter>
+    );
+
+    expect(screen.queryByText(/✨ Robotics & DevAI/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Autonomous Systems & AI Orchestration/i)).not.toBeInTheDocument();
   });
 
   it('renders engineering philosophy callout and tenets', () => {
@@ -53,7 +67,6 @@ describe('Home Page', () => {
     expect(
       screen.getByText(/Robots operate in environments that are uncertain and hard to model/i)
     ).toBeInTheDocument();
-    expect(screen.queryByText('Production Robot Software')).not.toBeInTheDocument();
   });
 
   it('renders bottom feature callouts row with all 4 domain pillars', () => {
@@ -92,17 +105,6 @@ describe('Home Page', () => {
 
     fireEvent.click(roboticsBtn);
     expect(handleNavigate).toHaveBeenCalledWith('research');
-  });
-
-  it('does not render outdated single portfolio CTA', () => {
-    render(
-      <MemoryRouter>
-        <Home />
-      </MemoryRouter>
-    );
-
-    expect(screen.queryByRole('link', { name: /^view portfolio/i })).not.toBeInTheDocument();
-    expect(screen.queryByRole('button', { name: /^view portfolio/i })).not.toBeInTheDocument();
   });
 
   it('triggers navigation callback when focus area cards are clicked', () => {
