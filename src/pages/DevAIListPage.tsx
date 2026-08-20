@@ -21,11 +21,14 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
   const flagshipTools = useMemo(() => DEVAI_FLAGSHIPS, []);
 
   const filteredPosts = useMemo(() => {
-    if (selectedTag === 'All Topics') return posts.filter((p) => {
+    const researchOnlySlugs = ['leac-monitoring-software', 'light-therapy-mit', 'boop-light-detector'];
+    const devAiPosts = posts.filter((p) => !researchOnlySlugs.includes(p.slug));
+
+    if (selectedTag === 'All Topics') return devAiPosts.filter((p) => {
         const cat = (p.category || '').toLowerCase();
         return !cat.includes('robotics'); // exclude robotics
     });
-    return posts.filter((p) => {
+    return devAiPosts.filter((p) => {
       const tags = p.tags.map((t) => t.toLowerCase());
       const cat = (p.category || '').toLowerCase();
       if (cat.includes('robotics')) return false;
