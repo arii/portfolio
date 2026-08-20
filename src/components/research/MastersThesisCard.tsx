@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookOpen, ExternalLink, GraduationCap, Sparkles } from 'lucide-react';
+import { BookOpen, ExternalLink, GraduationCap } from 'lucide-react';
 import { mastersThesisData, ThesisEntry } from '@/data/research/theses';
 
 export interface MastersThesisCardProps {
@@ -23,12 +23,6 @@ export const MastersThesisCard: React.FC<MastersThesisCardProps> = ({
           loading="lazy"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-80" />
-        <div className="absolute top-3 left-3">
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-500/30 bg-slate-950/80 px-3 py-1 text-[11px] font-semibold tracking-wider text-amber-400 backdrop-blur-md">
-            <Sparkles className="h-3 w-3" />
-            <span>{thesis.category}</span>
-          </span>
-        </div>
         <div className="absolute top-3 right-3">
           <span className="rounded-md bg-slate-950/90 px-2.5 py-1 text-xs font-bold tracking-wide text-amber-400 border border-slate-800">
             {thesis.year}
