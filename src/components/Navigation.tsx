@@ -39,7 +39,7 @@ const Navigation: React.FC = () => {
 
   return (
     <>
-      <header className="sticky top-0 z-40 w-full border-b border-border/60 bg-slate-950/95 backdrop-blur-md">
+      <header className="sticky top-0 z-40 w-full border-b border-line/60 bg-bg/95 backdrop-blur-md">
         <div className="mx-auto flex h-14 sm:h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <Link to="/" className="flex items-center space-x-3 group">
             <div className="flex flex-col">
@@ -89,22 +89,22 @@ const Navigation: React.FC = () => {
       {/* Mobile Fixed Slide-over Modal Drawer */}
       {isOpen && (
         <div
-          className="fixed inset-0 z-50 flex justify-end bg-slate-950/80 backdrop-blur-md md:hidden"
+          className="fixed inset-0 z-50 flex justify-end bg-bg/80 backdrop-blur-md md:hidden"
           onClick={() => setIsOpen(false)}
           role="dialog"
           aria-modal="true"
           aria-label="Mobile Navigation Menu"
         >
           <div
-            className="w-72 h-full bg-slate-950 border-l border-slate-800 p-6 shadow-2xl flex flex-col justify-between"
+            className="w-72 h-full bg-bg border-l border-line p-6 shadow-2xl flex flex-col justify-between"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="space-y-6">
-              <div className="flex items-center justify-between pb-4 border-b border-slate-800">
-                <span className="text-sm font-bold text-slate-100">Navigation</span>
+              <div className="flex items-center justify-between pb-4 border-b border-line">
+                <span className="text-sm font-bold text-text-main">Navigation</span>
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="flex h-11 w-11 items-center justify-center rounded-md border border-slate-800 text-slate-300 hover:text-slate-100"
+                  className="flex h-11 w-11 items-center justify-center rounded-md border border-line text-text-body hover:text-text-main"
                   aria-label="Close menu"
                 >
                   <X className="h-5 w-5" />
@@ -122,8 +122,8 @@ const Navigation: React.FC = () => {
                       onClick={() => setIsOpen(false)}
                       className={`flex items-center space-x-3 rounded-lg px-4 py-3 text-base font-semibold min-h-[44px] transition-colors ${
                         active
-                          ? 'bg-amber-500/15 text-amber-400 border border-amber-500/30'
-                          : 'text-slate-300 hover:bg-slate-900 hover:text-slate-100'
+                          ? 'bg-accent/15 text-accent border border-accent/30'
+                          : 'text-text-body hover:bg-surface hover:text-text-main'
                       }`}
                     >
                       <Icon className="h-5 w-5" />
@@ -134,8 +134,8 @@ const Navigation: React.FC = () => {
               </div>
             </div>
 
-            <div className="pt-6 border-t border-slate-800">
-              <span className="text-xs text-slate-400">
+            <div className="pt-6 border-t border-line">
+              <span className="text-xs text-text-dim">
                 Ariel Anders, PhD — Roboticist
               </span>
             </div>

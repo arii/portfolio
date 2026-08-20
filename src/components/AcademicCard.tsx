@@ -45,7 +45,7 @@ const AcademicCard: React.FC<AcademicCardProps> = ({ paper }) => {
           {paper.tags.map((tag) => (
             <span
               key={tag}
-              className="px-2.5 py-0.5 rounded-full text-[10px] font-sans bg-[#0f172a] text-text-dim border border-line"
+              className="px-2.5 py-0.5 rounded-full text-[10px] font-sans bg-surface text-text-dim border border-line"
             >
               {tag}
             </span>

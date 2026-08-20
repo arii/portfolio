@@ -23,7 +23,7 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
   const content = (
     <div className={`p-4 bg-surface/50 border border-line rounded-2xl transition-all space-y-2 ${isClickable ? 'hover:border-accent cursor-pointer group' : ''}`}>
       {tool.image && (
-        <div className="relative mb-3 aspect-video w-full overflow-hidden rounded-lg bg-muted border border-line/50">
+        <div className="relative mb-3 aspect-video w-full overflow-hidden rounded-lg bg-surface border border-line/50">
           <SafeImage
             src={tool.image}
             alt={tool.imageAlt || tool.title}
@@ -31,7 +31,7 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
             containerClassName="w-full h-full"
             loading="lazy"
           />
-          <span className="absolute top-2 right-2 z-10 rounded-full bg-black/70 px-2.5 py-0.5 text-[10px] font-semibold text-white backdrop-blur-sm border border-line">
+          <span className="absolute top-2 right-2 z-10 rounded-full bg-bg/80 px-2.5 py-0.5 text-[10px] font-semibold text-text-main backdrop-blur-sm border border-line">
             {tool.category}
           </span>
         </div>
@@ -65,7 +65,7 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
       <p className="text-xs text-text-dim leading-relaxed">{tool.description}</p>
       <div className="flex flex-wrap gap-1.5 pt-1">
         {tool.tags.map(tag => (
-          <span key={tag} className="text-[9px] bg-[#0f172a] px-2 py-0.5 text-text-dim border border-line rounded-full">{tag}</span>
+          <span key={tag} className="text-[9px] bg-surface px-2 py-0.5 text-text-dim border border-line rounded-full">{tag}</span>
         ))}
       </div>
     </div>

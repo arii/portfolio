@@ -25,9 +25,9 @@ export const SafeImage: React.FC<SafeImageProps> = ({
   }
 
   return (
-    <div className={`relative overflow-hidden bg-slate-900 ${containerClassName}`}>
+    <div className={`relative overflow-hidden bg-surface ${containerClassName}`}>
       {isLoading && (
-        <div className="absolute inset-0 animate-pulse bg-slate-800" aria-hidden="true" />
+        <div className="absolute inset-0 animate-pulse bg-surface-alt" aria-hidden="true" />
       )}
       {!hasError ? (
         <img
@@ -50,7 +50,7 @@ export const SafeImage: React.FC<SafeImageProps> = ({
         />
       ) : (
         <div
-          className="flex h-full w-full items-center justify-center bg-slate-800/80 px-4 text-center text-xs font-mono text-slate-400"
+          className="flex h-full w-full items-center justify-center bg-surface-alt/80 px-4 text-center text-xs font-mono text-text-dim"
           role="img"
           aria-label={alt}
         >

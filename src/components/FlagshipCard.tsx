@@ -30,17 +30,17 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
   return (
     <div className="rounded-3xl border border-line bg-surface p-0 flex flex-col justify-between overflow-hidden transition-all hover:border-accent hover:shadow-glow">
       {tool.customPreview ? (
-        <div className="p-6 bg-[#020617] border-b border-line min-h-[140px] flex flex-col justify-center space-y-2">
+        <div className="p-6 bg-bg border-b border-line min-h-[140px] flex flex-col justify-center space-y-2">
           <div className="text-accent font-extrabold text-sm tracking-wider font-display">
-            {tool.customPreview.logo.prefix}<span className="text-white">{tool.customPreview.logo.accent}</span><span className="text-slate-400 font-light">{tool.customPreview.logo.suffix}</span>
+            {tool.customPreview.logo.prefix}<span className="text-text-main">{tool.customPreview.logo.accent}</span><span className="text-text-dim font-light">{tool.customPreview.logo.suffix}</span>
           </div>
-          <div className="text-white font-black text-lg leading-tight font-display">
+          <div className="text-text-main font-black text-lg leading-tight font-display">
             {tool.customPreview.headline.map((line, idx) => (<span key={idx} className={line.accent ? 'text-accent' : ''}>{line.text}{' '}</span>))}
           </div>
           <div className="text-xs text-text-dim">{tool.customPreview.tagline}</div>
         </div>
       ) : imageSrc ? (
-        <div onClick={() => onImageClick(imageSrc)} className="relative aspect-[16/10] max-h-48 sm:max-h-64 overflow-hidden bg-[#020617] border-b border-line cursor-zoom-in group">
+        <div onClick={() => onImageClick(imageSrc)} className="relative aspect-[16/10] max-h-48 sm:max-h-64 overflow-hidden bg-bg border-b border-line cursor-zoom-in group">
           <SafeImage
             src={imageSrc}
             alt={tool.imageAlt || tool.title}
@@ -65,7 +65,7 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
           </div>
           <p className="text-sm text-text-dim leading-relaxed">{tool.description}</p>
           {tool.inDevMessage && (
-            <div className="bg-[#0f172a] border border-line p-3 rounded-2xl text-xs flex gap-2 items-start text-text-dim">
+            <div className="bg-surface border border-line p-3 rounded-2xl text-xs flex gap-2 items-start text-text-dim">
               <FlaskConical className="h-4 w-4 text-accent shrink-0 mt-0.5" />
               <p><strong className="text-text-main">{tool.inDevMessage.highlight}</strong> {tool.inDevMessage.rest}</p>
             </div>
@@ -75,7 +75,7 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
         <div className="space-y-4 pt-4 border-t border-line">
           <div className="flex flex-wrap gap-1.5">
             {tool.tags.map((tag) => (
-              <span key={tag} className="px-2.5 py-0.5 rounded-full text-[10px] font-sans bg-[#0f172a] text-text-dim border border-line">{tag}</span>
+              <span key={tag} className="px-2.5 py-0.5 rounded-full text-[10px] font-sans bg-surface text-text-dim border border-line">{tag}</span>
             ))}
           </div>
 
@@ -90,7 +90,7 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
               </button>
             ) : null}
             {tool.sourceUrl && (
-              <a href={tool.sourceUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center space-x-1.5 bg-[#0f172a] border border-line px-3.5 py-2 rounded-xl text-xs font-semibold text-text-dim hover:bg-slate-900 hover:text-text-main transition-colors min-h-[44px]">
+              <a href={tool.sourceUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center space-x-1.5 bg-surface border border-line px-3.5 py-2 rounded-xl text-xs font-semibold text-text-dim hover:bg-surface-alt hover:text-text-main transition-colors min-h-[44px]">
                 <span>Source Repo</span><GithubIcon className="h-3.5 w-3.5" />
               </a>
             )}

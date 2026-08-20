@@ -27,39 +27,39 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
   const getCalloutIcon = (iconName: string) => {
     switch (iconName) {
       case 'compass':
-        return <Compass className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />;
+        return <Compass className="w-5 h-5 text-accent shrink-0 mt-0.5" />;
       case 'workflow':
-        return <Bot className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />;
+        return <Bot className="w-5 h-5 text-accent shrink-0 mt-0.5" />;
       case 'laptop':
-        return <Laptop className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />;
+        return <Laptop className="w-5 h-5 text-accent shrink-0 mt-0.5" />;
       case 'server':
-        return <Server className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />;
+        return <Server className="w-5 h-5 text-accent shrink-0 mt-0.5" />;
       case 'cloud':
-        return <Cloud className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />;
+        return <Cloud className="w-5 h-5 text-accent shrink-0 mt-0.5" />;
       default:
-        return <Cpu className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />;
+        return <Cpu className="w-5 h-5 text-accent shrink-0 mt-0.5" />;
     }
   };
 
   return (
     <main className="space-y-8 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
       {/* 2-Column Surfaced Hero Card Grid */}
-      <section className="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 sm:p-10 lg:p-12 shadow-xl backdrop-blur-sm">
+      <section className="bg-surface/60 border border-line rounded-2xl p-6 sm:p-10 lg:p-12 shadow-xl backdrop-blur-sm">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           {/* Left Column (8 cols): Bio & Intro */}
           <div className="lg:col-span-8 space-y-6">
             <div className="space-y-2">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-100 tracking-tight leading-tight">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-text-main tracking-tight leading-tight">
                 {HERO_DATA.name}
               </h1>
-              <p className="text-amber-400 font-semibold text-lg sm:text-xl">{HERO_DATA.title}</p>
+              <p className="text-accent font-semibold text-lg sm:text-xl">{HERO_DATA.title}</p>
             </div>
 
-            <p className="text-lg sm:text-xl font-medium text-slate-200 leading-relaxed">
+            <p className="text-lg sm:text-xl font-medium text-text-main leading-relaxed">
               {HERO_DATA.subheading}
             </p>
 
-            <div className="space-y-4 text-slate-300 text-base leading-relaxed border-t border-slate-800/80 pt-6">
+            <div className="space-y-4 text-text-body text-base leading-relaxed border-t border-line/80 pt-6">
               {HERO_DATA.bioParagraphs.map((para, idx) => (
                 <p key={idx}>{para}</p>
               ))}
@@ -74,7 +74,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                     handleNav('devai');
                   }
                 }}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-md bg-amber-500 hover:bg-amber-400 text-slate-950 px-5 py-2.5 text-sm font-medium shadow transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 min-h-[44px]"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-md bg-accent hover:opacity-90 text-bg px-5 py-2.5 text-sm font-medium shadow transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent min-h-[44px]"
               >
                 <Bot className="w-4 h-4" />
                 <span>View Agentic AI Work</span>
@@ -89,7 +89,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                     handleNav('research');
                   }
                 }}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-md bg-amber-500 hover:bg-amber-400 text-slate-950 px-5 py-2.5 text-sm font-medium shadow transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 min-h-[44px]"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-md bg-accent hover:opacity-90 text-bg px-5 py-2.5 text-sm font-medium shadow transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent min-h-[44px]"
               >
                 <Cpu className="w-4 h-4" />
                 <span>View Robotics Research</span>
@@ -98,17 +98,17 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
           </div>
 
           {/* Right Column (4 cols): Engineering Philosophy Box */}
-          <div className="lg:col-span-4 bg-slate-950/60 border border-slate-800/80 rounded-xl p-6 space-y-5">
-            <div className="flex items-center gap-2 border-b border-slate-800 pb-3">
-              <Cpu className="w-5 h-5 text-amber-400" />
-              <h2 className="text-base sm:text-lg font-bold text-slate-100 tracking-tight">Engineering Philosophy</h2>
+          <div className="lg:col-span-4 bg-bg/60 border border-line/80 rounded-xl p-6 space-y-5">
+            <div className="flex items-center gap-2 border-b border-line pb-3">
+              <Cpu className="w-5 h-5 text-accent" />
+              <h2 className="text-base sm:text-lg font-bold text-text-main tracking-tight">Engineering Philosophy</h2>
             </div>
 
             <div className="space-y-5">
               {PHILOSOPHY_TENETS.map((tenet) => (
                 <div key={tenet.id} className="space-y-1.5">
-                  <h3 className="text-sm sm:text-base font-bold text-amber-400">{tenet.title}</h3>
-                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">{tenet.description}</p>
+                  <h3 className="text-sm sm:text-base font-bold text-accent">{tenet.title}</h3>
+                  <p className="text-xs sm:text-sm text-text-body leading-relaxed">{tenet.description}</p>
                 </div>
               ))}
             </div>
@@ -122,15 +122,15 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
           <button
             key={item.id}
             onClick={() => handleNav(item.id)}
-            className="text-left w-full group bg-slate-900/60 hover:bg-slate-900/90 border border-slate-800 hover:border-amber-500/40 rounded-xl p-6 sm:p-8 cursor-pointer transition-all duration-200 flex flex-col justify-between space-y-5 shadow-md focus:outline-none focus:ring-2 focus:ring-amber-500/50"
+            className="text-left w-full group bg-surface/60 hover:bg-surface/90 border border-line hover:border-accent/40 rounded-xl p-6 sm:p-8 cursor-pointer transition-all duration-200 flex flex-col justify-between space-y-5 shadow-md focus:outline-none focus:ring-2 focus:ring-accent/50"
           >
             <div className="space-y-2.5">
-              <h3 className="text-lg sm:text-xl font-bold text-slate-100 group-hover:text-amber-400 transition-colors">
+              <h3 className="text-lg sm:text-xl font-bold text-text-main group-hover:text-accent transition-colors">
                 {item.title}
               </h3>
-              <p className="text-sm text-slate-300 leading-relaxed">{item.description}</p>
+              <p className="text-sm text-text-body leading-relaxed">{item.description}</p>
             </div>
-            <div className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-amber-400 group-hover:translate-x-1 transition-transform">
+            <div className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-accent group-hover:translate-x-1 transition-transform">
               <span>{item.actionText}</span>
               <ArrowRight className="w-4 h-4" />
             </div>
@@ -145,8 +145,8 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
             <div key={feature.id} className="flex gap-3.5 items-start">
               {getCalloutIcon(feature.iconName)}
               <div className="space-y-1">
-                <h4 className="text-sm sm:text-base font-bold text-slate-100">{feature.title}</h4>
-                <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">{feature.description}</p>
+                <h4 className="text-sm sm:text-base font-bold text-text-main">{feature.title}</h4>
+                <p className="text-xs sm:text-sm text-text-dim leading-relaxed">{feature.description}</p>
               </div>
             </div>
           ))}

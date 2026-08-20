@@ -14,12 +14,12 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
 
   if (!post) {
     return (
-      <div className="mx-auto max-w-3xl px-4 py-16 text-center rounded-3xl bg-slate-900/40 border border-slate-800">
-        <h2 className="text-2xl font-bold text-white">Article Not Found</h2>
-        <p className="mt-2 text-slate-400">The requested research paper could not be found.</p>
+      <div className="mx-auto max-w-3xl px-4 py-16 text-center rounded-3xl bg-surface/40 border border-line">
+        <h2 className="text-2xl font-bold text-text-main">Article Not Found</h2>
+        <p className="mt-2 text-text-dim">The requested research paper could not be found.</p>
         <button
           onClick={onBack}
-          className="mt-6 inline-flex items-center space-x-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 px-4 py-2 text-sm font-semibold transition-colors min-h-[44px]"
+          className="mt-6 inline-flex items-center space-x-2 rounded-xl bg-accent-sky hover:bg-accent-sky/90 text-bg px-4 py-2 text-sm font-semibold transition-colors min-h-[44px]"
         >
           <ArrowLeft className="h-4 w-4" />
           <span>Back to Research</span>
@@ -32,33 +32,33 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
     <article className="mx-auto max-w-3xl px-4 py-12 space-y-8">
       <button
         onClick={onBack}
-        className="inline-flex items-center space-x-2 text-sm font-semibold text-slate-400 hover:text-amber-400 transition-colors"
+        className="inline-flex items-center space-x-2 text-sm font-semibold text-text-dim hover:text-accent-sky transition-colors"
       >
         <ArrowLeft className="h-4 w-4" />
         <span>Back to Articles</span>
       </button>
 
-      <header className="border-b border-slate-800 pb-8 space-y-4">
+      <header className="border-b border-line pb-8 space-y-4">
         <div className="flex flex-wrap gap-2">
           {post.tags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full bg-amber-500/10 px-2.5 py-0.5 text-xs font-semibold text-amber-400 border border-amber-500/20"
+              className="rounded-full bg-accent-sky/10 px-2.5 py-0.5 text-xs font-semibold text-accent-sky border border-accent-sky/15"
             >
               {tag}
             </span>
           ))}
         </div>
-        <h1 className="text-3xl sm:text-4xl font-black text-white leading-tight">
+        <h1 className="text-3xl sm:text-4xl font-black text-text-main leading-tight">
           {post.title}
         </h1>
-        <div className="flex items-center space-x-6 text-xs text-slate-400">
+        <div className="flex items-center space-x-6 text-xs text-text-dim">
           <span className="flex items-center space-x-1.5">
-            <Calendar className="h-4 w-4 text-slate-500" />
+            <Calendar className="h-4 w-4 text-text-dim" />
             <time dateTime={post.date}>{post.date}</time>
           </span>
           <span className="flex items-center space-x-1.5">
-            <Clock className="h-4 w-4 text-slate-500" />
+            <Clock className="h-4 w-4 text-text-dim" />
             <span>{post.readingTime}</span>
           </span>
         </div>
@@ -78,73 +78,73 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
 
               if (isBlock) {
                 return (
-                  <div className="my-6 rounded-2xl border border-slate-800 overflow-hidden bg-slate-950">
+                  <div className="my-6 rounded-2xl border border-line overflow-hidden bg-bg">
                     {language && (
-                      <div className="bg-slate-900 px-4 py-2 border-b border-slate-800 text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400">
+                      <div className="bg-surface px-4 py-2 border-b border-line text-[10px] font-mono font-bold uppercase tracking-wider text-text-dim">
                         {language}
                       </div>
                     )}
-                    <pre className="p-4 overflow-x-auto text-sm font-mono text-amber-400/90 leading-relaxed bg-slate-950">
+                    <pre className="p-4 overflow-x-auto text-sm font-mono text-accent-sky/90 leading-relaxed bg-bg">
                       <code>{children}</code>
                     </pre>
                   </div>
                 );
               }
               return (
-                <code className="bg-slate-900 text-amber-400 px-1.5 py-0.5 rounded font-mono text-xs border border-slate-800 normal-case" {...props}>
+                <code className="bg-surface text-accent-sky px-1.5 py-0.5 rounded font-mono text-xs border border-line normal-case" {...props}>
                   {children}
                 </code>
               );
             },
             table: ({ children, ...props }) => (
-              <div className="my-6 w-full overflow-x-auto rounded-2xl border border-slate-800 bg-slate-900/10">
+              <div className="my-6 w-full overflow-x-auto rounded-2xl border border-line bg-surface/10">
                 <table className="w-full border-collapse text-sm" {...props}>
                   {children}
                 </table>
               </div>
             ),
             th: ({ children, ...props }) => (
-              <th className="border-b border-slate-800 bg-slate-950/40 p-4 text-left font-mono text-xs font-bold uppercase tracking-wider text-slate-400" {...props}>
+              <th className="border-b border-line bg-bg/40 p-4 text-left font-mono text-xs font-bold uppercase tracking-wider text-text-dim" {...props}>
                 {children}
               </th>
             ),
             td: ({ children, ...props }) => (
-              <td className="border-b border-slate-800/50 p-4 text-slate-300" {...props}>
+              <td className="border-b border-line/50 p-4 text-text-body" {...props}>
                 {children}
               </td>
             ),
             h1: ({ children, ...props }) => (
-              <h1 className="text-3xl font-black text-white mt-12 mb-4" {...props}>
+              <h1 className="text-3xl font-black text-text-main mt-12 mb-4" {...props}>
                 {children}
               </h1>
             ),
             h2: ({ children, ...props }) => (
-              <h2 className="text-2xl font-bold text-white mt-12 mb-4 pb-2 border-b border-slate-800" {...props}>
+              <h2 className="text-2xl font-bold text-text-main mt-12 mb-4 pb-2 border-b border-line" {...props}>
                 {children}
               </h2>
             ),
             h3: ({ children, ...props }) => (
-              <h3 className="text-lg font-bold text-white mt-8 mb-3" {...props}>
+              <h3 className="text-lg font-bold text-text-main mt-8 mb-3" {...props}>
                 {children}
               </h3>
             ),
             ul: ({ children, ...props }) => (
-              <ul className="list-disc pl-6 my-4 space-y-1.5 text-slate-300" {...props}>
+              <ul className="list-disc pl-6 my-4 space-y-1.5 text-text-body" {...props}>
                 {children}
               </ul>
             ),
             ol: ({ children, ...props }) => (
-              <ol className="list-decimal pl-6 my-4 space-y-1.5 text-slate-300" {...props}>
+              <ol className="list-decimal pl-6 my-4 space-y-1.5 text-text-body" {...props}>
                 {children}
               </ol>
             ),
             p: ({ children, ...props }) => (
-              <p className="text-slate-300 text-base leading-relaxed mb-6" {...props}>
+              <p className="text-text-body text-base leading-relaxed mb-6" {...props}>
                 {children}
               </p>
             ),
             li: ({ children, ...props }) => (
-              <li className="text-slate-300 leading-relaxed" {...props}>
+              <li className="text-text-body leading-relaxed" {...props}>
                 {children}
               </li>
             )
