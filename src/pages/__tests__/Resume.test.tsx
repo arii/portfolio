@@ -14,8 +14,8 @@ describe('Resume Page', () => {
   it('renders all sections and updated content correctly', () => {
     render(<Resume />);
 
-    // Header name & PDF button
-    expect(screen.getByText('Ariel Anders, PhD')).toBeInTheDocument();
+    // Header title & PDF button
+    expect(screen.getByText('Resume')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /View PDF/i })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /View PDF/i })).toHaveAttribute('href', 'https://drive.google.com/file/d/14V6KjfEMO12uwNQAhY1OMy2d-_vkGXK_/view');
 

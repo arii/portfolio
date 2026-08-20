@@ -8,10 +8,10 @@ const About: React.FC = () => {
     <div className="space-y-8 sm:space-y-12">
       <header className="space-y-3 border-b border-line/20 pb-6 sm:pb-8">
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-text-main leading-tight">
-          {profileData.name}
+          About Ariel
         </h1>
-        <p className="text-lg sm:text-xl text-text-body font-bold tracking-tight">
-          {profileData.role}
+        <p className="text-text-dim text-sm sm:text-base leading-relaxed">
+          Roboticist &amp; Senior Software Engineer &middot; Robotics background, research history, and personal interests.
         </p>
       </header>
 

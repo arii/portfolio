@@ -3,7 +3,6 @@ import { Download, ExternalLink } from 'lucide-react';
 import { ResumeSocialLink } from '@/data/resume';
 
 export interface ResumeHeaderProps {
-  name: string;
   pdfUrl: string;
 }
 
@@ -40,16 +39,19 @@ const SocialIcon: React.FC<{ type: ResumeSocialLink['type'] }> = ({ type }) => {
 };
 
 export const ResumeHeader: React.FC<ResumeHeaderProps> = ({
-  name,
   pdfUrl
 }) => {
   return (
-    <header className="border-b border-border/60 pb-4 md:pb-6 print:border-b-2 print:border-black print:pb-4">
-      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
-        <div>
-          <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-foreground leading-tight print:text-black">
-            {name}
+    <header className="border-b border-line/20 pb-6 sm:pb-8">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-4">
+        <div className="space-y-1">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-text-main leading-tight">
+            <span className="print:hidden">Resume</span>
+            <span className="hidden print:inline text-black">Ariel Anders, PhD</span>
           </h1>
+          <p className="text-text-dim text-sm sm:text-base leading-relaxed print:text-black">
+            Roboticist &amp; Senior Software Engineer &middot; Professional experience, technical skills, and education.
+          </p>
         </div>
 
         <div className="print:hidden shrink-0">

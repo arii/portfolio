@@ -70,7 +70,7 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
         <meta property="og:description" content="System architectures, agentic CI/CD pipelines, autonomous developer tooling, and shipped production applications." />
       </Helmet>
 
-      <header className="space-y-4 border-b border-line/20 pb-8">
+      <header className="space-y-4 border-b border-line/20 pb-6 sm:pb-8">
         <div className="max-w-3xl space-y-4">
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-text-main leading-tight">DevAI &amp; Software Systems</h1>
           <p className="text-text-dim max-w-2xl text-sm sm:text-base leading-relaxed">System architectures, agentic CI/CD pipelines, autonomous developer tooling, and shipped production applications.</p>

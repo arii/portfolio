@@ -6,7 +6,7 @@ describe('About Page Content Ownership', () => {
   it('renders bio, advisor credibility line, and resume outlink', () => {
     render(<About />);
 
-    expect(screen.getByText('Ariel Anders, PhD')).toBeInTheDocument();
+    expect(screen.getByText('About Ariel')).toBeInTheDocument();
     expect(screen.getByText('Education')).toBeInTheDocument();
     expect(screen.getByText('Honors')).toBeInTheDocument();
     expect(

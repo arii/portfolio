@@ -26,7 +26,7 @@ const ResearchListPage: React.FC<ResearchListPageProps> = ({ onNavigate }) => {
         <meta property="og:description" content="Planning under uncertainty, conformant belief-state manipulation, multi-robot coordination, and hardware automation systems." />
       </Helmet>
 
-      <header className="space-y-4 border-b border-line/20 pb-8">
+      <header className="space-y-4 border-b border-line/20 pb-6 sm:pb-8">
         <div className="max-w-3xl space-y-4">
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-text-main leading-tight">Robotics &amp; Algorithmic Research</h1>
           <p className="text-text-dim max-w-2xl text-sm sm:text-base leading-relaxed">Planning under uncertainty, conformant belief-state manipulation, multi-robot coordination, and hardware automation systems.</p>
