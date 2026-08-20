@@ -2,32 +2,6 @@ import { ResearchTool } from '@/types/research';
 
 export const autonomousTools: ResearchTool[] = [
   {
-    id: 'conformant-planning-manipulation',
-    taxonomyBucket: 'infrastructure',
-    title: 'Reliably Arranging Objects: Conformant Planning for Robot Manipulation',
-    description: 'Willow Garage PR2 robot manipulation under uncertainty, fixture optimization for push/assembly reliability (increasing Tetris reliability from 1.9% to 80.7%), and belief-state planning without external sensing.',
-    category: 'Robotics & Autonomy',
-    status: 'Completed',
-    tags: ['Robotics', 'Planning', 'PhD Thesis'],
-    image: '/assets/research/phd/tetris1.png',
-    imageAlt: 'Willow Garage PR2 robot arranging Tetris blocks using conformant planning',
-    canonicalPath: '/research/conformant-planning-manipulation',
-    externalUrl: 'https://dspace.mit.edu/handle/1721.1/122822'
-  },
-  {
-    id: 'belief-state-visualization',
-    taxonomyBucket: 'infrastructure',
-    title: 'Belief State Visualization & Action Noise Characterization',
-    description: 'Experimental noise characterization of grasping/placing actions and algorithm belief-state overlays.',
-    category: 'Robotics & Autonomy',
-    status: 'Completed',
-    tags: ['Robotics', 'Research'],
-    image: '/assets/research/phd/beliefoverlay.png',
-    imageAlt: 'Algorithm belief-state overlay visualization and experimental noise characterization of robot grasping and placing',
-    canonicalPath: '/research/belief-state-visualization',
-    externalUrl: 'https://dspace.mit.edu/handle/1721.1/122822'
-  },
-  {
     id: 'bwsi-racecar',
     taxonomyBucket: 'infrastructure',
     title: 'BeaverWorks Summer Institute (RACECAR)',
