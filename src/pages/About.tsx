@@ -11,7 +11,7 @@ const About: React.FC = () => {
           About Ariel
         </h1>
         <p className="text-text-dim text-sm sm:text-base leading-relaxed">
-          Roboticist &amp; Senior Software Engineer &middot; Robotics background, research history, and personal interests.
+          Robotics background, research history, and personal interests.
         </p>
       </header>
 
