@@ -27,7 +27,9 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build with base path
-        run: pnpm run build
+        run: |
+          pnpm run build
+          cp -r public/previews dist/previews
         env:
           VITE_BASE_PATH: /portfolio/
 
