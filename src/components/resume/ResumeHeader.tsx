@@ -4,9 +4,6 @@ import { ResumeSocialLink } from '@/data/resume';
 
 export interface ResumeHeaderProps {
   name: string;
-  title: string;
-  summary: string;
-  socials: ResumeSocialLink[];
   pdfUrl: string;
 }
 
@@ -44,21 +41,15 @@ const SocialIcon: React.FC<{ type: ResumeSocialLink['type'] }> = ({ type }) => {
 
 export const ResumeHeader: React.FC<ResumeHeaderProps> = ({
   name,
-  title,
-  summary,
-  socials,
   pdfUrl
 }) => {
   return (
-    <header className="space-y-4 border-b border-border/60 pb-8 print:border-b-2 print:border-black print:pb-6">
-      <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
-        <div className="space-y-2">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-foreground leading-tight print:text-black">
+    <header className="border-b border-border/60 pb-4 md:pb-6 print:border-b-2 print:border-black print:pb-4">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+        <div>
+          <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-foreground leading-tight print:text-black">
             {name}
           </h1>
-          <p className="text-lg sm:text-xl text-primary font-bold tracking-tight print:text-gray-800">
-            {title}
-          </p>
         </div>
 
         <div className="print:hidden shrink-0">
@@ -72,27 +63,6 @@ export const ResumeHeader: React.FC<ResumeHeaderProps> = ({
             <span>View PDF</span>
           </a>
         </div>
-      </div>
-
-      <p className="text-muted-foreground max-w-3xl text-sm leading-relaxed print:text-black print:mt-3">
-        {summary}
-      </p>
-
-      {/* Header Social & Academic Outlinks */}
-      <div className="flex flex-wrap items-center gap-3 pt-2 print:hidden">
-        {socials.map((social, idx) => (
-          <a
-            key={idx}
-            href={social.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3.5 py-2.5 text-xs font-semibold rounded-lg bg-secondary/80 text-foreground border border-border/60 hover:border-primary hover:text-primary transition-all min-h-[44px]"
-          >
-            <SocialIcon type={social.type} />
-            <span>{social.label}</span>
-            <ExternalLink className="w-3 h-3 opacity-60" />
-          </a>
-        ))}
       </div>
     </header>
   );

@@ -14,19 +14,14 @@ describe('Resume Page', () => {
   it('renders all sections and updated content correctly', () => {
     render(<Resume />);
 
-    // Header name, title, summary & PDF button
+    // Header name & PDF button
     expect(screen.getByText('Ariel Anders, PhD')).toBeInTheDocument();
-    expect(screen.getByText('Roboticist & Senior Software Engineer')).toBeInTheDocument();
-    expect(screen.getByText(/Roboticist and Senior Software Engineer with an MIT CSAIL PhD/i)).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /View PDF/i })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /View PDF/i })).toHaveAttribute('href', 'https://drive.google.com/file/d/14V6KjfEMO12uwNQAhY1OMy2d-_vkGXK_/view');
 
-    // Social header links (Google Scholar link appears in header & publications section)
+    // Scholar link appears in publications section
     const scholarLinks = screen.getAllByRole('link', { name: /Google Scholar/i });
     expect(scholarLinks.length).toBeGreaterThanOrEqual(1);
-    expect(screen.getByRole('link', { name: /Email/i })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /LinkedIn/i })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /GitHub/i })).toBeInTheDocument();
 
     // Section Headings
     expect(screen.getByRole('heading', { name: /^Experience$/i })).toBeInTheDocument();
