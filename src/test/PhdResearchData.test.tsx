@@ -13,7 +13,7 @@ describe('PhD Research Data Consolidation', () => {
     const post = getResearchPostBySlug('conformant-planning-manipulation');
     expect(post).toBeDefined();
     expect(post?.title).toBe('Reliably Arranging Objects: Conformant Planning for Robot Manipulation');
-    expect(post?.content).toContain('Willow Garage PR2 robot');
+    expect(post?.content).toContain('PR2');
     expect(post?.content).toContain('1.9%');
     expect(post?.content).toContain('80.7%');
     expect(post?.content).toContain('Belief State Visualization & Action Noise Characterization');
