@@ -8,10 +8,10 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg: 'var(--raw-color-bg, #020617)',
-        surface: 'var(--raw-color-surface, #0f172a)',
-        'surface-alt': 'var(--raw-color-surface-alt, #1e293b)',
-        line: 'var(--raw-color-line, #334155)',
+        bg: '#020617',
+        surface: '#0f172a',
+        'surface-alt': '#1e293b',
+        line: '#1e293b',
         accent: '#f59e0b', // amber-500
         'accent-sky': '#38bdf8',
         'accent-purple': '#a78bfa',
