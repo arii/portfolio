@@ -10,6 +10,7 @@ tags:
   - ROS
 category: "Education & Autonomous Systems"
 summary: "Instructional curricula and course lead for autonomous miniature racecars utilizing visual servoing, motion planning, and ROS."
+videoUrl: "https://www.youtube.com/watch?v=DUp9yURMo2c&list=PLEcASxU_mgVgnMZvVHgrTGFMUXze0MiOp"
 ---
 
 # BeaverWorks Summer Institute (RACECAR)
@@ -17,6 +18,14 @@ summary: "Instructional curricula and course lead for autonomous miniature racec
 ## Autonomous Miniature Racecars & Robotics Education
 
 The **BeaverWorks Summer Institute (RACECAR)** program at MIT was an intensive STEM initiative designed to teach high school students advanced robotics, computer vision, and autonomous vehicle navigation using 1/10th scale autonomous racecars.
+
+---
+
+## Course Highlights & Challenge Demos
+
+[![MIT Beaverworks RACECAR Course Highlights](https://img.youtube.com/vi/DUp9yURMo2c/hqdefault.jpg)](https://www.youtube.com/watch?v=DUp9yURMo2c&list=PLEcASxU_mgVgnMZvVHgrTGFMUXze0MiOp "MIT Beaverworks RACECAR Course Highlights")
+
+*Watch student mini autonomous vehicles navigating high-speed tracks, obstacle courses, and visual servoing challenges.*
 
 ---
 

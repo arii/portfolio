@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExternalLink, ArrowRight, FlaskConical, Activity, Server, FileText, ShoppingBag, Cpu } from 'lucide-react';
+import { ExternalLink, ArrowRight, FlaskConical, Activity, Server, FileText, ShoppingBag, Cpu, Video } from 'lucide-react';
 import { ResearchTool } from '@/types/research';
 import SafeImage from '@/components/ui/SafeImage';
 
@@ -89,6 +89,16 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
               >
                 <span>Read Deep-Dive</span><ArrowRight className="h-3.5 w-3.5" />
               </button>
+            )}
+            {tool.videoUrl && (
+              <a
+                href={tool.videoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center space-x-1.5 bg-surface border border-line px-3.5 py-2 rounded-xl text-xs font-semibold text-text-dim hover:bg-surface-alt hover:text-text-main transition-colors min-h-[44px]"
+              >
+                <Video className="h-3.5 w-3.5 text-accent" /><span>Watch Video</span>
+              </a>
             )}
             {tool.externalUrl && (
               <a

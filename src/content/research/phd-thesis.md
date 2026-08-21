@@ -10,6 +10,7 @@ tags:
   - MIT CSAIL
 category: "Robotics & AI"
 summary: "Conformant planning approach to reliable robot manipulation under severe sensing and control uncertainty. Combines fixture-augmented plan optimization and physics-driven belief state transitions to elevate assembly reliability from 1.9% to 80.7% on a PR2 robot."
+videoUrl: "https://www.youtube.com/watch?v=so-9kkQXlxc&list=PLEcASxU_mgVi6kMdElumAUh-gJW4wCOUV"
 ---
 
 # Reliably Arranging Objects
@@ -27,6 +28,14 @@ summary: "Conformant planning approach to reliable robot manipulation under seve
 Autonomous robotic assembly in unconstrained real-world environments is severely constrained by visual occlusion, sensor noise, and actuation inaccuracy. Standard open-loop pick-and-place plans fail catastrophically when tolerances are tight—a single millimeter of alignment error can jam a peg or knock over a multi-block structure.
 
 This doctoral dissertation introduces a **conformant planning framework** that enables autonomous robots (such as the Willow Garage PR2) to execute complex, multi-stage object arrangements with high reliability **without relying on real-time external visual sensing during execution**.
+
+---
+
+## Demonstration Video
+
+[![Reliably Arranging Objects in Uncertain Domains](https://img.youtube.com/vi/so-9kkQXlxc/hqdefault.jpg)](https://www.youtube.com/watch?v=so-9kkQXlxc&list=PLEcASxU_mgVi6kMdElumAUh-gJW4wCOUV "Reliably Arranging Objects in Uncertain Domains")
+
+*Watch ICRA 2018 Spotlight Video demonstrating PR2 robot executing conformant planning manipulation without vision feedback.*
 
 ---
 

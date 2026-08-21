@@ -12,6 +12,7 @@ export const autonomousTools: ResearchTool[] = [
     image: '/assets/research/bw.jpg',
     imageAlt: 'Students programming miniature autonomous vehicles',
     canonicalPath: '/research/bwsi-racecar',
+    videoUrl: 'https://www.youtube.com/watch?v=DUp9yURMo2c&list=PLEcASxU_mgVgnMZvVHgrTGFMUXze0MiOp',
     externalUrl: 'https://beaverworks.ll.mit.edu/CMS/bw/bwsi'
   },
   {
