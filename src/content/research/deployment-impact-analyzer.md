@@ -1,6 +1,6 @@
 ---
 type: study
-title: "Technical Deep-Dive: Building the Deployment Impact Analyzer"
+title: "Visual Impact / UX Audit"
 date: "2026-06-19"
 author: "Ariel Anders, PhD"
 category: "DevAI"

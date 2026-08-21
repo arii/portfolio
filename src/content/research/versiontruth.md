@@ -1,6 +1,6 @@
 ---
 type: study
-title: "VersionTruth & Hackathons Submission: Ground-Truth Agent Skill Guide"
+title: "Version Truth & Hackathons Submission"
 date: "2026-07-10"
 author: "Ariel Anders, PhD"
 category: "DevAI"
