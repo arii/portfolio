@@ -82,6 +82,7 @@ export const flagshipTools: ResearchTool[] = [
     image: '/assets/research/masters-thesis.png',
     imageAlt: 'Robot manipulator executing whole-arm contact and grasping strategy on irregular objects',
     canonicalPath: '/research/masters-thesis',
+    videoUrl: 'https://www.youtube.com/watch?v=pmdjquZoJkE',
     externalUrl: 'https://dspace.mit.edu/entities/publication/ead0c10d-3401-46a1-bcc5-42f5a56fe0b8',
     externalLinkDisplayLabel: 'MIT DSpace Thesis'
   }

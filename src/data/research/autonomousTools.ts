@@ -36,6 +36,7 @@ export const autonomousTools: ResearchTool[] = [
     image: '/assets/research/drone.jpg',
     imageAlt: 'Parrot Rolling Spider Drone hovering over path',
     canonicalPath: '/research/autonomous-drone-line-following',
+    videoUrl: 'https://www.youtube.com/watch?v=f5l8GA1PHm8',
     externalUrl: 'https://github.com/arii/FollowTheYellowBrickRoad'
   },
   {

@@ -9,6 +9,7 @@ tags:
   - Drones
 category: "Aerial Robotics & Control"
 summary: "Feedback and Control Systems implementation using an onboard camera on a Rolling Spider Parrot drone to autonomously follow floor-marked paths."
+videoUrl: "https://www.youtube.com/watch?v=f5l8GA1PHm8"
 ---
 
 # Drone Line Following Autonomous Controller
@@ -16,6 +17,14 @@ summary: "Feedback and Control Systems implementation using an onboard camera on
 ## Closed-Loop Vision-Based Trajectory Tracking for Micro-Quadrotors
 
 The **Drone Line Following Autonomous Controller** project involved engineering a real-time computer vision and state feedback control loop for a micro quadrotor (Parrot Rolling Spider) to autonomously detect, align with, and track floor-marked paths ("Follow the Yellow Brick Road").
+
+---
+
+## Flight Demonstration Video
+
+[![Drone Line Following Demonstration](https://img.youtube.com/vi/f5l8GA1PHm8/hqdefault.jpg)](https://www.youtube.com/watch?v=f5l8GA1PHm8 "Drone Line Following Demonstration")
+
+*Watch Rolling Spider micro-drone executing closed-loop visual path tracking along a yellow floor-marked trajectory.*
 
 ---
 

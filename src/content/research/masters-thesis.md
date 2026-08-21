@@ -11,6 +11,7 @@ tags:
   - MIT CSAIL
 category: "Robotics & AI"
 summary: "Investigated tactile-driven, sensorimotor reinforcement learning policies for bimanual and whole-arm grasping of bulky, irregular objects under real-world physical uncertainty."
+videoUrl: "https://www.youtube.com/watch?v=pmdjquZoJkE"
 ---
 
 # Learning a Strategy for Whole-Arm Grasping
@@ -20,6 +21,14 @@ summary: "Investigated tactile-driven, sensorimotor reinforcement learning polic
 **Author:** Ariel Anders
 **Advisor:** Prof. Daniela Rus
 **Institution:** Massachusetts Institute of Technology (MIT CSAIL)
+
+---
+
+## Demonstration Video
+
+[![Proprioceptive Inference for Dual-Arm Grasping of Bulky Objects](https://img.youtube.com/vi/pmdjquZoJkE/hqdefault.jpg)](https://www.youtube.com/watch?v=pmdjquZoJkE "Proprioceptive Inference for Dual-Arm Grasping of Bulky Objects")
+
+*Watch whole-arm and dual-arm contact-rich grasping demonstration on bulky irregular objects.*
 
 ---
 
