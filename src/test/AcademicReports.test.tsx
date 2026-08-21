@@ -26,15 +26,12 @@ describe('Academic Research Project Reports (PDFs)', () => {
     });
   });
 
-  it('includes pdfUrl on relevant academic papers data entries', () => {
-    const papersWithPdf = ACADEMIC_PAPERS.filter((p) => p.pdfUrl);
-    expect(papersWithPdf.length).toBeGreaterThanOrEqual(5);
-
+  it('keeps peer-reviewed publication entries in ACADEMIC_PAPERS and excludes class reports', () => {
     const dentalPaper = ACADEMIC_PAPERS.find((p) => p.id === 'nsbe-dental-2012');
     expect(dentalPaper?.pdfUrl).toBe('/reports/report_dental.pdf');
 
-    const mlPaper = ACADEMIC_PAPERS.find((p) => p.id === 'ml-lis-2012');
-    expect(mlPaper?.pdfUrl).toBe('/reports/report_ml.pdf');
+    const classReportInAcademic = ACADEMIC_PAPERS.find((p) => p.id === 'ml-lis-2012');
+    expect(classReportInAcademic).toBeUndefined();
   });
 
   it('includes pdfUrl on relevant autonomous tools entries', () => {
