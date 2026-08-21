@@ -1,6 +1,5 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import React from 'react';
 import fs from 'fs';
 import path from 'path';
 import { ACADEMIC_PAPERS } from '@/data/academicResearch';
