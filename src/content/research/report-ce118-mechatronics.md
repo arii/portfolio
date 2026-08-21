@@ -31,6 +31,13 @@ Key technical components:
 
 ---
 
+## Video Demonstrations & Playlist
+
+- ▶️ [Watch MAK Attack Line Following Robot Video](https://www.youtube.com/watch?v=qSe8JmWQnYk)
+- 📺 [Browse Robotics Demos Playlist](https://www.youtube.com/playlist?list=PLEcASxU_mgVgnMZvVHgrTGFMUXze0MiOp)
+
+---
+
 ## Downloadable Technical Report
 
 - 📄 [Download Mechatronics Lab Report (PDF)](/reports/report_ce118.pdf)

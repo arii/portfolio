@@ -45,7 +45,7 @@ describe('Academic Research Project Reports (PDFs)', () => {
     expect(dentalTool?.pdfUrl).toBe('/reports/report_dental.pdf');
   });
 
-  it('renders Download PDF Report button in AcademicCard when paper.pdfUrl is provided', () => {
+  it('renders Download PDF Report and Watch Video buttons in AcademicCard when properties are provided', () => {
     const mockPaper = {
       id: 'test-paper',
       title: 'Test Paper Title',
@@ -55,16 +55,26 @@ describe('Academic Research Project Reports (PDFs)', () => {
       venue: 'Test Venue',
       summary: 'Test summary statement.',
       tags: ['TestTag'],
-      pdfUrl: '/reports/report_dental.pdf'
+      pdfUrl: '/reports/report_dental.pdf',
+      videoUrl: 'https://www.youtube.com/watch?v=so-9kkQXlxc',
+      playlistUrl: 'https://www.youtube.com/playlist?list=PLEcASxU_mgVi6kMdElumAUh-gJW4wCOUV'
     };
 
     render(<AcademicCard paper={mockPaper} />);
     const pdfLink = screen.getByRole('link', { name: /Download PDF Report/i });
     expect(pdfLink).toBeInTheDocument();
     expect(pdfLink).toHaveAttribute('href', '/reports/report_dental.pdf');
+
+    const videoLink = screen.getByRole('link', { name: /Watch Video Demo/i });
+    expect(videoLink).toBeInTheDocument();
+    expect(videoLink).toHaveAttribute('href', 'https://www.youtube.com/watch?v=so-9kkQXlxc');
+
+    const playlistLink = screen.getByRole('link', { name: /Watch Playlist/i });
+    expect(playlistLink).toBeInTheDocument();
+    expect(playlistLink).toHaveAttribute('href', 'https://www.youtube.com/playlist?list=PLEcASxU_mgVi6kMdElumAUh-gJW4wCOUV');
   });
 
-  it('renders PDF Report Available badge in ToolCard when tool.pdfUrl is provided', () => {
+  it('renders PDF Report and Video badges in ToolCard when properties are provided', () => {
     const mockTool = {
       id: 'test-tool',
       title: 'Test Tool',
@@ -73,11 +83,13 @@ describe('Academic Research Project Reports (PDFs)', () => {
       status: 'Completed',
       tags: ['TestTag'],
       canonicalPath: '/research/cad-cam-dental-workflow',
-      pdfUrl: '/reports/report_dental.pdf'
+      pdfUrl: '/reports/report_dental.pdf',
+      videoUrl: 'https://www.youtube.com/watch?v=so-9kkQXlxc'
     };
 
     render(<ToolCard tool={mockTool} onNavigate={() => {}} />);
-    expect(screen.getByText(/PDF Report Available/i)).toBeInTheDocument();
+    expect(screen.getByText(/PDF Report/i)).toBeInTheDocument();
+    expect(screen.getByText(/Video Demo/i)).toBeInTheDocument();
   });
 
   it('parses research posts with PDF download links from markdown files', () => {

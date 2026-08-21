@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExternalLink, ArrowRight, FlaskConical, Activity, Server, FileText, ShoppingBag, Cpu } from 'lucide-react';
+import { ExternalLink, ArrowRight, FlaskConical, Activity, Server, FileText, ShoppingBag, Cpu, Video, Play } from 'lucide-react';
 import { ResearchTool } from '@/types/research';
 import SafeImage from '@/components/ui/SafeImage';
 
@@ -102,6 +102,28 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
                 }`}
               >
                 <span>{tool.externalLinkDisplayLabel || 'Open Link'}</span><ExternalLink className="h-3.5 w-3.5" />
+              </a>
+            )}
+            {tool.videoUrl && (
+              <a
+                href={tool.videoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center space-x-1.5 bg-accent/10 border border-accent/20 px-3.5 py-2 rounded-xl text-xs font-semibold text-accent hover:bg-accent/20 transition-colors min-h-[44px]"
+              >
+                <Video className="h-3.5 w-3.5" />
+                <span>Watch Video</span>
+              </a>
+            )}
+            {tool.playlistUrl && (
+              <a
+                href={tool.playlistUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center space-x-1.5 bg-surface border border-line px-3.5 py-2 rounded-xl text-xs font-semibold text-text-dim hover:bg-surface-alt hover:text-text-main transition-colors min-h-[44px]"
+              >
+                <Play className="h-3.5 w-3.5 text-accent" />
+                <span>Watch Playlist</span>
               </a>
             )}
             {tool.sourceUrl && (

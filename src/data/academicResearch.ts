@@ -9,6 +9,8 @@ export interface AcademicPaper {
   tags: string[];
   link?: string;
   pdfUrl?: string;
+  videoUrl?: string;
+  playlistUrl?: string;
 }
 
 export const ACADEMIC_PAPERS: AcademicPaper[] = [
@@ -21,7 +23,9 @@ export const ACADEMIC_PAPERS: AcademicPaper[] = [
     venue: 'MIT CSAIL (advised by Leslie P. Kaelbling & Tomas Lozano-Perez)',
     summary: 'Focused on reliable robotic manipulation under pose uncertainty using conformant belief-state planning and fixture optimization, improving physical multi-step assembly success from 1.9% to 80.7%.',
     tags: ['Robotics', 'Manipulation', 'AI', 'TAMP', 'Conformant Planning'],
-    link: 'https://dspace.mit.edu/handle/1721.1/122822'
+    link: 'https://dspace.mit.edu/handle/1721.1/122822',
+    videoUrl: 'https://www.youtube.com/watch?v=omdHFeBBYZ0',
+    playlistUrl: 'https://www.youtube.com/playlist?list=PLEcASxU_mgVi6kMdElumAUh-gJW4wCOUV'
   },
   {
     id: 'masters-thesis-2014',
@@ -43,7 +47,9 @@ export const ACADEMIC_PAPERS: AcademicPaper[] = [
     venue: 'IEEE International Conference on Robotics and Automation (ICRA)',
     summary: 'Introduced an efficient belief-state planning algorithm that optimizes physical fixture placements to guarantee reliable object manipulation in uncertain physical environments.',
     tags: ['ICRA', 'Robotics', 'Manipulation', 'Uncertainty'],
-    link: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=NM6SfiEAAAAJ&citation_for_view=NM6SfiEAAAAJ:MXK_kJrjxJIC'
+    link: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=NM6SfiEAAAAJ&citation_for_view=NM6SfiEAAAAJ:MXK_kJrjxJIC',
+    videoUrl: 'https://www.youtube.com/watch?v=so-9kkQXlxc',
+    playlistUrl: 'https://www.youtube.com/playlist?list=PLEcASxU_mgVi6kMdElumAUh-gJW4wCOUV'
   },
   {
     id: 'ijrr-2016',
@@ -65,7 +71,9 @@ export const ACADEMIC_PAPERS: AcademicPaper[] = [
     venue: 'IEEE Integrated STEM Education Conference (ISEC)',
     summary: 'Designed hands-on algorithmic robotics curriculum for 1/10th scale autonomous race cars, teaching perception, obstacle avoidance, and control.',
     tags: ['Self-Driving', 'ROS', 'Autonomy', 'Education'],
-    link: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=NM6SfiEAAAAJ&citation_for_view=NM6SfiEAAAAJ:W7OEmFMy1HYC'
+    link: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=NM6SfiEAAAAJ&citation_for_view=NM6SfiEAAAAJ:W7OEmFMy1HYC',
+    videoUrl: 'https://www.youtube.com/watch?v=DUp9yURMo2c',
+    playlistUrl: 'https://www.youtube.com/playlist?list=PLEcASxU_mgVgnMZvVHgrTGFMUXze0MiOp'
   },
   {
     id: 'nsbe-dental-2012',
@@ -77,6 +85,7 @@ export const ACADEMIC_PAPERS: AcademicPaper[] = [
     summary: 'Robotic trajectory planning and dynamic registration for autonomous dental crowning and implant placement.',
     tags: ['Robotics', 'Medical UI', 'CAD/CAM', 'UCSC'],
     pdfUrl: '/reports/report_dental.pdf',
+    videoUrl: 'https://www.youtube.com/watch?v=tXif7xeZmGI',
     link: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=NM6SfiEAAAAJ&citation_for_view=NM6SfiEAAAAJ:YsMSGLbcyi4C'
   },
   {
@@ -110,7 +119,8 @@ export const ACADEMIC_PAPERS: AcademicPaper[] = [
     venue: 'UCSC (CMPE-118 Mechatronics)',
     summary: 'Autonomous mobile robot designed for navigation, event detection state machines, and obstacle engagement.',
     tags: ['Mechatronics', 'Embedded C', 'Robotics', 'UCSC'],
-    pdfUrl: '/reports/report_ce118.pdf'
+    pdfUrl: '/reports/report_ce118.pdf',
+    videoUrl: 'https://www.youtube.com/watch?v=qSe8JmWQnYk'
   },
   {
     id: 'microprocessor-ce121-2011',

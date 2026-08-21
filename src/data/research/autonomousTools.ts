@@ -9,8 +9,10 @@ export const autonomousTools: ResearchTool[] = [
     category: 'Education',
     status: 'Completed',
     tags: ['Robotics & Autonomy', 'Computer Vision', 'Visual Servoing', 'Motion Planning', 'ROS'],
-    image: '/assets/research/bw.jpg',
+    image: 'https://i.ytimg.com/vi/DUp9yURMo2c/hqdefault.jpg',
     imageAlt: 'Students programming miniature autonomous vehicles',
+    videoUrl: 'https://www.youtube.com/watch?v=DUp9yURMo2c',
+    playlistUrl: 'https://www.youtube.com/playlist?list=PLEcASxU_mgVgnMZvVHgrTGFMUXze0MiOp',
     externalUrl: 'https://beaverworks.ll.mit.edu/CMS/bw/bwsi'
   },
   {
@@ -30,8 +32,9 @@ export const autonomousTools: ResearchTool[] = [
     category: 'Robotics',
     status: 'Completed',
     tags: ['Robotics & Autonomy', 'Control Systems', 'Computer Vision', 'Drones'],
-    image: '/assets/research/drone.jpg',
+    image: 'https://i.ytimg.com/vi/f5l8GA1PHm8/hqdefault.jpg',
     imageAlt: 'Parrot Rolling Spider Drone hovering over path',
+    videoUrl: 'https://www.youtube.com/watch?v=f5l8GA1PHm8',
     externalUrl: 'https://github.com/arii/FollowTheYellowBrickRoad'
   },
   {
@@ -95,8 +98,10 @@ export const autonomousTools: ResearchTool[] = [
     category: 'Medical Robotics',
     status: 'Completed',
     tags: ['Robotics', 'Medical UI', 'CAD/CAM', 'Bionics Lab UCSC'],
+    image: 'https://i.ytimg.com/vi/tXif7xeZmGI/hqdefault.jpg',
     canonicalPath: '/research/cad-cam-dental-workflow',
     pdfUrl: '/reports/report_dental.pdf',
+    videoUrl: 'https://www.youtube.com/watch?v=tXif7xeZmGI',
     externalUrl: '/reports/report_dental.pdf'
   },
   {
@@ -108,7 +113,8 @@ export const autonomousTools: ResearchTool[] = [
     status: 'Completed',
     tags: ['Machine Learning', 'Computer Vision', 'Ranking', 'MIT CSAIL'],
     canonicalPath: '/research/report-ml-lis',
-    pdfUrl: '/reports/report_ml.pdf'
+    pdfUrl: '/reports/report_ml.pdf',
+    videoUrl: 'https://www.youtube.com/watch?v=0U0pPbWhLVE'
   },
   {
     id: 'report-6375-rsa',
@@ -129,8 +135,10 @@ export const autonomousTools: ResearchTool[] = [
     category: 'Mechatronics',
     status: 'Completed',
     tags: ['Mechatronics', 'Embedded C', 'Robotics', 'UCSC'],
+    image: 'https://i.ytimg.com/vi/qSe8JmWQnYk/hqdefault.jpg',
     canonicalPath: '/research/report-ce118-mechatronics',
-    pdfUrl: '/reports/report_ce118.pdf'
+    pdfUrl: '/reports/report_ce118.pdf',
+    videoUrl: 'https://www.youtube.com/watch?v=qSe8JmWQnYk'
   },
   {
     id: 'report-ce121-microprocessor',

@@ -44,6 +44,12 @@ Ariel engineered key control UI software and trajectory validation scripts:
 
 ---
 
+## Video Demonstrations & Media
+
+- ▶️ [Watch Dental Robotics Demonstration Video](https://www.youtube.com/watch?v=tXif7xeZmGI)
+
+---
+
 ## Downloadable Technical Report
 
 - 📄 [Download Dynamic Registration for Dental Robotics Report (PDF)](/reports/report_dental.pdf)

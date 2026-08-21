@@ -30,6 +30,12 @@ Key technical highlights:
 
 ---
 
+## Video Demonstrations & Media
+
+- ▶️ [Watch IBVS Visual Servoing & Object Reranking Video](https://www.youtube.com/watch?v=0U0pPbWhLVE)
+
+---
+
 ## Downloadable Technical Report
 
 - 📄 [Download Machine Learning Technical Report (PDF)](/reports/report_ml.pdf)
