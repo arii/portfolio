@@ -12,13 +12,15 @@ status: "In Progress"
 
 # AI Experiments (In Progress)
 
-This article consolidates experimental DevAI tooling, automated data ingestion routines, and e-commerce integrations currently in development and validation across active projects.
+This article consolidates experimental DevAI tooling, automated data ingestion routines, e-commerce integrations, and autonomous auditing routines currently in development and validation across active projects.
 
 ---
 
 ## 1. WCS Event Telemetry Scraping & ETL Pipeline
 
 Manually updating WSDC event details is a bottleneck. To keep event schedules automatically up to date, this serverless ETL pipeline uses GitHub Actions to scrape, validate, and sync WSDC event data directly to frontend nodes.
+
+![WCS Scraper Telemetry Pipeline Interface](/assets/research/ai-experiments/wcs-scraper.png)
 
 ### 1. The Scraper and Data Validation
 
@@ -189,6 +191,8 @@ Automating print-on-demand merchandising and e-commerce product pipelines using 
 
 ## 3. RAG-Powered AI Blog Drafter
 
+![AI Blog Drafter Interface](/assets/research/ai-experiments/blog-drafter.png)
+
 ### Human-in-the-Loop Content Engine
 
 The **AI Blog Drafter** is a specialized prompt engineering platform designed to streamline brand-consistent content generation. Rather than replacing human writers, it augments them by providing a powerful drafting tool that understands the unique voice and style of a publication.
@@ -205,3 +209,11 @@ By utilizing Retrieval-Augmented Generation (RAG) over an existing corpus of blo
 ### Why This Matters
 
 Maintaining a consistent voice across dozens or hundreds of articles is challenging, especially when scaling content production. The AI Blog Drafter reduces the initial friction of the "blank page" while ensuring that the final output feels authentic and aligned with the brand's core message.
+
+---
+
+## 4. Visual Regression & UX Auditor
+
+![UX Auditor Visual Regression Console](/assets/research/ai-experiments/ux-auditor.png)
+
+Automated visual regression testing using Playwright and pixelmatch to capture screenshot diffs and score visual severity across responsive breakpoints prior to deployment.
