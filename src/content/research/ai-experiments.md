@@ -4,29 +4,29 @@ title: "AI Experiments (In Progress)"
 date: "2026-08-15"
 author: "Ariel Anders"
 category: "AI Experiments"
-tags: ["ETL", "WCS Scraper", "Printful API", "LLM", "RAG", "Automation"]
-excerpt: "A consolidated collection of active AI experiments and automated routines, including WCS event telemetry scraping & ETL, Printful API merch automation, and RAG-powered AI blog drafting."
-readTime: 8
+tags: ["ETL", "WCS Scraper", "Printful API", "LLM", "RAG", "Automation", "Visual Testing"]
+excerpt: "A consolidated collection of active AI experiments and automated routines, including WCS event telemetry scraping & ETL, Printful API merch automation, RAG-powered AI blog drafting, and Playwright visual UX auditing."
+readTime: 10
 status: "In Progress"
 ---
 
 # AI Experiments (In Progress)
 
-This article consolidates experimental DevAI tooling, automated data ingestion routines, e-commerce integrations, and autonomous auditing routines currently in development and validation across active projects.
+This article consolidates experimental DevAI tooling, automated data ingestion routines, e-commerce integrations, and autonomous auditing routines currently in active development and validation across the ecosystem.
 
 ---
 
 ## 1. WCS Event Telemetry Scraping & ETL Pipeline
 
-Manually updating WSDC event details is a bottleneck. To keep event schedules automatically up to date, this serverless ETL pipeline uses GitHub Actions to scrape, validate, and sync WSDC event data directly to frontend nodes.
+Manually tracking and updating regional West Coast Swing (WCS) event schedules and dancer registries is a frequent maintenance bottleneck. To maintain accurate, up-to-date schedules automatically, this serverless ETL pipeline leverages GitHub Actions to scrape, validate, and publish WSDC event data directly to frontend distribution nodes.
 
-![WCS Scraper Telemetry Pipeline Interface](/assets/research/ai-experiments/wcs-scraper.png)
+![Automated WCS Telemetry Scraper execution console and schema validation interface](/assets/research/ai-experiments/wcs-scraper.png)
 
-### 1. The Scraper and Data Validation
+### 1. The Scraper & Data Validation Engine
 
-Web scraping is inherently brittle. Instead of just dumping HTML into a dictionary, the script uses `BeautifulSoup` for parsing and `pydantic` for strict schema validation. This ensures no malformed data ever makes it to the frontend.
+Web scraping against unstandardized external sources is inherently fragile. Rather than emitting unstructured dictionary payloads, the scraper relies on `BeautifulSoup` for resilient HTML traversal and `pydantic` for strict runtime schema enforcement. Malformed records are filtered out before reaching production pipelines.
 
-One major challenge was the lack of consistent WSDC registry links for all dancers. A fallback mechanism using robust temporary identifiers ensures no competitor data is dropped during sync.
+A key edge case encountered during ingestion was inconsistent WSDC dancer registry links. A fallback generator assigns deterministic temporary identifiers (`tmp_{hash(name)}`), guaranteeing zero data loss during sync operations.
 
 ```python
 # etl/scraper.py
@@ -57,7 +57,7 @@ def scrape_wcs_events() -> List[dict]:
     soup = BeautifulSoup(response.text, 'html.parser')
     valid_events = []
 
-    # Handle inconsistent HTML structures
+    # Handle inconsistent HTML structures across event listings
     rows = soup.find_all('tr', class_='event-row') or soup.find_all('div', class_='event-item')
 
     for row in rows:
@@ -66,7 +66,7 @@ def scrape_wcs_events() -> List[dict]:
             location = row.find(['td', 'span'], class_='location').text.strip()
             date = row.find(['td', 'time'], class_='date').text.strip()
 
-            # Registry Link Resilience: Catch missing IDs and use fallbacks
+            # Registry Link Resilience: Catch missing IDs and apply fallback hashing
             link_tag = row.find('a', href=True)
             registry_id = link_tag['href'].split('/')[-1] if link_tag else f"tmp_{hash(name)}"
 
@@ -81,7 +81,7 @@ def scrape_wcs_events() -> List[dict]:
             print(f"Skipping malformed row: {e}")
             continue
 
-    # Write directly to the public directory for Vite async fetch
+    # Write output to the public static path for frontend async consumption
     with open('public/data/event_queue.json', 'w') as f:
         json.dump(valid_events, f, indent=2)
 
@@ -91,7 +91,7 @@ if __name__ == "__main__":
 
 ### 2. Serverless Scheduling with GitHub Actions
 
-The scraper runs on a weekly cron job. To prevent littering the git history with empty commits when the schedule hasn't changed, the Action checks for a `git diff` before pushing.
+The ETL process runs on a scheduled GitHub Actions cron job. To avoid polluting git commit logs when scraped data remains identical between runs, the workflow executes a `git diff` check prior to committing.
 
 ```yaml
 # .github/workflows/wcs_etl.yml
@@ -134,9 +134,9 @@ jobs:
           fi
 ```
 
-### 3. The React Frontend Sync
+### 3. Asynchronous Client Synchronization
 
-Because the ETL pipeline writes the JSON directly into the `public/data/` directory, the Vite application can fetch it asynchronously without ballooning the initial JavaScript bundle size.
+By writing validated JSON into `public/data/`, client applications retrieve telemetry asynchronously on demand, preserving low initial JavaScript bundle size and avoiding unnecessary server runtime costs.
 
 ```typescript
 // src/features/research/useWCSData.ts
@@ -157,7 +157,6 @@ export function useWCSData() {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        // Fetch from public directory to avoid bundling overhead
         const response = await fetch('/data/event_queue.json');
         if (!response.ok) throw new Error('WCS data sync failed');
         const data = await response.json();
@@ -180,40 +179,61 @@ export function useWCSData() {
 
 ## 2. Ecommerce Merchandising & Storefront Automation
 
-Automating print-on-demand merchandising and e-commerce product pipelines using modern REST APIs and autonomous content pipelines.
+Automating print-on-demand merchandising pipelines and catalog management using modern REST APIs and autonomous vector art transformation pipelines.
 
-### Architecture
-1. **Programmatic Design Generation**: Custom artwork and graphic automation tailored for community gear.
-2. **Printful API Sync**: Automated creation of product variants, mockups, and inventory synchronization across storefronts.
-3. **Affiliate & Catalog Ingestion**: Incoming pipelines connecting Amazon affiliate listings directly into site catalog nodes.
+### Architectural Breakdown
+1. **Programmatic Artwork Generation**: Transforming vector graphics and branding assets programmatically to match apparel dimensions and print safe zones.
+2. **Printful REST API Integration**: Automated creation of product variants, high-resolution mockup generation, pricing calculations, and real-time inventory synchronization.
+3. **Affiliate & Catalog Ingestion**: Automated mapping routines ingesting external affiliate listings directly into structured site catalog nodes.
+
+```typescript
+// Example: Printful API Sync Routine
+export async function syncProductVariant(variantId: number, printFileUrl: string) {
+  const response = await fetch(`https://api.printful.com/store/products/${variantId}`, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      sync_product: { name: 'BoomTick Commemorative Apparel' },
+      sync_variants: [{
+        retail_price: '28.00',
+        files: [{ type: 'default', url: printFileUrl }]
+      }]
+    })
+  });
+  return response.json();
+}
+```
 
 ---
 
 ## 3. RAG-Powered AI Blog Drafter
 
-![AI Blog Drafter Interface](/assets/research/ai-experiments/blog-drafter.png)
+![AI Blog Drafter prompt generation and contextual vector retrieval interface](/assets/research/ai-experiments/blog-drafter.png)
 
 ### Human-in-the-Loop Content Engine
 
-The **AI Blog Drafter** is a specialized prompt engineering platform designed to streamline brand-consistent content generation. Rather than replacing human writers, it augments them by providing a powerful drafting tool that understands the unique voice and style of a publication.
+The **AI Blog Drafter** is a specialized prompt-engineering and content automation tool designed to streamline publication drafting. Rather than replacing editorial judgment, it augments human writers by generating structurally complete drafts that strictly align with established brand style guidelines.
 
-### How It Works
+### Workflow & Mechanics
 
-By utilizing Retrieval-Augmented Generation (RAG) over an existing corpus of blog posts, the drafter can mimic the author's tone, structure, and vocabulary.
+Utilizing Retrieval-Augmented Generation (RAG) over an indexed knowledge base of past articles, the drafter maintains consistency in tone, technical precision, and article hierarchy.
 
-1. **Context Retrieval:** The system indexes previous articles.
-2. **Prompt Construction:** When given a new topic or outline, it injects relevant historical context into the prompt.
-3. **Draft Generation:** The LLM produces a first draft that closely aligns with the established brand identity.
-4. **Human Review:** An editor steps in to refine, fact-check, and finalize the content, ensuring editorial quality remains high.
-
-### Why This Matters
-
-Maintaining a consistent voice across dozens or hundreds of articles is challenging, especially when scaling content production. The AI Blog Drafter reduces the initial friction of the "blank page" while ensuring that the final output feels authentic and aligned with the brand's core message.
+1. **Vector Context Retrieval:** Historical posts and style guidelines are indexed into vector embeddings.
+2. **Prompt Construction:** Incoming topic outlines trigger similarity search queries, injecting top matching excerpts into the LLM system prompt.
+3. **Structured First Draft:** The model synthesizes an initial draft formatted with Markdown headings, code blocks, and key takeaways.
+4. **Editorial Review:** Human authors review, fact-check, and polish the generated copy before publication.
 
 ---
 
 ## 4. Visual Regression & UX Auditor
 
-![UX Auditor Visual Regression Console](/assets/research/ai-experiments/ux-auditor.png)
+![Playwright Visual UX Auditor console showing visual regression diff score and breakpoint preview](/assets/research/ai-experiments/ux-auditor.png)
 
-Automated visual regression testing using Playwright and pixelmatch to capture screenshot diffs and score visual severity across responsive breakpoints prior to deployment.
+### Automated UI Quality Guardrails
+
+The **Visual Regression & UX Auditor** captures full-page screenshot diffs across responsive viewport dimensions (`375px`, `768px`, `1280px`) using Playwright and pixelmatch.
+
+By analyzing visual delta percentages before merging code, the pipeline flags layout shifts, unintended font size variations, and broken element constraints before changes reach production environments.

@@ -147,6 +147,18 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
               <li className="text-text-body leading-relaxed" {...props}>
                 {children}
               </li>
+            ),
+            img: ({ src, alt, ...props }) => (
+              <figure className="my-8 space-y-3">
+                <div className="overflow-hidden rounded-2xl border border-line bg-bg shadow-lg">
+                  <img src={src} alt={alt || ''} className="w-full h-auto object-cover" {...props} />
+                </div>
+                {alt && (
+                  <figcaption className="text-center text-xs font-mono text-text-dim px-4 leading-relaxed">
+                    <span className="font-semibold text-accent-sky">Figure:</span> {alt}
+                  </figcaption>
+                )}
+              </figure>
             )
           }}
         >
