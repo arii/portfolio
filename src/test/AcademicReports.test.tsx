@@ -26,9 +26,9 @@ describe('Academic Research Project Reports (PDFs)', () => {
     });
   });
 
-  it('keeps peer-reviewed publication entries in ACADEMIC_PAPERS and excludes class reports', () => {
+  it('excludes report entries from ACADEMIC_PAPERS and ensures they are in project cards', () => {
     const dentalPaper = ACADEMIC_PAPERS.find((p) => p.id === 'nsbe-dental-2012');
-    expect(dentalPaper?.pdfUrl).toBe('/reports/report_dental.pdf');
+    expect(dentalPaper).toBeUndefined();
 
     const classReportInAcademic = ACADEMIC_PAPERS.find((p) => p.id === 'ml-lis-2012');
     expect(classReportInAcademic).toBeUndefined();

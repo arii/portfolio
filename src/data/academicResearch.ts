@@ -74,18 +74,5 @@ export const ACADEMIC_PAPERS: AcademicPaper[] = [
     link: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=NM6SfiEAAAAJ&citation_for_view=NM6SfiEAAAAJ:W7OEmFMy1HYC',
     videoUrl: 'https://www.youtube.com/watch?v=DUp9yURMo2c',
     playlistUrl: 'https://www.youtube.com/playlist?list=PLEcASxU_mgVgnMZvVHgrTGFMUXze0MiOp'
-  },
-  {
-    id: 'nsbe-dental-2012',
-    title: 'Dynamic Registration for Dental Robotics',
-    type: 'Technical Proceedings Paper',
-    year: '2012',
-    authors: ['A.S. Anders', 'J. Rosen'],
-    venue: 'NSBE Technical Proceedings (UCSC Bionics Lab)',
-    summary: 'Robotic trajectory planning and dynamic registration for autonomous dental crowning and implant placement.',
-    tags: ['Robotics', 'Medical UI', 'CAD/CAM', 'UCSC'],
-    pdfUrl: '/reports/report_dental.pdf',
-    videoUrl: 'https://www.youtube.com/watch?v=tXif7xeZmGI',
-    link: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=NM6SfiEAAAAJ&citation_for_view=NM6SfiEAAAAJ:YsMSGLbcyi4C'
   }
 ];
