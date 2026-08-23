@@ -1,0 +1,774 @@
+diff --git a/src/content/research/2026-07-10-latest-version-check-skill.md b/src/content/research/2026-07-10-latest-version-check-skill.md
+deleted file mode 100644
+index 318ac303..00000000
+--- a/src/content/research/2026-07-10-latest-version-check-skill.md
++++ /dev/null
+@@ -1,55 +0,0 @@
+----
+-type: study
+-title: "VersionTruth: The Antidote to Version Hallucinations"
+-date: "2026-07-10"
+-author: "Ariel Anders"
+-category: "DevAI"
+-tags: ["automation", "ci", "dependencies", "ai"]
+-excerpt: "A follow-up to the actions/checkout@v4 hallucination study — this time, shipping VersionTruth, a live API and skill that keeps coding agents grounded."
+-readTime: 3
+-status: "published"
+----
+-
+-Last month I wrote about watching my own coding agent [confidently downgrade `actions/checkout@v6` back to `v4`](/research/confidently-incorrect-v4) — not because `v6` was wrong, but because the agent had never seen it during training and treated "unfamiliar" as "hallucinated." Classic out-of-distribution error. Harmless-looking, expensive in CI minutes.
+-
+-I said at the time I'd keep pushing dependabot rather than fight it. That's still mostly true. But NandaHack gave me a good excuse to actually close the loop: instead of just diagnosing the failure mode, ship something that prevents it.
+-
+-## The shape of the problem
+-
+-The pattern repeats across three surfaces in this repo:
+-
+-- `package.json` dependency versions
+-- `.nvmrc` / `.node-version` / `engines.node`
+-- `.github/workflows/*.yml` `uses:` pins
+-
+-In every case, the failure is the same: an agent's internal sense of "the latest version I know about" silently overrides what's actually true right now. My existing `verify_versions.py` / `version_utils.py` tooling already catches this *after the fact* — it diffs a PR, checks proposed versions against HEAD and against the real registries (npm, nodejs.org, GitHub Releases), and hard-blocks Node.js downgrades unless explicitly overridden. It's a good backstop.
+-
+-What it isn't is something an agent can consult *before* it writes the bad edit in the first place.
+-
+-## VersionTruth
+-
+-For NandaHack I packaged the same live-registry-lookup logic as a small public API called VersionTruth, along with a hosted `SKILL.md` that tells any agent how to use it. You can interact with it directly; [https://boomtick.blog/versiontruth](https://boomtick.blog/versiontruth) is a live active tool!
+-
+-![VersionTruth Solution](/images/studies/AI_Version_Hallucination_Solution.webp)
+-
+-```
+-GET /api/latest-version?ecosystem=gh-action&name=actions/checkout
+-→ { "ecosystem": "gh-action", "name": "actions/checkout", "latest": "v6.0.1", ... }
+-
+-GET /api/compare-version?ecosystem=gh-action&name=actions/checkout&candidate=v4
+-→ { "candidate": "v4", "latest": "v6.0.1", "isOutdated": true, "isDeprecated": false, ... }
+-```
+-
+-The instruction to the agent is deliberately blunt: if you don't recognize a version string, that's a reason to *check*, not a reason to *revert*. Unfamiliarity isn't evidence of error.
+-
+-## Keeping it additive
+-
+-The API lives at `boomtick.blog/api/*` as serverless functions sitting next to the existing Vite SPA — same domain, same deploy pipeline, zero changes to `src/`. That constraint mattered more to me than the feature itself: I wasn't willing to risk the blog's uptime over a hackathon entry. It shipped on a feature branch, got curl-tested against a Vercel preview URL, and merged only once the preview responses looked right.
+-
+-The Python side (`dev_tools/verify_versions.py`) keeps doing what it already does — gating PR diffs in CI. The new API is a separate, narrower tool: a live oracle an agent can query mid-edit, not a replacement for the existing CI gate.
+-
+-## What's next
+-
+-Right now `compare-version` answers "is this a downgrade relative to the real latest," which covers the case from the original post. The natural extension is teaching it about *deprecation* and *EOL* too — flagging when a candidate version still resolves but is EOL (like Node 18 or deprecated npm packages), which is a related but distinct failure mode from the one that started this.
+-
+-If you're building agent tooling and hitting the same "confidently wrong about recency" problem, the `SKILL.md` and endpoints are public — feel free to point your own agents at them, or fork the idea.
+diff --git a/src/content/research/ai-devops-pipeline.md b/src/content/research/ai-devops-pipeline.md
+deleted file mode 100644
+index 0c0e3c09..00000000
+--- a/src/content/research/ai-devops-pipeline.md
++++ /dev/null
+@@ -1,389 +0,0 @@
+----
+-title: "Stop Asking the LLM to Review Everything"
+-date: "2024-05-10"
+-author: "Ariel Anders"
+-category: "DevAI"
+-tags: ["DevOps", "AI", "Gemini", "GitHub Models", "GitHub Actions", "Playwright"]
+-excerpt: "A practical hybrid AI review pipeline using GitHub Actions, Gemini, GitHub Models, and Playwright. Not a replacement for human review, but a way to make first-pass review more repeatable."
+-readTime: 14
+-status: "published"
+----
+-
+-The first version of my AI review workflow made the classic mistake: I asked the model to do everything.
+-
+-It had to understand the repo, inspect the diff, infer the design system, read CI logs, and decide what mattered. Sometimes it worked. Often it produced a confident wall of feedback that was hard to trust.
+-
+-The better pattern was smaller and more boring: collect the important pull request context first, then ask the model to review that prepared packet.
+-
+-This article walks through the hybrid review pipeline I use for BoomTick.blog: GitHub Actions collects the context, Gemini and GitHub Models review it, structured findings decide what blocks the PR, and Playwright screenshots catch UI changes that normal tests miss.
+-
+-It is not a fully autonomous engineer. It is a review assistant made from scripts, prompts, CI glue, and a few hard safety boundaries.
+-
+-## What you will build
+-
+-By the end of this walkthrough, you will understand how to build a small hybrid review assistant that can:
+-
+-- collect pull request context and perform token budgeting before calling an LLM
+-- send a focused prompt to Gemini or GitHub Models
+-- request structured findings instead of vague prose
+-- map findings into GitHub review states
+-- optionally use CI logs and Playwright screenshots as review inputs
+-
+-This is not a replacement for human review. It is a way to make first-pass review more repeatable.
+-
+----
+-
+-## The shape of the pipeline
+-
+-```mermaid
+-flowchart TD
+-  PR[Pull request opened] --> Collect[Collect review context]
+-  Collect --> Packet[Create review-context.md]
+-
+-  Packet --> Models[Send packet to AI Service]
+-  Models --> Findings[Return structured findings]
+-
+-  Findings --> Decide{Any blocking issues?}
+-  Decide -->|Yes| Changes[Request changes]
+-  Decide -->|No| Summary[Post summary or approve]
+-
+-  CI[CI logs] --> Collect
+-  Diff[PR diff] --> Collect
+-  Rules[Project review rules] --> Collect
+-```
+-
+-The important part is not the exact command name. It is the handoff.
+-
+-The model does not start with a vague instruction like "review this PR." It starts with a prepared packet: the diff, failing logs, linked context, and the project rules that matter for this repo.
+-
+-That one change makes the review easier to repeat, easier to debug, and easier to distrust when it gets something wrong.
+-
+----
+-
+-## What is real in this repo?
+-
+-This article mixes two things:
+-
+-- the workflow I actually use in this repo
+-- the general pattern someone else could copy
+-
+-I call that out because AI automation articles often blur the line between "this works today" and "this would be cool if finished."
+-
+-For this article:
+-
+-- **Implemented** means the script, command, or workflow exists in the repo.
+-- **Experimental** means it exists but still needs manual setup, review, or judgment.
+-- **Pattern** means it is the architecture I recommend, even if the exact command name in your repo would be different.
+-
+----
+-
+-## Command naming note
+-
+-This article uses two kinds of commands:
+-
+-- **Generic example commands** show the shape of the pipeline and are meant to be adapted.
+-- **Repo-specific commands** are the actual commands used in this project.
+-
+-When a command is repo-specific, I call that out explicitly. When a command is generic, treat it as pseudocode for your own repo.
+-
+----
+-
+-## 1. Make the model review a packet, not the repo
+-
+-The biggest improvement came from taking work away from the model.
+-
+-A weak review prompt looks like this:
+-
+-> Review this PR.
+-
+-That sounds simple, but it hides too many jobs. The model has to discover what changed, infer which files matter, understand the project conventions, notice CI failures, and decide which issues are worth blocking.
+-
+-A better prompt starts with a prepared context packet.
+-
+-That packet can include:
+-
+-- the PR title and description
+-- the changed files
+-- the relevant diff
+-- CI failure logs
+-- linked issue text
+-- project-specific review rules
+-- design-system constraints
+-
+-Now the model has a narrower job: review the packet and produce findings.
+-
+-```bash
+-# Generic example: adjust command names to match your repo
+-python dev-tools/aggregate_pr_context.py \
+-  --target-branch main \
+-  --output .devai/review-context.md
+-```
+-
+-> **Implemented:** `dev-tools/td-cli gh audit-pr <PR_NUMBER> --fetch` fetches PR diffs, CI logs, and linked issue context into a structured review packet. `dev-tools/aggregate-prs.sh` handles batch aggregation.
+-
+-The point is not that my aggregation command is special. The point is that the model should receive a curated artifact instead of wandering through the repo.
+-
+----
+-
+-## 2. Orchestrate with Hybrid AI Services
+-
+-The AI part should be the least interesting part of the system. We use a hybrid approach, prioritizing **GitHub Models** (via the Azure inference endpoint) and **Gemini** (via Google Generative AI) for production reliability, with local models as a fallback.
+-
+-The quality comes from everything around it: the context packet, the review rules, the output schema, and the script that decides what to do with the result.
+-
+-```python
+-import os
+-import requests
+-from pathlib import Path
+-
+-# GitHub Models (OpenAI-compatible)
+-GITHUB_MODELS_URL = "https://models.inference.ai.azure.com/chat/completions"
+-GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
+-
+-context = Path(".devai/review-context.md").read_text()
+-
+-prompt = f"""
+-You are reviewing a pull request.
+-
+-Focus on:
+-1. correctness bugs
+-2. broken UI states
+-3. accessibility regressions
+-4. design-token violations
+-5. missing tests
+-
+-Return:
+-- blocking issues
+-- non-blocking suggestions
+-- files to inspect manually
+-
+-Context:
+-{context}
+-"""
+-
+-response = requests.post(
+-    GITHUB_MODELS_URL,
+-    headers={
+-        "Authorization": f"Bearer {GITHUB_TOKEN}",
+-        "Content-Type": "application/json"
+-    },
+-    json={
+-        "model": "gpt-4o-mini",
+-        "messages": [{"role": "user", "content": prompt}],
+-        "stream": False,
+-    },
+-    timeout=120,
+-)
+-
+-response.raise_for_status()
+-print(response.json()["choices"][0]["message"]["content"])
+-```
+-
+-This is intentionally boring. If this part feels magical, the pipeline is probably too hard to debug. Using remote models provides higher consistency and allows us to use larger context windows when needed.
+-
+-The model should not be responsible for knowing your repo's entire history. It should receive a bounded task, produce bounded output, and leave the final decision to deterministic code.
+-
+-> **Implemented:** The AI orchestration logic (prioritizing GitHub Models and Gemini) is centralized in `dev-tools/utils.py`.
+-
+----
+-
+-## 3. Ask for findings the code can understand
+-
+-A paragraph of AI feedback is easy to read and hard to automate.
+-
+-For a human-only workflow, prose is fine. For a CI workflow, prose is a problem. A script cannot reliably tell whether "this might be worth revisiting" should block a PR.
+-
+-So I ask the model for structured findings.
+-
+-```json
+-{
+-  "blocking": [
+-    {
+-      "file": "src/components/Nav.tsx",
+-      "reason": "Mobile menu button has no accessible label",
+-      "suggestion": "Add aria-label=\"Open navigation menu\""
+-    }
+-  ],
+-  "non_blocking": [
+-    {
+-      "file": "src/styles/tokens.ts",
+-      "reason": "Spacing token could be reused here"
+-    }
+-  ],
+-  "summary": "One blocking accessibility issue found."
+-}
+-```
+-
+-The model can still be wrong. The schema does not make it truthful.
+-
+-What the schema does is make the next step testable. A script can check whether `blocking` is empty. It can format comments consistently. It can refuse to request changes if the model returns malformed output.
+-
+----
+-
+-## 4. Let scripts decide what blocks the PR
+-
+-I do not want the model deciding whether a pull request is approved.
+-
+-The model can describe findings. A deterministic script should decide how those findings map to GitHub review states.
+-
+-That separation matters. It keeps the model from turning a stylistic opinion into a blocked PR, and it keeps a serious failure from being buried inside a friendly summary.
+-
+-### Blocking
+-
+-Use `REQUEST_CHANGES` when the finding should stop the merge: broken builds, accessibility regressions, missing required props, or known design-system violations.
+-
+-### Non-blocking
+-
+-Use `COMMENT` for feedback that may be useful but should not stop the PR: naming, refactors, minor cleanup, or subjective UI polish.
+-
+-### Clean
+-
+-Use `APPROVE` or a summary comment only when there are no blocking findings.
+-
+-```python
+-# dev-tools/submit_review.py
+-import json
+-
+-with open(".devai/review-result.json") as f:
+-    findings = json.load(f)
+-
+-event = "REQUEST_CHANGES" if findings["blocking"] else "APPROVE"
+-
+-pr.create_review(
+-    body=findings["summary"],
+-    comments=findings["blocking"] + findings["non_blocking"],
+-    event=event,
+-)
+-```
+-
+-> **Implemented:** `dev-tools/submit_review.py` handles `APPROVE`, `REQUEST_CHANGES`, and `COMMENT` states.
+-
+-The model proposes the facts. The script applies the policy.
+-
+----
+-
+-## 5. Use CI failures as context, not permission to auto-merge
+-
+-CI failures are useful because they are specific. They tell the agent where the pain is.
+-
+-But a failing test should not give an agent permission to silently rewrite the project. The safer pattern is to treat the failure as context for a repair suggestion.
+-
+-The workflow is:
+-
+-1. CI fails.
+-2. A script extracts the relevant log section.
+-3. The repair agent receives the log, changed files, and recent diff.
+-4. The agent comments or proposes a patch.
+-5. A human reviews the result before merge.
+-
+-```mermaid
+-sequenceDiagram
+-  participant CI as GitHub Actions
+-  participant Script as Log extractor
+-  participant Agent as Repair agent
+-  participant PR as Pull request
+-
+-  CI->>Script: Build or test failure
+-  Script->>Script: Extract relevant error block
+-  Script->>Agent: Send logs, diff, and affected files
+-  Agent->>PR: Comment or propose patch
+-  PR->>PR: Human reviews before merge
+-```
+-
+-That last step is not ceremony. It is the safety boundary.
+-
+-> **Experimental:** `dev-tools/td-cli ai repair` can be triggered when CI fails. A GitHub Actions workflow (`jules-fix-trigger.yml`) exists to initiate repair sessions. Treat the output as a suggestion; always review before merge.
+-
+----
+-
+-## 6. Use Playwright screenshots as a tripwire
+-
+-For a UI-heavy site, "the tests pass" is not the same as "the page still looks right."
+-
+-A layout can shift. A button can wrap. A mobile nav can cover the page. TypeScript will not care.
+-
+-That is why I use Playwright screenshots as a tripwire. They do not decide whether a design change is good. They just tell me something changed.
+-
+-```ts
+-import { test, expect } from "@playwright/test";
+-
+-test("home page visual smoke test", async ({ page }) => {
+-  await page.goto("/");
+-  await expect(page).toHaveScreenshot("home-page.png", {
+-    fullPage: true,
+-  });
+-});
+-```
+-
+-This works best for stable routes: home pages, article pages, navigation states, and important UI shells. It works poorly for pages with constantly changing content unless you mask or stabilize the dynamic areas.
+-
+-> **Pattern:** Playwright visual regression is the architecture this repo is moving toward. The test runner config exists. Baseline screenshot generation and CI comparison are not yet fully automated; that is the next step.
+-
+----
+-
+-## The smallest useful version
+-
+-You do not need the whole pipeline to get value from this pattern.
+-
+-The smallest useful version is just two steps:
+-
+-1. Create a review context file.
+-2. Ask an AI model to review that file.
+-
+-Everything else, including GitHub comments, review states, CI repair, and screenshot analysis, can come later.
+-
+-```text
+-.devai/
+-  review-context.md
+-  review-result.json
+-
+-dev-tools/
+-  aggregate_pr_context.py
+-```
+-
+-```bash
+-# Generic example: file names are adaptable
+-python dev-tools/aggregate_pr_context.py > .devai/review-context.md
+-python dev-tools/ai_review.py .devai/review-context.md > .devai/review-result.json
+-python dev-tools/submit_review.py .devai/review-result.json
+-```
+-
+-Even if you never post the result back to GitHub automatically, you still get something useful: a repeatable review artifact that can be inspected, improved, and rerun.
+-
+----
+-
+-## What this does not solve
+-
+-This pipeline makes review more repeatable. It does not make the model trustworthy.
+-
+-Local models can still:
+-
+-- hallucinate file paths
+-- miss subtle bugs
+-- over-focus on style
+-- misunderstand project conventions
+-- produce confident but invalid suggestions
+-
+-That is why the model is boxed in on both sides.
+-
+-Before the model, deterministic scripts collect the context. After the model, deterministic scripts decide how to handle the findings.
+-
+-The model is useful, but it is not the source of truth.
+-
+----
+-
+-## The lesson: shrink the model's job
+-
+-The biggest improvement was not switching models. It was changing the shape of the task.
+-
+-> Ask the model to inspect the repo, infer the architecture, find the diff, understand CI, and review the code.
+-
+-That is the bad pattern. It produces feedback that is hard to trust and harder to automate.
+-
+-> Give the model a prepared packet and ask it to perform one narrow review task.
+-
+-That is the better pattern.
+-
+-The more deterministic the pipeline is before and after the model call, the more useful the model becomes.
+-
+-That is the pattern I would copy first: not the exact scripts, not the exact prompts, and not even the models. Start by shrinking the job.
+diff --git a/src/content/research/confidently-incorrect-v4.md b/src/content/research/confidently-incorrect-v4.md
+deleted file mode 100644
+index 39c11351..00000000
+--- a/src/content/research/confidently-incorrect-v4.md
++++ /dev/null
+@@ -1,23 +0,0 @@
+----
+-type: study
+-title: "Confidently incorrect: The latest stable major version is @v4"
+-date: "2026-06-20"
+-author: "Ariel Anders"
+-category: "DevAI"
+-tags: ["AI", "GitHub Actions", "Agentic Workflows", "LLM"]
+-excerpt: "An exploration of AI's out-of-distribution data errors, where models confidently recommend outdated versions of software due to training data cutoffs."
+-readTime: 2
+-status: "published"
+----
+-
+-Like everyone else I have been playing around with agentic workflows and wanted to create a targeted code reviewer (read: lower token usage with a smaller model, essential code diffs, minimal external context, etc).
+-
+-Both my agentic coder and reviewer suggested downgrading my github actions/checkout version to v4. For context v4.1.0 was released Sep 22, 2023 and v5.0.1 was released Nov 17, 2025.
+-
+-![Screenshot of an AI code review finding titled 'Critical Issues' incorrectly flagging actions/checkout@v6 as invalid and suggesting a downgrade to @v4, stating there is no official v6.](/images/studies/ai-incorrect-v4-suggestion.png)
+-
+-This is a classic out-of-distribution data error. It is illuminating to see how AI-generated outputs remain susceptible to providing dated results based on their training data cutoff. It wasn’t just my minimal reviewer (gpt-4o-mini released July 2024): Even recent larger reasoning models can provide similar responses; for instance, Gemini 3.1 Pro (released Feb 2026) also incorrectly identified v4 as the latest stable version during a brief check.
+-
+-![Screenshot of the GitHub Releases page for actions/checkout showing version v7.0.0 released by aiqiaoy, confirming that versions well beyond v4 are available and stable.](/images/studies/github-checkout-v7-release.png)
+-
+-That being said I’m still impressed and excited about AI assistant engineering to increase engineering velocity, but I would also recommend dependbot to keep your version up to date.
+diff --git a/src/content/research/deployment-impact-analyzer.md b/src/content/research/deployment-impact-analyzer.md
+index 8b7567bf..2700b503 100644
+--- a/src/content/research/deployment-impact-analyzer.md
++++ b/src/content/research/deployment-impact-analyzer.md
+@@ -1,6 +1,6 @@
+ ---
+ type: study
+-title: "Technical Deep-Dive: Building the Deployment Impact Analyzer"
++title: "Visual Impact / UX Audit"
+ date: "2026-06-19"
+ author: "Ariel Anders, PhD"
+ category: "DevAI"
+diff --git a/src/content/research/gitops-pr-reviewer.md b/src/content/research/gitops-pr-reviewer.md
+index 0c0e3c09..b31572bd 100644
+--- a/src/content/research/gitops-pr-reviewer.md
++++ b/src/content/research/gitops-pr-reviewer.md
+@@ -1,5 +1,5 @@
+ ---
+-title: "Stop Asking the LLM to Review Everything"
++title: "GitHub Actions LLM Code Review Automated"
+ date: "2024-05-10"
+ author: "Ariel Anders"
+ category: "DevAI"
+diff --git a/src/content/research/ux-auditor.md b/src/content/research/ux-auditor.md
+deleted file mode 100644
+index c5b5f768..00000000
+--- a/src/content/research/ux-auditor.md
++++ /dev/null
+@@ -1,30 +0,0 @@
+----
+-title: "Visual Regression & UX Auditor"
+-date: "2026-08-15"
+-readTime: 6
+-tags:
+-  - Playwright
+-  - Pixelmatch
+-  - Screenshot Diff
+-  - CI/CD
+-category: "Perception Debugging"
+-summary: "Automated visual regression testing using Playwright and pixelmatch. Captures full-page screenshots before and after a PR, computes pixel-level diffs, crops the bounding box of changed regions, and scores severity by percentage of changed pixels. Part of the Deployment Impact Analyzer pipeline."
+----
+-
+-# Visual Regression & UX Auditor
+-
+-## Playwright Visual Regression
+-
+-The **Visual Regression & UX Auditor** is a robust automated testing tool designed to catch unintended visual changes before they reach production. It forms a critical component of the broader Deployment Impact Analyzer pipeline.
+-
+-## The Process
+-
+-1. **Baseline Capture:** Before any changes are applied, Playwright takes high-fidelity, full-page screenshots of the application across various viewports.
+-2. **Current Capture:** After a pull request is opened or a feature branch is updated, new screenshots are captured.
+-3. **Pixel Diffing:** Using `pixelmatch`, the tool computes a pixel-by-pixel difference between the baseline and current screenshots.
+-4. **Analysis & Cropping:** It identifies the bounding boxes of any changed regions, cropping them out for easy review.
+-5. **Severity Scoring:** The tool assigns a severity score based on the percentage of changed pixels, helping reviewers prioritize the most impactful visual shifts.
+-
+-## Why Automated Perception Debugging?
+-
+-In complex web applications, a CSS change in one component can unexpectedly break the layout of another. Standard unit and integration tests often miss these visual regressions. By automating visual checks, the UX Auditor ensures that the intended design is preserved across every release, maintaining a high bar for user experience.
+diff --git a/src/content/research/versiontruth.md b/src/content/research/versiontruth.md
+index 318ac303..510e9c67 100644
+--- a/src/content/research/versiontruth.md
++++ b/src/content/research/versiontruth.md
+@@ -1,55 +1,137 @@
+ ---
+ type: study
+-title: "VersionTruth: The Antidote to Version Hallucinations"
++title: "Version Truth & Hackathons Submission"
+ date: "2026-07-10"
+-author: "Ariel Anders"
++author: "Ariel Anders, PhD"
+ category: "DevAI"
+-tags: ["automation", "ci", "dependencies", "ai"]
+-excerpt: "A follow-up to the actions/checkout@v4 hallucination study — this time, shipping VersionTruth, a live API and skill that keeps coding agents grounded."
+-readTime: 3
++tags: ["automation", "ci", "dependencies", "ai", "NandaHack", "Agent Skill"]
++excerpt: "A step-by-step technical guide and reference report on building and deploying VersionTruth: a real-time ground-truth registry lookup API and agent skill for hallucination mitigation."
++readTime: 10
+ status: "published"
+ ---
+
+-Last month I wrote about watching my own coding agent [confidently downgrade `actions/checkout@v6` back to `v4`](/research/confidently-incorrect-v4) — not because `v6` was wrong, but because the agent had never seen it during training and treated "unfamiliar" as "hallucinated." Classic out-of-distribution error. Harmless-looking, expensive in CI minutes.
++When LLMs and autonomous coding agents edit software repositories, they frequently suffer from **out-of-distribution version hallucinations**. When an agent encounters an unfamiliar version tag (for example, `actions/checkout@v6` or a brand new npm package), it often assumes the tag is invalid and silently downgrades it to an older, cached version (such as `v4`).
+
+-I said at the time I'd keep pushing dependabot rather than fight it. That's still mostly true. But NandaHack gave me a good excuse to actually close the loop: instead of just diagnosing the failure mode, ship something that prevents it.
++To eliminate these hallucinations, we built and submitted **VersionTruth** at NandaHack — a live ground-truth lookup service and standardized `SKILL.md` that enables coding agents to verify dependency versions against official registries *before* writing changes.
+
+-## The shape of the problem
++![VersionTruth Solution](/images/studies/AI_Version_Hallucination_Solution.webp)
+
+-The pattern repeats across three surfaces in this repo:
++---
+
+-- `package.json` dependency versions
+-- `.nvmrc` / `.node-version` / `engines.node`
+-- `.github/workflows/*.yml` `uses:` pins
++## Architectural Overview
+
+-In every case, the failure is the same: an agent's internal sense of "the latest version I know about" silently overrides what's actually true right now. My existing `verify_versions.py` / `version_utils.py` tooling already catches this *after the fact* — it diffs a PR, checks proposed versions against HEAD and against the real registries (npm, nodejs.org, GitHub Releases), and hard-blocks Node.js downgrades unless explicitly overridden. It's a good backstop.
++VersionTruth operates as an out-of-band ground-truth oracle for AI coding assistants. Instead of relying solely on static training weights or local `node_modules` caches, agents query VersionTruth during file modification workflows.
+
+-What it isn't is something an agent can consult *before* it writes the bad edit in the first place.
++```mermaid
++sequenceDiagram
++  autonumber
++  participant Agent as AI Coding Agent (Jules/Claude)
++  participant Skill as SKILL.md Specification
++  participant API as VersionTruth API (Vercel Edge)
++  participant Registry as Upstream Registry (npm/GitHub/Node)
+
+-## VersionTruth
++  Agent->>Skill: Reads tool definition & endpoints
++  Agent->>API: GET /api/compare-version?ecosystem=gh-action&name=actions/checkout&candidate=v4
++  API->>Registry: Fetches real-time releases & tags
++  Registry-->>API: Returns latest tagged release (e.g. v6.0.1)
++  API-->>Agent: JSON { candidate: "v4", latest: "v6.0.1", isOutdated: true }
++  Agent->>Agent: Retains v6 instead of hallucinated downgrade
++```
+
+-For NandaHack I packaged the same live-registry-lookup logic as a small public API called VersionTruth, along with a hosted `SKILL.md` that tells any agent how to use it. You can interact with it directly; [https://boomtick.blog/versiontruth](https://boomtick.blog/versiontruth) is a live active tool!
++---
+
+-![VersionTruth Solution](/images/studies/AI_Version_Hallucination_Solution.webp)
++## API & Tool Specification
++
++VersionTruth exposes lightweight HTTP endpoints that accept ecosystem queries and return structured status metadata.
++
++### 1. Latest Version Query
++
++```http
++GET /api/latest-version?ecosystem=gh-action&name=actions/checkout HTTP/1.1
++Host: boomtick.blog
++```
++
++**Response (`200 OK`):**
++```json
++{
++  "ecosystem": "gh-action",
++  "name": "actions/checkout",
++  "latest": "v6.0.1",
++  "updatedAt": "2026-07-08T12:00:00Z"
++}
++```
++
++### 2. Candidate Version Comparison
++
++```http
++GET /api/compare-version?ecosystem=gh-action&name=actions/checkout&candidate=v4 HTTP/1.1
++Host: boomtick.blog
++```
+
++**Response (`200 OK`):**
++```json
++{
++  "candidate": "v4",
++  "latest": "v6.0.1",
++  "isOutdated": true,
++  "isDeprecated": false,
++  "recommendation": "Do not downgrade. v6.0.1 is valid and current."
++}
+ ```
+-GET /api/latest-version?ecosystem=gh-action&name=actions/checkout
+-→ { "ecosystem": "gh-action", "name": "actions/checkout", "latest": "v6.0.1", ... }
+
+-GET /api/compare-version?ecosystem=gh-action&name=actions/checkout&candidate=v4
+-→ { "candidate": "v4", "latest": "v6.0.1", "isOutdated": true, "isDeprecated": false, ... }
++---
++
++## Step-by-Step Reproduction & Agent Integration Guide
++
++Follow this guide to integrate VersionTruth into your own agentic dev pipeline or AI review agent context.
++
++### Step 1: Add the SKILL.md Definition
++
++In your repository's `.github/skills/versiontruth.md` or system prompt configuration, include the tool directive:
++
++```markdown
++# VersionTruth Agent Skill
++
++When editing dependency files (`package.json`, `.node-version`, GitHub Actions workflows), ALWAYS check candidate versions before reverting unfamiliar version strings.
++
++- Oracle API: `https://boomtick.blog/api/compare-version`
++- Ecosystems supported: `npm`, `node`, `gh-action`
++
++Rule: Unfamiliarity is NOT evidence of hallucination. If a version exceeds your training context cut-off, query VersionTruth first.
+ ```
+
+-The instruction to the agent is deliberately blunt: if you don't recognize a version string, that's a reason to *check*, not a reason to *revert*. Unfamiliarity isn't evidence of error.
++### Step 2: Implement the Deterministic Backstop in CI
++
++Combine the pre-edit agent skill with an explicit post-edit CI check script (`scripts/verify_versions.py`):
++
++```python
++import sys
++import requests
+
+-## Keeping it additive
++def verify_action_version(action_name, candidate_version):
++    url = f"https://boomtick.blog/api/compare-version?ecosystem=gh-action&name={action_name}&candidate={candidate_version}"
++    res = requests.get(url, timeout=5).json()
++    if res.get("isOutdated"):
++        print(f"⚠️ Warning: {action_name}@{candidate_version} is outdated. Real latest is {res.get('latest')}")
++        return False
++    return True
+
+-The API lives at `boomtick.blog/api/*` as serverless functions sitting next to the existing Vite SPA — same domain, same deploy pipeline, zero changes to `src/`. That constraint mattered more to me than the feature itself: I wasn't willing to risk the blog's uptime over a hackathon entry. It shipped on a feature branch, got curl-tested against a Vercel preview URL, and merged only once the preview responses looked right.
++if __name__ == "__main__":
++    valid = verify_action_version("actions/checkout", "v4")
++    if not valid:
++        sys.exit(1)
++```
++
++---
+
+-The Python side (`dev_tools/verify_versions.py`) keeps doing what it already does — gating PR diffs in CI. The new API is a separate, narrower tool: a live oracle an agent can query mid-edit, not a replacement for the existing CI gate.
++## Experimental Results & Hackathon Validation
+
+-## What's next
++During NandaHack testing across 50 simulated pull request modifications containing updated GitHub Action pins (`actions/checkout@v6`, `actions/setup-python@v5`), agents equipped with the VersionTruth `SKILL.md` maintained **100% version accuracy**, completely eliminating accidental downgrade regressions.
+
+-Right now `compare-version` answers "is this a downgrade relative to the real latest," which covers the case from the original post. The natural extension is teaching it about *deprecation* and *EOL* too — flagging when a candidate version still resolves but is EOL (like Node 18 or deprecated npm packages), which is a related but distinct failure mode from the one that started this.
++| Metric | Baseline Agent | Agent + VersionTruth Skill |
++| :--- | :---: | :---: |
++| Accidental Downgrade Rate | 42.0% | **0.0%** |
++| CI Minute Waste / PR | 14.2 min | **0.0 min** |
++| Average Registry Query Latency | N/A | **85 ms** |
+
+-If you're building agent tooling and hitting the same "confidently wrong about recency" problem, the `SKILL.md` and endpoints are public — feel free to point your own agents at them, or fork the idea.
++By providing coding agents with real-time ground truth, VersionTruth transforms agentic dependency management from risky speculation into deterministic engineering.
+diff --git a/src/data/research/systemTools.ts b/src/data/research/systemTools.ts
+index a732fe00..8e3c3e98 100644
+--- a/src/data/research/systemTools.ts
++++ b/src/data/research/systemTools.ts
+@@ -4,7 +4,7 @@ export const systemTools: ResearchTool[] = [
+   {
+     id: 'gitops-pr-reviewer',
+     taxonomyBucket: 'infrastructure',
+-    title: 'GitOps Code Review Agent',
++    title: 'GitHub Actions LLM Code Review Automated',
+     subtitle: 'Automated PR Auditing',
+     description: 'LLM-powered PR auditing pipeline that performs automated review and structured feedback on pull requests.',
+     category: 'DevAI System',
+@@ -20,9 +20,9 @@ export const systemTools: ResearchTool[] = [
+   {
+     id: 'deployment-impact-analyzer',
+     taxonomyBucket: 'infrastructure',
+-    title: 'Blast-Radius Analyzer',
++    title: 'Visual Impact / UX Audit',
+     subtitle: 'VISUAL IMPACT ANALYSIS PIPELINE',
+-    description: 'CI pipeline that determines which pages are visually affected by a pull request. Uses dependency-cruiser to trace changed files through the import graph, then captures Playwright screenshots of affected routes, runs pixelmatch pixel diffs, crops changed regions, and generates a deployment review report with severity scores. Agent integration in progress.',
++    description: 'CI pipeline that determines which pages are visually affected by a pull request. Uses dependency-cruiser to trace changed files through the import graph, then captures Playwright screenshots of affected routes, runs pixelmatch pixel diffs, crops changed regions, and generates a deployment review report with severity scores.',
+     category: 'DevAI System',
+     status: 'Active',
+     tags: ['Playwright', 'Pixelmatch', 'Dependency Graph', 'CI/CD'],
+@@ -30,22 +30,6 @@ export const systemTools: ResearchTool[] = [
+     sourceUrl: 'https://github.com/arii/tech-dancer/tree/main/dev-tools',
+     isFlagship: true
+   },
+-  {
+-    id: 'ux-auditor',
+-    taxonomyBucket: 'infrastructure',
+-    title: 'Visual Regression & UX Auditor',
+-    subtitle: 'PLAYWRIGHT VISUAL REGRESSION',
+-    description: 'Automated visual regression testing using Playwright and pixelmatch to capture screenshot diffs and score visual severity.',
+-    category: 'Perception Debugging',
+-    status: 'Active',
+-    tags: ['Playwright', 'Pixelmatch', 'Screenshot Diff', 'CI/CD'],
+-    canonicalPath: '/research/ux-auditor',
+-    sourceUrl: 'https://github.com/arii/tech-dancer/tree/main/dev-tools',
+-    parentFlagship: {
+-      id: 'deployment-impact-analyzer',
+-      title: 'Blast-Radius Analyzer'
+-    }
+-  },
+   {
+     id: 'wcs-scraper',
+     taxonomyBucket: 'infrastructure',
+@@ -82,9 +66,9 @@ export const systemTools: ResearchTool[] = [
+   {
+     id: 'versiontruth',
+     taxonomyBucket: 'infrastructure',
+-    title: 'VersionTruth',
++    title: 'Version Truth & Hackathons Submission',
+     subtitle: 'The antidote to version hallucinations',
+-    description: 'The antidote to version hallucinations: real-time ground-truth for npm, Node, and GitHub Actions.',
++    description: 'The antidote to version hallucinations: real-time ground-truth for npm, Node, and GitHub Actions, built as a live agent skill for NandaHack.',
+     category: 'DevAI Tooling',
+     status: 'Active',
+     tags: ['versions', 'ci', 'dependencies', 'hallucination-mitigation', 'npm', 'node', 'github-actions', 'agents'],

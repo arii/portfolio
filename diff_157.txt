@@ -1,0 +1,675 @@
+diff --git a/public/reports/report_6375.pdf b/public/reports/report_6375.pdf
+new file mode 100644
+index 00000000..5cf67c23
+Binary files /dev/null and b/public/reports/report_6375.pdf differ
+diff --git a/public/reports/report_ce118.pdf b/public/reports/report_ce118.pdf
+new file mode 100644
+index 00000000..2a9ae8d7
+Binary files /dev/null and b/public/reports/report_ce118.pdf differ
+diff --git a/public/reports/report_ce121.pdf b/public/reports/report_ce121.pdf
+new file mode 100644
+index 00000000..83bad3fb
+Binary files /dev/null and b/public/reports/report_ce121.pdf differ
+diff --git a/public/reports/report_dental.pdf b/public/reports/report_dental.pdf
+new file mode 100644
+index 00000000..627e0296
+Binary files /dev/null and b/public/reports/report_dental.pdf differ
+diff --git a/public/reports/report_ml.pdf b/public/reports/report_ml.pdf
+new file mode 100644
+index 00000000..4c1eab36
+Binary files /dev/null and b/public/reports/report_ml.pdf differ
+diff --git a/src/components/AcademicCard.tsx b/src/components/AcademicCard.tsx
+index 287318f7..d27ea965 100644
+--- a/src/components/AcademicCard.tsx
++++ b/src/components/AcademicCard.tsx
+@@ -1,5 +1,5 @@
+ import React from 'react';
+-import { ExternalLink, GraduationCap, Award } from 'lucide-react';
++import { ExternalLink, GraduationCap, Award, FileText, Video, Play } from 'lucide-react';
+ import { AcademicPaper } from '@/data/academicResearch';
+
+ export interface AcademicCardProps {
+@@ -52,19 +52,52 @@ const AcademicCard: React.FC<AcademicCardProps> = ({ paper }) => {
+           ))}
+         </div>
+
+-        {paper.link && (
+-          <div>
++        <div className="flex flex-wrap gap-2">
++          {paper.pdfUrl && (
+             <a
+-              href={paper.link}
++              href={paper.pdfUrl}
++              target="_blank"
++              rel="noopener noreferrer"
++              className="inline-flex items-center space-x-1.5 bg-accent/10 border border-accent/20 px-3 py-1.5 rounded-xl text-xs font-semibold text-accent hover:bg-accent/20 transition-colors"
++            >
++              <FileText className="h-3.5 w-3.5" />
++              <span>Download PDF Report</span>
++            </a>
++          )}
++          {paper.videoUrl && (
++            <a
++              href={paper.videoUrl}
+               target="_blank"
+               rel="noopener noreferrer"
+               className="inline-flex items-center space-x-1.5 bg-accent/10 border border-accent/20 px-3 py-1.5 rounded-xl text-xs font-semibold text-accent hover:bg-accent/20 transition-colors"
++            >
++              <Video className="h-3.5 w-3.5" />
++              <span>Watch Video Demo</span>
++            </a>
++          )}
++          {paper.playlistUrl && (
++            <a
++              href={paper.playlistUrl}
++              target="_blank"
++              rel="noopener noreferrer"
++              className="inline-flex items-center space-x-1.5 bg-surface border border-line px-3 py-1.5 rounded-xl text-xs font-semibold text-text-dim hover:text-text-main transition-colors"
++            >
++              <Play className="h-3.5 w-3.5 text-accent" />
++              <span>Watch Playlist</span>
++            </a>
++          )}
++          {paper.link && (
++            <a
++              href={paper.link}
++              target="_blank"
++              rel="noopener noreferrer"
++              className="inline-flex items-center space-x-1.5 bg-surface border border-line px-3 py-1.5 rounded-xl text-xs font-semibold text-text-dim hover:text-text-main transition-colors"
+             >
+               <span>View Publication</span>
+               <ExternalLink className="h-3.5 w-3.5" />
+             </a>
+-          </div>
+-        )}
++          )}
++        </div>
+       </div>
+     </div>
+   );
+diff --git a/src/components/FlagshipCard.tsx b/src/components/FlagshipCard.tsx
+index d5d9e4c6..f3171e2f 100644
+--- a/src/components/FlagshipCard.tsx
++++ b/src/components/FlagshipCard.tsx
+@@ -1,5 +1,5 @@
+ import React from 'react';
+-import { ExternalLink, ArrowRight, FlaskConical, Activity, Server, FileText, ShoppingBag, Cpu } from 'lucide-react';
++import { ExternalLink, ArrowRight, FlaskConical, Activity, Server, FileText, ShoppingBag, Cpu, Video, Play } from 'lucide-react';
+ import { ResearchTool } from '@/types/research';
+ import SafeImage from '@/components/ui/SafeImage';
+
+@@ -104,6 +104,28 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
+                 <span>{tool.externalLinkDisplayLabel || 'Open Link'}</span><ExternalLink className="h-3.5 w-3.5" />
+               </a>
+             )}
++            {tool.videoUrl && (
++              <a
++                href={tool.videoUrl}
++                target="_blank"
++                rel="noopener noreferrer"
++                className="inline-flex items-center space-x-1.5 bg-accent/10 border border-accent/20 px-3.5 py-2 rounded-xl text-xs font-semibold text-accent hover:bg-accent/20 transition-colors min-h-[44px]"
++              >
++                <Video className="h-3.5 w-3.5" />
++                <span>Watch Video</span>
++              </a>
++            )}
++            {tool.playlistUrl && (
++              <a
++                href={tool.playlistUrl}
++                target="_blank"
++                rel="noopener noreferrer"
++                className="inline-flex items-center space-x-1.5 bg-surface border border-line px-3.5 py-2 rounded-xl text-xs font-semibold text-text-dim hover:bg-surface-alt hover:text-text-main transition-colors min-h-[44px]"
++              >
++                <Play className="h-3.5 w-3.5 text-accent" />
++                <span>Watch Playlist</span>
++              </a>
++            )}
+             {tool.sourceUrl && (
+               <a
+                 href={tool.sourceUrl}
+diff --git a/src/components/ToolCard.tsx b/src/components/ToolCard.tsx
+index e61061b1..2d2ab0b1 100644
+--- a/src/components/ToolCard.tsx
++++ b/src/components/ToolCard.tsx
+@@ -63,7 +63,23 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
+       )}
+
+       <p className="text-xs text-text-dim leading-relaxed">{tool.description}</p>
++
+       <div className="flex flex-wrap gap-1.5 pt-1">
++        {tool.pdfUrl && (
++          <span className="inline-flex items-center gap-1 text-[10px] bg-accent/10 text-accent border border-accent/20 px-2 py-0.5 rounded font-medium">
++            📄 PDF Report
++          </span>
++        )}
++        {tool.videoUrl && (
++          <span className="inline-flex items-center gap-1 text-[10px] bg-accent/10 text-accent border border-accent/20 px-2 py-0.5 rounded font-medium">
++            ▶️ Video Demo
++          </span>
++        )}
++        {tool.playlistUrl && (
++          <span className="inline-flex items-center gap-1 text-[10px] bg-accent/10 text-accent border border-accent/20 px-2 py-0.5 rounded font-medium">
++            📺 Playlist
++          </span>
++        )}
+         {tool.tags.map(tag => (
+           <span key={tag} className="text-[9px] bg-surface px-2 py-0.5 text-text-dim border border-line rounded-full">{tag}</span>
+         ))}
+diff --git a/src/content/research/cad-cam-dental-workflow.md b/src/content/research/cad-cam-dental-workflow.md
+index 062b89d7..d9b185e5 100644
+--- a/src/content/research/cad-cam-dental-workflow.md
++++ b/src/content/research/cad-cam-dental-workflow.md
+@@ -44,6 +44,18 @@ Ariel engineered key control UI software and trajectory validation scripts:
+
+ ---
+
++## Video Demonstrations & Media
++
++- ▶️ [Watch Dental Robotics Demonstration Video](https://www.youtube.com/watch?v=tXif7xeZmGI)
++
++---
++
++## Downloadable Technical Report
++
++- 📄 [Download Dynamic Registration for Dental Robotics Report (PDF)](/reports/report_dental.pdf)
++
++---
++
+ ## Research Significance
+
+ - Demonstrated the feasibility of semi-autonomous robotic assistance in chairside dental restoration.
+diff --git a/src/content/research/report-6375-rsa.md b/src/content/research/report-6375-rsa.md
+new file mode 100644
+index 00000000..c08d091f
+--- /dev/null
++++ b/src/content/research/report-6375-rsa.md
+@@ -0,0 +1,42 @@
++---
++title: "Hardware RSA Accelerator"
++date: "2013-05-15"
++readTime: 5
++tags:
++  - Hardware
++  - Cryptography
++  - Bluespec SystemVerilog
++  - MIT
++category: "Hardware Engineering"
++summary: "Designed and implemented a high-performance hardware RSA encryption accelerator in Bluespec SystemVerilog."
++---
++
++# Hardware RSA Accelerator
++
++## Complex Digital Systems Design (MIT 6.375)
++
++Developed for **MIT 6.375 Complex Digital Systems**, this hardware design project (in collaboration with Timur Balbekov and Neil Forrester) implemented a high-performance, parameterized **Hardware RSA Accelerator** using **Bluespec SystemVerilog (BSV)**.
++
++---
++
++## Architecture & Hardware Specification
++
++RSA public-key cryptography relies on modular exponentiation over large integers, which is computationally expensive in software.
++
++Key architecture features:
++1. **Montgomery Modular Multiplication:** Accelerated large integer modular arithmetic while eliminating expensive division steps.
++2. **Pipelined Datapath:** Parameterized bit-width datapath allowing custom throughput/area trade-offs.
++3. **BSV Rule Synthesizability:** Modeled concurrency using guarded atomic actions to ensure deadlock-free hardware execution.
++
++---
++
++## Downloadable Technical Report
++
++- 📄 [Download Hardware RSA Accelerator Report (PDF)](/reports/report_6375.pdf)
++
++---
++
++## Project Significance
++
++- Achieved efficient cycle-accurate execution for multi-hundred bit RSA key processing on FPGA target platforms.
++- Validated hardware verification methodologies for formal safety in cryptographic hardware modules.
+diff --git a/src/content/research/report-ce118-mechatronics.md b/src/content/research/report-ce118-mechatronics.md
+new file mode 100644
+index 00000000..0d52a8e1
+--- /dev/null
++++ b/src/content/research/report-ce118-mechatronics.md
+@@ -0,0 +1,50 @@
++---
++title: "Autonomous Mechatronic Systems (MAK Attack)"
++date: "2012-03-19"
++readTime: 5
++tags:
++  - Mechatronics
++  - Robotics
++  - State Machines
++  - Embedded C
++  - UCSC
++category: "Mechatronics"
++summary: "Autonomous mobile robot designed for navigation, event detection state machines, and obstacle engagement."
++---
++
++# CMPE-118 An Introduction to Mechatronics: MAK Attack
++
++## Autonomous Robotic Platform at UC Santa Cruz
++
++Developed for **CMPE-118 Introduction to Mechatronics** at UCSC (with Matthew Luxton and Kyle Huey), the **MAK Attack** project engineered an autonomous mobile robot designed to execute complex arena navigation and object manipulation tasks under real-time constraints.
++
++---
++
++## Technical Design & Mechatronic Integration
++
++The robot combined custom mechanical chassis design, sensor signal conditioning, and event-driven embedded C programming.
++
++Key technical components:
++1. **Hierarchical State Machines:** Hierarchical state machines for robust tape-following, arena navigation, and target acquisition.
++2. **Custom Sensor Integration:** Integrated IR optical tape sensors, bumper hit detectors, and optical encoders with hardware debounce circuitry.
++3. **Actuation & Power Management:** Designed H-bridge motor drive circuits with PWM speed regulation and battery voltage monitoring.
++
++---
++
++## Video Demonstrations & Playlist
++
++- ▶️ [Watch MAK Attack Line Following Robot Video](https://www.youtube.com/watch?v=qSe8JmWQnYk)
++- 📺 [Browse Robotics Demos Playlist](https://www.youtube.com/playlist?list=PLEcASxU_mgVgnMZvVHgrTGFMUXze0MiOp)
++
++---
++
++## Downloadable Technical Report
++
++- 📄 [Download Mechatronics Lab Report (PDF)](/reports/report_ce118.pdf)
++
++---
++
++## Project Outcomes
++
++- Successfully competed in the final autonomous arena challenge with 100% operational reliability.
++- Demonstrated modular mechatronic engineering practices across mechanical, electrical, and firmware domains.
+diff --git a/src/content/research/report-ce121-microprocessor.md b/src/content/research/report-ce121-microprocessor.md
+new file mode 100644
+index 00000000..f714d711
+--- /dev/null
++++ b/src/content/research/report-ce121-microprocessor.md
+@@ -0,0 +1,43 @@
++---
++title: "Microprocessor System Design (68HC11E1 Board)"
++date: "2011-12-10"
++readTime: 5
++tags:
++  - Microprocessors
++  - Embedded Systems
++  - Assembly Language
++  - Hardware Interfacing
++  - UCSC
++category: "Embedded Systems"
++summary: "Hardware interface and embedded firmware for 68HC11E1 microcontroller board with external SRAM, ROM, and serial communication."
++---
++
++# CMPE-121 Microprocessor System Design Project
++
++## Embedded Microcontroller Architecture at UC Santa Cruz
++
++Completed for **CMPE-121 Microprocessor System Design** at UCSC, this project involved designing, soldering, and programming a custom **Motorola 68HC11E1 microcontroller system** from bare silicon to a functional embedded computer.
++
++---
++
++## Hardware Interfacing & Firmware Architecture
++
++The system required low-level hardware memory mapping, bus interface timing analysis, and Assembly/C firmware development.
++
++Key technical specifications:
++1. **Memory Subsystem Interfacing:** Interfaced 8KB external SRAM and 8KB EPROM with address decoding logic.
++2. **Serial Communication Interfaces:** Configured RS-232C serial UART interface for PC communication and SPI serial protocol for peripheral expansion.
++3. **Power & Hardware Diagnostics:** Built 7-12V DC power regulation and diagnostic LED displays for memory test validation.
++
++---
++
++## Downloadable Technical Report
++
++- 📄 [Download Microprocessor System Design Report (PDF)](/reports/report_ce121.pdf)
++
++---
++
++## Engineering Impact
++
++- Verified memory read/write timing constraints and bus contention avoidance across hardware operating modes.
++- Built a reusable microcontroller testbed for sensor data acquisition and embedded hardware prototyping.
+diff --git a/src/content/research/report-ml-lis.md b/src/content/research/report-ml-lis.md
+new file mode 100644
+index 00000000..9366d897
+--- /dev/null
++++ b/src/content/research/report-ml-lis.md
+@@ -0,0 +1,48 @@
++---
++title: "Applying Machine Learning Techniques to Improve LIS Object Detection"
++date: "2012-12-15"
++readTime: 6
++tags:
++  - Machine Learning
++  - Computer Vision
++  - Ordinal Regression
++  - MIT CSAIL
++category: "Machine Learning"
++summary: "Evaluated ordinal regression and P-norm push algorithms to optimize object detection confidence scores for household robotic manipulation."
++---
++
++# Applying Machine Learning Techniques to Improve the Object Detector Used by LIS
++
++## Machine Learning Research at MIT CSAIL
++
++This research project, completed for **6.867 Machine Learning** at MIT CSAIL in collaboration with Sanja Popovic, evaluated learning algorithms to improve object detection ranking and scoring used by the **Learning and Intelligent Systems (LIS) group**.
++
++---
++
++## Core Problem & Approach
++
++Object detection systems used in mobile robotic manipulation frequently yield imperfect candidate bounding boxes. Standard regression models fail to account for relative ranking preferences across candidate detections.
++
++Key technical highlights:
++1. **Ordinal Regression:** Formulated pairwise loss functions to prioritize high-precision detection candidates over background noise.
++2. **P-Norm Push:** Implemented the P-norm push ranking algorithm to enforce strict top-rank accuracy for target manipulation objects.
++3. **Experimental Validation:** Evaluated bounding box confidence scoring across real-world cluttered kitchen environments.
++
++---
++
++## Video Demonstrations & Media
++
++- ▶️ [Watch IBVS Visual Servoing & Object Reranking Video](https://www.youtube.com/watch?v=0U0pPbWhLVE)
++
++---
++
++## Downloadable Technical Report
++
++- 📄 [Download Machine Learning Technical Report (PDF)](/reports/report_ml.pdf)
++
++---
++
++## Key Results
++
++- Demonstrated significant ranking accuracy improvements over standard linear regression baseline models.
++- Established optimal feature representation strategies for bounding box candidate reranking in robotic manipulation.
+diff --git a/src/data/academicResearch.ts b/src/data/academicResearch.ts
+index 2bad6444..b12cfbef 100644
+--- a/src/data/academicResearch.ts
++++ b/src/data/academicResearch.ts
+@@ -9,6 +9,8 @@ export interface AcademicPaper {
+   tags: string[];
+   link?: string;
+   pdfUrl?: string;
++  videoUrl?: string;
++  playlistUrl?: string;
+ }
+
+ export const ACADEMIC_PAPERS: AcademicPaper[] = [
+@@ -21,7 +23,9 @@ export const ACADEMIC_PAPERS: AcademicPaper[] = [
+     venue: 'MIT CSAIL (advised by Leslie P. Kaelbling & Tomas Lozano-Perez)',
+     summary: 'Focused on reliable robotic manipulation under pose uncertainty using conformant belief-state planning and fixture optimization, improving physical multi-step assembly success from 1.9% to 80.7%.',
+     tags: ['Robotics', 'Manipulation', 'AI', 'TAMP', 'Conformant Planning'],
+-    link: 'https://dspace.mit.edu/handle/1721.1/122822'
++    link: 'https://dspace.mit.edu/handle/1721.1/122822',
++    videoUrl: 'https://www.youtube.com/watch?v=omdHFeBBYZ0',
++    playlistUrl: 'https://www.youtube.com/playlist?list=PLEcASxU_mgVi6kMdElumAUh-gJW4wCOUV'
+   },
+   {
+     id: 'masters-thesis-2014',
+@@ -43,7 +47,9 @@ export const ACADEMIC_PAPERS: AcademicPaper[] = [
+     venue: 'IEEE International Conference on Robotics and Automation (ICRA)',
+     summary: 'Introduced an efficient belief-state planning algorithm that optimizes physical fixture placements to guarantee reliable object manipulation in uncertain physical environments.',
+     tags: ['ICRA', 'Robotics', 'Manipulation', 'Uncertainty'],
+-    link: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=NM6SfiEAAAAJ&citation_for_view=NM6SfiEAAAAJ:MXK_kJrjxJIC'
++    link: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=NM6SfiEAAAAJ&citation_for_view=NM6SfiEAAAAJ:MXK_kJrjxJIC',
++    videoUrl: 'https://www.youtube.com/watch?v=so-9kkQXlxc',
++    playlistUrl: 'https://www.youtube.com/playlist?list=PLEcASxU_mgVi6kMdElumAUh-gJW4wCOUV'
+   },
+   {
+     id: 'ijrr-2016',
+@@ -65,6 +71,21 @@ export const ACADEMIC_PAPERS: AcademicPaper[] = [
+     venue: 'IEEE Integrated STEM Education Conference (ISEC)',
+     summary: 'Designed hands-on algorithmic robotics curriculum for 1/10th scale autonomous race cars, teaching perception, obstacle avoidance, and control.',
+     tags: ['Self-Driving', 'ROS', 'Autonomy', 'Education'],
+-    link: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=NM6SfiEAAAAJ&citation_for_view=NM6SfiEAAAAJ:W7OEmFMy1HYC'
++    link: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=NM6SfiEAAAAJ&citation_for_view=NM6SfiEAAAAJ:W7OEmFMy1HYC',
++    videoUrl: 'https://www.youtube.com/watch?v=DUp9yURMo2c',
++    playlistUrl: 'https://www.youtube.com/playlist?list=PLEcASxU_mgVgnMZvVHgrTGFMUXze0MiOp'
++  },
++  {
++    id: 'nsbe-dental-2012',
++    title: 'Dynamic Registration for Dental Robotics',
++    type: 'Technical Proceedings Paper',
++    year: '2012',
++    authors: ['A.S. Anders', 'J. Rosen'],
++    venue: 'NSBE Technical Proceedings (UCSC Bionics Lab)',
++    summary: 'Robotic trajectory planning and dynamic registration for autonomous dental crowning and implant placement.',
++    tags: ['Robotics', 'Medical UI', 'CAD/CAM', 'UCSC'],
++    pdfUrl: '/reports/report_dental.pdf',
++    videoUrl: 'https://www.youtube.com/watch?v=tXif7xeZmGI',
++    link: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=NM6SfiEAAAAJ&citation_for_view=NM6SfiEAAAAJ:YsMSGLbcyi4C'
+   }
+ ];
+diff --git a/src/data/research/autonomousTools.ts b/src/data/research/autonomousTools.ts
+index 8287fe41..2c343f2a 100644
+--- a/src/data/research/autonomousTools.ts
++++ b/src/data/research/autonomousTools.ts
+@@ -9,8 +9,10 @@ export const autonomousTools: ResearchTool[] = [
+     category: 'Education',
+     status: 'Completed',
+     tags: ['Robotics & Autonomy', 'Computer Vision', 'Visual Servoing', 'Motion Planning', 'ROS'],
+-    image: '/assets/research/bw.jpg',
++    image: 'https://i.ytimg.com/vi/DUp9yURMo2c/hqdefault.jpg',
+     imageAlt: 'Students programming miniature autonomous vehicles',
++    videoUrl: 'https://www.youtube.com/watch?v=DUp9yURMo2c',
++    playlistUrl: 'https://www.youtube.com/playlist?list=PLEcASxU_mgVgnMZvVHgrTGFMUXze0MiOp',
+     externalUrl: 'https://beaverworks.ll.mit.edu/CMS/bw/bwsi'
+   },
+   {
+@@ -30,8 +32,9 @@ export const autonomousTools: ResearchTool[] = [
+     category: 'Robotics',
+     status: 'Completed',
+     tags: ['Robotics & Autonomy', 'Control Systems', 'Computer Vision', 'Drones'],
+-    image: '/assets/research/drone.jpg',
++    image: 'https://i.ytimg.com/vi/f5l8GA1PHm8/hqdefault.jpg',
+     imageAlt: 'Parrot Rolling Spider Drone hovering over path',
++    videoUrl: 'https://www.youtube.com/watch?v=f5l8GA1PHm8',
+     externalUrl: 'https://github.com/arii/FollowTheYellowBrickRoad'
+   },
+   {
+@@ -91,11 +94,66 @@ export const autonomousTools: ResearchTool[] = [
+     id: 'cad-cam-dental-workflow',
+     taxonomyBucket: 'product',
+     title: 'CAD/CAM Robotic Dental Crowning Workflow',
+-    description: 'Robotic UI and verified experimental workflows for autonomous dental crowning.',
++    subtitle: 'UCSC Bionics Lab',
++    description: 'Robotic trajectory planning, 6-DOF manipulation, and dynamic registration for autonomous dental crowning with Dr. Jacob Rosen.',
+     category: 'Medical Robotics',
+     status: 'Completed',
+     tags: ['Robotics', 'Medical UI', 'CAD/CAM', 'Bionics Lab UCSC'],
++    image: 'https://i.ytimg.com/vi/tXif7xeZmGI/hqdefault.jpg',
+     canonicalPath: '/research/cad-cam-dental-workflow',
+-    externalUrl: 'https://github.com/arii'
++    pdfUrl: '/reports/report_dental.pdf',
++    videoUrl: 'https://www.youtube.com/watch?v=tXif7xeZmGI',
++    externalUrl: '/reports/report_dental.pdf'
++  },
++  {
++    id: 'report-ml-lis',
++    taxonomyBucket: 'infrastructure',
++    title: 'Applying Machine Learning to Improve LIS Object Detection',
++    subtitle: 'MIT CSAIL (6.867 Machine Learning)',
++    description: 'Evaluated ordinal regression and P-norm push algorithms with Sanja Popovic to optimize candidate bounding box confidence scoring for robotic manipulation in LIS group.',
++    category: 'Machine Learning',
++    status: 'Completed',
++    tags: ['Machine Learning', 'Computer Vision', 'Ranking', 'MIT CSAIL'],
++    canonicalPath: '/research/report-ml-lis',
++    pdfUrl: '/reports/report_ml.pdf',
++    videoUrl: 'https://www.youtube.com/watch?v=0U0pPbWhLVE'
++  },
++  {
++    id: 'report-6375-rsa',
++    taxonomyBucket: 'infrastructure',
++    title: 'Hardware RSA Accelerator',
++    subtitle: 'MIT (6.375 Complex Digital Systems)',
++    description: 'Designed and implemented a high-performance hardware RSA encryption accelerator in Bluespec SystemVerilog with Timur Balbekov and Neil Forrester.',
++    category: 'Hardware',
++    status: 'Completed',
++    tags: ['Hardware', 'Cryptography', 'BSV', 'MIT'],
++    canonicalPath: '/research/report-6375-rsa',
++    pdfUrl: '/reports/report_6375.pdf'
++  },
++  {
++    id: 'report-ce118-mechatronics',
++    taxonomyBucket: 'infrastructure',
++    title: 'Autonomous Mechatronic Systems (MAK Attack)',
++    subtitle: 'UCSC (CMPE-118 Mechatronics)',
++    description: 'Autonomous mobile robot designed with Matthew Luxton and Kyle Huey for arena navigation, event detection state machines, and obstacle engagement.',
++    category: 'Mechatronics',
++    status: 'Completed',
++    tags: ['Mechatronics', 'Embedded C', 'Robotics', 'UCSC'],
++    image: 'https://i.ytimg.com/vi/qSe8JmWQnYk/hqdefault.jpg',
++    canonicalPath: '/research/report-ce118-mechatronics',
++    pdfUrl: '/reports/report_ce118.pdf',
++    videoUrl: 'https://www.youtube.com/watch?v=qSe8JmWQnYk'
++  },
++  {
++    id: 'report-ce121-microprocessor',
++    taxonomyBucket: 'infrastructure',
++    title: 'Microprocessor System Design (68HC11E1 Board)',
++    subtitle: 'UCSC (CMPE-121 Microprocessors)',
++    description: 'Hardware interface and embedded firmware for 68HC11E1 microcontroller board with external SRAM, ROM, address decoding, and serial communication.',
++    category: 'Embedded Systems',
++    status: 'Completed',
++    tags: ['Embedded Systems', 'Microcontrollers', 'Assembly', 'UCSC'],
++    canonicalPath: '/research/report-ce121-microprocessor',
++    pdfUrl: '/reports/report_ce121.pdf'
+   }
+ ];
+diff --git a/src/data/research/flagshipTools.ts b/src/data/research/flagshipTools.ts
+index 23a8ca68..d9597a39 100644
+--- a/src/data/research/flagshipTools.ts
++++ b/src/data/research/flagshipTools.ts
+@@ -65,6 +65,8 @@ export const flagshipTools: ResearchTool[] = [
+     imageAlt: 'PR2 robot reliably arranging blocks using conformant planning without external sensing feedback',
+     externalUrl: 'https://dspace.mit.edu/handle/1721.1/122822',
+     externalLinkDisplayLabel: 'MIT DSpace Thesis',
++    videoUrl: 'https://www.youtube.com/watch?v=so-9kkQXlxc',
++    playlistUrl: 'https://www.youtube.com/playlist?list=PLEcASxU_mgVi6kMdElumAUh-gJW4wCOUV',
+     sourceUrl: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=NM6SfiEAAAAJ&citation_for_view=NM6SfiEAAAAJ:4DMP91E08xMC'
+   },
+   {
+diff --git a/src/test/AcademicReports.test.tsx b/src/test/AcademicReports.test.tsx
+new file mode 100644
+index 00000000..d2b6cc64
+--- /dev/null
++++ b/src/test/AcademicReports.test.tsx
+@@ -0,0 +1,101 @@
++import { describe, it, expect } from 'vitest';
++import { render, screen } from '@testing-library/react';
++import fs from 'fs';
++import path from 'path';
++import { ACADEMIC_PAPERS } from '@/data/academicResearch';
++import { autonomousTools } from '@/data/research/autonomousTools';
++import { getResearchPostBySlug } from '@/data/research';
++import AcademicCard from '@/components/AcademicCard';
++import ToolCard from '@/components/ToolCard';
++
++describe('Academic Research Project Reports (PDFs)', () => {
++  const expectedPdfFiles = [
++    'report_dental.pdf',
++    'report_ml.pdf',
++    'report_6375.pdf',
++    'report_ce118.pdf',
++    'report_ce121.pdf'
++  ];
++
++  it('verifies all 5 PDF report files exist in public/reports with non-zero size', () => {
++    expectedPdfFiles.forEach((filename) => {
++      const filePath = path.join(process.cwd(), 'public', 'reports', filename);
++      expect(fs.existsSync(filePath)).toBe(true);
++      const stats = fs.statSync(filePath);
++      expect(stats.size).toBeGreaterThan(0);
++    });
++  });
++
++  it('keeps peer-reviewed publication entries in ACADEMIC_PAPERS and excludes class reports', () => {
++    const dentalPaper = ACADEMIC_PAPERS.find((p) => p.id === 'nsbe-dental-2012');
++    expect(dentalPaper?.pdfUrl).toBe('/reports/report_dental.pdf');
++
++    const classReportInAcademic = ACADEMIC_PAPERS.find((p) => p.id === 'ml-lis-2012');
++    expect(classReportInAcademic).toBeUndefined();
++  });
++
++  it('includes pdfUrl on relevant autonomous tools entries', () => {
++    const toolsWithPdf = autonomousTools.filter((t) => t.pdfUrl);
++    expect(toolsWithPdf.length).toBeGreaterThanOrEqual(5);
++
++    const dentalTool = autonomousTools.find((t) => t.id === 'cad-cam-dental-workflow');
++    expect(dentalTool?.pdfUrl).toBe('/reports/report_dental.pdf');
++  });
++
++  it('renders Download PDF Report and Watch Video buttons in AcademicCard when properties are provided', () => {
++    const mockPaper = {
++      id: 'test-paper',
++      title: 'Test Paper Title',
++      type: 'Research Report',
++      year: '2022',
++      authors: ['Author A'],
++      venue: 'Test Venue',
++      summary: 'Test summary statement.',
++      tags: ['TestTag'],
++      pdfUrl: '/reports/report_dental.pdf',
++      videoUrl: 'https://www.youtube.com/watch?v=so-9kkQXlxc',
++      playlistUrl: 'https://www.youtube.com/playlist?list=PLEcASxU_mgVi6kMdElumAUh-gJW4wCOUV'
++    };
++
++    render(<AcademicCard paper={mockPaper} />);
++    const pdfLink = screen.getByRole('link', { name: /Download PDF Report/i });
++    expect(pdfLink).toBeInTheDocument();
++    expect(pdfLink).toHaveAttribute('href', '/reports/report_dental.pdf');
++
++    const videoLink = screen.getByRole('link', { name: /Watch Video Demo/i });
++    expect(videoLink).toBeInTheDocument();
++    expect(videoLink).toHaveAttribute('href', 'https://www.youtube.com/watch?v=so-9kkQXlxc');
++
++    const playlistLink = screen.getByRole('link', { name: /Watch Playlist/i });
++    expect(playlistLink).toBeInTheDocument();
++    expect(playlistLink).toHaveAttribute('href', 'https://www.youtube.com/playlist?list=PLEcASxU_mgVi6kMdElumAUh-gJW4wCOUV');
++  });
++
++  it('renders PDF Report and Video badges in ToolCard when properties are provided', () => {
++    const mockTool = {
++      id: 'test-tool',
++      title: 'Test Tool',
++      description: 'Test description',
++      category: 'Test Category',
++      status: 'Completed',
++      tags: ['TestTag'],
++      canonicalPath: '/research/cad-cam-dental-workflow',
++      pdfUrl: '/reports/report_dental.pdf',
++      videoUrl: 'https://www.youtube.com/watch?v=so-9kkQXlxc'
++    };
++
++    render(<ToolCard tool={mockTool} onNavigate={() => {}} />);
++    expect(screen.getByText(/PDF Report/i)).toBeInTheDocument();
++    expect(screen.getByText(/Video Demo/i)).toBeInTheDocument();
++  });
++
++  it('parses research posts with PDF download links from markdown files', () => {
++    const dentalPost = getResearchPostBySlug('cad-cam-dental-workflow');
++    expect(dentalPost).toBeDefined();
++    expect(dentalPost?.content).toContain('/reports/report_dental.pdf');
++
++    const mlPost = getResearchPostBySlug('report-ml-lis');
++    expect(mlPost).toBeDefined();
++    expect(mlPost?.content).toContain('/reports/report_ml.pdf');
++  });
++});
+diff --git a/src/types/research.ts b/src/types/research.ts
+index 7dea095c..4debc15c 100644
+--- a/src/types/research.ts
++++ b/src/types/research.ts
+@@ -24,6 +24,9 @@ export interface ResearchTool {
+   canonicalPath?: string;
+   externalUrl?: string;
+   externalLinkDisplayLabel?: string;
++  pdfUrl?: string;
++  videoUrl?: string;
++  playlistUrl?: string;
+   sourceUrl?: string;
+   isFlagship?: boolean;
+   excludeFromEngineeringTools?: boolean;

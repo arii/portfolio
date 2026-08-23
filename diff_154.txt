@@ -1,0 +1,455 @@
+diff --git a/src/components/FlagshipCard.tsx b/src/components/FlagshipCard.tsx
+index d5d9e4c6..6a96b6e0 100644
+--- a/src/components/FlagshipCard.tsx
++++ b/src/components/FlagshipCard.tsx
+@@ -1,5 +1,5 @@
+ import React from 'react';
+-import { ExternalLink, ArrowRight, FlaskConical, Activity, Server, FileText, ShoppingBag, Cpu } from 'lucide-react';
++import { ExternalLink, ArrowRight, FlaskConical, Activity, Server, FileText, ShoppingBag, Cpu, Video } from 'lucide-react';
+ import { ResearchTool } from '@/types/research';
+ import SafeImage from '@/components/ui/SafeImage';
+
+@@ -90,6 +90,16 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
+                 <span>Read Deep-Dive</span><ArrowRight className="h-3.5 w-3.5" />
+               </button>
+             )}
++            {tool.videoUrl && (
++              <a
++                href={tool.videoUrl}
++                target="_blank"
++                rel="noopener noreferrer"
++                className="inline-flex items-center space-x-1.5 bg-surface border border-line px-3.5 py-2 rounded-xl text-xs font-semibold text-text-dim hover:bg-surface-alt hover:text-text-main transition-colors min-h-[44px]"
++              >
++                <Video className="h-3.5 w-3.5 text-accent" /><span>Watch Video</span>
++              </a>
++            )}
+             {tool.externalUrl && (
+               <a
+                 href={tool.externalUrl}
+diff --git a/src/components/ToolCard.tsx b/src/components/ToolCard.tsx
+index e61061b1..62ce733c 100644
+--- a/src/components/ToolCard.tsx
++++ b/src/components/ToolCard.tsx
+@@ -72,25 +72,19 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
+   );
+
+   if (isClickable) {
+-    if (tool.externalUrl) {
+-      return (
+-        <a href={tool.externalUrl} target="_blank" rel="noopener noreferrer" className="block outline-none">
+-          {content}
+-        </a>
+-      );
+-    } else if (tool.canonicalPath) {
++    if (tool.canonicalPath) {
+       const isResearch = tool.canonicalPath.startsWith('/research/');
+       const targetSlug = isResearch ? tool.canonicalPath.replace('/research/', '') : tool.canonicalPath;
+
+       return (
+         <div
+           onClick={() => isResearch ? onNavigate(targetSlug) : window.open(targetSlug, '_blank', 'noopener,noreferrer')}
+-          className="block outline-none"
++          className="block outline-none cursor-pointer"
+           role="button"
+           tabIndex={0}
+           onKeyDown={(e) => {
+             if (e.key === 'Enter' || e.key === ' ') {
+-      if (e.key === ' ') e.preventDefault();
++              if (e.key === ' ') e.preventDefault();
+               isResearch ? onNavigate(targetSlug) : window.open(targetSlug, '_blank', 'noopener,noreferrer');
+             }
+           }}
+@@ -98,6 +92,12 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
+           {content}
+         </div>
+       );
++    } else if (tool.externalUrl) {
++      return (
++        <a href={tool.externalUrl} target="_blank" rel="noopener noreferrer" className="block outline-none">
++          {content}
++        </a>
++      );
+     }
+   }
+
+diff --git a/src/content/research/autonomous-drone-line-following.md b/src/content/research/autonomous-drone-line-following.md
+new file mode 100644
+index 00000000..14ce1603
+--- /dev/null
++++ b/src/content/research/autonomous-drone-line-following.md
+@@ -0,0 +1,51 @@
++---
++title: "Drone Line Following Autonomous Controller"
++date: "2015-12-05"
++readTime: 5
++tags:
++  - Robotics & Autonomy
++  - Control Systems
++  - Computer Vision
++  - Drones
++category: "Aerial Robotics & Control"
++summary: "Feedback and Control Systems implementation using an onboard camera on a Rolling Spider Parrot drone to autonomously follow floor-marked paths."
++videoUrl: "https://www.youtube.com/watch?v=f5l8GA1PHm8"
++---
++
++# Drone Line Following Autonomous Controller
++
++## Closed-Loop Vision-Based Trajectory Tracking for Micro-Quadrotors
++
++The **Drone Line Following Autonomous Controller** project involved engineering a real-time computer vision and state feedback control loop for a micro quadrotor (Parrot Rolling Spider) to autonomously detect, align with, and track floor-marked paths ("Follow the Yellow Brick Road").
++
++---
++
++## Flight Demonstration Video
++
++[![Drone Line Following Demonstration](https://img.youtube.com/vi/f5l8GA1PHm8/hqdefault.jpg)](https://www.youtube.com/watch?v=f5l8GA1PHm8 "Drone Line Following Demonstration")
++
++*Watch Rolling Spider micro-drone executing closed-loop visual path tracking along a yellow floor-marked trajectory.*
++
++---
++
++## System Architecture & Control Loop
++
++Autonomous flight using low-cost micro-drones poses severe real-time compute and sensor noise constraints. The control architecture separates path estimation from flight stabilization:
++
++### 1. Vision Processing Pipeline
++- **Downward Image Capture:** Captures low-latency ground-facing video frames.
++- **Color Thresholding & HSV Masking:** Isolates target path markers from background floor textures.
++- **Centroid & Orientation Estimation:** Computes lateral offset (cross-track error $e_y$) and heading error ($\psi$) relative to the path center line using image moments and Hough line transforms.
++
++### 2. Cascaded PID Control Loop
++- **Yaw Controller:** Modulates differential rotor torque to align heading with the detected line trajectory.
++- **Lateral Roll Controller:** Modulates roll angle to drive cross-track error to zero.
++- **Forward Velocity Controller:** Maintains a continuous forward velocity along straight path segments, slowing down dynamically when detecting sharp bends or curvature changes.
++
++---
++
++## Hardware & Flight Verification
++
++- **Platform:** Parrot Rolling Spider micro quadrotor equipped with down-facing camera, pressure sensor, and ultrasonic altitude sensor.
++- **Ground Station Interface:** Custom MATLAB/Simulink and Python communication link transmitting Bluetooth LE control packets at high refresh rates.
++- **Experimental Results:** Successfully achieved closed-loop flight tracking across continuous curved paths, acute 90-degree turns, and intersecting line paths with reliable recovery from external aerodynamic disturbances.
+diff --git a/src/content/research/bwsi-racecar.md b/src/content/research/bwsi-racecar.md
+new file mode 100644
+index 00000000..9ecb5f2d
+--- /dev/null
++++ b/src/content/research/bwsi-racecar.md
+@@ -0,0 +1,55 @@
++---
++title: "BeaverWorks Summer Institute (RACECAR)"
++date: "2018-07-01"
++readTime: 6
++tags:
++  - Robotics & Autonomy
++  - Computer Vision
++  - Visual Servoing
++  - Motion Planning
++  - ROS
++category: "Education & Autonomous Systems"
++summary: "Instructional curricula and course lead for autonomous miniature racecars utilizing visual servoing, motion planning, and ROS."
++videoUrl: "https://www.youtube.com/watch?v=DUp9yURMo2c&list=PLEcASxU_mgVgnMZvVHgrTGFMUXze0MiOp"
++---
++
++# BeaverWorks Summer Institute (RACECAR)
++
++## Autonomous Miniature Racecars & Robotics Education
++
++The **BeaverWorks Summer Institute (RACECAR)** program at MIT was an intensive STEM initiative designed to teach high school students advanced robotics, computer vision, and autonomous vehicle navigation using 1/10th scale autonomous racecars.
++
++---
++
++## Course Highlights & Challenge Demos
++
++[![MIT Beaverworks RACECAR Course Highlights](https://img.youtube.com/vi/DUp9yURMo2c/hqdefault.jpg)](https://www.youtube.com/watch?v=DUp9yURMo2c&list=PLEcASxU_mgVgnMZvVHgrTGFMUXze0MiOp "MIT Beaverworks RACECAR Course Highlights")
++
++*Watch student mini autonomous vehicles navigating high-speed tracks, obstacle courses, and visual servoing challenges.*
++
++---
++
++## Program Overview & Curriculum Design
++
++Ariel served as an instructional lead and curriculum developer, designing hands-on software modules and challenge scenarios that bridged theoretical robotics concepts with real-time physical system execution on mini autonomous vehicles.
++
++### Core Curricular Pillars
++1. **Robot Operating System (ROS):** Teaching publisher-subscriber patterns, node communication, dynamic reconfigure, and sensor data transformation trees (`tf`).
++2. **Computer Vision & Visual Servoing:** Implementing OpenCV pipelines for lane detection, color blob tracking, and visual visual servoing controllers to navigate race tracks without GPS.
++3. **LIDAR Safety & Obstacle Avoidance:** Configuring planar LIDAR scans for high-speed obstacle detection, wall-following, and potential field navigation.
++4. **Motion Planning & Trajectory Tracking:** Teaching path generation (A*, Dijkstra) and high-speed trajectory follow control (Pure Pursuit, PID control).
++
++---
++
++## Hardware Platform & System Specs
++
++The RACECAR vehicle platform combined high-performance compute with agile physical dynamics:
++- **Compute:** NVIDIA Jetson embedded GPU platform running Ubuntu and ROS.
++- **Sensing:** Hokuyo 2D LIDAR, ZED Stereo Camera, and IMU telemetry.
++- **Actuation:** VESC electronic speed controller and brushless DC motor on a 1/10th scale rally chassis.
++
++---
++
++## Educational Impact & Competition
++
++Students culminated their intensive 4-week workshop by competing in an autonomous race through complex indoor hallways and obstacle courses, applying real-time obstacle avoidance, drift control, and wall-following strategies engineered during the program.
+diff --git a/src/content/research/delivery-bots.md b/src/content/research/delivery-bots.md
+new file mode 100644
+index 00000000..4883ed5a
+--- /dev/null
++++ b/src/content/research/delivery-bots.md
+@@ -0,0 +1,52 @@
++---
++title: "Delivery Bots: Multi-Robot Coordination under Uncertainty"
++date: "2015-07-12"
++readTime: 7
++tags:
++  - Robotics & Autonomy
++  - Multi-Agent
++  - RSS 2015 Finalist
++  - IJRR
++category: "Multi-Robot Systems"
++summary: "Decentralized multi-agent package delivery in dynamic human environments (RSS 2015 Best Paper Finalist & IJRR journal publication)."
++---
++
++# Delivery Bots: Multi-Robot Coordination under Uncertainty
++
++## Decentralized Autonomous Logistics in Dynamic Human Environments
++
++The **Delivery Bots** research initiative addressed the challenge of deploying multi-robot autonomous fleets for package and item delivery within complex, populated indoor environments (such as university campuses and hospital corridors) where human motion and task durations are highly uncertain.
++
++---
++
++## Research Significance & Honors
++
++- **RSS 2015 Best Paper Finalist:** Recognized at the *Robotics: Science and Systems (RSS)* conference in Rome, Italy.
++- **IJRR Journal Publication:** Expanded into a comprehensive journal paper published in the *International Journal of Robotics Research (IJRR)*.
++
++---
++
++## Core Technical Challenges
++
++Multi-agent coordination in shared human spaces suffers from severe unpredictability:
++1. **Dynamic Human Obstacles:** Pedestrians temporarily block hallways, slow down delivery routes, or interact unpredictably with vehicles.
++2. **Task Duration Uncertainty:** Item pickup and handoff times vary widely based on human availability and response time.
++3. **Communication Latency & Drops:** Centralized controllers fail when network bandwidth drops or when agents move into wireless dead zones.
++
++---
++
++## Algorithmic Architecture & System Design
++
++To solve these challenges, the team developed a decentralized Macro-Action POMDP (Partially Observable Markov Decision Process) planning framework:
++
++### 1. Decentralized Task Allocation
++- Robots negotiate task assignments locally without requiring continuous connection to a central server.
++- Formulation incorporates probabilistic models of route traversal times and human delays.
++
++### 2. Macro-Action Planning under Uncertainty
++- Replaces primitive motion commands with high-level macro-actions (e.g., "Navigate to Room 320 via East Hallway").
++- Evaluates risk-aware belief states to dynamically re-route around crowded hallways or stalled elevator banks.
++
++### 3. Real-World Autonomous Deployment
++- Evaluated on a fleet of autonomous mobile robots operating in MIT building corridors over multi-day deployment trials.
++- Demonstrated robust package delivery throughput despite unexpected corridor blockages and variable human interaction delays.
+diff --git a/src/content/research/masters-thesis.md b/src/content/research/masters-thesis.md
+new file mode 100644
+index 00000000..98cf00e1
+--- /dev/null
++++ b/src/content/research/masters-thesis.md
+@@ -0,0 +1,62 @@
++---
++title: "Learning a Strategy for Whole-Arm Grasping"
++date: "2014-06-01"
++readTime: 8
++tags:
++  - Whole-Arm Grasping
++  - Bimanual Manipulation
++  - Reinforcement Learning
++  - Sensorimotor Control
++  - Tactile Feedback
++  - MIT CSAIL
++category: "Robotics & AI"
++summary: "Investigated tactile-driven, sensorimotor reinforcement learning policies for bimanual and whole-arm grasping of bulky, irregular objects under real-world physical uncertainty."
++videoUrl: "https://www.youtube.com/watch?v=pmdjquZoJkE"
++---
++
++# Learning a Strategy for Whole-Arm Grasping
++
++## MIT S.M. Thesis — Computer Science and Artificial Intelligence Laboratory (CSAIL)
++
++**Author:** Ariel Anders
++**Advisor:** Prof. Daniela Rus
++**Institution:** Massachusetts Institute of Technology (MIT CSAIL)
++
++---
++
++## Demonstration Video
++
++[![Proprioceptive Inference for Dual-Arm Grasping of Bulky Objects](https://img.youtube.com/vi/pmdjquZoJkE/hqdefault.jpg)](https://www.youtube.com/watch?v=pmdjquZoJkE "Proprioceptive Inference for Dual-Arm Grasping of Bulky Objects")
++
++*Watch whole-arm and dual-arm contact-rich grasping demonstration on bulky irregular objects.*
++
++---
++
++## Executive Summary
++
++Traditional robotic grasping relies heavily on high-precision end-effector fingertips and explicit 3D geometric models of target objects. However, when handling large, bulky, heavy, or irregularly shaped objects, end-effector fingertip grasps often fail due to torque constraints and narrow contact surfaces.
++
++This Master's thesis investigated **whole-arm grasping**—a sensorimotor approach where a robot utilizes its entire upper limbs (forearms, upper arms, and torso) to envelope, cradle, and stabilize heavy or un-modeled items.
++
++---
++
++## Technical Approach & Methodological Breakthroughs
++
++### 1. Tactile-Driven Sensorimotor Control
++- Integrated dense tactile array sensors along compliant arm surfaces to detect real-time contact pressure distribution.
++- Developed sensorimotor feedback policies that react to slip, contact force vectors, and surface contours without requiring prior CAD models of target objects.
++
++### 2. Reinforcement Learning for Contact-Rich Tasks
++- Formulated whole-arm manipulation as a contact-rich Markov Decision Process (MDP).
++- Trained policy networks to synthesize multi-joint trajectories that guide arm links into enveloping configurations while actively counteracting gravity and disturbance torques.
++
++### 3. Bimanual Coordination Framework
++- Coordinated dual-arm manipulators to execute complex whole-body hugs, lifts, and stabilization maneuvers.
++- Evaluated physical interactions across various bulky everyday objects (boxes, spheres, irregular containers).
++
++---
++
++## Key Findings & Impact
++
++- Demonstrated that whole-arm contact strategies significantly lower peak contact stress while multiplying payload capacity compared to fingertip pinch grasps.
++- Formulated robust reactive policies capable of regaining grasp stability when target objects shift or slip unexpectedly during transport.
+diff --git a/src/content/research/phd-thesis.md b/src/content/research/phd-thesis.md
+new file mode 100644
+index 00000000..d0ae9aaa
+--- /dev/null
++++ b/src/content/research/phd-thesis.md
+@@ -0,0 +1,65 @@
++---
++title: "Reliably Arranging Objects: Conformant Planning under Severe Uncertainty"
++date: "2019-06-01"
++readTime: 10
++tags:
++  - PR2
++  - Conformant Planning
++  - Belief State
++  - Manipulation
++  - MIT CSAIL
++category: "Robotics & AI"
++summary: "Conformant planning approach to reliable robot manipulation under severe sensing and control uncertainty. Combines fixture-augmented plan optimization and physics-driven belief state transitions to elevate assembly reliability from 1.9% to 80.7% on a PR2 robot."
++videoUrl: "https://www.youtube.com/watch?v=so-9kkQXlxc&list=PLEcASxU_mgVi6kMdElumAUh-gJW4wCOUV"
++---
++
++# Reliably Arranging Objects
++
++## MIT Ph.D. Dissertation — Computer Science and Artificial Intelligence Laboratory (CSAIL)
++
++**Author:** Ariel Anders, Ph.D.
++**Advisor:** Prof. Leslie Pack Kaelbling & Prof. Tomás Lozano-Pérez
++**Institution:** Massachusetts Institute of Technology (MIT CSAIL)
++
++---
++
++## Abstract & Research Motivation
++
++Autonomous robotic assembly in unconstrained real-world environments is severely constrained by visual occlusion, sensor noise, and actuation inaccuracy. Standard open-loop pick-and-place plans fail catastrophically when tolerances are tight—a single millimeter of alignment error can jam a peg or knock over a multi-block structure.
++
++This doctoral dissertation introduces a **conformant planning framework** that enables autonomous robots (such as the Willow Garage PR2) to execute complex, multi-stage object arrangements with high reliability **without relying on real-time external visual sensing during execution**.
++
++---
++
++## Demonstration Video
++
++[![Reliably Arranging Objects in Uncertain Domains](https://img.youtube.com/vi/so-9kkQXlxc/hqdefault.jpg)](https://www.youtube.com/watch?v=so-9kkQXlxc&list=PLEcASxU_mgVi6kMdElumAUh-gJW4wCOUV "Reliably Arranging Objects in Uncertain Domains")
++
++*Watch ICRA 2018 Spotlight Video demonstrating PR2 robot executing conformant planning manipulation without vision feedback.*
++
++---
++
++## Key Experimental Results
++
++By leveraging physics-driven environmental interactions and passive fixtures (such as corners, guide plates, and pushing motions), the developed conformant planning algorithm drastically improved assembly task success rates across multi-block Tetris structure trials:
++
++| Planning Approach | Success Rate | Alignment Error |
++| :--- | :--- | :--- |
++| **Open-Loop Baseline** | **1.9%** | Severe cumulative drift / Collapses |
++| **Conformant Plan (Ours)** | **80.7%** | Sub-millimeter precision via funneling |
++
++---
++
++## Core Technical Contributions
++
++### 1. Fixture-Augmented Conformant Motion Planning
++- Formulates multi-body assembly actions that use physical surfaces and fixtures as "funnels" to collapse belief state uncertainty.
++- Pushing an object against a wall or corner reduces pose uncertainty down to mechanical alignment tolerances without requiring camera feedback.
++
++### 2. Belief State Optimization & Simulation Filtering
++- Computes probability distribution over possible object poses (belief state transitions).
++- Evaluates sequence candidates in physics simulators (Bullet/ODE) to select trajectory pipelines that guarantee set convergence despite initial pose variance.
++
++### 3. Real-World Execution on PR2 Manipulator
++- Validated on a 2-arm PR2 robot performing intricate multi-block assembly tasks (Tetris-style block placement, box packing, and multi-stage stacking).
++- Demonstrated robust execution across hundreds of physical experimental trials under severe artificial pose noise.
+diff --git a/src/data/research/autonomousTools.ts b/src/data/research/autonomousTools.ts
+index 8287fe41..b5c1edbe 100644
+--- a/src/data/research/autonomousTools.ts
++++ b/src/data/research/autonomousTools.ts
+@@ -11,6 +11,8 @@ export const autonomousTools: ResearchTool[] = [
+     tags: ['Robotics & Autonomy', 'Computer Vision', 'Visual Servoing', 'Motion Planning', 'ROS'],
+     image: '/assets/research/bw.jpg',
+     imageAlt: 'Students programming miniature autonomous vehicles',
++    canonicalPath: '/research/bwsi-racecar',
++    videoUrl: 'https://www.youtube.com/watch?v=DUp9yURMo2c&list=PLEcASxU_mgVgnMZvVHgrTGFMUXze0MiOp',
+     externalUrl: 'https://beaverworks.ll.mit.edu/CMS/bw/bwsi'
+   },
+   {
+@@ -20,7 +22,8 @@ export const autonomousTools: ResearchTool[] = [
+     description: 'Decentralized multi-agent package delivery in dynamic human environments (RSS 2015 Best Paper Finalist & IJRR journal publication).',
+     category: 'Robotics & Autonomy',
+     status: 'Completed',
+-    tags: ['Robotics & Autonomy', 'Multi-Agent', 'RSS 2015 Finalist', 'IJRR']
++    tags: ['Robotics & Autonomy', 'Multi-Agent', 'RSS 2015 Finalist', 'IJRR'],
++    canonicalPath: '/research/delivery-bots'
+   },
+   {
+     id: 'autonomous-drone-line-following',
+@@ -32,6 +35,8 @@ export const autonomousTools: ResearchTool[] = [
+     tags: ['Robotics & Autonomy', 'Control Systems', 'Computer Vision', 'Drones'],
+     image: '/assets/research/drone.jpg',
+     imageAlt: 'Parrot Rolling Spider Drone hovering over path',
++    canonicalPath: '/research/autonomous-drone-line-following',
++    videoUrl: 'https://www.youtube.com/watch?v=f5l8GA1PHm8',
+     externalUrl: 'https://github.com/arii/FollowTheYellowBrickRoad'
+   },
+   {
+diff --git a/src/data/research/flagshipTools.ts b/src/data/research/flagshipTools.ts
+index 23a8ca68..288baa6a 100644
+--- a/src/data/research/flagshipTools.ts
++++ b/src/data/research/flagshipTools.ts
+@@ -63,6 +63,8 @@ export const flagshipTools: ResearchTool[] = [
+     isFlagship: true,
+     image: '/assets/research/phd/sixblock.png',
+     imageAlt: 'PR2 robot reliably arranging blocks using conformant planning without external sensing feedback',
++    canonicalPath: '/research/phd-thesis',
++    videoUrl: 'https://www.youtube.com/watch?v=so-9kkQXlxc&list=PLEcASxU_mgVi6kMdElumAUh-gJW4wCOUV',
+     externalUrl: 'https://dspace.mit.edu/handle/1721.1/122822',
+     externalLinkDisplayLabel: 'MIT DSpace Thesis',
+     sourceUrl: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=NM6SfiEAAAAJ&citation_for_view=NM6SfiEAAAAJ:4DMP91E08xMC'
+@@ -79,6 +81,8 @@ export const flagshipTools: ResearchTool[] = [
+     isFlagship: true,
+     image: '/assets/research/masters-thesis.png',
+     imageAlt: 'Robot manipulator executing whole-arm contact and grasping strategy on irregular objects',
++    canonicalPath: '/research/masters-thesis',
++    videoUrl: 'https://www.youtube.com/watch?v=pmdjquZoJkE',
+     externalUrl: 'https://dspace.mit.edu/entities/publication/ead0c10d-3401-46a1-bcc5-42f5a56fe0b8',
+     externalLinkDisplayLabel: 'MIT DSpace Thesis'
+   }
+diff --git a/src/types/research.ts b/src/types/research.ts
+index 7dea095c..a99da4c3 100644
+--- a/src/types/research.ts
++++ b/src/types/research.ts
+@@ -29,6 +29,7 @@ export interface ResearchTool {
+   excludeFromEngineeringTools?: boolean;
+   image?: string;
+   imageAlt?: string;
++  videoUrl?: string;
+   metrics?: string;
+   inDevMessage?: {
+     highlight: string;

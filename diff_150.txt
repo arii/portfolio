@@ -1,0 +1,278 @@
+diff --git a/src/App.test.tsx b/src/App.test.tsx
+index 18f1d693..f0c909fd 100644
+--- a/src/App.test.tsx
++++ b/src/App.test.tsx
+@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
+ import { createHashRouter } from 'react-router-dom';
+ import App from '@/App';
+ import Layout from '@/components/Layout';
+-import { Home } from '@/pages/Home';
++import Home from '@/pages/Home';
+
+ describe('arii/portfolio Smoke Test', () => {
+   test('renders application successfully without errors', () => {
+diff --git a/src/components/ui/ContentCard.tsx b/src/components/ui/ContentCard.tsx
+deleted file mode 100644
+index 0f6e67f4..00000000
+--- a/src/components/ui/ContentCard.tsx
++++ /dev/null
+@@ -1,50 +0,0 @@
+-import React from 'react';
+-import SafeImage from '@/components/ui/SafeImage';
+-
+-export interface ContentCardProps {
+-  title: string;
+-  description: string;
+-  imageUrl?: string;
+-  imageAlt?: string;
+-  tags: string[];
+-  status?: string;
+-  metrics?: string;
+-}
+-
+-export const ContentCard: React.FC<ContentCardProps> = ({
+-  title,
+-  description,
+-  imageUrl,
+-  imageAlt,
+-  tags,
+-  status,
+-  metrics
+-}) => {
+-  return (
+-    <article className="flex flex-col overflow-hidden rounded-lg border border-line bg-bg transition hover:border-accent/40">
+-      <SafeImage
+-        src={imageUrl}
+-        alt={imageAlt || title}
+-        containerClassName="h-44 w-full"
+-        className="h-full w-full object-cover"
+-      />
+-      <div className="flex flex-1 flex-col p-4">
+-        <div className="mb-2 flex items-center justify-between">
+-          <span className="text-xs font-medium text-text-dim">{status}</span>
+-          {metrics && <span className="text-xs font-semibold text-accent">{metrics}</span>}
+-        </div>
+-        <h3 className="text-base font-semibold text-text-main">{title}</h3>
+-        <p className="mt-2 line-clamp-3 text-sm text-text-dim">{description}</p>
+-        <div className="mt-auto pt-4 flex flex-wrap gap-1.5">
+-          {tags.map((tag) => (
+-            <span key={tag} className="rounded bg-surface px-2 py-0.5 text-xs text-text-body border border-line">
+-              {tag}
+-            </span>
+-          ))}
+-        </div>
+-      </div>
+-    </article>
+-  );
+-};
+-
+-export default ContentCard;
+diff --git a/src/components/ui/SafeImage.tsx b/src/components/ui/SafeImage.tsx
+index fbf76ca9..e843a6d0 100644
+--- a/src/components/ui/SafeImage.tsx
++++ b/src/components/ui/SafeImage.tsx
+@@ -5,7 +5,7 @@ export interface SafeImageProps extends React.ImgHTMLAttributes<HTMLImageElement
+   containerClassName?: string;
+ }
+
+-export const SafeImage: React.FC<SafeImageProps> = ({
++const SafeImage: React.FC<SafeImageProps> = ({
+   src,
+   alt,
+   fallbackSrc,
+diff --git a/src/components/ui/card.tsx b/src/components/ui/card.tsx
+deleted file mode 100644
+index 07cf4b4c..00000000
+--- a/src/components/ui/card.tsx
++++ /dev/null
+@@ -1,31 +0,0 @@
+-import React from 'react';
+-
+-export const Card: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ className = '', children, ...props }) => (
+-  <div className={`rounded-xl border ${className}`} {...props}>
+-    {children}
+-  </div>
+-);
+-
+-export const CardHeader: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ className = '', children, ...props }) => (
+-  <div className={className} {...props}>
+-    {children}
+-  </div>
+-);
+-
+-export const CardTitle: React.FC<React.HTMLAttributes<HTMLHeadingElement>> = ({ className = '', children, ...props }) => (
+-  <h3 className={className} {...props}>
+-    {children}
+-  </h3>
+-);
+-
+-export const CardDescription: React.FC<React.HTMLAttributes<HTMLParagraphElement>> = ({ className = '', children, ...props }) => (
+-  <p className={className} {...props}>
+-    {children}
+-  </p>
+-);
+-
+-export const CardContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ className = '', children, ...props }) => (
+-  <div className={className} {...props}>
+-    {children}
+-  </div>
+-);
+diff --git a/src/data/research/theses.ts b/src/data/research/theses.ts
+deleted file mode 100644
+index 0bbdd299..00000000
+--- a/src/data/research/theses.ts
++++ /dev/null
+@@ -1,40 +0,0 @@
+-export interface ThesisEntry {
+-  id: string;
+-  degree: "Master's Thesis" | 'Ph.D. Thesis';
+-  category: string;
+-  year: string;
+-  institution: string;
+-  title: string;
+-  subtitle: string;
+-  description: string;
+-  imageSrc: string;
+-  imageAlt: string;
+-  tags: string[];
+-  dspaceUrl: string;
+-  sourceRepoUrl?: string;
+-  advisor?: string;
+-}
+-
+-export const mastersThesisData: ThesisEntry = {
+-  id: 'masters-thesis',
+-  degree: "Master's Thesis",
+-  category: 'ROBOTICS & EMBODIED AI',
+-  year: '2014',
+-  institution: 'MIT CSAIL',
+-  title: 'Learning a Strategy for Whole-Arm Grasping',
+-  subtitle: "MIT S.M. THESIS — COMPUTER SCIENCE & ARTIFICIAL INTELLIGENCE LABORATORY",
+-  description:
+-    'Investigated tactile-driven, sensorimotor reinforcement learning policies for bimanual and whole-arm grasping of bulky, irregular objects under real-world physical uncertainty. Formulated contact-rich control strategies that leverage compliant arm surfaces and multi-modal feedback to stabilize grasping without prior geometric part models.',
+-  imageSrc: '/assets/research/masters-thesis.png',
+-  imageAlt: 'Robot manipulator executing whole-arm contact and grasping strategy on irregular objects',
+-  tags: [
+-    'Whole-Arm Grasping',
+-    'Bimanual Manipulation',
+-    'Reinforcement Learning',
+-    'Sensorimotor Control',
+-    'Tactile Feedback',
+-    'MIT CSAIL',
+-  ],
+-  dspaceUrl: 'https://dspace.mit.edu/entities/publication/ead0c10d-3401-46a1-bcc5-42f5a56fe0b8',
+-  advisor: 'Prof. Leslie Pack Kaelbling & Prof. Tomás Lozano-Pérez',
+-};
+diff --git a/src/features/research/ResearchCard.tsx b/src/features/research/ResearchCard.tsx
+index f5a815c1..7a541037 100644
+--- a/src/features/research/ResearchCard.tsx
++++ b/src/features/research/ResearchCard.tsx
+@@ -6,7 +6,7 @@ export interface ResearchCardProps {
+   project: ResearchProject;
+ }
+
+-export const ResearchCard: React.FC<ResearchCardProps> = ({ project }) => {
++const ResearchCard: React.FC<ResearchCardProps> = ({ project }) => {
+   return (
+     <article className="flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-all hover:shadow-md">
+       <div className="relative aspect-video w-full overflow-hidden bg-muted">
+diff --git a/src/layouts/Button.tsx b/src/layouts/Button.tsx
+deleted file mode 100644
+index 6de274cc..00000000
+--- a/src/layouts/Button.tsx
++++ /dev/null
+@@ -1,23 +0,0 @@
+-import React from 'react';
+-
+-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+-  variant?: 'primary' | 'outline';
+-  size?: 'sm' | 'md' | 'lg';
+-}
+-
+-export const Button: React.FC<ButtonProps> = ({ variant = 'primary', size = 'md', className = '', ...props }) => {
+-  const baseClasses = "inline-flex items-center justify-center rounded-xl font-bold transition-all min-h-[44px] focus:outline-none focus:ring-2 focus:ring-offset-2";
+-  const variants = {
+-    primary: "bg-accent hover:opacity-90 text-bg",
+-    outline: "bg-surface hover:bg-surface-alt text-text-main border border-line",
+-  };
+-  const sizes = {
+-    sm: "px-3.5 py-2 text-xs",
+-    md: "px-5 py-3 text-sm",
+-    lg: "px-8 py-4 text-base",
+-  };
+-
+-  return (
+-    <button className={`${baseClasses} ${variants[variant]} ${sizes[size]} ${className}`} {...props} />
+-  );
+-};
+diff --git a/src/layouts/Primitives.tsx b/src/layouts/Primitives.tsx
+deleted file mode 100644
+index dba839a1..00000000
+--- a/src/layouts/Primitives.tsx
++++ /dev/null
+@@ -1,39 +0,0 @@
+-import React from 'react';
+-
+-export const Box: React.FC<React.HTMLAttributes<HTMLDivElement>> = (props) => <div {...props} />;
+-
+-export const Stack: React.FC<React.HTMLAttributes<HTMLDivElement> & { gap?: '1' | '2' | '3' | '4' | '6' | '8' | '10' | '12' | '16', direction?: 'row' | 'col', align?: 'start' | 'center' | 'end' | 'stretch', justify?: 'start' | 'center' | 'end' | 'between' | 'around' }> = ({ gap = '4', direction = 'col', align, justify, className = '', ...props }) => {
+-  const alignClass = align ? `items-${align}` : '';
+-  const justifyClass = justify ? `justify-${justify}` : '';
+-
+-  // Safe list mappings to prevent PurgeCSS dynamic removal
+-  const spaceYMap: Record<string, string> = { '1': 'space-y-1', '2': 'space-y-2', '3': 'space-y-3', '4': 'space-y-4', '6': 'space-y-6', '8': 'space-y-8', '10': 'space-y-10', '12': 'space-y-12', '16': 'space-y-16' };
+-  const spaceXMap: Record<string, string> = { '1': 'space-x-1', '2': 'space-x-2', '3': 'space-x-3', '4': 'space-x-4', '6': 'space-x-6', '8': 'space-x-8', '10': 'space-x-10', '12': 'space-x-12', '16': 'space-x-16' };
+-
+-  const gapClass = direction === 'col' ? spaceYMap[gap] : spaceXMap[gap];
+-  const dirClass = direction === 'col' ? 'flex-col' : 'flex-row';
+-
+-  return <div className={`flex ${dirClass} ${gapClass} ${alignClass} ${justifyClass} ${className}`} {...props} />;
+-};
+-
+-export const Grid: React.FC<React.HTMLAttributes<HTMLDivElement> & { cols?: string, gap?: '4' | '6' | '8' | '10' | '12' }> = ({ cols = '1', gap = '8', className = '', ...props }) => {
+-  const gapMap: Record<string, string> = { '4': 'gap-4', '6': 'gap-6', '8': 'gap-8', '10': 'gap-10', '12': 'gap-12' };
+-
+-  // Custom parsing for inputs like "1 md:grid-cols-3" or "1 lg:grid-cols-12" to be safely processed
+-  const baseCols = cols.split(' ')[0];
+-  const colsStr = ['1', '2', '3', '4', '12'].includes(baseCols) ? `grid-cols-${baseCols}` : '';
+-  const customCols = cols.split(' ').slice(1).join(' '); // e.g., "md:grid-cols-3"
+-
+-  return <div className={`grid ${colsStr} ${customCols} ${gapMap[gap]} ${className}`} {...props} />;
+-};
+-
+-export const Text: React.FC<React.HTMLAttributes<HTMLParagraphElement> & { variant?: 'body' | 'dim' | 'heading' | 'subheading' }> = ({ variant = 'body', className = '', ...props }) => {
+-  const variants = {
+-    body: 'text-muted-foreground leading-relaxed',
+-    dim: 'text-muted-foreground text-sm leading-relaxed opacity-80',
+-    heading: 'text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground',
+-    subheading: 'text-2xl font-bold text-foreground tracking-tight'
+-  };
+-  const Tag = variant === 'heading' ? 'h1' : variant === 'subheading' ? 'h2' : 'p';
+-  return React.createElement(Tag, { className: `${variants[variant]} ${className}`, ...props });
+-};
+diff --git a/src/pages/Home.tsx b/src/pages/Home.tsx
+index b02bbdc2..e56788eb 100644
+--- a/src/pages/Home.tsx
++++ b/src/pages/Home.tsx
+@@ -15,7 +15,7 @@ interface HomeProps {
+   onNavigate?: (tab: string) => void;
+ }
+
+-export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
++const Home: React.FC<HomeProps> = ({ onNavigate }) => {
+   const navigate = useNavigate();
+
+   const handleNav = (tab: string) => {
+diff --git a/src/pages/__tests__/Home.test.tsx b/src/pages/__tests__/Home.test.tsx
+index 90635384..aa2a141c 100644
+--- a/src/pages/__tests__/Home.test.tsx
++++ b/src/pages/__tests__/Home.test.tsx
+@@ -1,7 +1,7 @@
+ import { describe, it, expect, vi } from 'vitest';
+ import { render, screen, fireEvent } from '@testing-library/react';
+ import { MemoryRouter } from 'react-router-dom';
+-import { Home } from '../Home';
++import Home from '../Home';
+
+ describe('Home Page', () => {
+   it('renders hero title and role hierarchy correctly', () => {
