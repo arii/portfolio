@@ -40,7 +40,7 @@ export const flagshipTools: ResearchTool[] = [
     category: 'Product development',
     status: 'Active dev',
     tags: ['Next.js', 'LLM Workflows', 'SEO'],
-    canonicalPath: '/research/ecommerce-automation',
+    canonicalPath: '/research/ai-experiments',
     externalUrl: 'https://boomtick.blog',
     externalLinkDisplayLabel: 'View Details',
     sourceUrl: 'https://github.com/arii/tech-dancer',
