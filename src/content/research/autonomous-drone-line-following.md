@@ -22,9 +22,9 @@ The **Drone Line Following Autonomous Controller** project involved engineering 
 
 ## Flight Demonstration Video
 
-[![Drone Line Following Demonstration](https://img.youtube.com/vi/f5l8GA1PHm8/hqdefault.jpg)](https://www.youtube.com/watch?v=f5l8GA1PHm8 "Drone Line Following Demonstration")
+https://www.youtube.com/watch?v=f5l8GA1PHm8
 
-*Watch Rolling Spider micro-drone executing closed-loop visual path tracking along a yellow floor-marked trajectory.*
+*Rolling Spider micro-drone executing closed-loop visual path tracking along a yellow floor-marked trajectory.*
 
 ---
 

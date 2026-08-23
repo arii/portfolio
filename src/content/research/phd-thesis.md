@@ -33,9 +33,9 @@ This doctoral dissertation introduces a **conformant planning framework** that e
 
 ## Demonstration Video
 
-[![Reliably Arranging Objects in Uncertain Domains](https://img.youtube.com/vi/so-9kkQXlxc/hqdefault.jpg)](https://www.youtube.com/watch?v=so-9kkQXlxc&list=PLEcASxU_mgVi6kMdElumAUh-gJW4wCOUV "Reliably Arranging Objects in Uncertain Domains")
+https://www.youtube.com/watch?v=so-9kkQXlxc&list=PLEcASxU_mgVi6kMdElumAUh-gJW4wCOUV
 
-*Watch ICRA 2018 Spotlight Video demonstrating PR2 robot executing conformant planning manipulation without vision feedback.*
+*ICRA 2018 Spotlight Video demonstrating PR2 robot executing conformant planning manipulation without vision feedback.*
 
 ---
 

@@ -23,9 +23,9 @@ The **BeaverWorks Summer Institute (RACECAR)** program at MIT was an intensive S
 
 ## Course Highlights & Challenge Demos
 
-[![MIT Beaverworks RACECAR Course Highlights](https://img.youtube.com/vi/DUp9yURMo2c/hqdefault.jpg)](https://www.youtube.com/watch?v=DUp9yURMo2c&list=PLEcASxU_mgVgnMZvVHgrTGFMUXze0MiOp "MIT Beaverworks RACECAR Course Highlights")
+https://www.youtube.com/watch?v=DUp9yURMo2c&list=PLEcASxU_mgVgnMZvVHgrTGFMUXze0MiOp
 
-*Watch student mini autonomous vehicles navigating high-speed tracks, obstacle courses, and visual servoing challenges.*
+*MIT BeaverWorks RACECAR student mini autonomous vehicles navigating high-speed tracks and obstacle courses.*
 
 ---
 

@@ -26,9 +26,9 @@ videoUrl: "https://www.youtube.com/watch?v=pmdjquZoJkE"
 
 ## Demonstration Video
 
-[![Proprioceptive Inference for Dual-Arm Grasping of Bulky Objects](https://img.youtube.com/vi/pmdjquZoJkE/hqdefault.jpg)](https://www.youtube.com/watch?v=pmdjquZoJkE "Proprioceptive Inference for Dual-Arm Grasping of Bulky Objects")
+https://www.youtube.com/watch?v=pmdjquZoJkE
 
-*Watch whole-arm and dual-arm contact-rich grasping demonstration on bulky irregular objects.*
+*Whole-arm and dual-arm contact-rich grasping demonstration on bulky irregular objects.*
 
 ---
 
