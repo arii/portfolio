@@ -15,7 +15,7 @@ summary: "iOS accessibility utility translating ambient light intensity into aud
 
 ## iOS Assistive Technology for Visually Impaired Users
 
-**Boop Light Detector** is an iOS accessibility application designed to translate ambient light levels into audible frequencies and tactile haptic feedback. Developed following the **MIT Assistive Technology Hackathon (ATHack 2016)**, the app has served blind and visually impaired users worldwide with over **6,000+ downloads** on the Apple App Store.
+**Boop Light Detector** is an iOS accessibility application designed to translate ambient light levels into audible frequencies and tactile haptic feedback. I developed the app following the **MIT Assistive Technology Hackathon (ATHack 2016)**, and it has served blind and visually impaired users worldwide with over **6,000+ downloads** on the Apple App Store.
 
 ![Boop Light Detector app testing during development and user trials](/assets/research/app_testing.jpg)
 
@@ -35,10 +35,10 @@ Existing light detection apps were often:
 
 ## Engineering Design & Key Features
 
-Boop was engineered from the ground up with a minimalist, accessible single-screen architecture:
+I engineered Boop from the ground up with a minimalist, accessible single-screen architecture:
 
 ### 1. Multi-Factor Luminescence Sensing Algorithm
-Rather than computing simple pixel RGB averages, Boop's light calculation factors in:
+Rather than computing simple pixel RGB averages, my light calculation factors in:
 - Camera ISO sensitivity
 - Frame exposure duration
 - Lens aperture and RGB pixel brightness at the center of the viewport
