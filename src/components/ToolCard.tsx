@@ -88,31 +88,31 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
   );
 
   if (isClickable) {
-    if (tool.externalUrl) {
-      return (
-        <a href={tool.externalUrl} target="_blank" rel="noopener noreferrer" className="block outline-none">
-          {content}
-        </a>
-      );
-    } else if (tool.canonicalPath) {
+    if (tool.canonicalPath) {
       const isResearch = tool.canonicalPath.startsWith('/research/');
       const targetSlug = isResearch ? tool.canonicalPath.replace('/research/', '') : tool.canonicalPath;
 
       return (
         <div
           onClick={() => isResearch ? onNavigate(targetSlug) : window.open(targetSlug, '_blank', 'noopener,noreferrer')}
-          className="block outline-none"
+          className="block outline-none cursor-pointer"
           role="button"
           tabIndex={0}
           onKeyDown={(e) => {
             if (e.key === 'Enter' || e.key === ' ') {
-      if (e.key === ' ') e.preventDefault();
+              if (e.key === ' ') e.preventDefault();
               isResearch ? onNavigate(targetSlug) : window.open(targetSlug, '_blank', 'noopener,noreferrer');
             }
           }}
         >
           {content}
         </div>
+      );
+    } else if (tool.externalUrl) {
+      return (
+        <a href={tool.externalUrl} target="_blank" rel="noopener noreferrer" className="block outline-none">
+          {content}
+        </a>
       );
     }
   }

@@ -40,7 +40,7 @@ export const flagshipTools: ResearchTool[] = [
     category: 'Product development',
     status: 'Active dev',
     tags: ['Next.js', 'LLM Workflows', 'SEO'],
-    canonicalPath: '/research/ecommerce-automation',
+    canonicalPath: '/research/ai-experiments',
     externalUrl: 'https://boomtick.blog',
     externalLinkDisplayLabel: 'View Details',
     sourceUrl: 'https://github.com/arii/tech-dancer',
@@ -61,6 +61,7 @@ export const flagshipTools: ResearchTool[] = [
     status: 'Completed (2019)',
     tags: ['PR2', 'Conformant Planning', 'Belief State', 'Manipulation', 'MIT CSAIL'],
     isFlagship: true,
+    canonicalPath: '/research/conformant-planning-manipulation',
     image: '/assets/research/phd/sixblock.png',
     imageAlt: 'PR2 robot reliably arranging blocks using conformant planning without external sensing feedback',
     externalUrl: 'https://dspace.mit.edu/handle/1721.1/122822',
@@ -81,6 +82,8 @@ export const flagshipTools: ResearchTool[] = [
     isFlagship: true,
     image: '/assets/research/masters-thesis.png',
     imageAlt: 'Robot manipulator executing whole-arm contact and grasping strategy on irregular objects',
+    canonicalPath: '/research/masters-thesis',
+    videoUrl: 'https://www.youtube.com/watch?v=pmdjquZoJkE',
     externalUrl: 'https://dspace.mit.edu/entities/publication/ead0c10d-3401-46a1-bcc5-42f5a56fe0b8',
     externalLinkDisplayLabel: 'MIT DSpace Thesis'
   }

@@ -4,7 +4,7 @@ export const systemTools: ResearchTool[] = [
   {
     id: 'gitops-pr-reviewer',
     taxonomyBucket: 'infrastructure',
-    title: 'GitOps Code Review Agent',
+    title: 'GitHub Actions LLM Code Review Automated',
     subtitle: 'Automated PR Auditing',
     description: 'LLM-powered PR auditing pipeline that performs automated review and structured feedback on pull requests.',
     category: 'DevAI System',
@@ -20,31 +20,15 @@ export const systemTools: ResearchTool[] = [
   {
     id: 'deployment-impact-analyzer',
     taxonomyBucket: 'infrastructure',
-    title: 'Blast-Radius Analyzer',
+    title: 'Visual Impact / UX Audit',
     subtitle: 'VISUAL IMPACT ANALYSIS PIPELINE',
-    description: 'CI pipeline that determines which pages are visually affected by a pull request. Uses dependency-cruiser to trace changed files through the import graph, then captures Playwright screenshots of affected routes, runs pixelmatch pixel diffs, crops changed regions, and generates a deployment review report with severity scores. Agent integration in progress.',
+    description: 'CI pipeline that determines which pages are visually affected by a pull request. Uses dependency-cruiser to trace changed files through the import graph, then captures Playwright screenshots of affected routes, runs pixelmatch pixel diffs, crops changed regions, and generates a deployment review report with severity scores.',
     category: 'DevAI System',
     status: 'Active',
     tags: ['Playwright', 'Pixelmatch', 'Dependency Graph', 'CI/CD'],
     canonicalPath: '/research/deployment-impact-analyzer',
     sourceUrl: 'https://github.com/arii/tech-dancer/tree/main/dev-tools',
     isFlagship: true
-  },
-  {
-    id: 'ux-auditor',
-    taxonomyBucket: 'infrastructure',
-    title: 'Visual Regression & UX Auditor',
-    subtitle: 'PLAYWRIGHT VISUAL REGRESSION',
-    description: 'Automated visual regression testing using Playwright and pixelmatch to capture screenshot diffs and score visual severity.',
-    category: 'Perception Debugging',
-    status: 'Active',
-    tags: ['Playwright', 'Pixelmatch', 'Screenshot Diff', 'CI/CD'],
-    canonicalPath: '/research/ux-auditor',
-    sourceUrl: 'https://github.com/arii/tech-dancer/tree/main/dev-tools',
-    parentFlagship: {
-      id: 'deployment-impact-analyzer',
-      title: 'Blast-Radius Analyzer'
-    }
   },
   {
     id: 'wcs-scraper',
@@ -82,9 +66,9 @@ export const systemTools: ResearchTool[] = [
   {
     id: 'versiontruth',
     taxonomyBucket: 'infrastructure',
-    title: 'VersionTruth',
+    title: 'Version Truth & Hackathons Submission',
     subtitle: 'The antidote to version hallucinations',
-    description: 'The antidote to version hallucinations: real-time ground-truth for npm, Node, and GitHub Actions.',
+    description: 'The antidote to version hallucinations: real-time ground-truth for npm, Node, and GitHub Actions, built as a live agent skill for NandaHack.',
     category: 'DevAI Tooling',
     status: 'Active',
     tags: ['versions', 'ci', 'dependencies', 'hallucination-mitigation', 'npm', 'node', 'github-actions', 'agents'],
