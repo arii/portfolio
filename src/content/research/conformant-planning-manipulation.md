@@ -27,17 +27,11 @@ This research forms the core of my PhD dissertation at **MIT CSAIL**, advised by
 
 ## ICRA & Video Overview Breakdowns
 
-Below are the primary video overviews detailing the conformant planning framework, ICRA 2018 conference presentation, and physical PR2 robot execution trials.
+Primary video overviews detailing the conformant planning framework, ICRA 2018 spotlight, and conference presentation.
 
-### ICRA 2018 Spotlight Overview
-https://www.youtube.com/watch?v=so-9kkQXlxc
+https://www.youtube.com/watch?v=so-9kkQXlxc https://www.youtube.com/watch?v=omdHFeBBYZ0
 
-*Figure 2: ICRA 2018 spotlight breakdown detailing sensorless manipulation and contact-driven funneling on the PR2.*
-
-### ICRA Conference Presentation
-https://www.youtube.com/watch?v=omdHFeBBYZ0
-
-*Figure 3: Conference video presentation explaining conformant planning formulations under severe pose uncertainty.*
+*Figure 2 & 3: ICRA 2018 spotlight breakdown (left) and conference paper presentation (right).*
 
 ---
 
@@ -45,31 +39,20 @@ https://www.youtube.com/watch?v=omdHFeBBYZ0
 
 When manipulators perform multi-step assembly or packaging tasks—such as placing 1-inch polyomino Tetris blocks into tight grid slots—small position and angle errors accumulate across sequential actions. Open-loop trajectory execution frequently fails because slight misalignments cause binding, jamming, or collision.
 
-![PR2 placing block with precision funneling](/assets/research/phd/placing.png)
-*Figure 4: Close-up of PR2 gripper placing a polyomino block into a dense arrangement using contact funneling.*
-
 Furthermore, camera lines-of-sight are frequently obstructed by robot end-effectors or nearby fixtures. **Conformant planning** overcomes these perception dead-zones by synthesizing control strategies that leverage contact mechanics (such as pushing, sliding, and funneling) to systematically reduce state uncertainty purely through physical interactions without requiring continuous visual feedback.
-
-My thesis formulates two complementary paradigms for conformant planning:
 
 ### 1. Plan Improvement (Fixture-Augmented Optimization)
 - **Concept:** Augments open-loop trajectories by introducing **movable fixtures** (fences or guide structures) for the robot to push parts against.
 - **Optimization:** Solves for ideal fixture geometry, contact angles, and push trajectories, transforming high-variance placements into deterministic funnels.
 
-![Six block arrangement task on PR2](/assets/research/phd/sixblock.png)
-*Figure 5: Multi-block arrangement setup demonstrating fixture-augmented funneling.*
+![PR2 placing block with precision funneling](/assets/research/phd/placing.png) ![Six block arrangement task on PR2](/assets/research/phd/sixblock.png)
+*Figure 4 & 5: Precision placement via contact funneling (left) and six-block arrangement setup (right).*
 
 #### Video Breakdowns: Sliding & Plan Improvement
 
-**Sliding & Pushing Alignment Trajectories:**
-https://www.youtube.com/watch?v=lrLWu9uQNIk
+https://www.youtube.com/watch?v=lrLWu9uQNIk https://www.youtube.com/watch?v=EsfNJPkpheY
 
-*Figure 6: Demonstration of contact sliding and pushing actions reducing initial object orientation error.*
-
-**Plan Improvement Execution:**
-https://www.youtube.com/watch?v=EsfNJPkpheY
-
-*Figure 7: Physical execution of plan improvement optimization using movable fixtures to guide block insertion.*
+*Figure 6 & 7: Sliding alignment trajectories (left) and physical execution of plan improvement optimization (right).*
 
 ### 2. Planning by Construction (Belief-State Transition Search)
 - **Concept:** Formulates manipulation as a forward search over non-parametric belief probability distributions `b(s) = P(s)`.
@@ -82,15 +65,9 @@ Support(b_t+1) ⊆ Support(b_t)
 
 #### Video Breakdowns: Planning & Funneling
 
-**Belief-State Search Trajectory Execution:**
-https://www.youtube.com/watch?v=MBsnNbD18tU
+https://www.youtube.com/watch?v=MBsnNbD18tU https://www.youtube.com/watch?v=yjhySqcgLi4
 
-*Figure 8: Robot executing a synthesized belief-state transition trajectory to collapse state uncertainty.*
-
-**Multi-Block Funneling Sequence:**
-https://www.youtube.com/watch?v=yjhySqcgLi4
-
-*Figure 9: Sequence showing sequential multi-block placement with contact-driven error recovery.*
+*Figure 8 & 9: Synthesized belief-state trajectory execution (left) and multi-block funneling sequence (right).*
 
 ---
 
@@ -108,15 +85,9 @@ To capture true physical noise profiles, I programmed the **Willow Garage PR2 ro
 
 #### Video Breakdowns: Sensing Noise & Action Characterization
 
-**Robust Sliding Under Sensing Noise:**
-https://www.youtube.com/watch?v=ubUMq8Rnb18
+https://www.youtube.com/watch?v=ubUMq8Rnb18 https://www.youtube.com/watch?v=bWjzn89H1x4
 
-*Figure 11: Real-world execution showing robustness to artificial pose noise through sliding actions.*
-
-**Empirical Action Noise Characterization:**
-https://www.youtube.com/watch?v=bWjzn89H1x4
-
-*Figure 12: Vicon motion tracking trials capturing non-parametric noise models for stochastic contact dynamics.*
+*Figure 11 & 12: Robust sliding under artificial pose noise (left) and Vicon motion tracking trials for non-parametric noise models (right).*
 
 ---
 
