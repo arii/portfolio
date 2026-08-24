@@ -15,6 +15,8 @@ videoUrl: "https://www.youtube.com/watch?v=DUp9yURMo2c&list=PLEcASxU_mgVgnMZvVHg
 
 # BeaverWorks Summer Institute (RACECAR)
 
+![BeaverWorks RACECAR students and autonomous vehicles](/assets/research/bw.jpg)
+
 ## Autonomous Miniature Racecars & Robotics Education
 
 The **BeaverWorks Summer Institute (RACECAR)** program at MIT was an intensive STEM initiative designed to teach high school students advanced robotics, computer vision, and autonomous vehicle navigation using 1/10th scale autonomous racecars.
@@ -25,7 +27,13 @@ The **BeaverWorks Summer Institute (RACECAR)** program at MIT was an intensive S
 
 https://www.youtube.com/watch?v=DUp9yURMo2c&list=PLEcASxU_mgVgnMZvVHgrTGFMUXze0MiOp
 
-*MIT BeaverWorks RACECAR student mini autonomous vehicles navigating high-speed tracks and obstacle courses.*
+https://www.youtube.com/watch?v=0U0pPbWhLVE
+
+https://www.youtube.com/watch?v=JbiTX1P6f0o
+
+https://www.youtube.com/watch?v=qSe8JmWQnYk
+
+*MIT BeaverWorks RACECAR student mini autonomous vehicles navigating high-speed tracks, visual servoing routines, and obstacle courses.*
 
 ---
 
