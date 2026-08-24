@@ -23,6 +23,8 @@ export const autonomousTools: ResearchTool[] = [
     category: 'Robotics & Autonomy',
     status: 'Completed',
     tags: ['Robotics & Autonomy', 'Multi-Agent', 'RSS 2015 Finalist', 'IJRR'],
+    image: '/assets/research/beer.png',
+    imageAlt: 'Autonomous delivery robots operating in dynamic human environment',
     canonicalPath: '/research/delivery-bots'
   },
   {
@@ -62,6 +64,8 @@ export const autonomousTools: ResearchTool[] = [
     category: 'Community Health & Wellness',
     status: 'Completed',
     tags: ['MindHandHeart', 'Community', 'Wellness', 'MIT'],
+    image: '/assets/research/light.jpg',
+    imageAlt: 'Light therapy lamps installed across MIT campus locations',
     canonicalPath: '/research/light-therapy-mit',
     externalUrl: 'https://arii.github.io/SAD/',
     sourceUrl: 'https://github.com/arii/SAD'
@@ -100,6 +104,8 @@ export const autonomousTools: ResearchTool[] = [
     category: 'Medical Robotics',
     status: 'Completed',
     tags: ['Robotics', 'Medical UI', 'CAD/CAM', 'Bionics Lab UCSC'],
+    image: '/assets/research/dental.jpg',
+    imageAlt: 'CAD/CAM Robotic Dental Crowning Workflow UI',
     canonicalPath: '/research/cad-cam-dental-workflow',
     externalUrl: 'https://github.com/arii'
   }

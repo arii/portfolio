@@ -18,6 +18,7 @@ export interface FlagshipCardProps {
 const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageClick }) => {
   const getToolIcon = (t: ResearchTool) => {
     if (t.id.includes('hrm')) return Activity;
+    if (t.id.includes('experiments')) return FlaskConical;
     if (t.id.includes('scraper')) return Server;
     if (t.id.includes('blog-drafter')) return FileText;
     if (t.id.includes('ecommerce')) return ShoppingBag;

@@ -5,10 +5,10 @@ import { flagshipTools } from '../data/research/flagshipTools';
 import { systemTools } from '../data/research/systemTools';
 
 describe('FlagshipCard Deep-Dive Linking', () => {
-  it('renders "Read Deep-Dive" for boomtick-blog and navigates to ecommerce-automation', () => {
+  it('renders "Read Deep-Dive" for boomtick-blog and navigates to ai-experiments', () => {
     const boomtickTool = flagshipTools.find((t) => t.id === 'boomtick-blog');
     expect(boomtickTool).toBeDefined();
-    expect(boomtickTool?.canonicalPath).toBe('/research/ecommerce-automation');
+    expect(boomtickTool?.canonicalPath).toBe('/research/ai-experiments');
 
     const handleNavigate = vi.fn();
     render(<FlagshipCard tool={boomtickTool!} onNavigate={handleNavigate} onImageClick={() => {}} />);
@@ -17,7 +17,7 @@ describe('FlagshipCard Deep-Dive Linking', () => {
     expect(deepDiveBtn).toBeInTheDocument();
 
     fireEvent.click(deepDiveBtn);
-    expect(handleNavigate).toHaveBeenCalledWith('ecommerce-automation');
+    expect(handleNavigate).toHaveBeenCalledWith('ai-experiments');
   });
 
   it('renders "Read Deep-Dive" for repo-auditor-ai and navigates to gitops-pr-reviewer', () => {
