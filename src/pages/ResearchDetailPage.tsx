@@ -29,7 +29,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
   }
 
   return (
-    <article className="mx-auto max-w-3xl px-4 py-12 space-y-8">
+    <article className="mx-auto max-w-4xl px-4 py-12 space-y-8">
       <button
         onClick={onBack}
         className="inline-flex items-center space-x-2 text-sm font-semibold text-text-dim hover:text-accent-sky transition-colors"
@@ -156,7 +156,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
 
                 if (embedUrl && isEmbedLink) {
                   return (
-                    <span className="block my-6 space-y-2">
+                    <span className="block space-y-2">
                       <div className="relative aspect-video w-full rounded-2xl overflow-hidden border border-line bg-surface shadow-md">
                         <iframe
                           src={embedUrl}
@@ -192,11 +192,45 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
                 </a>
               );
             },
-            p: ({ children, ...props }) => (
-              <p className="text-text-body text-base leading-relaxed mb-6" {...props}>
-                {children}
-              </p>
-            ),
+            p: ({ children, ...props }) => {
+              // Check if paragraph contains media items that should be displayed side-by-side in a grid
+              // ReactMarkdown wraps standalone block elements or consecutive links in <p>
+              const childrenArray = React.Children.toArray(children);
+
+              // Detect if all element children are links to YouTube or images
+              const isMediaGroup = childrenArray.length > 1 && childrenArray.every((child) => {
+                if (typeof child === 'string' && child.trim() === '') return true; // whitespace between links
+                if (React.isValidElement(child)) {
+                  const propsAny = child.props as any;
+                  // Is it a video link?
+                  if (propsAny && propsAny.href && (propsAny.href.includes('youtube.com') || propsAny.href.includes('youtu.be'))) {
+                    return true;
+                  }
+                  // Is it an image?
+                  if (child.type === 'img' || (propsAny && propsAny.src)) {
+                    return true;
+                  }
+                }
+                return false;
+              });
+
+              if (isMediaGroup) {
+                return (
+                  <div className="my-8 grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+                    {childrenArray.map((child, idx) => {
+                      if (typeof child === 'string' && child.trim() === '') return null;
+                      return <div key={idx} className="w-full">{child}</div>;
+                    })}
+                  </div>
+                );
+              }
+
+              return (
+                <p className="text-text-body text-base leading-relaxed mb-6" {...props}>
+                  {children}
+                </p>
+              );
+            },
             li: ({ children, ...props }) => (
               <li className="text-text-body leading-relaxed" {...props}>
                 {children}
