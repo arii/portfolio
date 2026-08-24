@@ -260,6 +260,8 @@ pr.create_review(
 
 The model proposes the facts. The script applies the policy.
 
+![Automated Pull Request Code Review Feedback posted by github-actions bot with blocking accessibility issue and non-blocking token suggestion](/assets/research/gitops-pr-reviewer-comment.png)
+
 ---
 
 ## 5. Use CI failures as context, not permission to auto-merge
