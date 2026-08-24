@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { ArrowLeft, Calendar, Clock } from 'lucide-react';
-import { getResearchPostBySlug } from '@/data/research';
+import { ArrowLeft, Calendar, Clock, Download, Video, Play, ExternalLink } from 'lucide-react';
+import { getResearchPostBySlug, RESEARCH_TOOLS } from '@/data/research';
+import { GithubIcon } from '@/components/SocialIcons';
 
 export interface ResearchDetailPageProps {
   slug: string;
@@ -11,6 +12,9 @@ export interface ResearchDetailPageProps {
 
 const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack }) => {
   const post = getResearchPostBySlug(slug);
+  const matchingTool = RESEARCH_TOOLS.find(
+    (t) => t.id === slug || (t.canonicalPath && t.canonicalPath.replace('/research/', '') === slug)
+  );
 
   if (!post) {
     return (
@@ -62,6 +66,66 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
             <span>{post.readingTime}</span>
           </span>
         </div>
+
+        {matchingTool && (matchingTool.pdfUrl || matchingTool.videoUrl || matchingTool.playlistUrl || matchingTool.sourceUrl || matchingTool.externalUrl) && (
+          <div className="flex flex-wrap gap-3 pt-4 border-t border-line/50">
+            {matchingTool.pdfUrl && (
+              <a
+                href={matchingTool.pdfUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center space-x-2 bg-accent/15 border border-accent/30 text-accent hover:bg-accent/25 px-4 py-2 rounded-xl text-xs font-semibold transition-colors min-h-[44px]"
+              >
+                <Download className="h-4 w-4 text-accent" />
+                <span>Download PDF Report</span>
+              </a>
+            )}
+            {matchingTool.videoUrl && (
+              <a
+                href={matchingTool.videoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center space-x-2 bg-surface border border-line text-text-dim hover:bg-surface-alt hover:text-text-main px-4 py-2 rounded-xl text-xs font-semibold transition-colors min-h-[44px]"
+              >
+                <Video className="h-4 w-4 text-accent" />
+                <span>Watch Video Demo</span>
+              </a>
+            )}
+            {matchingTool.playlistUrl && (
+              <a
+                href={matchingTool.playlistUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center space-x-2 bg-surface border border-line text-text-dim hover:bg-surface-alt hover:text-text-main px-4 py-2 rounded-xl text-xs font-semibold transition-colors min-h-[44px]"
+              >
+                <Play className="h-4 w-4 text-accent" />
+                <span>Watch Playlist</span>
+              </a>
+            )}
+            {matchingTool.sourceUrl && (
+              <a
+                href={matchingTool.sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center space-x-2 bg-surface border border-line text-text-dim hover:bg-surface-alt hover:text-text-main px-4 py-2 rounded-xl text-xs font-semibold transition-colors min-h-[44px]"
+              >
+                <GithubIcon className="h-4 w-4" />
+                <span>Source Repository</span>
+              </a>
+            )}
+            {matchingTool.externalUrl && !matchingTool.pdfUrl && (
+              <a
+                href={matchingTool.externalUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center space-x-2 bg-surface border border-line text-text-dim hover:bg-surface-alt hover:text-text-main px-4 py-2 rounded-xl text-xs font-semibold transition-colors min-h-[44px]"
+              >
+                <ExternalLink className="h-4 w-4 text-accent" />
+                <span>{matchingTool.externalLinkDisplayLabel || 'External Link'}</span>
+              </a>
+            )}
+          </div>
+        )}
       </header>
 
       {/* Render Markdown content cleanly using elegant, high-fidelity custom components */}
