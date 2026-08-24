@@ -10,7 +10,8 @@
   },
   "scripts": {
     "dev": "vite --port 3000",
-    "build": "tsc && vite build",
+    "build:media": "node scripts/optimize-media.js",
+    "build": "pnpm run build:media && tsc && vite build",
     "preview": "vite preview --port 3000",
     "type-check": "tsc --noEmit",
     "lint": "eslint .",
@@ -69,9 +70,11 @@
     "knip": "^6.32.2",
     "postcss": "^8.4.49",
     "rollup-plugin-visualizer": "^7.1.1",
+    "sharp": "^0.35.3",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.7.3",
     "vite": "^6.1.0",
+    "vite-plugin-image-optimizer": "^2.0.3",
     "vitest": "^3.0.5",
     "yaml": "^2.9.0"
   }

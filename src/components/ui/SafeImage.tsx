@@ -1,28 +1,74 @@
 import React, { useState } from 'react';
 
+export interface SafeImageSource {
+  srcSet: string;
+  type?: string;
+  media?: string;
+}
+
 export interface SafeImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   fallbackSrc?: string;
   containerClassName?: string;
+  webpSrc?: string;
+  sources?: SafeImageSource[];
+  disableWebpAutoInfer?: boolean;
 }
+
+const resolveAssetUrl = (url?: string): string | undefined => {
+  if (!url) return undefined;
+  if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('data:')) {
+    return url;
+  }
+  const baseUrl = import.meta.env.BASE_URL || '/';
+  const cleanUrl = url.replace(/^\//, '');
+  return baseUrl.endsWith('/') ? `${baseUrl}${cleanUrl}` : `${baseUrl}/${cleanUrl}`;
+};
 
 const SafeImage: React.FC<SafeImageProps> = ({
   src,
   alt,
   fallbackSrc,
-  className = '',
   containerClassName = '',
+  className = '',
+  webpSrc,
+  sources,
+  disableWebpAutoInfer = false,
   ...props
 }) => {
   const [hasError, setHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Normalize path with Vite Base URL if relative
-  let resolvedSrc = src;
-  if (src && !src.startsWith('http') && !src.startsWith('data:')) {
-    const baseUrl = import.meta.env.BASE_URL || '/';
-    const cleanSrc = src.replace(/^\//, '');
-    resolvedSrc = baseUrl.endsWith('/') ? `${baseUrl}${cleanSrc}` : `${baseUrl}/${cleanSrc}`;
+  // Resolve main image source
+  const resolvedSrc = resolveAssetUrl(src);
+
+  // Determine WebP source
+  let resolvedWebpSrc = resolveAssetUrl(webpSrc);
+  if (!resolvedWebpSrc && src && !disableWebpAutoInfer && /\.(png|jpe?g)$/i.test(src)) {
+    const autoWebp = src.replace(/\.(png|jpe?g)$/i, '.webp');
+    resolvedWebpSrc = resolveAssetUrl(autoWebp);
   }
+
+  // Resolve additional sources if present
+  const resolvedSources = sources?.map((source) => ({
+    ...source,
+    srcSet: resolveAssetUrl(source.srcSet) || source.srcSet,
+  }));
+
+  const hasPictureSources = Boolean(resolvedWebpSrc || (resolvedSources && resolvedSources.length > 0));
+
+  const imageElement = (
+    <img
+      src={resolvedSrc}
+      alt={alt}
+      className={`transition-opacity duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'} ${className}`}
+      onLoad={() => setIsLoading(false)}
+      onError={() => {
+        setHasError(true);
+        setIsLoading(false);
+      }}
+      {...props}
+    />
+  );
 
   return (
     <div className={`relative overflow-hidden bg-surface ${containerClassName}`}>
@@ -30,20 +76,27 @@ const SafeImage: React.FC<SafeImageProps> = ({
         <div className="absolute inset-0 animate-pulse bg-surface-alt" aria-hidden="true" />
       )}
       {!hasError ? (
-        <img
-          src={resolvedSrc}
-          alt={alt}
-          className={`transition-opacity duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'} ${className}`}
-          onLoad={() => setIsLoading(false)}
-          onError={() => {
-            setHasError(true);
-            setIsLoading(false);
-          }}
-          {...props}
-        />
+        hasPictureSources ? (
+          <picture>
+            {resolvedSources?.map((source, index) => (
+              <source
+                key={index}
+                srcSet={source.srcSet}
+                type={source.type}
+                media={source.media}
+              />
+            ))}
+            {resolvedWebpSrc && (
+              <source srcSet={resolvedWebpSrc} type="image/webp" />
+            )}
+            {imageElement}
+          </picture>
+        ) : (
+          imageElement
+        )
       ) : fallbackSrc ? (
         <img
-          src={fallbackSrc}
+          src={resolveAssetUrl(fallbackSrc)}
           alt={alt}
           className={`object-cover ${className}`}
           {...props}

@@ -14,6 +14,9 @@ const ImageLightbox: React.FC<ImageLightboxProps> = ({
 }) => {
   if (!imageSrc) return null;
 
+  const isWebpAvailable = /\.(png|jpe?g)$/i.test(imageSrc);
+  const webpSrc = isWebpAvailable ? imageSrc.replace(/\.(png|jpe?g)$/i, '.webp') : null;
+
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-bg/95 cursor-zoom-out p-4 backdrop-blur-sm"
@@ -26,11 +29,22 @@ const ImageLightbox: React.FC<ImageLightboxProps> = ({
       >
         <X className="h-8 w-8" />
       </button>
-      <img
-        src={imageSrc}
-        alt={altText}
-        className="max-w-full max-h-[90vh] object-contain rounded-3xl border border-line shadow-2xl"
-      />
+      {isWebpAvailable && webpSrc ? (
+        <picture>
+          <source srcSet={webpSrc} type="image/webp" />
+          <img
+            src={imageSrc}
+            alt={altText}
+            className="max-w-full max-h-[90vh] object-contain rounded-3xl border border-line shadow-2xl"
+          />
+        </picture>
+      ) : (
+        <img
+          src={imageSrc}
+          alt={altText}
+          className="max-w-full max-h-[90vh] object-contain rounded-3xl border border-line shadow-2xl"
+        />
+      )}
     </div>
   );
 };
