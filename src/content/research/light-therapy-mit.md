@@ -38,7 +38,7 @@ Clinical research demonstrates that daily exposure to artificial light therapy e
 Supported by the **MIT MindHandHeart Innovation Fund**, I proposed and executed a campus-wide phototherapy deployment plan:
 
 ### 1. EHS Approval & Safety Coordination
-I worked closely with Robert Edwards and Peter Bochnak from MIT Environment, Health & Safety (EHS), along with Dr. David V. Diamond from MIT Medical, to establish comprehensive safety guidelines and contact info for campus resources like Mental Health and Counseling (MH&C).
+I coordinated with MIT Environment, Health & Safety (EHS) and MIT Medical to establish safety guidelines and provide contact info for campus wellness resources.
 
 ### 2. High-Traffic Phototherapy Stations
 Teaming up with John Costanza (CSAIL's assistant director of infrastructure), we installed public lightboxes inside three bright red, sun-yellow interior phone/conference booths on floors 2, 4, and 7 of the Stata Center (Building 32).
