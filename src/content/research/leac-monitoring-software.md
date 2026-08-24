@@ -29,7 +29,9 @@ Lacking automated telemetry, laboratory managers were unable to pinpoint ineffic
 
 ## System Architecture & Software Implementation
 
-Ariel engineered a lightweight, networked monitoring platform to capture real-time sash positions and airflow metrics across campus research facilities:
+![LEAC Fume Hood Network Monitoring Interface](/assets/research/leac.jpg)
+
+I engineered a lightweight, networked monitoring platform to capture real-time sash positions and airflow metrics across campus research facilities:
 
 ### 1. Embedded Telemetry Ingestion
 - Integrated sensor microcontrollers mounted on laboratory fume hoods to measure sash height and face velocity continuously.
