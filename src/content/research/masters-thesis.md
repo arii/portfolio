@@ -1,16 +1,16 @@
 ---
 title: "Learning a Strategy for Whole-Arm Grasping"
 date: "2014-06-01"
-readTime: 8
+readTime: 6
 tags:
   - Whole-Arm Grasping
   - Bimanual Manipulation
   - Reinforcement Learning
-  - Sensorimotor Control
-  - Tactile Feedback
+  - Policy Search
+  - Manipulation Under Uncertainty
   - MIT CSAIL
 category: "Robotics & AI"
-summary: "Investigated tactile-driven, sensorimotor reinforcement learning policies for bimanual and whole-arm grasping of bulky, irregular objects under real-world physical uncertainty."
+summary: "My Master's thesis on learning robust whole-arm and bimanual grasping policies to cradle and secure bulky, unmodeled objects under physical and pose uncertainty."
 videoUrl: "https://www.youtube.com/watch?v=pmdjquZoJkE"
 ---
 
@@ -18,9 +18,9 @@ videoUrl: "https://www.youtube.com/watch?v=pmdjquZoJkE"
 
 ## MIT S.M. Thesis — Computer Science and Artificial Intelligence Laboratory (CSAIL)
 
-**Author:** Ariel Anders
-**Advisor:** Prof. Daniela Rus
-**Institution:** Massachusetts Institute of Technology (MIT CSAIL)
+* **Author:** Ariel Anders
+* **Advisors:** Prof. Leslie Pack Kaelbling & Prof. Tomás Lozano-Pérez
+* **Institution:** Massachusetts Institute of Technology (MIT CSAIL)
 
 ---
 
@@ -28,35 +28,66 @@ videoUrl: "https://www.youtube.com/watch?v=pmdjquZoJkE"
 
 https://www.youtube.com/watch?v=pmdjquZoJkE
 
-*Whole-arm and dual-arm contact-rich grasping demonstration on bulky irregular objects.*
+*Whole-arm and bimanual grasping demonstrations securing bulky, irregular objects on the PR2.*
 
 ---
 
-## Executive Summary
+## Project Overview
 
-Traditional robotic grasping relies heavily on high-precision end-effector fingertips and explicit 3D geometric models of target objects. However, when handling large, bulky, heavy, or irregularly shaped objects, end-effector fingertip grasps often fail due to torque constraints and narrow contact surfaces.
+Traditional robotic grasping separates the problem into two distinct stages: finding optimal contact points for the fingertips and planning collision-free trajectories to reach them. While effective for small items with known CAD models, this approach breaks down when handling large, heavy, or irregularly shaped objects where fingertip pinch grasps lack the required torque and contact area.
 
-This Master's thesis investigated **whole-arm grasping**—a sensorimotor approach where a robot utilizes its entire upper limbs (forearms, upper arms, and torso) to envelope, cradle, and stabilize heavy or un-modeled items.
+In my Master's thesis, I formulated a framework for **whole-arm grasping**. Instead of restricting contact to end-effectors, the robot leverages the full kinematic chain—forearms, upper arms, and torso—to envelope, scoop, and cradle unmodeled objects under physical and pose uncertainty.
 
----
-
-## Technical Approach & Methodological Breakthroughs
-
-### 1. Tactile-Driven Sensorimotor Control
-- Integrated dense tactile array sensors along compliant arm surfaces to detect real-time contact pressure distribution.
-- Developed sensorimotor feedback policies that react to slip, contact force vectors, and surface contours without requiring prior CAD models of target objects.
-
-### 2. Reinforcement Learning for Contact-Rich Tasks
-- Formulated whole-arm manipulation as a contact-rich Markov Decision Process (MDP).
-- Trained policy networks to synthesize multi-joint trajectories that guide arm links into enveloping configurations while actively counteracting gravity and disturbance torques.
-
-### 3. Bimanual Coordination Framework
-- Coordinated dual-arm manipulators to execute complex whole-body hugs, lifts, and stabilization maneuvers.
-- Evaluated physical interactions across various bulky everyday objects (boxes, spheres, irregular containers).
+![Whole-arm grasping experimental setup](/assets/research/swag.jpg)
+*Figure 1: Experimental setup and kinematics for whole-arm grasping on the PR2 platform.*
 
 ---
 
-## Key Findings & Impact
+## Technical Approach & Methodology
 
-- Demonstrated that whole-arm contact strategies significantly lower peak contact stress while multiplying payload capacity compared to fingertip pinch grasps.
-- Formulated robust reactive policies capable of regaining grasp stability when target objects shift or slip unexpectedly during transport.
+### 1. Unified Policy Formulation
+* Replaced the decoupled grasp-then-plan paradigm with a policy search formulation that directly maps object states and robot configurations into coordinated multi-joint trajectories.
+* Optimized motions over a distribution of object poses and geometries to ensure robustness without requiring high-precision 3D reconstruction.
+
+### 2. Reinforcement Learning for Whole-Arm Envelopment
+* Formulated the enveloping and lifting sequence as a policy optimization problem.
+* Trained policies in physics simulation to discover dynamic multi-joint motions that cradle objects against the robot's body while managing contact constraints and gravity.
+
+### 3. Bimanual & Torso Coordination
+* Coordinated dual-arm trajectories and torso positioning to execute complex enveloping maneuvers on bulky everyday items (boxes, spheres, and irregular containers).
+* Transferred learned simulation policies directly to the physical Willow Garage PR2 platform.
+
+![Thesis Key Concepts Word Cloud](/assets/research/thesis_wordle.png)
+*Figure 2: Word cloud of core themes from my MIT S.M. thesis.*
+
+---
+
+## Reinforcement Learning Simulations
+
+Simulation trials evaluating policy convergence, trajectory generation, and stability across object dimensions and initial offsets:
+
+* [RL Simulation Run 1](https://www.youtube.com/watch?v=PIhXfWyNPzQ)
+* [RL Simulation Run 2](https://www.youtube.com/watch?v=M5PbYaPY0RE)
+* [RL Simulation Run 3](https://www.youtube.com/watch?v=8TKJiJnDOSo)
+* [RL Simulation Run 4](https://www.youtube.com/watch?v=lnHDDjkWKfE)
+* [RL Simulation Run 5](https://www.youtube.com/watch?v=s1vjsvnPfdc)
+* [RL Simulation Run 6](https://www.youtube.com/watch?v=gf2vNOKEKXc)
+* [RL Simulation Run 7](https://www.youtube.com/watch?v=bgHzqflrkCE)
+
+---
+
+## Physical Robot Experiments (PR2 Platform)
+
+Validation of learned whole-arm manipulation policies on the physical PR2:
+
+* [PR2 Grasping Demonstration 1](https://www.youtube.com/watch?v=2mGN3ka_7i0)
+* [PR2 Grasping Demonstration 2](https://www.youtube.com/watch?v=-V2KtcETAi8)
+* [PR2 Grasping Demonstration 3](https://www.youtube.com/watch?v=QgoJKaoZ3dY)
+* [PR2 Grasping Demonstration 4](https://www.youtube.com/watch?v=WfJ6xRo0Y9Y)
+
+---
+
+## Key Takeaways
+
+* **Form-Closure Caging Over Precision Points:** Enveloping objects with the full arm structure creates robust form-closure and support surfaces, bypassing the need for exact fingertip friction modeling.
+* **Payload Scaling:** Utilizing the arms and torso distributes load and joint torques, enabling manipulation of items far exceeding the PR2 gripper payload limits.
