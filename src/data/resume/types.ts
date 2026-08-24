@@ -35,11 +35,6 @@ export interface ResumeSkillGroup {
   skills: string[];
 }
 
-export type ResumeSkillCategory = {
-  category: string;
-  skills: string | string[];
-};
-
 export interface ResumeHonor {
   title: string;
   year: string;

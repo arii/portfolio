@@ -15,13 +15,6 @@ export interface PhilosophyTenet {
   description: string;
 }
 
-export interface FocusArea {
-  id: string;
-  title: string;
-  description: string;
-  actionText: string;
-}
-
 export interface FeatureCallout {
   id: string;
   title: string;
@@ -37,14 +30,6 @@ export interface HeroContent {
   bioParagraphs: string[];
 }
 
-export interface HeroData {
-  badge?: string;
-  name: string;
-  title: string;
-  subheading?: string;
-  bioParagraphs: string[];
-}
-
 export const heroContent: HeroContent = {
   brandTitle: 'Ariel Anders Portfolio',
   brandRole: 'Roboticist & Agentic Orchestration Architect',
@@ -53,14 +38,6 @@ export const heroContent: HeroContent = {
   bioParagraphs: [
     'I build reliable software for robotics and autonomous systems, from motion planning and localization to production infrastructure and AI-assisted development.',
   ],
-};
-
-// Retain HERO_DATA alias for compatibility if referenced elsewhere
-export const HERO_DATA: HeroData = {
-  name: heroContent.name,
-  title: heroContent.title,
-  subheading: heroContent.bioParagraphs[0],
-  bioParagraphs: heroContent.bioParagraphs,
 };
 
 export const PHILOSOPHY_TENETS: PhilosophyTenet[] = [
@@ -75,27 +52,6 @@ export const PHILOSOPHY_TENETS: PhilosophyTenet[] = [
     title: 'Make Robots Behave',
     description:
       'I combine machine learning, motion planning, and precise system design to ensure predictable, reliable robotic performance in uncertain environments.',
-  },
-];
-
-export const FOCUS_AREAS: FocusArea[] = [
-  {
-    id: 'devai-products',
-    title: "Products built with DevAI",
-    description: "Live full-stack consumer apps and platforms built with autonomous agent workflows.",
-    actionText: "View Products →",
-  },
-  {
-    id: 'devai-tools',
-    title: "DevAI Orchestration",
-    description: "How I build: Engineering multi-agent workflows, automated code-auditing guardrails, and agentic CI/CD pipelines to enforce production standards.",
-    actionText: "Read Articles →",
-  },
-  {
-    id: 'robotics-research',
-    title: "Robotics Research",
-    description: "Research and publications spanning robotics, motion planning, autonomy, and real-world systems.",
-    actionText: "Read Research →",
   },
 ];
 

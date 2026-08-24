@@ -33,6 +33,9 @@
     "project": [
       "src/**/*.{ts,tsx}"
     ],
+    "ignoreBinaries": [
+      "td-cli"
+    ],
     "ignoreDependencies": [
       "autoprefixer",
       "postcss",

@@ -7,12 +7,6 @@ import { honorsData, teachingData } from './honorsTeaching';
 import { publicationsData, scholarUrl } from './publications';
 
 export * from './types';
-export { experienceData } from './experience';
-export { educationData } from './education';
-export { skillsData } from './skills';
-export { projectsData } from './projects';
-export { honorsData, teachingData } from './honorsTeaching';
-export { publicationsData, scholarUrl } from './publications';
 
 export const resumeData: ResumeData = {
   name: "Ariel Anders, PhD",
