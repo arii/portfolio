@@ -36,7 +36,7 @@ export const autonomousTools: ResearchTool[] = [
     category: 'Robotics',
     status: 'Completed',
     tags: ['Robotics & Autonomy', 'Control Systems', 'Computer Vision', 'Drones'],
-    image: 'https://i.ytimg.com/vi/f5l8GA1PHm8/hqdefault.jpg',
+    image: '/assets/research/drone.jpg',
     imageAlt: 'Parrot Rolling Spider Drone hovering over path',
     canonicalPath: '/research/autonomous-drone-line-following',
     videoUrl: 'https://www.youtube.com/watch?v=f5l8GA1PHm8',

@@ -16,7 +16,9 @@ videoUrl: "https://www.youtube.com/watch?v=f5l8GA1PHm8"
 
 ## Closed-Loop Vision-Based Trajectory Tracking for Micro-Quadrotors
 
-The **Drone Line Following Autonomous Controller** project involved engineering a real-time computer vision and state feedback control loop for a micro quadrotor (Parrot Rolling Spider) to autonomously detect, align with, and track floor-marked paths ("Follow the Yellow Brick Road").
+The **Drone Line Following Autonomous Controller** ("Follow the Yellow Brick Road") project was a collaborative effort with teammates Raghav Aggarwal, Julia Sokol, and Patrick Lowe to engineer a real-time computer vision and state feedback control loop for a micro quadrotor (Parrot Rolling Spider) to autonomously detect, align with, and track floor-marked paths.
+
+![Parrot Rolling Spider Drone Setup and Line Following Flight](/assets/research/drone.jpg)
 
 ---
 
@@ -24,28 +26,27 @@ The **Drone Line Following Autonomous Controller** project involved engineering 
 
 https://www.youtube.com/watch?v=f5l8GA1PHm8
 
-*Rolling Spider micro-drone executing closed-loop visual path tracking along a yellow floor-marked trajectory.*
+*Rolling Spider micro-drone executing closed-loop visual path tracking along yellow floor-marked trajectories.*
 
 ---
 
 ## System Architecture & Control Loop
 
-Autonomous flight using low-cost micro-drones poses severe real-time compute and sensor noise constraints. The control architecture separates path estimation from flight stabilization:
+Autonomous flight using low-cost micro-drones poses severe real-time compute and sensor noise constraints. My primary contributions focused on the image processing architecture and integration into the Rolling Spider framework:
 
-### 1. Vision Processing Pipeline
-- **Downward Image Capture:** Captures low-latency ground-facing video frames.
-- **Color Thresholding & HSV Masking:** Isolates target path markers from background floor textures.
-- **Centroid & Orientation Estimation:** Computes lateral offset (cross-track error $e_y$) and heading error ($\psi$) relative to the path center line using image moments and Hough line transforms.
+### 1. Offline Image Processing & Data Capture Pipeline
+- **Yavta Integration:** Developed custom scripts utilizing the Yet Another V4L2 Test Application (`yavta`) to rapidly capture and download test images directly from the quadcopter.
+- **Format Conversion & Testing:** Rendered images in JPEG and raw YUV formats, analyzing luminance (Y) components to separate line targets from varying floor textures without heavy RGB conversion overhead.
+- **Pixel Offset Calculation:** Implemented a lightweight line detection algorithm iterating over pixel arrays to compute the position-wise pixel offset relative to the center line.
 
-### 2. Cascaded PID Control Loop
-- **Yaw Controller:** Modulates differential rotor torque to align heading with the detected line trajectory.
-- **Lateral Roll Controller:** Modulates roll angle to drive cross-track error to zero.
-- **Forward Velocity Controller:** Maintains a continuous forward velocity along straight path segments, slowing down dynamically when detecting sharp bends or curvature changes.
+### 2. Cascaded Control & System Integration
+- **Bang-Bang Controller Prototype:** Initially integrated the pixel offset algorithm into a bang-bang controller modifying `rsedu_vis.c` and `rsedu_control.c` to test custom input command streaming.
+- **Refined Flight Controllers:** While the initial bang-bang approach served as a foundational proof-of-concept, teammates (Julia Sokol and Raghav Aggarwal) integrated more advanced PID controllers and yaw/position estimations to achieve stable trajectory tracking across continuous curved paths and sharp turns.
 
 ---
 
 ## Hardware & Flight Verification
 
-- **Platform:** Parrot Rolling Spider micro quadrotor equipped with down-facing camera, pressure sensor, and ultrasonic altitude sensor.
-- **Ground Station Interface:** Custom MATLAB/Simulink and Python communication link transmitting Bluetooth LE control packets at high refresh rates.
-- **Experimental Results:** Successfully achieved closed-loop flight tracking across continuous curved paths, acute 90-degree turns, and intersecting line paths with reliable recovery from external aerodynamic disturbances.
+- **Platform:** Parrot Rolling Spider micro quadrotor equipped with a down-facing camera, pressure sensor, and ultrasonic altitude sensor.
+- **Ground Station Interface:** Custom MATLAB/Simulink and Python communication links transmitting control packets at high refresh rates.
+- **Experimental Results:** Successfully achieved closed-loop flight tracking across continuous paths and distinct floor markers (such as yellow or black tape) with reliable state estimation.
