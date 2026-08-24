@@ -40,7 +40,7 @@ Key technical components:
 
 ## Downloadable Technical Report
 
-- 📄 [Download Mechatronics Lab Report (PDF)](/reports/report_ce118.pdf)
+- 📄 [Download Mechatronics Lab Report (PDF)](https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_ce118.pdf)
 
 ---
 

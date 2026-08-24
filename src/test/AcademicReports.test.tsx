@@ -1,7 +1,5 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import fs from 'fs';
-import path from 'path';
 import { ACADEMIC_PAPERS } from '@/data/academicResearch';
 import { autonomousTools } from '@/data/research/autonomousTools';
 import { getResearchPostBySlug } from '@/data/research';
@@ -9,23 +7,6 @@ import AcademicCard from '@/components/AcademicCard';
 import ToolCard from '@/components/ToolCard';
 
 describe('Academic Research Project Reports (PDFs)', () => {
-  const expectedPdfFiles = [
-    'report_dental.pdf',
-    'report_ml.pdf',
-    'report_6375.pdf',
-    'report_ce118.pdf',
-    'report_ce121.pdf'
-  ];
-
-  it('verifies all 5 PDF report files exist in public/reports with non-zero size', () => {
-    expectedPdfFiles.forEach((filename) => {
-      const filePath = path.join(process.cwd(), 'public', 'reports', filename);
-      expect(fs.existsSync(filePath)).toBe(true);
-      const stats = fs.statSync(filePath);
-      expect(stats.size).toBeGreaterThan(0);
-    });
-  });
-
   it('excludes report entries from ACADEMIC_PAPERS and ensures they are in project cards', () => {
     const dentalPaper = ACADEMIC_PAPERS.find((p) => p.id === 'nsbe-dental-2012');
     expect(dentalPaper).toBeUndefined();
@@ -34,12 +15,12 @@ describe('Academic Research Project Reports (PDFs)', () => {
     expect(classReportInAcademic).toBeUndefined();
   });
 
-  it('includes pdfUrl on relevant autonomous tools entries', () => {
+  it('includes external raw github pdfUrl on relevant autonomous tools entries', () => {
     const toolsWithPdf = autonomousTools.filter((t) => t.pdfUrl);
     expect(toolsWithPdf.length).toBeGreaterThanOrEqual(5);
 
     const dentalTool = autonomousTools.find((t) => t.id === 'cad-cam-dental-workflow');
-    expect(dentalTool?.pdfUrl).toBe('/reports/report_dental.pdf');
+    expect(dentalTool?.pdfUrl).toBe('https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_dental.pdf');
   });
 
   it('renders Download PDF Report and Watch Video buttons in AcademicCard when properties are provided', () => {
@@ -52,7 +33,7 @@ describe('Academic Research Project Reports (PDFs)', () => {
       venue: 'Test Venue',
       summary: 'Test summary statement.',
       tags: ['TestTag'],
-      pdfUrl: '/reports/report_dental.pdf',
+      pdfUrl: 'https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_dental.pdf',
       videoUrl: 'https://www.youtube.com/watch?v=so-9kkQXlxc',
       playlistUrl: 'https://www.youtube.com/playlist?list=PLEcASxU_mgVi6kMdElumAUh-gJW4wCOUV'
     };
@@ -60,7 +41,7 @@ describe('Academic Research Project Reports (PDFs)', () => {
     render(<AcademicCard paper={mockPaper} />);
     const pdfLink = screen.getByRole('link', { name: /Download PDF Report/i });
     expect(pdfLink).toBeInTheDocument();
-    expect(pdfLink).toHaveAttribute('href', '/reports/report_dental.pdf');
+    expect(pdfLink).toHaveAttribute('href', 'https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_dental.pdf');
 
     const videoLink = screen.getByRole('link', { name: /Watch Video Demo/i });
     expect(videoLink).toBeInTheDocument();
@@ -80,7 +61,7 @@ describe('Academic Research Project Reports (PDFs)', () => {
       status: 'Completed',
       tags: ['TestTag'],
       canonicalPath: '/research/cad-cam-dental-workflow',
-      pdfUrl: '/reports/report_dental.pdf',
+      pdfUrl: 'https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_dental.pdf',
       videoUrl: 'https://www.youtube.com/watch?v=so-9kkQXlxc'
     };
 
@@ -92,10 +73,10 @@ describe('Academic Research Project Reports (PDFs)', () => {
   it('parses research posts with PDF download links from markdown files', () => {
     const dentalPost = getResearchPostBySlug('cad-cam-dental-workflow');
     expect(dentalPost).toBeDefined();
-    expect(dentalPost?.content).toContain('/reports/report_dental.pdf');
+    expect(dentalPost?.content).toContain('https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_dental.pdf');
 
     const mlPost = getResearchPostBySlug('report-ml-lis');
     expect(mlPost).toBeDefined();
-    expect(mlPost?.content).toContain('/reports/report_ml.pdf');
+    expect(mlPost?.content).toContain('https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_ml.pdf');
   });
 });

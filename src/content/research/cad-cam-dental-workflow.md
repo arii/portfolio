@@ -52,7 +52,7 @@ Ariel engineered key control UI software and trajectory validation scripts:
 
 ## Downloadable Technical Report
 
-- 📄 [Download Dynamic Registration for Dental Robotics Report (PDF)](/reports/report_dental.pdf)
+- 📄 [Download Dynamic Registration for Dental Robotics Report (PDF)](https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_dental.pdf)
 
 ---
 

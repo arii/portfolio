@@ -32,7 +32,7 @@ Key architecture features:
 
 ## Downloadable Technical Report
 
-- 📄 [Download Hardware RSA Accelerator Report (PDF)](/reports/report_6375.pdf)
+- 📄 [Download Hardware RSA Accelerator Report (PDF)](https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_6375.pdf)
 
 ---
 

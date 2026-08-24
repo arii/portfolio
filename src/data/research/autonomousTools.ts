@@ -101,9 +101,9 @@ export const autonomousTools: ResearchTool[] = [
     tags: ['Robotics', 'Medical UI', 'CAD/CAM', 'Bionics Lab UCSC'],
     image: 'https://i.ytimg.com/vi/tXif7xeZmGI/hqdefault.jpg',
     canonicalPath: '/research/cad-cam-dental-workflow',
-    pdfUrl: '/reports/report_dental.pdf',
+    pdfUrl: 'https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_dental.pdf',
     videoUrl: 'https://www.youtube.com/watch?v=tXif7xeZmGI',
-    externalUrl: '/reports/report_dental.pdf'
+    externalUrl: 'https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_dental.pdf'
   },
   {
     id: 'report-ml-lis',
@@ -115,7 +115,7 @@ export const autonomousTools: ResearchTool[] = [
     status: 'Completed',
     tags: ['Machine Learning', 'Computer Vision', 'Ranking', 'MIT CSAIL'],
     canonicalPath: '/research/report-ml-lis',
-    pdfUrl: '/reports/report_ml.pdf',
+    pdfUrl: 'https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_ml.pdf',
     videoUrl: 'https://www.youtube.com/watch?v=0U0pPbWhLVE'
   },
   {
@@ -128,7 +128,7 @@ export const autonomousTools: ResearchTool[] = [
     status: 'Completed',
     tags: ['Hardware', 'Cryptography', 'BSV', 'MIT'],
     canonicalPath: '/research/report-6375-rsa',
-    pdfUrl: '/reports/report_6375.pdf'
+    pdfUrl: 'https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_6375.pdf'
   },
   {
     id: 'report-ce118-mechatronics',
@@ -141,7 +141,7 @@ export const autonomousTools: ResearchTool[] = [
     tags: ['Mechatronics', 'Embedded C', 'Robotics', 'UCSC'],
     image: 'https://i.ytimg.com/vi/qSe8JmWQnYk/hqdefault.jpg',
     canonicalPath: '/research/report-ce118-mechatronics',
-    pdfUrl: '/reports/report_ce118.pdf',
+    pdfUrl: 'https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_ce118.pdf',
     videoUrl: 'https://www.youtube.com/watch?v=qSe8JmWQnYk'
   },
   {
@@ -154,6 +154,6 @@ export const autonomousTools: ResearchTool[] = [
     status: 'Completed',
     tags: ['Embedded Systems', 'Microcontrollers', 'Assembly', 'UCSC'],
     canonicalPath: '/research/report-ce121-microprocessor',
-    pdfUrl: '/reports/report_ce121.pdf'
+    pdfUrl: 'https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_ce121.pdf'
   }
 ];

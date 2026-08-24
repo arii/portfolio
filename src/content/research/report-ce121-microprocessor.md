@@ -33,7 +33,7 @@ Key technical specifications:
 
 ## Downloadable Technical Report
 
-- 📄 [Download Microprocessor System Design Report (PDF)](/reports/report_ce121.pdf)
+- 📄 [Download Microprocessor System Design Report (PDF)](https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_ce121.pdf)
 
 ---
 

@@ -38,7 +38,7 @@ Key technical highlights:
 
 ## Downloadable Technical Report
 
-- 📄 [Download Machine Learning Technical Report (PDF)](/reports/report_ml.pdf)
+- 📄 [Download Machine Learning Technical Report (PDF)](https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_ml.pdf)
 
 ---
 
