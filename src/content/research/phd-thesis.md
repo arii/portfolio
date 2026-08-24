@@ -17,9 +17,9 @@ videoUrl: "https://www.youtube.com/watch?v=so-9kkQXlxc&list=PLEcASxU_mgVi6kMdElu
 
 ## MIT Ph.D. Dissertation — Computer Science and Artificial Intelligence Laboratory (CSAIL)
 
-**Author:** Ariel Anders, Ph.D.
-**Advisor:** Prof. Leslie Pack Kaelbling & Prof. Tomás Lozano-Pérez
-**Institution:** Massachusetts Institute of Technology (MIT CSAIL)
+* **Author:** Ariel Anders, Ph.D.
+* **Advisors:** Prof. Leslie Pack Kaelbling & Prof. Tomás Lozano-Pérez
+* **Institution:** Massachusetts Institute of Technology (MIT CSAIL)
 
 ---
 
@@ -27,7 +27,7 @@ videoUrl: "https://www.youtube.com/watch?v=so-9kkQXlxc&list=PLEcASxU_mgVi6kMdElu
 
 Autonomous robotic assembly in unconstrained real-world environments is severely constrained by visual occlusion, sensor noise, and actuation inaccuracy. Standard open-loop pick-and-place plans fail catastrophically when tolerances are tight—a single millimeter of alignment error can jam a peg or knock over a multi-block structure.
 
-This doctoral dissertation introduces a **conformant planning framework** that enables autonomous robots (such as the Willow Garage PR2) to execute complex, multi-stage object arrangements with high reliability **without relying on real-time external visual sensing during execution**.
+In my doctoral dissertation, I introduced a **conformant planning framework** that enables autonomous robots (such as the Willow Garage PR2) to execute complex, multi-stage object arrangements with high reliability **without relying on real-time external visual sensing during execution**.
 
 ---
 
@@ -35,13 +35,13 @@ This doctoral dissertation introduces a **conformant planning framework** that e
 
 https://www.youtube.com/watch?v=so-9kkQXlxc&list=PLEcASxU_mgVi6kMdElumAUh-gJW4wCOUV
 
-*ICRA 2018 Spotlight Video demonstrating PR2 robot executing conformant planning manipulation without vision feedback.*
+*ICRA 2018 Spotlight Video demonstrating my PR2 robot executing conformant planning manipulation without vision feedback.*
 
 ---
 
 ## Key Experimental Results
 
-By leveraging physics-driven environmental interactions and passive fixtures (such as corners, guide plates, and pushing motions), the developed conformant planning algorithm drastically improved assembly task success rates across multi-block Tetris structure trials:
+By leveraging physics-driven environmental interactions and passive fixtures (such as corners, guide plates, and pushing motions), my conformant planning algorithm drastically improved assembly task success rates across multi-block Tetris structure trials:
 
 | Planning Approach | Success Rate | Alignment Error |
 | :--- | :--- | :--- |
@@ -53,12 +53,12 @@ By leveraging physics-driven environmental interactions and passive fixtures (su
 ## Core Technical Contributions
 
 ### 1. Fixture-Augmented Conformant Motion Planning
-- Formulates multi-body assembly actions that use physical surfaces and fixtures as "funnels" to collapse belief state uncertainty.
+- Formulated multi-body assembly actions that use physical surfaces and fixtures as "funnels" to collapse belief state uncertainty.
 - Pushing an object against a wall or corner reduces pose uncertainty down to mechanical alignment tolerances without requiring camera feedback.
 
 ### 2. Belief State Optimization & Simulation Filtering
-- Computes probability distribution over possible object poses (belief state transitions).
-- Evaluates sequence candidates in physics simulators (Bullet/ODE) to select trajectory pipelines that guarantee set convergence despite initial pose variance.
+- Computed probability distributions over possible object poses (belief state transitions).
+- Evaluated sequence candidates in physics simulators (Bullet/ODE) to select trajectory pipelines that guarantee set convergence despite initial pose variance.
 
 ### 3. Real-World Execution on PR2 Manipulator
 - Validated on a 2-arm PR2 robot performing intricate multi-block assembly tasks (Tetris-style block placement, box packing, and multi-stage stacking).
