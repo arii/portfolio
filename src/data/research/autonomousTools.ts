@@ -163,5 +163,18 @@ export const autonomousTools: ResearchTool[] = [
     tags: ['Embedded Systems', 'Microcontrollers', 'Assembly', 'UCSC'],
     canonicalPath: '/research/report-ce121-microprocessor',
     pdfUrl: 'https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_ce121.pdf'
+  },
+  {
+    id: 'undergraduate-projects',
+    taxonomyBucket: 'infrastructure',
+    title: 'Undergraduate Engineering Projects & Robotics B-Roll',
+    subtitle: 'UCSC Robotics & Hardware Systems',
+    description: 'Archive of foundational undergraduate robotics, embedded hardware projects, mechatronics demos, and video footage from UCSC.',
+    category: 'Robotics & Hardware',
+    status: 'Completed',
+    tags: ['Robotics', 'Mechatronics', 'Embedded Systems', 'UCSC', 'Hardware'],
+    image: 'https://i.ytimg.com/vi/qSe8JmWQnYk/hqdefault.jpg',
+    canonicalPath: '/research/undergraduate-projects',
+    playlistUrl: 'https://www.youtube.com/playlist?list=PL2C1605ACDFFFA855'
   }
 ];
