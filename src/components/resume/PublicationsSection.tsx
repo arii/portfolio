@@ -65,7 +65,7 @@ export const PublicationsSection: React.FC<PublicationsSectionProps> = ({
             )}
 
             {pub.venue && (
-              <p className="text-[11px] text-muted-foreground/80 italic print:text-gray-800">{pub.venue}</p>
+              <p className="text-[11px] text-muted-foreground/80 italic print:text-text-body">{pub.venue}</p>
             )}
           </div>
         ))}

@@ -34,7 +34,7 @@ const HeroPathCard: React.FC<HeroPathCardProps> = ({ card, onNavigate }) => {
   return (
     <button
       onClick={handleClick}
-      className="text-left w-full group bg-slate-900/60 hover:bg-slate-900/90 border border-slate-800 hover:border-accent/40 hover:-translate-y-1 hover:shadow-lg rounded-xl p-5 sm:p-6 cursor-pointer transition-all duration-300 flex flex-col justify-between space-y-3.5 shadow-md focus:outline-none focus:ring-2 focus:ring-accent/50 h-full"
+      className="text-left w-full group bg-surface/60 hover:bg-surface/90 border border-line hover:border-accent/40 hover:-translate-y-1 hover:shadow-lg rounded-xl p-5 sm:p-6 cursor-pointer transition-all duration-300 flex flex-col justify-between space-y-3.5 shadow-md focus:outline-none focus:ring-2 focus:ring-accent/50 h-full"
     >
       <div className="space-y-2.5">
         {badge && (
