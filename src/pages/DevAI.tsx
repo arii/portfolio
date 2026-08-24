@@ -28,6 +28,10 @@ const DevAI: React.FC<DevAIProps> = () => {
       'light-therapy': 'light-therapy-mit',
       'boop-light-detector': 'boop-light-detector',
       'boop': 'boop-light-detector',
+      'report-6375-rsa': 'report-6375-rsa',
+      'report-ml-lis': 'report-ml-lis',
+      'report-ce118-mechatronics': 'report-ce118-mechatronics',
+      'report-ce121-microprocessor': 'report-ce121-microprocessor',
     };
 
     if (slug in researchOnlyRedirects) {

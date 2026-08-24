@@ -5,7 +5,7 @@ import ResearchListPage from '../ResearchListPage';
 import { HelmetProvider } from 'react-helmet-async';
 
 describe('DevAI and Research List Page Deduplication', () => {
-  it('renders DevAIListPage correctly', () => {
+  it('renders DevAIListPage correctly and excludes research/academic report items', () => {
     const handleNavigate = vi.fn();
     render(
       <HelmetProvider>
@@ -18,9 +18,15 @@ describe('DevAI and Research List Page Deduplication', () => {
     expect(screen.getByText('DevAI Orchestration')).toBeInTheDocument();
     expect(screen.queryByText(/Delivery Bots/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/BeaverWorks/i)).not.toBeInTheDocument();
+
+    // Academic & microprocessor reports excluded from DevAI
+    expect(screen.queryByText(/Hardware RSA Accelerator/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Applying Machine Learning Techniques/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Autonomous Mechatronic Systems/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Microprocessor System Design/i)).not.toBeInTheDocument();
   });
 
-  it('renders ResearchListPage correctly with Delivery Bots and BeaverWorks RACECAR', () => {
+  it('renders ResearchListPage correctly with Delivery Bots, BeaverWorks RACECAR, and Academic Reports', () => {
     const handleNavigate = vi.fn();
     render(
       <HelmetProvider>
@@ -34,5 +40,11 @@ describe('DevAI and Research List Page Deduplication', () => {
     expect(screen.getByText('Robotics and Academic Projects')).toBeInTheDocument();
     expect(screen.getAllByText(/Delivery Bots/i).length).toBeGreaterThan(0);
     expect(screen.getAllByText(/BeaverWorks/i).length).toBeGreaterThan(0);
+
+    // Academic & microprocessor reports present on Research
+    expect(screen.getAllByText(/Hardware RSA Accelerator/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/Applying Machine Learning/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/Autonomous Mechatronic Systems/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/Microprocessor System Design/i).length).toBeGreaterThan(0);
   });
 });
