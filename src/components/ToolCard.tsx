@@ -79,7 +79,7 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
       return (
         <div
           onClick={() => isResearch ? onNavigate(targetSlug) : window.open(targetSlug, '_blank', 'noopener,noreferrer')}
-          className="block outline-none"
+          className="block outline-none cursor-pointer"
           role="button"
           tabIndex={0}
           onKeyDown={(e) => {

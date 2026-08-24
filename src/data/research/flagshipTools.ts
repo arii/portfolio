@@ -64,6 +64,7 @@ export const flagshipTools: ResearchTool[] = [
     canonicalPath: '/research/conformant-planning-manipulation',
     image: '/assets/research/phd/sixblock.png',
     imageAlt: 'PR2 robot reliably arranging blocks using conformant planning without external sensing feedback',
+    videoUrl: 'https://www.youtube.com/watch?v=so-9kkQXlxc&list=PLEcASxU_mgVi6kMdElumAUh-gJW4wCOUV',
     externalUrl: 'https://dspace.mit.edu/handle/1721.1/122822',
     externalLinkDisplayLabel: 'MIT DSpace Thesis',
     sourceUrl: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=NM6SfiEAAAAJ&citation_for_view=NM6SfiEAAAAJ:4DMP91E08xMC'
@@ -80,6 +81,8 @@ export const flagshipTools: ResearchTool[] = [
     isFlagship: true,
     image: '/assets/research/masters-thesis.png',
     imageAlt: 'Robot manipulator executing whole-arm contact and grasping strategy on irregular objects',
+    canonicalPath: '/research/masters-thesis',
+    videoUrl: 'https://www.youtube.com/watch?v=pmdjquZoJkE',
     externalUrl: 'https://dspace.mit.edu/entities/publication/ead0c10d-3401-46a1-bcc5-42f5a56fe0b8',
     externalLinkDisplayLabel: 'MIT DSpace Thesis'
   }
