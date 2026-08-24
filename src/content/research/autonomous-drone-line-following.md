@@ -18,13 +18,18 @@ videoUrl: "https://www.youtube.com/watch?v=f5l8GA1PHm8"
 
 The **Drone Line Following Autonomous Controller** project involved engineering a real-time computer vision and state feedback control loop for a micro quadrotor (Parrot Rolling Spider) to autonomously detect, align with, and track floor-marked paths ("Follow the Yellow Brick Road").
 
+![Parrot Rolling Spider Drone Setup and Line Following Flight](/assets/research/drone.jpg)
+
 ---
 
-## Flight Demonstration Video
+## Flight Demonstration Videos
 
 https://www.youtube.com/watch?v=f5l8GA1PHm8
+https://www.youtube.com/watch?v=pmg2qBnSXtw
+https://www.youtube.com/watch?v=njzohksfnB4
+https://www.youtube.com/watch?v=UW5mkcNSp5g
 
-*Rolling Spider micro-drone executing closed-loop visual path tracking along a yellow floor-marked trajectory.*
+*Rolling Spider micro-drone executing closed-loop visual path tracking along yellow floor-marked trajectories across multiple test runs.*
 
 ---
 
