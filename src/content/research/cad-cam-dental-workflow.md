@@ -17,6 +17,9 @@ summary: "Robotic UI and verified experimental workflows for autonomous dental c
 
 The **CAD/CAM Robotic Dental Crowning Workflow** was an advanced medical robotics initiative conducted at the **Bionics Lab, University of California, Santa Cruz (UCSC)**. The project focused on developing interactive user interfaces and trajectory planning workflows for semi-autonomous robotic dental restoration.
 
+![CAD/CAM Robotic Dental Crowning Workflow and Setup](/assets/research/dental.jpg)
+*Figure 1: Robotic dental crowning experimental setup and software user interface at UCSC Bionics Lab.*
+
 ---
 
 ## Technical Context & Surgical Challenge
