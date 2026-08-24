@@ -15,7 +15,7 @@ interface HomeProps {
   onNavigate?: (tab: string) => void;
 }
 
-export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
+const Home: React.FC<HomeProps> = ({ onNavigate }) => {
   const navigate = useNavigate();
 
   const handleNav = (tab: string) => {

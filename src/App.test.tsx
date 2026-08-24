@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { createHashRouter } from 'react-router-dom';
 import App from '@/App';
 import Layout from '@/components/Layout';
-import { Home } from '@/pages/Home';
+import Home from '@/pages/Home';
 
 describe('arii/portfolio Smoke Test', () => {
   test('renders application successfully without errors', () => {

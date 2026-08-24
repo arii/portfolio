@@ -5,7 +5,7 @@ export interface SafeImageProps extends React.ImgHTMLAttributes<HTMLImageElement
   containerClassName?: string;
 }
 
-export const SafeImage: React.FC<SafeImageProps> = ({
+const SafeImage: React.FC<SafeImageProps> = ({
   src,
   alt,
   fallbackSrc,

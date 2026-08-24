@@ -6,7 +6,7 @@ export interface ResearchCardProps {
   project: ResearchProject;
 }
 
-export const ResearchCard: React.FC<ResearchCardProps> = ({ project }) => {
+const ResearchCard: React.FC<ResearchCardProps> = ({ project }) => {
   return (
     <article className="flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-all hover:shadow-md">
       <div className="relative aspect-video w-full overflow-hidden bg-muted">
