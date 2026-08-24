@@ -21,6 +21,8 @@ summary: "Campus-wide seasonal affective disorder (SAD) wellness initiative fund
 
 ## Background & Mental Health Context
 
+![Light therapy campus setup](/assets/research/light.jpg)
+
 New England winters feature drastically reduced daylight hours and harsh weather, which significantly impacts mental health, mood regulation, and academic productivity—especially for international students and non-native East Coast residents adjusting to winter conditions.
 
 Clinical research demonstrates that daily exposure to **10,000 lux artificial light therapy** effectively treats SAD by regulating circadian rhythms and melatonin levels. However, high-grade phototherapy lightboxes are bulky and expensive for individual students to purchase.
