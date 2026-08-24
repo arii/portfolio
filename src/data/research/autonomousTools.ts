@@ -2,6 +2,20 @@ import { ResearchTool } from '@/types/research';
 
 export const autonomousTools: ResearchTool[] = [
   {
+    id: 'duckietown',
+    taxonomyBucket: 'infrastructure',
+    title: 'MIT Duckietown (Autonomous Taxi Fleet)',
+    description: 'An open-source, low-cost robotics education and research platform for autonomous driving, multi-agent fleet coordination, and lane tracking for rubber ducks.',
+    category: 'Robotics & Autonomy',
+    status: 'Completed',
+    tags: ['Robotics & Autonomy', 'Computer Vision', 'Lane Tracking', 'ROS', 'Multi-Agent', 'MIT'],
+    image: 'https://i.ytimg.com/vi/rPpewHIF2KU/hqdefault.jpg',
+    imageAlt: 'Duckietown autonomous vehicles operating on miniature road networks',
+    canonicalPath: '/research/duckietown',
+    videoUrl: 'https://www.youtube.com/watch?v=rPpewHIF2KU',
+    externalUrl: 'https://www.duckietown.org/'
+  },
+  {
     id: 'bwsi-racecar',
     taxonomyBucket: 'infrastructure',
     title: 'BeaverWorks Summer Institute (RACECAR)',

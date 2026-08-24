@@ -34,5 +34,6 @@ describe('DevAI and Research List Page Deduplication', () => {
     expect(screen.getByText('Robotics and Academic Projects')).toBeInTheDocument();
     expect(screen.getAllByText(/Delivery Bots/i).length).toBeGreaterThan(0);
     expect(screen.getAllByText(/BeaverWorks/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/Duckietown/i).length).toBeGreaterThan(0);
   });
 });
