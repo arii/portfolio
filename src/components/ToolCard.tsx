@@ -63,7 +63,23 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
       )}
 
       <p className="text-xs text-text-dim leading-relaxed">{tool.description}</p>
+
       <div className="flex flex-wrap gap-1.5 pt-1">
+        {tool.pdfUrl && (
+          <span className="inline-flex items-center gap-1 text-[10px] bg-accent/10 text-accent border border-accent/20 px-2 py-0.5 rounded font-medium">
+            📄 PDF Report
+          </span>
+        )}
+        {tool.videoUrl && (
+          <span className="inline-flex items-center gap-1 text-[10px] bg-accent/10 text-accent border border-accent/20 px-2 py-0.5 rounded font-medium">
+            ▶️ Video Demo
+          </span>
+        )}
+        {tool.playlistUrl && (
+          <span className="inline-flex items-center gap-1 text-[10px] bg-accent/10 text-accent border border-accent/20 px-2 py-0.5 rounded font-medium">
+            📺 Playlist
+          </span>
+        )}
         {tool.tags.map(tag => (
           <span key={tag} className="text-[9px] bg-surface px-2 py-0.5 text-text-dim border border-line rounded-full">{tag}</span>
         ))}

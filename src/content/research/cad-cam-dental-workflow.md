@@ -44,6 +44,18 @@ Ariel engineered key control UI software and trajectory validation scripts:
 
 ---
 
+## Video Demonstrations & Media
+
+- ▶️ [Watch Dental Robotics Demonstration Video](https://www.youtube.com/watch?v=tXif7xeZmGI)
+
+---
+
+## Downloadable Technical Report
+
+- 📄 [Download Dynamic Registration for Dental Robotics Report (PDF)](https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_dental.pdf)
+
+---
+
 ## Research Significance
 
 - Demonstrated the feasibility of semi-autonomous robotic assistance in chairside dental restoration.
