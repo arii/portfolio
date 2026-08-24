@@ -464,7 +464,7 @@ summary: "iOS accessibility utility translating ambient light intensity into aud
 
 ## iOS Assistive Technology for Visually Impaired Users
 
-**Boop Light Detector** is an iOS accessibility application designed to translate ambient light levels into audible frequencies and tactile haptic feedback. Developed by Ariel Anders following the **MIT Assistive Technology Hackathon (ATHack 2016)**, the app has served blind and visually impaired users worldwide with over **6,000+ downloads** on the Apple App Store.
+**Boop Light Detector** is an iOS accessibility application designed to translate ambient light levels into audible frequencies and tactile haptic feedback. Developed following the **MIT Assistive Technology Hackathon (ATHack 2016)**, the app has served blind and visually impaired users worldwide with over **6,000+ downloads** on the Apple App Store.
 
 ![Boop Light Detector app testing during development and user trials](/assets/research/app_testing.jpg)
 
@@ -509,7 +509,7 @@ This produces a normalized luminescence rating from **0 to 100**, enabling preci
 
 - **6,000+ Downloads:** Published on the Apple App Store as a completely free tool with zero ads, data collection, or tracking.
 - **ATHack 2016 Awardee:** Received Honorable Mention at MIT ATHack 2016 in collaboration with co-creators and blind accessibility advocate Jonathan Gale.
-- **Recommended Accessibility Tool:** Highlighted on *AppleVis* and community directories supporting independent living for blind individuals.
+- **Recommended Accessibility Tool:** Highlighted on community directories supporting independent living for blind individuals.
 `,zD=Object.freeze(Object.defineProperty({__proto__:null,default:LD},Symbol.toStringTag,{value:"Module"})),ID=`---
 title: "BeaverWorks Summer Institute (RACECAR)"
 date: "2018-07-01"
