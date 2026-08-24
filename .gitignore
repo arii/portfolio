@@ -122,3 +122,6 @@ dist/
 Thumbs.db
 cli/
 cli/
+
+# Python virtual environment
+.venv/

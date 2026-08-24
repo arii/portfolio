@@ -47,37 +47,16 @@ export const systemTools: ResearchTool[] = [
     }
   },
   {
-    id: 'wcs-scraper',
+    id: 'ai-experiments',
     taxonomyBucket: 'infrastructure',
-    title: 'High-Scale Telemetry Ingestion ETL',
-    subtitle: 'Scraper-to-Parquet Pipeline',
-    description: 'A data engineering showcase for Dev AI systems, transforming raw competitive dance records into compressed Parquet formats. This enables efficient RAG indexing and complex analytical queries.',
-    category: 'Data Engineering',
-    status: 'Active',
-    tags: ['ETL', 'Apache Parquet', 'Scraping', 'Data Pipelines'],
-    canonicalPath: '/research/wcs-scraper'
-  },
-  {
-    id: 'blog-drafter',
-    taxonomyBucket: 'infrastructure',
-    title: 'AI Blog Drafter',
-    subtitle: 'Human-in-the-Loop Content Engine',
-    description: 'A prompt engineering platform designed for brand-consistent content generation. It combines RAG over existing blog posts with a human-in-the-loop workflow to maintain editorial quality.',
-    category: 'Content Tools',
-    status: 'Active',
-    tags: ['LLM', 'Content Generation', 'Productivity'],
-    canonicalPath: '/research/blog-drafter'
-  },
-  {
-    id: 'ecommerce-automation',
-    taxonomyBucket: 'infrastructure',
-    title: 'Ecommerce Automation Experiments',
-    subtitle: 'Printful & Merch Pipeline',
-    description: 'Automated merch operations including programmatic design generation, Printful API storefront sync, and incoming Amazon affiliate integration workflows.',
-    category: 'Business Automation',
+    title: 'AI Experiments (In Progress)',
+    subtitle: 'Scraper, Ecommerce & Content Generation Pipelines',
+    description: 'A consolidated collection of active AI experiments and automated routines: WCS event telemetry ingestion ETL, Printful API storefront sync, and RAG-driven AI blog drafting.',
+    category: 'AI Experiments (In Progress)',
     status: 'In Progress',
-    tags: ['Printful API', 'Image Gen', 'Amazon Sync', 'Workflow'],
-    canonicalPath: '/research/ecommerce-automation'
+    tags: ['ETL', 'WCS Scraper', 'Printful API', 'LLM', 'RAG', 'Automation'],
+    canonicalPath: '/research/ai-experiments',
+    sourceUrl: 'https://github.com/arii/tech-dancer'
   },
   {
     id: 'versiontruth',

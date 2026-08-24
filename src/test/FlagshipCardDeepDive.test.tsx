@@ -24,9 +24,9 @@ describe('FlagshipCard Deep-Dive Linking', () => {
     expect(handleNavigate).toHaveBeenCalledWith(expectedSlug);
   };
 
-  it('renders "Read Deep-Dive" for boomtick-blog and navigates to ecommerce-automation', () => {
+  it('renders "Read Deep-Dive" for boomtick-blog and navigates to ai-experiments', () => {
     const boomtickTool = flagshipTools.find((t) => t.id === 'boomtick-blog');
-    verifyDeepDiveNavigation(boomtickTool, '/research/ecommerce-automation', 'ecommerce-automation');
+    verifyDeepDiveNavigation(boomtickTool, '/research/ai-experiments', 'ai-experiments');
   });
 
   it('renders "Read Deep-Dive" for repo-auditor-ai and navigates to gitops-pr-reviewer', () => {
