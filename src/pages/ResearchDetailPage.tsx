@@ -138,6 +138,60 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
                 {children}
               </ol>
             ),
+            a: ({ href, children, ...props }) => {
+              if (href) {
+                // Extract video ID or playlist ID
+                let embedUrl: string | null = null;
+                const ytMatch = href.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+                const listMatch = href.match(/youtube\.com\/.*[?&]list=([a-zA-Z0-9_-]+)/);
+
+                if (ytMatch) {
+                  embedUrl = `https://www.youtube.com/embed/${ytMatch[1]}${listMatch ? `?list=${listMatch[1]}` : ''}`;
+                } else if (listMatch) {
+                  embedUrl = `https://www.youtube.com/embed/videoseries?list=${listMatch[1]}`;
+                }
+
+                // If children is an image (thumbnail preview) or link text asking to play video
+                const isEmbedLink = href.includes('youtube.com') || href.includes('youtu.be');
+
+                if (embedUrl && isEmbedLink) {
+                  return (
+                    <span className="block my-6 space-y-2">
+                      <div className="relative aspect-video w-full rounded-2xl overflow-hidden border border-line bg-surface shadow-md">
+                        <iframe
+                          src={embedUrl}
+                          title={typeof children === 'string' ? children : 'YouTube video player'}
+                          className="absolute top-0 left-0 w-full h-full border-0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                          allowFullScreen
+                        />
+                      </div>
+                      <a
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block text-xs font-medium text-accent hover:underline"
+                        {...props}
+                      >
+                        Open on YouTube ↗
+                      </a>
+                    </span>
+                  );
+                }
+              }
+
+              return (
+                <a
+                  href={href}
+                  target={href?.startsWith('http') ? '_blank' : undefined}
+                  rel={href?.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  className="text-accent hover:underline font-medium"
+                  {...props}
+                >
+                  {children}
+                </a>
+              );
+            },
             p: ({ children, ...props }) => (
               <p className="text-text-body text-base leading-relaxed mb-6" {...props}>
                 {children}
@@ -147,6 +201,18 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
               <li className="text-text-body leading-relaxed" {...props}>
                 {children}
               </li>
+            ),
+            img: ({ src, alt, ...props }) => (
+              <figure className="my-8 space-y-3">
+                <div className="overflow-hidden rounded-2xl border border-line bg-bg shadow-lg">
+                  <img src={src} alt={alt || ''} className="w-full h-auto object-cover" {...props} />
+                </div>
+                {alt && (
+                  <figcaption className="text-center text-xs font-mono text-text-dim px-4 leading-relaxed">
+                    <span className="font-semibold text-accent-sky">Figure:</span> {alt}
+                  </figcaption>
+                )}
+              </figure>
             )
           }}
         >

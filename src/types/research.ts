@@ -24,6 +24,9 @@ export interface ResearchTool {
   canonicalPath?: string;
   externalUrl?: string;
   externalLinkDisplayLabel?: string;
+  pdfUrl?: string;
+  videoUrl?: string;
+  playlistUrl?: string;
   sourceUrl?: string;
   isFlagship?: boolean;
   excludeFromEngineeringTools?: boolean;

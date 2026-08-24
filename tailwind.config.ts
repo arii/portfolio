@@ -21,6 +21,8 @@ const config: Config = {
         'text-primary': '#f8fafc',
         'text-secondary': '#cbd5e1',
         'surface-elevated': '#1e293b',
+        'slate-blue': '#7FA8C9',
+        'slate-blue-light': '#b5d0e8',
         error: '#ef4444',
 
         background: '#020617', // slate-950

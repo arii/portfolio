@@ -113,7 +113,8 @@ dist/
 *.sln
 *.sw?
 
-# Vite build output
+# Build artifacts
+artifacts/
 dist/
 
 # OS files
@@ -121,3 +122,6 @@ dist/
 Thumbs.db
 cli/
 cli/
+
+# Python virtual environment
+.venv/

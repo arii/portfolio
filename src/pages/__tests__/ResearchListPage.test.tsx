@@ -14,8 +14,8 @@ describe('DevAI and Research List Page Deduplication', () => {
     );
 
     expect(screen.getByText('DevAI & Software Systems')).toBeInTheDocument();
-    expect(screen.getByText('Flagship Applications & Tooling')).toBeInTheDocument();
-    expect(screen.getByText('Technical Articles & Deep Dives')).toBeInTheDocument();
+    expect(screen.getByText('Products built with DevAI')).toBeInTheDocument();
+    expect(screen.getByText('DevAI Orchestration')).toBeInTheDocument();
   });
 
   it('renders ResearchListPage correctly', () => {
@@ -27,8 +27,8 @@ describe('DevAI and Research List Page Deduplication', () => {
     );
 
     expect(screen.getByText('Robotics & Algorithmic Research')).toBeInTheDocument();
-    expect(screen.getByText('Doctoral & Graduate Theses')).toBeInTheDocument();
+    expect(screen.getByText('Graduate Theses')).toBeInTheDocument();
     expect(screen.getByText('Peer-Reviewed Publications')).toBeInTheDocument();
-    expect(screen.getByText('Applied Systems & Infrastructure Projects')).toBeInTheDocument();
+    expect(screen.getByText('Robotics and Academic Projects')).toBeInTheDocument();
   });
 });

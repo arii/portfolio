@@ -17,9 +17,9 @@ describe('PhD Thesis Flagship Project', () => {
   it('renders PhD Thesis as a flagship project card with media and external link on ResearchListPage', () => {
     render(<ResearchListPage onNavigate={() => {}} />);
 
-    expect(screen.getByText('Reliably Arranging Objects (PhD Thesis)')).toBeInTheDocument();
+    expect(screen.getByText('Reliably Arranging Objects')).toBeInTheDocument();
     expect(screen.getByText('MIT CSAIL PH.D. THESIS')).toBeInTheDocument();
-    expect(screen.getByText('MIT DSpace Thesis')).toBeInTheDocument();
+    expect(screen.getAllByText('MIT DSpace Thesis')[0]).toBeInTheDocument();
 
     const phdImage = screen.getByAltText(/PR2 robot reliably arranging blocks/i);
     expect(phdImage).toBeInTheDocument();

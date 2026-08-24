@@ -1,0 +1,125 @@
+---
+type: study
+title: "AI Experiments (In Progress)"
+date: "2026-08-15"
+author: "Ariel Anders"
+category: "AI Experiments"
+tags: ["ETL", "WCS Scraper", "Printful API", "LLM", "RAG", "Automation", "Visual Testing"]
+excerpt: "A collection of custom dev tools, background ETL pipelines, and automated UI testing workflows I am currently building."
+readTime: 10
+status: "In Progress"
+---
+
+A collection of custom dev tools, background ETL pipelines, and automated UI testing workflows I am currently building.
+
+---
+
+### Quick Status
+
+- **[WCS Scraping & ETL](#1-wcs-event-telemetry-scraping--etl-pipeline)** *(Production)* — 100% automated weekly sync with zero manual maintenance.
+- **[Storefront Automation](#2-ecommerce-merchandising--storefront-automation)** *(Active)* — Converts vector art and pushes variant configurations directly to Printful.
+- **[RAG AI Blog Drafter](#3-context-aware-technical-blog-drafter)** *(In Progress)* — Speeds up first-draft technical writing by 4x using past posts as core context.
+- **[Visual UX Auditor](#4-visual-regression--ux-auditor)** *(Active)* — Catches responsive UI layout breaks across viewports using Playwright.
+
+---
+
+## 1. WCS Event Telemetry Scraping & ETL Pipeline
+
+**Stack:** Python • Pydantic • GitHub Actions • BeautifulSoup
+
+![WCS Telemetry Scraper execution console and schema validation interface](/assets/research/ai-experiments/wcs-scraper.png)
+
+Tracking regional West Coast Swing event schedules and dancer registries from the [World Swing Dance Council](https://worldwestcoastswingcouncil.com/events/) manually was a headache. Registration links broke often, and dates fell out of sync.
+
+To fix this, I wrote a lightweight scraper using `BeautifulSoup` and `Pydantic`. It handles missing registry links by creating fallback temporary hashes (`tmp_{hash(name)}`) so valid events never get dropped during ingestion.
+
+```python
+# etl/scraper.py - Pydantic validation & fallback hashing
+from pydantic import BaseModel, Field
+from typing import Optional
+
+class WCSEvent(BaseModel):
+    name: str = Field(..., min_length=1)
+    location: str
+    date: str
+    registry_id: Optional[str] = None
+
+# Fallback generator for missing WSDC registry IDs
+def parse_registry_id(link_tag, event_name: str) -> str:
+    if link_tag and 'href' in link_tag.attrs:
+        return link_tag['href'].split('/')[-1]
+    return f"tmp_{hash(event_name)}"
+```
+
+The pipeline runs on a weekly GitHub Actions cron job. Before committing changes to `public/data/event_queue.json`, it checks `git diff --staged` to make sure we don't spam commit logs when event data hasn't changed.
+
+```yaml
+# .github/workflows/wcs_etl.yml - Git diff guardrail
+- name: Commit and Push Data
+  run: |
+    git add public/data/event_queue.json
+    if git diff --staged --quiet; then
+      echo "No changes in event data. Skipping commit."
+    else
+      git commit -m "chore: Sync latest WSDC Event Data"
+      git push
+    fi
+```
+
+- **The Result:** The pipeline runs quietly in the background every Monday, keeping our frontend JSON data fresh with zero manual maintenance.
+
+---
+
+## 2. Ecommerce Merchandising & Storefront Automation
+
+**Stack:** TypeScript • Printful REST API • Vector Processing
+
+Setting up products manually on Printful—uploading artwork, recalculating margins, and mapping variants—became incredibly repetitive. To fix this, I built an automated pipeline that ingests source vector files, auto-clips dimensions to stay safely inside print zones, and syncs variants directly via the [Printful API](https://developers.printful.com/docs/).
+
+```typescript
+// sync/printful.ts - Automated variant payload creation
+export async function syncProductVariant(variantId: number, printFileUrl: string) {
+  const res = await fetch(`https://api.printful.com/store/products/${variantId}`, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      sync_product: { name: 'BoomTick Commemorative Apparel' },
+      sync_variants: [{ retail_price: '28.00', files: [{ type: 'default', url: printFileUrl }] }]
+    })
+  });
+  return res.json();
+}
+```
+
+- **Why it matters:** It removes the manual merchandising overhead and keeps our product pricing and catalog nodes aligned in real time.
+
+---
+
+## 3. Context-Aware Technical Blog Drafter
+
+**Stack:** Vector DB • LLM • Markdown
+
+![AI Blog Drafter prompt generation and contextual vector retrieval interface](/assets/research/ai-experiments/blog-drafter.png)
+
+Drafting technical posts from scratch usually means wasting time fixing inconsistent code formatting or drift from established style guidelines.
+
+To speed up my workflow, I built a local RAG tool. It indexes previous Markdown posts into a local vector store, pulling my exact writing style, phrasing preferences, and code conventions straight into the LLM prompts.
+
+- **The Impact:** It hits the right structural hierarchy on the first try, cutting down initial drafting times by roughly 4x while keeping human editorial control.
+
+---
+
+## 4. Visual Regression & UX Auditor
+
+**Stack:** Playwright • Pixelmatch • CI/CD
+
+![Playwright Visual UX Auditor console showing visual regression diff score and breakpoint preview](/assets/research/ai-experiments/ux-auditor.png)
+
+CSS layout shifts, broken elements, and font size glitches across mobile and desktop screens can easily slip past standard unit tests.
+
+I set up an automated visual testing workflow using [Playwright](https://github.com/microsoft/playwright) and [Pixelmatch](https://github.com/mapbox/pixelmatch). It captures full-page snapshots at key breakpoints (`375px`, `768px`, `1280px`) and flags pixel-level diffs on pull requests before changes hit production.
+
+- **Outcome:** Catches responsive layout breaks automatically before merging code.

@@ -1,6 +1,6 @@
 import React from 'react';
 import { MapPin, GraduationCap, Award, LucideIcon } from 'lucide-react';
-import { MailIcon, LinkedinIcon, GithubIcon } from '@/components/SocialIcons';
+import { MailIcon, LinkedinIcon, GithubIcon, BoomTickIcon, ScholarIcon } from '@/components/SocialIcons';
 
 export interface ProfileDetail {
   label: string;
@@ -18,7 +18,7 @@ export interface HighlightItem {
 export interface ProfileData {
   name: string;
   role: string;
-  bio: string[];
+  bio: React.ReactNode[];
   details: ProfileDetail[];
   availability: string;
   highlights: HighlightItem[];
@@ -27,10 +27,25 @@ export interface ProfileData {
 
 export const profileData: ProfileData = {
   name: "Ariel Anders, PhD",
-  role: "Senior roboticist · DevAI engineer",
+  role: "Roboticist & Senior Software Engineer",
   bio: [
-    "I'm an MIT PhD roboticist and senior software engineer with deep expertise in AI, motion planning, and autonomous systems. Most recently, I've been applying robotics-grade software rigor to autonomous AI engineering agents, agentic CI/CD pipelines, and developer infrastructure.",
-    "Outside of robotics and AI, you’ll usually find me on the dance floor or in a theater. I am an active West Coast Swing dancer who travels for regional events, and I practice improv comedy. Recently, I combined my technical background with these creative outlets to build boomtick.blog, a lifestyle and community platform featuring West Coast Swing guides, gear recommendations, and custom merchandise."
+    React.createElement('span', null,
+      "I am an MIT CSAIL roboticist whose work focuses on ",
+      React.createElement('strong', { className: 'font-bold text-text-main' }, "building reliable autonomous systems"),
+      ". My research focused on learning physics-based models for planning under uncertainty.  I bring deep experience across research and industry, from ",
+      React.createElement('strong', { className: 'font-bold text-text-main' }, "robot manipulation to social navigation"),
+      " in dynamic indoor environments and autonomous driving."
+    ),
+    React.createElement('span', null,
+      "Over the past year, I’ve built ",
+      React.createElement('strong', { className: 'font-bold text-text-main' }, "stateful, multi-agent workflows for software development"),
+      ", using AI to engineer feature-rich applications while maintaining code quality and architectural standards, bringing ",
+      React.createElement('strong', { className: 'font-bold text-text-main' }, "robotics-grade reliability to DevAI"),
+      "."
+    ),
+    React.createElement('span', null,
+      "Outside of robotics and AI, you’ll usually find me on the dance floor or exploring San Francisco. I am an active West Coast Swing dancer who travels for regional events, perform in improv comedy jams, stay fit with high-intensity workouts, and love a good game of chess. Recently, I combined my technical background with these creative outlets to build boomtick.blog, a lifestyle and community platform featuring West Coast Swing guides, gear recommendations, and custom merchandise."
+    )
   ],
   details: [
     { label: "Location", value: "San Francisco, CA", icon: MapPin },
@@ -74,6 +89,8 @@ export const profileData: ProfileData = {
   socials: [
     { label: "Email", url: "mailto:anders.ariel@gmail.com", icon: MailIcon },
     { label: "LinkedIn", url: "https://www.linkedin.com/in/ariel-anders/", icon: LinkedinIcon },
-    { label: "GitHub", url: "https://github.com/arii", icon: GithubIcon }
+    { label: "GitHub", url: "https://github.com/arii", icon: GithubIcon },
+    { label: "Google Scholar", url: "https://scholar.google.com/citations?user=NM6SfiEAAAAJ&hl=en", icon: ScholarIcon },
+    { label: "BoomTick Blog", url: "https://boomtick.blog", icon: BoomTickIcon }
   ]
 };

@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { Home } from '../Home';
+import Home from '../Home';
 
 describe('Home Page', () => {
   it('renders hero title and role hierarchy correctly', () => {
@@ -16,7 +16,7 @@ describe('Home Page', () => {
     expect(screen.getByText('Roboticist & Senior Software Engineer')).toBeInTheDocument();
   });
 
-  it('renders all three distilled bio paragraphs without outdated employer listings', () => {
+  it('renders distilled bio paragraph without outdated employer listings', () => {
     const handleNavigate = vi.fn();
     render(
       <MemoryRouter>
@@ -25,14 +25,12 @@ describe('Home Page', () => {
     );
 
     expect(
-      screen.getByText(/I architect reliable autonomous systems for physical robots and build agentic workflows that autonomously engineer full-stack software\./i)
+      screen.getByText(/I build reliable software for robotics and autonomous systems, from motion planning and localization to production infrastructure and AI-assisted development\./i)
     ).toBeInTheDocument();
-    expect(
-      screen.getByText(/I am an MIT CSAIL roboticist whose work focuses on building reliable autonomous systems\./i)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(/Over the past year, I’ve built stateful, multi-agent workflows for software development/i)
-    ).toBeInTheDocument();
+
+    // Verify removed bio paragraphs are absent
+    expect(screen.queryByText(/I am an MIT CSAIL roboticist whose work focuses on building reliable autonomous systems/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Over the past year, I’ve built stateful, multi-agent workflows/i)).not.toBeInTheDocument();
 
     // Verify removed employer list is absent from the hero
     expect(screen.queryByText(/At Robust AI, I was the tech lead/i)).not.toBeInTheDocument();
@@ -61,11 +59,11 @@ describe('Home Page', () => {
     expect(screen.getByText('Engineering Philosophy')).toBeInTheDocument();
     expect(screen.getByText('AI-Accelerated Rigor')).toBeInTheDocument();
     expect(
-      screen.getByText(/AI should raise the bar, not lower it/i)
+      screen.getByText(/I build agentic CI\/CD workflows and automated code reviews/i)
     ).toBeInTheDocument();
     expect(screen.getByText('Make Robots Behave')).toBeInTheDocument();
     expect(
-      screen.getByText(/Robots operate in environments that are uncertain and hard to model/i)
+      screen.getByText(/I combine machine learning, motion planning, and precise system design/i)
     ).toBeInTheDocument();
   });
 

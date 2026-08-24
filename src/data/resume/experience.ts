@@ -16,7 +16,7 @@ export const experienceData: ResumeExperience[] = [
   {
     title: "Independent AI Engineering & Research",
     company: "Autonomous Fitness Ecosystem & AI DevOps Pipeline",
-    period: "Jan 2025 – Aug 2025",
+    period: "Jan 2025 – present",
     link: "https://github.com/arii/hrm",
     description: "Dedicated research & development period focused on agentic AI pipelines and telemetry infrastructure.",
     points: [

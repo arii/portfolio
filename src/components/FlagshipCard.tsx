@@ -1,13 +1,8 @@
 import React from 'react';
-import { ExternalLink, ArrowRight, FlaskConical, Activity, Server, FileText, ShoppingBag, Cpu } from 'lucide-react';
+import { ExternalLink, ArrowRight, FlaskConical, Activity, Server, FileText, ShoppingBag, Cpu, Video, Play } from 'lucide-react';
 import { ResearchTool } from '@/types/research';
 import SafeImage from '@/components/ui/SafeImage';
-
-const GithubIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
-  </svg>
-);
+import { GithubIcon } from '@/components/SocialIcons';
 
 export interface FlagshipCardProps {
   tool: ResearchTool;
@@ -18,6 +13,7 @@ export interface FlagshipCardProps {
 const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageClick }) => {
   const getToolIcon = (t: ResearchTool) => {
     if (t.id.includes('hrm')) return Activity;
+    if (t.id.includes('experiments')) return FlaskConical;
     if (t.id.includes('scraper')) return Server;
     if (t.id.includes('blog-drafter')) return FileText;
     if (t.id.includes('ecommerce')) return ShoppingBag;
@@ -54,9 +50,11 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
         <div className="space-y-3">
           <div className="flex items-center justify-between">
             <div className="h-10 w-10 rounded-2xl bg-accent/10 flex items-center justify-center border border-accent/20"><ToolIcon className="h-5 w-5 text-accent" /></div>
-            <span className="rounded-full bg-accent/10 px-2.5 py-0.5 text-[9px] font-semibold uppercase text-accent border border-accent/20">
-              {tool.id === 'boomtick-blog' ? 'Active dev' : 'Flagship'}
-            </span>
+            {tool.id !== 'phd-thesis' && tool.id !== 'masters-thesis' && (
+              <span className="rounded-full bg-accent/10 px-2.5 py-0.5 text-[9px] font-semibold uppercase text-accent border border-accent/20">
+                {tool.id === 'boomtick-blog' ? 'Active dev' : 'Flagship'}
+              </span>
+            )}
           </div>
           <div>
             <span className="text-[10px] text-accent font-bold uppercase tracking-wider block font-sans">{tool.category}</span>
@@ -88,6 +86,16 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
                 <span>Read Deep-Dive</span><ArrowRight className="h-3.5 w-3.5" />
               </button>
             )}
+            {tool.videoUrl && (
+              <a
+                href={tool.videoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center space-x-1.5 bg-surface border border-line px-3.5 py-2 rounded-xl text-xs font-semibold text-text-dim hover:bg-surface-alt hover:text-text-main transition-colors min-h-[44px]"
+              >
+                <Video className="h-3.5 w-3.5 text-accent" /><span>Watch Video</span>
+              </a>
+            )}
             {tool.externalUrl && (
               <a
                 href={tool.externalUrl}
@@ -100,6 +108,28 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
                 }`}
               >
                 <span>{tool.externalLinkDisplayLabel || 'Open Link'}</span><ExternalLink className="h-3.5 w-3.5" />
+              </a>
+            )}
+            {tool.videoUrl && (
+              <a
+                href={tool.videoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center space-x-1.5 bg-accent/10 border border-accent/20 px-3.5 py-2 rounded-xl text-xs font-semibold text-accent hover:bg-accent/20 transition-colors min-h-[44px]"
+              >
+                <Video className="h-3.5 w-3.5" />
+                <span>Watch Video</span>
+              </a>
+            )}
+            {tool.playlistUrl && (
+              <a
+                href={tool.playlistUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center space-x-1.5 bg-surface border border-line px-3.5 py-2 rounded-xl text-xs font-semibold text-text-dim hover:bg-surface-alt hover:text-text-main transition-colors min-h-[44px]"
+              >
+                <Play className="h-3.5 w-3.5 text-accent" />
+                <span>Watch Playlist</span>
               </a>
             )}
             {tool.sourceUrl && (

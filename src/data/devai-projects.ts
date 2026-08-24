@@ -8,6 +8,5 @@ export const DEVAI_PROJECTS: ResearchTool[] = [
 ];
 
 export const DEVAI_FLAGSHIPS = [
-  ...flagshipTools.filter(t => ['hrm-flagship', 'repo-auditor-ai', 'boomtick-blog'].includes(t.id)),
-  ...systemTools.filter(t => t.id === 'deployment-impact-analyzer')
+  ...flagshipTools.filter(t => ['hrm-flagship', 'repo-auditor-ai', 'boomtick-blog'].includes(t.id))
 ];

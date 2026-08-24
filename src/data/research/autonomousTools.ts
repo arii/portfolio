@@ -9,8 +9,11 @@ export const autonomousTools: ResearchTool[] = [
     category: 'Education',
     status: 'Completed',
     tags: ['Robotics & Autonomy', 'Computer Vision', 'Visual Servoing', 'Motion Planning', 'ROS'],
-    image: '/assets/research/bw.jpg',
+    image: 'https://i.ytimg.com/vi/DUp9yURMo2c/hqdefault.jpg',
     imageAlt: 'Students programming miniature autonomous vehicles',
+    canonicalPath: '/research/bwsi-racecar',
+    videoUrl: 'https://www.youtube.com/watch?v=DUp9yURMo2c',
+    playlistUrl: 'https://www.youtube.com/playlist?list=PLEcASxU_mgVgnMZvVHgrTGFMUXze0MiOp',
     externalUrl: 'https://beaverworks.ll.mit.edu/CMS/bw/bwsi'
   },
   {
@@ -20,16 +23,10 @@ export const autonomousTools: ResearchTool[] = [
     description: 'Decentralized multi-agent package delivery in dynamic human environments (RSS 2015 Best Paper Finalist & IJRR journal publication).',
     category: 'Robotics & Autonomy',
     status: 'Completed',
-    tags: ['Robotics & Autonomy', 'Multi-Agent', 'RSS 2015 Finalist', 'IJRR']
-  },
-  {
-    id: 'swag-grasping',
-    taxonomyBucket: 'infrastructure',
-    title: 'Learning Strategy for Whole-Arm Grasping (SWAG)',
-    description: 'Master’s thesis utilizing reinforcement learning for bulky and irregular dynamic whole-arm manipulation.',
-    category: 'Robotics & Autonomy',
-    status: 'Completed',
-    tags: ['Robotics & Autonomy', 'Reinforcement Learning', 'Manipulation', "Master's Thesis"]
+    tags: ['Robotics & Autonomy', 'Multi-Agent', 'RSS 2015 Finalist', 'IJRR'],
+    image: '/assets/research/beer.png',
+    imageAlt: 'Autonomous delivery robots operating in dynamic human environment',
+    canonicalPath: '/research/delivery-bots'
   },
   {
     id: 'autonomous-drone-line-following',
@@ -39,8 +36,10 @@ export const autonomousTools: ResearchTool[] = [
     category: 'Robotics',
     status: 'Completed',
     tags: ['Robotics & Autonomy', 'Control Systems', 'Computer Vision', 'Drones'],
-    image: '/assets/research/drone.jpg',
+    image: 'https://i.ytimg.com/vi/f5l8GA1PHm8/hqdefault.jpg',
     imageAlt: 'Parrot Rolling Spider Drone hovering over path',
+    canonicalPath: '/research/autonomous-drone-line-following',
+    videoUrl: 'https://www.youtube.com/watch?v=f5l8GA1PHm8',
     externalUrl: 'https://github.com/arii/FollowTheYellowBrickRoad'
   },
   {
@@ -66,6 +65,8 @@ export const autonomousTools: ResearchTool[] = [
     category: 'Community Health & Wellness',
     status: 'Completed',
     tags: ['MindHandHeart', 'Community', 'Wellness', 'MIT'],
+    image: '/assets/research/light.jpg',
+    imageAlt: 'Light therapy lamps installed across MIT campus locations',
     canonicalPath: '/research/light-therapy-mit',
     externalUrl: 'https://arii.github.io/SAD/',
     sourceUrl: 'https://github.com/arii/SAD'
@@ -100,11 +101,67 @@ export const autonomousTools: ResearchTool[] = [
     id: 'cad-cam-dental-workflow',
     taxonomyBucket: 'product',
     title: 'CAD/CAM Robotic Dental Crowning Workflow',
-    description: 'Robotic UI and verified experimental workflows for autonomous dental crowning.',
+    subtitle: 'UCSC Bionics Lab',
+    description: 'Robotic trajectory planning, 6-DOF manipulation, and dynamic registration for autonomous dental crowning with Dr. Jacob Rosen.',
     category: 'Medical Robotics',
     status: 'Completed',
     tags: ['Robotics', 'Medical UI', 'CAD/CAM', 'Bionics Lab UCSC'],
+    image: '/assets/research/dental.jpg',
+    imageAlt: 'CAD/CAM Robotic Dental Crowning Workflow UI',
     canonicalPath: '/research/cad-cam-dental-workflow',
-    externalUrl: 'https://github.com/arii'
+    pdfUrl: 'https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_dental.pdf',
+    videoUrl: 'https://www.youtube.com/watch?v=tXif7xeZmGI',
+    externalUrl: 'https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_dental.pdf'
+  },
+  {
+    id: 'report-ml-lis',
+    taxonomyBucket: 'infrastructure',
+    title: 'Applying Machine Learning to Improve LIS Object Detection',
+    subtitle: 'MIT CSAIL (6.867 Machine Learning)',
+    description: 'Evaluated ordinal regression and P-norm push algorithms with Sanja Popovic to optimize candidate bounding box confidence scoring for robotic manipulation in LIS group.',
+    category: 'Machine Learning',
+    status: 'Completed',
+    tags: ['Machine Learning', 'Computer Vision', 'Ranking', 'MIT CSAIL'],
+    canonicalPath: '/research/report-ml-lis',
+    pdfUrl: 'https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_ml.pdf',
+    videoUrl: 'https://www.youtube.com/watch?v=0U0pPbWhLVE'
+  },
+  {
+    id: 'report-6375-rsa',
+    taxonomyBucket: 'infrastructure',
+    title: 'Hardware RSA Accelerator',
+    subtitle: 'MIT (6.375 Complex Digital Systems)',
+    description: 'Designed and implemented a high-performance hardware RSA encryption accelerator in Bluespec SystemVerilog with Timur Balbekov and Neil Forrester.',
+    category: 'Hardware',
+    status: 'Completed',
+    tags: ['Hardware', 'Cryptography', 'BSV', 'MIT'],
+    canonicalPath: '/research/report-6375-rsa',
+    pdfUrl: 'https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_6375.pdf'
+  },
+  {
+    id: 'report-ce118-mechatronics',
+    taxonomyBucket: 'infrastructure',
+    title: 'Autonomous Mechatronic Systems (MAK Attack)',
+    subtitle: 'UCSC (CMPE-118 Mechatronics)',
+    description: 'Autonomous mobile robot designed with Matthew Luxton and Kyle Huey for arena navigation, event detection state machines, and obstacle engagement.',
+    category: 'Mechatronics',
+    status: 'Completed',
+    tags: ['Mechatronics', 'Embedded C', 'Robotics', 'UCSC'],
+    image: 'https://i.ytimg.com/vi/qSe8JmWQnYk/hqdefault.jpg',
+    canonicalPath: '/research/report-ce118-mechatronics',
+    pdfUrl: 'https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_ce118.pdf',
+    videoUrl: 'https://www.youtube.com/watch?v=qSe8JmWQnYk'
+  },
+  {
+    id: 'report-ce121-microprocessor',
+    taxonomyBucket: 'infrastructure',
+    title: 'Microprocessor System Design (68HC11E1 Board)',
+    subtitle: 'UCSC (CMPE-121 Microprocessors)',
+    description: 'Hardware interface and embedded firmware for 68HC11E1 microcontroller board with external SRAM, ROM, address decoding, and serial communication.',
+    category: 'Embedded Systems',
+    status: 'Completed',
+    tags: ['Embedded Systems', 'Microcontrollers', 'Assembly', 'UCSC'],
+    canonicalPath: '/research/report-ce121-microprocessor',
+    pdfUrl: 'https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_ce121.pdf'
   }
 ];
