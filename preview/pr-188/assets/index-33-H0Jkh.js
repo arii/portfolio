@@ -549,13 +549,15 @@ https://www.youtube.com/watch?v=qSe8JmWQnYk
 
 ## Program Overview & Curriculum Design
 
-Ariel served as an instructional lead and curriculum developer, designing hands-on software modules and challenge scenarios that bridged theoretical robotics concepts with real-time physical system execution on mini autonomous vehicles.
+My involvement with the MIT RACECAR platform started as a graduate teaching assistant for the undergraduate course (6.141/16.405 Robotics: Science and Systems) that utilized the platform. I later transitioned to a lead instructor role for the BeaverWorks Summer Institute (BWSI) summer program for high school students.
 
-### Core Curricular Pillars
+In this capacity, I designed core curriculum—such as the visual servoing lab and cone detector—delivered technical lectures, and oversaw lab sessions where students programmed the cars to execute complex robotic behaviors.
+
+### Core Curricular Pillars & Lectures
 1. **Robot Operating System (ROS):** Teaching publisher-subscriber patterns, node communication, dynamic reconfigure, and sensor data transformation trees (\`tf\`).
-2. **Computer Vision & Visual Servoing:** Implementing OpenCV pipelines for lane detection, color blob tracking, and visual visual servoing controllers to navigate race tracks without GPS.
-3. **LIDAR Safety & Obstacle Avoidance:** Configuring planar LIDAR scans for high-speed obstacle detection, wall-following, and potential field navigation.
-4. **Motion Planning & Trajectory Tracking:** Teaching path generation (A*, Dijkstra) and high-speed trajectory follow control (Pure Pursuit, PID control).
+2. **Motion Planning:** Authored and delivered lectures on core planning algorithms, including path generation and tracking ([Watch Planning Lecture](https://www.youtube.com/watch?v=CdRs0l9f5WM)).
+3. **Computer Vision & Visual Servoing:** Developed visual servoing labs, cone detectors, and OpenCV pipelines for lane detection and color blob tracking, accompanied by dedicated instructional lectures ([Watch Visual Servoing Lecture](https://www.youtube.com/watch?v=bAAatB2IvUM)).
+4. **LIDAR & Trajectory Control:** Configured planar LIDAR scans and taught high-speed control methodologies such as Pure Pursuit, SLAM, and obstacle avoidance.
 
 ---
 
@@ -570,7 +572,7 @@ The RACECAR vehicle platform combined high-performance compute with agile physic
 
 ## Educational Impact & Competition
 
-Students culminated their intensive 4-week workshop by competing in an autonomous race through complex indoor hallways and obstacle courses, applying real-time obstacle avoidance, drift control, and wall-following strategies engineered during the program.
+Students culminated their intensive workshop by programming the cars to perform a variety of tasks—including pure pursuit, SLAM, and visual servoing—and competing in an autonomous race through complex indoor hallways and obstacle courses.
 `,UD=Object.freeze(Object.defineProperty({__proto__:null,default:ID},Symbol.toStringTag,{value:"Module"})),BD=`---
 title: "CAD/CAM Robotic Dental Crowning Workflow"
 date: "2014-06-01"
