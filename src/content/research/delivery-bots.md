@@ -13,6 +13,8 @@ summary: "Decentralized multi-agent package delivery in dynamic human environmen
 
 # Delivery Bots: Multi-Robot Coordination under Uncertainty
 
+![Autonomous Delivery Bot Transporting Item](/assets/research/beer.png)
+
 ## Decentralized Autonomous Logistics in Dynamic Human Environments
 
 The **Delivery Bots** research initiative addressed the challenge of deploying multi-robot autonomous fleets for package and item delivery within complex, populated indoor environments (such as university campuses and hospital corridors) where human motion and task durations are highly uncertain.
