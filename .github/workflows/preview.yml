@@ -12,6 +12,9 @@ jobs:
   preview:
     name: Manage PR Preview
     runs-on: ubuntu-latest
+    concurrency:
+      group: gh-pages-deploy
+      cancel-in-progress: false
 
     permissions:
       contents: write
