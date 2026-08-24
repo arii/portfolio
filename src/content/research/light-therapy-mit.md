@@ -15,36 +15,41 @@ summary: "Campus-wide seasonal affective disorder (SAD) wellness initiative fund
 
 ## Mitigating Seasonal Affective Disorder Across Campus
 
-**Light Therapy at MIT** is a community wellness initiative conceived, funded, and deployed by Ariel Anders to combat Seasonal Affective Disorder (SAD) and winter depression among students and researchers at the Massachusetts Institute of Technology.
+As a fourth-year PhD student in EECS at the Massachusetts Institute of Technology, I created **Light Therapy at MIT**—a community wellness initiative conceived, funded, and deployed to combat Seasonal Affective Disorder (SAD) and winter depression among students and researchers.
+
+*(Read the full feature on my work in [MIT News](https://news.mit.edu/2016/stata-center-phone-booths-light-therapy-aims-to-brighten-moods-0729).)*
 
 ---
 
-## Background & Mental Health Context
+## Background & Personal Context
 
-New England winters feature drastically reduced daylight hours and harsh weather, which significantly impacts mental health, mood regulation, and academic productivity—especially for international students and non-native East Coast residents adjusting to winter conditions.
+![Light therapy campus setup](/assets/research/light.jpg)
 
-Clinical research demonstrates that daily exposure to **10,000 lux artificial light therapy** effectively treats SAD by regulating circadian rhythms and melatonin levels. However, high-grade phototherapy lightboxes are bulky and expensive for individual students to purchase.
+Moving to Boston from California, I was initially terrified of the harsh New England winter. During my second winter, working long hours between my office, the lab, and the gym in the Ray and Maria Stata Center, I developed severe wrist pain and fatigue. A doctor diagnosed me with a vitamin D deficiency linked to a lack of sunlight.
+
+Once I started taking supplements, spending extra time walking in the morning sun, and using a light box at my desk, my mood lifted and my physical symptoms cleared up within a couple of weeks. When the MindHandHeart Innovation Fund launched, it felt like a natural step to bring light boxes to campus spaces so others could experience that same relief.
+
+Clinical research demonstrates that daily exposure to artificial light therapy effectively treats SAD by mimicking natural outdoor light to regulate circadian rhythms and melatonin levels in the hypothalamus. However, high-grade phototherapy lightboxes can be bulky and expensive for individual students to purchase.
 
 ---
 
 ## Project Execution & Campus Deployment
 
-Supported by the **MIT MindHandHeart Innovation Fund**, Ariel proposed and executed a campus-wide phototherapy deployment plan:
+Supported by the **MIT MindHandHeart Innovation Fund**, I proposed and executed a campus-wide phototherapy deployment plan:
 
 ### 1. EHS Approval & Safety Coordination
-Worked closely with the MIT Environment, Health & Safety (EHS) department to establish safety guidelines, ensuring all deployed lamps provided **10,000 lux UV-blocked, eye-safe illumination**.
+I coordinated with MIT Environment, Health & Safety (EHS) and MIT Medical to establish safety guidelines and provide contact info for campus wellness resources.
 
 ### 2. High-Traffic Phototherapy Stations
-Installed public floor-standing and desktop lightbox stations in key accessible locations, including public quiet booths in the **MIT Stata Center (Building 32)**.
+Teaming up with John Costanza (CSAIL's assistant director of infrastructure), we installed public lightboxes inside three bright red, sun-yellow interior phone/conference booths on floors 2, 4, and 7 of the Stata Center (Building 32).
 
 ### 3. Equipment Evaluation
-- **Floor Models:** Full-spectrum 10,000 lux floor lamps for seated reading and study spaces.
-- **Desktop Models:** Compact blue-light and ion phototherapy units for workstation integration.
+Users were given full control to switch the bright-light lamps on and off depending on their preference. I collected ongoing feedback via suggestion boxes and my project website to evaluate the pilot's success.
 
 ---
 
 ## Outcomes & Legacy
 
 - **Institutional Funding:** Successfully secured initial grant funding from MindHandHeart's inaugural Innovation Fund round.
-- **Mental Health Awareness:** Created open educational resources and guidelines for students on phototherapy protocols, vitamin D supplementation, and winter wellness.
-- **Campus Adoption:** Deployed lightboxes remained active throughout winter months, serving as a template for subsequent student mental health initiatives across MIT dormitories and departments.
+- **Mental Health Awareness:** Educated the campus community about SAD—a condition that Massachusetts residents are particularly vulnerable to during long winter months.
+- **Campus Adoption:** The pilot project served as a template for expanding mental health support and student-led wellness initiatives across MIT dormitories and departments.
