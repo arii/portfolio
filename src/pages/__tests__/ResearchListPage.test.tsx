@@ -16,9 +16,11 @@ describe('DevAI and Research List Page Deduplication', () => {
     expect(screen.getByText('DevAI & Software Systems')).toBeInTheDocument();
     expect(screen.getByText('Products built with DevAI')).toBeInTheDocument();
     expect(screen.getByText('DevAI Orchestration')).toBeInTheDocument();
+    expect(screen.queryByText(/Delivery Bots/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/BeaverWorks/i)).not.toBeInTheDocument();
   });
 
-  it('renders ResearchListPage correctly', () => {
+  it('renders ResearchListPage correctly with Delivery Bots and BeaverWorks RACECAR', () => {
     const handleNavigate = vi.fn();
     render(
       <HelmetProvider>
@@ -30,5 +32,7 @@ describe('DevAI and Research List Page Deduplication', () => {
     expect(screen.getByText('Graduate Theses')).toBeInTheDocument();
     expect(screen.getByText('Peer-Reviewed Publications')).toBeInTheDocument();
     expect(screen.getByText('Robotics and Academic Projects')).toBeInTheDocument();
+    expect(screen.getAllByText(/Delivery Bots/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/BeaverWorks/i).length).toBeGreaterThan(0);
   });
 });
