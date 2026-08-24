@@ -1,5 +1,5 @@
 ---
-title: "Stop Asking the LLM to Review Everything"
+title: "GitHub Actions LLM Code Review Automated"
 date: "2024-05-10"
 author: "Ariel Anders"
 category: "DevAI"
