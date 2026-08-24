@@ -843,10 +843,13 @@ summary: "Decentralized multi-agent package delivery in dynamic human environmen
 
 The **Delivery Bots** research initiative addressed the challenge of deploying multi-robot autonomous fleets for package and item delivery within complex, populated indoor environments (such as university campuses and hospital corridors) where human motion and task durations are highly uncertain.
 
+To demonstrate the system in action, we converted the MIT CSAIL lab into a miniature "bar" featuring a PR2 robot "bartender" and two Turtlebot "waiters". As the demo lead for this project, I guided the live demonstration showcasing how decentralized robots can coordinate efficiently even with intermittent communication.
+
 ---
 
 ## Research Significance & Honors
 
+- **Demo Leadership & Awards:** Led the live project demonstration and won 2nd place at the **CSAIL Research Highlights (Spring 2015)**.
 - **RSS 2015 Best Paper Finalist:** Recognized at the *Robotics: Science and Systems (RSS)* conference in Rome, Italy.
 - **IJRR Journal Publication:** Expanded into a comprehensive journal paper published in the *International Journal of Robotics Research (IJRR)*.
 
@@ -876,6 +879,14 @@ To solve these challenges, the team developed a decentralized Macro-Action POMDP
 ### 3. Real-World Autonomous Deployment
 - Evaluated on a fleet of autonomous mobile robots operating in MIT building corridors over multi-day deployment trials.
 - Demonstrated robust package delivery throughput despite unexpected corridor blockages and variable human interaction delays.
+
+---
+
+## Media Impact & Government Legacy
+
+The project drew widespread public interest for using beer delivery as a fun and relatable proxy to test complex multi-robot algorithms intended for critical logistics, such as transporting medical supplies or navigating disaster zones:
+- **Featured in MIT News & National Media:** Highlighted across outlets like the *Los Angeles Times*, *HuffPost*, *Popular Science*, and *UPI* for advancing real-world multi-agent coordination.
+- **A Legislative Milestone:** The project achieved unexpected fame when U.S. Senator Jeff Flake introduced an amendment to the Department of Defense appropriations bill specifically targeting the research to ban federal funding for "beerbots and other robot bartenders"—cementing its unique place in both robotics history and legislative trivia.
 `,VD=Object.freeze(Object.defineProperty({__proto__:null,default:FD},Symbol.toStringTag,{value:"Module"})),GD=`---
 type: study
 title: "Visual Impact / UX Audit"
