@@ -23,8 +23,32 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
   const ToolIcon = getToolIcon(tool);
   const imageSrc = tool.id === 'hrm-flagship' ? '/assets/research/hrm-flagship.png' : tool.id === 'repo-auditor-ai' ? '/assets/research/repo-auditor-ai.png' : tool.image || null;
 
+  const isClickable = !!tool.canonicalPath;
+  const targetSlug = tool.canonicalPath ? tool.canonicalPath.replace('/research/', '') : '';
+
+  const handleCardClick = () => {
+    if (isClickable && targetSlug) {
+      onNavigate(targetSlug);
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if ((e.key === 'Enter' || e.key === ' ') && isClickable && targetSlug) {
+      if (e.key === ' ') e.preventDefault();
+      onNavigate(targetSlug);
+    }
+  };
+
   return (
-    <div className="rounded-3xl border border-line bg-surface p-0 flex flex-col justify-between overflow-hidden transition-all hover:border-accent hover:shadow-glow">
+    <div
+      onClick={handleCardClick}
+      onKeyDown={handleKeyDown}
+      tabIndex={isClickable ? 0 : undefined}
+      role={isClickable ? 'button' : undefined}
+      className={`group rounded-3xl border border-line bg-surface p-0 flex flex-col justify-between overflow-hidden transition-all hover:border-accent hover:shadow-glow ${
+        isClickable ? 'cursor-pointer' : ''
+      }`}
+    >
       {tool.customPreview ? (
         <div className="p-6 bg-bg border-b border-line min-h-[140px] flex flex-col justify-center space-y-2">
           <div className="text-accent font-extrabold text-sm tracking-wider font-display">
@@ -36,11 +60,17 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
           <div className="text-xs text-text-dim">{tool.customPreview.tagline}</div>
         </div>
       ) : imageSrc ? (
-        <div onClick={() => onImageClick(imageSrc)} className="relative aspect-[16/10] max-h-48 sm:max-h-64 overflow-hidden bg-bg border-b border-line cursor-zoom-in group">
+        <div
+          onClick={(e) => {
+            e.stopPropagation();
+            onImageClick(imageSrc);
+          }}
+          className="relative aspect-[16/10] max-h-48 sm:max-h-64 overflow-hidden bg-bg border-b border-line cursor-zoom-in group/img"
+        >
           <SafeImage
             src={imageSrc}
             alt={tool.imageAlt || tool.title}
-            className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-102"
+            className="w-full h-full object-cover object-top transition-transform duration-500 group-hover/img:scale-102"
             containerClassName="w-full h-full"
           />
         </div>
@@ -58,7 +88,7 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
           </div>
           <div>
             <span className="text-[10px] text-accent font-bold uppercase tracking-wider block font-sans">{tool.category}</span>
-            <h3 className="text-xl font-bold text-text-main mt-1 font-display">{tool.title}</h3>
+            <h3 className="text-xl font-bold text-text-main mt-1 font-display group-hover:text-accent transition-colors">{tool.title}</h3>
             {tool.subtitle && <p className="text-xs text-accent font-semibold tracking-wide mt-1 uppercase font-sans">{tool.subtitle}</p>}
           </div>
           <p className="text-sm text-text-dim leading-relaxed">{tool.description}</p>
@@ -77,10 +107,13 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
             ))}
           </div>
 
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-3" onClick={(e) => e.stopPropagation()}>
             {tool.canonicalPath && (
               <button
-                onClick={() => onNavigate(tool.canonicalPath?.replace('/research/', '') || '')}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onNavigate(targetSlug);
+                }}
                 className="inline-flex items-center space-x-1.5 bg-accent/10 border border-accent/20 px-3.5 py-2 rounded-xl text-xs font-semibold text-accent hover:bg-accent/20 transition-colors min-h-[44px] cursor-pointer"
               >
                 <span>Read Deep-Dive</span><ArrowRight className="h-3.5 w-3.5" />
@@ -91,6 +124,7 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
                 href={tool.videoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
                 className="inline-flex items-center space-x-1.5 bg-surface border border-line px-3.5 py-2 rounded-xl text-xs font-semibold text-text-dim hover:bg-surface-alt hover:text-text-main transition-colors min-h-[44px]"
               >
                 <Video className="h-3.5 w-3.5 text-accent" /><span>Watch Video</span>
@@ -101,6 +135,7 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
                 href={tool.externalUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
                 className={`inline-flex items-center space-x-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold transition-colors min-h-[44px] ${
                   tool.canonicalPath
                     ? 'bg-surface border border-line text-text-dim hover:bg-surface-alt hover:text-text-main'
@@ -110,22 +145,12 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
                 <span>{tool.externalLinkDisplayLabel || 'Open Link'}</span><ExternalLink className="h-3.5 w-3.5" />
               </a>
             )}
-            {tool.videoUrl && (
-              <a
-                href={tool.videoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center space-x-1.5 bg-accent/10 border border-accent/20 px-3.5 py-2 rounded-xl text-xs font-semibold text-accent hover:bg-accent/20 transition-colors min-h-[44px]"
-              >
-                <Video className="h-3.5 w-3.5" />
-                <span>Watch Video</span>
-              </a>
-            )}
             {tool.playlistUrl && (
               <a
                 href={tool.playlistUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
                 className="inline-flex items-center space-x-1.5 bg-surface border border-line px-3.5 py-2 rounded-xl text-xs font-semibold text-text-dim hover:bg-surface-alt hover:text-text-main transition-colors min-h-[44px]"
               >
                 <Play className="h-3.5 w-3.5 text-accent" />
@@ -137,6 +162,7 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
                 href={tool.sourceUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
                 className="inline-flex items-center space-x-1.5 bg-surface border border-line px-3.5 py-2 rounded-xl text-xs font-semibold text-text-dim hover:bg-surface-alt hover:text-text-main transition-colors min-h-[44px]"
               >
                 <span>Source Repo</span><GithubIcon className="h-3.5 w-3.5" />

@@ -17,7 +17,7 @@ describe('FlagshipCard Deep-Dive Linking', () => {
     const handleNavigate = vi.fn();
     render(<FlagshipCard tool={tool!} onNavigate={handleNavigate} onImageClick={() => {}} />);
 
-    const deepDiveBtn = screen.getByRole('button', { name: /Read Deep-Dive/i });
+    const deepDiveBtn = screen.getAllByRole('button', { name: /Read Deep-Dive/i })[0];
     expect(deepDiveBtn).toBeInTheDocument();
 
     fireEvent.click(deepDiveBtn);
