@@ -13,6 +13,8 @@ summary: "Cross-departmental robotics research conference organization and web p
 
 # RoboCon MIT
 
+![RoboCon event portal showcase](/assets/research/robocon.jpg)
+
 ## Fostering Cross-Departmental Robotics Collaboration
 
 **RoboCon MIT** was a cross-departmental robotics research conference organized to bridge research silos between the Computer Science and Artificial Intelligence Laboratory (CSAIL), Mechanical Engineering (MechE), AeroAstro, and Media Lab robotics groups at MIT.
