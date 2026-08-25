@@ -25,8 +25,7 @@ During my undergraduate studies in Computer Engineering at UC Santa Cruz (UCSC),
 
 #### CMPE 100L Laboratory: Breadboard D Flip-Flop
 
-[![Breadboard D Flip-Flop Demonstration](/assets/research/undergraduate-projects/flip_flop.gif)](https://www.youtube.com/watch?v=G0uw5PP9fuw#no-embed)
-*Figure: Breadboard D Flip-Flop hardware loops. [Watch Full Video Demonstration on YouTube ↗](https://www.youtube.com/watch?v=G0uw5PP9fuw#no-embed)*
+[![Breadboard D Flip-Flop hardware loops. | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=G0uw5PP9fuw#no-embed](/assets/research/undergraduate-projects/flip_flop.gif)](https://www.youtube.com/watch?v=G0uw5PP9fuw#no-embed)
 
 ---
 
@@ -39,8 +38,7 @@ During my undergraduate studies in Computer Engineering at UC Santa Cruz (UCSC),
 
 For **CMPE-121 Microprocessor System Design** at UC Santa Cruz, I designed, hand-soldered, and programmed a custom embedded computer board based on the **Motorola 68HC11E1 microcontroller**, bringing bare silicon up to full operational capability to control a mechanical gripper without a host computer.
 
-![68HC11 Microcontroller Board Schematic](/assets/research/report-ce121-microprocessor/68hc11_board_schematic.png)
-*Figure: Complete hardware schematic for the custom Motorola 68HC11E1 microcontroller system board.*
+![Complete hardware schematic for the custom Motorola 68HC11E1 microcontroller system board.](/assets/research/report-ce121-microprocessor/68hc11_board_schematic.png#invert-dark)
 
 ### Hardware Interfacing & Firmware Engineering
 
@@ -50,8 +48,7 @@ Building the single-board computer required precise hardware timing analysis, ma
 2. **Serial & Peripheral Communication:** Configured RS-232 serial UART communication for terminal debugging alongside SPI interface logic for peripheral expansion.
 3. **Power Regulation & Hardware Diagnostics:** Designed onboard 5V linear power regulation circuitry and integrated LED logic displays for verifying memory read/write cycles.
 
-![Memory Address Decoding Subsystem](/assets/research/report-ce121-microprocessor/memory_address_decoding.png)
-*Figure: Memory address decoding block diagram mapping 8KB SRAM and EPROM windows into the 68HC11 memory space.*
+![Memory address decoding block diagram mapping 8KB SRAM and EPROM windows into the 68HC11 memory space.](/assets/research/report-ce121-microprocessor/memory_address_decoding.png#invert-dark)
 
 ### Software & Gripper Control Implementation
 
@@ -60,8 +57,7 @@ The software was structured to manage real-time communication and hardware feedb
 * **Pseudo-Force Control:** Motor resistance is regulated by specifying direct current levels. I mapped out eight distinct current settings into their hexadecimal representations, creating a structured command look-up table for both opening and closing actions.
 * **Dynamic Lookup System:** When an operator presses a digital push-button, the program measures the active voltage across the potentiometer and uses that value to index the corresponding open or close command from the lookup table.
 
-[![68HC11 Microcontroller Board and Mechanical Gripper](/assets/research/undergraduate-projects/gripper_control.gif)](https://www.youtube.com/watch?v=tXif7xeZmGI#no-embed)
-*Figure: 68HC11 Microcontroller Board and Mechanical Gripper hardware loops. [Watch Full Video Demonstration on YouTube ↗](https://www.youtube.com/watch?v=tXif7xeZmGI#no-embed)*
+[![68HC11 Microcontroller Board and Mechanical Gripper hardware loops.](/assets/research/undergraduate-projects/gripper_control.gif)](https://www.youtube.com/watch?v=tXif7xeZmGI#no-embed)
 
 ### Engineering Impact & Verification
 
@@ -83,8 +79,7 @@ The software was structured to manage real-time communication and hardware feedb
 
 In **CMPE-118 Introduction to Mechatronics** at UC Santa Cruz, my team (Matthew Luxton, Kyle Huey, and I) designed, constructed, and programmed **MAK Attack**—an autonomous mobile robot built to solve real-time arena navigation and object manipulation challenges under strict operational deadlines.
 
-![MAK Attack Autonomous Mechatronic Robot](/assets/research/report-ce118-mechatronics/mak_attack_robot.png)
-*Figure: The MAK Attack autonomous mobile robot platform, highlighting optical sensors, bumper switches, and custom motor drive electronics.*
+![The MAK Attack autonomous mobile robot platform, highlighting optical sensors, bumper switches, and custom motor drive electronics.](/assets/research/report-ce118-mechatronics/mak_attack_robot.png)
 
 ### **At a Glance**
 
@@ -101,8 +96,7 @@ In **CMPE-118 Introduction to Mechatronics** at UC Santa Cruz, my team (Matthew 
 
   * **Hierarchical Finite State Machine (FSM)**: Architected and programmed a complex control structure featuring modular sub-state machines (e.g., dedicated centering algorithms and localized sensor-sampling logic).
 
-![Hierarchical Event State Machine](/assets/research/report-ce118-mechatronics/hierarchical_state_machine.png)
-*Figure: Hierarchical event-driven state machine architecture governing autonomous robot behavior during arena trials.*
+![Hierarchical event-driven state machine architecture governing autonomous robot behavior during arena trials.](/assets/research/report-ce118-mechatronics/hierarchical_state_machine.png)
 
   * **Ambient-Resilient Event Detection**: Developed a differential sampling state machine for the robot’s IR tape sensors. By capturing active and passive states sequentially, the software calculated ambient light deltas to stabilize detection thresholds under variable environmental lighting.
   * **Adaptive Battery Voltage Scaling**: Engineered an algorithmic solution to address supply fluctuations (from a 14.4V dual-battery series configuration). Built continuous PWM duty-cycle scaling code utilizing a 10-bit ADC reference to normalize motor outputs relative to a steady 12V operational baseline, ensuring consistent maneuverability and projectile power.
@@ -125,10 +119,8 @@ In **CMPE-118 Introduction to Mechatronics** at UC Santa Cruz, my team (Matthew 
   * **High-Precision Target Acquisition**: Achieved exceptional accuracy with the projectile launcher, consistently landing multiple impacts on target by relying on dynamic software thresholding to counter complex external ambient light interference.
   * **Agile Problem Solving**: Overcame a critical, late-stage failure of the robot's primary micro-servos by adapting the physical chassis to house robust, larger-scale servos and utilizing custom ground shielding around signaling lines to eliminate high-current motor noise.
 
-### **Media & Report Downloads**
+### **Downloads**
 
-- ▶️ [Watch MAK Attack Line Following Robot Video](https://www.youtube.com/watch?v=qSe8JmWQnYk)
-- 📺 [Browse Robotics Demos Playlist](https://www.youtube.com/playlist?list=PLEcASxU_mgVgnMZvVHgrTGFMUXze0MiOp)
 - 📄 [Download Mechatronics Lab Report (PDF)](https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_ce118.pdf)
 
 ### **System & Component Gallery**
@@ -154,8 +146,7 @@ We created this interactive arcade game for the Tau Beta Pi student organization
 
 We wired an array of 28 individual LEDs across digital output pins 22 through 49. The code lights up one LED at a time with a quick 10ms delay, making the light look like it is spinning in a continuous circle. The game button connects to an analog input pin (A0). The microcontroller constantly reads this pin, and when the button press drops the reading below our set threshold of 500, the movement loop stops completely. This freezes the light, sends the final score data through a 9600 baud Serial pipeline, and keeps the game at the end screen until you press reset to play again.
 
-[![LED Ring Reaction Game](/assets/research/undergraduate-projects/led_game.gif)](https://www.youtube.com/watch?v=p1W5xtdLUWk#no-embed)
-*Figure: Microcontroller-Based LED Ring Reaction Game hardware loops. [Watch Full Video Demonstration on YouTube ↗](https://www.youtube.com/watch?v=p1W5xtdLUWk#no-embed)*
+[![Microcontroller-Based LED Ring Reaction Game hardware loops. | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=p1W5xtdLUWk#no-embed](/assets/research/undergraduate-projects/led_game.gif)](https://www.youtube.com/watch?v=p1W5xtdLUWk#no-embed)
 
 ---
 

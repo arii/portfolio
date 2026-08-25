@@ -15,8 +15,6 @@ videoUrl: "https://www.youtube.com/watch?v=pmdjquZoJkE"
 pdfUrl: "https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_ml.pdf"
 ---
 
-# Learning a Strategy for Whole-Arm Grasping
-
 ## MIT S.M. Thesis — Computer Science and Artificial Intelligence Laboratory (CSAIL)
 
 * **Author:** Ariel Anders

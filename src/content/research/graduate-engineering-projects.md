@@ -11,8 +11,6 @@ category: "Graduate Engineering"
 summary: "A showcase of advanced graduate-level engineering systems developed at MIT. These projects span real-time computer vision control, ordinal machine learning ranking, and parameterized hardware accelerators built using Bluespec SystemVerilog."
 ---
 
-# Graduate Engineering Projects
-
 A showcase of advanced graduate-level engineering systems developed at MIT. These projects span real-time computer vision control, ordinal machine learning ranking, and parameterized hardware accelerators built using Bluespec SystemVerilog.
 
 ---
@@ -23,8 +21,7 @@ A showcase of advanced graduate-level engineering systems developed at MIT. Thes
 
 The **Drone Line Following Autonomous Controller** ("Follow the Yellow Brick Road") project was a collaborative effort with teammates Raghav Aggarwal, Julia Sokol, and Patrick Lowe to engineer a real-time computer vision and state feedback control loop for a micro quadrotor (Parrot Rolling Spider) to autonomously detect, align with, and track floor-marked paths.
 
-[![Parrot Rolling Spider Drone Setup and Line Following Flight](/assets/research/drone_follow.gif)](https://www.youtube.com/watch?v=f5l8GA1PHm8#no-embed)
-*Figure: Rolling Spider micro-drone executing closed-loop visual path tracking along yellow floor-marked trajectories. [Watch Full Video Demonstration on YouTube ↗](https://www.youtube.com/watch?v=f5l8GA1PHm8#no-embed)*
+[![Rolling Spider micro-drone executing closed-loop visual path tracking along yellow floor-marked trajectories. | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=f5l8GA1PHm8#no-embed](/assets/research/drone_follow.gif)](https://www.youtube.com/watch?v=f5l8GA1PHm8#no-embed)
 
 ### System Architecture & Control Loop
 
@@ -53,8 +50,7 @@ Autonomous flight using low-cost micro-drones poses severe real-time compute and
 
 In this research project for **6.867 Machine Learning** at MIT CSAIL, my teammate Sanja Popovic and I evaluated learning algorithms to refine object detection ranking and confidence scoring for the **Learning and Intelligent Systems (LIS) group**.
 
-![Score versus distance discrepancy](/assets/research/report-ml-lis/fig1_score_discrepancy.png)
-*Figure: Distance discrepancy decay functions evaluated to transform spatial offsets into bounding box confidence scores.*
+![Distance discrepancy decay functions evaluated to transform spatial offsets into bounding box confidence scores.](/assets/research/report-ml-lis/fig1_score_discrepancy.png)
 
 ### Core Problem & Approach
 
@@ -66,8 +62,7 @@ To solve this issue, I focused on formulating learning-to-rank models specifical
 2. **P-Norm Push:** Implemented the P-norm push ranking algorithm, placing higher mathematical penalty on errors at the top of the ranked list so the robot's top choice is correct.
 3. **Experimental Validation:** Evaluated bounding box candidate scoring across real-world cluttered kitchen environments captured by mobile manipulators.
 
-![Ordinal regression confidence scoring evaluation](/assets/research/report-ml-lis/fig2_ranking_performance.png)
-*Figure: Performance evaluation showing how our learned weight vectors successfully elevate high-precision bounding box candidate scores.*
+![Performance evaluation showing how our learned weight vectors successfully elevate high-precision bounding box candidate scores.](/assets/research/report-ml-lis/fig2_ranking_performance.png)
 
 ### Key Results & Takeaways
 
@@ -75,9 +70,8 @@ To solve this issue, I focused on formulating learning-to-rank models specifical
 - **Robust Feature Representation:** Identified optimal spatial feature representations for candidate reranking in household manipulation tasks.
 - **Direct Practical Impact:** Provided the LIS research group with a framework to filter candidate clutter before passing target poses to motion planners.
 
-### Video Demonstrations & Downloads
+### Downloads
 
-- ▶️ [Watch IBVS Visual Servoing & Object Reranking Video](https://www.youtube.com/watch?v=0U0pPbWhLVE)
 - 📄 [Download Machine Learning Technical Report (PDF)](https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_ml.pdf)
 
 ---
@@ -88,8 +82,7 @@ To solve this issue, I focused on formulating learning-to-rank models specifical
 
 For **MIT 6.375 Complex Digital Systems**, my teammates Timur Balbekov, Neil Forrester, and I engineered a high-performance, parameterized **Hardware RSA Accelerator** using **Bluespec SystemVerilog (BSV)**.
 
-![RSA Hardware Accelerator Architecture](/assets/research/report-6375-rsa/rsa_hardware_architecture.png)
-*Figure: System architecture of the RSA accelerator showing memory interface, control rule state machines, and modular exponentiation datapath.*
+![System architecture of the RSA accelerator showing memory interface, control rule state machines, and modular exponentiation datapath.](/assets/research/report-6375-rsa/rsa_hardware_architecture.png#invert-dark)
 
 ### Architecture & Hardware Specification
 
@@ -101,8 +94,7 @@ To achieve maximum hardware throughput, I designed and synthesized custom datapa
 2. **Pipelined Datapath Design:** Built a flexible, parameterized bit-width datapath that allows developers to trade off FPGA area against target clock frequency and throughput.
 3. **BSV Guarded Atomic Actions:** Modeled execution concurrency using BSV rule synthesizability, ensuring deadlock-free hardware scheduling and clean control logic.
 
-![Montgomery Modular Multiplier Datapath](/assets/research/report-6375-rsa/montgomery_multiplier_datapath.png)
-*Figure: Pipelined Montgomery modular multiplication unit designed for high-throughput integer exponentiation.*
+![Pipelined Montgomery modular multiplication unit designed for high-throughput integer exponentiation.](/assets/research/report-6375-rsa/montgomery_multiplier_datapath.png#invert-dark)
 
 ### Technical Outcomes & Lessons Learned
 
