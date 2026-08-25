@@ -39,3 +39,16 @@ Based on a review of the consolidated site text, here are suggested improvements
 
 ## Next Steps
 Review these findings against the source files and apply the necessary edits to the `.ts`, `.tsx`, and `.md` files in the `src/` directory.
+
+## 8. Irrelevant or Uninteresting Content (Candidates for Condensing)
+**Issue:** Some content may be overly generic or focus on less impactful legacy details, diluting the core message.
+**Recommendation:**
+- **Legacy Academic Reports:** In files like `src/content/research/undergraduate-projects.md` or `report-ce121-microprocessor.md`, check if the deep technical minutiae from a decade ago is still highly relevant to the current brand as an "Agentic Orchestration Architect." Consider summarizing the outcomes rather than providing full thesis-level breakdowns.
+- **Generic Soft Skills:** In `src/data/aboutData.ts` or resume descriptions, remove any generic phrases (e.g., "proven ability to work in teams" or "strong communication skills") and replace them with concrete engineering achievements.
+
+## 9. "Needs More" (Media and Detail Gaps)
+**Issue:** Certain high-impact areas of the portfolio lack sufficient detail or visual proof.
+**Recommendation (Please advise if we should source/add these):**
+- **Agentic DevAI Visuals:** Do we have architectural flowcharts or terminal recordings (`.webm` or `.gif`) for tools like the "GitHub Actions LLM Code Review Automated" (`gitops-pr-reviewer.md`)? Currently, these sections can feel very text-heavy.
+- **AI Experiments (In Progress):** For `src/content/research/ai-experiments.md` ("WCS Scraper", "Ecommerce Automation"), the text is brief. Should we add screenshots of the scraper in action or link to a live data dashboard?
+- **Deployment & Edge Infrastructure:** The Home page lists this as a core domain pillar (`FEATURE_CALLOUTS`), but the visual representation across the site is light compared to Robotics. Do we have infrastructure diagrams (e.g., Docker/Cloud deployment topologies) we can feature to balance the portfolio?
