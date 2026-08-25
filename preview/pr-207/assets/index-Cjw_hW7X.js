@@ -542,7 +542,7 @@ summary: "Dynamic registration, kinematic calibration, and interactive UI for au
 
 ## Autonomous Surgical Robotics at Bionics Lab UCSC
 
-The **CAD/CAM Robotic Dental Crowning Workflow** project at the **Bionics Lab, University of California, Santa Cruz (UCSC)** focused on semi-autonomous robotic dental restoration. I developed dynamic registration, joint-space kinematic tracking, and surgical control software to align high-precision robotic milling and drilling with patient-specific intraoral geometry.
+The **CAD/CAM Robotic Dental Crowning Workflow** project at the **Bionics Lab, University of California, Santa Cruz (UCSC)** focused on semi-autonomous robotic dental restoration. We developed dynamic registration, joint-space kinematic tracking, and surgical control software to align high-precision robotic milling and drilling with patient-specific intraoral geometry.
 
 ![CAD/CAM Robotic Dental Crowning Setup](/assets/research/dental.jpg)
 *Figure 1: Robotic dental crowning experimental setup and software user interface at UCSC Bionics Lab.*
@@ -565,7 +565,7 @@ Key engineering challenges included:
 
 ## Kinematic Formulation & Frame Calibration
 
-To achieve precise alignment between the robotic tool tip and the target tooth site, I established coordinate frames across the arm and tracking sensor:
+To achieve precise alignment between the robotic tool tip and the target tooth site, we established coordinate frames across the arm and tracking sensor:
 
 ![Coordinate Frame Mapping](/assets/research/dental/dental_robotics-001.png)
 *Figure 3: Kinematic coordinate frame mapping between robot base D{0}, end-effector D{6}, tracking base MX{0}, and tracking probe tip MX{6}.*
@@ -594,7 +594,7 @@ Where:
 
 ## Closed-Loop Dynamic Tracking System
 
-I implemented a closed-loop controller that continuously queries the tracking arm position and adjusts the Denso robot manipulator commands in real time.
+We implemented a closed-loop controller that continuously queries the tracking arm position and adjusts the Denso robot manipulator commands in real time.
 
 ![Closed Loop Controller Architecture](/assets/research/dental/dental_robotics-003.png)
 *Figure 6: Closed-loop dynamic tracking control system diagram for real-time jaw motion compensation.*
@@ -606,7 +606,7 @@ I implemented a closed-loop controller that continuously queries the tracking ar
 
 ## Experimental Results & Tracking Accuracy
 
-I benchmarked tracking accuracy across simulated patient motion profiles using anatomical dental phantom models.
+We benchmarked tracking accuracy across simulated patient motion profiles using anatomical dental phantom models.
 
 ![Positional Tracking Error Plot](/assets/research/dental/dental_robotics-006.png)
 *Figure 8: Measured 3D positional tracking error over time during dynamic compensation testing.*
@@ -804,7 +804,7 @@ summary: "Decentralized multi-agent package delivery in dynamic human environmen
 
 The **Delivery Bots** research initiative addressed the challenge of deploying multi-robot autonomous fleets for package and item delivery within complex, populated indoor environments (such as university campuses and hospital corridors) where human motion and task durations are highly uncertain.
 
-To demonstrate the system in action, I converted the MIT CSAIL lab into a miniature "bar" featuring a PR2 robot "bartender" and two Turtlebot "waiters". As the demo lead for this project, I guided the live demonstration showcasing how decentralized robots can coordinate efficiently even with intermittent communication.
+To demonstrate the system in action, we converted the MIT CSAIL lab into a miniature "bar" featuring a PR2 robot "bartender" and two Turtlebot "waiters". As the demo lead for this project, I guided the live demonstration showcasing how decentralized robots can coordinate efficiently even with intermittent communication.
 
 ---
 
@@ -1570,13 +1570,13 @@ To address these challenges, I built and deployed a multi-faceted monitoring pla
 - Designed the initial data logging architecture and command-line execution flows to capture high-frequency power measurements.
 
 ### 2. Computer Vision State Detection
-- For hardwired laboratory equipment such as fume hoods and overhead lighting where inline smart plugs cannot be inserted, I incorporated lightweight computer vision pipelines to identify on/off states and sash positions.
+- For hardwired laboratory equipment such as fume hoods and overhead lighting where inline smart plugs cannot be inserted, we incorporated lightweight computer vision pipelines to identify on/off states and sash positions.
 
 ---
 
 ## Student Mentorship & Program Execution
 
-Following initial prototype development, I worked closely with my team—including co-founders, EHS liaisons, and talented undergraduate researchers—to support campus-wide audits:
+Following initial prototype development, I worked closely with our team—including co-founders, EHS liaisons, and talented undergraduate researchers—to support campus-wide audits:
 - **Mentorship:** Guided undergraduate team members (such as Dheekshita Kumar, Juan Ferrua, and Maxwell Drake) in configuring hardware, managing data logging repositories, and analyzing lab power draw.
 - **Collaborative Research:** This work contributed to broader campus sustainability frameworks and publications, including collaborative findings detailed in *Energy Reports* (Becerra et al., 2018).
 
@@ -1902,9 +1902,9 @@ The software was structured to manage real-time communication and hardware feedb
 
 ## Microcontroller-Based LED Ring Reaction Game for UCSC Engineering Week
 
-I created this interactive arcade game for the Tau Beta Pi student organization during Engineering Week at UC Santa Cruz in February 2020. Built by Ariel Anders, Nathan Abercrombie, and Julian Dahan, the game challenges players to press a large button and stop a fast-moving light on a specific target LED.
+We created this interactive arcade game for the Tau Beta Pi student organization during Engineering Week at UC Santa Cruz in February 2020. Built by Ariel Anders, Nathan Abercrombie, and Julian Dahan, the game challenges players to press a large button and stop a fast-moving light on a specific target LED.
 
-I wired an array of 28 individual LEDs across digital output pins 22 through 49. The code lights up one LED at a time with a quick 10ms delay, making the light look like it is spinning in a continuous circle. The game button connects to an analog input pin (A0). The microcontroller constantly reads this pin, and when the button press drops the reading below my set threshold of 500, the movement loop stops completely. This freezes the light, sends the final score data through a 9600 baud Serial pipeline, and keeps the game at the end screen until you press reset to play again.
+We wired an array of 28 individual LEDs across digital output pins 22 through 49. The code lights up one LED at a time with a quick 10ms delay, making the light look like it is spinning in a continuous circle. The game button connects to an analog input pin (A0). The microcontroller constantly reads this pin, and when the button press drops the reading below our set threshold of 500, the movement loop stops completely. This freezes the light, sends the final score data through a 9600 baud Serial pipeline, and keeps the game at the end screen until you press reset to play again.
 
 [![LED Ring Reaction Game](/assets/research/undergraduate-projects/led_game.gif)](https://www.youtube.com/watch?v=p1W5xtdLUWk#no-embed)
 *Figure: Microcontroller-Based LED Ring Reaction Game hardware loops. [Watch Full Video Demonstration on YouTube ↗](https://www.youtube.com/watch?v=p1W5xtdLUWk#no-embed)*
