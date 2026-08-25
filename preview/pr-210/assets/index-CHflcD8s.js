@@ -1572,7 +1572,7 @@ To address these challenges, I built and deployed a multi-faceted monitoring pla
 - Designed the initial data logging architecture and command-line execution flows to capture high-frequency power measurements.
 
 ### 2. Computer Vision State Detection
-- For hardwired laboratory equipment such as fume hoods and overhead lighting where I cannot insert inline smart plugs, I incorporated lightweight computer vision pipelines to identify on/off states and sash positions.
+- For hardwired laboratory equipment such as fume hoods and overhead lighting where inline smart plugs cannot be inserted, we incorporated lightweight computer vision pipelines to identify on/off states and sash positions.
 
 ---
 
