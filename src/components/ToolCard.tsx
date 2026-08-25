@@ -62,7 +62,7 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
         </div>
       )}
 
-      <p className="text-xs text-text-dim leading-relaxed">{tool.description}</p>
+      <p className="text-xs text-text-dim leading-relaxed whitespace-pre-line">{tool.description}</p>
 
       <div className="flex flex-wrap gap-1.5 pt-1">
         {tool.pdfUrl && (

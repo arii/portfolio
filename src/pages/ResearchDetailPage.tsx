@@ -205,7 +205,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
             a: ({ href, children, ...props }) => {
               if (href) {
                 const isNoEmbed = href.includes('no-embed');
-                const cleanHref = href.replace(/[\?#]no-embed/, '');
+                const cleanHref = href.replace(/[?#]no-embed/, '');
 
                 // Extract video ID or playlist ID
                 let embedUrl: string | null = null;

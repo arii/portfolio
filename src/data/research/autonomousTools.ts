@@ -32,28 +32,28 @@ export const autonomousTools: ResearchTool[] = [
     id: 'graduate-engineering-projects',
     taxonomyBucket: 'infrastructure',
     title: 'Graduate Engineering Projects',
-    subtitle: 'MIT Advanced Robotics & Systems',
-    description: 'A combined archive of advanced graduate-level engineering, machine learning, and hardware acceleration projects completed at MIT. It highlights: • Drone Autonomy: Feedback and control system design for a Parrot drone to follow floor paths. • Computer Vision: ML-driven confidence scoring to optimize robotic manipulation bounding boxes. • Hardware Acceleration (6.365): High-performance cryptographic hardware RSA design in Bluespec SystemVerilog.',
+    subtitle: 'MIT Advanced Systems',
+    description: 'A showcase of advanced graduate-level engineering systems developed at MIT spanning real-time computer vision control, ordinal machine learning ranking, and parameterized hardware accelerators.',
     category: 'Graduate Engineering',
     status: 'Completed',
-    tags: ['Robotics', 'Control Systems', 'Machine Learning', 'Computer Vision', 'Hardware', 'Cryptography', 'BSV', 'MIT'],
+    tags: ['Robotics', 'Machine Learning', 'Hardware Acceleration', 'MIT'],
     image: '/assets/research/drone_follow.gif',
     imageAlt: 'Parrot Rolling Spider Drone hovering over path',
-    canonicalPath: '/research/autonomous-drone-line-following',
+    canonicalPath: '/research/graduate-engineering-projects',
     mediaLinks: [
       {
         type: 'video',
-        label: 'Video Demo (Drone)',
+        label: 'Video Demo',
         url: 'https://www.youtube.com/watch?v=f5l8GA1PHm8'
       },
       {
         type: 'pdf',
-        label: 'PDF Report (ML Object Detection)',
+        label: 'ML PDF Report',
         url: 'https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_ml.pdf'
       },
       {
         type: 'pdf',
-        label: 'PDF Report (RSA Accelerator)',
+        label: 'RSA PDF Report',
         url: 'https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_6375.pdf'
       }
     ]

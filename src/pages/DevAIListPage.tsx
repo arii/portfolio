@@ -51,7 +51,9 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
       'bwsi-racecar',
       'report-6375-rsa',
       'report-ml-lis',
-      'report-ce118-mechatronics'
+      'report-ce118-mechatronics',
+      'graduate-engineering-projects',
+      'autonomous-drone-line-following'
     ];
     const devAiPosts = posts.filter((p) => !researchOnlySlugs.includes(p.slug));
 

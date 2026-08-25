@@ -80,7 +80,7 @@ describe('Academic Research Project Reports (PDFs)', () => {
     expect(dentalPost).toBeDefined();
     expect(dentalPost?.content).toContain('https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_dental.pdf');
 
-    const mlPost = getResearchPostBySlug('report-ml-lis');
+    const mlPost = getResearchPostBySlug('graduate-engineering-projects');
     expect(mlPost).toBeDefined();
     expect(mlPost?.content).toContain('https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_ml.pdf');
   });
