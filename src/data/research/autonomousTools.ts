@@ -139,18 +139,6 @@ export const autonomousTools: ResearchTool[] = [
     pdfUrl: 'https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_6375.pdf'
   },
   {
-    id: 'report-ce121-microprocessor',
-    taxonomyBucket: 'infrastructure',
-    title: 'Microprocessor System Design (68HC11E1 Board)',
-    subtitle: 'UCSC (CMPE-121 Microprocessors)',
-    description: 'Hardware interface and embedded firmware for 68HC11E1 microcontroller board with external SRAM, ROM, address decoding, and serial communication.',
-    category: 'Embedded Systems',
-    status: 'Completed',
-    tags: ['Embedded Systems', 'Microcontrollers', 'Assembly', 'UCSC'],
-    canonicalPath: '/research/report-ce121-microprocessor',
-    pdfUrl: 'https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_ce121.pdf'
-  },
-  {
     id: 'undergraduate-projects',
     taxonomyBucket: 'infrastructure',
     title: 'Undergraduate Engineering Projects',

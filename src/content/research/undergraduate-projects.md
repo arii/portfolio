@@ -46,9 +46,10 @@ In 2011, as part of my final microprocessor design laboratory course (CMPE 121),
 
 Building the system required an intensive wire-wrapping and soldering process to construct a custom circuit layout. The hardware configuration consists of the following components:
 
-  * **Microcontroller & Memory:** A Motorola 68HC11E1 chip operating alongside 16Kx8 external SRAM and ROM chips.
-  * **User Controls:** Two digital I/O push-buttons for manual command triggers and a potentiometer paired with an analog-to-digital (A/D) converter pin to modulate operational parameters.
-  * **Peripherals & Connectivity:** A DB9 serial port connection integrated with standard RS-232 communication lines connected directly to a mechanical gripper.
+  * **Microcontroller & Memory:** A Motorola 68HC11E1 chip configured in expanded bus mode operating alongside 8KB external SRAM and 8KB EPROM. I performed rigorous bus interface timing analysis to verify read/write constraints and avoid bus contention across hardware operating modes.
+  * **User Controls & Diagnostics:** Two digital I/O push-buttons for manual command triggers, a potentiometer paired with an analog-to-digital (A/D) converter pin to modulate operational parameters, and dedicated diagnostic LED displays for memory test validation.
+  * **Power Regulation:** An integrated 7-12V DC power regulation circuit to supply stable power to the logic and peripherals.
+  * **Peripherals & Connectivity:** A DB9 serial port connection integrated with standard RS-232 communication lines connected directly to a mechanical gripper, alongside the SPI serial protocol for auxiliary peripheral expansion.
 
 ### Software Implementation
 
@@ -59,6 +60,10 @@ The software was structured to manage real-time communication and hardware feedb
 
 ![68HC11 Microcontroller Board and Mechanical Gripper](/assets/research/undergraduate-projects/gripper_control.gif)
 *Figure: 68HC11 Microcontroller Board and Mechanical Gripper hardware loops. [Watch Full Video Demonstration on YouTube ↗](https://www.youtube.com/watch?v=tXif7xeZmGI)*
+
+### Downloadable Technical Report
+
+* 📄 [Download Microprocessor System Design Report (PDF)](https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_ce121.pdf)
 
 ---
 
