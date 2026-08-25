@@ -26,7 +26,7 @@ export interface ProfileData {
 }
 
 export const profileData: ProfileData = {
-  name: "Ariel Anders, PhD",
+  name: "Ariel Anders",
   role: "Roboticist & Senior Software Engineer",
   bio: [
     React.createElement('span', null,
@@ -40,7 +40,7 @@ export const profileData: ProfileData = {
       "Over the past year, I’ve built ",
       React.createElement('strong', { className: 'font-bold text-text-main' }, "stateful, multi-agent workflows for software development"),
       ", using AI to engineer feature-rich applications while maintaining code quality and architectural standards, bringing ",
-      React.createElement('strong', { className: 'font-bold text-text-main' }, "robotics-grade reliability to DevAI"),
+      React.createElement('strong', { className: 'font-bold text-text-main' }, "robotics-grade reliability to AI-assisted engineering"),
       "."
     ),
     React.createElement('span', null,

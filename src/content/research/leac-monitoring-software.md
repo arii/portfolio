@@ -50,7 +50,7 @@ Following initial prototype development, I worked closely with our team—includ
 
 ---
 
-## Grant Recognition & Impact
+## Grant Recognition
 
 - **MIT Green Labs Innovation Award:** Recognized with the 2017 Innovation Award ($5,000) for developing sustainable campus technology.
 - **Actionable Telemetry:** Provided free, minimally invasive energy audits and data-driven recommendations to campus research groups, establishing a scalable model for lab decarbonization.

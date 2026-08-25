@@ -20,7 +20,7 @@ videoUrl: "https://www.youtube.com/watch?v=rPpewHIF2KU"
 
 ## Overview & Inaugural MIT 2.166 Class
 
-**Duckietown** is an open-source, hands-on robotics platform created at MIT to make autonomy education accessible and standardized. The project features a fleet of miniature autonomous vehicles ("Duckiebots") navigating scaled urban environments ("Duckietowns") populated by rubber duck passengers.
+**Duckietown** is an open-source, applied robotics platform created at MIT to make autonomy education accessible and standardized. The project features a fleet of miniature autonomous vehicles ("Duckiebots") navigating scaled urban environments ("Duckietowns") populated by rubber duck passengers.
 
 I was a member of the inaugural MIT 2.166 class taking Duckietown as a student as part of my major requirements for my doctorate degree. Working directly on the platform in its founding year, I helped develop and test fundamental autonomous driving pipelines—including visual lane detection, state estimation, and multi-robot fleet coordination under real-world sensing constraints.
 
@@ -53,6 +53,6 @@ The Duckietown architecture integrates classical computer vision with real-time 
 
 ---
 
-## Impact & Educational Reach
+## Educational Reach
 
 Duckietown has grown into an international benchmark for robotics education and research competitions (such as the AI Driving Olympics). By providing a real-world testbed with physical uncertainties, lighting variations, and low-cost hardware limitations, it bridges the gap between simulated algorithms and deployed autonomous systems.

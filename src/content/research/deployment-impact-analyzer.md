@@ -2,7 +2,7 @@
 type: study
 title: "Visual Impact / UX Audit"
 date: "2026-06-19"
-author: "Ariel Anders, PhD"
+author: "Ariel Anders"
 category: "DevAI"
 tags: ["Playwright", "Dependency Graph", "CI/CD", "Automation", "Visual Review"]
 excerpt: "How we built a semantic visual impact analysis pipeline using dependency-cruiser, Playwright screenshot diffing, and automated severity scoring."

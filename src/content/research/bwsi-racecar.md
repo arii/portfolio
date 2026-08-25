@@ -71,6 +71,6 @@ The RACECAR vehicle platform combined high-performance compute with agile physic
 
 ---
 
-## Educational Impact & Competition
+## Educational Reach & Competition
 
 Students culminated their intensive workshop by programming the cars to perform a variety of tasks—including pure pursuit, SLAM, and visual servoing—and competing in an autonomous race through complex indoor hallways and obstacle courses.

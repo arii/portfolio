@@ -126,9 +126,9 @@ To communicate these theoretical planning concepts during my thesis defense pres
 
 ### IEEE ICRA Paper & Dissertation Record
 * **Thesis Title:** *Reliably Arranging Objects: A Conformant Planning Approach to Robot Manipulation*
-* **Author:** Ariel S. Anders, PhD
+* **Author:** Ariel Anders
 * **Advisors:** Prof. Leslie Pack Kaelbling & Prof. Tomás Lozano-Pérez
-* **Institution:** Massachusetts Institute of Technology (MIT CSAIL, 2019)
+* **Institution:** MIT CSAIL (2019)
 * **Direct PDF Download:** [1125200388-MIT.pdf](https://dspace.mit.edu/bitstream/handle/1721.1/122822/1125200388-MIT.pdf)
 * **MIT DSpace Archive:** [1721.1/122822](https://dspace.mit.edu/handle/1721.1/122822)
 * **Google Scholar:** [Citation Record](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=NM6SfiEAAAAJ&citation_for_view=NM6SfiEAAAAJ:4DMP91E08xMC)

@@ -33,7 +33,7 @@ export interface HeroContent {
 export const heroContent: HeroContent = {
   brandTitle: 'Ariel Anders Portfolio',
   brandRole: 'Roboticist & Agentic Orchestration Architect',
-  name: 'Ariel Anders, PhD',
+  name: 'Ariel Anders',
   title: 'Roboticist & Senior Software Engineer',
   bioParagraphs: [
     'I build reliable software for robotics and autonomous systems, from motion planning and localization to production infrastructure and AI-assisted development.',
@@ -65,7 +65,7 @@ export const FEATURE_CALLOUTS: FeatureCallout[] = [
   {
     id: 'devai-workflows',
     title: 'Agentic DevAI',
-    description: 'AI agents and developer tooling for modern software engineering.',
+    description: 'AI agents and developer tools for modern software engineering.',
     iconName: 'workflow',
   },
   {

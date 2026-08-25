@@ -47,7 +47,7 @@ export const systemTools: ResearchTool[] = [
     title: 'Version Truth & Hackathons Submission',
     subtitle: 'The antidote to version hallucinations',
     description: 'The antidote to version hallucinations: real-time ground-truth for npm, Node, and GitHub Actions, built as a live agent skill for NandaHack.',
-    category: 'DevAI Tooling',
+    category: 'DevAI Tools',
     status: 'Active',
     tags: ['versions', 'ci', 'dependencies', 'hallucination-mitigation', 'npm', 'node', 'github-actions', 'agents'],
     canonicalPath: '/research/versiontruth',

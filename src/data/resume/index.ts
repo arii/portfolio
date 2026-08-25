@@ -9,7 +9,7 @@ import { publicationsData, scholarUrl } from './publications';
 export * from './types';
 
 export const resumeData: ResumeData = {
-  name: "Ariel Anders, PhD",
+  name: "Ariel Anders",
   title: "Roboticist & Senior Software Engineer",
   summary: "Roboticist and Senior Software Engineer with an MIT CSAIL PhD and track record across Waymo, Robust.AI, and Civ Robotics. Specializing in onboard motion planning, reactive navigation, and state estimation, as well as multi-agent DevAI workflows and CI/CD automation.",
   scholarUrl,

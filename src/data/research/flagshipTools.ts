@@ -20,7 +20,7 @@ export const flagshipTools: ResearchTool[] = [
     taxonomyBucket: 'product',
     title: 'RepoAuditor',
     description: 'Automated GitHub PR auditing built on a Gemini-driven CI/CD pipeline with Jules autonomous coding agent integration. An independent project demonstrating agentic engineering workflow — not prior paid work.',
-    category: 'DevAI Tooling',
+    category: 'DevAI Tools',
     status: 'Active',
     tags: ['DevAI', 'GitHub API', 'Multi-Agent', 'Workflow'],
     canonicalPath: '/research/gitops-pr-reviewer',

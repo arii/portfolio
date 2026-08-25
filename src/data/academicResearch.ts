@@ -69,7 +69,7 @@ export const ACADEMIC_PAPERS: AcademicPaper[] = [
     year: '2017',
     authors: ['S. Karaman', 'A. Anders', 'M. Boulet', 'J. Connor', 'K. Gregson', 'W. Guerra', 'et al.'],
     venue: 'IEEE Integrated STEM Education Conference (ISEC)',
-    summary: 'Designed hands-on algorithmic robotics curriculum for 1/10th scale autonomous race cars, teaching perception, obstacle avoidance, and control.',
+    summary: 'Designed applied algorithmic robotics curriculum for 1/10th scale autonomous race cars, teaching perception, obstacle avoidance, and control.',
     tags: ['Self-Driving', 'ROS', 'Autonomy', 'Education'],
     link: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=NM6SfiEAAAAJ&citation_for_view=NM6SfiEAAAAJ:W7OEmFMy1HYC'
   }

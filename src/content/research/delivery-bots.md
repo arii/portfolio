@@ -58,7 +58,7 @@ To solve these challenges, the team developed a decentralized Macro-Action POMDP
 
 ---
 
-## Media Impact & Government Legacy
+## Media & Government Legacy
 
 The project drew widespread public interest for using beer delivery as a fun and relatable proxy to test complex multi-robot algorithms intended for critical logistics, such as transporting medical supplies or navigating disaster zones:
 - **Featured in MIT News & National Media:** Highlighted across outlets like the *Los Angeles Times*, *HuffPost*, *Popular Science*, and *UPI* for advancing real-world multi-agent coordination.

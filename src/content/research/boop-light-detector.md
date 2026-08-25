@@ -56,7 +56,7 @@ This produces a normalized luminescence rating from **0 to 100**, enabling preci
 
 ---
 
-## Community Impact & Outreach
+## Community Outreach
 
 - **6,000+ Downloads:** Published on the Apple App Store as a completely free tool with zero ads, data collection, or tracking.
 - **ATHack 2016 Awardee:** Received Honorable Mention at MIT ATHack 2016 in collaboration with co-creators and blind accessibility advocate Jonathan Gale.
