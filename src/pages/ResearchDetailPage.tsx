@@ -182,16 +182,34 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
                 {children}
               </h1>
             ),
-            h2: ({ children, ...props }) => (
-              <h2 className="text-2xl font-bold text-text-main mt-12 mb-4 pb-2 border-b border-line" {...props}>
-                {children}
-              </h2>
-            ),
-            h3: ({ children, ...props }) => (
-              <h3 className="text-lg font-bold text-text-main mt-8 mb-3" {...props}>
-                {children}
-              </h3>
-            ),
+            h2: ({ children, ...props }) => {
+              let textContent = '';
+              if (typeof children === 'string') {
+                textContent = children;
+              } else if (Array.isArray(children)) {
+                textContent = children.map(c => typeof c === 'string' ? c : '').join('');
+              }
+              const id = textContent.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+              return (
+                <h2 id={id || undefined} className="text-2xl font-bold text-text-main mt-12 mb-4 pb-2 border-b border-line" {...props}>
+                  {children}
+                </h2>
+              );
+            },
+            h3: ({ children, ...props }) => {
+              let textContent = '';
+              if (typeof children === 'string') {
+                textContent = children;
+              } else if (Array.isArray(children)) {
+                textContent = children.map(c => typeof c === 'string' ? c : '').join('');
+              }
+              const id = textContent.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+              return (
+                <h3 id={id || undefined} className="text-lg font-bold text-text-main mt-8 mb-3" {...props}>
+                  {children}
+                </h3>
+              );
+            },
             ul: ({ children, ...props }) => (
               <ul className="list-disc pl-6 my-4 space-y-1.5 text-text-body" {...props}>
                 {children}

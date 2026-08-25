@@ -16,10 +16,9 @@ A collection of custom dev tools, background ETL pipelines, and automated UI tes
 
 ### Quick Status
 
-- **[WCS Scraping & ETL](#1-wcs-event-telemetry-scraping--etl-pipeline)** *(Production)* — 100% automated weekly sync with zero manual maintenance.
-- **[Storefront Automation](#2-ecommerce-merchandising--storefront-automation)** *(Active)* — Converts vector art and pushes variant configurations directly to Printful.
+- **[WCS Scraping & ETL](#1-wcs-event-telemetry-scraping-etl-pipeline)** *(Production)* — 100% automated weekly sync with zero manual maintenance.
+- **[Storefront Automation](#2-ecommerce-merchandising-storefront-automation)** *(Active)* — Converts vector art and pushes variant configurations directly to Printful.
 - **[RAG AI Blog Drafter](#3-context-aware-technical-blog-drafter)** *(In Progress)* — Speeds up first-draft technical writing by 4x using past posts as core context.
-- **[Visual UX Auditor](#4-visual-regression--ux-auditor)** *(Active)* — Catches responsive UI layout breaks across viewports using Playwright.
 
 ---
 
@@ -74,6 +73,8 @@ The pipeline runs on a weekly GitHub Actions cron job. Before committing changes
 
 **Stack:** TypeScript • Printful REST API • Vector Processing
 
+![Ecommerce automation console showing printful integration](/assets/research/ai-experiments/ecommerce-automation.webp)
+
 Setting up products manually on Printful—uploading artwork, recalculating margins, and mapping variants—became incredibly repetitive. To fix this, I built an automated pipeline that ingests source vector files, auto-clips dimensions to stay safely inside print zones, and syncs variants directly via the [Printful API](https://developers.printful.com/docs/).
 
 ```typescript
@@ -111,15 +112,3 @@ To speed up my workflow, I built a local RAG tool. It indexes previous Markdown 
 - **The Impact:** It hits the right structural hierarchy on the first try, cutting down initial drafting times by roughly 4x while keeping human editorial control.
 
 ---
-
-## 4. Visual Regression & UX Auditor
-
-**Stack:** Playwright • Pixelmatch • CI/CD
-
-![Playwright Visual UX Auditor console showing visual regression diff score and breakpoint preview](/assets/research/ai-experiments/ux-auditor.png)
-
-CSS layout shifts, broken elements, and font size glitches across mobile and desktop screens can easily slip past standard unit tests.
-
-I set up an automated visual testing workflow using [Playwright](https://github.com/microsoft/playwright) and [Pixelmatch](https://github.com/mapbox/pixelmatch). It captures full-page snapshots at key breakpoints (`375px`, `768px`, `1280px`) and flags pixel-level diffs on pull requests before changes hit production.
-
-- **Outcome:** Catches responsive layout breaks automatically before merging code.
