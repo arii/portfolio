@@ -323,7 +323,7 @@ def parse_registry_id(link_tag, event_name: str) -> str:
     return f"tmp_{hash(event_name)}"
 \`\`\`
 
-The pipeline runs on a weekly GitHub Actions cron job. Before committing changes to \`public/data/event_queue.json\`, it checks \`git diff --staged\` to make sure I don't spam commit logs when event data hasn't changed.
+The pipeline runs on a weekly GitHub Actions cron job. Before committing changes to \`public/data/event_queue.json\`, it checks \`git diff --staged\` to prevent redundant commits when event data hasn't changed.
 
 \`\`\`yaml
 # .github/workflows/wcs_etl.yml - Git diff guardrail
@@ -338,7 +338,7 @@ The pipeline runs on a weekly GitHub Actions cron job. Before committing changes
     fi
 \`\`\`
 
-- **The Result:** The pipeline runs quietly in the background every Monday, keeping my frontend JSON data fresh with zero manual maintenance.
+- **The Result:** The pipeline runs quietly in the background every Monday, keeping frontend JSON data fresh with zero manual maintenance.
 
 ---
 
@@ -368,7 +368,7 @@ export async function syncProductVariant(variantId: number, printFileUrl: string
 }
 \`\`\`
 
-- **Why it matters:** It removes the manual merchandising overhead and keeps my product pricing and catalog nodes aligned in real time.
+- **Why it matters:** It removes manual merchandising overhead and keeps product pricing and catalog nodes aligned in real time.
 
 ---
 
@@ -888,9 +888,9 @@ flowchart TD
 
 ## 1. Import Graph Parsing with dependency-cruiser
 
-I don't want to test every page if only the "About" section changed. To achieve targeted testing, I use \`dependency-cruiser\` to analyze the project's import graph.
+To prevent testing every page when only isolated components change, I use \`dependency-cruiser\` to analyze the project's import graph.
 
-When a file is modified, I trace its dependents up the tree until I reach an entry point (a route or a page component).
+When a file is modified, the system traces its dependents up the tree until it reaches an entry point (a route or a page component).
 
 \`\`\`bash
 # Example logic for finding dependents
@@ -898,20 +898,20 @@ npx depcruise --exclude "^node_modules" --output-type json src | \\
   jq '.modules[] | select(.dependencies[].resolved == "src/components/Button.tsx") | .source'
 \`\`\`
 
-By identifying the "semantic blast radius," I reduce the number of screenshots I need to capture by up to 90% in large-scale applications.
+Identifying this "semantic blast radius" reduces the number of screenshots needed by up to 90% in large-scale applications.
 
 ---
 
 ## 2. Automated Playwright Screenshot Diffing
 
-Once I have a list of affected routes, I trigger a Playwright-based capture service.
+Once the affected routes are identified, the pipeline triggers a Playwright-based capture service.
 
 The pipeline performs a "sandwich" comparison:
 1.  **Baseline**: Capture screenshots of the affected routes on the \`main\` branch.
 2.  **Current**: Capture screenshots of the same routes on the feature branch.
 3.  **Diff**: Use \`pixelmatch\` to generate a pixel-level delta.
 
-To improve the signal-to-noise ratio, I automatically crop the diff to the bounding box of the changed area. This helps reviewers focus on the specific UI shift rather than scanning a full-page screenshot.
+To improve the signal-to-noise ratio, the pipeline automatically crops the diff to the bounding box of the changed area. This helps reviewers focus on the specific UI shift rather than scanning a full-page screenshot.
 
 ---
 
@@ -960,7 +960,7 @@ When a PR is opened, the analyzer posts a summary directly to the GitHub convers
 | \`/about\` | 0.0% | 🟢 LOW | Auto-passed |
 | \`/merch\` | 1.2% | 🟡 MEDIUM | Review Suggested |
 
-> **Implemented:** I use the \`cropped\` diff artifacts to show exactly where the pixels changed, saving reviewers from playing "spot the difference" on full-page screenshots.
+> **Implemented:** The \`cropped\` diff artifacts show exactly where pixels changed, saving reviewers from playing "spot the difference" on full-page screenshots.
 
 | Before | After | Diff |
 | :---: | :---: | :---: |
@@ -1629,7 +1629,7 @@ Supported by the **MIT MindHandHeart Innovation Fund**, I proposed and executed 
 I coordinated with MIT Environment, Health & Safety (EHS) and MIT Medical to establish safety guidelines and provide contact info for campus wellness resources.
 
 ### 2. High-Traffic Phototherapy Stations
-Teaming up with John Costanza (CSAIL's assistant director of infrastructure), I installed public lightboxes inside three bright red, sun-yellow interior phone/conference booths on floors 2, 4, and 7 of the Stata Center (Building 32).
+Teaming up with John Costanza (CSAIL's assistant director of infrastructure), we installed public lightboxes inside three bright red, sun-yellow interior phone/conference booths on floors 2, 4, and 7 of the Stata Center (Building 32).
 
 ### 3. Equipment Evaluation
 Users were given full control to switch the bright-light lamps on and off depending on their preference. I collected ongoing feedback via suggestion boxes and my project website to evaluate the pilot's success.
@@ -1931,7 +1931,7 @@ status: "published"
 
 When LLMs and autonomous coding agents edit software repositories, they frequently suffer from **out-of-distribution version hallucinations**. When an agent encounters an unfamiliar version tag (for example, \`actions/checkout@v6\` or a brand new npm package), it often assumes the tag is invalid and silently downgrades it to an older, cached version (such as \`v4\`).
 
-To eliminate these hallucinations, I built and submitted **VersionTruth** at NandaHack — a live ground-truth lookup service and standardized \`SKILL.md\` that enables coding agents to verify dependency versions against official registries *before* writing changes.
+To eliminate these hallucinations, we built and submitted **VersionTruth** at NandaHack — a live ground-truth lookup service and standardized \`SKILL.md\` that enables coding agents to verify dependency versions against official registries *before* writing changes.
 
 ![VersionTruth Solution](/images/studies/AI_Version_Hallucination_Solution.webp)
 
