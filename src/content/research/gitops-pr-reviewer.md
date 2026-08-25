@@ -137,7 +137,7 @@ import requests
 from pathlib import Path
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-ENDPOINT = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key={GEMINI_API_KEY}"
+ENDPOINT = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-pro:generateContent?key={GEMINI_API_KEY}"
 
 context = Path(".devai/review-context.md").read_text()
 
