@@ -31,37 +31,15 @@ export const systemTools: ResearchTool[] = [
     isFlagship: true
   },
   {
-    id: 'wcs-scraper',
+    id: 'ai-experiments',
     taxonomyBucket: 'infrastructure',
-    title: 'High-Scale Telemetry Ingestion ETL',
-    subtitle: 'Scraper-to-Parquet Pipeline',
-    description: 'A data engineering showcase for Dev AI systems, transforming raw competitive dance records into compressed Parquet formats. This enables efficient RAG indexing and complex analytical queries.',
-    category: 'Data Engineering',
-    status: 'Active',
-    tags: ['ETL', 'Apache Parquet', 'Scraping', 'Data Pipelines'],
-    canonicalPath: '/research/wcs-scraper'
-  },
-  {
-    id: 'blog-drafter',
-    taxonomyBucket: 'infrastructure',
-    title: 'AI Blog Drafter',
-    subtitle: 'Human-in-the-Loop Content Engine',
-    description: 'A prompt engineering platform designed for brand-consistent content generation. It combines RAG over existing blog posts with a human-in-the-loop workflow to maintain editorial quality.',
-    category: 'Content Tools',
-    status: 'Active',
-    tags: ['LLM', 'Content Generation', 'Productivity'],
-    canonicalPath: '/research/blog-drafter'
-  },
-  {
-    id: 'ecommerce-automation',
-    taxonomyBucket: 'infrastructure',
-    title: 'Ecommerce Automation Experiments',
-    subtitle: 'Printful & Merch Pipeline',
-    description: 'Automated merch operations including programmatic design generation, Printful API storefront sync, and incoming Amazon affiliate integration workflows.',
-    category: 'Business Automation',
+    title: 'AI Experiments',
+    subtitle: 'WCS Scraper, Ecommerce Automation, and AI Blog Drafter',
+    description: 'A collection of custom dev tools, background ETL pipelines, and automated workflows I am currently building.',
+    category: 'AI Experiments',
     status: 'In Progress',
-    tags: ['Printful API', 'Image Gen', 'Amazon Sync', 'Workflow'],
-    canonicalPath: '/research/ecommerce-automation'
+    tags: ['ETL', 'WCS Scraper', 'Printful API', 'LLM', 'RAG', 'Automation', 'Visual Testing'],
+    canonicalPath: '/research/ai-experiments'
   },
   {
     id: 'versiontruth',
