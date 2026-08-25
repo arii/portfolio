@@ -16,7 +16,7 @@ summary: "Dynamic registration, kinematic calibration, and interactive UI for au
 
 ## Autonomous Surgical Robotics at Bionics Lab UCSC
 
-The **CAD/CAM Robotic Dental Crowning Workflow** project at the **Bionics Lab, University of California, Santa Cruz (UCSC)** focused on semi-autonomous robotic dental restoration. We developed dynamic registration, joint-space kinematic tracking, and surgical control software to align high-precision robotic milling and drilling with patient-specific intraoral geometry.
+The **CAD/CAM Robotic Dental Crowning Workflow** project at the **Bionics Lab, University of California, Santa Cruz (UCSC)** focused on semi-autonomous robotic dental restoration. I developed dynamic registration, joint-space kinematic tracking, and surgical control software to align high-precision robotic milling and drilling with patient-specific intraoral geometry.
 
 ![CAD/CAM Robotic Dental Crowning Setup](/assets/research/dental.jpg)
 *Figure 1: Robotic dental crowning experimental setup and software user interface at UCSC Bionics Lab.*
@@ -39,7 +39,7 @@ Key engineering challenges included:
 
 ## Kinematic Formulation & Frame Calibration
 
-To achieve precise alignment between the robotic tool tip and the target tooth site, we established coordinate frames across the arm and tracking sensor:
+To achieve precise alignment between the robotic tool tip and the target tooth site, I established coordinate frames across the arm and tracking sensor:
 
 ![Coordinate Frame Mapping](/assets/research/dental/dental_robotics-001.png)
 *Figure 3: Kinematic coordinate frame mapping between robot base D{0}, end-effector D{6}, tracking base MX{0}, and tracking probe tip MX{6}.*
@@ -68,7 +68,7 @@ Where:
 
 ## Closed-Loop Dynamic Tracking System
 
-We implemented a closed-loop controller that continuously queries the tracking arm position and adjusts the Denso robot manipulator commands in real time.
+I implemented a closed-loop controller that continuously queries the tracking arm position and adjusts the Denso robot manipulator commands in real time.
 
 ![Closed Loop Controller Architecture](/assets/research/dental/dental_robotics-003.png)
 *Figure 6: Closed-loop dynamic tracking control system diagram for real-time jaw motion compensation.*
@@ -80,7 +80,7 @@ We implemented a closed-loop controller that continuously queries the tracking a
 
 ## Experimental Results & Tracking Accuracy
 
-We benchmarked tracking accuracy across simulated patient motion profiles using anatomical dental phantom models.
+I benchmarked tracking accuracy across simulated patient motion profiles using anatomical dental phantom models.
 
 ![Positional Tracking Error Plot](/assets/research/dental/dental_robotics-006.png)
 *Figure 8: Measured 3D positional tracking error over time during dynamic compensation testing.*
