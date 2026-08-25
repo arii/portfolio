@@ -80,6 +80,20 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
             📺 Playlist
           </span>
         )}
+        {tool.mediaLinks?.map(link => (
+          <a
+            key={link.url}
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+            className="inline-flex items-center gap-1 text-[10px] bg-accent/10 text-accent border border-accent/20 px-2 py-0.5 rounded font-medium hover:bg-accent/20 transition-colors cursor-pointer"
+          >
+            {link.type === 'video' ? '▶️' : link.type === 'pdf' ? '📄' : '🔗'} {link.label}
+          </a>
+        ))}
         {tool.tags.map(tag => (
           <span key={tag} className="text-[9px] bg-surface px-2 py-0.5 text-text-dim border border-line rounded-full">{tag}</span>
         ))}

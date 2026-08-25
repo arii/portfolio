@@ -29,18 +29,34 @@ export const autonomousTools: ResearchTool[] = [
     canonicalPath: '/research/delivery-bots'
   },
   {
-    id: 'autonomous-drone-line-following',
+    id: 'graduate-engineering-projects',
     taxonomyBucket: 'infrastructure',
-    title: 'Drone Line Following Autonomous Controller',
-    description: 'Feedback and Control Systems implementation using an onboard camera on a Rolling Spider Parrot drone to autonomously follow floor-marked paths.',
-    category: 'Robotics',
+    title: 'Graduate Engineering Projects',
+    subtitle: 'MIT Advanced Robotics & Systems',
+    description: 'A combined archive of advanced graduate-level engineering, machine learning, and hardware acceleration projects completed at MIT. It highlights: • Drone Autonomy: Feedback and control system design for a Parrot drone to follow floor paths. • Computer Vision: ML-driven confidence scoring to optimize robotic manipulation bounding boxes. • Hardware Acceleration (6.365): High-performance cryptographic hardware RSA design in Bluespec SystemVerilog.',
+    category: 'Graduate Engineering',
     status: 'Completed',
-    tags: ['Robotics & Autonomy', 'Control Systems', 'Computer Vision', 'Drones'],
+    tags: ['Robotics', 'Control Systems', 'Machine Learning', 'Computer Vision', 'Hardware', 'Cryptography', 'BSV', 'MIT'],
     image: '/assets/research/drone_follow.gif',
     imageAlt: 'Parrot Rolling Spider Drone hovering over path',
     canonicalPath: '/research/autonomous-drone-line-following',
-    videoUrl: 'https://www.youtube.com/watch?v=f5l8GA1PHm8',
-    externalUrl: 'https://github.com/arii/FollowTheYellowBrickRoad'
+    mediaLinks: [
+      {
+        type: 'video',
+        label: 'Video Demo (Drone)',
+        url: 'https://www.youtube.com/watch?v=f5l8GA1PHm8'
+      },
+      {
+        type: 'pdf',
+        label: 'PDF Report (ML Object Detection)',
+        url: 'https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_ml.pdf'
+      },
+      {
+        type: 'pdf',
+        label: 'PDF Report (RSA Accelerator)',
+        url: 'https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_6375.pdf'
+      }
+    ]
   },
   {
     id: 'boop-light-detector',
@@ -112,31 +128,6 @@ export const autonomousTools: ResearchTool[] = [
     pdfUrl: 'https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_dental.pdf',
     videoUrl: 'https://www.youtube.com/watch?v=tXif7xeZmGI',
     externalUrl: 'https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_dental.pdf'
-  },
-  {
-    id: 'report-ml-lis',
-    taxonomyBucket: 'infrastructure',
-    title: 'Applying Machine Learning to Improve LIS Object Detection',
-    subtitle: 'MIT CSAIL (6.867 Machine Learning)',
-    description: 'Evaluated ordinal regression and P-norm push algorithms with Sanja Popovic to optimize candidate bounding box confidence scoring for robotic manipulation in LIS group.',
-    category: 'Machine Learning',
-    status: 'Completed',
-    tags: ['Machine Learning', 'Computer Vision', 'Ranking', 'MIT CSAIL'],
-    canonicalPath: '/research/report-ml-lis',
-    pdfUrl: 'https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_ml.pdf',
-    videoUrl: 'https://www.youtube.com/watch?v=0U0pPbWhLVE'
-  },
-  {
-    id: 'report-6375-rsa',
-    taxonomyBucket: 'infrastructure',
-    title: 'Hardware RSA Accelerator',
-    subtitle: 'MIT (6.375 Complex Digital Systems)',
-    description: 'Designed and implemented a high-performance hardware RSA encryption accelerator in Bluespec SystemVerilog with Timur Balbekov and Neil Forrester.',
-    category: 'Hardware',
-    status: 'Completed',
-    tags: ['Hardware', 'Cryptography', 'BSV', 'MIT'],
-    canonicalPath: '/research/report-6375-rsa',
-    pdfUrl: 'https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_6375.pdf'
   },
   {
     id: 'undergraduate-projects',
