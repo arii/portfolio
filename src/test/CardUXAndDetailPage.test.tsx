@@ -43,7 +43,7 @@ describe('Card UX & Detail Page Navigation Improvements', () => {
     render(<ResearchDetailPage slug="duckietown" onBack={handleBack} />);
 
     expect(screen.getAllByText('MIT Duckietown (Autonomous Taxi Fleet)').length).toBeGreaterThan(0);
-    expect(screen.getByText(/Overview & Autonomy Platform/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/Inaugural MIT 2.166 Class/i).length).toBeGreaterThan(0);
 
     const { container } = render(<ResearchDetailPage slug="duckietown" onBack={handleBack} />);
 

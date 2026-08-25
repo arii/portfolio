@@ -16,13 +16,17 @@ videoUrl: "https://www.youtube.com/watch?v=rPpewHIF2KU"
 
 # Duckietown: Autonomous Taxi Fleet
 
-![Duckietown Autonomous Taxi Network](https://i.ytimg.com/vi/rPpewHIF2KU/hqdefault.jpg)
+![Inaugural MIT 2.166 Duckietown Class](/assets/research/duckietown.jpg)
 
-## Overview & Autonomy Platform
+## Overview & Inaugural MIT 2.166 Class
 
 **Duckietown** is an open-source, hands-on robotics platform created at MIT to make autonomy education accessible and standardized. The project features a fleet of miniature autonomous vehicles ("Duckiebots") navigating scaled urban environments ("Duckietowns") populated by rubber duck passengers.
 
-As a member of the teaching and research team, I contributed to system development and instructional labs for autonomous driving algorithms—including visual lane detection, state estimation, and multi-robot fleet coordination under real-world sensing constraints.
+I was a member of the inaugural MIT 2.166 class taking Duckietown as a student as part of my major requirements for my doctorate degree. Working directly on the platform in its founding year, I helped develop and test fundamental autonomous driving pipelines—including visual lane detection, state estimation, and multi-robot fleet coordination under real-world sensing constraints.
+
+For more background on the class and its history:
+- [MIT News: Self-driving cars, meet rubber duckies](https://news.mit.edu/2016/duckietown-self-driving-car-class-0420)
+- [A Brief History of Duckietown](https://www.duckietown.org/about/history)
 
 ---
 

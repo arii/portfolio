@@ -9,8 +9,8 @@ export const autonomousTools: ResearchTool[] = [
     category: 'Robotics & Autonomy',
     status: 'Completed',
     tags: ['Robotics & Autonomy', 'Computer Vision', 'Lane Tracking', 'ROS', 'Multi-Agent', 'MIT'],
-    image: 'https://i.ytimg.com/vi/rPpewHIF2KU/hqdefault.jpg',
-    imageAlt: 'Duckietown autonomous vehicles operating on miniature road networks',
+    image: '/assets/research/duckietown.jpg',
+    imageAlt: 'Duckietown autonomous vehicles and inaugural MIT 2.166 class',
     canonicalPath: '/research/duckietown',
     videoUrl: 'https://www.youtube.com/watch?v=rPpewHIF2KU',
     externalUrl: 'https://www.duckietown.org/'
