@@ -148,7 +148,6 @@ export const autonomousTools: ResearchTool[] = [
     status: 'Completed',
     tags: ['Robotics', 'Mechatronics', 'Embedded Systems', 'Digital Logic', 'Microcontrollers', 'UCSC', 'Hardware'],
     image: '/assets/research/undergraduate-projects/flip_flop.gif',
-    canonicalPath: '/research/undergraduate-projects',
-    playlistUrl: 'https://www.youtube.com/playlist?list=PL2C1605ACDFFFA855'
+    canonicalPath: '/research/undergraduate-projects'
   }
 ];

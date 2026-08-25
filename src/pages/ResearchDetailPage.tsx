@@ -204,10 +204,13 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
             ),
             a: ({ href, children, ...props }) => {
               if (href) {
+                const isNoEmbed = href.includes('no-embed');
+                const cleanHref = href.replace(/[\?#]no-embed/, '');
+
                 // Extract video ID or playlist ID
                 let embedUrl: string | null = null;
-                const ytMatch = href.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
-                const listMatch = href.match(/youtube\.com\/.*[?&]list=([a-zA-Z0-9_-]+)/);
+                const ytMatch = cleanHref.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+                const listMatch = cleanHref.match(/youtube\.com\/.*[?&]list=([a-zA-Z0-9_-]+)/);
 
                 if (ytMatch) {
                   embedUrl = `https://www.youtube.com/embed/${ytMatch[1]}${listMatch ? `?list=${listMatch[1]}` : ''}`;
@@ -216,7 +219,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
                 }
 
                 // If children is an image (thumbnail preview) or link text asking to play video
-                const isEmbedLink = href.includes('youtube.com') || href.includes('youtu.be');
+                const isEmbedLink = (cleanHref.includes('youtube.com') || cleanHref.includes('youtu.be')) && !isNoEmbed;
 
                 if (embedUrl && isEmbedLink) {
                   return (
@@ -231,7 +234,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
                         />
                       </div>
                       <a
-                        href={href}
+                        href={cleanHref}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-block text-xs font-medium text-accent hover:underline"
@@ -242,13 +245,23 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
                     </span>
                   );
                 }
+
+                return (
+                  <a
+                    href={cleanHref}
+                    target={cleanHref.startsWith('http') ? '_blank' : undefined}
+                    rel={cleanHref.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    className="text-accent hover:underline font-medium"
+                    {...props}
+                  >
+                    {children}
+                  </a>
+                );
               }
 
               return (
                 <a
                   href={href}
-                  target={href?.startsWith('http') ? '_blank' : undefined}
-                  rel={href?.startsWith('http') ? 'noopener noreferrer' : undefined}
                   className="text-accent hover:underline font-medium"
                   {...props}
                 >

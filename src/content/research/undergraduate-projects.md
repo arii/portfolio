@@ -12,10 +12,7 @@ tags:
   - Hardware
 category: "Robotics & Hardware"
 summary: "Archive of foundational undergraduate robotics and embedded hardware projects from UCSC—spanning CMPE 100 logic design, CMPE 121 microprocessor systems, CMPE 118 mechatronics, and custom microcontroller-based LED game side projects."
-playlistUrl: "https://www.youtube.com/playlist?list=PL2C1605ACDFFFA855"
 ---
-
-# Undergraduate Engineering Projects
 
 During my undergraduate studies in Computer Engineering at UC Santa Cruz (UCSC), I worked on a wide array of hands-on mechatronics, embedded systems, digital design, and robotics engineering projects. This archive consolidates project demonstrations, technical b-roll footage, and prototype testing videos captured during these foundational years.
 
@@ -28,8 +25,8 @@ During my undergraduate studies in Computer Engineering at UC Santa Cruz (UCSC),
 
 #### CMPE 100L Laboratory: Breadboard D Flip-Flop
 
-![Breadboard D Flip-Flop Demonstration](/assets/research/undergraduate-projects/flip_flop.gif)
-*Figure: Breadboard D Flip-Flop hardware loops. [Watch Full Video Demonstration on YouTube ↗](https://www.youtube.com/watch?v=G0uw5PP9fuw)*
+[![Breadboard D Flip-Flop Demonstration](/assets/research/undergraduate-projects/flip_flop.gif)](https://www.youtube.com/watch?v=G0uw5PP9fuw#no-embed)
+*Figure: Breadboard D Flip-Flop hardware loops. [Watch Full Video Demonstration on YouTube ↗](https://www.youtube.com/watch?v=G0uw5PP9fuw#no-embed)*
 
 ---
 
@@ -58,8 +55,8 @@ The software was structured to manage real-time communication and hardware feedb
   * **Pseudo-Force Control:** Motor resistance is regulated by specifying direct current levels. I mapped out eight distinct current settings into their hexadecimal representations, creating a structured command look-up table for both opening and closing actions.
   * **Dynamic Lookup System:** When an operator presses a digital push-button, the program measures the active voltage across the potentiometer and uses that value to index the corresponding open or close command from the lookup table.
 
-![68HC11 Microcontroller Board and Mechanical Gripper](/assets/research/undergraduate-projects/gripper_control.gif)
-*Figure: 68HC11 Microcontroller Board and Mechanical Gripper hardware loops. [Watch Full Video Demonstration on YouTube ↗](https://www.youtube.com/watch?v=tXif7xeZmGI)*
+[![68HC11 Microcontroller Board and Mechanical Gripper](/assets/research/undergraduate-projects/gripper_control.gif)](https://www.youtube.com/watch?v=tXif7xeZmGI#no-embed)
+*Figure: 68HC11 Microcontroller Board and Mechanical Gripper hardware loops. [Watch Full Video Demonstration on YouTube ↗](https://www.youtube.com/watch?v=tXif7xeZmGI#no-embed)*
 
 ### Downloadable Technical Report
 
@@ -132,8 +129,8 @@ We created this interactive arcade game for the Tau Beta Pi student organization
 
 We wired an array of 28 individual LEDs across digital output pins 22 through 49. The code lights up one LED at a time with a quick 10ms delay, making the light look like it is spinning in a continuous circle. The game button connects to an analog input pin (A0). The microcontroller constantly reads this pin, and when the button press drops the reading below our set threshold of 500, the movement loop stops completely. This freezes the light, sends the final score data through a 9600 baud Serial pipeline, and keeps the game at the end screen until you press reset to play again.
 
-![LED Ring Reaction Game](/assets/research/undergraduate-projects/led_game.gif)
-*Figure: Microcontroller-Based LED Ring Reaction Game hardware loops. [Watch Full Video Demonstration on YouTube ↗](https://www.youtube.com/watch?v=p1W5xtdLUWk)*
+[![LED Ring Reaction Game](/assets/research/undergraduate-projects/led_game.gif)](https://www.youtube.com/watch?v=p1W5xtdLUWk#no-embed)
+*Figure: Microcontroller-Based LED Ring Reaction Game hardware loops. [Watch Full Video Demonstration on YouTube ↗](https://www.youtube.com/watch?v=p1W5xtdLUWk#no-embed)*
 
 ---
 
