@@ -4,6 +4,7 @@ import remarkGfm from 'remark-gfm';
 import { ArrowLeft, Calendar, Clock, Download, Video, Play, ExternalLink } from 'lucide-react';
 import { getResearchPostBySlug, RESEARCH_TOOLS } from '@/data/research';
 import { GithubIcon } from '@/components/SocialIcons';
+import { resolveAssetUrl } from '@/utils/asset';
 
 export interface ResearchDetailPageProps {
   slug: string;
@@ -334,7 +335,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
             img: ({ src, alt, ...props }) => (
               <figure className="my-8 space-y-3">
                 <div className="overflow-hidden rounded-2xl border border-line bg-bg shadow-lg">
-                  <img src={src} alt={alt || ''} className="w-full h-auto object-cover" {...props} />
+                  <img src={resolveAssetUrl(src)} alt={alt || ''} className="w-full h-auto object-cover" {...props} />
                 </div>
                 {alt && (
                   <figcaption className="text-center text-xs font-mono text-text-dim px-4 leading-relaxed">

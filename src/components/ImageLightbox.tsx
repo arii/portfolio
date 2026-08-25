@@ -1,5 +1,6 @@
 import React from 'react';
 import { X } from 'lucide-react';
+import { resolveAssetUrl } from '@/utils/asset';
 
 export interface ImageLightboxProps {
   imageSrc: string | null;
@@ -14,8 +15,10 @@ const ImageLightbox: React.FC<ImageLightboxProps> = ({
 }) => {
   if (!imageSrc) return null;
 
-  const isWebpAvailable = /\.(png|jpe?g)$/i.test(imageSrc);
-  const webpSrc = isWebpAvailable ? imageSrc.replace(/\.(png|jpe?g)$/i, '.webp') : null;
+  const resolvedImageSrc = resolveAssetUrl(imageSrc) as string;
+
+  const isWebpAvailable = /\.(png|jpe?g)$/i.test(resolvedImageSrc);
+  const webpSrc = isWebpAvailable ? resolvedImageSrc.replace(/\.(png|jpe?g)$/i, '.webp') : null;
 
   return (
     <div
@@ -33,14 +36,14 @@ const ImageLightbox: React.FC<ImageLightboxProps> = ({
         <picture>
           <source srcSet={webpSrc} type="image/webp" />
           <img
-            src={imageSrc}
+            src={resolvedImageSrc}
             alt={altText}
             className="max-w-full max-h-[90vh] object-contain rounded-3xl border border-line shadow-2xl"
           />
         </picture>
       ) : (
         <img
-          src={imageSrc}
+          src={resolvedImageSrc}
           alt={altText}
           className="max-w-full max-h-[90vh] object-contain rounded-3xl border border-line shadow-2xl"
         />

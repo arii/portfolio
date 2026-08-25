@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { resolveAssetUrl } from '@/utils/asset';
 
 export interface VideoSource {
   src: string;
@@ -14,16 +15,6 @@ export interface OptimizedVideoProps extends React.VideoHTMLAttributes<HTMLVideo
   ariaLabel?: string;
   fallbackText?: string;
 }
-
-const resolveAssetUrl = (url?: string): string | undefined => {
-  if (!url) return undefined;
-  if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('data:')) {
-    return url;
-  }
-  const baseUrl = import.meta.env.BASE_URL || '/';
-  const cleanUrl = url.replace(/^\//, '');
-  return baseUrl.endsWith('/') ? `${baseUrl}${cleanUrl}` : `${baseUrl}/${cleanUrl}`;
-};
 
 const OptimizedVideo: React.FC<OptimizedVideoProps> = ({
   src,
