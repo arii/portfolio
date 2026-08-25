@@ -29,18 +29,34 @@ export const autonomousTools: ResearchTool[] = [
     canonicalPath: '/research/delivery-bots'
   },
   {
-    id: 'autonomous-drone-line-following',
+    id: 'graduate-engineering-projects',
     taxonomyBucket: 'infrastructure',
-    title: 'Drone Line Following Autonomous Controller',
-    description: 'Feedback and Control Systems implementation using an onboard camera on a Rolling Spider Parrot drone to autonomously follow floor-marked paths.',
-    category: 'Robotics',
+    title: 'Graduate Engineering Projects',
+    subtitle: 'MIT Advanced Systems',
+    description: 'A showcase of advanced graduate-level engineering systems developed at MIT spanning real-time computer vision control, ordinal machine learning ranking, and parameterized hardware accelerators.',
+    category: 'Graduate Engineering',
     status: 'Completed',
-    tags: ['Robotics & Autonomy', 'Control Systems', 'Computer Vision', 'Drones'],
-    image: '/assets/research/drone.jpg',
+    tags: ['Robotics', 'Machine Learning', 'Hardware Acceleration', 'MIT'],
+    image: '/assets/research/drone_follow.gif',
     imageAlt: 'Parrot Rolling Spider Drone hovering over path',
-    canonicalPath: '/research/autonomous-drone-line-following',
-    videoUrl: 'https://www.youtube.com/watch?v=f5l8GA1PHm8',
-    externalUrl: 'https://github.com/arii/FollowTheYellowBrickRoad'
+    canonicalPath: '/research/graduate-engineering-projects',
+    mediaLinks: [
+      {
+        type: 'video',
+        label: 'Video Demo',
+        url: 'https://www.youtube.com/watch?v=f5l8GA1PHm8'
+      },
+      {
+        type: 'pdf',
+        label: 'ML PDF Report',
+        url: 'https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_ml.pdf'
+      },
+      {
+        type: 'pdf',
+        label: 'RSA PDF Report',
+        url: 'https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_6375.pdf'
+      }
+    ]
   },
   {
     id: 'boop-light-detector',
@@ -114,54 +130,15 @@ export const autonomousTools: ResearchTool[] = [
     externalUrl: 'https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_dental.pdf'
   },
   {
-    id: 'report-ml-lis',
+    id: 'undergraduate-projects',
     taxonomyBucket: 'infrastructure',
-    title: 'Applying Machine Learning to Improve LIS Object Detection',
-    subtitle: 'MIT CSAIL (6.867 Machine Learning)',
-    description: 'Evaluated ordinal regression and P-norm push algorithms with Sanja Popovic to optimize candidate bounding box confidence scoring for robotic manipulation in LIS group.',
-    category: 'Machine Learning',
+    title: 'Undergraduate Engineering Projects',
+    subtitle: 'UCSC Robotics & Hardware Systems',
+    description: 'Archive of foundational undergraduate robotics and embedded hardware projects from UCSC—spanning CMPE 100 logic design, CMPE 121 microprocessor systems, CMPE 118 mechatronics, and custom microcontroller-based LED game side projects.',
+    category: 'Robotics & Hardware',
     status: 'Completed',
-    tags: ['Machine Learning', 'Computer Vision', 'Ranking', 'MIT CSAIL'],
-    canonicalPath: '/research/report-ml-lis',
-    pdfUrl: 'https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_ml.pdf',
-    videoUrl: 'https://www.youtube.com/watch?v=0U0pPbWhLVE'
-  },
-  {
-    id: 'report-6375-rsa',
-    taxonomyBucket: 'infrastructure',
-    title: 'Hardware RSA Accelerator',
-    subtitle: 'MIT (6.375 Complex Digital Systems)',
-    description: 'Designed and implemented a high-performance hardware RSA encryption accelerator in Bluespec SystemVerilog with Timur Balbekov and Neil Forrester.',
-    category: 'Hardware',
-    status: 'Completed',
-    tags: ['Hardware', 'Cryptography', 'BSV', 'MIT'],
-    canonicalPath: '/research/report-6375-rsa',
-    pdfUrl: 'https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_6375.pdf'
-  },
-  {
-    id: 'report-ce118-mechatronics',
-    taxonomyBucket: 'infrastructure',
-    title: 'Autonomous Mechatronic Systems (MAK Attack)',
-    subtitle: 'UCSC (CMPE-118 Mechatronics)',
-    description: 'Autonomous mobile robot designed with Matthew Luxton and Kyle Huey for arena navigation, event detection state machines, and obstacle engagement.',
-    category: 'Mechatronics',
-    status: 'Completed',
-    tags: ['Mechatronics', 'Embedded C', 'Robotics', 'UCSC'],
-    image: 'https://i.ytimg.com/vi/qSe8JmWQnYk/hqdefault.jpg',
-    canonicalPath: '/research/report-ce118-mechatronics',
-    pdfUrl: 'https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_ce118.pdf',
-    videoUrl: 'https://www.youtube.com/watch?v=qSe8JmWQnYk'
-  },
-  {
-    id: 'report-ce121-microprocessor',
-    taxonomyBucket: 'infrastructure',
-    title: 'Microprocessor System Design (68HC11E1 Board)',
-    subtitle: 'UCSC (CMPE-121 Microprocessors)',
-    description: 'Hardware interface and embedded firmware for 68HC11E1 microcontroller board with external SRAM, ROM, address decoding, and serial communication.',
-    category: 'Embedded Systems',
-    status: 'Completed',
-    tags: ['Embedded Systems', 'Microcontrollers', 'Assembly', 'UCSC'],
-    canonicalPath: '/research/report-ce121-microprocessor',
-    pdfUrl: 'https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_ce121.pdf'
+    tags: ['Robotics', 'Mechatronics', 'Embedded Systems', 'Digital Logic', 'Microcontrollers', 'UCSC', 'Hardware'],
+    image: '/assets/research/undergraduate-projects/flip_flop.gif',
+    canonicalPath: '/research/undergraduate-projects'
   }
 ];

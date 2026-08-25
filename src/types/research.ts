@@ -46,4 +46,9 @@ export interface ResearchTool {
     id: string;
     title: string;
   };
+  mediaLinks?: {
+    type: 'video' | 'pdf' | 'external';
+    label: string;
+    url: string;
+  }[];
 }

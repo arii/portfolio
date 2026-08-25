@@ -125,3 +125,14 @@ cli/
 
 # Python virtual environment
 .venv/
+
+# Python cache files
+__pycache__/
+*.pyc
+
+# Local screenshots
+screenshot_*.png
+
+# Temporary task markdown files
+issues.md
+mit_bwsi.md

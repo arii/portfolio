@@ -17,10 +17,15 @@ describe('Academic Research Project Reports (PDFs)', () => {
 
   it('includes external raw github pdfUrl on relevant autonomous tools entries', () => {
     const toolsWithPdf = autonomousTools.filter((t) => t.pdfUrl);
-    expect(toolsWithPdf.length).toBeGreaterThanOrEqual(5);
+    expect(toolsWithPdf.length).toBeGreaterThanOrEqual(1);
 
     const dentalTool = autonomousTools.find((t) => t.id === 'cad-cam-dental-workflow');
     expect(dentalTool?.pdfUrl).toBe('https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_dental.pdf');
+
+    const gradProjects = autonomousTools.find((t) => t.id === 'graduate-engineering-projects');
+    expect(gradProjects).toBeDefined();
+    const pdfLinks = gradProjects?.mediaLinks?.filter(l => l.type === 'pdf');
+    expect(pdfLinks?.length).toBe(2);
   });
 
   it('renders Download PDF Report and Watch Video buttons in AcademicCard when properties are provided', () => {
@@ -75,7 +80,7 @@ describe('Academic Research Project Reports (PDFs)', () => {
     expect(dentalPost).toBeDefined();
     expect(dentalPost?.content).toContain('https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_dental.pdf');
 
-    const mlPost = getResearchPostBySlug('report-ml-lis');
+    const mlPost = getResearchPostBySlug('graduate-engineering-projects');
     expect(mlPost).toBeDefined();
     expect(mlPost?.content).toContain('https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_ml.pdf');
   });

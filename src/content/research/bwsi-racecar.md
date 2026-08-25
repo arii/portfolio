@@ -10,7 +10,7 @@ tags:
   - ROS
 category: "Education & Autonomous Systems"
 summary: "Instructional curricula and course lead for autonomous miniature racecars utilizing visual servoing, motion planning, and ROS."
-videoUrl: "https://www.youtube.com/watch?v=DUp9yURMo2c&list=PLEcASxU_mgVgnMZvVHgrTGFMUXze0MiOp"
+videoUrl: "https://www.youtube.com/watch?v=UjVatZ3NK5U"
 ---
 
 # BeaverWorks Summer Institute (RACECAR)
@@ -25,28 +25,39 @@ The **BeaverWorks Summer Institute (RACECAR)** program at MIT was an intensive S
 
 ## Course Highlights & Challenge Demos
 
-https://www.youtube.com/watch?v=DUp9yURMo2c&list=PLEcASxU_mgVgnMZvVHgrTGFMUXze0MiOp
+[![Main RACECAR Challenge Demonstration](/assets/research/bwsi-racecar/racecar_main.gif)](https://www.youtube.com/watch?v=UjVatZ3NK5U#no-embed)
+*Figure: High-speed autonomous navigation loops. [Watch Full Video Demonstration on YouTube ↗](https://www.youtube.com/watch?v=UjVatZ3NK5U#no-embed)*
 
-https://www.youtube.com/watch?v=0U0pPbWhLVE
+---
 
-https://www.youtube.com/watch?v=JbiTX1P6f0o
+[![Autonomous Navigation & Visual Servoing Behaviors](/assets/research/bwsi-racecar/racecar_behaviors.gif)](https://www.youtube.com/watch?v=0U0pPbWhLVE#no-embed)
+*Figure: Color tracking and visual servoing. [Watch Full Video Demonstration on YouTube ↗](https://www.youtube.com/watch?v=0U0pPbWhLVE#no-embed)*
 
-https://www.youtube.com/watch?v=qSe8JmWQnYk
+---
 
-*MIT BeaverWorks RACECAR student mini autonomous vehicles navigating high-speed tracks, visual servoing routines, and obstacle courses.*
+[![Student Cone Tracking Visual Servoing Demo](/assets/research/bwsi-racecar/racecar_students.gif)](https://www.youtube.com/watch?v=qSe8JmWQnYk#no-embed)
+*Figure: High school student final challenge runs. [Watch Full Video Demonstration on YouTube ↗](https://www.youtube.com/watch?v=qSe8JmWQnYk#no-embed)*
 
 ---
 
 ## Program Overview & Curriculum Design
 
-My involvement with the MIT RACECAR platform started as a graduate teaching assistant for the undergraduate course (6.141/16.405 Robotics: Science and Systems) that utilized the platform. I later transitioned to a lead instructor role for the BeaverWorks Summer Institute (BWSI) summer program for high school students.
+My involvement with the MIT RACECAR platform started as a graduate teaching assistant for the undergraduate course **6.141J/16.405J: Robotics: Science and Systems (RSS)**, and I later transitioned to a lead instructor role for the **BeaverWorks Summer Institute (BWSI)** summer program for high school students. 
 
 In this capacity, I designed core curriculum—such as the visual servoing lab and cone detector—delivered technical lectures, and oversaw lab sessions where students programmed the cars to execute complex robotic behaviors.
 
+### Model AI Assignments & AAAI Publication
+
+The visual servoing curriculum developed through this work was formalized, submitted, and accepted into the **Model AI Assignments** repository—part of the Educational Advances in Artificial Intelligence (EAAI) symposium at the **AAAI Conference**—where I also presented these educational materials and methodologies.
+
+* **Project Link:** [Model AI: Visual Servoing Assignment](https://modelai.gettysburg.edu/2017/visual-servo/index.html)
+* **Core Technologies:** Python/C++, OpenCV, and ROS.
+* **Assignment Focus:** Students use Image-Based Visual Servoing (IBVS) to program mobile robots to park in front of solid-color objects (like orange cones) or handle line-following tasks using monocular camera input and closed-loop proportional control.
+
 ### Core Curricular Pillars & Lectures
 1. **Robot Operating System (ROS):** Teaching publisher-subscriber patterns, node communication, dynamic reconfigure, and sensor data transformation trees (`tf`).
-2. **Motion Planning:** Authored and delivered lectures on core planning algorithms, including path generation and tracking ([Watch Planning Lecture](https://www.youtube.com/watch?v=CdRs0l9f5WM)).
-3. **Computer Vision & Visual Servoing:** Developed visual servoing labs, cone detectors, and OpenCV pipelines for lane detection and color blob tracking, accompanied by dedicated instructional lectures ([Watch Visual Servoing Lecture](https://www.youtube.com/watch?v=bAAatB2IvUM)).
+2. **Motion Planning:** Authored and delivered lectures on core planning algorithms, including path generation and tracking ([Watch Planning Lecture](https://www.youtube.com/watch?v=CdRs0l9f5WM#no-embed)).
+3. **Computer Vision & Visual Servoing:** Developed visual servoing labs, cone detectors, and OpenCV pipelines for lane detection and color blob tracking, accompanied by dedicated instructional lectures ([Watch Visual Servoing Lecture](https://www.youtube.com/watch?v=bAAatB2IvUM#no-embed)).
 4. **LIDAR & Trajectory Control:** Configured planar LIDAR scans and taught high-speed control methodologies such as Pure Pursuit, SLAM, and obstacle avoidance.
 
 ---
