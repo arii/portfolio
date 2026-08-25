@@ -41,10 +41,10 @@ Supported by the **MIT MindHandHeart Innovation Fund**, I proposed and executed 
 I coordinated with MIT Environment, Health & Safety (EHS) and MIT Medical to establish safety guidelines and provide contact info for campus wellness resources.
 
 ### 2. High-Traffic Phototherapy Stations
-Teaming up with John Costanza (CSAIL's assistant director of infrastructure), we installed public lightboxes inside three bright red, sun-yellow interior phone/conference booths on floors 2, 4, and 7 of the Stata Center (Building 32).
+Teaming up with John Costanza (CSAIL's assistant director of infrastructure), I installed public lightboxes inside three bright red, sun-yellow interior phone/conference booths on floors 2, 4, and 7 of the Stata Center (Building 32).
 
 ### 3. Equipment Evaluation
-Users were given full control to switch the bright-light lamps on and off depending on their preference. I collected ongoing feedback via suggestion boxes and my project website to evaluate the pilot's success.
+I gave users full control to switch the bright-light lamps on and off depending on their preference. I collected ongoing feedback via suggestion boxes and my project website to evaluate the pilot's success.
 
 ---
 

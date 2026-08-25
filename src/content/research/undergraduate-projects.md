@@ -50,9 +50,9 @@ Building the system required an intensive wire-wrapping and soldering process to
 
 ### Software Implementation
 
-The software was structured to manage real-time communication and hardware feedback loops using the RS-232 communication protocol:
+I structured the software to manage real-time communication and hardware feedback loops using the RS-232 communication protocol:
 
-  * **Pseudo-Force Control:** Motor resistance is regulated by specifying direct current levels. I mapped out eight distinct current settings into their hexadecimal representations, creating a structured command look-up table for both opening and closing actions.
+  * **Pseudo-Force Control:** Specifying direct current levels regulates motor resistance. I mapped out eight distinct current settings into their hexadecimal representations, creating a structured command look-up table for both opening and closing actions.
   * **Dynamic Lookup System:** When an operator presses a digital push-button, the program measures the active voltage across the potentiometer and uses that value to index the corresponding open or close command from the lookup table.
 
 [![68HC11 Microcontroller Board and Mechanical Gripper](/assets/research/undergraduate-projects/gripper_control.gif)](https://www.youtube.com/watch?v=tXif7xeZmGI#no-embed)
@@ -125,9 +125,9 @@ The software was structured to manage real-time communication and hardware feedb
 
 ## Microcontroller-Based LED Ring Reaction Game for UCSC Engineering Week
 
-We created this interactive arcade game for the Tau Beta Pi student organization during Engineering Week at UC Santa Cruz in February 2020. Built by Ariel Anders, Nathan Abercrombie, and Julian Dahan, the game challenges players to press a large button and stop a fast-moving light on a specific target LED.
+I co-created this interactive arcade game for the Tau Beta Pi student organization during Engineering Week at UC Santa Cruz in February 2020. Built with Nathan Abercrombie and Julian Dahan, the game challenges players to press a large button and stop a fast-moving light on a specific target LED.
 
-We wired an array of 28 individual LEDs across digital output pins 22 through 49. The code lights up one LED at a time with a quick 10ms delay, making the light look like it is spinning in a continuous circle. The game button connects to an analog input pin (A0). The microcontroller constantly reads this pin, and when the button press drops the reading below our set threshold of 500, the movement loop stops completely. This freezes the light, sends the final score data through a 9600 baud Serial pipeline, and keeps the game at the end screen until you press reset to play again.
+I wired an array of 28 individual LEDs across digital output pins 22 through 49. The code lights up one LED at a time with a quick 10ms delay, making the light look like it is spinning in a continuous circle. The game button connects to an analog input pin (A0). The microcontroller constantly reads this pin, and when the button press drops the reading below a set threshold of 500, the movement loop stops completely. This freezes the light, sends the final score data through a 9600 baud Serial pipeline, and keeps the game at the end screen until you press reset to play again.
 
 [![LED Ring Reaction Game](/assets/research/undergraduate-projects/led_game.gif)](https://www.youtube.com/watch?v=p1W5xtdLUWk#no-embed)
 *Figure: Microcontroller-Based LED Ring Reaction Game hardware loops. [Watch Full Video Demonstration on YouTube ↗](https://www.youtube.com/watch?v=p1W5xtdLUWk#no-embed)*

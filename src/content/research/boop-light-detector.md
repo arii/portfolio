@@ -23,7 +23,7 @@ summary: "iOS accessibility utility translating ambient light intensity into aud
 
 ## The Problem & Motivation
 
-For blind and visually impaired individuals, simple daily tasks—such as checking whether household lights are turned on, verifying whether a Wi-Fi router status light is active, or locating open windows during the daytime—require specialized tools.
+For blind and visually impaired individuals, simple daily tasks—such as checking whether household lights are on, verifying whether a Wi-Fi router status light is active, or locating open windows during the daytime—require specialized tools.
 
 Existing light detection apps were often:
 1. **Expensive or ad-laden**

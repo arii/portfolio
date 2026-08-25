@@ -81,7 +81,7 @@ For this article:
 
 This article uses two kinds of commands:
 
-- **Generic example commands** show the shape of the pipeline and are meant to be adapted.
+- **Generic example commands** show the shape of the pipeline and you can adapt them.
 - **Repo-specific commands** are the actual commands used in this project.
 
 When a command is repo-specific, I call that out explicitly. When a command is generic, treat it as pseudocode for your own repo.
@@ -184,7 +184,7 @@ This is intentionally boring. If this part feels magical, the pipeline is probab
 
 The model should not be responsible for knowing your repo's entire history. It should receive a bounded task, produce bounded output, and leave the final decision to deterministic code.
 
-> **Implemented:** The AI orchestration logic is centralized in `dev-tools/utils.py`.
+> **Implemented:** I centralized the AI orchestration logic in `dev-tools/utils.py`.
 
 ---
 
@@ -287,7 +287,7 @@ sequenceDiagram
 
 That last step is not ceremony. It is the safety boundary.
 
-> **Experimental:** `dev-tools/td-cli ai repair` can be triggered when CI fails. A GitHub Actions workflow (`jules-fix-trigger.yml`) exists to initiate repair sessions. Treat the output as a suggestion; always review before merge.
+> **Experimental:** CI failures can trigger `dev-tools/td-cli ai repair`. A GitHub Actions workflow (`jules-fix-trigger.yml`) exists to initiate repair sessions. Treat the output as a suggestion; always review before merge.
 
 ---
 
@@ -343,7 +343,7 @@ python dev-tools/ai_review.py .devai/review-context.md > .devai/review-result.js
 python dev-tools/submit_review.py .devai/review-result.json
 ```
 
-Even if you never post the result back to GitHub automatically, you still get a repeatable review artifact that can be inspected, improved, and rerun.
+Even if you never post the result back to GitHub automatically, you still get a repeatable review artifact that you can inspect, improve, and rerun.
 
 ---
 
@@ -359,7 +359,7 @@ LLMs can still:
 - misunderstand implicit project conventions
 - produce confident but invalid suggestions
 
-That is why the model is boxed in on both sides.
+That is why I box the model in on both sides.
 
 Before the model, deterministic scripts collect the context. After the model, deterministic scripts decide how to handle the findings.
 
