@@ -1,10 +1,10 @@
 ---
-title: "GitHub Actions LLM Code Review Automated"
+title: "Automating PR Reviews with GitHub Actions and Gemini"
 date: "2024-05-10"
 author: "Ariel Anders"
 category: "DevAI"
-tags: ["DevOps", "AI", "Gemini", "GitHub Models", "GitHub Actions", "Playwright"]
-excerpt: "A practical hybrid AI review pipeline using GitHub Actions, Gemini, GitHub Models, and Playwright. Not a replacement for human review, but a way to make first-pass review more repeatable."
+tags: ["DevOps", "AI", "Gemini", "GitHub Actions", "Playwright"]
+excerpt: "A practical AI review pipeline using GitHub Actions, Google Gemini, and Playwright. Not a replacement for human review, but a way to make first-pass review repeatable."
 readTime: 14
 status: "published"
 ---
@@ -15,18 +15,18 @@ It had to understand the repo, inspect the diff, infer the design system, read C
 
 The better pattern was smaller and more boring: collect the important pull request context first, then ask the model to review that prepared packet.
 
-This article walks through the hybrid review pipeline I use for BoomTick.blog: GitHub Actions collects the context, Gemini and GitHub Models review it, structured findings decide what blocks the PR, and Playwright screenshots catch UI changes that normal tests miss.
+This article walks through the review pipeline I use for BoomTick.blog: GitHub Actions collects the context, Gemini reviews it, structured findings decide what blocks the PR, and Playwright screenshots catch UI changes that normal tests miss.
 
 It is not a fully autonomous engineer. It is a review assistant made from scripts, prompts, CI glue, and a few hard safety boundaries.
 
 ## What you will build
 
-By the end of this walkthrough, you will understand how to build a small hybrid review assistant that can:
+By the end of this walkthrough, you will understand how to build a review assistant that can:
 
 - collect pull request context and perform token budgeting before calling an LLM
-- send a focused prompt to Gemini or GitHub Models
+- send a focused prompt directly to the Gemini API
 - request structured findings instead of vague prose
-- map findings into GitHub review states
+- map findings deterministically into GitHub review states
 - optionally use CI logs and Playwright screenshots as review inputs
 
 This is not a replacement for human review. It is a way to make first-pass review more repeatable.
@@ -40,7 +40,7 @@ flowchart TD
   PR[Pull request opened] --> Collect[Collect review context]
   Collect --> Packet[Create review-context.md]
 
-  Packet --> Models[Send packet to AI Service]
+  Packet --> Models[Send packet to Gemini API]
   Models --> Findings[Return structured findings]
 
   Findings --> Decide{Any blocking issues?}
@@ -125,20 +125,19 @@ The point is not that my aggregation command is special. The point is that the m
 
 ---
 
-## 2. Orchestrate with Hybrid AI Services
+## 2. Orchestrate with the Gemini API
 
-The AI part should be the least interesting part of the system. We use a hybrid approach, prioritizing **GitHub Models** (via the Azure inference endpoint) and **Gemini** (via Google Generative AI) for production reliability, with local models as a fallback.
+The AI inference should be the least complicated part of the system. I call the Google Gemini API directly, relying on Gemini's large context window to ingest diffs and build artifacts without truncation.
 
-The quality comes from everything around it: the context packet, the review rules, the output schema, and the script that decides what to do with the result.
+The quality comes from everything around it: the context packet, the review rules, the output schema, and the script that processes the result.
 
 ```python
 import os
 import requests
 from pathlib import Path
 
-# GitHub Models (OpenAI-compatible)
-GITHUB_MODELS_URL = "https://models.inference.ai.azure.com/chat/completions"
-GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+ENDPOINT = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-pro:generateContent?key={GEMINI_API_KEY}"
 
 context = Path(".devai/review-context.md").read_text()
 
@@ -152,38 +151,40 @@ Focus on:
 4. design-token violations
 5. missing tests
 
-Return:
-- blocking issues
-- non-blocking suggestions
-- files to inspect manually
+Return valid JSON with this schema:
+{{
+  "blocking": [{{"file": "string", "reason": "string", "suggestion": "string"}}],
+  "non_blocking": [{{"file": "string", "reason": "string"}}],
+  "summary": "string"
+}}
 
 Context:
 {context}
 """
 
 response = requests.post(
-    GITHUB_MODELS_URL,
-    headers={
-        "Authorization": f"Bearer {GITHUB_TOKEN}",
-        "Content-Type": "application/json"
-    },
+    ENDPOINT,
+    headers={"Content-Type": "application/json"},
     json={
-        "model": "gpt-4o-mini",
-        "messages": [{"role": "user", "content": prompt}],
-        "stream": False,
+        "contents": [{"parts": [{"text": prompt}]}],
+        "generationConfig": {
+            "responseMimeType": "application/json",
+            "temperature": 0.2
+        }
     },
     timeout=120,
 )
 
 response.raise_for_status()
-print(response.json()["choices"][0]["message"]["content"])
+result = response.json()
+print(result["candidates"][0]["content"]["parts"][0]["text"])
 ```
 
-This is intentionally boring. If this part feels magical, the pipeline is probably too hard to debug. Using remote models provides higher consistency and allows us to use larger context windows when needed.
+This is intentionally boring. If this part feels magical, the pipeline is probably too hard to debug.
 
 The model should not be responsible for knowing your repo's entire history. It should receive a bounded task, produce bounded output, and leave the final decision to deterministic code.
 
-> **Implemented:** The AI orchestration logic (prioritizing GitHub Models and Gemini) is centralized in `dev-tools/utils.py`.
+> **Implemented:** The AI orchestration logic is centralized in `dev-tools/utils.py`.
 
 ---
 
@@ -193,7 +194,7 @@ A paragraph of AI feedback is easy to read and hard to automate.
 
 For a human-only workflow, prose is fine. For a CI workflow, prose is a problem. A script cannot reliably tell whether "this might be worth revisiting" should block a PR.
 
-So I ask the model for structured findings.
+By configuring Gemini with structured JSON output (`responseMimeType: "application/json"`), the model returns a schema ready for automation:
 
 ```json
 {
@@ -216,7 +217,7 @@ So I ask the model for structured findings.
 
 The model can still be wrong. The schema does not make it truthful.
 
-What the schema does is make the next step testable. A script can check whether `blocking` is empty. It can format comments consistently. It can refuse to request changes if the model returns malformed output.
+What the schema does is make the next step testable. A script can check whether `blocking` is empty, format PR comments consistently, and safely reject malformed output.
 
 ---
 
@@ -228,17 +229,9 @@ The model can describe findings. A deterministic script should decide how those 
 
 That separation matters. It keeps the model from turning a stylistic opinion into a blocked PR, and it keeps a serious failure from being buried inside a friendly summary.
 
-### Blocking
-
-Use `REQUEST_CHANGES` when the finding should stop the merge: broken builds, accessibility regressions, missing required props, or known design-system violations.
-
-### Non-blocking
-
-Use `COMMENT` for feedback that may be useful but should not stop the PR: naming, refactors, minor cleanup, or subjective UI polish.
-
-### Clean
-
-Use `APPROVE` or a summary comment only when there are no blocking findings.
+- **Blocking:** Use `REQUEST_CHANGES` when the finding should stop the merge: broken builds, accessibility regressions, missing required props, or known design-system violations.
+- **Non-blocking:** Use `COMMENT` for feedback that may be useful but should not stop the PR: naming, refactors, minor cleanup, or subjective UI polish.
+- **Clean:** Use `APPROVE` or a summary comment only when there are no blocking findings.
 
 ```python
 # dev-tools/submit_review.py
@@ -259,6 +252,8 @@ pr.create_review(
 > **Implemented:** `dev-tools/submit_review.py` handles `APPROVE`, `REQUEST_CHANGES`, and `COMMENT` states.
 
 The model proposes the facts. The script applies the policy.
+
+![Automated Pull Request Code Review Feedback posted by github-actions bot with blocking accessibility issue and non-blocking token suggestion](/assets/research/gitops-pr-reviewer-comment.png)
 
 ---
 
@@ -328,7 +323,7 @@ You do not need the whole pipeline to get value from this pattern.
 The smallest useful version is just two steps:
 
 1. Create a review context file.
-2. Ask an AI model to review that file.
+2. Ask Gemini to review that file.
 
 Everything else, including GitHub comments, review states, CI repair, and screenshot analysis, can come later.
 
@@ -348,20 +343,20 @@ python dev-tools/ai_review.py .devai/review-context.md > .devai/review-result.js
 python dev-tools/submit_review.py .devai/review-result.json
 ```
 
-Even if you never post the result back to GitHub automatically, you still get something useful: a repeatable review artifact that can be inspected, improved, and rerun.
+Even if you never post the result back to GitHub automatically, you still get a repeatable review artifact that can be inspected, improved, and rerun.
 
 ---
 
 ## What this does not solve
 
-This pipeline makes review more repeatable. It does not make the model trustworthy.
+This pipeline makes review more repeatable. It does not make the model infallible.
 
-Local models can still:
+LLMs can still:
 
-- hallucinate file paths
-- miss subtle bugs
-- over-focus on style
-- misunderstand project conventions
+- hallucinate non-existent file paths
+- miss subtle edge cases or race conditions
+- over-focus on cosmetic style choices
+- misunderstand implicit project conventions
 - produce confident but invalid suggestions
 
 That is why the model is boxed in on both sides.
@@ -384,6 +379,4 @@ That is the bad pattern. It produces feedback that is hard to trust and harder t
 
 That is the better pattern.
 
-The more deterministic the pipeline is before and after the model call, the more useful the model becomes.
-
-That is the pattern I would copy first: not the exact scripts, not the exact prompts, and not even the models. Start by shrinking the job.
+Deterministic code should handle everything before and after the inference step: context gathering, token budgeting, format validation, and review state mapping. Start by shrinking the job.
