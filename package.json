@@ -26,13 +26,11 @@
     "impact:gemini-review": "echo 'Gemini review completed'"
   },
   "knip": {
-    "entry": [
-      "src/main.tsx",
-      "vite.config.ts",
-      "src/**/*.test.{ts,tsx}"
-    ],
     "project": [
       "src/**/*.{ts,tsx}"
+    ],
+    "ignoreBinaries": [
+      "td-cli"
     ],
     "ignoreDependencies": [
       "autoprefixer",
