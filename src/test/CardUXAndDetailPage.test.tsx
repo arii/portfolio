@@ -37,4 +37,21 @@ describe('Card UX & Detail Page Navigation Improvements', () => {
       'https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_dental.pdf'
     );
   });
+
+  it('renders Duckietown detail page with content and embedded videos', () => {
+    const handleBack = vi.fn();
+    render(<ResearchDetailPage slug="duckietown" onBack={handleBack} />);
+
+    expect(screen.getAllByText('MIT Duckietown (Autonomous Taxi Fleet)').length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/Inaugural MIT 2.166 Class/i).length).toBeGreaterThan(0);
+
+    const { container } = render(<ResearchDetailPage slug="duckietown" onBack={handleBack} />);
+
+    const iframes = Array.from(container.querySelectorAll('iframe'));
+    expect(iframes.length).toBeGreaterThanOrEqual(3);
+    const iframeSrcs = iframes.map(iframe => iframe.getAttribute('src'));
+    expect(iframeSrcs).toContain('https://www.youtube.com/embed/rPpewHIF2KU');
+    expect(iframeSrcs).toContain('https://www.youtube.com/embed/HfS5Yj63H34');
+    expect(iframeSrcs).toContain('https://www.youtube.com/embed/YTB2FgN_4zo');
+  });
 });
