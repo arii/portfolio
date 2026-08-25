@@ -38,7 +38,7 @@ export const systemTools: ResearchTool[] = [
     description: 'A collection of custom dev tools, background ETL pipelines, and automated workflows I am currently building.',
     category: 'AI Experiments',
     status: 'In Progress',
-    tags: ['ETL', 'WCS Scraper', 'Printful API', 'LLM', 'RAG', 'Automation', 'Visual Testing'],
+    tags: ['ETL', 'WCS Scraper', 'Printful API', 'LLM', 'RAG', 'Automation'],
     canonicalPath: '/research/ai-experiments'
   },
   {
