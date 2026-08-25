@@ -12,7 +12,7 @@ describe('Home Page', () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByRole('heading', { level: 1, name: /Ariel Anders, PhD/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 1, name: /Ariel Anders/i })).toBeInTheDocument();
     expect(screen.getByText('Roboticist & Senior Software Engineer')).toBeInTheDocument();
   });
 
