@@ -18,15 +18,8 @@ videoUrl: "https://www.youtube.com/watch?v=f5l8GA1PHm8"
 
 The **Drone Line Following Autonomous Controller** ("Follow the Yellow Brick Road") project was a collaborative effort with teammates Raghav Aggarwal, Julia Sokol, and Patrick Lowe to engineer a real-time computer vision and state feedback control loop for a micro quadrotor (Parrot Rolling Spider) to autonomously detect, align with, and track floor-marked paths.
 
-![Parrot Rolling Spider Drone Setup and Line Following Flight](/assets/research/drone.jpg)
-
----
-
-## Flight Demonstration Video
-
-https://www.youtube.com/watch?v=f5l8GA1PHm8
-
-*Rolling Spider micro-drone executing closed-loop visual path tracking along yellow floor-marked trajectories.*
+![Parrot Rolling Spider Drone Setup and Line Following Flight](/assets/research/drone_follow.gif)
+*Figure: Rolling Spider micro-drone executing closed-loop visual path tracking along yellow floor-marked trajectories. [Watch Full Video Demonstration on YouTube ↗](https://www.youtube.com/watch?v=f5l8GA1PHm8)*
 
 ---
 
