@@ -38,9 +38,9 @@ flowchart TD
 
 ## 1. Import Graph Parsing with dependency-cruiser
 
-I don't want to test every page if only the "About" section changed. To achieve targeted testing, I use `dependency-cruiser` to analyze the project's import graph.
+To prevent testing every page when only isolated components change, I use `dependency-cruiser` to analyze the project's import graph.
 
-When a file is modified, I trace its dependents up the tree until I reach an entry point (a route or a page component).
+When a file is modified, the system traces its dependents up the tree until it reaches an entry point (a route or a page component).
 
 ```bash
 # Example logic for finding dependents
@@ -48,20 +48,20 @@ npx depcruise --exclude "^node_modules" --output-type json src | \
   jq '.modules[] | select(.dependencies[].resolved == "src/components/Button.tsx") | .source'
 ```
 
-By identifying the "semantic blast radius," I reduce the number of screenshots I need to capture by up to 90% in large-scale applications.
+Identifying this "semantic blast radius" reduces the number of screenshots needed by up to 90% in large-scale applications.
 
 ---
 
 ## 2. Automated Playwright Screenshot Diffing
 
-Once I have a list of affected routes, I trigger a Playwright-based capture service.
+Once the affected routes are identified, the pipeline triggers a Playwright-based capture service.
 
 The pipeline performs a "sandwich" comparison:
 1.  **Baseline**: Capture screenshots of the affected routes on the `main` branch.
 2.  **Current**: Capture screenshots of the same routes on the feature branch.
 3.  **Diff**: Use `pixelmatch` to generate a pixel-level delta.
 
-To improve the signal-to-noise ratio, I automatically crop the diff to the bounding box of the changed area. This helps reviewers focus on the specific UI shift rather than scanning a full-page screenshot.
+To improve the signal-to-noise ratio, the pipeline automatically crops the diff to the bounding box of the changed area. This helps reviewers focus on the specific UI shift rather than scanning a full-page screenshot.
 
 ---
 
@@ -110,7 +110,7 @@ When a PR is opened, the analyzer posts a summary directly to the GitHub convers
 | `/about` | 0.0% | 🟢 LOW | Auto-passed |
 | `/merch` | 1.2% | 🟡 MEDIUM | Review Suggested |
 
-> **Implemented:** I use the `cropped` diff artifacts to show exactly where the pixels changed, saving reviewers from playing "spot the difference" on full-page screenshots.
+> **Implemented:** The `cropped` diff artifacts show exactly where pixels changed, saving reviewers from playing "spot the difference" on full-page screenshots.
 
 | Before | After | Diff |
 | :---: | :---: | :---: |
