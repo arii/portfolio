@@ -40,7 +40,7 @@ const Resume: React.FC<ResumeProps> = ({ version = 'v2.1' }) => {
         </div>
       </div>
 
-      <div className="hidden print:block text-center pt-8 text-xs text-gray-500 font-mono">
+      <div className="hidden print:block text-center pt-8 text-xs text-text-dim font-mono">
         Portfolio generated from arii/portfolio {version}
       </div>
     </div>

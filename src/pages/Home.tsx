@@ -46,9 +46,9 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
   return (
     <main className="space-y-8 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
       {/* Restructured to Balanced Vertical Layout with Optimized Spacing */}
-      <section className="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-xl backdrop-blur-sm space-y-6">
+      <section className="bg-surface/60 border border-line rounded-2xl p-6 sm:p-8 shadow-xl backdrop-blur-sm space-y-6">
         {/* Top block: Bio and CTAs */}
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-slate-800/80">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-line/80">
           <div className="space-y-3 max-w-3xl">
             <div className="space-y-1">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-text-main tracking-tight leading-tight">
@@ -76,7 +76,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                    handleNav('devai');
                 }
               }}
-              className="inline-flex items-center justify-center gap-2 rounded-md bg-accent hover:opacity-90 text-slate-950 px-5 py-2.5 text-sm font-bold shadow transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent min-h-[44px]"
+              className="inline-flex items-center justify-center gap-2 rounded-md bg-accent hover:opacity-90 text-bg px-5 py-2.5 text-sm font-bold shadow transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent min-h-[44px]"
             >
               <Bot className="w-4 h-4" />
               <span>View Agentic AI Work</span>
@@ -91,7 +91,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                   handleNav('research');
                 }
               }}
-              className="inline-flex items-center justify-center gap-2 rounded-md bg-accent hover:opacity-90 text-slate-950 px-5 py-2.5 text-sm font-bold shadow transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent min-h-[44px]"
+              className="inline-flex items-center justify-center gap-2 rounded-md bg-accent hover:opacity-90 text-bg px-5 py-2.5 text-sm font-bold shadow transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent min-h-[44px]"
             >
               <Cpu className="w-4 h-4" />
               <span>View Robotics Research</span>
@@ -126,7 +126,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
       </section>
 
       {/* Bottom Feature Callouts Row - Quieter Flat Panel and Shrunken Padding */}
-      <section className="bg-slate-900/40 border border-line rounded-xl p-5 sm:p-6">
+      <section className="bg-surface/40 border border-line rounded-xl p-5 sm:p-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {FEATURE_CALLOUTS.map((feature) => (
             <div key={feature.id} className="flex gap-3.5 items-start">

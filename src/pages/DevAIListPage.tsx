@@ -43,7 +43,18 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
   const flagshipTools = useMemo(() => DEVAI_FLAGSHIPS, []);
 
   const filteredPosts = useMemo(() => {
-    const researchOnlySlugs = ['leac-monitoring-software', 'light-therapy-mit', 'boop-light-detector', 'delivery-bots', 'bwsi-racecar'];
+    const researchOnlySlugs = [
+      'leac-monitoring-software',
+      'light-therapy-mit',
+      'boop-light-detector',
+      'delivery-bots',
+      'bwsi-racecar',
+      'report-6375-rsa',
+      'report-ml-lis',
+      'report-ce118-mechatronics',
+      'graduate-engineering-projects',
+      'autonomous-drone-line-following'
+    ];
     const devAiPosts = posts.filter((p) => !researchOnlySlugs.includes(p.slug));
 
     if (selectedTag === 'All Topics') return devAiPosts.filter((p) => {

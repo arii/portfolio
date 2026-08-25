@@ -71,8 +71,6 @@ export const ACADEMIC_PAPERS: AcademicPaper[] = [
     venue: 'IEEE Integrated STEM Education Conference (ISEC)',
     summary: 'Designed hands-on algorithmic robotics curriculum for 1/10th scale autonomous race cars, teaching perception, obstacle avoidance, and control.',
     tags: ['Self-Driving', 'ROS', 'Autonomy', 'Education'],
-    link: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=NM6SfiEAAAAJ&citation_for_view=NM6SfiEAAAAJ:W7OEmFMy1HYC',
-    videoUrl: 'https://www.youtube.com/watch?v=DUp9yURMo2c',
-    playlistUrl: 'https://www.youtube.com/playlist?list=PLEcASxU_mgVgnMZvVHgrTGFMUXze0MiOp'
+    link: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=NM6SfiEAAAAJ&citation_for_view=NM6SfiEAAAAJ:W7OEmFMy1HYC'
   }
 ];
