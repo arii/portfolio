@@ -139,20 +139,6 @@ export const autonomousTools: ResearchTool[] = [
     pdfUrl: 'https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_6375.pdf'
   },
   {
-    id: 'report-ce118-mechatronics',
-    taxonomyBucket: 'infrastructure',
-    title: 'Autonomous Mechatronic Systems (MAK Attack)',
-    subtitle: 'UCSC (CMPE-118 Mechatronics)',
-    description: 'Autonomous mobile robot designed with Matthew Luxton and Kyle Huey for arena navigation, event detection state machines, and obstacle engagement.',
-    category: 'Mechatronics',
-    status: 'Completed',
-    tags: ['Mechatronics', 'Embedded C', 'Robotics', 'UCSC'],
-    image: 'https://i.ytimg.com/vi/qSe8JmWQnYk/hqdefault.jpg',
-    canonicalPath: '/research/report-ce118-mechatronics',
-    pdfUrl: 'https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_ce118.pdf',
-    videoUrl: 'https://www.youtube.com/watch?v=qSe8JmWQnYk'
-  },
-  {
     id: 'report-ce121-microprocessor',
     taxonomyBucket: 'infrastructure',
     title: 'Microprocessor System Design (68HC11E1 Board)',
@@ -167,13 +153,13 @@ export const autonomousTools: ResearchTool[] = [
   {
     id: 'undergraduate-projects',
     taxonomyBucket: 'infrastructure',
-    title: 'Undergraduate Engineering Projects & Robotics B-Roll',
+    title: 'Undergraduate Engineering Projects',
     subtitle: 'UCSC Robotics & Hardware Systems',
-    description: 'Archive of foundational undergraduate robotics, embedded hardware projects, mechatronics demos, and video footage from UCSC.',
+    description: 'Archive of foundational undergraduate robotics and embedded hardware projects from UCSC—spanning CMPE 100 logic design, CMPE 121 microprocessor systems, CMPE 118 mechatronics, and custom microcontroller-based LED game side projects.',
     category: 'Robotics & Hardware',
     status: 'Completed',
-    tags: ['Robotics', 'Mechatronics', 'Embedded Systems', 'UCSC', 'Hardware'],
-    image: 'https://i.ytimg.com/vi/qSe8JmWQnYk/hqdefault.jpg',
+    tags: ['Robotics', 'Mechatronics', 'Embedded Systems', 'Digital Logic', 'Microcontrollers', 'UCSC', 'Hardware'],
+    image: '/assets/research/undergraduate-projects/flip_flop.gif',
     canonicalPath: '/research/undergraduate-projects',
     playlistUrl: 'https://www.youtube.com/playlist?list=PL2C1605ACDFFFA855'
   }
