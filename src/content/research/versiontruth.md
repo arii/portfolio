@@ -2,7 +2,7 @@
 type: study
 title: "Version Truth & Hackathons Submission"
 date: "2026-07-10"
-author: "Ariel Anders"
+author: "Ariel Anders, PhD"
 category: "DevAI"
 tags: ["automation", "ci", "dependencies", "ai", "NandaHack", "Agent Skill"]
 excerpt: "A step-by-step technical guide and reference report on building and deploying VersionTruth: a real-time ground-truth registry lookup API and agent skill for hallucination mitigation."

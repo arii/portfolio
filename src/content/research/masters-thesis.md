@@ -16,7 +16,7 @@ videoUrl: "https://www.youtube.com/watch?v=pmdjquZoJkE"
 
 # Learning a Strategy for Whole-Arm Grasping
 
-## MIT S.M. Thesis — CSAIL
+## MIT S.M. Thesis — Computer Science and Artificial Intelligence Laboratory (CSAIL)
 
 * **Author:** Ariel Anders
 * **Advisors:** Prof. Leslie Pack Kaelbling & Prof. Tomás Lozano-Pérez

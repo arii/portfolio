@@ -33,7 +33,7 @@ export interface HeroContent {
 export const heroContent: HeroContent = {
   brandTitle: 'Ariel Anders Portfolio',
   brandRole: 'Roboticist & Agentic Orchestration Architect',
-  name: 'Ariel Anders',
+  name: 'Ariel Anders, PhD',
   title: 'Roboticist & Senior Software Engineer',
   bioParagraphs: [
     'I build reliable software for robotics and autonomous systems, from motion planning and localization to production infrastructure and AI-assisted development.',

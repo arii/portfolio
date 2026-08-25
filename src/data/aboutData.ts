@@ -26,7 +26,7 @@ export interface ProfileData {
 }
 
 export const profileData: ProfileData = {
-  name: "Ariel Anders",
+  name: "Ariel Anders, PhD",
   role: "Roboticist & Senior Software Engineer",
   bio: [
     React.createElement('span', null,
