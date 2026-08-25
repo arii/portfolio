@@ -37,28 +37,38 @@ During my undergraduate studies in Computer Engineering at UC Santa Cruz (UCSC),
 
 ## 68HC11 Microcontroller Board for Mechanical Gripper Control
 
-In 2011, as part of my final microprocessor design laboratory course (CMPE 121), I designed, built, and programmed a custom microcontroller board using the Motorola 68HC11E1 chip configured in expanded bus mode. The primary goal of the project was to create a hardware-based controller capable of direct peripheral management, reducing the reliance on a separate PC software interface.
+For **CMPE-121 Microprocessor System Design** at UC Santa Cruz, I designed, hand-soldered, and programmed a custom embedded computer board based on the **Motorola 68HC11E1 microcontroller**, bringing bare silicon up to full operational capability to control a mechanical gripper without a host computer.
 
-### Hardware Architecture
+![68HC11 Microcontroller Board Schematic](/assets/research/report-ce121-microprocessor/68hc11_board_schematic.png)
+*Figure: Complete hardware schematic for the custom Motorola 68HC11E1 microcontroller system board.*
 
-Building the system required an intensive wire-wrapping and soldering process to construct a custom circuit layout. The hardware configuration consists of the following components:
+### Hardware Interfacing & Firmware Engineering
 
-  * **Microcontroller & Memory:** A Motorola 68HC11E1 chip configured in expanded bus mode operating alongside 8KB external SRAM and 8KB EPROM. I performed rigorous bus interface timing analysis to verify read/write constraints and avoid bus contention across hardware operating modes.
-  * **User Controls & Diagnostics:** Two digital I/O push-buttons for manual command triggers, a potentiometer paired with an analog-to-digital (A/D) converter pin to modulate operational parameters, and dedicated diagnostic LED displays for memory test validation.
-  * **Power Regulation:** An integrated 7-12V DC power regulation circuit to supply stable power to the logic and peripherals.
-  * **Peripherals & Connectivity:** A DB9 serial port connection integrated with standard RS-232 communication lines connected directly to a mechanical gripper, alongside the SPI serial protocol for auxiliary peripheral expansion.
+Building the single-board computer required precise hardware timing analysis, manual bus wiring (wire-wrapping and soldering), address decoding, and low-level C/Assembly firmware engineering:
 
-### Software Implementation
+1. **Memory Subsystem Interfacing:** Designed and wired 8KB external SRAM and 8KB EPROM memory ICs with 74HC logic gates for precise address decoding.
+2. **Serial & Peripheral Communication:** Configured RS-232 serial UART communication for terminal debugging alongside SPI interface logic for peripheral expansion.
+3. **Power Regulation & Hardware Diagnostics:** Designed onboard 5V linear power regulation circuitry and integrated LED logic displays for verifying memory read/write cycles.
+
+![Memory Address Decoding Subsystem](/assets/research/report-ce121-microprocessor/memory_address_decoding.png)
+*Figure: Memory address decoding block diagram mapping 8KB SRAM and EPROM windows into the 68HC11 memory space.*
+
+### Software & Gripper Control Implementation
 
 The software was structured to manage real-time communication and hardware feedback loops using the RS-232 communication protocol:
 
-  * **Pseudo-Force Control:** Motor resistance is regulated by specifying direct current levels. I mapped out eight distinct current settings into their hexadecimal representations, creating a structured command look-up table for both opening and closing actions.
-  * **Dynamic Lookup System:** When an operator presses a digital push-button, the program measures the active voltage across the potentiometer and uses that value to index the corresponding open or close command from the lookup table.
+* **Pseudo-Force Control:** Motor resistance is regulated by specifying direct current levels. I mapped out eight distinct current settings into their hexadecimal representations, creating a structured command look-up table for both opening and closing actions.
+* **Dynamic Lookup System:** When an operator presses a digital push-button, the program measures the active voltage across the potentiometer and uses that value to index the corresponding open or close command from the lookup table.
 
 [![68HC11 Microcontroller Board and Mechanical Gripper](/assets/research/undergraduate-projects/gripper_control.gif)](https://www.youtube.com/watch?v=tXif7xeZmGI#no-embed)
 *Figure: 68HC11 Microcontroller Board and Mechanical Gripper hardware loops. [Watch Full Video Demonstration on YouTube ↗](https://www.youtube.com/watch?v=tXif7xeZmGI#no-embed)*
 
-### Downloadable Technical Report
+### Engineering Impact & Verification
+
+- **Timing & Bus Validation:** Verified signal setup and hold times across system buses, preventing bus contention during high-speed memory reads.
+- **Prototyping Platform:** Created a reliable embedded hardware platform for real-time sensor data collection and low-level firmware testing.
+
+### Technical Report Download
 
 * 📄 [Download Microprocessor System Design Report (PDF)](https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_ce121.pdf)
 
@@ -70,6 +80,11 @@ The software was structured to manage real-time communication and hardware feedb
 * **Highlights:** Built autonomous embedded robotic platforms capable of real-time environmental navigation, obstacle detection, and precise actuation under tight hardware constraints.
 
 ## **Project Overview: MAK Attack Autonomous Mechatronic System**
+
+In **CMPE-118 Introduction to Mechatronics** at UC Santa Cruz, my team (Matthew Luxton, Kyle Huey, and I) designed, constructed, and programmed **MAK Attack**—an autonomous mobile robot built to solve real-time arena navigation and object manipulation challenges under strict operational deadlines.
+
+![MAK Attack Autonomous Mechatronic Robot](/assets/research/report-ce118-mechatronics/mak_attack_robot.png)
+*Figure: The MAK Attack autonomous mobile robot platform, highlighting optical sensors, bumper switches, and custom motor drive electronics.*
 
 ### **At a Glance**
 
@@ -85,6 +100,10 @@ The software was structured to manage real-time communication and hardware feedb
 #### **1. Software Architecture & Control Systems**
 
   * **Hierarchical Finite State Machine (FSM)**: Architected and programmed a complex control structure featuring modular sub-state machines (e.g., dedicated centering algorithms and localized sensor-sampling logic).
+
+![Hierarchical Event State Machine](/assets/research/report-ce118-mechatronics/hierarchical_state_machine.png)
+*Figure: Hierarchical event-driven state machine architecture governing autonomous robot behavior during arena trials.*
+
   * **Ambient-Resilient Event Detection**: Developed a differential sampling state machine for the robot’s IR tape sensors. By capturing active and passive states sequentially, the software calculated ambient light deltas to stabilize detection thresholds under variable environmental lighting.
   * **Adaptive Battery Voltage Scaling**: Engineered an algorithmic solution to address supply fluctuations (from a 14.4V dual-battery series configuration). Built continuous PWM duty-cycle scaling code utilizing a 10-bit ADC reference to normalize motor outputs relative to a steady 12V operational baseline, ensuring consistent maneuverability and projectile power.
 
@@ -105,6 +124,12 @@ The software was structured to manage real-time communication and hardware feedb
   * **Integration-Driven Development**: Successfully mitigated integration bottlenecks by designing testing harnesses and sub-assembly code in parallel with mechanical builds throughout a 5-week integration runway.
   * **High-Precision Target Acquisition**: Achieved exceptional accuracy with the projectile launcher, consistently landing multiple impacts on target by relying on dynamic software thresholding to counter complex external ambient light interference.
   * **Agile Problem Solving**: Overcame a critical, late-stage failure of the robot's primary micro-servos by adapting the physical chassis to house robust, larger-scale servos and utilizing custom ground shielding around signaling lines to eliminate high-current motor noise.
+
+### **Media & Report Downloads**
+
+- ▶️ [Watch MAK Attack Line Following Robot Video](https://www.youtube.com/watch?v=qSe8JmWQnYk)
+- 📺 [Browse Robotics Demos Playlist](https://www.youtube.com/playlist?list=PLEcASxU_mgVgnMZvVHgrTGFMUXze0MiOp)
+- 📄 [Download Mechatronics Lab Report (PDF)](https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_ce118.pdf)
 
 ### **System & Component Gallery**
 

@@ -12,6 +12,7 @@ tags:
 category: "Robotics & AI"
 summary: "My Master's thesis on learning robust whole-arm and bimanual grasping policies to cradle and secure bulky, unmodeled objects under physical and pose uncertainty."
 videoUrl: "https://www.youtube.com/watch?v=pmdjquZoJkE"
+pdfUrl: "https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_ml.pdf"
 ---
 
 # Learning a Strategy for Whole-Arm Grasping
@@ -36,7 +37,7 @@ https://www.youtube.com/watch?v=pmdjquZoJkE
 
 Traditional robotic grasping separates the problem into two distinct stages: finding optimal contact points for the fingertips and planning collision-free trajectories to reach them. While effective for small items with known CAD models, this approach breaks down when handling large, heavy, or irregularly shaped objects where fingertip pinch grasps lack the required torque and contact area.
 
-In my Master's thesis, I formulated a framework for **whole-arm grasping**. Instead of restricting contact to end-effectors, the robot leverages the full kinematic chain—forearms, upper arms, and torso—to envelope, scoop, and cradle unmodeled objects under physical and pose uncertainty.
+In my Master's thesis, I formulated a framework for **whole-arm grasping**. Instead of restricting contact to end-effectors, I enabled the robot to leverage its full kinematic chain—forearms, upper arms, and torso—to envelope, scoop, and cradle unmodeled objects under physical and pose uncertainty.
 
 ![Whole-arm grasping experimental setup](/assets/research/swag.jpg)
 *Figure 1: Experimental setup and kinematics for whole-arm grasping on the PR2 platform.*
@@ -55,10 +56,10 @@ In my Master's thesis, I formulated a framework for **whole-arm grasping**. Inst
 
 ### 3. Bimanual & Torso Coordination
 * Coordinated dual-arm trajectories and torso positioning to execute complex enveloping maneuvers on bulky everyday items (boxes, spheres, and irregular containers).
-* Transferred learned simulation policies directly to the physical Willow Garage PR2 platform.
+* Transferred my learned simulation policies directly to the physical Willow Garage PR2 platform.
 
 ![Thesis Key Concepts Word Cloud](/assets/research/thesis_wordle.png)
-*Figure 2: Word cloud of core themes from my MIT S.M. thesis.*
+*Figure 2: Word cloud highlighting core themes from my MIT S.M. thesis research.*
 
 ---
 
@@ -78,7 +79,7 @@ Simulation trials evaluating policy convergence, trajectory generation, and stab
 
 ## Physical Robot Experiments (PR2 Platform)
 
-Validation of learned whole-arm manipulation policies on the physical PR2:
+Validation of my learned whole-arm manipulation policies on the physical PR2:
 
 * [PR2 Grasping Demonstration 1](https://www.youtube.com/watch?v=2mGN3ka_7i0)
 * [PR2 Grasping Demonstration 2](https://www.youtube.com/watch?v=-V2KtcETAi8)
@@ -90,4 +91,4 @@ Validation of learned whole-arm manipulation policies on the physical PR2:
 ## Key Takeaways
 
 * **Form-Closure Caging Over Precision Points:** Enveloping objects with the full arm structure creates robust form-closure and support surfaces, bypassing the need for exact fingertip friction modeling.
-* **Payload Scaling:** Utilizing the arms and torso distributes load and joint torques, enabling manipulation of items far exceeding the PR2 gripper payload limits.
+* **Payload Scaling:** Utilizing the arms and torso distributes load and joint torques, enabling manipulation of items far exceeding standard PR2 gripper payload limits.
