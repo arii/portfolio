@@ -42,35 +42,23 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
   const posts = useMemo(() => Array.from(new Map(getAllResearchPosts().map((p) => [p.slug || p.title, p])).values()), []);
   const flagshipTools = useMemo(() => DEVAI_FLAGSHIPS, []);
 
-  const filteredPosts = useMemo(() => {
-    const researchOnlySlugs = [
-      'leac-monitoring-software',
-      'light-therapy-mit',
-      'boop-light-detector',
-      'delivery-bots',
-      'bwsi-racecar',
-      'report-6375-rsa',
-      'report-ml-lis',
-      'report-ce118-mechatronics',
-      'report-ce121-microprocessor'
-    ];
-    const devAiPosts = posts.filter((p) => !researchOnlySlugs.includes(p.slug));
-
-    if (selectedTag === 'All Topics') return devAiPosts.filter((p) => {
-        const cat = (p.category || '').toLowerCase();
-        return !cat.includes('robotics'); // exclude robotics
+  const devAiPosts = useMemo(() => {
+    return posts.filter((p) => {
+      const cat = (p.category || '').toLowerCase();
+      return cat.includes('devai') || cat.includes('ai experiments');
     });
+  }, [posts]);
+
+  const filteredPosts = useMemo(() => {
+    if (selectedTag === 'All Topics') return devAiPosts;
     return devAiPosts.filter((p) => {
       const tags = p.tags.map((t) => t.toLowerCase());
-      const cat = (p.category || '').toLowerCase();
-      if (cat.includes('robotics')) return false;
-
-      if (selectedTag === 'DevAI & Agents') return tags.some((t) => ['devai', 'ai', 'llm', 'multi-agent', 'agentic workflows', 'productivity', 'agents'].includes(t)) || cat.includes('devai');
+      if (selectedTag === 'DevAI & Agents') return tags.some((t) => ['devai', 'ai', 'llm', 'multi-agent', 'agentic workflows', 'productivity', 'agents'].includes(t));
       if (selectedTag === 'CI/CD & Testing') return tags.some((t) => ['ci/cd', 'ci', 'github actions', 'playwright', 'pixelmatch', 'screenshot diff', 'automation', 'devops'].includes(t));
-      if (selectedTag === 'Data Pipelines & ETL') return tags.some((t) => ['etl', 'apache parquet', 'scraping', 'data pipelines', 'python', 'data engineering'].includes(t)) || cat.includes('data engineering');
+      if (selectedTag === 'Data Pipelines & ETL') return tags.some((t) => ['etl', 'apache parquet', 'scraping', 'data pipelines', 'python', 'data engineering'].includes(t));
       return true;
     });
-  }, [posts, selectedTag]);
+  }, [devAiPosts, selectedTag]);
 
   return (
     <div className="space-y-12 sm:space-y-16">
