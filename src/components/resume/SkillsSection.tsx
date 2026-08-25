@@ -28,7 +28,7 @@ export const SkillsSection: React.FC<SkillsSectionProps> = ({ skills }) => {
                 {skillsList.map((skill, sIdx) => (
                   <span
                     key={sIdx}
-                    className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-secondary text-foreground border border-border/60 print:border-gray-400 print:bg-transparent print:text-black"
+                    className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-secondary text-foreground border border-border/60 print:border-border print:bg-transparent print:text-black"
                   >
                     {skill}
                   </span>

@@ -18,15 +18,15 @@ export const EducationSection: React.FC<EducationSectionProps> = ({ education })
           <div key={idx} className="space-y-1.5">
             <div className="flex flex-col justify-between gap-1">
               <h3 className="text-sm font-bold text-foreground print:text-black leading-snug">{edu.degree}</h3>
-              <span className="text-xs font-mono text-muted-foreground print:text-gray-700">{edu.period}</span>
+              <span className="text-xs font-mono text-muted-foreground print:text-text-dim">{edu.period}</span>
             </div>
             <div className="text-xs font-semibold text-primary print:text-black">{edu.institution}</div>
             {edu.details && (
-              <p className="text-xs text-muted-foreground italic print:text-gray-800">{edu.details}</p>
+              <p className="text-xs text-muted-foreground italic print:text-text-body">{edu.details}</p>
             )}
             {edu.researchFocus && (
               <div className="mt-2 p-3 bg-secondary/30 rounded-xl border border-border/60 print:bg-transparent print:border-l-2 print:border-black print:rounded-none print:p-0 print:pl-3">
-                <p className="text-xs text-muted-foreground leading-relaxed print:text-gray-800">{edu.researchFocus}</p>
+                <p className="text-xs text-muted-foreground leading-relaxed print:text-text-body">{edu.researchFocus}</p>
               </div>
             )}
           </div>

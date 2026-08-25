@@ -27,9 +27,9 @@ const About: React.FC = () => {
               ))}
             </div>
 
-            <div className="mt-6 p-5 rounded-xl bg-slate-800/50 border border-slate-700/50">
+            <div className="mt-6 p-5 rounded-xl bg-surface-alt/50 border border-border/50">
               <h3 className="text-sm font-bold uppercase tracking-wider text-accent mb-3">🎨 Beyond the Code</h3>
-              <div className="text-sm text-slate-300 leading-relaxed">
+              <div className="text-sm text-text-body leading-relaxed">
                 {profileData.bio[profileData.bio.length - 1]}
               </div>
             </div>

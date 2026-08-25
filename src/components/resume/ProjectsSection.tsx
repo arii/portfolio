@@ -26,12 +26,12 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ projects }) =>
                 )}
               </div>
               {project.metric && (
-                <span className="shrink-0 px-2 py-0.5 text-[10px] font-mono font-semibold rounded-md bg-primary/10 text-primary border border-primary/20 print:border-gray-400 print:text-black print:bg-transparent">
+                <span className="shrink-0 px-2 py-0.5 text-[10px] font-mono font-semibold rounded-md bg-primary/10 text-primary border border-primary/20 print:border-border print:text-black print:bg-transparent">
                   {project.metric}
                 </span>
               )}
             </div>
-            <p className="text-[11px] text-muted-foreground leading-relaxed print:text-gray-800">{project.description}</p>
+            <p className="text-[11px] text-muted-foreground leading-relaxed print:text-text-body">{project.description}</p>
             {project.techStack && (
               <div className="flex flex-wrap gap-1 pt-1 print:hidden">
                 {project.techStack.map((tech, tIdx) => (
