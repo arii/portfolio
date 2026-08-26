@@ -6,6 +6,8 @@ export interface StackProps extends BoxProps {
   align?: 'start' | 'center' | 'end' | 'stretch' | 'baseline';
   justify?: 'start' | 'center' | 'end' | 'between' | 'around' | 'evenly';
   wrap?: boolean;
+  to?: string;
+  onClick?: (e: any) => void;
 }
 
 export const Stack: React.FC<StackProps> = ({

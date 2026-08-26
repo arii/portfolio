@@ -2,6 +2,7 @@ import React, { ElementType } from 'react';
 
 export interface BoxProps extends React.HTMLAttributes<HTMLElement> {
   as?: ElementType;
+  to?: string;
   children?: React.ReactNode;
   px?: number | string;
   py?: number | string;
