@@ -25,7 +25,7 @@ export const CareerHighlightsSection: React.FC<{ highlights: ProfileData['highli
 
 export const AtAGlanceSidebar: React.FC<{ details: ProfileData['details'] }> = ({ details }) => (
   <div className="border border-line bg-surface p-6 rounded-3xl space-y-4">
-    <h3 className="text-xs font-semibold text-accent uppercase tracking-widest flex items-center space-x-1.5 font-sans">
+    <h3 className="text-sm font-semibold text-text-main flex items-center space-x-1.5 font-sans">
       <span>At a Glance</span>
     </h3>
     <div className="space-y-4">
@@ -33,7 +33,7 @@ export const AtAGlanceSidebar: React.FC<{ details: ProfileData['details'] }> = (
         const Icon = detail.icon;
         return (
           <div key={idx} className="flex flex-col border-b border-line/30 pb-3 last:border-0 last:pb-0 gap-1">
-            <span className="text-[10px] text-text-dim flex items-center space-x-1.5 shrink-0 font-bold uppercase tracking-wider">
+            <span className="text-xs font-semibold text-text-dim flex items-center space-x-1.5 shrink-0">
               {Icon && <Icon className="h-3.5 w-3.5 text-text-dim shrink-0" />}
               <span>{detail.label}</span>
             </span>

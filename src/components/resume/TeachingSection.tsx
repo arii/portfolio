@@ -22,7 +22,7 @@ export const TeachingSection: React.FC<TeachingSectionProps> = ({
       <div className="flex items-center justify-between mb-6 border-b border-border/40 pb-2 print:border-b-2 print:border-black">
         <div className="flex items-center space-x-3">
           <BookOpen className="h-6 w-6 text-primary print:text-black" />
-          <h2 className="text-2xl font-bold text-foreground print:text-black uppercase tracking-wider">Teaching & Leadership</h2>
+          <h2 className="text-2xl font-semibold text-foreground print:text-black">Teaching & Leadership</h2>
         </div>
         {isCollapsible && onToggleExpand && (
           <button

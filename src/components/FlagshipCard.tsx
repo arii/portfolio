@@ -91,18 +91,18 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
           <div className="flex items-center justify-between">
             <div className="h-10 w-10 rounded-2xl bg-accent/10 flex items-center justify-center border border-accent/20"><ToolIcon className="h-5 w-5 text-accent" /></div>
             {tool.id !== 'phd-thesis' && tool.id !== 'masters-thesis' && (
-              <div className="flex items-center space-x-1.5 bg-surface border border-line px-2 py-1 rounded-full">
+              <div className="flex items-center space-x-1.5 bg-surface border border-line px-2 py-1 rounded-md">
                 <span className={`w-2 h-2 rounded-full ${
                   tool.status === 'Live' ? 'bg-accent' :
                   tool.status === 'Local only' ? 'bg-accent' :
                   tool.status === 'In development' ? 'bg-accent-sky' : 'bg-muted-foreground'
                 }`}></span>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-text-main pr-0.5">{tool.status}</span>
+                <span className="text-xs font-semibold text-text-main pr-0.5">{tool.status}</span>
               </div>
             )}
           </div>
           <div>
-            <span className="text-[10px] text-accent font-bold uppercase tracking-wider block font-sans">{tool.category}</span>
+            <span className="text-xs text-accent font-semibold block font-sans">{tool.category}</span>
             <h3 className="text-xl font-bold text-text-main mt-1 font-display group-hover:text-accent transition-colors">{tool.title}</h3>
             {tool.subtitle && <p className="text-xs text-accent font-semibold tracking-wide mt-1 uppercase font-sans">{tool.subtitle}</p>}
           </div>

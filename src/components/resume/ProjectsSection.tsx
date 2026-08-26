@@ -22,7 +22,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
       <div className="flex items-center justify-between mb-4 border-b border-border/40 pb-2 print:border-b-2 print:border-black">
         <div className="flex items-center space-x-2.5">
           <FolderGit2 className="h-5 w-5 text-primary print:text-black" />
-          <h2 className="text-xl font-bold text-foreground print:text-black uppercase tracking-wider">Impact Projects</h2>
+          <h2 className="text-xl font-semibold text-foreground print:text-black">Impact Projects</h2>
         </div>
         {isCollapsible && onToggleExpand && (
           <button

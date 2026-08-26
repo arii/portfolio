@@ -24,7 +24,7 @@ export const PublicationsSection: React.FC<PublicationsSectionProps> = ({
       <div className="flex items-center justify-between mb-4 border-b border-border/40 pb-2 print:border-b-2 print:border-black">
         <div className="flex items-center space-x-2.5">
           <FileText className="h-5 w-5 text-primary print:text-black" />
-          <h2 className="text-xl font-bold text-foreground print:text-black uppercase tracking-wider">Publications & Theses</h2>
+          <h2 className="text-xl font-semibold text-foreground print:text-black">Publications & Theses</h2>
         </div>
         <div className="flex items-center gap-3 print:hidden">
           {isCollapsible && onToggleExpand && (

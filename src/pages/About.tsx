@@ -35,7 +35,7 @@ const About: React.FC = () => {
             </div>
 
             <div className="mt-6 p-5 rounded-xl bg-surface-alt/50 border border-border/50">
-              <h3 className="text-sm font-bold uppercase tracking-wider text-accent mb-3">🎨 Beyond the Code</h3>
+              <h3 className="text-sm font-semibold text-text-main mb-3">🎨 Beyond the Code</h3>
               <div className="text-sm text-text-body leading-relaxed">
                 {profileData.bio[profileData.bio.length - 1]}
               </div>
@@ -43,7 +43,7 @@ const About: React.FC = () => {
           </div>
 
           <div className="border border-accent/20 bg-accent/5 rounded-3xl p-6 sm:p-8 space-y-3">
-            <span className="text-xs font-semibold text-accent uppercase tracking-widest flex items-center space-x-1.5">
+            <span className="text-sm font-semibold text-text-main flex items-center space-x-1.5">
               <span className="h-2 w-2 rounded-full bg-accent animate-pulse"></span>
               <span>Current Availability</span>
             </span>
@@ -69,7 +69,7 @@ const About: React.FC = () => {
           <AtAGlanceSidebar details={profileData.details} />
 
           <div className="border border-line bg-surface p-6 rounded-3xl space-y-4">
-            <h3 className="text-xs font-semibold text-accent uppercase tracking-widest flex items-center space-x-1.5 font-sans">
+            <h3 className="text-sm font-semibold text-text-main flex items-center space-x-1.5 font-sans">
               <span>Connect</span>
             </h3>
             <div className="flex flex-col gap-3">
