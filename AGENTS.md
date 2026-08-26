@@ -53,3 +53,25 @@ To run these tools locally:
    - Run `pnpm run impact:gemini-review` to trigger visual UX audits of layout shifts or issues using the Gemini API.
    - Run `pnpm run impact:gemini-code-review` to trigger regular code reviews.
 
+## AI Reviewer Content Constraints
+
+When conducting automated code and content reviews (e.g., via `td-cli ai review` or Impact Analysis context building):
+
+1. **Strict Editorial Skepticism**:
+   - Act as a strict, skeptical content auditor when reviewing pull requests containing markdown articles, portfolio project copy, or research descriptions.
+   - Do not rubber-stamp content changes or offer superficial praise. Challenge unverified assertions, unsubstantiated metrics, or fictional project tools.
+
+2. **Source Verification & Citations**:
+   - Require all newly introduced research tools, case studies, or technical claims to have backing citations, valid source links, or corresponding metadata entries (e.g., in `src/data/research.ts` or `src/data/research/*.ts`).
+   - Flag any claims lacking verifiable references or missing corresponding data structure integration as blocking errors.
+
+3. **Content Deduplication**:
+   - Aggressively flag redundant or duplicate content across markdown files and data files.
+   - Ensure new articles do not repeat existing case studies or create duplicate entries for previously documented tools.
+
+4. **Block Unrequested Pages & Routes**:
+   - Treat unrequested additions of new top-level pages, routes, or standalone markdown articles as a blocking error (`error` severity) unless explicitly specified in the issue or task prompt.
+
+5. **Editorial Standards & Voice**:
+   - Enforce first-person singular voice ('I', 'my', 'me') representing Ariel Anders across all portfolio prose. Reject third-person phrasing, passive voice, or corporate buzzwords ('streamline', 'leverage', 'consolidated suite').
+   - Ensure headers and tags follow sentence case and maintain natural developer narrative flow.
