@@ -14,11 +14,24 @@ export interface BoxProps extends React.HTMLAttributes<HTMLElement> {
   my?: number | string;
 }
 
+const classCache = new Map<string, string>();
+
+const sanitizeClassName = (name: string): string => {
+  if (!name) return '';
+  let cached = classCache.get(name);
+  if (cached === undefined) {
+    cached = name.replace(/\b(px-[0-9.]+|py-[0-9.]+|p-[0-9.]+|my-[0-9.]+|w-full|min-h-\[[^\]]+\])\b/g, '').trim();
+    classCache.set(name, cached);
+  }
+  return cached;
+};
+
 export const Box: React.FC<BoxProps> = ({
   as: Component = 'div',
   children,
   className = '',
   px, py, pt, pb, p, w, h, minH, my,
+  style,
   ...props
 }) => {
   const styleProps: Record<string, any> = {};
@@ -44,10 +57,10 @@ export const Box: React.FC<BoxProps> = ({
   if (h !== undefined) styleProps.height = h === 'full' ? '100%' : h;
   if (minH !== undefined) styleProps.minHeight = minH;
 
-  const combinedStyle = { ...styleProps, ...(props.style || {}) };
+  const combinedStyle = { ...styleProps, ...(style || {}) };
 
-  // Strip banned classes if they somehow slipped in via className
-  const cleanClassName = className.replace(/\b(px-[0-9.]+|py-[0-9.]+|p-[0-9.]+|my-[0-9.]+|w-full|min-h-\[[^\]]+\])\b/g, '').trim();
+  // Strip banned classes if they somehow slipped in via className (cached to prevent performance overhead)
+  const cleanClassName = sanitizeClassName(className);
 
   return (
     <Component className={cleanClassName} style={Object.keys(combinedStyle).length > 0 ? combinedStyle : undefined} {...props}>

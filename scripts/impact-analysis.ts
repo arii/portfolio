@@ -1,0 +1,150 @@
+import fs from 'fs';
+import { IMPACT_CONFIG } from './impact-analysis.config';
+import { logHeartbeat } from './heartbeat';
+import {
+  exec,
+  getChangedFiles,
+  buildReverseMap,
+  findAffectedFiles,
+  getDynamicRouteMapping,
+  resolveAffectedUrls,
+  generateReports,
+  traceLayoutHierarchyUpward,
+  type DependencyGraph,
+  type ImpactReport
+} from './impact-analysis-utils';
+
+async function main() {
+  await logHeartbeat('Starting Deployment Impact Analysis');
+  console.log('🚀 Running Deployment Impact Analysis...');
+
+  try {
+    if (!fs.existsSync('src')) {
+      console.warn('⚠️ No "src" directory found. Skipping detailed impact analysis.');
+      const changedFiles = getChangedFiles();
+      const emptyReport: ImpactReport = {
+        changedFiles,
+        affectedPages: [],
+        affectedDynamicImports: [],
+        routes: [],
+        visualReviewRequired: [],
+        impactLevel: 'LOW'
+      };
+      generateReports(emptyReport, changedFiles, []);
+      return;
+    }
+
+    const envChangedFiles = (process.env.CHANGED_FILES || '').split(',').filter(Boolean);
+    const files = envChangedFiles.length > 0 ? envChangedFiles : getChangedFiles();
+
+    if (files.length === 0) {
+      console.log('✅ No changes detected. Generating empty report.');
+      const emptyReport: ImpactReport = {
+        changedFiles: [],
+        affectedPages: [],
+        affectedDynamicImports: [],
+        routes: [],
+        visualReviewRequired: [],
+        impactLevel: 'LOW'
+      };
+      generateReports(emptyReport, [], []);
+      return;
+    }
+
+    console.log(`\nFound ${files.length} changed files.`);
+
+    // Generate dependency graph
+    await logHeartbeat('Generating dependency graph');
+    console.log('📊 Generating dependency graph...');
+    let graphJson: string;
+
+    const depCruiseConfig = '.dependency-cruiser.config.mjs';
+    const tsConfig = 'tsconfig.app.json';
+
+    if (!fs.existsSync(depCruiseConfig) || !fs.existsSync(tsConfig)) {
+      console.warn(`⚠️ Missing ${depCruiseConfig} or ${tsConfig}. Generating empty report.`);
+      const emptyReport: ImpactReport = {
+        changedFiles: files,
+        affectedPages: [],
+        affectedDynamicImports: [],
+        routes: [],
+        visualReviewRequired: [],
+        impactLevel: 'LOW'
+      };
+      generateReports(emptyReport, [], []);
+      return;
+    }
+
+    graphJson = exec(`depcruise src --config ${depCruiseConfig} --ts-config ${tsConfig} --output-type json`);
+
+    const graph: DependencyGraph = JSON.parse(graphJson);
+
+    const reverseMap = buildReverseMap(graph);
+
+    // Find affected files in src/
+    const srcChanges = files.filter(f => f.startsWith('src/'));
+
+    // Trace layout hierarchy upward from the point of change
+    const { layoutTrace, sharedLayouts } = traceLayoutHierarchyUpward(srcChanges, reverseMap);
+    const finalSrcChanges = Array.from(new Set([...srcChanges, ...sharedLayouts]));
+
+    const allAffected = findAffectedFiles(finalSrcChanges, reverseMap, { includeDynamic: true });
+    const staticAffected = findAffectedFiles(finalSrcChanges, reverseMap, { includeDynamic: false });
+
+    // Resolve Dynamic Mapping and URLs
+    const dynamicRouteMapping = getDynamicRouteMapping(graph);
+    await logHeartbeat('Resolving affected URLs');
+    const allUrls = resolveAffectedUrls(allAffected, files, dynamicRouteMapping, staticAffected);
+
+    // Find all dynamic imports in the whole graph to identify dynamic boundaries
+    const allDynamicImports = new Set<string>();
+    graph.modules.forEach(m => m.dependencies.forEach(d => {
+      if (d.dynamic && d.resolved) allDynamicImports.add(d.resolved);
+    }));
+
+    const affectedDynamicImportsSet = allAffected.filter(f => allDynamicImports.has(f)).sort();
+
+    // Severity detection
+    const getSeverity = (fList: string[]): 'HIGH' | 'MEDIUM' | 'LOW' => {
+      for (const f of fList) if (IMPACT_CONFIG.HIGH_IMPACT_PATHS.some(p => f.startsWith(p))) return 'HIGH';
+      for (const f of fList) if (IMPACT_CONFIG.MEDIUM_IMPACT_PATHS.some(p => f.startsWith(p))) return 'MEDIUM';
+      return 'LOW';
+    };
+    const severity = getSeverity(files);
+
+    const report: ImpactReport = {
+      changedFiles: files,
+      affectedPages: allAffected.filter(f => f.startsWith(IMPACT_CONFIG.PAGES_DIR) || Object.keys(dynamicRouteMapping).includes(f)),
+      affectedDynamicImports: affectedDynamicImportsSet,
+      routes: allUrls,
+      visualReviewRequired: allUrls,
+      impactLevel: severity,
+      sharedLayouts,
+      layoutTrace
+    };
+
+    // Human readable output
+    console.log('\n' + '='.repeat(40));
+    console.log('DEPLOYMENT IMPACT ANALYSIS');
+    console.log('='.repeat(40));
+    console.log(`\nIMPACT LEVEL: ${severity}`);
+    console.log('\nCHANGED FILES:');
+    files.forEach(f => console.log(`  - ${f}`));
+    console.log('\nVISUAL REVIEW REQUIRED:');
+    if (allUrls.length > 0) {
+      allUrls.forEach(url => console.log(`  - ${url}`));
+    } else {
+      console.log('  None detected (code-only changes)');
+    }
+    console.log('\n' + '='.repeat(40));
+
+    generateReports(report, files, affectedDynamicImportsSet);
+    await logHeartbeat('Impact Analysis Complete');
+  } catch (error: unknown) {
+    const err = error as Error;
+    console.error(`❌ Error during impact analysis: ${err.message}`);
+    process.exit(1);
+  }
+}
+
+main().catch(console.error);

@@ -1,0 +1,1 @@
+/home/ari/tech-dancer/scripts/ux-capture.ts
