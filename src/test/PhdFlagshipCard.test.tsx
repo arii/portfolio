@@ -8,7 +8,7 @@ describe('PhD Thesis Flagship Project', () => {
     const phdTool = RESEARCH_TOOLS.find((t) => t.id === 'phd-thesis');
     expect(phdTool).toBeDefined();
     expect(phdTool?.isFlagship).toBe(true);
-    expect(phdTool?.image).toBe('/assets/research/phd/sixblock.png');
+    expect(phdTool?.image).toBe('/assets/research/phd/icra_presentation.gif');
     expect(phdTool?.externalUrl).toBe('https://dspace.mit.edu/entities/publication/d489a172-efbf-4e35-b81c-04e4acf3d24d');
     expect(phdTool?.externalLinkDisplayLabel).toBe('MIT DSpace Thesis');
     expect(phdTool?.description).toContain('1.9% to 80.7%');
@@ -21,8 +21,8 @@ describe('PhD Thesis Flagship Project', () => {
     expect(screen.getByText('MIT CSAIL PH.D. THESIS')).toBeInTheDocument();
     expect(screen.getAllByText('MIT DSpace Thesis')[0]).toBeInTheDocument();
 
-    const phdImage = screen.getByAltText(/PR2 robot reliably arranging blocks/i);
+    const phdImage = screen.getByAltText(/PR2 robot executing conformant planning/i);
     expect(phdImage).toBeInTheDocument();
-    expect(phdImage).toHaveAttribute('src', '/assets/research/phd/sixblock.png');
+    expect(phdImage).toHaveAttribute('src', '/assets/research/phd/icra_presentation.gif');
   });
 });
