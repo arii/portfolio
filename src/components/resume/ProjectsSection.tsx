@@ -4,17 +4,39 @@ import { ResumeProject } from '@/data/resume';
 
 export interface ProjectsSectionProps {
   projects: ResumeProject[];
+  isCollapsible?: boolean;
+  isExpanded?: boolean;
+  onToggleExpand?: () => void;
 }
 
-export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ projects }) => {
+export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
+  projects,
+  isCollapsible,
+  isExpanded,
+  onToggleExpand
+}) => {
+  const displayedProjects = isCollapsible && !isExpanded ? projects.slice(0, 1) : projects;
+
   return (
     <section className="mb-10 print:mb-6 print:break-inside-avoid">
-      <div className="flex items-center space-x-2.5 mb-4 border-b border-border/40 pb-2 print:border-b-2 print:border-black">
-        <FolderGit2 className="h-5 w-5 text-primary print:text-black" />
-        <h2 className="text-xl font-bold text-foreground print:text-black uppercase tracking-wider">Impact Projects</h2>
+      <div className="flex items-center justify-between mb-4 border-b border-border/40 pb-2 print:border-b-2 print:border-black">
+        <div className="flex items-center space-x-2.5">
+          <FolderGit2 className="h-5 w-5 text-primary print:text-black" />
+          <h2 className="text-xl font-bold text-foreground print:text-black uppercase tracking-wider">Impact Projects</h2>
+        </div>
+        {isCollapsible && onToggleExpand && (
+          <button
+            type="button"
+            onClick={onToggleExpand}
+            className="text-xs font-semibold text-primary hover:underline font-mono print:hidden min-h-[40px] px-2"
+            aria-expanded={isExpanded}
+          >
+            {isExpanded ? '[ Collapse ]' : '[ Expand ]'}
+          </button>
+        )}
       </div>
       <div className="space-y-3.5">
-        {projects.map((project, idx) => (
+        {displayedProjects.map((project, idx) => (
           <div key={idx} className="bg-card border border-border/80 p-3.5 rounded-xl space-y-2 hover:border-primary/50 transition-colors print:border-none print:p-0 print:bg-transparent">
             <div className="flex items-start justify-between gap-2">
               <div className="flex items-center gap-1.5 flex-wrap">

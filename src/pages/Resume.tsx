@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { resumeData } from '@/data/resume';
 import { ResumeHeader } from '@/components/resume/ResumeHeader';
@@ -22,6 +22,23 @@ const Resume: React.FC<ResumeProps> = ({ version = 'v2.1' }) => {
     setSearchParams({ layout: mode });
   };
 
+  // Expand/collapse states for full-width layout (default to false/collapsed)
+  const [expandSkills, setExpandSkills] = useState(false);
+  const [expandProjects, setExpandProjects] = useState(false);
+  const [expandEducation, setExpandEducation] = useState(false);
+  const [expandPublications, setExpandPublications] = useState(false);
+  const [expandTeaching, setExpandTeaching] = useState(false);
+  const [expandHonors, setExpandHonors] = useState(false);
+
+  const toggleAll = (expand: boolean) => {
+    setExpandSkills(expand);
+    setExpandProjects(expand);
+    setExpandEducation(expand);
+    setExpandPublications(expand);
+    setExpandTeaching(expand);
+    setExpandHonors(expand);
+  };
+
   return (
     <div className="max-w-5xl mx-auto space-y-10 pb-16 print:space-y-6 print:pb-0 print:max-w-none">
       <SEO
@@ -40,23 +57,64 @@ const Resume: React.FC<ResumeProps> = ({ version = 'v2.1' }) => {
           {/* Full-width Experience Section */}
           <ExperienceSection experiences={resumeData.experience} />
 
-          {/* Secondary sections grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 print:block print:gap-0 space-y-6 md:space-y-0">
-            <div className="space-y-8">
-              <SkillsSection skills={resumeData.skills} />
-              <ProjectsSection projects={resumeData.projects} />
-            </div>
-            <div className="space-y-8">
-              <EducationSection education={resumeData.education} />
-              <TeachingSection teaching={resumeData.teaching} />
-            </div>
-            <div className="space-y-8 md:col-span-2 lg:col-span-1">
-              <PublicationsSection
-                publications={resumeData.publications}
-                scholarUrl={resumeData.scholarUrl}
-              />
-              <HonorsSection honors={resumeData.honors} />
-            </div>
+          {/* Collapsible Action Bar */}
+          <div className="flex justify-end gap-3 print:hidden border-b border-border/40 pb-2">
+            <button
+              type="button"
+              onClick={() => toggleAll(true)}
+              className="text-xs font-semibold text-primary hover:underline min-h-[36px] px-2"
+            >
+              Expand All Sections
+            </button>
+            <span className="text-text-dim text-xs select-none flex items-center">|</span>
+            <button
+              type="button"
+              onClick={() => toggleAll(false)}
+              className="text-xs font-semibold text-primary hover:underline min-h-[36px] px-2"
+            >
+              Collapse All Sections
+            </button>
+          </div>
+
+          {/* Full-width Collapsible Single Column List */}
+          <div className="space-y-10">
+            <SkillsSection
+              skills={resumeData.skills}
+              isCollapsible={true}
+              isExpanded={expandSkills}
+              onToggleExpand={() => setExpandSkills(!expandSkills)}
+            />
+            <ProjectsSection
+              projects={resumeData.projects}
+              isCollapsible={true}
+              isExpanded={expandProjects}
+              onToggleExpand={() => setExpandProjects(!expandProjects)}
+            />
+            <EducationSection
+              education={resumeData.education}
+              isCollapsible={true}
+              isExpanded={expandEducation}
+              onToggleExpand={() => setExpandEducation(!expandEducation)}
+            />
+            <PublicationsSection
+              publications={resumeData.publications}
+              scholarUrl={resumeData.scholarUrl}
+              isCollapsible={true}
+              isExpanded={expandPublications}
+              onToggleExpand={() => setExpandPublications(!expandPublications)}
+            />
+            <TeachingSection
+              teaching={resumeData.teaching}
+              isCollapsible={true}
+              isExpanded={expandTeaching}
+              onToggleExpand={() => setExpandTeaching(!expandTeaching)}
+            />
+            <HonorsSection
+              honors={resumeData.honors}
+              isCollapsible={true}
+              isExpanded={expandHonors}
+              onToggleExpand={() => setExpandHonors(!expandHonors)}
+            />
           </div>
         </div>
       ) : (

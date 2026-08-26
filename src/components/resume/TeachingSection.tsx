@@ -4,17 +4,39 @@ import { ResumeTeaching } from '@/data/resume';
 
 export interface TeachingSectionProps {
   teaching: ResumeTeaching[];
+  isCollapsible?: boolean;
+  isExpanded?: boolean;
+  onToggleExpand?: () => void;
 }
 
-export const TeachingSection: React.FC<TeachingSectionProps> = ({ teaching }) => {
+export const TeachingSection: React.FC<TeachingSectionProps> = ({
+  teaching,
+  isCollapsible,
+  isExpanded,
+  onToggleExpand
+}) => {
+  const displayedTeaching = isCollapsible && !isExpanded ? teaching.slice(0, 1) : teaching;
+
   return (
     <section className="mb-12 print:mb-8 print:break-inside-avoid">
-      <div className="flex items-center space-x-3 mb-6 border-b border-border/40 pb-2 print:border-b-2 print:border-black">
-        <BookOpen className="h-6 w-6 text-primary print:text-black" />
-        <h2 className="text-2xl font-bold text-foreground print:text-black uppercase tracking-wider">Teaching & Leadership</h2>
+      <div className="flex items-center justify-between mb-6 border-b border-border/40 pb-2 print:border-b-2 print:border-black">
+        <div className="flex items-center space-x-3">
+          <BookOpen className="h-6 w-6 text-primary print:text-black" />
+          <h2 className="text-2xl font-bold text-foreground print:text-black uppercase tracking-wider">Teaching & Leadership</h2>
+        </div>
+        {isCollapsible && onToggleExpand && (
+          <button
+            type="button"
+            onClick={onToggleExpand}
+            className="text-xs font-semibold text-primary hover:underline font-mono print:hidden min-h-[40px] px-2"
+            aria-expanded={isExpanded}
+          >
+            {isExpanded ? '[ Collapse ]' : '[ Expand ]'}
+          </button>
+        )}
       </div>
       <div className="space-y-4">
-        {teaching.map((item, idx) => (
+        {displayedTeaching.map((item, idx) => (
           <div key={idx} className="space-y-1">
             <div className="flex items-baseline justify-between gap-2">
               <h3 className="text-sm font-bold text-foreground print:text-black">{item.title}</h3>
