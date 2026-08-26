@@ -130,9 +130,7 @@ const Resume: React.FC<ResumeProps> = ({ version = 'v2.1' }) => {
           <div className="lg:col-span-7 print:col-span-12 space-y-10 print:space-y-6">
             <ExperienceSection
               experiences={resumeData.experience}
-              isCollapsible={true}
-              isExpanded={expandExperience}
-              onToggleExpand={() => setExpandExperience(!expandExperience)}
+              isCollapsible={false}
             />
             <ProjectsSection projects={resumeData.projects} />
           </div>

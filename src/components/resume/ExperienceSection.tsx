@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Briefcase, ExternalLink } from 'lucide-react';
 import { ResumeExperience } from '@/data/resume';
 
@@ -17,12 +17,21 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({
 }) => {
   const primaryExperiences = isCollapsible ? experiences.slice(0, 4) : experiences;
   const legacyExperiences = isCollapsible ? experiences.slice(4) : [];
+  const legacyRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isCollapsible && isExpanded && legacyRef.current) {
+      legacyRef.current.focus();
+    }
+  }, [isExpanded, isCollapsible]);
 
   const renderExperienceItem = (exp: ResumeExperience, idx: number, isLegacy = false) => (
     <div
       key={idx}
+      ref={isLegacy && idx === 4 ? legacyRef : undefined}
+      tabIndex={isLegacy && idx === 4 ? -1 : undefined}
       id={isLegacy && idx === 4 ? "legacy-experience" : undefined}
-      className="relative pl-4 sm:pl-6 border-l-2 border-border print:border-black print:pl-4"
+      className="relative pl-4 sm:pl-6 border-l-2 border-border print:border-black print:pl-4 focus:outline-none focus:ring-2 focus:ring-primary/20 rounded-lg"
     >
       <div className="absolute w-3 h-3 bg-primary rounded-full -left-[7px] top-1.5 print:bg-black" />
       <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-1 print:flex-row print:justify-between print:mb-0.5">
