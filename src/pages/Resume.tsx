@@ -8,6 +8,7 @@ import { SkillsSection } from '@/components/resume/SkillsSection';
 import { HonorsSection } from '@/components/resume/HonorsSection';
 import { TeachingSection } from '@/components/resume/TeachingSection';
 import { PublicationsSection } from '@/components/resume/PublicationsSection';
+import SEO from '@/components/SEO';
 
 export interface ResumeProps {
   version?: string;
@@ -16,6 +17,11 @@ export interface ResumeProps {
 const Resume: React.FC<ResumeProps> = ({ version = 'v2.1' }) => {
   return (
     <div className="max-w-5xl mx-auto space-y-10 pb-16 print:space-y-6 print:pb-0 print:max-w-none">
+      <SEO
+        title="Resume & Technical Experience"
+        description="Professional resume and technical experience of Ariel Anders, PhD — Senior Roboticist and Senior Software Engineer."
+        canonicalUrl="/resume"
+      />
       <ResumeHeader
         pdfUrl="https://drive.google.com/file/d/14V6KjfEMO12uwNQAhY1OMy2d-_vkGXK_/view"
       />
