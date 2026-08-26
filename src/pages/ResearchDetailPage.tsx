@@ -172,11 +172,54 @@ const MermaidChart = ({ codeString }: { codeString: string }) => {
         .mermaid .actor {
           stroke: #38bdf8 !important;
           fill: #1e293b !important;
+          stroke-width: 2px !important;
+          rx: 8px !important;
+          ry: 8px !important;
+        }
+        .mermaid text.actor,
+        .mermaid .actor text {
+          fill: #f8fafc !important;
+          font-size: 14px !important;
         }
         .mermaid .messageLine0,
         .mermaid .messageLine1 {
           stroke: #cbd5e1 !important;
           stroke-width: 2.5px !important;
+        }
+        .mermaid .messageText {
+          fill: #38bdf8 !important;
+          stroke: none !important;
+          font-size: 12px !important;
+          font-weight: 600 !important;
+        }
+        .mermaid .active0,
+        .mermaid .active1 {
+          fill: #0b0f19 !important;
+          stroke: #38bdf8 !important;
+          stroke-width: 1.5px !important;
+        }
+        .mermaid .note {
+          fill: #0b0f19 !important;
+          stroke: #e2e8f0 !important;
+          stroke-width: 1.5px !important;
+          rx: 4px !important;
+          ry: 4px !important;
+        }
+        .mermaid .noteText,
+        .mermaid .noteText span {
+          fill: #f8fafc !important;
+          font-size: 12px !important;
+          font-weight: 500 !important;
+        }
+        .mermaid .sequenceNumber {
+          fill: #38bdf8 !important;
+          stroke: #38bdf8 !important;
+          color: #0b0f19 !important;
+        }
+        .mermaid .labelBox {
+          fill: #0b0f19 !important;
+          stroke: #4b5563 !important;
+          stroke-width: 1px !important;
         }
         /* Style padding of SVG cleanly for proper containment */
         .mermaid svg {

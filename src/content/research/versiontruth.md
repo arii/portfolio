@@ -143,21 +143,3 @@ if __name__ == "__main__":
     if not valid:
         sys.exit(1)
 ```
-
----
-
-## Experimental Results & Hackathon Validation
-
-During NandaHack testing across 50 simulated pull request modifications containing updated GitHub Action pins (`actions/checkout@v6`, `actions/setup-python@v5`), agents equipped with the VersionTruth `SKILL.md` maintained **100% version accuracy**, completely eliminating accidental downgrade regressions.
-
-Methodology: the baseline and VersionTruth-equipped agents were run against the same 50 synthetic pull requests, each modifying a pinned GitHub Action or npm dependency to a version released after the agent's training cutoff; both agents used Claude 3.5 Sonnet with identical prompts, differing only in whether the VersionTruth `SKILL.md` was loaded into context. [View hackathon submission on Devpost →](https://devpost.com/software/versiontruth)
-
-| Metric | Baseline Agent | Agent + VersionTruth Skill |
-| :--- | :---: | :---: |
-| Accidental Downgrade Rate | 42.0% | **0.0%** |
-| CI Minute Waste / PR | 14.2 min | **0.0 min** |
-| Average Registry Query Latency | N/A | **85 ms** |
-
-*The ~85ms added latency per registry lookup is the cost of eliminating the 42% accidental-downgrade rate — a trade most CI pipelines will happily make.*
-
-By providing coding agents with real-time ground truth, VersionTruth transforms agentic dependency management from risky speculation into deterministic engineering.
