@@ -105,7 +105,11 @@ When opening a PR, the analyzer posts a summary directly to the GitHub conversat
 
 > **Implemented:** I use the `cropped` diff artifacts to show exactly where the pixels changed, saving reviewers from playing "spot the difference" on full-page screenshots.
 
-![A "sandwich" comparison showing the baseline, the new state, and the highlighted pixel delta.](/assets/research/deployment-impact-analyzer/baseline-diff.png)
+| Before | After | Diff |
+| :---: | :---: | :---: |
+| ![Baseline](/assets/studies/deployment-impact-analyzer/before.svg) | ![Current](/assets/studies/deployment-impact-analyzer/after.svg) | ![Visual Delta](/assets/studies/deployment-impact-analyzer/diff.svg) |
+
+*A "sandwich" comparison showing the baseline, the new state, and the highlighted pixel delta.*
 
 ### Real-World Finding: From 404 to Overflow Resolution
 
@@ -120,7 +124,11 @@ After fixing the routing, the page rendered, but a new issue emerged on mobile v
 #### 3. The Resolution (Truncation & Wrapping)
 I implemented a fix using Tailwind's `truncate` and `flex-wrap` utilities, ensuring that assets are readable even on the narrowest devices.
 
-![The mobile resolution sequence: from a 404 state to an overflow regression, and finally the resolved responsive layout.](/assets/research/deployment-impact-analyzer/404-overflow-fixed.png)
+| 1. Missing | 2. Diff | 3. Fixed |
+| :---: | :---: | :---: |
+| ![404 Error](/assets/studies/deployment-impact-analyzer/before-mobile.svg) | ![Regression Delta](/assets/studies/deployment-impact-analyzer/diff-mobile.svg) | ![Resolution](/assets/studies/deployment-impact-analyzer/after-mobile.svg) |
+
+*The mobile resolution sequence: from a 404 state to an overflow regression, and finally the resolved responsive layout.*
 
 ## Lessons Learned
 
