@@ -66,6 +66,7 @@ runs:
             max_reviews = 3
 
         fetch_url = f"https://api.github.com/repos/{github_repo}/issues/{pr_number}/comments?per_page=100"
+        bot_comment_count = 0
         existing_body = ''
 
         while fetch_url:
@@ -79,6 +80,7 @@ runs:
                     for c in comments:
                         if c.get('user', {}).get('type') == 'Bot' and '## Deployment Impact Analysis' in c.get('body', ''):
                             existing_body = c.get('body', '')
+                            bot_comment_count += 1
 
                     link_header = response.headers.get('Link')
                     fetch_url = None
@@ -96,13 +98,16 @@ runs:
             match = re.search(r'<!-- ai-review-count: (\d+) -->', existing_body)
             if match:
                 current_count = int(match.group(1))
-                if current_count >= max_reviews:
-                    print(f"Max reviews ({max_reviews}) reached. Current count: {current_count}.")
-                    with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
-                        f.write('skip=true\n')
-                    sys.exit(0)
-                else:
-                    print(f"Review count is {current_count} (max {max_reviews}).")
+            else:
+                current_count = bot_comment_count
+
+            if current_count >= max_reviews:
+                print(f"Max reviews ({max_reviews}) reached. Current count: {current_count}.")
+                with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+                    f.write('skip=true\n')
+                sys.exit(0)
+            else:
+                print(f"Review count is {current_count} (max {max_reviews}).")
 
         with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
             f.write('skip=false\n')
@@ -135,7 +140,11 @@ runs:
 
     - name: Ensure artifacts exist
       if: always()
-      run: mkdir -p artifacts && echo "## Deployment Impact Analysis\n\nNo impact found." > artifacts/deployment-review.md
+      run: |
+        mkdir -p artifacts
+        if [ ! -f artifacts/deployment-review.md ] && [ ! -f artifacts/impact-analysis/impact.md ]; then
+          echo "No impact found." > artifacts/deployment-review.md
+        fi
       shell: bash
 
     - name: Send impact analysis to Jules session
