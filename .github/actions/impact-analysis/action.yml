@@ -143,7 +143,7 @@ runs:
       run: |
         mkdir -p artifacts
         if [ ! -f artifacts/deployment-review.md ] && [ ! -f artifacts/impact-analysis/impact.md ]; then
-          printf "## Deployment Impact Analysis\n\nNo impact found.\n" > artifacts/deployment-review.md
+          echo "No impact found." > artifacts/deployment-review.md
         fi
       shell: bash
 
