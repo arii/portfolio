@@ -169,7 +169,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
               </div>
             ),
             th: ({ children, ...props }) => (
-              <th className="border-b border-line bg-surface/80 p-4 text-left font-sans text-sm font-bold text-text-main" {...props}>
+              <th className="border-b border-line bg-bg/40 p-4 text-left font-mono text-xs font-bold uppercase tracking-wider text-text-dim" {...props}>
                 {children}
               </th>
             ),
@@ -209,20 +209,6 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
                 <h3 id={id || undefined} className="text-lg font-bold text-text-main mt-8 mb-3" {...props}>
                   {children}
                 </h3>
-              );
-            },
-            h4: ({ children, ...props }) => {
-              let textContent = '';
-              if (typeof children === 'string') {
-                textContent = children;
-              } else if (Array.isArray(children)) {
-                textContent = children.map(c => typeof c === 'string' ? c : '').join('');
-              }
-              const id = textContent.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
-              return (
-                <h4 id={id || undefined} className="text-base font-bold text-text-main mt-6 mb-3 flex items-center space-x-2 bg-surface-alt/60 border border-line px-3.5 py-2 rounded-xl border-l-4 border-l-accent-sky" {...props}>
-                  {children}
-                </h4>
               );
             },
             ul: ({ children, ...props }) => (
