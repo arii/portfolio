@@ -122,7 +122,6 @@ runs:
         PR_NUMBER: ${{ github.event.pull_request.number }}
       run: |
         docker run --rm \
-          --entrypoint /github/workspace/scripts/resolve-cli.sh \
           -e GITHUB_TOKEN="${GITHUB_TOKEN}" \
           -e GITHUB_REPOSITORY="${GITHUB_REPOSITORY}" \
           -e GEMINI_API_KEY="${GEMINI_API_KEY}" \
@@ -131,7 +130,7 @@ runs:
           -v "${{ github.workspace }}":/github/workspace \
           -w /github/workspace \
           ghcr.io/arii/boomtick:latest \
-          td-cli ai review "${PR_NUMBER}" || echo "::warning::Agent code review returned non-zero, likely due to approval permission limitations"
+          ai review "${PR_NUMBER}" || echo "::warning::Agent code review returned non-zero, likely due to approval permission limitations"
 
     - name: Ensure artifacts exist
       if: always()
@@ -151,7 +150,7 @@ runs:
         if [ -f "scripts/send-jules-impact.py" ]; then
           echo "Executing send-jules-impact.py from current workspace via container to inherit dev_tools."
           docker run --rm \
-            --entrypoint /github/workspace/scripts/resolve-cli.sh \
+            --entrypoint /workspace/scripts/resolve-cli.sh \
             -e GITHUB_TOKEN="${GITHUB_TOKEN}" \
             -e GITHUB_REPOSITORY="${GITHUB_REPOSITORY}" \
             -e JULES_API_KEY="${JULES_API_KEY}" \
