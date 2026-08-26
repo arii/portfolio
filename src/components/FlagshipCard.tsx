@@ -93,9 +93,9 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
             {tool.id !== 'phd-thesis' && tool.id !== 'masters-thesis' && (
               <div className="flex items-center space-x-1.5 bg-surface border border-line px-2 py-1 rounded-full">
                 <span className={`w-2 h-2 rounded-full ${
-                  tool.status === 'Live' ? 'bg-emerald-500' :
-                  tool.status === 'Local only' ? 'bg-amber-500' :
-                  tool.status === 'In development' ? 'bg-sky-500' : 'bg-slate-500'
+                  tool.status === 'Live' ? 'bg-accent' :
+                  tool.status === 'Local only' ? 'bg-accent' :
+                  tool.status === 'In development' ? 'bg-accent-sky' : 'bg-muted-foreground'
                 }`}></span>
                 <span className="text-[10px] font-bold uppercase tracking-wider text-text-main pr-0.5">{tool.status}</span>
               </div>

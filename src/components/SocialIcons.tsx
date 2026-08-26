@@ -77,8 +77,8 @@ export const MailIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
 );
 
 const SocialIcons: React.FC<SocialIconsProps> = ({
-  className = 'flex items-center gap-4',
-  iconClassName = 'w-5 h-5 text-muted-foreground hover:text-foreground transition-colors',
+  className = 'flex items-center gap-2',
+  iconClassName = 'w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors',
 }) => {
   return (
     <div className={className}>
@@ -87,27 +87,27 @@ const SocialIcons: React.FC<SocialIconsProps> = ({
         target="_blank"
         rel="noopener noreferrer"
         aria-label="LinkedIn"
-        className={iconClassName}
+        className="group min-w-[44px] min-h-[44px] flex items-center justify-center p-2 rounded-lg hover:bg-surface/50 transition-colors"
       >
-        <LinkedinIcon className="w-full h-full" />
+        <LinkedinIcon className={iconClassName} />
       </a>
       <a
         href="https://github.com/arii"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="GitHub"
-        className={iconClassName}
+        className="group min-w-[44px] min-h-[44px] flex items-center justify-center p-2 rounded-lg hover:bg-surface/50 transition-colors"
       >
-        <GithubIcon className="w-full h-full" />
+        <GithubIcon className={iconClassName} />
       </a>
       <a
         href="https://boomtick.blog"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="BoomTick Blog"
-        className={iconClassName}
+        className="group min-w-[44px] min-h-[44px] flex items-center justify-center p-2 rounded-lg hover:bg-surface/50 transition-colors"
       >
-        <BoomTickIcon className="w-full h-full" />
+        <BoomTickIcon className={iconClassName} />
       </a>
     </div>
   );

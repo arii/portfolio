@@ -44,7 +44,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
   };
 
   return (
-    <main className="space-y-8 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+    <div className="space-y-8 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
       {/* Restructured to Balanced Vertical Layout with Optimized Spacing */}
       <section className="bg-surface/60 border border-line rounded-2xl p-6 sm:p-8 shadow-xl backdrop-blur-sm space-y-6">
         {/* Top block: Bio and CTAs */}
@@ -132,14 +132,14 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
             <div key={feature.id} className="flex gap-3.5 items-start">
               {getCalloutIcon(feature.iconName)}
               <div className="space-y-1">
-                <h4 className="text-sm sm:text-base font-bold text-text-main">{feature.title}</h4>
+                <h3 className="text-sm sm:text-base font-bold text-text-main">{feature.title}</h3>
                 <p className="text-xs sm:text-sm text-text-dim leading-relaxed">{feature.description}</p>
               </div>
             </div>
           ))}
         </div>
       </section>
-    </main>
+    </div>
   );
 };
 
