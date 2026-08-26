@@ -30,13 +30,8 @@ This research explores two distinct paradigms for conformant manipulation under 
 
 The belief-state approach is detailed in our **ICRA 2018** paper:
 * **Paper & Overview:** [Reliably Arranging Objects in the Real World (ICRA 2018) ↗](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=NM6SfiEAAAAJ&citation_for_view=NM6SfiEAAAAJ:MXK_kJrjxJIC)
-* **Presentation Video:** [Watch the ICRA Spotlight & Demo ↗](https://www.youtube.com/watch?v=omdHFeBBYZ0)
 
 ---
-
-## ICRA & Conference Presentation
-
-Primary video overview detailing the ICRA 2018 paper presentation and conference spotlight.
 
 [![Figure 2: ICRA 2018 paper presentation and conference spotlight breakdown. | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=so-9kkQXlxc#no-embed](/assets/research/phd/conformant_demo.gif#max-w-2xl)](https://www.youtube.com/watch?v=so-9kkQXlxc#no-embed)
 
