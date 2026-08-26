@@ -19,15 +19,15 @@ export const autonomousTools: ResearchTool[] = [
     id: 'bwsi-racecar',
     taxonomyBucket: 'infrastructure',
     title: 'BeaverWorks Summer Institute (RACECAR)',
-    description: 'I led instruction and developed curricula for autonomous miniature racecars with labs on visual servoing, motion planning, and ROS.',
+    description: 'I led instruction and developed curricula for autonomous miniature racecars with labs on visual servoing, motion planning, and ROS (ISEC 2017 & AAAI/EAAI Model AI Publication).',
     category: 'Education',
     status: 'Completed',
-    tags: ['Robotics & autonomy', 'Computer vision', 'Visual servoing', 'Motion planning', 'ROS'],
+    tags: ['Robotics & autonomy', 'Computer vision', 'ISEC 2017', 'Visual servoing', 'Motion planning', 'ROS'],
     image: '/assets/research/bwsi-racecar/racecar_main.gif',
     imageAlt: 'Students programming miniature autonomous vehicles',
     canonicalPath: '/research/bwsi-racecar',
     videoUrl: 'https://www.youtube.com/watch?v=UjVatZ3NK5U',
-    externalUrl: 'https://beaverworks.ll.mit.edu/CMS/bw/bwsi'
+    externalUrl: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=NM6SfiEAAAAJ&citation_for_view=NM6SfiEAAAAJ:W7OEmFMy1HYC'
   },
   {
     id: 'delivery-bots',
@@ -36,10 +36,11 @@ export const autonomousTools: ResearchTool[] = [
     description: 'Decentralized multi-agent package delivery in dynamic human environments (RSS 2015 Best Paper Finalist & IJRR journal publication).',
     category: 'Robotics & Autonomy',
     status: 'Completed',
-    tags: ['Robotics & autonomy', 'Multi-agent', 'RSS 2015 Finalist', 'IJRR'],
+    tags: ['Robotics & autonomy', 'Multi-agent', 'IJRR Journal', 'RSS 2015 Finalist', 'POMDP'],
     image: '/assets/research/beer.png',
     imageAlt: 'Autonomous delivery robots operating in dynamic human environment',
-    canonicalPath: '/research/delivery-bots'
+    canonicalPath: '/research/delivery-bots',
+    externalUrl: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=NM6SfiEAAAAJ&citation_for_view=NM6SfiEAAAAJ:zYLM7Y9cAGgC'
   },
   {
     id: 'graduate-engineering-projects',
