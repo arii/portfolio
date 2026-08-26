@@ -27,12 +27,12 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
   const targetSlug = tool.canonicalPath ? tool.canonicalPath.replace('/research/', '') : '';
 
   const executePrimaryAction = () => {
-    if (tool.externalUrl) {
+    if (tool.canonicalPath && targetSlug) {
+      onNavigate(targetSlug);
+    } else if (tool.externalUrl) {
       window.open(tool.externalUrl, '_blank', 'noopener,noreferrer');
     } else if (tool.sourceUrl) {
       window.open(tool.sourceUrl, '_blank', 'noopener,noreferrer');
-    } else if (tool.canonicalPath && targetSlug) {
-      onNavigate(targetSlug);
     }
   };
 
