@@ -7,6 +7,8 @@ export interface SocialIconsProps {
 
 export const LinkedinIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   <svg
+    width="24"
+    height="24"
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
@@ -23,6 +25,8 @@ export const LinkedinIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => 
 
 export const GithubIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   <svg
+    width="24"
+    height="24"
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
@@ -37,6 +41,8 @@ export const GithubIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
 
 export const BoomTickIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   <svg
+    width="100"
+    height="100"
     viewBox="0 0 100 100"
     fill="currentColor"
     xmlns="http://www.w3.org/2000/svg"
@@ -53,6 +59,8 @@ export const BoomTickIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => 
 
 export const ScholarIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   <svg
+    width="24"
+    height="24"
     viewBox="0 0 24 24"
     fill="currentColor"
     {...props}
@@ -63,6 +71,8 @@ export const ScholarIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
 
 export const MailIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   <svg
+    width="24"
+    height="24"
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"

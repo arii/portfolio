@@ -32,3 +32,9 @@ body {
     text-shadow: 0 0 15px rgba(245, 158, 11, 0.3);
   }
 }
+
+@layer base {
+  svg {
+    aspect-ratio: attr(width) / attr(height);
+  }
+}
