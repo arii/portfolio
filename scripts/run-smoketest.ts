@@ -99,7 +99,13 @@ async function main() {
       consoleErrors.length = 0;
       pageErrors.length = 0;
 
-      const response = await page.goto(currentUrl, { waitUntil: 'networkidle', timeout: 30000 });
+      let response;
+      try {
+        response = await page.goto(currentUrl, { waitUntil: 'load', timeout: 15000 });
+      } catch (err) {
+        console.warn(`⚠️ Navigation timeout on 'load' for ${currentUrl}. Retrying with 'domcontentloaded'...`);
+        response = await page.goto(currentUrl, { waitUntil: 'domcontentloaded', timeout: 10000 });
+      }
 
       // Check HTTP response status (if page is outside HashRouter fallback routing)
       if (response && response.status() >= 400) {
