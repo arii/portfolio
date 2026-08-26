@@ -30,34 +30,38 @@ const MermaidChart = ({ codeString }: { codeString: string }) => {
       startOnLoad: false,
       theme: 'dark',
       themeVariables: {
+        darkMode: true,
+        background: 'transparent',
+        mainBkg: '#0f172a',
         primaryColor: '#1e293b',
         primaryTextColor: '#f8fafc',
         primaryBorderColor: '#38bdf8',
-        lineColor: '#64748b',
+        lineColor: '#94a3b8',
         textColor: '#f8fafc',
         nodeBorder: '#38bdf8',
-        mainBkg: 'transparent',
+        clusterBkg: '#0b0f19',
+        clusterBorder: '#475569',
         actorBkg: '#1e293b',
         actorBorder: '#38bdf8',
         actorTextColor: '#f8fafc',
         signalColor: '#cbd5e1',
         signalTextColor: '#38bdf8',
-        labelBoxBkgColor: '#0b0f19',
-        labelBoxBorderColor: '#4b5563',
+        labelBoxBkgColor: '#0f172a',
+        labelBoxBorderColor: '#475569',
         labelTextColor: '#f8fafc',
-        noteBkgColor: '#0b0f19',
-        noteBorderColor: '#e2e8f0',
+        noteBkgColor: '#0f172a',
+        noteBorderColor: '#38bdf8',
         noteTextColor: '#f8fafc',
       },
       securityLevel: 'loose', // Allows interactive click events
-      flowchart: { useMaxWidth: false }, // Prevents distortion during zoom
+      flowchart: { useMaxWidth: false, htmlLabels: true, curve: 'basis' }, // Prevents distortion during zoom & ensures smooth curves
       sequence: {
         actorFontFamily: 'Plus Jakarta Sans, system-ui, -apple-system, sans-serif',
         noteFontFamily: 'Plus Jakarta Sans, system-ui, -apple-system, sans-serif',
         messageFontFamily: 'Plus Jakarta Sans, system-ui, -apple-system, sans-serif',
         boxMargin: 12,
-        width: 160,
-        height: 70,
+        width: 180,
+        height: 65,
       }
     });
 
@@ -137,53 +141,55 @@ const MermaidChart = ({ codeString }: { codeString: string }) => {
           fill: #f8fafc !important;
           color: #f8fafc !important;
           font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
-          font-size: 16px !important;
-          font-weight: bold !important;
+          font-size: 14px !important;
+          font-weight: 600 !important;
         }
         /* Style subgraph/cluster titles */
         .mermaid .cluster text,
         .mermaid .cluster-label,
         .mermaid .cluster-label text,
         .mermaid .cluster text span {
-          fill: #f8fafc !important;
-          color: #f8fafc !important;
+          fill: #38bdf8 !important;
+          color: #38bdf8 !important;
           font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
-          font-size: 18px !important;
-          font-weight: bold !important;
-          letter-spacing: 0.05em !important;
+          font-size: 15px !important;
+          font-weight: 700 !important;
+          letter-spacing: 0.04em !important;
         }
-        /* Style node boxes nicely (with 2px high-visibility borders matching classDef) */
+        /* Style node boxes nicely */
         .mermaid .node rect,
         .mermaid .node circle,
         .mermaid .node polygon,
         .mermaid .node path {
           stroke-width: 2px !important;
+          rx: 10px !important;
+          ry: 10px !important;
         }
-        /* Style connection arrows and lines - Steel Grey #cbd5e1 with thicker solid paths */
+        /* Style connection arrows and lines - Slate/Steel Blue #94a3b8 with solid paths */
         .mermaid .edgePath .path,
         .mermaid .transition {
-          stroke: #cbd5e1 !important;
-          stroke-width: 3px !important;
+          stroke: #94a3b8 !important;
+          stroke-width: 2.5px !important;
           opacity: 1.0 !important;
         }
         .mermaid .marker {
-          fill: #cbd5e1 !important;
-          stroke: #cbd5e1 !important;
-          stroke-width: 2.5px !important;
+          fill: #38bdf8 !important;
+          stroke: #38bdf8 !important;
+          stroke-width: 1px !important;
         }
-        /* Style edge labels (connection names) elegantly in steel-grey */
+        /* Style edge labels (connection names) elegantly */
         .mermaid .edgeLabel text,
         .mermaid .edgeLabel span {
-          fill: #cbd5e1 !important;
-          color: #cbd5e1 !important;
+          fill: #e2e8f0 !important;
+          color: #e2e8f0 !important;
           font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
-          font-size: 13px !important;
-          font-weight: bold !important;
+          font-size: 12px !important;
+          font-weight: 600 !important;
         }
         .mermaid .edgeLabel rect {
-          fill: #0b0f19 !important;
-          stroke: #4b5563 !important;
-          stroke-width: 1.5px !important;
+          fill: #0f172a !important;
+          stroke: #334155 !important;
+          stroke-width: 1px !important;
           rx: 6px !important;
           ry: 6px !important;
         }
