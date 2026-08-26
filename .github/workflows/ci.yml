@@ -11,7 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       BOOMTICK_APP_ID: ${{ secrets.APP_ID || secrets.BOOMTICK_APP_ID }}
-      BOOMTICK_APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY || secrets.BOOMTICK_APP_PRIVATE_KEY || secrets.BOOMTICK_PRIVATE_KEY }}
 
     permissions:
       contents: write
@@ -42,12 +41,12 @@ jobs:
         run: pnpm run build
 
       - name: Create GitHub App Token
-        if: github.event_name == 'pull_request' && env.BOOMTICK_APP_ID != '' && env.BOOMTICK_APP_PRIVATE_KEY != ''
+        if: github.event_name == 'pull_request' && env.BOOMTICK_APP_ID != ''
         uses: actions/create-github-app-token@v1
         id: app-token
         with:
           app-id: ${{ env.BOOMTICK_APP_ID }}
-          private-key: ${{ env.BOOMTICK_APP_PRIVATE_KEY }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY || secrets.BOOMTICK_APP_PRIVATE_KEY || secrets.BOOMTICK_PRIVATE_KEY }}
 
       - name: Run Ported BoomTick Impact Analysis
         if: github.event_name == 'pull_request'
