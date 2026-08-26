@@ -77,8 +77,8 @@ export const flagshipTools: ResearchTool[] = [
     status: 'Completed (2014)',
     tags: ['Whole-arm grasping', 'Bimanual manipulation', 'Reinforcement learning', 'Sensorimotor control', 'Tactile feedback', 'MIT CSAIL'],
     isFlagship: true,
-    image: '/assets/research/masters-thesis.png',
-    imageAlt: 'Robot manipulator executing whole-arm contact and grasping strategy on irregular objects',
+    image: '/assets/research/masters-thesis/pr2_grasp_3.gif',
+    imageAlt: 'PR2 robot executing whole-arm contact and grasping strategy on irregular objects',
     canonicalPath: '/research/masters-thesis',
     externalUrl: 'https://dspace.mit.edu/entities/publication/ead0c10d-3401-46a1-bcc5-42f5a56fe0b8',
     externalLinkDisplayLabel: 'MIT DSpace Thesis'
