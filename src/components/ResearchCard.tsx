@@ -33,13 +33,13 @@ const ResearchCard: React.FC<ResearchCardProps> = ({ post, onSelect }) => {
             {post.tags.slice(0, 3).map((tag) => (
               <span
                 key={tag}
-                className="rounded-full border border-border bg-background px-2 py-0.5 text-[10px] font-medium text-muted-foreground uppercase tracking-wider"
+                className="rounded-full border border-border bg-background px-2 py-0.5 text-[10px] font-medium text-muted-foreground uppercase tracking-wider whitespace-nowrap"
               >
                 {tag}
               </span>
             ))}
             {post.tags.length > 3 && (
-              <span className="rounded-full border border-border bg-background px-2 py-0.5 text-[10px] font-medium text-muted-foreground uppercase tracking-wider">
+              <span className="rounded-full border border-border bg-background px-2 py-0.5 text-[10px] font-medium text-muted-foreground uppercase tracking-wider whitespace-nowrap">
                 +{post.tags.length - 3}
               </span>
             )}
