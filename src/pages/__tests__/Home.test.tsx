@@ -113,7 +113,6 @@ describe('Home Page', () => {
       </MemoryRouter>
     );
 
-    const productsCard = screen.getByText('Products built with DevAI').closest('article');
     const productsLink = screen.getByLabelText(/Products built with DevAI - View Products/);
     fireEvent.click(productsLink);
     expect(handleNavigate).toHaveBeenCalledWith('/devai');
