@@ -6,7 +6,7 @@ import FlagshipCard from '@/components/FlagshipCard';
 import ToolCard from '@/components/ToolCard';
 import ImageLightbox from '@/components/ImageLightbox';
 import { BookOpen, Layers, Wrench } from 'lucide-react';
-import { Helmet } from 'react-helmet-async';
+import SEO from '@/components/SEO';
 
 export interface ResearchListPageProps {
   onNavigate: (slug: string) => void;
@@ -20,12 +20,11 @@ const ResearchListPage: React.FC<ResearchListPageProps> = ({ onNavigate }) => {
 
   return (
     <div className="space-y-12 sm:space-y-16">
-      <Helmet>
-        <title>Robotics &amp; Algorithmic Research | Ariel Anders</title>
-        <meta name="description" content="Planning under uncertainty, conformant belief-state manipulation, multi-robot coordination, and hardware automation systems." />
-        <meta property="og:title" content="Robotics &amp; Algorithmic Research | Ariel Anders" />
-        <meta property="og:description" content="Planning under uncertainty, conformant belief-state manipulation, multi-robot coordination, and hardware automation systems." />
-      </Helmet>
+      <SEO
+        title="Robotics & Algorithmic Research"
+        description="Planning under uncertainty, conformant belief-state manipulation, multi-robot coordination, and hardware automation systems."
+        canonicalUrl="/research"
+      />
 
       <header className="space-y-3 border-b border-line/20 pb-6 sm:pb-8">
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-text-main leading-tight">Robotics &amp; Algorithmic Research</h1>

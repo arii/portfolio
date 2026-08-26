@@ -8,6 +8,7 @@ import { GithubIcon } from '@/components/SocialIcons';
 import SafeImage from '@/components/ui/SafeImage';
 import { Box, Stack } from '@/components/layout';
 import svgPanZoom from 'svg-pan-zoom';
+import SEO from '@/components/SEO';
 
 export interface ResearchDetailPageProps {
   slug: string;
@@ -263,6 +264,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
   if (!post) {
     return (
       <div className="mx-auto max-w-3xl px-4 py-16 text-center rounded-3xl bg-surface/40 border border-line">
+        <SEO title="Article Not Found" description="The requested research paper could not be found." />
         <h2 className="text-2xl font-bold text-text-main">Article Not Found</h2>
         <p className="mt-2 text-text-dim">The requested research paper could not be found.</p>
         <button
@@ -276,8 +278,19 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
     );
   }
 
+  const imgMatch = post.content.match(/!\[.*?\]\((.*?)\)/);
+  const firstImage = imgMatch ? imgMatch[1].split('#')[0] : undefined;
+  const ogImage = firstImage || matchingTool?.image;
+
   return (
     <article className="mx-auto max-w-4xl px-4 py-12 space-y-8">
+      <SEO
+        title={post.title}
+        description={post.summary}
+        canonicalUrl={`/research/${post.slug}`}
+        ogType="article"
+        ogImage={ogImage}
+      />
       <button
         onClick={onBack}
         className="inline-flex items-center space-x-2 text-sm font-semibold text-text-dim hover:text-accent-sky transition-colors"
