@@ -16,6 +16,17 @@ export const autonomousTools: ResearchTool[] = [
     externalUrl: 'https://www.duckietown.org/'
   },
   {
+    id: 'edge-robotics-infrastructure',
+    taxonomyBucket: 'infrastructure',
+    title: 'Deployment & Edge Infrastructure',
+    subtitle: 'Containerization, CI/CD, and Cloud-to-Edge deployments',
+    description: 'Architecting reliable, scalable deployment pipelines and edge computing infrastructure for autonomous systems using Docker and automated CI/CD.',
+    category: 'Infrastructure',
+    status: 'Active',
+    tags: ['Docker', 'CI/CD', 'Cloud', 'Edge', 'Deployment'],
+    canonicalPath: '/research/edge-robotics-infrastructure',
+  },
+  {
     id: 'bwsi-racecar',
     taxonomyBucket: 'infrastructure',
     title: 'BeaverWorks Summer Institute (RACECAR)',

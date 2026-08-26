@@ -65,7 +65,7 @@ The pipeline runs on a weekly GitHub Actions cron job. Before committing changes
     fi
 ```
 
-- **The Result:** The pipeline runs quietly in the background every Monday, keeping my frontend JSON data fresh with zero manual maintenance.
+- **The Result:** The pipeline runs quietly in the background every Monday, keeping my frontend JSON data fresh with zero manual maintenance. I will be linking a live data dashboard here shortly to visualize the real-time event telemetry stream.
 
 ---
 
@@ -96,6 +96,16 @@ export async function syncProductVariant(variantId: number, printFileUrl: string
 ```
 
 - **Why it matters:** It removes the manual merchandising overhead and keeps product pricing and catalog nodes aligned in real time.
+
+```mermaid
+flowchart LR
+    A[Vector Artwork] --> B{Auto-clipper}
+    B --> C[Margin Recalculation]
+    C --> D[Variant Generation]
+    D --> E[Printful REST API]
+    E --> F[Storefront Sync]
+```
+*(A live `.webm` recording demonstrating this automated pipeline converting and pushing variant configurations is currently in production and will be added here soon.)*
 
 ---
 

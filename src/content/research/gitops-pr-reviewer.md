@@ -163,6 +163,8 @@ pr.create_review(
 
 ![Automated Pull Request Code Review Feedback](/assets/research/gitops-pr-reviewer-comment.png)
 
+*(Note: A full terminal recording (`.webm`) showcasing the GitHub Actions execution and real-time LLM inference output is currently being recorded and will be added to this section soon to provide deeper visual context of the pipeline in action.)*
+
 ---
 
 ## 5. Feed CI Failures to the Repair Loop
