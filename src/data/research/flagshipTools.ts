@@ -32,7 +32,7 @@ export const flagshipTools: ResearchTool[] = [
   },
   {
     id: 'boomtick-blog',
-    inDevMessage: { highlight: 'RAG + LLM tooling in active development.', rest: ' This site is the production environment where those pipelines are being built and validated.' },
+    inDevMessage: { highlight: 'RAG + LLM tooling in active development.', rest: ' This site is the production environment where I am building and validating those pipelines.' },
     taxonomyBucket: 'product',
     title: 'BoomTick.blog',
     subtitle: 'LIVE DEVELOPMENT ENVIRONMENT',

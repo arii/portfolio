@@ -36,7 +36,7 @@ During my undergraduate studies in Computer Engineering at UC Santa Cruz (UCSC),
 
 ### 68HC11 Microcontroller Board for Mechanical Gripper Control
 
-For **CMPE-121 Microprocessor System Design** at UC Santa Cruz, I designed, hand-soldered, and programmed a custom embedded computer board based on the **Motorola 68HC11E1 microcontroller**, bringing bare silicon up to full operational capability to control a mechanical gripper without a host computer.
+For **CMPE-121 Microprocessor System Design** at UC Santa Cruz, we designed, hand-soldered, and programmed a custom embedded computer board based on the **Motorola 68HC11E1 microcontroller**, bringing bare silicon up to full operational capability to control a mechanical gripper without a host computer.
 
 ![Complete hardware schematic for the custom Motorola 68HC11E1 microcontroller system board.](/assets/research/report-ce121-microprocessor/68hc11_board_schematic.png#invert-dark#max-w-3xl)
 
@@ -52,9 +52,9 @@ Building the single-board computer required precise hardware timing analysis, ma
 
 #### Software & Gripper Control Implementation
 
-The software was structured to manage real-time communication and hardware feedback loops using the RS-232 communication protocol:
+We structured the software to manage real-time communication and hardware feedback loops using the RS-232 communication protocol:
 
-* **Pseudo-Force Control:** Motor resistance is regulated by specifying direct current levels. I mapped out eight distinct current settings into their hexadecimal representations, creating a structured command look-up table for both opening and closing actions.
+* **Pseudo-Force Control:** Motor resistance is regulated by specifying direct current levels. We mapped out eight distinct current settings into their hexadecimal representations, creating a structured command look-up table for both opening and closing actions.
 * **Dynamic Lookup System:** When an operator presses a digital push-button, the program measures the active voltage across the potentiometer and uses that value to index the corresponding open or close command from the lookup table.
 
 [![68HC11 Microcontroller Board and Mechanical Gripper hardware loops.](/assets/research/undergraduate-projects/gripper_control.gif#max-w-2xl)](https://www.youtube.com/watch?v=tXif7xeZmGI#no-embed)

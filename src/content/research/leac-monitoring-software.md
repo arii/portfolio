@@ -44,7 +44,7 @@ To address these challenges, I built and deployed a multi-faceted monitoring pla
 
 ## Student Mentorship & Program Execution
 
-Following initial prototype development, I worked closely with our team—including co-founders, EHS liaisons, and talented undergraduate researchers—to support campus-wide audits:
+Following initial prototype development, I worked closely with the team—including co-founders, EHS liaisons, and talented undergraduate researchers—to support campus-wide audits:
 - **Mentorship:** Guided undergraduate team members (such as Dheekshita Kumar, Juan Ferrua, and Maxwell Drake) in configuring hardware, managing data logging repositories, and analyzing lab power draw.
 - **Collaborative Research:** This work contributed to broader campus sustainability frameworks and publications, including collaborative findings detailed in *Energy Reports* (Becerra et al., 2018).
 

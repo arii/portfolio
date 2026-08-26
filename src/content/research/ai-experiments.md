@@ -50,7 +50,7 @@ def parse_registry_id(link_tag, event_name: str) -> str:
     return f"tmp_{hash(event_name)}"
 ```
 
-The pipeline runs on a weekly GitHub Actions cron job. Before committing changes to `public/data/event_queue.json`, it checks `git diff --staged` to make sure we don't spam commit logs when event data hasn't changed.
+The pipeline runs on a weekly GitHub Actions cron job. Before committing changes to `public/data/event_queue.json`, it checks `git diff --staged` to make sure I don't spam commit logs when event data hasn't changed.
 
 ```yaml
 # .github/workflows/wcs_etl.yml - Git diff guardrail
@@ -65,7 +65,7 @@ The pipeline runs on a weekly GitHub Actions cron job. Before committing changes
     fi
 ```
 
-- **The Result:** The pipeline runs quietly in the background every Monday, keeping our frontend JSON data fresh with zero manual maintenance.
+- **The Result:** The pipeline runs quietly in the background every Monday, keeping my frontend JSON data fresh with zero manual maintenance.
 
 ---
 
@@ -95,7 +95,7 @@ export async function syncProductVariant(variantId: number, printFileUrl: string
 }
 ```
 
-- **Why it matters:** It removes the manual merchandising overhead and keeps our product pricing and catalog nodes aligned in real time.
+- **Why it matters:** It removes the manual merchandising overhead and keeps product pricing and catalog nodes aligned in real time.
 
 ---
 

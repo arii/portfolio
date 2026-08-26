@@ -53,7 +53,7 @@ As the Lead Associate Instructor for the BWSI RACECAR summer course, my role tra
   - **Navigation** (July 27, 2017)
 
 ### Model AI Assignment (AAAI/EAAI Publication)
-I authored an Image-Based Visual Servoing (IBVS) curriculum designed for high school and undergraduate students, formalized and published in the Model AI Assignments repository at the AAAI EAAI Symposium (EAAI-17 with Sertac Karaman, where it was accepted for publication).
+As one of the course instructors, I was asked to develop the visual servoing laboratory assignment. I then submitted the curriculum to the Model AI Assignments workshop—part of the Educational Advances in Artificial Intelligence (EAAI) symposium at the AAAI Conference—where I also presented these educational materials and methodologies.
 
 | Specification | Details |
 | :--- | :--- |

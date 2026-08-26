@@ -16,7 +16,12 @@ summary: "Dynamic registration, kinematic calibration, and interactive UI for au
 
 ## Autonomous Surgical Robotics at Bionics Lab UCSC
 
-The **CAD/CAM Robotic Dental Crowning Workflow** project at the **Bionics Lab, University of California, Santa Cruz (UCSC)** focused on semi-autonomous robotic dental restoration. We developed dynamic registration, joint-space kinematic tracking, and surgical control software to align high-precision robotic milling and drilling with patient-specific intraoral geometry.
+The **CAD/CAM Dental Robotics** project at the **Bionics Lab, University of California, Santa Cruz (UCSC)** focused on the development of an autonomous robotic system for semi-autonomous dental restoration. My research encompassed two primary areas:
+
+1.  **Dental Crowning Preparation:** I developed a workflow to generate milling trajectories from 3D-digitized tooth models, enabling the robotic arm to autonomously mill a boundary around the tooth.
+2.  **Dental Implant Preparation:** I extended this work to execute implant placement procedures. To account for patient movement during the procedure, I designed and implemented **dynamic registration**. This involved using a passive robotic arm (Microscribe MX) as a real-time feedback mechanism to track the position of the jaw.
+
+To facilitate this, I developed surgical control software—integrating Visual Studio, Matlab, and ORiN APIs—to synchronize the active robotic arm (Denso VM-B01G) with real-time positional data, allowing for high-precision milling and drilling aligned with patient-specific intraoral geometry.
 
 ![CAD/CAM Robotic Dental Crowning Setup](/assets/research/dental.jpg)
 *Figure 1: Robotic dental crowning experimental setup and software user interface at UCSC Bionics Lab.*
@@ -39,7 +44,7 @@ Key engineering challenges included:
 
 ## Kinematic Formulation & Frame Calibration
 
-To achieve precise alignment between the robotic tool tip and the target tooth site, we established coordinate frames across the arm and tracking sensor:
+To achieve precise alignment between the robotic tool tip and the target tooth site, I established coordinate frames across the arm and tracking sensor:
 
 ![Coordinate Frame Mapping](/assets/research/dental/dental_robotics-001.png)
 *Figure 3: Kinematic coordinate frame mapping between robot base D{0}, end-effector D{6}, tracking base MX{0}, and tracking probe tip MX{6}.*
@@ -49,7 +54,7 @@ To achieve precise alignment between the robotic tool tip and the target tooth s
 
 ### Homogeneous Transformation Math
 
-The spatial position of the target tooth implant site relative to the robot end-effector `M6_P_ImplantLoc` is solved through the transformation chain:
+I solved the spatial position of the target tooth implant site relative to the robot end-effector `M6_P_ImplantLoc` through the transformation chain:
 
 ```
 T_Implant = T_D6_to_Base * T_Base_to_MXBase * T_MXBase_to_MX6 * P_Tip
@@ -68,7 +73,7 @@ Where:
 
 ## Closed-Loop Dynamic Tracking System
 
-We implemented a closed-loop controller that continuously queries the tracking arm position and adjusts the Denso robot manipulator commands in real time.
+I implemented a closed-loop controller that continuously queries the tracking arm position and adjusts the Denso robot manipulator commands in real time.
 
 ![Closed Loop Controller Architecture](/assets/research/dental/dental_robotics-003.png)
 *Figure 6: Closed-loop dynamic tracking control system diagram for real-time jaw motion compensation.*
@@ -80,7 +85,7 @@ We implemented a closed-loop controller that continuously queries the tracking a
 
 ## Experimental Results & Tracking Accuracy
 
-We benchmarked tracking accuracy across simulated patient motion profiles using anatomical dental phantom models.
+I benchmarked tracking accuracy across simulated patient motion profiles using anatomical dental phantom models.
 
 ![Positional Tracking Error Plot](/assets/research/dental/dental_robotics-006.png)
 *Figure 8: Measured 3D positional tracking error over time during dynamic compensation testing.*

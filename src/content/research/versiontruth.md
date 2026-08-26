@@ -12,7 +12,7 @@ status: "published"
 
 When LLMs and autonomous coding agents edit software repositories, they frequently suffer from **out-of-distribution version hallucinations**. When an agent encounters an unfamiliar version tag (for example, `actions/checkout@v6` or a brand new npm package), it often assumes the tag is invalid and silently downgrades it to an older, cached version (such as `v4`).
 
-To eliminate these hallucinations, we built and submitted **VersionTruth** at NandaHack — a live ground-truth lookup service and standardized `SKILL.md` that enables coding agents to verify dependency versions against official registries *before* writing changes.
+To eliminate these hallucinations, I built and submitted **VersionTruth** at NandaHack — a live ground-truth lookup service and standardized `SKILL.md` that enables coding agents to verify dependency versions against official registries *before* writing changes.
 
 ![VersionTruth Solution](/images/studies/AI_Version_Hallucination_Solution.webp)
 
