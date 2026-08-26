@@ -73,8 +73,6 @@ The pipeline runs on a weekly GitHub Actions cron job. Before committing changes
 
 **Stack:** TypeScript • Printful REST API • Vector Processing
 
-![Ecommerce automation console showing printful integration](/assets/research/ai-experiments/ecommerce-automation.webp)
-
 Setting up products manually on Printful—uploading artwork, recalculating margins, and mapping variants—became incredibly repetitive. To fix this, I built an automated pipeline that ingests source vector files, auto-clips dimensions to stay safely inside print zones, and syncs variants directly via the [Printful API](https://developers.printful.com/docs/).
 
 ```typescript
