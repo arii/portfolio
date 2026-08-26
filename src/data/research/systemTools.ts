@@ -25,7 +25,7 @@ export const systemTools: ResearchTool[] = [
     description: 'Traces code changes through import graphs to execute targeted Playwright visual validation, catching layout shifts from AI-generated code and cutting screenshot volume by up to 90%.',
     category: 'DevAI System',
     status: 'Active',
-    tags: ['Playwright', 'Pixelmatch', 'Dependency graph', 'CI/CD'],
+    tags: ['Playwright', 'CI/CD', 'UX Audit', 'Dependency graph', 'Pixelmatch'],
     canonicalPath: '/research/deployment-impact-analyzer',
     sourceUrl: 'https://github.com/arii/boomtick',
     isFlagship: true
