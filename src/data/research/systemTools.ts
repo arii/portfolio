@@ -27,7 +27,7 @@ export const systemTools: ResearchTool[] = [
     status: 'Active',
     tags: ['Playwright', 'Pixelmatch', 'Dependency graph', 'CI/CD'],
     canonicalPath: '/research/deployment-impact-analyzer',
-    sourceUrl: 'https://github.com/arii/tech-dancer/tree/main/dev-tools',
+    sourceUrl: 'https://github.com/arii/boomtick',
     isFlagship: true
   },
   {

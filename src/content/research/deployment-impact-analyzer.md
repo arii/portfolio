@@ -17,20 +17,59 @@ I built the **Deployment Impact Analyzer** to catch these discrepancies automati
 ## The Architecture
 
 ```mermaid
-%%{init: {'theme': 'dark', 'themeVariables': { 'darkMode': true, 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#334155', 'lineColor': '#22d3ee' }, 'flowchart': { 'nodeSpacing': 50, 'rankSpacing': 50 }}}%%
-flowchart TD
-  PR[Pull Request] --> Diff[Identify Changed Files]
-  Diff --> Graph[dependency-cruiser Graph Analysis]
-  Graph --> Routes[Map to Affected Routes]
-  Routes --> Playwright[Playwright Capture & Diff]
-  Playwright --> Scoring[Severity Scoring Engine]
-  Scoring --> Report[GitHub PR Comment]
+graph TB
+    %% Strict High-Visibility Class Definitions
+    classDef gitHub fill:#232d38,stroke:#60a5fa,stroke-width:2px,color:#ffffff,font-weight:bold;
+    classDef runner fill:#1e293b,stroke:#3b82f6,stroke-width:2px,color:#ffffff,font-weight:bold;
+    classDef external fill:#064e3b,stroke:#34d399,stroke-width:2px,color:#ffffff,font-weight:bold;
+    classDef linkText fill:none,color:#cbd5e1,font-size:11px;
+    
+    %% Environments as System Boundaries
+    subgraph GitHub_Platform [GitHub Environment]
+        A[Pull Request Event]
+        G[PR Comment / Status Check]
+    end
+
+    subgraph CI_Runner [GitHub Actions Runner]
+        B[Identify Changed Files]
+        C[dependency-cruiser Analysis]
+        D[Map to Affected Routes]
+        E[Playwright Engine]
+        F[Severity Scoring Engine]
+    end
+
+    subgraph Target_Environments [Network / Environments]
+        Prod[Production Main Baseline]
+        Branch[Feature Branch Deploy Preview]
+    end
+
+    %% Pipeline Logic & High-Contrast Connectors
+    A ==>|Webhook Trigger| B
+    B ==>|git diff-tree| C
+    C ==>|Blast Radius Array| D
+    
+    D ==>|Target URLs| E
+    Prod -.->|HTTP Get| E
+    Branch -.->|HTTP Get| E
+    
+    E ==>|Pixel Delta Map| F
+    F ==>|Markdown Report| G
+
+    %% Assign Classes
+    class A,G gitHub;
+    class B,C,D,E,F runner;
+    class Prod,Branch external;
+
+    %% Subgraph Contrast Overrides
+    style GitHub_Platform fill:#0d1117,stroke:#4b5563,stroke-width:2px,color:#f3f4f6
+    style CI_Runner fill:#0b0f19,stroke:#4b5563,stroke-width:2px,color:#f3f4f6
+    style Target_Environments fill:#022c22,stroke:#047857,stroke-width:2px,color:#a7f3d0
 ```
 
-- **Dependency Graph Parsing**: Track file modifications up to entry points to establish the exact visual blast radius.
-- **Route Resolution**: Map the modified entry points to their associated, active application routes.
-- **Targeted Visual Diffing**: Trigger localized Playwright screenshot comparison against the production baseline.
-- **PR Feedback**: Calculate visual shift scores and comment the results directly onto the pull request.
+- **Dependency Graph Parsing**: Traces modified files up to entry points to establish an explicit visual blast radius.
+- **Route Resolution**: Maps structural code entry points directly to active application routing domains.
+- **Targeted Visual Diffing**: Executes localized Playwright automated captures against a production baseline.
+- **Asynchronous PR Feedback**: Generates layout shift metrics and updates the pull request conversation via GitHub APIs.
 
 ---
 
@@ -135,6 +174,6 @@ I implemented a fix using Tailwind's `truncate` and `flex-wrap` utilities, ensur
 
 ## Lessons Learned
 
-Building this tool taught me that **context is king**. An LLM can review code, but it struggles to "see" layout shifts. By combining deterministic graph analysis with visual regression, I create a "tripwire" that catches regressions before they reach production.
+The core engineering insight from this project is the value of multi-layered verification. Static analysis maps the system's structural vulnerabilities, but visual diffing provides the actual confirmation of interface integrity. Merging these workflows converts unpredictable visual evaluation into a deterministic, programmatic check.
 
 The next evolution of this tool involves agentic auto-resolution: using LLMs to analyze the visual diff and decide if a change is an intentional improvement or an accidental regression.

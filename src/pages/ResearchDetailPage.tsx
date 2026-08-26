@@ -20,18 +20,24 @@ const MermaidChart = ({ codeString }: { codeString: string }) => {
   useEffect(() => {
     // Determine orientation based on screen width for responsive layout
     const isMobile = window.innerWidth < 768;
-    // Replace 'graph TD' with 'graph LR' if we're on desktop,
-    // or vice versa depending on what's defined in the raw markdown string.
     let responsiveCodeString = codeString;
     if (isMobile) {
+      // Convert to vertical layout on mobile for responsiveness
       responsiveCodeString = responsiveCodeString.replace(/graph LR/g, 'graph TD').replace(/flowchart LR/g, 'flowchart TD');
-    } else {
-      responsiveCodeString = responsiveCodeString.replace(/graph TD/g, 'graph LR').replace(/flowchart TD/g, 'flowchart LR');
     }
 
     mermaid.initialize({
       startOnLoad: false,
       theme: 'dark',
+      themeVariables: {
+        primaryColor: '#1e293b',
+        primaryTextColor: '#f8fafc',
+        primaryBorderColor: '#38bdf8',
+        lineColor: '#64748b',
+        textColor: '#f8fafc',
+        nodeBorder: '#38bdf8',
+        mainBkg: 'transparent'
+      },
       securityLevel: 'loose', // Allows interactive click events
       flowchart: { useMaxWidth: false } // Prevents distortion during zoom
     });
@@ -50,16 +56,20 @@ const MermaidChart = ({ codeString }: { codeString: string }) => {
             // Apply standard dimensions so the container doesn't collapse
             svgElement.style.maxWidth = '100%';
             svgElement.style.height = 'auto';
-            svgElement.style.minHeight = '300px';
+            svgElement.style.minHeight = '350px';
 
-            svgPanZoom(svgElement, {
-              zoomEnabled: true,
-              controlIconsEnabled: true,
-              fit: true,
-              center: true,
-              minZoom: 0.5,
-              maxZoom: 10
-            });
+            // Only initialize svg-pan-zoom on desktop viewports to avoid gesture conflicts on mobile
+            const isMobileView = window.innerWidth < 768;
+            if (!isMobileView) {
+              svgPanZoom(svgElement, {
+                zoomEnabled: true,
+                controlIconsEnabled: false,
+                fit: true,
+                center: true,
+                minZoom: 0.5,
+                maxZoom: 10
+              });
+            }
           }
         } catch (error) {
           console.error("Mermaid rendering failed", error);
@@ -73,13 +83,110 @@ const MermaidChart = ({ codeString }: { codeString: string }) => {
   return (
     <Box
       my={8}
-      className="overflow-hidden rounded-2xl border border-line bg-surface shadow-md"
-      style={{ touchAction: 'none' }} // Prevents page bounce during diagram drag
+      className="mermaid-box overflow-hidden rounded-2xl border border-line bg-surface shadow-md"
     >
+      <style>{`
+        /* Viewport-aware touch action and scroll limits */
+        @media (max-width: 767px) {
+          .mermaid-box {
+            touch-action: auto !important;
+          }
+          .mermaid-container {
+            overflow-x: auto !important;
+            overflow-y: hidden !important;
+            justify-content: flex-start !important;
+            -webkit-overflow-scrolling: touch;
+          }
+          .mermaid-container svg {
+            max-width: none !important;
+            width: auto !important;
+            min-width: 800px !important; /* Force a minimum readable width on mobile */
+            height: auto !important;
+          }
+        }
+        @media (min-width: 768px) {
+          .mermaid-box {
+            touch-action: none !important;
+          }
+        }
+
+        /* Guarantee node text is light, crisp, and readable */
+        .mermaid .node text,
+        .mermaid .node .label,
+        .mermaid .label,
+        .mermaid text {
+          fill: #f8fafc !important;
+          color: #f8fafc !important;
+          font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
+          font-size: 16px !important;
+          font-weight: bold !important;
+        }
+        /* Style subgraph/cluster titles */
+        .mermaid .cluster text,
+        .mermaid .cluster-label,
+        .mermaid .cluster-label text,
+        .mermaid .cluster text span {
+          fill: #f8fafc !important;
+          color: #f8fafc !important;
+          font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
+          font-size: 18px !important;
+          font-weight: bold !important;
+          letter-spacing: 0.05em !important;
+        }
+        /* Style node boxes nicely (with 2px high-visibility borders matching classDef) */
+        .mermaid .node rect,
+        .mermaid .node circle,
+        .mermaid .node polygon,
+        .mermaid .node path {
+          stroke-width: 2px !important;
+        }
+        /* Style connection arrows and lines - Steel Grey #cbd5e1 with thicker solid paths */
+        .mermaid .edgePath .path,
+        .mermaid .transition {
+          stroke: #cbd5e1 !important;
+          stroke-width: 3px !important;
+          opacity: 1.0 !important;
+        }
+        .mermaid .marker {
+          fill: #cbd5e1 !important;
+          stroke: #cbd5e1 !important;
+          stroke-width: 2.5px !important;
+        }
+        /* Style edge labels (connection names) elegantly in steel-grey */
+        .mermaid .edgeLabel text,
+        .mermaid .edgeLabel span {
+          fill: #cbd5e1 !important;
+          color: #cbd5e1 !important;
+          font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
+          font-size: 13px !important;
+          font-weight: bold !important;
+        }
+        .mermaid .edgeLabel rect {
+          fill: #0b0f19 !important;
+          stroke: #4b5563 !important;
+          stroke-width: 1.5px !important;
+          rx: 6px !important;
+          ry: 6px !important;
+        }
+        /* Style sequence diagrams */
+        .mermaid .actor {
+          stroke: #38bdf8 !important;
+          fill: #1e293b !important;
+        }
+        .mermaid .messageLine0,
+        .mermaid .messageLine1 {
+          stroke: #cbd5e1 !important;
+          stroke-width: 2.5px !important;
+        }
+        /* Style padding of SVG cleanly for proper containment */
+        .mermaid svg {
+          padding: 16px !important;
+        }
+      `}</style>
       <div
         ref={ref}
-        className="flex flex-row justify-center"
-        style={{ width: '100%', minHeight: '400px', padding: '1rem' }}
+        className="mermaid-container flex flex-row justify-center"
+        style={{ width: '100%', minHeight: '600px', padding: '1rem' }}
       />
     </Box>
   );
