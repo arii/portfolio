@@ -31,11 +31,22 @@ jobs:
           pnpm run build
           cp -r public/previews dist/previews
         env:
-          VITE_BASE_PATH: /portfolio/
+          VITE_BASE_PATH: /
 
-      - name: Deploy to GitHub Pages
+      - name: Deploy to arii.github.io
         uses: JamesIves/github-pages-deploy-action@v4
         with:
+          token: ${{ secrets.DEPLOY_TOKEN }}
+          repository-name: arii/arii.github.io
+          branch: main
           folder: dist
-          branch: gh-pages
-          clean-exclude: preview/
+          clean: true
+          clean-exclude: |
+            phd/
+            img/
+            CSAIL_And_You_Know_It.mp3
+            CSAIL_And_You_Know_It.ogg
+            anders.png
+            reports/
+            rj/
+            .nojekyll
