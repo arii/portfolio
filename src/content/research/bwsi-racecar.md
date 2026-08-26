@@ -37,7 +37,7 @@ The RACECAR vehicle platform combines high-performance compute with agile physic
 
 ## 3. Instructional Roles & Publications
 
-My work with the MIT RACECAR platform spanned two complementary roles, where my responsibilities evolved from supporting the Robotics: Science and Systems (RSS) course to leading instruction at the Beaver Works Summer Institute (BWSI). I also leveraged the curriculum I developed for these courses to author a Model AI assignment.
+My work with the MIT RACECAR platform spanned two complementary roles, where my responsibilities evolved from supporting the Robotics: Science and Systems (RSS) course to leading instruction at the Beaver Works Summer Institute (BWSI). I also used the curriculum I developed for these courses to author a Model AI assignment.
 
 ### 16.405/6.141 Robotics: Science and Systems (RSS) – Teaching Assistant
 In my capacity as a TA for the RSS course with Sertac Karaman, I focused on the technical foundations of the course and direct student guidance.

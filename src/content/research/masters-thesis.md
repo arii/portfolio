@@ -35,7 +35,7 @@ https://www.youtube.com/watch?v=pmdjquZoJkE
 
 Traditional robotic grasping separates the problem into two distinct stages: finding optimal contact points for the fingertips and planning collision-free trajectories to reach them. While effective for small items with known CAD models, this approach breaks down when handling large, heavy, or irregularly shaped objects where fingertip pinch grasps lack the required torque and contact area.
 
-In my Master's thesis, I formulated a framework for **whole-arm grasping**. Instead of restricting contact to end-effectors, I enabled the robot to leverage its full kinematic chain—forearms, upper arms, and torso—to envelope, scoop, and cradle unmodeled objects under physical and pose uncertainty.
+I formulated a framework for **whole-arm grasping**. Instead of restricting contact to end-effectors, I enabled the robot to use its full kinematic chain—forearms, upper arms, and torso—to envelope, scoop, and cradle unmodeled objects under physical and pose uncertainty.
 
 ![Whole-arm grasping experimental setup](/assets/research/swag.jpg)
 *Figure 1: Experimental setup and kinematics for whole-arm grasping on the PR2 platform.*

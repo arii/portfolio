@@ -137,7 +137,7 @@ const Navigation: React.FC = () => {
 
             <div className="pt-6 border-t border-line">
               <span className="text-xs text-text-dim">
-                Ariel Anders, PhD — Roboticist
+                {heroContent.name} — {heroContent.brandRole}
               </span>
             </div>
           </div>

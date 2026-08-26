@@ -39,7 +39,7 @@ https://www.youtube.com/watch?v=so-9kkQXlxc https://www.youtube.com/watch?v=omdH
 
 When manipulators perform multi-step assembly or packaging tasks—such as placing 1-inch polyomino Tetris blocks into tight grid slots—small position and angle errors accumulate across sequential actions. Open-loop trajectory execution frequently fails because slight misalignments cause binding, jamming, or collision.
 
-Furthermore, camera lines-of-sight are frequently obstructed by robot end-effectors or nearby fixtures. **Conformant planning** overcomes these perception dead-zones by synthesizing control strategies that leverage contact mechanics (such as pushing, sliding, and funneling) to systematically reduce state uncertainty purely through physical interactions without requiring continuous visual feedback.
+Furthermore, camera lines-of-sight are frequently obstructed by robot end-effectors or nearby fixtures. **Conformant planning** overcomes these perception dead-zones by synthesizing control strategies that apply contact mechanics (such as pushing, sliding, and funneling) to systematically reduce state uncertainty purely through physical interactions without requiring continuous visual feedback.
 
 ### 1. Plan Improvement (Fixture-Augmented Optimization)
 - **Concept:** Augments open-loop trajectories by introducing **movable fixtures** (fences or guide structures) for the robot to push parts against.
@@ -108,7 +108,7 @@ Physical experiments conducted on the PR2 platform demonstrated that conformant 
 *Figure 13: "Eric", the robot thesis mascot used to visually convey belief-state uncertainty and contact constraints.*
 
 ### Thesis Mascot: "Eric" the Robot
-To communicate these theoretical planning concepts during my thesis defense presentation, I created **"Eric"**, a cartoon robot mascot inspired by my advisor Leslie's stick figures:
+To communicate these theoretical planning concepts during the defense presentation, I created **"Eric"**, a cartoon robot mascot inspired by Leslie's stick figures:
 - **"Blindfolded Eric":** Illustrating sensorless manipulation sequences where physical contact boundaries replace visual perception.
 - **"Picketing Eric":** Highlighting edge cases where open-loop trajectories fail due to unexpected friction or rotational torque.
 
