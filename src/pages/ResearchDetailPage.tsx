@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import mermaid from 'mermaid';
 import { ArrowLeft, Calendar, Clock, Download, Video, Play, ExternalLink } from 'lucide-react';
 import { getResearchPostBySlug, RESEARCH_TOOLS } from '@/data/research';
 import { GithubIcon } from '@/components/SocialIcons';
@@ -48,7 +49,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
           {post.tags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full bg-accent-sky/10 px-2.5 py-0.5 text-xs font-semibold text-accent-sky border border-accent-sky/15"
+              className="rounded-full bg-accent-sky/10 px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider text-accent-sky border border-accent-sky/15"
             >
               {tag}
             </span>
@@ -138,6 +139,27 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
               const match = /language-(\w+)/.exec(className || '');
               const language = match ? match[1] : '';
               const codeString = String(children).replace(/\n$/, '');
+
+              if (language === 'mermaid') {
+                const MermaidChart = () => {
+                  const ref = useRef<HTMLDivElement>(null);
+
+                  useEffect(() => {
+                    mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+                    if (ref.current) {
+                      mermaid.contentLoaded();
+                    }
+                  }, [codeString]);
+
+                  return (
+                    <div className="mermaid my-8 flex justify-center w-full" ref={ref}>
+                      {codeString}
+                    </div>
+                  );
+                };
+                return <MermaidChart />;
+              }
+
               // Match block vs inline
               const isBlock = codeString.includes('\n') || !!language;
 

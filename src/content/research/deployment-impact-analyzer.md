@@ -10,22 +10,13 @@ readTime: 12
 status: "published"
 ---
 
-A common challenge in modern web development is understanding the "blast radius" of a change. When you modify a shared utility or a global CSS variable, how do you know which pages across your entire application this affects?
+> **The Impact:** By identifying the "semantic blast radius" of code changes via import graph analysis, this pipeline reduces the number of visual regression screenshots I need to capture by up to **90%** in large-scale applications.
 
-It can be difficult to determine if these automated changes are beneficial or if they inadvertently break existing layouts. Since an AI agent might suggest a large number of modifications, it is not always immediately obvious what those changes are or if they align with your goals. This is why visual impact analysis is crucial when developing with AI agents.
+When modifying a shared utility or a global CSS variable, determining the "blast radius" is critical—especially when AI agents are suggesting large-scale modifications. Manual regression testing is slow, and running full end-to-end suites on every commit is expensive.
 
-Manual regression testing is slow and error-prone, and running full end-to-end suites on every commit is expensive. My solution is the **Deployment Impact Analyzer**: a CI/CD pipeline that semantically determines the scope of a change and performs targeted visual validation.
-
-While visual regression testing is effective for verifying that changes do not break existing layouts, it can be overly restrictive when you intend to make visual updates. In cases where design changes are intentional, standard regression testing may produce false positives, requiring a more nuanced approach to validate that the changes align with your goals.
+My solution is the **Deployment Impact Analyzer**: a CI/CD pipeline that semantically determines the scope of a change and performs targeted visual validation, catching layout shifts that standard unit tests miss.
 
 ## The Architecture
-
-The Deployment Impact Analyzer operates in four distinct phases:
-
-1.  **Import Graph Parsing**: Identifying which files the PR affects.
-2.  **Route Mapping**: Translating affected files into user-facing routes.
-3.  **Visual Diffing**: Capturing and comparing screenshots using Playwright and pixelmatch.
-4.  **Severity Scoring**: Calculating the impact and reporting findings to the PR.
 
 ```mermaid
 %%{init: {'theme': 'dark', 'themeVariables': { 'darkMode': true, 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#334155', 'lineColor': '#22d3ee' }, 'flowchart': { 'nodeSpacing': 50, 'rankSpacing': 50 }}}%%
@@ -51,8 +42,6 @@ When modifying a file, I trace its dependents up the tree until I reach an entry
 npx depcruise --exclude "^node_modules" --output-type json src | \
   jq '.modules[] | select(.dependencies[].resolved == "src/components/Button.tsx") | .source'
 ```
-
-By identifying the "semantic blast radius," I reduce the number of screenshots I need to capture by up to 90% in large-scale applications.
 
 ---
 
@@ -116,11 +105,7 @@ When opening a PR, the analyzer posts a summary directly to the GitHub conversat
 
 > **Implemented:** I use the `cropped` diff artifacts to show exactly where the pixels changed, saving reviewers from playing "spot the difference" on full-page screenshots.
 
-| Before | After | Diff |
-| :---: | :---: | :---: |
-| ![Baseline](/assets/studies/deployment-impact-analyzer/before.svg) | ![Current](/assets/studies/deployment-impact-analyzer/after.svg) | ![Visual Delta](/assets/studies/deployment-impact-analyzer/diff.svg) |
-
-*A "sandwich" comparison showing the baseline, the new state, and the highlighted pixel delta.*
+![A "sandwich" comparison showing the baseline, the new state, and the highlighted pixel delta.](/assets/research/deployment-impact-analyzer/baseline-diff.png)
 
 ### Real-World Finding: From 404 to Overflow Resolution
 
@@ -135,11 +120,7 @@ After fixing the routing, the page rendered, but a new issue emerged on mobile v
 #### 3. The Resolution (Truncation & Wrapping)
 I implemented a fix using Tailwind's `truncate` and `flex-wrap` utilities, ensuring that assets are readable even on the narrowest devices.
 
-| 1. Missing | 2. Diff | 3. Fixed |
-| :---: | :---: | :---: |
-| ![404 Error](/assets/studies/deployment-impact-analyzer/before-mobile.svg) | ![Regression Delta](/assets/studies/deployment-impact-analyzer/diff-mobile.svg) | ![Resolution](/assets/studies/deployment-impact-analyzer/after-mobile.svg) |
-
-*The mobile resolution sequence: from a 404 state to an overflow regression, and finally the resolved responsive layout.*
+![The mobile resolution sequence: from a 404 state to an overflow regression, and finally the resolved responsive layout.](/assets/research/deployment-impact-analyzer/404-overflow-fixed.png)
 
 ## Lessons Learned
 
