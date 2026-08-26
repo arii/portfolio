@@ -10,11 +10,11 @@ readTime: 12
 status: "published"
 ---
 
-> **The Impact:** By identifying the "semantic blast radius" of code changes via import graph analysis, this pipeline reduces the number of visual regression screenshots I need to capture by up to **90%** in large-scale applications.
+> **The Impact:** By identifying the "semantic blast radius" of code changes via import graph analysis, this pipeline reduces the number of visual regression screenshots required by up to **90%** in large-scale applications.
 
-When modifying a shared utility or a global CSS variable, determining the "blast radius" is critical—especially when AI agents are suggesting large-scale modifications. Manual regression testing is slow, and running full end-to-end suites on every commit is expensive.
+LLM code generation frequently introduces unintended visual side effects—hallucinated components, modified badge styles, shifted accents, or broken layouts. Reviewing multi-file diffs manually is error-prone, running full E2E suites on every commit is too slow, and standard unit tests miss visual regressions.
 
-My solution is the **Deployment Impact Analyzer**: a CI/CD pipeline that semantically determines the scope of a change and performs targeted visual validation, catching layout shifts that standard unit tests miss.
+I built the **Deployment Impact Analyzer** to catch these issues automatically. The pipeline traces code modifications through the dependency graph, identifies touched user routes, and triggers targeted Playwright visual diffs with Pixelmatch—cutting visual test volume by up to 90% while flagging unwanted UI shifts directly in the pull request.
 
 ## The Architecture
 
@@ -28,6 +28,11 @@ flowchart TD
   Playwright --> Scoring[Severity Scoring Engine]
   Scoring --> Report[GitHub PR Comment]
 ```
+
+- **Dependency Graph Parsing**: Track file modifications up to entry points to establish the exact visual blast radius.
+- **Route Resolution**: Map the modified entry points to their associated, active application routes.
+- **Targeted Visual Diffing**: Trigger localized Playwright screenshot comparison against the production baseline.
+- **PR Feedback**: Calculate visual shift scores and comment the results directly onto the pull request.
 
 ---
 

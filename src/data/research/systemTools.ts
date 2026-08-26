@@ -22,7 +22,7 @@ export const systemTools: ResearchTool[] = [
     taxonomyBucket: 'infrastructure',
     title: 'Visual Impact / UX Audit',
     subtitle: 'VISUAL IMPACT ANALYSIS PIPELINE',
-    description: 'I built a semantic visual impact analysis pipeline that cuts visual-review screenshots by up to 90% by tracing code changes through the import graph.',
+    description: 'Traces code changes through import graphs to execute targeted Playwright visual validation, catching layout shifts from AI-generated code and cutting screenshot volume by up to 90%.',
     category: 'DevAI System',
     status: 'Active',
     tags: ['Playwright', 'Pixelmatch', 'Dependency graph', 'CI/CD'],
