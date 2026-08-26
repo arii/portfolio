@@ -81,7 +81,7 @@ describe('Home Page', () => {
     expect(screen.getByText('Deployment & Edge Infrastructure')).toBeInTheDocument();
   });
 
-  it('renders both Agentic AI and Robotics Research CTA buttons with correct attributes', () => {
+  it('renders both Agentic DevAI and Robotics Research CTA buttons with correct attributes', () => {
     const handleNavigate = vi.fn();
     render(
       <MemoryRouter>
@@ -89,7 +89,7 @@ describe('Home Page', () => {
       </MemoryRouter>
     );
 
-    const aiBtn = screen.getByRole('link', { name: /view agentic ai work/i });
+    const aiBtn = screen.getByRole('link', { name: /view agentic devai work/i });
     const roboticsBtn = screen.getByRole('link', { name: /view robotics research/i });
 
     expect(aiBtn).toBeInTheDocument();

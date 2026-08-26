@@ -45,7 +45,7 @@ export const PHILOSOPHY_TENETS: PhilosophyTenet[] = [
     id: 'ai-rigor',
     title: 'AI-Accelerated Rigor',
     description:
-      'I build agentic CI/CD workflows and automated code reviews that aggressively catch technical debt—accelerating engineering speed without compromising rigor.',
+      'I build agentic CI/CD workflows and automated code reviews that proactively catch technical debt—accelerating engineering speed without compromising rigor.',
   },
   {
     id: 'robot-behavior',
@@ -59,25 +59,25 @@ export const FEATURE_CALLOUTS: FeatureCallout[] = [
   {
     id: 'motion-planning',
     title: 'Motion Planning & Autonomy',
-    description: 'Planning and autonomy for reliable real-world robotic systems.',
+    description: 'Planning and autonomy for reliable real-world robotic systems',
     iconName: 'compass',
   },
   {
     id: 'devai-workflows',
     title: 'Agentic DevAI',
-    description: 'AI agents and developer tooling for modern software engineering.',
+    description: 'AI agents and developer tooling for modern software engineering',
     iconName: 'workflow',
   },
   {
     id: 'production-systems',
     title: 'Production Software',
-    description: 'Production C++, Python, and ROS 2 for real-time onboard autonomy.',
+    description: 'Production C++, Python, and ROS 2 for real-time onboard autonomy',
     iconName: 'laptop',
   },
   {
     id: 'deployment-edge',
     title: 'Deployment & Edge Infrastructure',
-    description: 'Docker, CI/CD, cloud, and robotics deployment infrastructure.',
+    description: 'Docker, CI/CD, cloud, and robotics deployment infrastructure',
     iconName: 'cloud',
   },
 ];

@@ -79,7 +79,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
               className="inline-flex items-center justify-center gap-2 rounded-md bg-accent hover:opacity-90 text-bg px-5 py-2.5 text-sm font-bold shadow transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent min-h-[44px]"
             >
               <Bot className="w-4 h-4" />
-              <span>View Agentic AI Work</span>
+              <span>View Agentic DevAI Work</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
 

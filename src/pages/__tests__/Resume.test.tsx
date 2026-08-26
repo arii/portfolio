@@ -39,7 +39,7 @@ describe('Resume Page', () => {
     expect(screen.getByText('Robust.AI')).toBeInTheDocument();
 
     // Skills badge pills
-    expect(screen.getByText('Motion Planning')).toBeInTheDocument();
+    expect(screen.getByText('Motion planning')).toBeInTheDocument();
     expect(screen.getByText('C++')).toBeInTheDocument();
     expect(screen.getByText('Matlab')).toBeInTheDocument();
     expect(screen.getByText('Gemini API')).toBeInTheDocument();
