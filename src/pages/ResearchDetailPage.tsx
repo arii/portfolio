@@ -599,22 +599,28 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
                 );
               }
 
-              // Prevent block-level child elements (like figures from image renderers or video divs inside links) from nesting inside <p>
-              const hasBlockChild = childrenArray.some(child => {
-                if (React.isValidElement(child)) {
-                  const type = child.type;
-                  if (type === 'img' || type === 'figure' || type === 'div' || (child.props as any)?.src) {
+              const isBlockElement = (node: React.ReactNode): boolean => {
+                if (!React.isValidElement(node)) return false;
+                const type = node.type;
+                if (type === 'img' || type === 'figure' || type === 'div' || (node.props as any)?.src) {
+                  return true;
+                }
+                if (type === 'a' || (node.props as any)?.href) {
+                  const props = node.props as any;
+                  if (props && props.href && (props.href.includes('youtube.com') || props.href.includes('youtu.be')) && !props.href.includes('no-embed')) {
                     return true;
                   }
-                  if (type === 'a' || (child.props as any)?.href) {
-                    const childProps = child.props as any;
-                    if (childProps && childProps.href && (childProps.href.includes('youtube.com') || childProps.href.includes('youtu.be')) && !childProps.href.includes('no-embed')) {
-                      return true;
-                    }
+                }
+                const nodeChildren = (node.props as any)?.children;
+                if (nodeChildren) {
+                  if (Array.isArray(nodeChildren)) {
+                    return nodeChildren.some(isBlockElement);
                   }
+                  return isBlockElement(nodeChildren);
                 }
                 return false;
-              });
+              };
+              const hasBlockChild = childrenArray.some(isBlockElement);
 
               if (hasBlockChild) {
                 return <div className="mb-6">{children}</div>;
@@ -678,14 +684,9 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
                       {linkText && linkUrl && (
                         <>
                           {' '}
-                          <a
-                            href={linkUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-accent hover:underline font-semibold"
-                          >
+                          <span className="text-accent font-semibold ml-1">
                             {linkText}
-                          </a>
+                          </span>
                         </>
                       )}
                     </figcaption>

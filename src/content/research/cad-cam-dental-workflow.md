@@ -101,7 +101,7 @@ Experimental results verified:
 
 ## Video Demonstrations & Media
 
-- ▶️ [Watch Dental Robotics Demonstration Video](https://www.youtube.com/watch?v=tXif7xeZmGI)
+[![Dental Robotics Demonstration Video | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=tXif7xeZmGI#no-embed](/assets/research/dental/dental_robotics.gif#max-w-2xl)](https://www.youtube.com/watch?v=tXif7xeZmGI#no-embed)
 
 ---
 

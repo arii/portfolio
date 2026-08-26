@@ -62,8 +62,8 @@ export const flagshipTools: ResearchTool[] = [
     tags: ['PR2', 'Conformant planning', 'Belief state', 'Manipulation', 'MIT CSAIL'],
     isFlagship: true,
     canonicalPath: '/research/conformant-planning-manipulation',
-    image: '/assets/research/phd/sixblock.png',
-    imageAlt: 'PR2 robot reliably arranging blocks using conformant planning without external sensing feedback',
+    image: '/assets/research/phd/icra_presentation.gif',
+    imageAlt: 'PR2 robot executing conformant planning manipulation and reliable block alignment during ICRA presentation',
     externalUrl: 'https://dspace.mit.edu/entities/publication/d489a172-efbf-4e35-b81c-04e4acf3d24d',
     externalLinkDisplayLabel: 'MIT DSpace Thesis'
   },
@@ -77,8 +77,8 @@ export const flagshipTools: ResearchTool[] = [
     status: 'Completed (2014)',
     tags: ['Whole-arm grasping', 'Bimanual manipulation', 'Reinforcement learning', 'Sensorimotor control', 'Tactile feedback', 'MIT CSAIL'],
     isFlagship: true,
-    image: '/assets/research/masters-thesis.png',
-    imageAlt: 'Robot manipulator executing whole-arm contact and grasping strategy on irregular objects',
+    image: '/assets/research/masters-thesis/pr2_grasp_3.gif',
+    imageAlt: 'PR2 robot executing whole-arm contact and grasping strategy on irregular objects',
     canonicalPath: '/research/masters-thesis',
     externalUrl: 'https://dspace.mit.edu/entities/publication/ead0c10d-3401-46a1-bcc5-42f5a56fe0b8',
     externalLinkDisplayLabel: 'MIT DSpace Thesis'

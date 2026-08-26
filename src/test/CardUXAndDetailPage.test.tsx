@@ -48,10 +48,11 @@ describe('Card UX & Detail Page Navigation Improvements', () => {
     const { container } = render(<ResearchDetailPage slug="duckietown" onBack={handleBack} />);
 
     const iframes = Array.from(container.querySelectorAll('iframe'));
-    expect(iframes.length).toBeGreaterThanOrEqual(3);
-    const iframeSrcs = iframes.map(iframe => iframe.getAttribute('src'));
-    expect(iframeSrcs).toContain('https://www.youtube.com/embed/rPpewHIF2KU');
-    expect(iframeSrcs).toContain('https://www.youtube.com/embed/HfS5Yj63H34');
-    expect(iframeSrcs).toContain('https://www.youtube.com/embed/YTB2FgN_4zo');
+    expect(iframes.length).toBe(0); // With #no-embed, no iframes are generated
+    const images = Array.from(container.querySelectorAll('img'));
+    const imageSrcs = images.map(img => img.getAttribute('src'));
+    expect(imageSrcs).toContain('/assets/research/duckietown/oreo_wheelie.gif');
+    expect(imageSrcs).toContain('/assets/research/duckietown/navigation_2.gif');
+    expect(imageSrcs).toContain('/assets/research/duckietown/navigation_1.gif');
   });
 });

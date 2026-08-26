@@ -56,13 +56,25 @@ I formulated a framework for **whole-arm grasping**. Instead of restricting cont
 
 Simulation trials evaluating policy convergence, trajectory generation, and stability across object dimensions and initial offsets:
 
-* [RL Simulation Run 1](https://www.youtube.com/watch?v=PIhXfWyNPzQ)
-* [RL Simulation Run 2](https://www.youtube.com/watch?v=M5PbYaPY0RE)
-* [RL Simulation Run 3](https://www.youtube.com/watch?v=8TKJiJnDOSo)
-* [RL Simulation Run 4](https://www.youtube.com/watch?v=lnHDDjkWKfE)
-* [RL Simulation Run 5](https://www.youtube.com/watch?v=s1vjsvnPfdc)
-* [RL Simulation Run 6](https://www.youtube.com/watch?v=gf2vNOKEKXc)
-* [RL Simulation Run 7](https://www.youtube.com/watch?v=bgHzqflrkCE)
+### Early Point-Contact Formulations (Runs 1-4)
+The earliest phase of the research focused on a simplified model containing discrete point contacts to verify basic force-closure boundaries:
+
+| Phase | Description | Demonstration |
+| :--- | :--- | :--- |
+| **RL Simulation Run 1** | Point contact formulation for basic force-closure boundary verification. | [![Run 1 \| Watch Full Video on YouTube ↗ \| https://www.youtube.com/watch?v=PIhXfWyNPzQ#no-embed](/assets/research/masters-thesis/rl_sim_1.gif#max-w-xs)](https://www.youtube.com/watch?v=PIhXfWyNPzQ#no-embed) |
+| **RL Simulation Run 2** | Static evaluation of discrete MDP value iteration. | [![Run 2 \| Watch Full Video on YouTube ↗ \| https://www.youtube.com/watch?v=M5PbYaPY0RE#no-embed](/assets/research/masters-thesis/rl_sim_2.gif#max-w-xs)](https://www.youtube.com/watch?v=M5PbYaPY0RE#no-embed) |
+| **RL Simulation Run 3** | Multi-contact stability under varying payload offsets. | [![Run 3 \| Watch Full Video on YouTube ↗ \| https://www.youtube.com/watch?v=8TKJiJnDOSo#no-embed](/assets/research/masters-thesis/rl_sim_3.gif#max-w-xs)](https://www.youtube.com/watch?v=8TKJiJnDOSo#no-embed) |
+| **RL Simulation Run 4** | Point contact modeling with frictional boundaries via Sarsa. | [![Run 4 \| Watch Full Video on YouTube ↗ \| https://www.youtube.com/watch?v=lnHDDjkWKfE#no-embed](/assets/research/masters-thesis/rl_sim_4.gif#max-w-xs)](https://www.youtube.com/watch?v=lnHDDjkWKfE#no-embed) |
+
+### Advanced Enveloping & Whole-Arm Grasping (Runs 5-7)
+The subsequent iterations transitioned to whole-arm caging, continuous state space control, and active dual-arm manipulation:
+
+* **RL Simulation Run 5**
+  [![RL Simulation Run 5 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=s1vjsvnPfdc#no-embed](/assets/research/masters-thesis/rl_sim_5.gif#max-w-xl)](https://www.youtube.com/watch?v=s1vjsvnPfdc#no-embed)
+* **RL Simulation Run 6**
+  [![RL Simulation Run 6 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=-V2KtcETAi8#no-embed](/assets/research/masters-thesis/rl_sim_6.gif#max-w-xl)](https://www.youtube.com/watch?v=-V2KtcETAi8#no-embed)
+* **RL Simulation Run 7**
+  [![RL Simulation Run 7 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=gf2vNOKEKXc#no-embed](/assets/research/masters-thesis/rl_sim_7.gif#max-w-xl)](https://www.youtube.com/watch?v=gf2vNOKEKXc#no-embed)
 
 ---
 
@@ -70,9 +82,12 @@ Simulation trials evaluating policy convergence, trajectory generation, and stab
 
 Validation of my learned whole-arm manipulation policies on the physical PR2:
 
-* [PR2 Grasping Demonstration 1](https://www.youtube.com/watch?v=2mGN3ka_7i0)
-* [PR2 Grasping Demonstration 2](https://www.youtube.com/watch?v=-V2KtcETAi8)
-* [PR2 Grasping Demonstration 3](https://www.youtube.com/watch?v=QgoJKaoZ3dY)
+* **PR2 Grasping Demonstration 1**
+  [![PR2 Grasping Demonstration 1 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=2mGN3ka_7i0#no-embed](/assets/research/masters-thesis/pr2_grasp_1.gif#max-w-xl)](https://www.youtube.com/watch?v=2mGN3ka_7i0#no-embed)
+* **PR2 Grasping Demonstration 2**
+  [![PR2 Grasping Demonstration 2 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=QgoJKaoZ3dY#no-embed](/assets/research/masters-thesis/pr2_grasp_2.gif#max-w-xl)](https://www.youtube.com/watch?v=QgoJKaoZ3dY#no-embed)
+* **PR2 Grasping Demonstration 3**
+  [![PR2 Grasping Demonstration 3 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=bgHzqflrkCE#no-embed](/assets/research/masters-thesis/pr2_grasp_3.gif#max-w-xl)](https://www.youtube.com/watch?v=bgHzqflrkCE#no-embed)
 
 ---
 

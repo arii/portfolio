@@ -21,6 +21,11 @@ The **Delivery Bots** research initiative addressed the challenge of deploying m
 
 To demonstrate the system in action, I converted the MIT CSAIL lab into a miniature "bar" featuring a PR2 robot "bartender" and two Turtlebot "waiters". As the demo lead for this project, I guided the live demonstration showcasing how decentralized robots can coordinate efficiently even with intermittent communication.
 
+### Decentralized Beerbot Handoff & Delivery Demonstration
+The following demonstration showcases the complete decentralized multi-robot coordination pipeline operating in real-time within the MIT CSAIL corridors. A PR2 robotic bartender prepares and hands off a beverage to a Turtlebot delivery agent, which then autonomously navigates dynamic human obstacles to perform a successful delivery:
+
+[![Decentralized Beerbot Delivery Coordination | Watch Full Video on YouTube ↗ | https://www.youtube.com/watch?v=Jfzun9pP74U#no-embed](/assets/research/delivery-bots/coordination.gif#max-w-xl)](https://www.youtube.com/watch?v=Jfzun9pP74U#no-embed)
+
 ---
 
 ## Research Significance & Honors
