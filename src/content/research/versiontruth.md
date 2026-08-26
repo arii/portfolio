@@ -101,7 +101,7 @@ In your repository's `.github/skills/versiontruth.md` or system prompt configura
 When editing dependency files (`package.json`, `.node-version`, GitHub Actions workflows),
 ALWAYS check candidate versions before reverting unfamiliar version strings.
 
-- Oracle API: `https://boomtick.blog/api/compare`
+- Oracle API: `https://boomtick.blog/api/compare-version`
 - Ecosystems supported: `npm`, `node`, `gh-action`
 
 Rule: Unfamiliarity is NOT evidence of hallucination.
