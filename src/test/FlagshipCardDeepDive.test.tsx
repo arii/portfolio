@@ -18,7 +18,7 @@ describe('FlagshipCard Deep-Dive Linking', () => {
     window.open = vi.fn();
 
     const handleNavigate = vi.fn();
-    const { getByRole, getAllByRole } = render(<FlagshipCard tool={tool!} onNavigate={handleNavigate} onImageClick={() => {}} />);
+    const { getAllByRole } = render(<FlagshipCard tool={tool!} onNavigate={handleNavigate} onImageClick={() => {}} />);
 
     // get the Deep-Dive button explicitly inside the card (not the main card click handler which opens externalUrl)
     const deepDiveBtn = getAllByRole('button', { name: /Deep-Dive/i }).find(btn => btn.textContent?.includes('Deep-Dive'));
