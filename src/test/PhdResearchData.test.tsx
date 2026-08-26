@@ -12,10 +12,10 @@ describe('PhD Research Data Consolidation', () => {
   it('retrieves consolidated PhD research article content', () => {
     const post = getResearchPostBySlug('conformant-planning-manipulation');
     expect(post).toBeDefined();
-    expect(post?.title).toBe('Reliably Arranging Objects: Conformant Planning for Robot Manipulation');
+    expect(post?.title).toBe('Reliably Arranging Objects: A Conformant Planning Approach to Robot Manipulation');
     expect(post?.content).toContain('PR2');
     expect(post?.content).toContain('1.9%');
     expect(post?.content).toContain('80.7%');
-    expect(post?.content).toContain('Belief State Visualization & Action Noise Characterization');
+    expect(post?.content).toContain('Belief-State Transition Search & Noise Characterization');
   });
 });

@@ -149,14 +149,14 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
                         {language}
                       </div>
                     )}
-                    <pre className="p-4 overflow-x-auto text-sm font-mono text-accent-sky/90 leading-relaxed bg-bg">
+                    <pre className="p-4 overflow-x-auto text-sm font-mono text-accent-sky leading-relaxed bg-bg whitespace-pre-wrap break-words">
                       <code>{children}</code>
                     </pre>
                   </div>
                 );
               }
               return (
-                <code className="bg-surface text-accent-sky px-1.5 py-0.5 rounded font-mono text-xs border border-line normal-case" {...props}>
+                <code className="bg-surface text-text-main px-1.5 py-0.5 rounded font-mono text-xs border border-line normal-case" {...props}>
                   {children}
                 </code>
               );
@@ -169,7 +169,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
               </div>
             ),
             th: ({ children, ...props }) => (
-              <th className="border-b border-line bg-bg/40 p-4 text-left font-mono text-xs font-bold uppercase tracking-wider text-text-dim" {...props}>
+              <th className="border-b border-line bg-surface/80 p-4 text-left font-sans text-sm font-bold text-text-main" {...props}>
                 {children}
               </th>
             ),
@@ -209,6 +209,20 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
                 <h3 id={id || undefined} className="text-lg font-bold text-text-main mt-8 mb-3" {...props}>
                   {children}
                 </h3>
+              );
+            },
+            h4: ({ children, ...props }) => {
+              let textContent = '';
+              if (typeof children === 'string') {
+                textContent = children;
+              } else if (Array.isArray(children)) {
+                textContent = children.map(c => typeof c === 'string' ? c : '').join('');
+              }
+              const id = textContent.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+              return (
+                <h4 id={id || undefined} className="text-base font-bold text-text-main mt-6 mb-2" {...props}>
+                  {children}
+                </h4>
               );
             },
             ul: ({ children, ...props }) => (
@@ -360,18 +374,20 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
               }
 
               return (
-                <figure className={`my-8 space-y-3 ${maxWidthClass}`}>
-                  <div className="overflow-hidden rounded-2xl border border-line bg-bg shadow-lg">
+                <figure className={`my-6 space-y-2 ${maxWidthClass}`}>
+                  <div className="overflow-hidden rounded-2xl border border-line bg-surface/40 p-2 shadow-lg flex items-center justify-center">
                     <SafeImage
                       src={cleanSrc}
                       alt={displayCaption}
-                      className={`w-full h-auto object-cover ${shouldInvert ? 'dark:invert dark:hue-rotate-180 dark:mix-blend-screen' : ''}`}
+                      className={`max-h-[380px] w-auto h-auto object-contain rounded-xl ${shouldInvert ? 'dark:invert dark:hue-rotate-180 dark:mix-blend-screen' : ''}`}
                       {...props}
                     />
                   </div>
                   {displayCaption && (
-                    <figcaption className="text-center text-xs font-mono text-text-dim px-4 leading-relaxed">
-                      <span className="font-semibold text-accent-sky">Figure: </span>
+                    <figcaption className="text-center text-xs font-mono text-text-dim px-2 leading-relaxed">
+                      {!displayCaption.toLowerCase().startsWith('figure') && (
+                        <span className="font-semibold text-accent-sky">Figure: </span>
+                      )}
                       {displayCaption}
                       {linkText && linkUrl && (
                         <>
