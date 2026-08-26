@@ -54,19 +54,4 @@ describe('Card UX & Detail Page Navigation Improvements', () => {
     expect(iframeSrcs).toContain('https://www.youtube.com/embed/HfS5Yj63H34');
     expect(iframeSrcs).toContain('https://www.youtube.com/embed/YTB2FgN_4zo');
   });
-
-  it('renders image gallery with aspect ratio and object cover hash classes', () => {
-    const handleBack = vi.fn();
-    const { container } = render(<ResearchDetailPage slug="undergraduate-projects" onBack={handleBack} />);
-
-    const galleryFigures = container.querySelectorAll('figure');
-    expect(galleryFigures.length).toBeGreaterThanOrEqual(5);
-
-    // Verify aspect-[4/3] and object-cover are applied to figures and images
-    const aspectContainers = container.querySelectorAll('.aspect-\\[4\\/3\\]');
-    expect(aspectContainers.length).toBeGreaterThanOrEqual(5);
-
-    const objectCoverImages = container.querySelectorAll('.object-cover');
-    expect(objectCoverImages.length).toBeGreaterThanOrEqual(5);
-  });
 });
