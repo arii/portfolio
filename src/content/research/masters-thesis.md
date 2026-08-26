@@ -56,14 +56,19 @@ I formulated a framework for **whole-arm grasping**. Instead of restricting cont
 
 Simulation trials evaluating policy convergence, trajectory generation, and stability across object dimensions and initial offsets:
 
-* **RL Simulation Run 1**
-  [![RL Simulation Run 1 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=PIhXfWyNPzQ#no-embed](/assets/research/masters-thesis/rl_sim_1.gif#max-w-xl)](https://www.youtube.com/watch?v=PIhXfWyNPzQ#no-embed)
-* **RL Simulation Run 2**
-  [![RL Simulation Run 2 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=M5PbYaPY0RE#no-embed](/assets/research/masters-thesis/rl_sim_2.gif#max-w-xl)](https://www.youtube.com/watch?v=M5PbYaPY0RE#no-embed)
-* **RL Simulation Run 3**
-  [![RL Simulation Run 3 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=8TKJiJnDOSo#no-embed](/assets/research/masters-thesis/rl_sim_3.gif#max-w-xl)](https://www.youtube.com/watch?v=8TKJiJnDOSo#no-embed)
-* **RL Simulation Run 4**
-  [![RL Simulation Run 4 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=lnHDDjkWKfE#no-embed](/assets/research/masters-thesis/rl_sim_4.gif#max-w-xl)](https://www.youtube.com/watch?v=lnHDDjkWKfE#no-embed)
+### Early Point-Contact Formulations (Runs 1-4)
+The earliest phase of the research focused on a simplified model containing discrete point contacts to verify basic force-closure boundaries:
+
+| Phase | Description | Demonstration |
+| :--- | :--- | :--- |
+| **RL Simulation Run 1** | Point contact formulation for basic force-closure boundary verification. | [![Run 1 \| Watch Full Video on YouTube ↗ \| https://www.youtube.com/watch?v=PIhXfWyNPzQ#no-embed](/assets/research/masters-thesis/rl_sim_1.gif#max-w-xs)](https://www.youtube.com/watch?v=PIhXfWyNPzQ#no-embed) |
+| **RL Simulation Run 2** | Static evaluation of discrete MDP value iteration. | [![Run 2 \| Watch Full Video on YouTube ↗ \| https://www.youtube.com/watch?v=M5PbYaPY0RE#no-embed](/assets/research/masters-thesis/rl_sim_2.gif#max-w-xs)](https://www.youtube.com/watch?v=M5PbYaPY0RE#no-embed) |
+| **RL Simulation Run 3** | Multi-contact stability under varying payload offsets. | [![Run 3 \| Watch Full Video on YouTube ↗ \| https://www.youtube.com/watch?v=8TKJiJnDOSo#no-embed](/assets/research/masters-thesis/rl_sim_3.gif#max-w-xs)](https://www.youtube.com/watch?v=8TKJiJnDOSo#no-embed) |
+| **RL Simulation Run 4** | Point contact modeling with frictional boundaries via Sarsa. | [![Run 4 \| Watch Full Video on YouTube ↗ \| https://www.youtube.com/watch?v=lnHDDjkWKfE#no-embed](/assets/research/masters-thesis/rl_sim_4.gif#max-w-xs)](https://www.youtube.com/watch?v=lnHDDjkWKfE#no-embed) |
+
+### Advanced Enveloping & Whole-Arm Grasping (Runs 5-7)
+The subsequent iterations transitioned to whole-arm caging, continuous state space control, and active dual-arm manipulation:
+
 * **RL Simulation Run 5**
   [![RL Simulation Run 5 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=s1vjsvnPfdc#no-embed](/assets/research/masters-thesis/rl_sim_5.gif#max-w-xl)](https://www.youtube.com/watch?v=s1vjsvnPfdc#no-embed)
 * **RL Simulation Run 6**
