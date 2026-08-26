@@ -25,6 +25,32 @@ This research forms the core of my PhD dissertation at **MIT CSAIL**, advised by
 
 ---
 
+## Roadmap
+
+Two approaches: (1) plan improvement via fixtures, (2) belief-state search. Below: headline benchmark results, methodological breakdown, thesis downloads, and defense visuals.
+
+---
+
+## Experimental Benchmarks & Results
+
+Physical experiments conducted on the Willow Garage PR2 platform demonstrated that conformant planning yields dramatic improvements in assembly reliability across distinct manipulation paradigms:
+
+### Method 1: Planning by Construction (Belief-State Search)
+Evaluated on complex polyomino block arrangement under severe pose uncertainty without visual feedback. Monotonic belief shrinkage guarantees high insertion success:
+
+| Benchmark Task | Standard Open-Loop Baseline | Conformant Planning & Pushing | Performance Improvement |
+| :--- | :--- | :--- | :--- |
+| **Tetris Polyomino Placement** | 1.9% | **80.7%** | **+78.8% (42x Increase)** |
+
+### Method 2: Plan Improvement (Fixture-Augmented Optimization)
+Evaluated in contact-rich bimanual environments where physical guide fences funnel parts into deterministic target positions:
+
+| Benchmark Task | Standard Open-Loop Baseline | Conformant Planning & Fixture Funneling | Performance Improvement |
+| :--- | :--- | :--- | :--- |
+| **Bimanual Fixture Assembly** | < 5.0% | **85.2%** | **+80.2%** |
+
+---
+
 ## ICRA & Video Overview Breakdowns
 
 Primary video overviews detailing the conformant planning framework, ICRA 2018 spotlight, and conference presentation.
@@ -91,29 +117,6 @@ https://www.youtube.com/watch?v=ubUMq8Rnb18 https://www.youtube.com/watch?v=bWjz
 
 ---
 
-## Experimental Benchmarks & Results
-
-Physical experiments conducted on the PR2 platform demonstrated that conformant planning yields dramatic improvements in assembly reliability:
-
-| Benchmark Task | Standard Open-Loop Baseline | Conformant Planning & Pushing | Performance Improvement |
-| :--- | :--- | :--- | :--- |
-| **Tetris Polyomino Placement** | 1.9% | **80.7%** | **+78.8% (42x Increase)** |
-| **Bimanual Fixture Assembly** | < 5.0% | **85.2%** | **+80.2%** |
-
----
-
-## Defense Presentation & Visuals
-
-![Eric the Robot Thesis Mascot](/assets/research/phd/eric.png)
-*Figure 13: "Eric", the robot thesis mascot used to visually convey belief-state uncertainty and contact constraints.*
-
-### Thesis Mascot: "Eric" the Robot
-To communicate these theoretical planning concepts during the defense presentation and dissertation, I created graphics of **"Eric the red robot"**, a cartoon robot mascot inspired by Leslie's stick figures:
-- **"Blindfolded Eric":** Illustrating sensorless manipulation sequences where physical contact boundaries replace visual perception.
-- **"Picketing Eric":** Highlighting edge cases where open-loop trajectories fail due to unexpected friction or rotational torque.
-
----
-
 ## Key Takeaways
 
 1. **Environmental Mechanics as Zero-Cost Sensors:** Physical boundaries and contact friction systematically collapse pose uncertainty without perception overhead.
@@ -145,3 +148,15 @@ To communicate these theoretical planning concepts during the defense presentati
   url          = {https://dspace.mit.edu/handle/1721.1/122822}
 }
 ```
+
+---
+
+## Defense Presentation & Visuals
+
+![Eric the Robot Thesis Mascot](/assets/research/phd/eric.png)
+*Figure 13: "Eric", the robot thesis mascot used to visually convey belief-state uncertainty and contact constraints.*
+
+### Thesis Mascot: "Eric" the Robot
+To communicate these theoretical planning concepts during the defense presentation and dissertation, I created graphics of **"Eric the red robot"**, a cartoon robot mascot inspired by Leslie's stick figures:
+- **"Blindfolded Eric":** Illustrating sensorless manipulation sequences where physical contact boundaries replace visual perception.
+- **"Picketing Eric":** Highlighting edge cases where open-loop trajectories fail due to unexpected friction or rotational torque.
