@@ -14,7 +14,7 @@ When LLMs and autonomous coding agents edit software repositories, they frequent
 
 To eliminate this failure mode, I built and submitted **VersionTruth** at **NandaHack** (MIT Media Lab's agentic-AI hackathon) — a live ground-truth lookup service paired with a standardized `SKILL.md` that lets coding agents verify dependency versions against official registries *before* writing changes.
 
-![VersionTruth Solution](/images/studies/AI_Version_Hallucination_Solution.webp)
+![VersionTruth Solution](/images/studies/ai-incorrect-v4-suggestion.webp)
 
 VersionTruth operates as an out-of-band ground-truth oracle for AI coding assistants. Instead of trusting its own training data for "is this version real," the agent asks VersionTruth's API, which checks the live upstream registry.
 
