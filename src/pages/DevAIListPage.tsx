@@ -55,7 +55,15 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
       'graduate-engineering-projects',
       'autonomous-drone-line-following'
     ];
-    const devAiPosts = posts.filter((p) => !researchOnlySlugs.includes(p.slug));
+    const flagshipPaths = DEVAI_FLAGSHIPS.map((f) => f.canonicalPath).filter(Boolean);
+    const flagshipIds = DEVAI_FLAGSHIPS.map((f) => f.id);
+
+    const devAiPosts = posts.filter((p) => {
+      if (researchOnlySlugs.includes(p.slug)) return false;
+      if (flagshipIds.includes(p.slug)) return false;
+      if (p.slug && flagshipPaths.some((path) => path === `/research/${p.slug}`)) return false;
+      return true;
+    });
 
     if (selectedTag === 'All Topics') return devAiPosts.filter((p) => {
         const cat = (p.category || '').toLowerCase();
