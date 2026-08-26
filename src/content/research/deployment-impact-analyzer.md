@@ -12,7 +12,7 @@ status: "published"
 
 LLM code generation introduces unintended visual side effects—hallucinated UI components, modified badge styles, shifted accents, or unintended layout changes. Reviewing these multi-file diffs manually is error-prone, running full end-to-end test suites on every commit is too slow, and standard unit tests completely miss visual artifacts.
 
-I built the **Deployment Impact Analyzer** to catch these discrepancies automatically. The pipeline traces every code modification through the project's dependency graph, identifies which user-facing routes are touched, and triggers targeted Playwright visual diffs using Pixelmatch. By scoping screenshots strictly to impacted views, it flags hallucinated elements and styling shifts directly in the pull request while cutting visual testing volume by up to 90%. http://localhost:3000/#/devai/deployment-impact-analyzer
+I built the **Deployment Impact Analyzer** to catch these discrepancies automatically. The pipeline traces every code modification through the project's dependency graph, identifies which user-facing routes are touched, and triggers targeted Playwright visual diffs using Pixelmatch. By scoping screenshots strictly to impacted views, it flags hallucinated elements and styling shifts directly in the pull request while cutting visual testing volume by up to 90%.
 
 ## The Architecture
 
