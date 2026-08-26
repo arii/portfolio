@@ -66,7 +66,7 @@ export interface DomRouteSummary {
   severity: 'LOW' | 'MEDIUM' | 'HIGH';
 }
 
-export const ARTIFACTS_DIR = path.join(process.cwd(), 'artifacts');
+export const ARTIFACTS_DIR = process.env.IMPACT_ARTIFACTS_DIR ?? path.join(process.cwd(), 'artifacts');
 export const VISUAL_REVIEW_DIR = path.join(ARTIFACTS_DIR, 'visual-review');
 export const DOM_REVIEW_DIR = path.join(ARTIFACTS_DIR, 'dom-review');
 export const IMPACT_ANALYSIS_PATH = path.join(ARTIFACTS_DIR, 'impact-analysis.json');
