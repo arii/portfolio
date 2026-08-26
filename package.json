@@ -41,6 +41,7 @@
   },
   "dependencies": {
     "lucide-react": "^1.31.0",
+    "mermaid": "^11.17.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-helmet-async": "^3.0.0",
@@ -66,7 +67,6 @@
     "globals": "^17.10.0",
     "jsdom": "^26.0.0",
     "knip": "^6.32.2",
-    "playwright": "^1.62.1",
     "postcss": "^8.4.49",
     "rollup-plugin-visualizer": "^7.1.1",
     "sharp": "^0.35.3",
