@@ -56,15 +56,15 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-line/80">
           <div className="space-y-3 max-w-3xl">
             <div className="space-y-1">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-text-main tracking-tight leading-tight">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-text-main tracking-tight leading-tight text-balance">
                 {heroContent.name}
               </h1>
-              <p className="text-text-body font-semibold text-lg sm:text-xl font-mono">
+              <p className="text-text-body font-semibold text-lg sm:text-xl font-mono text-balance">
                 {heroContent.title}
               </p>
             </div>
 
-            <div className="text-text-body text-base sm:text-lg leading-relaxed">
+            <div className="text-text-body text-base sm:text-lg leading-relaxed text-pretty">
               {heroContent.bioParagraphs.map((para, idx) => (
                 <p key={idx}>{para}</p>
               ))}
@@ -96,7 +96,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                   handleNav('research');
                 }
               }}
-              className="inline-flex items-center justify-center gap-2 rounded-md bg-accent hover:opacity-90 text-bg px-5 py-2.5 text-sm font-bold shadow transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent min-h-[44px]"
+              className="inline-flex items-center justify-center gap-2 rounded-md border-2 border-accent text-accent hover:bg-accent/10 px-5 py-2.5 text-sm font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent min-h-[44px]"
             >
               <Cpu className="w-4 h-4" />
               <span>View Robotics Research</span>
@@ -115,8 +115,8 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {PHILOSOPHY_TENETS.map((tenet) => (
               <div key={tenet.id} className="space-y-1.5">
-                <h3 className="text-sm sm:text-base font-bold text-text-main">{tenet.title}</h3>
-                <p className="text-xs sm:text-sm text-text-body leading-relaxed">{tenet.description}</p>
+                <h3 className="text-sm sm:text-base font-bold text-text-main text-balance">{tenet.title}</h3>
+                <p className="text-xs sm:text-sm text-text-body leading-relaxed text-pretty">{tenet.description}</p>
               </div>
             ))}
           </div>
@@ -124,7 +124,8 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
       </section>
 
       {/* Middle Grid: 3 Featured Cards (Entire surface is clickable) */}
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 pt-2">
+      <section className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-6 lg:gap-8 pt-2">
+        <h2 className="sr-only">Featured Work</h2>
         {FEATURED_CARDS.map((card) => (
           <HeroPathCard key={card.id} card={card} onNavigate={handleNav} />
         ))}
@@ -132,13 +133,14 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
 
       {/* Bottom Feature Callouts Row - Quieter Flat Panel and Shrunken Padding */}
       <section className="bg-surface/40 border border-line rounded-xl p-5 sm:p-6">
+        <h2 className="sr-only">Core Capabilities</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {FEATURE_CALLOUTS.map((feature) => (
             <div key={feature.id} className="flex gap-3.5 items-start">
               {getCalloutIcon(feature.iconName)}
               <div className="space-y-1">
-                <h3 className="text-sm sm:text-base font-bold text-text-main">{feature.title}</h3>
-                <p className="text-xs sm:text-sm text-text-dim leading-relaxed">{feature.description}</p>
+                <h3 className="text-sm sm:text-base font-bold text-text-main text-balance">{feature.title}</h3>
+                <p className="text-xs sm:text-sm text-text-dim leading-relaxed text-pretty">{feature.description}</p>
               </div>
             </div>
           ))}

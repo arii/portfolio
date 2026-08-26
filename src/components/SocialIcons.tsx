@@ -78,7 +78,7 @@ export const MailIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
 
 const SocialIcons: React.FC<SocialIconsProps> = ({
   className = 'flex items-center gap-2',
-  iconClassName = 'w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors',
+  iconClassName = 'w-5 h-5 text-muted-foreground hover:text-foreground transition-colors',
 }) => {
   return (
     <div className={className}>
@@ -86,28 +86,28 @@ const SocialIcons: React.FC<SocialIconsProps> = ({
         href="https://www.linkedin.com/in/ariel-anders/"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="LinkedIn"
-        className="group min-w-[44px] min-h-[44px] flex items-center justify-center p-2 rounded-lg hover:bg-surface/50 transition-colors"
+        aria-label="LinkedIn Profile"
+        className={`flex items-center justify-center min-h-[48px] min-w-[48px] rounded-lg hover:bg-surface/50 transition-colors ${iconClassName.replace('w-5 h-5 ', '')}`}
       >
-        <LinkedinIcon className={iconClassName} />
+        <LinkedinIcon className="w-5 h-5" />
       </a>
       <a
         href="https://github.com/arii"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="GitHub"
-        className="group min-w-[44px] min-h-[44px] flex items-center justify-center p-2 rounded-lg hover:bg-surface/50 transition-colors"
+        aria-label="GitHub Profile"
+        className={`flex items-center justify-center min-h-[48px] min-w-[48px] rounded-lg hover:bg-surface/50 transition-colors ${iconClassName.replace('w-5 h-5 ', '')}`}
       >
-        <GithubIcon className={iconClassName} />
+        <GithubIcon className="w-5 h-5" />
       </a>
       <a
         href="https://boomtick.blog"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="BoomTick Blog"
-        className="group min-w-[44px] min-h-[44px] flex items-center justify-center p-2 rounded-lg hover:bg-surface/50 transition-colors"
+        aria-label="BoomTick Blog Profile"
+        className={`flex items-center justify-center min-h-[48px] min-w-[48px] rounded-lg hover:bg-surface/50 transition-colors ${iconClassName.replace('w-5 h-5 ', '')}`}
       >
-        <BoomTickIcon className={iconClassName} />
+        <BoomTickIcon className="w-5 h-5" />
       </a>
     </div>
   );
