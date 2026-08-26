@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { resumeData } from '@/data/resume';
 import { ResumeHeader } from '@/components/resume/ResumeHeader';
 import { ExperienceSection } from '@/components/resume/ExperienceSection';
@@ -15,7 +16,11 @@ export interface ResumeProps {
 }
 
 const Resume: React.FC<ResumeProps> = ({ version = 'v2.1' }) => {
-  const [layoutMode, setLayoutMode] = useState<'split' | 'full'>('split');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const layoutMode = searchParams.get('layout') === 'full' ? 'full' : 'split';
+  const setLayoutMode = (mode: 'split' | 'full') => {
+    setSearchParams({ layout: mode });
+  };
 
   return (
     <div className="max-w-5xl mx-auto space-y-10 pb-16 print:space-y-6 print:pb-0 print:max-w-none">
