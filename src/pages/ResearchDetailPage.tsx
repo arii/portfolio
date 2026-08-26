@@ -614,18 +614,19 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
             ),
             img: ({ src, alt, ...props }) => {
               const cleanSrc = src ? src.split('#')[0] : '';
-              const hash = src && src.includes('#') ? src.split('#')[1] : '';
-              const shouldInvert = hash.includes('invert-dark') || hash.includes('invert');
+              const hashString = src && src.includes('#') ? src.slice(src.indexOf('#')) : '';
+              const shouldInvert = hashString.includes('invert-dark') || hashString.includes('invert');
+              const isTall = hashString.includes('tall') || hashString.includes('contain');
 
               // Extract max-width from hash
               let maxWidthClass = '';
-              if (hash.includes('max-w-xs')) maxWidthClass = 'max-w-xs mx-auto';
-              else if (hash.includes('max-w-sm')) maxWidthClass = 'max-w-sm mx-auto';
-              else if (hash.includes('max-w-md')) maxWidthClass = 'max-w-md mx-auto';
-              else if (hash.includes('max-w-lg')) maxWidthClass = 'max-w-lg mx-auto';
-              else if (hash.includes('max-w-xl')) maxWidthClass = 'max-w-xl mx-auto';
-              else if (hash.includes('max-w-2xl')) maxWidthClass = 'max-w-2xl mx-auto';
-              else if (hash.includes('max-w-3xl')) maxWidthClass = 'max-w-3xl mx-auto';
+              if (hashString.includes('max-w-xs')) maxWidthClass = 'max-w-xs mx-auto';
+              else if (hashString.includes('max-w-sm')) maxWidthClass = 'max-w-sm mx-auto';
+              else if (hashString.includes('max-w-md')) maxWidthClass = 'max-w-md mx-auto';
+              else if (hashString.includes('max-w-lg')) maxWidthClass = 'max-w-lg mx-auto';
+              else if (hashString.includes('max-w-xl')) maxWidthClass = 'max-w-xl mx-auto';
+              else if (hashString.includes('max-w-2xl')) maxWidthClass = 'max-w-2xl mx-auto';
+              else if (hashString.includes('max-w-3xl')) maxWidthClass = 'max-w-3xl mx-auto';
 
               // Parse alt text for pipe-delimited description and link info
               let displayCaption = alt || '';
@@ -641,12 +642,12 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
 
               return (
                 <figure className={`my-6 space-y-2 ${maxWidthClass}`}>
-                  <div className="overflow-hidden rounded-2xl border border-line bg-surface/40 p-2 shadow-lg flex items-center justify-center">
+                  <div className={`overflow-hidden rounded-2xl border border-line shadow-lg flex items-center justify-center ${isTall ? 'bg-surface/60 p-4' : 'bg-surface/40 p-2'}`}>
                     <SafeImage
                       src={cleanSrc}
                       alt={displayCaption}
                       containerClassName="w-full flex justify-center"
-                      className={`max-h-[380px] w-full h-auto object-contain rounded-xl ${shouldInvert ? 'dark:invert dark:hue-rotate-180 dark:mix-blend-screen' : ''}`}
+                      className={`${isTall ? 'max-h-[500px] w-auto max-w-full' : 'max-h-[380px] w-full'} h-auto object-contain rounded-xl ${shouldInvert ? 'dark:invert dark:hue-rotate-180 dark:mix-blend-screen' : ''}`}
                       {...props}
                     />
                   </div>
