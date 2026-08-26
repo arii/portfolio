@@ -16,8 +16,9 @@ summary: "My MIT CSAIL PhD dissertation on conformant planning for robot manipul
 
 This research forms the core of my PhD dissertation at **MIT CSAIL**, advised by **Prof. Leslie Pack Kaelbling** and **Prof. Tomás Lozano-Pérez**. My work enables general-purpose helper robots to reliably arrange unanchored objects into desired target configurations despite severe pose uncertainty caused by inaccurate sensing, control errors, and unknown physical friction.
 
-![PR2 robot arranging Tetris blocks using conformant planning](/assets/research/phd/tetris1.png)
-*Figure 1: PR2 robot performing conformant manipulation to arrange polyomino blocks into tight slots under pose uncertainty without visual feedback.*
+https://www.youtube.com/watch?v=so-9kkQXlxc
+
+*Figure 1: Willow Garage PR2 robot performing physical conformant manipulation to arrange polyomino blocks into tight slots under pose uncertainty without visual feedback.*
 
 * **Institution:** MIT CSAIL (Advisors: Prof. Leslie Pack Kaelbling & Prof. Tomás Lozano-Pérez)
 * **Thesis Document:** [Download Thesis PDF (1125200388-MIT.pdf)](https://dspace.mit.edu/bitstream/handle/1721.1/122822/1125200388-MIT.pdf) | [MIT DSpace Thesis Record](https://dspace.mit.edu/handle/1721.1/122822)
@@ -51,13 +52,13 @@ Evaluated in contact-rich bimanual environments where physical guide fences funn
 
 ---
 
-## ICRA & Video Overview Breakdowns
+## ICRA & Conference Presentation
 
-Primary video overviews detailing the conformant planning framework, ICRA 2018 spotlight, and conference presentation.
+Primary video overview detailing the ICRA 2018 paper presentation and conference spotlight.
 
-https://www.youtube.com/watch?v=so-9kkQXlxc https://www.youtube.com/watch?v=omdHFeBBYZ0
+https://www.youtube.com/watch?v=omdHFeBBYZ0
 
-*Figure 2 & 3: ICRA 2018 spotlight breakdown (left) and conference paper presentation (right).*
+*Figure 2: ICRA 2018 paper presentation and conference spotlight breakdown.*
 
 ---
 
@@ -72,13 +73,13 @@ Furthermore, camera lines-of-sight are frequently obstructed by robot end-effect
 - **Optimization:** Solves for ideal fixture geometry, contact angles, and push trajectories, transforming high-variance placements into deterministic funnels.
 
 ![PR2 placing block with precision funneling](/assets/research/phd/placing.png) ![Six block arrangement task on PR2](/assets/research/phd/sixblock.png)
-*Figure 4 & 5: Precision placement via contact funneling (left) and six-block arrangement setup (right).*
+*Figure 3 & 4: Precision placement via contact funneling (left) and six-block arrangement setup on PR2 (right).*
 
 #### Video Breakdowns: Sliding & Plan Improvement
 
 https://www.youtube.com/watch?v=lrLWu9uQNIk https://www.youtube.com/watch?v=EsfNJPkpheY
 
-*Figure 6 & 7: Sliding alignment trajectories (left) and physical execution of plan improvement optimization (right).*
+*Figure 5 & 6: Sliding alignment trajectories (left) and physical execution of plan improvement optimization (right).*
 
 ### 2. Planning by Construction (Belief-State Transition Search)
 - **Concept:** Formulates manipulation as a forward search over non-parametric belief probability distributions `b(s) = P(s)`.
@@ -93,7 +94,7 @@ Support(b_t+1) ⊆ Support(b_t)
 
 https://www.youtube.com/watch?v=MBsnNbD18tU https://www.youtube.com/watch?v=yjhySqcgLi4
 
-*Figure 8 & 9: Synthesized belief-state trajectory execution (left) and multi-block funneling sequence (right).*
+*Figure 7 & 8: Synthesized belief-state trajectory execution (left) and multi-block funneling sequence (right).*
 
 ---
 
@@ -101,8 +102,8 @@ https://www.youtube.com/watch?v=MBsnNbD18tU https://www.youtube.com/watch?v=yjhy
 
 To ground simulated transitions in physical reality, the second major pillar of my thesis focuses on experimental noise characterization and spatial particle overlays for physical robot actions.
 
-![Belief State Overlay Visualization](/assets/research/phd/beliefoverlay.png)
-*Figure 10: Algorithm belief-state overlay depicting particle distributions and empirical contact confidence bounds during manipulation.*
+![Belief State Overlay Visualization](/assets/research/phd/beliefoverlay.png#max-w-xl)
+*Figure 9: Algorithm belief-state overlay depicting particle distributions and empirical contact confidence bounds during manipulation.*
 
 ### Experimental Protocol & Software Stack
 To capture true physical noise profiles, I programmed the **Willow Garage PR2 robot** using **ROS, Python, and C++**:
@@ -113,7 +114,7 @@ To capture true physical noise profiles, I programmed the **Willow Garage PR2 ro
 
 https://www.youtube.com/watch?v=ubUMq8Rnb18 https://www.youtube.com/watch?v=bWjzn89H1x4
 
-*Figure 11 & 12: Robust sliding under artificial pose noise (left) and Vicon motion tracking trials for non-parametric noise models (right).*
+*Figure 10 & 11: Robust sliding under artificial pose noise (left) and Vicon motion tracking trials for non-parametric noise models (right).*
 
 ---
 
@@ -153,13 +154,13 @@ https://www.youtube.com/watch?v=ubUMq8Rnb18 https://www.youtube.com/watch?v=bWjz
 
 ## Defense Presentation & Visuals
 
-![Eric the Robot Thesis Mascot](/assets/research/phd/eric.png)
-*Figure 13: "Eric", the robot thesis mascot used to visually convey belief-state uncertainty and contact constraints.*
+![Eric the Robot Thesis Mascot](/assets/research/phd/eric.png#max-w-md)
+*Figure 12: "Eric", the robot thesis mascot used to visually convey belief-state uncertainty and contact constraints.*
 
 ### Thesis Mascot: "Eric" the Robot
 To communicate these theoretical planning concepts during the defense presentation and dissertation, I created graphics of **"Eric the red robot"**, a cartoon robot mascot inspired by Leslie's stick figures:
 - **"Blindfolded Eric":** Illustrating sensorless manipulation sequences where physical contact boundaries replace visual perception.
 - **"Picketing Eric":** Highlighting edge cases where open-loop trajectories fail due to unexpected friction or rotational torque.
 
-![Blindfolded Eric mascot illustrating sensorless manipulation](/assets/research/phd/eric2.png#max-w-md) ![Picketing Eric mascot illustrating open-loop failure modes](/assets/research/phd/eric1.png#max-w-md)
-*Figure 14 & 15: "Blindfolded Eric" demonstrating sensorless contact funnels (left) and "Picketing Eric" illustrating trajectory failure modes under friction (right).*
+![Blindfolded Eric mascot illustrating sensorless manipulation](/assets/research/phd/eric2.png#max-w-sm) ![Picketing Eric mascot illustrating open-loop failure modes](/assets/research/phd/eric1.png#max-w-sm)
+*Figure 13 & 14: "Blindfolded Eric" demonstrating sensorless contact funnels (left) and "Picketing Eric" illustrating trajectory failure modes under friction (right).*

@@ -374,17 +374,17 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
               }
 
               return (
-                <figure className={`my-8 space-y-3 ${maxWidthClass}`}>
-                  <div className="overflow-hidden rounded-2xl border border-line bg-bg shadow-lg">
+                <figure className={`my-6 space-y-2 ${maxWidthClass}`}>
+                  <div className="overflow-hidden rounded-2xl border border-line bg-surface/40 p-2 shadow-lg flex items-center justify-center">
                     <SafeImage
                       src={cleanSrc}
                       alt={displayCaption}
-                      className={`w-full h-auto object-cover ${shouldInvert ? 'dark:invert dark:hue-rotate-180 dark:mix-blend-screen' : ''}`}
+                      className={`max-h-[380px] w-auto h-auto object-contain rounded-xl ${shouldInvert ? 'dark:invert dark:hue-rotate-180 dark:mix-blend-screen' : ''}`}
                       {...props}
                     />
                   </div>
                   {displayCaption && (
-                    <figcaption className="text-center text-xs font-mono text-text-dim px-4 leading-relaxed">
+                    <figcaption className="text-center text-xs font-mono text-text-dim px-2 leading-relaxed">
                       <span className="font-semibold text-accent-sky">Figure: </span>
                       {displayCaption}
                       {linkText && linkUrl && (
