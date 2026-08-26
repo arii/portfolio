@@ -11,7 +11,7 @@ tags:
   - MIT
 category: "Robotics & Autonomy"
 summary: "An open-source, low-cost robotics education and research platform for autonomous driving, multi-agent fleet coordination, and lane tracking for rubber ducks."
-videoUrl: "https://www.youtube.com/watch?v=rPpewHIF2KU"
+videoUrl: "[![Duckietown Autonomous Driving Demonstration 1 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=rPpewHIF2KU#no-embed](/assets/research/duckietown/navigation_1.gif#max-w-2xl)](https://www.youtube.com/watch?v=rPpewHIF2KU#no-embed)"
 ---
 
 # Duckietown: Autonomous Taxi Fleet
@@ -32,9 +32,9 @@ For more background on the class and its history:
 
 ## Demonstrations & Fleet Videos
 
-https://www.youtube.com/watch?v=rPpewHIF2KU
+[![Duckietown Autonomous Driving Demonstration 1 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=rPpewHIF2KU#no-embed](/assets/research/duckietown/navigation_1.gif#max-w-2xl)](https://www.youtube.com/watch?v=rPpewHIF2KU#no-embed)
 
-https://www.youtube.com/watch?v=HfS5Yj63H34
+[![Duckietown Intersection Traffic Control | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=HfS5Yj63H34#no-embed](/assets/research/duckietown/navigation_2.gif#max-w-2xl)](https://www.youtube.com/watch?v=HfS5Yj63H34#no-embed)
 
 https://www.youtube.com/watch?v=YTB2FgN_4zo
 
