@@ -10,11 +10,9 @@ readTime: 12
 status: "published"
 ---
 
-> **The Impact:** By identifying the "semantic blast radius" of code changes via import graph analysis, this pipeline reduces the number of visual regression screenshots required by up to **90%** in large-scale applications.
+LLM code generation introduces unintended visual side effects—hallucinated UI components, modified badge styles, shifted accents, or unintended layout changes. Reviewing these multi-file diffs manually is error-prone, running full end-to-end test suites on every commit is too slow, and standard unit tests completely miss visual artifacts.
 
-LLM code generation frequently introduces unintended visual side effects—hallucinated components, modified badge styles, shifted accents, or broken layouts. Reviewing multi-file diffs manually is error-prone, running full E2E suites on every commit is too slow, and standard unit tests miss visual regressions.
-
-I built the **Deployment Impact Analyzer** to catch these issues automatically. The pipeline traces code modifications through the dependency graph, identifies touched user routes, and triggers targeted Playwright visual diffs with Pixelmatch—cutting visual test volume by up to 90% while flagging unwanted UI shifts directly in the pull request.
+I built the **Deployment Impact Analyzer** to catch these discrepancies automatically. The pipeline traces every code modification through the project's dependency graph, identifies which user-facing routes are touched, and triggers targeted Playwright visual diffs using Pixelmatch. By scoping screenshots strictly to impacted views, it flags hallucinated elements and styling shifts directly in the pull request while cutting visual testing volume by up to 90%. http://localhost:3000/#/devai/deployment-impact-analyzer
 
 ## The Architecture
 
