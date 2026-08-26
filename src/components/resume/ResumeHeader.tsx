@@ -28,7 +28,7 @@ export const ResumeHeader: React.FC<ResumeHeaderProps> = ({
 
         <Stack direction="row" align="center" className="print:hidden shrink-0 gap-3">
           {onLayoutModeChange && (
-            <Stack direction="row" align="center" className="p-1 rounded-lg bg-surface border border-line text-xs font-medium">
+            <Stack direction="row" align="center" className="p-1 rounded-lg bg-surface border border-line text-xs font-medium hidden lg:flex">
               <button
                 type="button"
                 onClick={() => onLayoutModeChange('split')}
@@ -42,7 +42,7 @@ export const ResumeHeader: React.FC<ResumeHeaderProps> = ({
               >
                 <Stack direction="row" align="center" className="gap-1.5">
                   <Columns className="w-3.5 h-3.5" />
-                  <span className="hidden md:inline">Split View</span>
+                  <span>Split View</span>
                 </Stack>
               </button>
               <button
@@ -58,7 +58,7 @@ export const ResumeHeader: React.FC<ResumeHeaderProps> = ({
               >
                 <Stack direction="row" align="center" className="gap-1.5">
                   <LayoutGrid className="w-3.5 h-3.5" />
-                  <span className="hidden md:inline">Full Width</span>
+                  <span>Full Width</span>
                 </Stack>
               </button>
             </Stack>
