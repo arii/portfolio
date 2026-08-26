@@ -676,14 +676,23 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
                       {linkText && linkUrl && (
                         <>
                           {' '}
-                          <a
-                            href={linkUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-accent hover:underline font-semibold"
+                          <span
+                            role="link"
+                            tabIndex={0}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              window.open(linkUrl, '_blank', 'noopener,noreferrer');
+                            }}
+                            onKeyDown={(e) => {
+                              if (e.key === 'Enter' || e.key === ' ') {
+                                e.stopPropagation();
+                                window.open(linkUrl, '_blank', 'noopener,noreferrer');
+                              }
+                            }}
+                            className="text-accent hover:underline font-semibold cursor-pointer"
                           >
                             {linkText}
-                          </a>
+                          </span>
                         </>
                       )}
                     </figcaption>
