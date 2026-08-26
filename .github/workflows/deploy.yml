@@ -31,11 +31,31 @@ jobs:
           pnpm run build
           cp -r public/previews dist/previews
         env:
-          VITE_BASE_PATH: /portfolio/
+          VITE_BASE_PATH: /
 
-      - name: Deploy to GitHub Pages
+      - name: Create GitHub App Token
+        uses: actions/create-github-app-token@v1
+        id: app-token
+        with:
+          app-id: ${{ secrets.BOOMTICK_APP_ID }}
+          private-key: ${{ secrets.BOOMTICK_APP_PRIVATE_KEY || secrets.BOOMTICK_PRIVATE_KEY }}
+          owner: arii
+          repositories: arii.github.io
+
+      - name: Deploy to arii.github.io
         uses: JamesIves/github-pages-deploy-action@v4
         with:
+          token: ${{ steps.app-token.outputs.token }}
+          repository-name: arii/arii.github.io
+          branch: main
           folder: dist
-          branch: gh-pages
-          clean-exclude: preview/
+          clean: true
+          clean-exclude: |
+            phd/
+            img/
+            CSAIL_And_You_Know_It.mp3
+            CSAIL_And_You_Know_It.ogg
+            anders.png
+            reports/
+            rj/
+            .nojekyll
