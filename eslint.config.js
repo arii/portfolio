@@ -3,13 +3,15 @@ import tsParser from "@typescript-eslint/parser";
 import tsPlugin from "@typescript-eslint/eslint-plugin";
 import reactPlugin from "eslint-plugin-react";
 import reactHooksPlugin from "eslint-plugin-react-hooks";
+import securityPlugin from "eslint-plugin-security";
 import globals from "globals";
 
 export default [
   {
-    ignores: ["dist/**", "node_modules/**", "coverage/**", "build/**", ".venv/**", "scripts/**"],
+    ignores: ["dist/**", "node_modules/**", "coverage/**", "build/**", ".venv/**", "scripts/**", "public/**"],
   },
   js.configs.recommended,
+  securityPlugin.configs.recommended,
   {
     files: ["**/*.{ts,tsx,js,jsx}"],
     languageOptions: {

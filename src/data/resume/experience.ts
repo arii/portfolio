@@ -34,7 +34,7 @@ export const experienceData: ResumeExperience[] = [
     description: "Roboticist in the Planning team, developing onboard motion planning and decision-making software for safe self-driving technology.",
     points: [
       "Focused on improving pullover performance, decreasing user walking distance and congestion.",
-      "Applied software engineering, robotics, and machine learning to build autonomous driving capabilities."
+      "Utilized software engineering, robotics, and machine learning to build autonomous driving capabilities."
     ]
   },
   {
@@ -58,7 +58,7 @@ export const experienceData: ResumeExperience[] = [
         period: "July 2019 – May 2021",
         points: [
           "Developed robust real-time robot behaviors for indoor navigation in dynamic environments with contextual awareness.",
-          "Led social navigation work that helped secure Series A funding.",
+          "Led social navigation work pivotal in raising Series A funding.",
           "Established and executed testing procedures for robot navigation."
         ]
       }
