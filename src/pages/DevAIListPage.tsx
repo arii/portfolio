@@ -105,19 +105,12 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      <section className="border border-accent/20 bg-accent/5 rounded-3xl p-6 sm:p-8 space-y-3">
-        <h3 className="text-base sm:text-lg font-bold text-text-main flex items-center space-x-2"><Layers className="h-5 w-5 text-accent" /><span>Why this matters</span></h3>
-        <p className="text-text-dim leading-relaxed text-sm max-w-3xl font-sans">
-          Shipping high-fidelity autonomous systems and developer workflows requires <span className="text-accent font-bold">practical AI orchestration</span>, not hype. I focus on engineering deterministic state-verification feedback loops and isolated execution boundaries to scale development teams with absolute safety.
-        </p>
-      </section>
-
       <section className="space-y-8" id="articles">
         <div className="border-b border-line pb-3 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
           <div className="space-y-1">
             <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-text-main flex items-center space-x-2 font-display">
               <Layers className="h-5 w-5 text-accent" />
-              <span>DevAI Orchestration</span>
+              <span>Engineering Deep-Dives</span>
             </h2>
             <p className="text-xs sm:text-sm text-text-dim">
               How I build: Engineering multi-agent workflows, automated code-auditing guardrails, and agentic CI/CD pipelines to enforce production standards.
