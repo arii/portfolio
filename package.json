@@ -41,6 +41,7 @@
   },
   "dependencies": {
     "lucide-react": "^1.31.0",
+    "mermaid": "^11.17.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-helmet-async": "^3.0.0",

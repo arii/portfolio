@@ -43,8 +43,9 @@ export const systemTools: ResearchTool[] = [
   },
   {
     id: 'versiontruth',
+    inDevMessage: { highlight: '⚠ Hackathon submission (NandaHack, 2026)', rest: '— not yet in production' },
     taxonomyBucket: 'infrastructure',
-    title: 'Version Truth & Hackathons Submission',
+    title: 'VersionTruth: Killing Version Hallucinations in Agentic CI',
     subtitle: 'The antidote to version hallucinations',
     description: 'I created a tool that provides real-time ground-truth for npm, Node, and GitHub Actions, built as a live agent skill for NandaHack.',
     category: 'DevAI Tooling',
