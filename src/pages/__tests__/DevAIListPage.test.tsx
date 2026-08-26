@@ -26,8 +26,6 @@ describe('DevAIListPage Deduplication', () => {
     // For example, BoomTick.blog links to /research/ai-experiments, so "AI Experiments" article card
     // should be excluded from DevAI Orchestration section to prevent duplicate representation.
     // RepoAuditor links to /research/gitops-pr-reviewer.
-    const flagshipTitles = DEVAI_FLAGSHIPS.map((t) => t.title);
-
     // Check all article card titles rendered in the articles section
     // 'GitHub Actions LLM Code Review Automated' (gitops-pr-reviewer) and 'AI Experiments' should not appear as separate cards
     // since their flagship counterparts (RepoAuditor and BoomTick.blog) are displayed in Flagships.
