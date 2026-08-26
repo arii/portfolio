@@ -90,7 +90,7 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({
     <section className="mb-12 print:mb-8">
       <div className="flex items-center space-x-3 mb-6 border-b border-border/40 pb-2 print:border-b-2 print:border-black">
         <Briefcase className="h-6 w-6 text-primary print:text-black" />
-        <h2 className="text-2xl font-bold text-foreground print:text-black uppercase tracking-wider">Experience</h2>
+        <h2 className="text-2xl font-bold text-foreground print:text-black uppercase tracking-wider font-display">Experience</h2>
       </div>
       <div className="space-y-8 print:space-y-6">
         {primaryExperiences.map((exp, idx) => renderExperienceItem(exp, idx))}

@@ -72,7 +72,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
           </div>
 
           {/* CTA Buttons - High Contrast Solid buttons with dark text to fix accessibility */}
-          <div className="flex flex-col sm:flex-row lg:flex-col xl:flex-row items-stretch gap-3 shrink-0 lg:w-72 xl:w-auto">
+          <div className="flex flex-col sm:flex-row sm:items-start lg:items-center gap-3 shrink-0">
             <Link
               to="/devai"
               onClick={(e) => {

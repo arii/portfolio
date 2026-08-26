@@ -74,7 +74,7 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
       <section className="space-y-8" id="flagship">
         <div className="border-b border-line pb-3 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
           <div className="space-y-1">
-            <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-text-main flex items-center space-x-2">
+            <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-text-main flex items-center space-x-2 font-display">
               <Layers className="h-5 w-5 text-accent" />
               <span>Products built with DevAI</span>
             </h2>

@@ -4,7 +4,7 @@ import { ProfileData } from '@/data/aboutData';
 
 export const CareerHighlightsSection: React.FC<{ highlights: ProfileData['highlights'] }> = ({ highlights }) => (
   <div className="space-y-6 bg-surface p-6 sm:p-8 rounded-3xl border border-line">
-    <h2 className="text-2xl font-bold text-text-main pb-3 border-b border-line/30">
+    <h2 className="text-2xl font-bold text-text-main pb-3 border-b border-line/30 font-display">
       Career Highlights
     </h2>
     <div className="space-y-4">
