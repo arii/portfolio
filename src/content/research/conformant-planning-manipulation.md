@@ -21,29 +21,16 @@ This research forms the core of my PhD dissertation at **MIT CSAIL**, advised by
 
 ---
 
-## Roadmap
+### Approaches Explored
 
-Two approaches: (1) plan improvement via fixtures, (2) belief-state search. Below: headline benchmark results, methodological breakdown, thesis downloads, and defense visuals.
+This research explores two distinct paradigms for conformant manipulation under severe uncertainty:
 
----
+1. **Plan Improvement via Fixtures:** Optimizing open-loop trajectories using physical guide fences and contact dynamics to funnel parts into deterministic poses.
+2. **Belief-State Search (Planning by Construction):** Formulating multi-step manipulation as a search over belief spaces, guaranteeing monotonic uncertainty reduction without real-time visual feedback.
 
-## Experimental Benchmarks & Results
-
-Physical experiments conducted on the Willow Garage PR2 platform demonstrated that conformant planning yields dramatic improvements in assembly reliability across distinct manipulation paradigms:
-
-### Method 1: Plan Improvement (Fixture-Augmented Optimization)
-Evaluated in contact-rich bimanual environments where physical guide fences funnel parts into deterministic target positions:
-
-| Benchmark Task | Standard Open-Loop Baseline | Conformant Planning & Fixture Funneling | Performance Improvement |
-| :--- | :--- | :--- | :--- |
-| **Bimanual Fixture Assembly** | < 5.0% | **85.2%** | **+80.2%** |
-
-### Method 2: Planning by Construction (Belief-State Search)
-Evaluated on complex polyomino block arrangement under severe pose uncertainty without visual feedback. Monotonic belief shrinkage guarantees high insertion success:
-
-| Benchmark Task | Standard Open-Loop Baseline | Conformant Planning & Pushing | Performance Improvement |
-| :--- | :--- | :--- | :--- |
-| **Tetris Polyomino Placement** | 1.9% | **80.7%** | **+78.8% (42x Increase)** |
+The belief-state approach is detailed in our **ICRA 2018** paper:
+* **Paper & Overview:** [Reliably Arranging Objects in the Real World (ICRA 2018) ↗](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=NM6SfiEAAAAJ&citation_for_view=NM6SfiEAAAAJ:MXK_kJrjxJIC)
+* **Presentation Video:** [Watch the ICRA Spotlight & Demo ↗](https://www.youtube.com/watch?v=omdHFeBBYZ0)
 
 ---
 
