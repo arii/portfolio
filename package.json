@@ -20,10 +20,12 @@
     "preinstall": "node -e \"if (process.env.SKIP_BOOMTICK_PKG !== 'true' && process.env.VERCEL !== '1') { try { require('node:child_process').execSync('td-cli doctor', {stdio: 'inherit'}); } catch (e) {} }\"",
     "knip": "knip",
     "audit:dead-code": "pnpm exec knip",
-    "impact:analysis": "echo 'Impact analysis completed'",
-    "impact:visual-diff": "echo 'Visual diff completed'",
-    "impact:dom-diff": "echo 'DOM diff completed'",
-    "impact:gemini-review": "echo 'Gemini review completed'"
+    "impact:analysis": "tsx scripts/impact-analysis.ts",
+    "impact:build-main": "tsx scripts/impact-build-main.ts",
+    "impact:visual-diff": "tsx scripts/impact-visual-diff.ts",
+    "impact:dom-diff": "NODE_OPTIONS=--max-old-space-size=8192 tsx scripts/impact-dom-diff.ts",
+    "impact:gemini-review": "tsx scripts/impact-ai-review.ts gemini",
+    "impact:gemini-code-review": "tsx scripts/impact-ai-code-review.ts gemini"
   },
   "knip": {
     "project": [
@@ -33,9 +35,10 @@
       "td-cli"
     ],
     "ignoreDependencies": [
-      "autoprefixer",
-      "postcss",
-      "tailwindcss"
+      "dependency-cruiser",
+      "openai",
+      "@types/diff",
+      "@types/pixelmatch"
     ],
     "ignoreExportsUsedInFile": true
   },
@@ -47,30 +50,41 @@
     "react-helmet-async": "^3.0.0",
     "react-markdown": "^10.1.0",
     "react-router-dom": "^7.1.5",
-    "remark-gfm": "^4.0.1"
+    "remark-gfm": "^4.0.1",
+    "svg-pan-zoom": "^3.6.2"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.62.1",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
+    "@types/diff": "^8.0.0",
     "@types/jsdom": "^30.0.0",
     "@types/node": "^22.13.1",
+    "@types/pixelmatch": "^5.2.6",
+    "@types/pngjs": "^6.0.5",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
     "@typescript-eslint/eslint-plugin": "^8.67.0",
     "@typescript-eslint/parser": "^8.67.0",
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",
+    "dependency-cruiser": "^18.2.0",
+    "diff": "^9.0.0",
     "eslint": "^10.8.1",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.1.1",
     "globals": "^17.10.0",
     "jsdom": "^26.0.0",
     "knip": "^6.32.2",
+    "openai": "^7.5.0",
+    "pixelmatch": "^7.2.0",
+    "pngjs": "^7.0.0",
     "postcss": "^8.4.49",
     "rollup-plugin-visualizer": "^7.1.1",
     "sharp": "^0.35.3",
     "tailwindcss": "^3.4.17",
+    "tsx": "^4.23.12",
     "typescript": "^5.7.3",
     "vite": "^6.1.0",
     "vitest": "^3.0.5",

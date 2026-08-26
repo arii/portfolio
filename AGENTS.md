@@ -30,3 +30,26 @@ When referencing YouTube videos in markdown files (under `src/content/`):
      ```markdown
      [![Alt Text](/path/to/image.gif)](https://www.youtube.com/watch?v=XXXXXX#no-embed)
      ```
+
+## Deployment Impact Analysis & Code Reviews
+
+This portfolio workspace contains self-contained scripts to perform local deployment impact analyses, visual diff reviews, and AI code reviews using the Gemini API.
+
+To run these tools locally:
+
+1. **Deployment Impact Analysis**:
+   - Run `pnpm run impact:analysis` to generate a dependency blast-radius analysis report under `artifacts/impact-analysis/`. This identifies which user-facing routes are affected by the changes.
+
+2. **Baseline Main Branch Preparation**:
+   - Run `pnpm run impact:build-main` to checkout a baseline worktree of the latest main branch under `.tmp-main/` and build it.
+
+3. **Visual Diff Comparison**:
+   - Run `pnpm run impact:visual-diff` to spin up local previews of both the baseline and current head, capture screenshots of the impacted routes, perform visual pixel diffs, and save them to `artifacts/visual-review/`.
+
+4. **DOM Diff Generation**:
+   - Run `pnpm run impact:dom-diff` to compare the normalized DOM trees of baseline vs head, output detailed analysis results to `artifacts/dom-review/`, and generate a main markdown review summary at `artifacts/deployment-review.md`.
+
+5. **AI Reviews**:
+   - Run `pnpm run impact:gemini-review` to trigger visual UX audits of layout shifts or issues using the Gemini API.
+   - Run `pnpm run impact:gemini-code-review` to trigger regular code reviews.
+

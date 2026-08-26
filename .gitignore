@@ -136,3 +136,6 @@ screenshot_*.png
 # Temporary task markdown files
 issues.md
 mit_bwsi.md
+
+# Temporary baseline worktree
+.tmp-main/

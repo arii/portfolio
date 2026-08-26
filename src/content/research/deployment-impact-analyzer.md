@@ -10,33 +10,66 @@ readTime: 12
 status: "published"
 ---
 
-A common challenge in modern web development is understanding the "blast radius" of a change. When you modify a shared utility or a global CSS variable, how do you know which pages across your entire application this affects?
+LLM code generation introduces unintended visual side effects—hallucinated UI components, modified badge styles, shifted accents, or unintended layout changes. Reviewing these multi-file diffs manually is error-prone, running full end-to-end test suites on every commit is too slow, and standard unit tests completely miss visual artifacts.
 
-It can be difficult to determine if these automated changes are beneficial or if they inadvertently break existing layouts. Since an AI agent might suggest a large number of modifications, it is not always immediately obvious what those changes are or if they align with your goals. This is why visual impact analysis is crucial when developing with AI agents.
-
-Manual regression testing is slow and error-prone, and running full end-to-end suites on every commit is expensive. My solution is the **Deployment Impact Analyzer**: a CI/CD pipeline that semantically determines the scope of a change and performs targeted visual validation.
-
-While visual regression testing is effective for verifying that changes do not break existing layouts, it can be overly restrictive when you intend to make visual updates. In cases where design changes are intentional, standard regression testing may produce false positives, requiring a more nuanced approach to validate that the changes align with your goals.
+I built the **Deployment Impact Analyzer** to catch these discrepancies automatically. The pipeline traces every code modification through the project's dependency graph, identifies which user-facing routes are touched, and triggers targeted Playwright visual diffs using Pixelmatch. By scoping screenshots strictly to impacted views, it flags hallucinated elements and styling shifts directly in the pull request while cutting visual testing volume by up to 90%.
 
 ## The Architecture
 
-The Deployment Impact Analyzer operates in four distinct phases:
-
-1.  **Import Graph Parsing**: Identifying which files the PR affects.
-2.  **Route Mapping**: Translating affected files into user-facing routes.
-3.  **Visual Diffing**: Capturing and comparing screenshots using Playwright and pixelmatch.
-4.  **Severity Scoring**: Calculating the impact and reporting findings to the PR.
-
 ```mermaid
-%%{init: {'theme': 'dark', 'themeVariables': { 'darkMode': true, 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#334155', 'lineColor': '#22d3ee' }, 'flowchart': { 'nodeSpacing': 50, 'rankSpacing': 50 }}}%%
-flowchart TD
-  PR[Pull Request] --> Diff[Identify Changed Files]
-  Diff --> Graph[dependency-cruiser Graph Analysis]
-  Graph --> Routes[Map to Affected Routes]
-  Routes --> Playwright[Playwright Capture & Diff]
-  Playwright --> Scoring[Severity Scoring Engine]
-  Scoring --> Report[GitHub PR Comment]
+graph TB
+    %% Strict High-Visibility Class Definitions
+    classDef gitHub fill:#232d38,stroke:#60a5fa,stroke-width:2px,color:#ffffff,font-weight:bold;
+    classDef runner fill:#1e293b,stroke:#3b82f6,stroke-width:2px,color:#ffffff,font-weight:bold;
+    classDef external fill:#064e3b,stroke:#34d399,stroke-width:2px,color:#ffffff,font-weight:bold;
+    classDef linkText fill:none,color:#cbd5e1,font-size:11px;
+    
+    %% Environments as System Boundaries
+    subgraph GitHub_Platform ["GitHub Environment"]
+        A[Pull Request Event]
+        G[PR Comment / Status Check]
+    end
+
+    subgraph CI_Runner ["GitHub Actions Runner"]
+        B[Identify Changed Files]
+        C[dependency-cruiser Analysis]
+        D[Map to Affected Routes]
+        E[Playwright Engine]
+        F[Severity Scoring Engine]
+    end
+
+    subgraph Target_Environments ["Network / Environments"]
+        Prod[Production Main Baseline]
+        Branch[Feature Branch Deploy Preview]
+    end
+
+    %% Pipeline Logic & High-Contrast Connectors
+    A ==>|Webhook Trigger| B
+    B ==>|git diff-tree| C
+    C ==>|Blast Radius Array| D
+    
+    D ==>|Target URLs| E
+    Prod -.->|HTTP Get| E
+    Branch -.->|HTTP Get| E
+    
+    E ==>|Pixel Delta Map| F
+    F ==>|Markdown Report| G
+
+    %% Assign Classes
+    class A,G gitHub;
+    class B,C,D,E,F runner;
+    class Prod,Branch external;
+
+    %% Subgraph Contrast Overrides
+    style GitHub_Platform fill:#0d1117,stroke:#4b5563,stroke-width:2px,color:#f3f4f6
+    style CI_Runner fill:#0b0f19,stroke:#4b5563,stroke-width:2px,color:#f3f4f6
+    style Target_Environments fill:#022c22,stroke:#047857,stroke-width:2px,color:#a7f3d0
 ```
+
+- **Dependency Graph Parsing**: Traces modified files up to entry points to establish an explicit visual blast radius.
+- **Route Resolution**: Maps structural code entry points directly to active application routing domains.
+- **Targeted Visual Diffing**: Executes localized Playwright automated captures against a production baseline.
+- **Asynchronous PR Feedback**: Generates layout shift metrics and updates the pull request conversation via GitHub APIs.
 
 ---
 
@@ -51,8 +84,6 @@ When modifying a file, I trace its dependents up the tree until I reach an entry
 npx depcruise --exclude "^node_modules" --output-type json src | \
   jq '.modules[] | select(.dependencies[].resolved == "src/components/Button.tsx") | .source'
 ```
-
-By identifying the "semantic blast radius," I reduce the number of screenshots I need to capture by up to 90% in large-scale applications.
 
 ---
 
@@ -143,10 +174,6 @@ I implemented a fix using Tailwind's `truncate` and `flex-wrap` utilities, ensur
 
 ## Lessons Learned
 
-Building this tool taught me that **context is king**. An LLM can review code, but it struggles to "see" layout shifts. By combining deterministic graph analysis with visual regression, I create a "tripwire" that catches regressions before they reach production.
+The core engineering insight from this project is the value of multi-layered verification. Static analysis maps the system's structural vulnerabilities, but visual diffing provides the actual confirmation of interface integrity. Merging these workflows converts unpredictable visual evaluation into a deterministic, programmatic check.
 
 The next evolution of this tool involves agentic auto-resolution: using LLMs to analyze the visual diff and decide if a change is an intentional improvement or an accidental regression.
-
----
-
-*This analyzer is part of the BoomTick.blog DevAI suite. Check out the [Engineering Portfolio](/research) for more tools.*
