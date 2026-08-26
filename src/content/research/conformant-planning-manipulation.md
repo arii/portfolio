@@ -108,7 +108,7 @@ Physical experiments conducted on the PR2 platform demonstrated that conformant 
 *Figure 13: "Eric", the robot thesis mascot used to visually convey belief-state uncertainty and contact constraints.*
 
 ### Thesis Mascot: "Eric" the Robot
-To communicate these theoretical planning concepts during the defense presentation, I created **"Eric"**, a cartoon robot mascot inspired by Leslie's stick figures:
+To communicate these theoretical planning concepts during the defense presentation and dissertation, I created graphics of **"Eric the red robot"**, a cartoon robot mascot inspired by Leslie's stick figures:
 - **"Blindfolded Eric":** Illustrating sensorless manipulation sequences where physical contact boundaries replace visual perception.
 - **"Picketing Eric":** Highlighting edge cases where open-loop trajectories fail due to unexpected friction or rotational torque.
 
