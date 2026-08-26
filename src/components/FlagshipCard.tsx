@@ -23,19 +23,29 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
   const ToolIcon = getToolIcon(tool);
   const imageSrc = tool.id === 'hrm-flagship' ? '/assets/research/hrm-flagship.png' : tool.id === 'repo-auditor-ai' ? '/assets/research/repo-auditor-ai.png' : tool.image || null;
 
-  const isClickable = !!tool.canonicalPath;
+  const isClickable = !!(tool.externalUrl || tool.sourceUrl || tool.canonicalPath);
   const targetSlug = tool.canonicalPath ? tool.canonicalPath.replace('/research/', '') : '';
 
-  const handleCardClick = () => {
-    if (isClickable && targetSlug) {
+  const executePrimaryAction = () => {
+    if (tool.externalUrl) {
+      window.open(tool.externalUrl, '_blank', 'noopener,noreferrer');
+    } else if (tool.sourceUrl) {
+      window.open(tool.sourceUrl, '_blank', 'noopener,noreferrer');
+    } else if (tool.canonicalPath && targetSlug) {
       onNavigate(targetSlug);
     }
   };
 
+  const handleCardClick = () => {
+    if (isClickable) {
+      executePrimaryAction();
+    }
+  };
+
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if ((e.key === 'Enter' || e.key === ' ') && isClickable && targetSlug) {
+    if ((e.key === 'Enter' || e.key === ' ') && isClickable) {
       if (e.key === ' ') e.preventDefault();
-      onNavigate(targetSlug);
+      executePrimaryAction();
     }
   };
 
@@ -111,7 +121,9 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
               <button
                 onClick={(e) => {
                   e.stopPropagation();
-                  onNavigate(targetSlug);
+                  if (targetSlug) {
+                    onNavigate(targetSlug);
+                  }
                 }}
                 className="inline-flex items-center space-x-1.5 bg-accent/10 border border-accent/20 px-3.5 py-2 rounded-xl text-xs font-semibold text-accent hover:bg-accent/20 transition-colors min-h-[44px] cursor-pointer"
               >
