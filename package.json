@@ -67,7 +67,6 @@
     "globals": "^17.10.0",
     "jsdom": "^26.0.0",
     "knip": "^6.32.2",
-    "playwright": "^1.62.1",
     "postcss": "^8.4.49",
     "rollup-plugin-visualizer": "^7.1.1",
     "sharp": "^0.35.3",

@@ -30,18 +30,26 @@ Host: boomtick.blog
 
 ```mermaid
 sequenceDiagram
-  autonumber
-  participant Agent as AI Coding Agent (Jules/Claude)
-  participant Skill as SKILL.md Specification
-  participant API as VersionTruth API (Vercel Edge)
-  participant Registry as Upstream Registry (npm/GitHub/Node)
+    autonumber
 
-  Agent->>Skill: Reads tool definition & endpoints
-  Agent->>API: GET /api/compare-version?ecosystem=gh-action&name=actions/checkout&candidate=v4
-  API->>Registry: Fetches real-time releases & tags
-  Registry-->>API: Returns latest tagged release (e.g. v6.0.1)
-  API-->>Agent: JSON { candidate: "v4", latest: "v6.0.1", isOutdated: true }
-  Agent->>Agent: Retains v6 instead of hallucinated downgrade
+    actor Agent as AI Coding Agent<br/>(Jules / Claude)
+    participant Skill as SKILL.md<br/>Specification
+    participant API as VersionTruth API<br/>(Vercel Edge)
+    participant Reg as Upstream Registry<br/>(npm / GitHub / Node)
+
+    Agent->>Skill: Reads tool definition & endpoints
+    activate Skill
+    Skill-->>Agent: Returns schema & parameters
+    deactivate Skill
+
+    Agent->>+API: GET /api/compare-version<br/>?ecosystem=gh-action<br/>&name=actions/checkout<br/>&candidate=v4
+
+    API->>+Reg: Fetches real-time releases & tags
+    Reg-->>-API: Returns latest tagged release (e.g. v6.0.1)
+
+    API-->>-Agent: 200 OK: { candidate: "v4",<br/>latest: "v6.0.1", isOutdated: true }
+
+    Agent->>Agent: Retains v6 instead of<br/>hallucinated downgrade
 ```
 
 ---
