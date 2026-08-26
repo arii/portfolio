@@ -11,11 +11,7 @@ export interface DevAIListPageProps {
   onNavigate: (slug: string) => void;
 }
 
-export const PRIMARY_TAGS = ['All Topics', 'DevAI & Agents', 'CI/CD & Testing', 'Data Pipelines & ETL'] as const;
-export type PrimaryTag = (typeof PRIMARY_TAGS)[number];
-
 const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
-  const [selectedTag, setSelectedTag] = useState<PrimaryTag>('All Topics');
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
 
   useEffect(() => {
@@ -55,23 +51,12 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
       'graduate-engineering-projects',
       'autonomous-drone-line-following'
     ];
-    const devAiPosts = posts.filter((p) => !researchOnlySlugs.includes(p.slug));
-
-    if (selectedTag === 'All Topics') return devAiPosts.filter((p) => {
-        const cat = (p.category || '').toLowerCase();
-        return !cat.includes('robotics'); // exclude robotics
-    });
-    return devAiPosts.filter((p) => {
-      const tags = p.tags.map((t) => t.toLowerCase());
+    return posts.filter((p) => {
+      if (researchOnlySlugs.includes(p.slug)) return false;
       const cat = (p.category || '').toLowerCase();
-      if (cat.includes('robotics')) return false;
-
-      if (selectedTag === 'DevAI & Agents') return tags.some((t) => ['devai', 'ai', 'llm', 'multi-agent', 'agentic workflows', 'productivity', 'agents'].includes(t)) || cat.includes('devai');
-      if (selectedTag === 'CI/CD & Testing') return tags.some((t) => ['ci/cd', 'ci', 'github actions', 'playwright', 'pixelmatch', 'screenshot diff', 'automation', 'devops'].includes(t));
-      if (selectedTag === 'Data Pipelines & ETL') return tags.some((t) => ['etl', 'apache parquet', 'scraping', 'data pipelines', 'python', 'data engineering'].includes(t)) || cat.includes('data engineering');
-      return true;
+      return !cat.includes('robotics'); // exclude robotics
     });
-  }, [posts, selectedTag]);
+  }, [posts]);
 
   return (
     <div className="space-y-12 sm:space-y-16">
@@ -117,21 +102,6 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
             </p>
           </div>
           <span className="text-xs text-text-dim uppercase tracking-widest shrink-0">{filteredPosts.length} Articles</span>
-        </div>
-
-        {/* Full-width segmented filter control */}
-        <div className="flex flex-wrap items-center justify-start gap-2 bg-surface p-1.5 rounded-2xl border border-line">
-          {PRIMARY_TAGS.map((tag) => (
-            <button
-              key={tag}
-              onClick={() => setSelectedTag(tag)}
-              className={`flex-1 min-w-[140px] rounded-xl px-4 py-2.5 text-xs sm:text-sm font-semibold transition-all cursor-pointer min-h-[44px] flex items-center justify-center text-center ${
-                selectedTag === tag ? 'bg-accent/15 border border-accent/30 text-accent shadow-sm' : 'bg-transparent text-text-dim hover:text-text-main hover:bg-surface-alt'
-              }`}
-            >
-              {tag}
-            </button>
-          ))}
         </div>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
