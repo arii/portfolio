@@ -29,7 +29,8 @@
     "impact:visual-diff": "tsx scripts/impact-visual-diff.ts",
     "impact:dom-diff": "NODE_OPTIONS=--max-old-space-size=8192 tsx scripts/impact-dom-diff.ts",
     "impact:gemini-review": "tsx scripts/impact-ai-review.ts gemini",
-    "impact:gemini-code-review": "tsx scripts/impact-ai-code-review.ts gemini"
+    "impact:gemini-code-review": "tsx scripts/impact-ai-code-review.ts gemini",
+    "test:smoke": "tsx scripts/run-smoketest.ts"
   },
   "knip": {
     "project": [
