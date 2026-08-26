@@ -140,3 +140,5 @@ mit_bwsi.md
 
 # Temporary baseline worktree
 .tmp-main/
+.tmp-main-old/
+.tmp-main-new/

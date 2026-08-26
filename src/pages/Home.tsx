@@ -146,7 +146,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
           ))}
         </div>
       </section>
-    </div>
+    </main>
   );
 };
 
