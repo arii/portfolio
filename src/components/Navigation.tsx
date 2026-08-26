@@ -54,7 +54,7 @@ const Navigation: React.FC = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex md:items-center md:space-x-1">
+          <nav className="hidden md:flex md:items-center gap-3">
             {navLinks.map((link) => {
               const Icon = link.icon;
               const active = isActive(link.path);
@@ -62,10 +62,10 @@ const Navigation: React.FC = () => {
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`flex items-center space-x-2 rounded-md px-3.5 py-2 text-sm font-medium transition-colors min-h-[44px] ${
+                  className={`flex items-center space-x-2 rounded-md px-4 py-2 text-sm font-medium transition-colors min-h-[48px] ${
                     active
                       ? 'bg-secondary text-foreground'
-                      : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+                      : 'text-slate-400 hover:bg-muted hover:text-foreground'
                   }`}
                 >
                   <Icon className="h-4 w-4" />

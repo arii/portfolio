@@ -77,8 +77,8 @@ export const MailIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
 );
 
 const SocialIcons: React.FC<SocialIconsProps> = ({
-  className = 'flex items-center gap-4',
-  iconClassName = 'w-5 h-5 text-muted-foreground hover:text-foreground transition-colors',
+  className = 'flex items-center gap-2',
+  iconClassName = 'w-5 h-5 text-slate-400 hover:text-foreground transition-colors',
 }) => {
   return (
     <div className={className}>
@@ -86,28 +86,28 @@ const SocialIcons: React.FC<SocialIconsProps> = ({
         href="https://www.linkedin.com/in/ariel-anders/"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="LinkedIn"
-        className={iconClassName}
+        aria-label="LinkedIn Profile"
+        className={`flex items-center justify-center min-h-[48px] min-w-[48px] ${iconClassName.replace('w-5 h-5 ', '')}`}
       >
-        <LinkedinIcon className="w-full h-full" />
+        <LinkedinIcon className="w-5 h-5" />
       </a>
       <a
         href="https://github.com/arii"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="GitHub"
-        className={iconClassName}
+        aria-label="GitHub Profile"
+        className={`flex items-center justify-center min-h-[48px] min-w-[48px] ${iconClassName.replace('w-5 h-5 ', '')}`}
       >
-        <GithubIcon className="w-full h-full" />
+        <GithubIcon className="w-5 h-5" />
       </a>
       <a
         href="https://boomtick.blog"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="BoomTick Blog"
-        className={iconClassName}
+        aria-label="BoomTick Blog Profile"
+        className={`flex items-center justify-center min-h-[48px] min-w-[48px] ${iconClassName.replace('w-5 h-5 ', '')}`}
       >
-        <BoomTickIcon className="w-full h-full" />
+        <BoomTickIcon className="w-5 h-5" />
       </a>
     </div>
   );
