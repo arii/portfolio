@@ -62,8 +62,8 @@ export const flagshipTools: ResearchTool[] = [
     tags: ['PR2', 'Conformant planning', 'Belief state', 'Manipulation', 'MIT CSAIL'],
     isFlagship: true,
     canonicalPath: '/research/conformant-planning-manipulation',
-    image: '/assets/research/phd/sixblock.png',
-    imageAlt: 'PR2 robot reliably arranging blocks using conformant planning without external sensing feedback',
+    image: '/assets/research/phd/icra_presentation.gif',
+    imageAlt: 'PR2 robot executing conformant planning manipulation and reliable block alignment during ICRA presentation',
     externalUrl: 'https://dspace.mit.edu/entities/publication/d489a172-efbf-4e35-b81c-04e4acf3d24d',
     externalLinkDisplayLabel: 'MIT DSpace Thesis'
   },
