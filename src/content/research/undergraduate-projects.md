@@ -40,7 +40,7 @@ Microprocessor architecture, external memory mapping, peripheral interfacing, an
 
 - **Timeline:** Spring 2011 | **Role:** Embedded Firmware & Hardware Interfacing Lead | **Tech Stack:** Motorola 68HC11, C/Assembly, Wire-Wrap Board Assembly, RS-232 UART, PWM Current Control
 
-For **CMPE 121 Microprocessor System Design** at UC Santa Cruz, I designed, hand-soldered, and programmed a custom embedded computer board based on the **Motorola 68HC11E1 microcontroller**, bringing bare silicon up to full operational capability to control a mechanical gripper without a host computer.
+For **CMPE 121 Microprocessor System Design** at UC Santa Cruz, we designed, hand-soldered, and programmed a custom embedded computer board based on the **Motorola 68HC11E1 microcontroller**, bringing bare silicon up to full operational capability to control a mechanical gripper without a host computer.
 
 ![Complete hardware schematic for the custom Motorola 68HC11E1 microcontroller system board.](/assets/research/report-ce121-microprocessor/68hc11_board_schematic.png#invert-dark#max-w-3xl)
 
@@ -56,9 +56,9 @@ Building the single-board computer required precise hardware timing analysis, ma
 
 #### Software & Gripper Control Implementation
 
-I structured the software to manage real-time communication and hardware feedback loops using the RS-232 communication protocol:
+We structured the software to manage real-time communication and hardware feedback loops using the RS-232 communication protocol:
 
-* **Pseudo-Force Control:** Motor resistance is regulated by specifying direct current levels. I mapped out eight distinct current settings into their hexadecimal representations, creating a structured command look-up table for both opening and closing actions.
+* **Pseudo-Force Control:** Motor resistance is regulated by specifying direct current levels. We mapped out eight distinct current settings into their hexadecimal representations, creating a structured command look-up table for both opening and closing actions.
 * **Dynamic Lookup System:** When an operator presses a digital push-button, the program measures the active voltage across the potentiometer and uses that value to index the corresponding open or close command from the lookup table.
 
 [![68HC11 Microcontroller Board and Mechanical Gripper hardware loops.](/assets/research/undergraduate-projects/gripper_control.gif#max-w-2xl)](https://www.youtube.com/watch?v=tXif7xeZmGI#no-embed)
@@ -82,7 +82,7 @@ Interdisciplinary electromechanical systems blending microcontrollers, analog si
 
 - **Timeline:** Winter 2012 | **Role:** Systems Engineer, Programming Lead & Circuit Debugger | **Tech Stack:** PIC32 Microcontroller, Mechatronic State Machine Architecture, IR Sensor Arrays, Dual-Motor Differential Drive, Analog Hardware Debounce, PWM Regulation
 
-In **CMPE 118 Introduction to Mechatronics** at UC Santa Cruz, I co-designed, constructed, and programmed **MAK Attack**—an 11" x 11" x 11" autonomous mobile robot engineered with teammates Matthew Luxton and Kyle Huey to navigate an 8' x 8' competitive arena, locate target islands via infrared beacons, launch mechanical projectiles, and return home under tight real-time constraints.
+In **CMPE 118 Introduction to Mechatronics** at UC Santa Cruz, my team (Matthew Luxton, Kyle Huey, and I) designed, constructed, and programmed **MAK Attack**—an 11" x 11" x 11" autonomous mobile robot built to solve real-time arena navigation and object manipulation challenges under strict operational deadlines.
 
 ![The MAK Attack autonomous mobile robot platform, highlighting optical sensors, bumper switches, and custom motor drive electronics.](/assets/research/report-ce118-mechatronics/mak_attack_robot.png#max-w-2xl)
 
@@ -135,9 +135,9 @@ Interactive embedded hardware projects, custom firmware state machines, and reso
 
 - **Timeline:** February 2020 | **Role:** Embedded Systems Developer | **Tech Stack:** Microcontrollers, Digital Output Multiplexing, Analog Input Debouncing, Serial Protocols
 
-I created this interactive arcade game for the Tau Beta Pi student organization during Engineering Week at UC Santa Cruz with teammates Nathan Abercrombie and Julian Dahan. The game challenges players to press a large button and stop a fast-moving light on a specific target LED.
+We created this interactive arcade game for the Tau Beta Pi student organization during Engineering Week at UC Santa Cruz in February 2020. Built by Ariel Anders, Nathan Abercrombie, and Julian Dahan, the game challenges players to press a large button and stop a fast-moving light on a specific target LED.
 
-I wired an array of 28 individual LEDs across digital output pins 22 through 49. The code lights up one LED at a time with a quick 10ms delay, making the light look like it is spinning in a continuous circle. The game button connects to an analog input pin (A0). The microcontroller constantly reads this pin, and when the button press drops the reading below my set threshold of 500, the movement loop stops completely. This freezes the light, sends the final score data through a 9600 baud Serial pipeline, and keeps the game at the end screen until reset is pressed to play again.
+We wired an array of 28 individual LEDs across digital output pins 22 through 49. The code lights up one LED at a time with a quick 10ms delay, making the light look like it is spinning in a continuous circle. The game button connects to an analog input pin (A0). The microcontroller constantly reads this pin, and when the button press drops the reading below our set threshold of 500, the movement loop stops completely. This freezes the light, sends the final score data through a 9600 baud Serial pipeline, and keeps the game at the end screen until reset is pressed to play again.
 
 [![Microcontroller-Based LED Ring Reaction Game hardware loops. | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=p1W5xtdLUWk#no-embed](/assets/research/undergraduate-projects/led_game.gif#max-w-2xl)](https://www.youtube.com/watch?v=p1W5xtdLUWk#no-embed)
 
