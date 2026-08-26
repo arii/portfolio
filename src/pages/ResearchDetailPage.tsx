@@ -12,6 +12,23 @@ export interface ResearchDetailPageProps {
   onBack: () => void;
 }
 
+const MermaidChart = ({ codeString }: { codeString: string }) => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    if (ref.current) {
+      mermaid.contentLoaded();
+    }
+  }, [codeString]);
+
+  return (
+    <div className="mermaid my-8 flex justify-center w-full" ref={ref}>
+      {codeString}
+    </div>
+  );
+};
+
 const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack }) => {
   const post = getResearchPostBySlug(slug);
   const matchingTool = RESEARCH_TOOLS.find(
@@ -141,23 +158,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
               const codeString = String(children).replace(/\n$/, '');
 
               if (language === 'mermaid') {
-                const MermaidChart = () => {
-                  const ref = useRef<HTMLDivElement>(null);
-
-                  useEffect(() => {
-                    mermaid.initialize({ startOnLoad: true, theme: 'dark' });
-                    if (ref.current) {
-                      mermaid.contentLoaded();
-                    }
-                  }, [codeString]);
-
-                  return (
-                    <div className="mermaid my-8 flex justify-center w-full" ref={ref}>
-                      {codeString}
-                    </div>
-                  );
-                };
-                return <MermaidChart />;
+                return <MermaidChart codeString={codeString} />;
               }
 
               // Match block vs inline
