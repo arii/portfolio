@@ -461,7 +461,8 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
                     <SafeImage
                       src={cleanSrc}
                       alt={displayCaption}
-                      className={`max-h-[380px] w-auto h-auto object-contain rounded-xl ${shouldInvert ? 'dark:invert dark:hue-rotate-180 dark:mix-blend-screen' : ''}`}
+                      containerClassName="w-full flex justify-center"
+                      className={`max-h-[380px] w-full h-auto object-contain rounded-xl ${shouldInvert ? 'dark:invert dark:hue-rotate-180 dark:mix-blend-screen' : ''}`}
                       {...props}
                     />
                   </div>

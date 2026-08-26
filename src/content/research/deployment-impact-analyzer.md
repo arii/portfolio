@@ -138,7 +138,3 @@ I implemented a fix using Tailwind's `truncate` and `flex-wrap` utilities, ensur
 Building this tool taught me that **context is king**. An LLM can review code, but it struggles to "see" layout shifts. By combining deterministic graph analysis with visual regression, I create a "tripwire" that catches regressions before they reach production.
 
 The next evolution of this tool involves agentic auto-resolution: using LLMs to analyze the visual diff and decide if a change is an intentional improvement or an accidental regression.
-
----
-
-*This analyzer is part of the BoomTick.blog DevAI suite. Check out the [Engineering Portfolio](/research) for more tools.*
