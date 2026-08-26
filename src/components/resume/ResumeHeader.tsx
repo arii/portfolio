@@ -1,5 +1,6 @@
 import React from 'react';
 import { Download, Columns, LayoutGrid } from 'lucide-react';
+import { Box, Stack } from '@/components/layout';
 
 export interface ResumeHeaderProps {
   pdfUrl: string;
@@ -13,9 +14,9 @@ export const ResumeHeader: React.FC<ResumeHeaderProps> = ({
   onLayoutModeChange
 }) => {
   return (
-    <header className="border-b border-line/20 pb-6 sm:pb-8">
-      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
-        <div className="space-y-1">
+    <Box as="header" className="border-b border-line/20 pb-6 sm:pb-8">
+      <Stack direction="row" justify="between" align="center" className="flex-col sm:flex-row gap-4">
+        <Stack direction="col" className="space-y-1">
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-text-main leading-tight">
             <span className="print:hidden">Resume</span>
             <span className="hidden print:inline text-black">Ariel Anders, PhD</span>
@@ -23,15 +24,15 @@ export const ResumeHeader: React.FC<ResumeHeaderProps> = ({
           <p className="text-text-dim text-sm sm:text-base leading-relaxed print:text-black">
             Roboticist &amp; Senior Software Engineer &middot; Professional experience, technical skills, and education.
           </p>
-        </div>
+        </Stack>
 
-        <div className="print:hidden shrink-0 flex items-center gap-3">
+        <Stack direction="row" align="center" className="print:hidden shrink-0 gap-3">
           {onLayoutModeChange && (
-            <div className="inline-flex p-1 rounded-lg bg-surface border border-line text-xs font-medium">
+            <Stack direction="row" align="center" className="p-1 rounded-lg bg-surface border border-line text-xs font-medium">
               <button
                 type="button"
                 onClick={() => onLayoutModeChange('split')}
-                className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md transition-colors ${
+                className={`px-2.5 py-1.5 rounded-md transition-colors ${
                   layoutMode === 'split'
                     ? 'bg-primary/20 text-primary font-semibold'
                     : 'text-text-dim hover:text-text-main'
@@ -39,13 +40,15 @@ export const ResumeHeader: React.FC<ResumeHeaderProps> = ({
                 aria-label="Two Column Split View"
                 title="Two Column View"
               >
-                <Columns className="w-3.5 h-3.5" />
-                <span className="hidden md:inline">Split View</span>
+                <Stack direction="row" align="center" className="gap-1.5">
+                  <Columns className="w-3.5 h-3.5" />
+                  <span className="hidden md:inline">Split View</span>
+                </Stack>
               </button>
               <button
                 type="button"
                 onClick={() => onLayoutModeChange('full')}
-                className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md transition-colors ${
+                className={`px-2.5 py-1.5 rounded-md transition-colors ${
                   layoutMode === 'full'
                     ? 'bg-primary/20 text-primary font-semibold'
                     : 'text-text-dim hover:text-text-main'
@@ -53,23 +56,27 @@ export const ResumeHeader: React.FC<ResumeHeaderProps> = ({
                 aria-label="Full Width View"
                 title="Full Width Experience View"
               >
-                <LayoutGrid className="w-3.5 h-3.5" />
-                <span className="hidden md:inline">Full Width</span>
+                <Stack direction="row" align="center" className="gap-1.5">
+                  <LayoutGrid className="w-3.5 h-3.5" />
+                  <span className="hidden md:inline">Full Width</span>
+                </Stack>
               </button>
-            </div>
+            </Stack>
           )}
 
           <a
             href={pdfUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center space-x-2 bg-foreground text-background hover:bg-foreground/90 transition-colors px-4 py-2 rounded-lg text-sm font-semibold cursor-pointer min-h-[40px]"
+            className="bg-foreground text-background hover:bg-foreground/90 transition-colors px-4 py-2 rounded-lg text-sm font-semibold cursor-pointer min-h-[40px]"
           >
-            <Download className="w-4 h-4" />
-            <span>View PDF</span>
+            <Stack direction="row" align="center" className="gap-2">
+              <Download className="w-4 h-4" />
+              <span>View PDF</span>
+            </Stack>
           </a>
-        </div>
-      </div>
-    </header>
+        </Stack>
+      </Stack>
+    </Box>
   );
 };
