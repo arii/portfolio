@@ -36,10 +36,29 @@ const MermaidChart = ({ codeString }: { codeString: string }) => {
         lineColor: '#64748b',
         textColor: '#f8fafc',
         nodeBorder: '#38bdf8',
-        mainBkg: 'transparent'
+        mainBkg: 'transparent',
+        actorBkg: '#1e293b',
+        actorBorder: '#38bdf8',
+        actorTextColor: '#f8fafc',
+        signalColor: '#cbd5e1',
+        signalTextColor: '#38bdf8',
+        labelBoxBkgColor: '#0b0f19',
+        labelBoxBorderColor: '#4b5563',
+        labelTextColor: '#f8fafc',
+        noteBkgColor: '#0b0f19',
+        noteBorderColor: '#e2e8f0',
+        noteTextColor: '#f8fafc',
       },
       securityLevel: 'loose', // Allows interactive click events
-      flowchart: { useMaxWidth: false } // Prevents distortion during zoom
+      flowchart: { useMaxWidth: false }, // Prevents distortion during zoom
+      sequence: {
+        actorFontFamily: 'Plus Jakarta Sans, system-ui, -apple-system, sans-serif',
+        noteFontFamily: 'Plus Jakarta Sans, system-ui, -apple-system, sans-serif',
+        messageFontFamily: 'Plus Jakarta Sans, system-ui, -apple-system, sans-serif',
+        boxMargin: 12,
+        width: 160,
+        height: 70,
+      }
     });
 
     const renderDiagram = async () => {
