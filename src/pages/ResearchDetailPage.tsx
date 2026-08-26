@@ -76,7 +76,11 @@ const MermaidChart = ({ codeString }: { codeString: string }) => {
       className="overflow-hidden rounded-2xl border border-line bg-surface shadow-md"
       style={{ touchAction: 'none' }} // Prevents page bounce during diagram drag
     >
-      <Stack direction="row" justify="center" w="full" minH="400px" p={4} ref={ref} />
+      <div
+        ref={ref}
+        className="flex flex-row justify-center"
+        style={{ width: '100%', minHeight: '400px', padding: '1rem' }}
+      />
     </Box>
   );
 };
