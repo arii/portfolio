@@ -17,13 +17,14 @@ I built the **Deployment Impact Analyzer** to catch these discrepancies automati
 ## The Architecture
 
 ```mermaid
-flowchart TD
-    %% High-Visibility Class Definitions
-    classDef gitHub fill:#1e293b,stroke:#38bdf8,stroke-width:2px,color:#f8fafc,font-weight:bold;
-    classDef runner fill:#0f172a,stroke:#38bdf8,stroke-width:2px,color:#f8fafc,font-weight:bold;
-    classDef external fill:#022c22,stroke:#34d399,stroke-width:2px,color:#f8fafc,font-weight:bold;
+graph TB
+    %% Strict High-Visibility Class Definitions
+    classDef gitHub fill:#232d38,stroke:#60a5fa,stroke-width:2px,color:#ffffff,font-weight:bold;
+    classDef runner fill:#1e293b,stroke:#3b82f6,stroke-width:2px,color:#ffffff,font-weight:bold;
+    classDef external fill:#064e3b,stroke:#34d399,stroke-width:2px,color:#ffffff,font-weight:bold;
+    classDef linkText fill:none,color:#cbd5e1,font-size:11px;
 
-    %% System Boundaries
+    %% Environments as System Boundaries
     subgraph GitHub_Platform ["GitHub Environment"]
         A[Pull Request Event]
         G[PR Comment / Status Check]
@@ -37,32 +38,32 @@ flowchart TD
         F[Severity Scoring Engine]
     end
 
-    subgraph Target_Environments ["Target Deployments"]
-        Prod[Production Baseline]
-        Branch[Deploy Preview]
+    subgraph Target_Environments ["Network / Environments"]
+        Prod[Production Main Baseline]
+        Branch[Feature Branch Deploy Preview]
     end
 
-    %% Pipeline Connectors
-    A -->|Webhook Trigger| B
-    B -->|git diff-tree| C
-    C -->|Blast Radius Array| D
+    %% Pipeline Logic & High-Contrast Connectors
+    A ==>|Webhook Trigger| B
+    B ==>|git diff-tree| C
+    C ==>|Blast Radius Array| D
 
-    D -->|Target URLs| E
-    Prod -.->|HTTP GET| E
-    Branch -.->|HTTP GET| E
+    D ==>|Target URLs| E
+    Prod -.->|HTTP Get| E
+    Branch -.->|HTTP Get| E
 
-    E -->|Pixel Delta Map| F
-    F -->|Markdown Report| G
+    E ==>|Pixel Delta Map| F
+    F ==>|Markdown Report| G
 
-    %% Class Assignments
+    %% Assign Classes
     class A,G gitHub;
     class B,C,D,E,F runner;
     class Prod,Branch external;
 
-    %% Subgraph Overrides
-    style GitHub_Platform fill:#0b0f19,stroke:#475569,stroke-width:2px,color:#38bdf8
-    style CI_Runner fill:#0f172a,stroke:#475569,stroke-width:2px,color:#38bdf8
-    style Target_Environments fill:#064e3b,stroke:#059669,stroke-width:2px,color:#34d399
+    %% Subgraph Contrast Overrides
+    style GitHub_Platform fill:#0d1117,stroke:#4b5563,stroke-width:2px,color:#f3f4f6
+    style CI_Runner fill:#0b0f19,stroke:#4b5563,stroke-width:2px,color:#f3f4f6
+    style Target_Environments fill:#022c22,stroke:#047857,stroke-width:2px,color:#a7f3d0
 ```
 
 - **Dependency Graph Parsing**: Traces modified files up to entry points to establish an explicit visual blast radius.

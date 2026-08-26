@@ -17,28 +17,19 @@ The better pattern is to shrink the model's job: collect the important pull requ
 
 ```mermaid
 flowchart TD
-  classDef startNode fill:#1e293b,stroke:#38bdf8,stroke-width:2px,color:#f8fafc;
-  classDef processNode fill:#0f172a,stroke:#38bdf8,stroke-width:2px,color:#f8fafc;
-  classDef decisionNode fill:#312e81,stroke:#818cf8,stroke-width:2px,color:#f8fafc;
-  classDef actionNode fill:#064e3b,stroke:#34d399,stroke-width:2px,color:#f8fafc;
+  PR[Pull request opened] --> Collect[Collect review context]
+  Collect --> Packet[Create review-context.md]
 
-  PR[Pull Request Opened] --> Collect[Collect Review Context]
-  CI[CI Failure Logs] --> Collect
-  Diff[PR Code Diff] --> Collect
-  Rules[Project Review Rules] --> Collect
+  Packet --> Models[Send packet to Gemini API]
+  Models --> Findings[Return structured findings]
 
-  Collect --> Packet[Build review-context.md]
-  Packet --> Models[Send Context to Gemini API]
-  Models --> Findings[Extract Structured JSON Findings]
+  Findings --> Decide{Any blocking issues?}
+  Decide -->|Yes| Changes[Request changes]
+  Decide -->|No| Summary[Post summary or approve]
 
-  Findings --> Decide{Any Blocking Issues?}
-  Decide -->|Yes| Changes[Request Changes & Block Merge]
-  Decide -->|No| Summary[Post Summary Comment / Approve]
-
-  class PR startNode;
-  class Collect,CI,Diff,Rules,Packet,Models,Findings processNode;
-  class Decide decisionNode;
-  class Changes,Summary actionNode;
+  CI[CI logs] --> Collect
+  Diff[PR diff] --> Collect
+  Rules[Project review rules] --> Collect
 ```
 
 ---
