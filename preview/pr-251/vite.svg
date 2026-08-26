@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 257" width="100%" height="100%">
+  <defs>
+    <linearGradient id="viteA" x1="43.28%" y1="0%" x2="50%" y2="89.24%">
+      <stop offset="0%" stop-color="#646CFF"></stop>
+      <stop offset="100%" stop-color="#24297A"></stop>
+    </linearGradient>
+  </defs>
+  <!-- Clean, sharp geometric 'A' shape with no background box -->
+  <path fill="url(#viteA)" d="M128 0L28 175h52l48-84l48 84h52L128 0zm0 65l32 56H96l32-56z"/>
+</svg>
