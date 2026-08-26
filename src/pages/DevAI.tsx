@@ -20,18 +20,19 @@ const DevAI: React.FC<DevAIProps> = () => {
   };
 
   if (slug) {
-    const researchOnlyRedirects: Record<string, string> = {
-      'leac-monitoring-software': 'leac-monitoring-software',
-      'leac-monitoring': 'leac-monitoring-software',
-      'leac': 'leac-monitoring-software',
-      'light-therapy-mit': 'light-therapy-mit',
-      'light-therapy': 'light-therapy-mit',
-      'boop-light-detector': 'boop-light-detector',
-      'boop': 'boop-light-detector',
-    };
+    const targetMap = new Map<string, string>([
+      ['leac-monitoring-software', 'leac-monitoring-software'],
+      ['leac-monitoring', 'leac-monitoring-software'],
+      ['leac', 'leac-monitoring-software'],
+      ['light-therapy-mit', 'light-therapy-mit'],
+      ['light-therapy', 'light-therapy-mit'],
+      ['boop-light-detector', 'boop-light-detector'],
+      ['boop', 'boop-light-detector'],
+    ]);
 
-    if (slug in researchOnlyRedirects) {
-      return <Navigate to={`/research/${researchOnlyRedirects[slug]}`} replace />;
+    const redirectTarget = targetMap.get(slug);
+    if (redirectTarget) {
+      return <Navigate to={`/research/${redirectTarget}`} replace />;
     }
 
     return <ResearchDetailPage slug={slug} onBack={handleBack} />;
