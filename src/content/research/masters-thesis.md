@@ -82,7 +82,6 @@ Validation of my learned whole-arm manipulation policies on the physical PR2:
 * [PR2 Grasping Demonstration 1](https://www.youtube.com/watch?v=2mGN3ka_7i0)
 * [PR2 Grasping Demonstration 2](https://www.youtube.com/watch?v=-V2KtcETAi8)
 * [PR2 Grasping Demonstration 3](https://www.youtube.com/watch?v=QgoJKaoZ3dY)
-* [PR2 Grasping Demonstration 4](https://www.youtube.com/watch?v=WfJ6xRo0Y9Y)
 
 ---
 
