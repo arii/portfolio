@@ -37,8 +37,8 @@ export const autonomousTools: ResearchTool[] = [
     category: 'Robotics & Autonomy',
     status: 'Completed',
     tags: ['Robotics & autonomy', 'Multi-agent', 'IJRR Journal', 'RSS 2015 Finalist', 'POMDP'],
-    image: '/assets/research/beer.png',
-    imageAlt: 'Autonomous delivery robots operating in dynamic human environment',
+    image: '/assets/research/delivery-bots/coordination.gif',
+    imageAlt: 'Decentralized multi-robot package delivery and coordination under uncertainty',
     canonicalPath: '/research/delivery-bots',
     externalUrl: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=NM6SfiEAAAAJ&citation_for_view=NM6SfiEAAAAJ:zYLM7Y9cAGgC'
   },
