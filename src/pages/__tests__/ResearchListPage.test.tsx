@@ -30,7 +30,7 @@ describe('DevAI and Research List Page Deduplication', () => {
 
     expect(screen.getByText('Robotics & Algorithmic Research')).toBeInTheDocument();
     expect(screen.getByText('Graduate Theses')).toBeInTheDocument();
-    expect(screen.getByText('Peer-Reviewed Publications')).toBeInTheDocument();
+    expect(screen.queryByText('Peer-Reviewed Publications')).not.toBeInTheDocument();
     expect(screen.getByText('Robotics and Academic Projects')).toBeInTheDocument();
     expect(screen.getAllByText(/Delivery Bots/i).length).toBeGreaterThan(0);
     expect(screen.getAllByText(/BeaverWorks/i).length).toBeGreaterThan(0);
