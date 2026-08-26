@@ -47,7 +47,8 @@
     "react-helmet-async": "^3.0.0",
     "react-markdown": "^10.1.0",
     "react-router-dom": "^7.1.5",
-    "remark-gfm": "^4.0.1"
+    "remark-gfm": "^4.0.1",
+    "svg-pan-zoom": "^3.6.2"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

@@ -6,6 +6,8 @@ import { ArrowLeft, Calendar, Clock, Download, Video, Play, ExternalLink } from 
 import { getResearchPostBySlug, RESEARCH_TOOLS } from '@/data/research';
 import { GithubIcon } from '@/components/SocialIcons';
 import SafeImage from '@/components/ui/SafeImage';
+import { Box, Stack } from '@/components/layout';
+import svgPanZoom from 'svg-pan-zoom';
 
 export interface ResearchDetailPageProps {
   slug: string;
@@ -16,16 +18,66 @@ const MermaidChart = ({ codeString }: { codeString: string }) => {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    mermaid.initialize({ startOnLoad: true, theme: 'dark' });
-    if (ref.current) {
-      mermaid.contentLoaded();
+    // Determine orientation based on screen width for responsive layout
+    const isMobile = window.innerWidth < 768;
+    // Replace 'graph TD' with 'graph LR' if we're on desktop,
+    // or vice versa depending on what's defined in the raw markdown string.
+    let responsiveCodeString = codeString;
+    if (isMobile) {
+      responsiveCodeString = responsiveCodeString.replace(/graph LR/g, 'graph TD').replace(/flowchart LR/g, 'flowchart TD');
+    } else {
+      responsiveCodeString = responsiveCodeString.replace(/graph TD/g, 'graph LR').replace(/flowchart TD/g, 'flowchart LR');
     }
+
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'dark',
+      securityLevel: 'loose', // Allows interactive click events
+      flowchart: { useMaxWidth: false } // Prevents distortion during zoom
+    });
+
+    const renderDiagram = async () => {
+      if (ref.current) {
+        try {
+          // Generate a unique ID for the SVG
+          const id = `mermaid-${Math.random().toString(36).substr(2, 9)}`;
+          const { svg } = await mermaid.render(id, responsiveCodeString);
+          ref.current.innerHTML = svg;
+
+          // Find the injected SVG and apply pan-zoom
+          const svgElement = ref.current.querySelector('svg');
+          if (svgElement) {
+            // Apply standard dimensions so the container doesn't collapse
+            svgElement.style.maxWidth = '100%';
+            svgElement.style.height = 'auto';
+            svgElement.style.minHeight = '300px';
+
+            svgPanZoom(svgElement, {
+              zoomEnabled: true,
+              controlIconsEnabled: true,
+              fit: true,
+              center: true,
+              minZoom: 0.5,
+              maxZoom: 10
+            });
+          }
+        } catch (error) {
+          console.error("Mermaid rendering failed", error);
+        }
+      }
+    };
+
+    renderDiagram();
   }, [codeString]);
 
   return (
-    <div className="mermaid my-8 flex justify-center w-full" ref={ref}>
-      {codeString}
-    </div>
+    <Box
+      my={8}
+      className="overflow-hidden rounded-2xl border border-line bg-surface shadow-md"
+      style={{ touchAction: 'none' }} // Prevents page bounce during diagram drag
+    >
+      <Stack direction="row" justify="center" w="full" minH="400px" p={4} ref={ref} />
+    </Box>
   );
 };
 
@@ -62,16 +114,19 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
       </button>
 
       <header className="border-b border-line pb-8 space-y-4">
-        <div className="flex flex-wrap gap-2">
+        <Stack direction="row" wrap className="gap-2">
           {post.tags.map((tag) => (
-            <span
+            <Box
+              as="span"
               key={tag}
-              className="rounded-full bg-accent-sky/10 px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider text-accent-sky border border-accent-sky/15"
+              px={3}
+              py={1}
+              className="rounded-full bg-accent-sky/10 text-[10px] font-semibold uppercase tracking-wider text-accent-sky border border-accent-sky/15"
             >
               {tag}
-            </span>
+            </Box>
           ))}
-        </div>
+        </Stack>
         <h1 className="text-3xl sm:text-4xl font-black text-text-main leading-tight">
           {post.title}
         </h1>
