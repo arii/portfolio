@@ -16,12 +16,10 @@ summary: "My MIT CSAIL PhD dissertation on conformant planning for robot manipul
 
 This research forms the core of my PhD dissertation at **MIT CSAIL**, advised by **Prof. Leslie Pack Kaelbling** and **Prof. Tomás Lozano-Pérez**, with committee member **Prof. Sertac Karaman**. My work enables general-purpose helper robots to reliably arrange unanchored objects into desired target configurations despite severe pose uncertainty caused by inaccurate sensing, control errors, and unknown physical friction.
 
-https://www.youtube.com/watch?v=so-9kkQXlxc
-
 *Figure 1: Willow Garage PR2 robot performing physical conformant manipulation to arrange polyomino blocks into tight slots under pose uncertainty without visual feedback.*
 
 * **Institution:** MIT CSAIL (Advisors: Prof. Leslie Pack Kaelbling & Prof. Tomás Lozano-Pérez | Committee: Prof. Sertac Karaman)
-* **Thesis Document:** [Download Thesis PDF (1125200388-MIT.pdf)](https://dspace.mit.edu/bitstream/handle/1721.1/122822/1125200388-MIT.pdf) | [MIT DSpace Thesis Record](https://dspace.mit.edu/handle/1721.1/122822)
+* **Thesis Document:** [MIT DSpace Thesis Record](https://dspace.mit.edu/entities/publication/d489a172-efbf-4e35-b81c-04e4acf3d24d)
 * **Citation & Papers:** [Google Scholar Citation](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=NM6SfiEAAAAJ&citation_for_view=NM6SfiEAAAAJ:4DMP91E08xMC) | IEEE ICRA 2018
 
 ---
@@ -141,8 +139,7 @@ https://www.youtube.com/watch?v=bWjzn89H1x4
 * **Advisors:** Prof. Leslie Pack Kaelbling & Prof. Tomás Lozano-Pérez
 * **Committee:** Prof. Sertac Karaman
 * **Institution:** Massachusetts Institute of Technology (MIT CSAIL, 2019)
-* **Direct PDF Download:** [1125200388-MIT.pdf](https://dspace.mit.edu/bitstream/handle/1721.1/122822/1125200388-MIT.pdf)
-* **MIT DSpace Archive:** [1721.1/122822](https://dspace.mit.edu/handle/1721.1/122822)
+* **MIT DSpace Publication:** [MIT DSpace Record](https://dspace.mit.edu/entities/publication/d489a172-efbf-4e35-b81c-04e4acf3d24d)
 * **Google Scholar:** [Citation Record](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=NM6SfiEAAAAJ&citation_for_view=NM6SfiEAAAAJ:4DMP91E08xMC)
 * **Conference Publication:** *Reliably Arranging Objects in Uncertain Domains*, IEEE International Conference on Robotics and Automation (ICRA), 2018.
 
@@ -154,7 +151,7 @@ https://www.youtube.com/watch?v=bWjzn89H1x4
   title        = {Reliably Arranging Objects: A Conformant Planning Approach to Robot Manipulation},
   school       = {Massachusetts Institute of Technology},
   year         = {2019},
-  url          = {https://dspace.mit.edu/handle/1721.1/122822}
+  url          = {https://dspace.mit.edu/entities/publication/d489a172-efbf-4e35-b81c-04e4acf3d24d}
 }
 ```
 

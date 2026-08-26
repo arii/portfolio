@@ -9,7 +9,7 @@ describe('PhD Thesis Flagship Project', () => {
     expect(phdTool).toBeDefined();
     expect(phdTool?.isFlagship).toBe(true);
     expect(phdTool?.image).toBe('/assets/research/phd/sixblock.png');
-    expect(phdTool?.externalUrl).toBe('https://dspace.mit.edu/handle/1721.1/122822');
+    expect(phdTool?.externalUrl).toBe('https://dspace.mit.edu/entities/publication/d489a172-efbf-4e35-b81c-04e4acf3d24d');
     expect(phdTool?.externalLinkDisplayLabel).toBe('MIT DSpace Thesis');
     expect(phdTool?.description).toContain('1.9% to 80.7%');
   });
