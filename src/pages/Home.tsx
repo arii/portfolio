@@ -10,6 +10,7 @@ import { ArrowRight, Cpu, Compass, Bot, Server, Cloud, Laptop } from 'lucide-rea
 import { heroContent, PHILOSOPHY_TENETS, FEATURE_CALLOUTS } from '@/data/home';
 import { FEATURED_CARDS } from '@/config/content';
 import HeroPathCard from '@/components/ui/HeroPathCard';
+import SEO from '@/components/SEO';
 
 interface HomeProps {
   onNavigate?: (tab: string) => void;
@@ -45,6 +46,10 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
 
   return (
     <main className="space-y-8 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+      <SEO
+        description="Personal website and portfolio of Ariel Anders, PhD (MIT CSAIL). Highlights in robotics research, agentic DevAI tools, autonomous systems, and full-stack software engineering."
+        canonicalUrl="/"
+      />
       {/* Restructured to Balanced Vertical Layout with Optimized Spacing */}
       <section className="bg-surface/60 border border-line rounded-2xl p-6 sm:p-8 shadow-xl backdrop-blur-sm space-y-6">
         {/* Top block: Bio and CTAs */}
@@ -101,10 +106,10 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
         </div>
 
         {/* Bottom block: Engineering Philosophy Horizontal Text Blocks (Diminished card style to avoid confusion) */}
-        <div className="space-y-3">
+        <div className="space-y-3 bg-surface-alt/40 p-4 rounded-xl border border-line/60">
           <div className="flex items-center gap-2 pb-1">
-            <Cpu className="w-5 h-5 text-text-dim" />
-            <h2 className="text-xs sm:text-sm font-bold text-text-main tracking-widest uppercase">Engineering Philosophy</h2>
+            <Cpu className="w-5 h-5 text-accent" />
+            <h2 className="text-xs sm:text-sm font-bold text-accent tracking-widest uppercase">Engineering Philosophy</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
