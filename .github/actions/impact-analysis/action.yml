@@ -131,7 +131,7 @@ runs:
           -v "${{ github.workspace }}":/github/workspace \
           -w /github/workspace \
           ghcr.io/arii/boomtick:latest \
-          ai review "${PR_NUMBER}" || echo "::warning::Agent code review returned non-zero, likely due to approval permission limitations"
+          td-cli ai review "${PR_NUMBER}" || echo "::warning::Agent code review returned non-zero, likely due to approval permission limitations"
 
     - name: Ensure artifacts exist
       if: always()
