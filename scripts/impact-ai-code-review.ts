@@ -1,11 +1,9 @@
 import { orchestrateCodeReview } from './codeReviewOrchestrator';
-import { githubModelsCodeReviewClient } from './clients/githubModelsCodeReviewClient';
 import { geminiCodeReviewClient } from './clients/geminiCodeReviewClient';
-import { writeMissingApiKeyVerdict, writeDeprecatedVerdict } from './utils/verdict';
+import { writeMissingApiKeyVerdict } from './utils/verdict';
 
 const ALL_REVIEW_TITLES = [
   geminiCodeReviewClient.reportTitle,
-  githubModelsCodeReviewClient.reportTitle,
 ];
 
 async function main(): Promise<void> {
@@ -27,20 +25,8 @@ async function main(): Promise<void> {
       return;
     }
     await orchestrateCodeReview(geminiCodeReviewClient, ALL_REVIEW_TITLES);
-  } else if (provider === 'github-models') {
-    console.warn('⚠️  Skipping agent code review — GitHub Models/OpenAI review is disabled. Only Gemini review is active.');
-    try {
-      await writeDeprecatedVerdict(
-        githubModelsCodeReviewClient.reportFileName,
-        githubModelsCodeReviewClient.reportTitle,
-        'GitHub Models'
-      );
-    } catch (err) {
-      console.error('Failed to write deprecated verdict', err);
-    }
-    return;
   } else {
-    console.error('❌ Unknown provider specified.');
+    console.error('❌ Unknown provider or deprecated provider specified.');
     process.exit(1);
   }
 }
