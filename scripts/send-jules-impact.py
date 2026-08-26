@@ -11,8 +11,11 @@ logger = logging.getLogger(__name__)
 
 
 def is_skipped_review(content: str) -> bool:
+    content = content.strip()
+    if not content:
+        return True
     lines = [line.strip() for line in content.splitlines() if line.strip()]
-    return len(lines) == 2 and lines[1].startswith("Skipped:")
+    return any(line.startswith("Skipped:") for line in lines)
 
 
 def is_skipped_verdict(data: dict) -> bool:
