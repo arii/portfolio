@@ -30,3 +30,24 @@ When referencing YouTube videos in markdown files (under `src/content/`):
      ```markdown
      [![Alt Text](/path/to/image.gif)](https://www.youtube.com/watch?v=XXXXXX#no-embed)
      ```
+
+## AI Reviewer Content Constraints
+
+When evaluating pull requests and content changes in `arii/portfolio`, automated AI reviewers and agents must adopt a strict, skeptical content auditing posture. Do not rubber-stamp pull requests. Apply the following mandatory criteria:
+
+1. **Skeptical Verification & Hallucination Prevention**:
+   - Act as a skeptical content editor. Assume new claims, metrics, case studies, or tools require proof.
+   - Flag any unverified technical claims, fabricated performance numbers, or hallucinated project details as blocking review errors.
+   - Require explicit backing citations, external links, paper PDFs (`public/reports/`), or corresponding metadata entries in `src/data/research/` for all newly introduced research projects or tools.
+
+2. **Redundancy & Duplication Auditing**:
+   - Aggressively flag duplicate or redundant content across markdown files (`src/content/research/`) and data configurations (`src/data/research/`).
+   - Ensure new articles do not duplicate existing tool definitions, flagship summaries, or case studies.
+
+3. **Strict Page & Route Governance**:
+   - Treat unrequested, spurious, or scope-expanding new page additions (`src/pages/` or `src/content/`) as blocking errors.
+   - Block any PR that adds new markdown articles or portfolio entries without explicit backing in feature requirements or data structures.
+
+4. **Editorial & Voice Standards**:
+   - Enforce active, first-person singular voice ("I", "my", "me") representing Ariel Anders across all research and project copy. Flag any use of third-person or passive constructions.
+   - Reject corporate buzzwords ("streamline", "leverage", "consolidated suite") and robotic structural templates ("Executive Summary" tables, "Quick-Nav" matrices).
