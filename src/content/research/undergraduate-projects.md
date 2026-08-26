@@ -50,9 +50,9 @@ Building the system required an intensive wire-wrapping and soldering process to
 
 ### Software Implementation
 
-I structured the software to manage real-time communication and hardware feedback loops using the RS-232 communication protocol:
+We structured the software to manage real-time communication and hardware feedback loops using the RS-232 communication protocol:
 
-  * **Pseudo-Force Control:** Specifying direct current levels regulates motor resistance. I mapped out eight distinct current settings into their hexadecimal representations, creating a structured command look-up table for both opening and closing actions.
+  * **Pseudo-Force Control:** Specifying direct current levels regulates motor resistance. We mapped out eight distinct current settings into their hexadecimal representations, creating a structured command look-up table for both opening and closing actions.
   * **Dynamic Lookup System:** When an operator presses a digital push-button, the program measures the active voltage across the potentiometer and uses that value to index the corresponding open or close command from the lookup table.
 
 [![68HC11 Microcontroller Board and Mechanical Gripper](/assets/research/undergraduate-projects/gripper_control.gif)](https://www.youtube.com/watch?v=tXif7xeZmGI#no-embed)
