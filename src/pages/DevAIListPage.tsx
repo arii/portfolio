@@ -11,11 +11,7 @@ export interface DevAIListPageProps {
   onNavigate: (slug: string) => void;
 }
 
-export const PRIMARY_TAGS = ['All Topics', 'DevAI & Agents', 'CI/CD & Testing', 'Data Pipelines & ETL'] as const;
-export type PrimaryTag = (typeof PRIMARY_TAGS)[number];
-
 const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
-  const [selectedTag, setSelectedTag] = useState<PrimaryTag>('All Topics');
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
 
   useEffect(() => {
@@ -55,23 +51,12 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
       'graduate-engineering-projects',
       'autonomous-drone-line-following'
     ];
-    const devAiPosts = posts.filter((p) => !researchOnlySlugs.includes(p.slug));
-
-    if (selectedTag === 'All Topics') return devAiPosts.filter((p) => {
-        const cat = (p.category || '').toLowerCase();
-        return !cat.includes('robotics'); // exclude robotics
-    });
-    return devAiPosts.filter((p) => {
-      const tags = p.tags.map((t) => t.toLowerCase());
+    return posts.filter((p) => {
+      if (researchOnlySlugs.includes(p.slug)) return false;
       const cat = (p.category || '').toLowerCase();
-      if (cat.includes('robotics')) return false;
-
-      if (selectedTag === 'DevAI & Agents') return tags.some((t) => ['devai', 'ai', 'llm', 'multi-agent', 'agentic workflows', 'productivity', 'agents'].includes(t)) || cat.includes('devai');
-      if (selectedTag === 'CI/CD & Testing') return tags.some((t) => ['ci/cd', 'ci', 'github actions', 'playwright', 'pixelmatch', 'screenshot diff', 'automation', 'devops'].includes(t));
-      if (selectedTag === 'Data Pipelines & ETL') return tags.some((t) => ['etl', 'apache parquet', 'scraping', 'data pipelines', 'python', 'data engineering'].includes(t)) || cat.includes('data engineering');
-      return true;
+      return !cat.includes('robotics'); // exclude robotics
     });
-  }, [posts, selectedTag]);
+  }, [posts]);
 
   return (
     <div className="space-y-12 sm:space-y-16">
@@ -105,40 +90,18 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      <section className="border border-accent/20 bg-accent/5 rounded-3xl p-6 sm:p-8 space-y-3">
-        <h3 className="text-base sm:text-lg font-bold text-text-main flex items-center space-x-2"><Layers className="h-5 w-5 text-accent" /><span>Why this matters</span></h3>
-        <p className="text-text-dim leading-relaxed text-sm max-w-3xl font-sans">
-          Shipping high-fidelity autonomous systems and developer workflows requires <span className="text-accent font-bold">practical AI orchestration</span>, not hype. I focus on engineering deterministic state-verification feedback loops and isolated execution boundaries to scale development teams with absolute safety.
-        </p>
-      </section>
-
       <section className="space-y-8" id="articles">
         <div className="border-b border-line pb-3 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
           <div className="space-y-1">
             <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-text-main flex items-center space-x-2 font-display">
               <Layers className="h-5 w-5 text-accent" />
-              <span>DevAI Orchestration</span>
+              <span>Engineering Deep-Dives</span>
             </h2>
             <p className="text-xs sm:text-sm text-text-dim">
               How I build: Engineering multi-agent workflows, automated code-auditing guardrails, and agentic CI/CD pipelines to enforce production standards.
             </p>
           </div>
           <span className="text-xs text-text-dim uppercase tracking-widest shrink-0">{filteredPosts.length} Articles</span>
-        </div>
-
-        {/* Full-width segmented filter control */}
-        <div className="flex flex-wrap items-center justify-start gap-2 bg-surface p-1.5 rounded-2xl border border-line">
-          {PRIMARY_TAGS.map((tag) => (
-            <button
-              key={tag}
-              onClick={() => setSelectedTag(tag)}
-              className={`flex-1 min-w-[140px] rounded-xl px-4 py-2.5 text-xs sm:text-sm font-semibold transition-all cursor-pointer min-h-[44px] flex items-center justify-center text-center ${
-                selectedTag === tag ? 'bg-accent/15 border border-accent/30 text-accent shadow-sm' : 'bg-transparent text-text-dim hover:text-text-main hover:bg-surface-alt'
-              }`}
-            >
-              {tag}
-            </button>
-          ))}
         </div>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">

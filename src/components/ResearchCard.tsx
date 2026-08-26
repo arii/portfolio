@@ -30,7 +30,7 @@ const ResearchCard: React.FC<ResearchCardProps> = ({ post, onSelect }) => {
       <div className="flex-grow flex flex-col justify-between">
         <div>
           <div className="flex flex-wrap gap-2 mb-3">
-            {post.tags.map((tag) => (
+            {post.tags.slice(0, 3).map((tag) => (
               <span
                 key={tag}
                 className="rounded-full border border-border bg-background px-2 py-0.5 text-[10px] font-medium text-muted-foreground uppercase tracking-wider"
@@ -38,6 +38,11 @@ const ResearchCard: React.FC<ResearchCardProps> = ({ post, onSelect }) => {
                 {tag}
               </span>
             ))}
+            {post.tags.length > 3 && (
+              <span className="rounded-full border border-border bg-background px-2 py-0.5 text-[10px] font-medium text-muted-foreground uppercase tracking-wider">
+                +{post.tags.length - 3}
+              </span>
+            )}
           </div>
           <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors flex items-start space-x-1">
             <span>{post.title}</span>

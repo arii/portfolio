@@ -23,19 +23,29 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
   const ToolIcon = getToolIcon(tool);
   const imageSrc = tool.id === 'hrm-flagship' ? '/assets/research/hrm-flagship.png' : tool.id === 'repo-auditor-ai' ? '/assets/research/repo-auditor-ai.png' : tool.image || null;
 
-  const isClickable = !!tool.canonicalPath;
+  const isClickable = !!(tool.externalUrl || tool.sourceUrl || tool.canonicalPath);
   const targetSlug = tool.canonicalPath ? tool.canonicalPath.replace('/research/', '') : '';
 
-  const handleCardClick = () => {
-    if (isClickable && targetSlug) {
+  const executePrimaryAction = () => {
+    if (tool.externalUrl) {
+      window.open(tool.externalUrl, '_blank', 'noopener,noreferrer');
+    } else if (tool.sourceUrl) {
+      window.open(tool.sourceUrl, '_blank', 'noopener,noreferrer');
+    } else if (tool.canonicalPath && targetSlug) {
       onNavigate(targetSlug);
     }
   };
 
+  const handleCardClick = () => {
+    if (isClickable) {
+      executePrimaryAction();
+    }
+  };
+
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if ((e.key === 'Enter' || e.key === ' ') && isClickable && targetSlug) {
+    if ((e.key === 'Enter' || e.key === ' ') && isClickable) {
       if (e.key === ' ') e.preventDefault();
-      onNavigate(targetSlug);
+      executePrimaryAction();
     }
   };
 
@@ -50,7 +60,7 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
       }`}
     >
       {tool.customPreview ? (
-        <div className="p-6 bg-bg border-b border-line min-h-[140px] flex flex-col justify-center space-y-2">
+        <div className="p-6 bg-bg border-b border-line aspect-[16/10] max-h-48 sm:max-h-64 flex flex-col justify-center space-y-2">
           <div className="text-accent font-extrabold text-sm tracking-wider font-display">
             {tool.customPreview.logo.prefix}<span className="text-text-main">{tool.customPreview.logo.accent}</span><span className="text-text-dim font-light">{tool.customPreview.logo.suffix}</span>
           </div>
@@ -81,9 +91,14 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
           <div className="flex items-center justify-between">
             <div className="h-10 w-10 rounded-2xl bg-accent/10 flex items-center justify-center border border-accent/20"><ToolIcon className="h-5 w-5 text-accent" /></div>
             {tool.id !== 'phd-thesis' && tool.id !== 'masters-thesis' && (
-              <span className="rounded-full bg-accent/10 px-2.5 py-0.5 text-[9px] font-semibold uppercase text-accent border border-accent/20">
-                {tool.id === 'boomtick-blog' ? 'Active dev' : 'Flagship'}
-              </span>
+              <div className="flex items-center space-x-1.5 bg-surface border border-line px-2 py-1 rounded-full">
+                <span className={`w-2 h-2 rounded-full ${
+                  tool.status === 'Live' ? 'bg-emerald-500' :
+                  tool.status === 'Local only' ? 'bg-amber-500' :
+                  tool.status === 'In development' ? 'bg-sky-500' : 'bg-slate-500'
+                }`}></span>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-text-main pr-0.5">{tool.status}</span>
+              </div>
             )}
           </div>
           <div>
@@ -91,13 +106,7 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
             <h3 className="text-xl font-bold text-text-main mt-1 font-display group-hover:text-accent transition-colors">{tool.title}</h3>
             {tool.subtitle && <p className="text-xs text-accent font-semibold tracking-wide mt-1 uppercase font-sans">{tool.subtitle}</p>}
           </div>
-          <p className="text-sm text-text-dim leading-relaxed">{tool.description}</p>
-          {tool.inDevMessage && (
-            <div className="bg-surface border border-line p-3 rounded-2xl text-xs flex gap-2 items-start text-text-dim">
-              <FlaskConical className="h-4 w-4 text-accent shrink-0 mt-0.5" />
-              <p><strong className="text-text-main">{tool.inDevMessage.highlight}</strong> {tool.inDevMessage.rest}</p>
-            </div>
-          )}
+          <p className="text-sm text-text-dim leading-relaxed ">{tool.description}</p>
         </div>
 
         <div className="space-y-4 pt-4 border-t border-line">
@@ -112,11 +121,13 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
               <button
                 onClick={(e) => {
                   e.stopPropagation();
-                  onNavigate(targetSlug);
+                  if (targetSlug) {
+                    onNavigate(targetSlug);
+                  }
                 }}
                 className="inline-flex items-center space-x-1.5 bg-accent/10 border border-accent/20 px-3.5 py-2 rounded-xl text-xs font-semibold text-accent hover:bg-accent/20 transition-colors min-h-[44px] cursor-pointer"
               >
-                <span>Read Deep-Dive</span><ArrowRight className="h-3.5 w-3.5" />
+                <span>Deep-Dive</span><ArrowRight className="h-3.5 w-3.5" />
               </button>
             )}
             {tool.videoUrl && (
