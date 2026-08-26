@@ -35,7 +35,7 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ experience
 
             {/* Direct Points */}
             {exp.points && (
-              <ul className="space-y-1.5 print:space-y-1 mb-3">
+              <ul className="space-y-1.5 print:space-y-1 mb-3 pl-1">
                 {exp.points.map((point, pIdx) => (
                   <li key={pIdx} className="flex gap-2 text-sm text-muted-foreground leading-relaxed print:text-text-body print:text-[13px]">
                     <span className="text-primary print:text-black mt-0.5 opacity-70">•</span>
@@ -49,12 +49,12 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ experience
             {exp.subRoles && exp.subRoles.length > 0 && (
               <div className="mt-3 space-y-4 pt-2 border-t border-border/40 print:border-border">
                 {exp.subRoles.map((subRole, sIdx) => (
-                  <div key={sIdx} className="space-y-1.5 pl-3 border-l-2 border-border/60 print:border-border">
+                  <div key={sIdx} className="space-y-2 pl-4 border-l-2 border-border/60 print:border-border">
                     <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
                       <span className="text-sm font-bold text-foreground print:text-black">{subRole.title}</span>
                       <span className="text-xs font-mono text-muted-foreground print:text-text-dim">{subRole.period}</span>
                     </div>
-                    <ul className="space-y-1">
+                    <ul className="space-y-1.5">
                       {subRole.points.map((point, pIdx) => (
                         <li key={pIdx} className="flex gap-2 text-sm text-muted-foreground leading-relaxed print:text-text-body print:text-[13px]">
                           <span className="text-primary print:text-black mt-0.5 opacity-70">•</span>
