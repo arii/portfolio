@@ -42,7 +42,7 @@ jobs:
         run: pnpm run build
 
       - name: Create GitHub App Token
-        if: github.event_name == 'pull_request' && env.BOOMTICK_APP_ID != ''
+        if: github.event_name == 'pull_request' && env.BOOMTICK_APP_ID != '' && env.BOOMTICK_APP_PRIVATE_KEY != ''
         uses: actions/create-github-app-token@v1
         id: app-token
         with:
