@@ -168,7 +168,7 @@ async function main() {
 
       for (const link of internalLinks) {
         if (!visited.has(link) && !queue.includes(link)) {
-          if (!link.includes('/assets/')) {
+          if (link.startsWith(`${BASE_URL}/#/`) && !link.includes('/assets/')) {
             queue.push(link);
           }
         }
