@@ -28,14 +28,15 @@ export const HonorsSection: React.FC<HonorsSectionProps> = ({
           <button
             type="button"
             onClick={onToggleExpand}
-            className="text-xs font-semibold text-primary hover:underline font-mono print:hidden min-h-[40px] px-2"
+            className="text-xs font-semibold text-primary hover:text-primary/80 bg-primary/10 hover:bg-primary/20 px-3 py-1.5 rounded-full transition-colors print:hidden min-h-[44px] min-w-[80px]"
             aria-expanded={isExpanded}
+            aria-controls="honors-content"
           >
-            {isExpanded ? '[ Collapse ]' : '[ Expand ]'}
+            {isExpanded ? 'Collapse' : 'Expand'}
           </button>
         )}
       </div>
-      <div className="space-y-3">
+      <div id="honors-content" className="space-y-3">
         {displayedHonors.map((honor, idx) => (
           <div key={idx} className="flex items-start justify-between gap-3 text-sm">
             <div className="space-y-0.5">

@@ -28,14 +28,15 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
           <button
             type="button"
             onClick={onToggleExpand}
-            className="text-xs font-semibold text-primary hover:underline font-mono print:hidden min-h-[40px] px-2"
+            className="text-xs font-semibold text-primary hover:text-primary/80 bg-primary/10 hover:bg-primary/20 px-3 py-1.5 rounded-full transition-colors print:hidden min-h-[44px] min-w-[80px]"
             aria-expanded={isExpanded}
+            aria-controls="projects-content"
           >
-            {isExpanded ? '[ Collapse ]' : '[ Expand ]'}
+            {isExpanded ? 'Collapse' : 'Expand'}
           </button>
         )}
       </div>
-      <div className="space-y-3.5">
+      <div id="projects-content" className="space-y-3.5">
         {displayedProjects.map((project, idx) => (
           <div key={idx} className="bg-card border border-border/80 p-3.5 rounded-xl space-y-2 hover:border-primary/50 transition-colors print:border-none print:p-0 print:bg-transparent">
             <div className="flex items-start justify-between gap-2">

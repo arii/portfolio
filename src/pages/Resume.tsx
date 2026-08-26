@@ -22,13 +22,13 @@ const Resume: React.FC<ResumeProps> = ({ version = 'v2.1' }) => {
     setSearchParams({ layout: mode });
   };
 
-  // Expand/collapse states for full-width layout (default to false/collapsed)
-  const [expandSkills, setExpandSkills] = useState(false);
-  const [expandProjects, setExpandProjects] = useState(false);
-  const [expandEducation, setExpandEducation] = useState(false);
-  const [expandPublications, setExpandPublications] = useState(false);
-  const [expandTeaching, setExpandTeaching] = useState(false);
-  const [expandHonors, setExpandHonors] = useState(false);
+  // Expand/collapse states for full-width layout (default to true/expanded)
+  const [expandSkills, setExpandSkills] = useState(true);
+  const [expandProjects, setExpandProjects] = useState(true);
+  const [expandEducation, setExpandEducation] = useState(true);
+  const [expandPublications, setExpandPublications] = useState(true);
+  const [expandTeaching, setExpandTeaching] = useState(true);
+  const [expandHonors, setExpandHonors] = useState(true);
 
   const toggleAll = (expand: boolean) => {
     setExpandSkills(expand);

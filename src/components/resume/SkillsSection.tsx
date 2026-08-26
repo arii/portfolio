@@ -28,14 +28,15 @@ export const SkillsSection: React.FC<SkillsSectionProps> = ({
           <button
             type="button"
             onClick={onToggleExpand}
-            className="text-xs font-semibold text-primary hover:underline font-mono print:hidden min-h-[40px] px-2"
+            className="text-xs font-semibold text-primary hover:text-primary/80 bg-primary/10 hover:bg-primary/20 px-3 py-1.5 rounded-full transition-colors print:hidden min-h-[44px] min-w-[80px]"
             aria-expanded={isExpanded}
+            aria-controls="skills-content"
           >
-            {isExpanded ? '[ Collapse ]' : '[ Expand ]'}
+            {isExpanded ? 'Collapse' : 'Expand'}
           </button>
         )}
       </div>
-      <div className="space-y-6">
+      <div id="skills-content" className="space-y-6">
         {displayedSkills.map((skillGroup, idx) => {
           const skillsList = Array.isArray(skillGroup.skills)
             ? skillGroup.skills

@@ -31,17 +31,18 @@ export const PublicationsSection: React.FC<PublicationsSectionProps> = ({
             <button
               type="button"
               onClick={onToggleExpand}
-              className="text-xs font-semibold text-primary hover:underline font-mono min-h-[40px] px-2"
+              className="text-xs font-semibold text-primary hover:text-primary/80 bg-primary/10 hover:bg-primary/20 px-3 py-1.5 rounded-full transition-colors print:hidden min-h-[44px] min-w-[80px]"
               aria-expanded={isExpanded}
+              aria-controls="publications-content"
             >
-              {isExpanded ? '[ Collapse ]' : '[ Expand ]'}
+              {isExpanded ? 'Collapse' : 'Expand'}
             </button>
           )}
           <a
             href={scholarUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline min-h-[40px]"
+            className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline min-h-[44px]"
           >
             <span>Google Scholar</span>
             <ExternalLink className="w-3 h-3" />
@@ -49,7 +50,7 @@ export const PublicationsSection: React.FC<PublicationsSectionProps> = ({
         </div>
       </div>
 
-      <div className="space-y-3">
+      <div id="publications-content" className="space-y-3">
         {displayedPublications.map((pub) => (
           <div
             key={pub.id}
