@@ -313,7 +313,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
             </Box>
           ))}
         </Stack>
-        <h1 className="text-3xl sm:text-4xl font-black text-text-main leading-tight">
+        <h1 className="text-3xl sm:text-4xl font-black text-text-main leading-tight font-display">
           {post.title}
         </h1>
         <div className="flex items-center space-x-6 text-xs text-text-dim">
@@ -443,7 +443,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
               </td>
             ),
             h1: ({ children, ...props }) => (
-              <h1 className="text-3xl font-black text-text-main mt-12 mb-4" {...props}>
+              <h1 className="text-3xl font-black text-text-main mt-12 mb-4 font-display" {...props}>
                 {children}
               </h1>
             ),

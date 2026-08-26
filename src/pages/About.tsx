@@ -14,7 +14,7 @@ const About: React.FC = () => {
         canonicalUrl="/about"
       />
       <header className="space-y-3 border-b border-line/20 pb-6 sm:pb-8">
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-text-main leading-tight">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-text-main leading-tight font-display">
           About Ariel
         </h1>
         <p className="text-text-dim text-sm sm:text-base leading-relaxed">

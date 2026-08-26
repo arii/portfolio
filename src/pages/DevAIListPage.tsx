@@ -67,7 +67,7 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
       />
 
       <header className="space-y-3 border-b border-line/20 pb-6 sm:pb-8">
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-text-main leading-tight">DevAI &amp; Software Systems</h1>
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-text-main leading-tight font-display">DevAI &amp; Software Systems</h1>
         <p className="text-text-dim text-sm sm:text-base leading-relaxed">System architectures, agentic CI/CD pipelines, autonomous developer tooling, and shipped production applications.</p>
       </header>
 
