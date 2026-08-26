@@ -149,14 +149,14 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
                         {language}
                       </div>
                     )}
-                    <pre className="p-4 overflow-x-auto text-sm font-mono text-accent-sky/90 leading-relaxed bg-bg">
+                    <pre className="p-4 overflow-x-auto text-sm font-mono text-accent-sky leading-relaxed bg-bg whitespace-pre-wrap break-words">
                       <code>{children}</code>
                     </pre>
                   </div>
                 );
               }
               return (
-                <code className="bg-surface text-accent-sky px-1.5 py-0.5 rounded font-mono text-xs border border-line normal-case" {...props}>
+                <code className="bg-surface text-text-main px-1.5 py-0.5 rounded font-mono text-xs border border-line normal-case" {...props}>
                   {children}
                 </code>
               );
@@ -220,7 +220,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
               }
               const id = textContent.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
               return (
-                <h4 id={id || undefined} className="text-base font-bold text-text-main mt-6 mb-3 flex items-center space-x-2 bg-surface-alt/60 border border-line px-3.5 py-2 rounded-xl border-l-4 border-l-accent-sky" {...props}>
+                <h4 id={id || undefined} className="text-base font-bold text-text-main mt-6 mb-2" {...props}>
                   {children}
                 </h4>
               );
@@ -385,7 +385,9 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
                   </div>
                   {displayCaption && (
                     <figcaption className="text-center text-xs font-mono text-text-dim px-2 leading-relaxed">
-                      <span className="font-semibold text-accent-sky">Figure: </span>
+                      {!displayCaption.toLowerCase().startsWith('figure') && (
+                        <span className="font-semibold text-accent-sky">Figure: </span>
+                      )}
                       {displayCaption}
                       {linkText && linkUrl && (
                         <>
