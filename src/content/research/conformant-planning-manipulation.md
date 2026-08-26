@@ -160,3 +160,6 @@ https://www.youtube.com/watch?v=ubUMq8Rnb18 https://www.youtube.com/watch?v=bWjz
 To communicate these theoretical planning concepts during the defense presentation and dissertation, I created graphics of **"Eric the red robot"**, a cartoon robot mascot inspired by Leslie's stick figures:
 - **"Blindfolded Eric":** Illustrating sensorless manipulation sequences where physical contact boundaries replace visual perception.
 - **"Picketing Eric":** Highlighting edge cases where open-loop trajectories fail due to unexpected friction or rotational torque.
+
+![Blindfolded Eric mascot illustrating sensorless manipulation](/assets/research/phd/eric2.png#max-w-md) ![Picketing Eric mascot illustrating open-loop failure modes](/assets/research/phd/eric1.png#max-w-md)
+*Figure 14 & 15: "Blindfolded Eric" demonstrating sensorless contact funnels (left) and "Picketing Eric" illustrating trajectory failure modes under friction (right).*
