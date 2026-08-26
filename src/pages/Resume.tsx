@@ -59,12 +59,12 @@ const Resume: React.FC<ResumeProps> = ({ version = 'v2.1' }) => {
           {/* Left Column: Primary Experience Track */}
           <div className="lg:col-span-7 print:col-span-12 space-y-10 print:space-y-6">
             <ExperienceSection experiences={resumeData.experience} />
+            <ProjectsSection projects={resumeData.projects} />
           </div>
 
-          {/* Right Sidebar: Skills, Projects, Education, Publications, Teaching & Honors */}
+          {/* Right Sidebar: Skills, Education, Publications, Teaching & Honors */}
           <div className="lg:col-span-5 print:col-span-12 space-y-10 print:space-y-6">
             <SkillsSection skills={resumeData.skills} />
-            <ProjectsSection projects={resumeData.projects} />
             <EducationSection education={resumeData.education} />
             <PublicationsSection
               publications={resumeData.publications}
