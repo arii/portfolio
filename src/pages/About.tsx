@@ -2,6 +2,7 @@ import React from 'react';
 import roboticistPhoto from '@/assets/roboticist.jpg';
 import { profileData } from '@/data/aboutData';
 import { CareerHighlightsSection, AtAGlanceSidebar } from '@/components/about/AboutSections';
+import { resolveAssetUrl } from '@/utils/asset';
 
 const About: React.FC = () => {
   return (
@@ -52,7 +53,7 @@ const About: React.FC = () => {
           <div className="relative group mx-auto lg:mx-0 max-w-sm rounded-3xl overflow-hidden border border-line bg-surface transition-all duration-300">
             <div className="aspect-[4/3] sm:aspect-square max-h-72 sm:max-h-none w-full overflow-hidden">
               <img
-                src={roboticistPhoto}
+                src={resolveAssetUrl(roboticistPhoto)}
                 alt="Ariel Anders, PhD - Roboticist and DevAI Engineer"
                 className="w-full h-full object-cover object-top transition-all duration-500 group-hover:scale-105"
               />

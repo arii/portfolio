@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { resolveAssetUrl } from '@/utils/asset';
 
 export interface SafeImageSource {
   srcSet: string;
@@ -13,16 +14,6 @@ export interface SafeImageProps extends React.ImgHTMLAttributes<HTMLImageElement
   sources?: SafeImageSource[];
   disableWebpAutoInfer?: boolean;
 }
-
-const resolveAssetUrl = (url?: string): string | undefined => {
-  if (!url) return undefined;
-  if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('data:')) {
-    return url;
-  }
-  const baseUrl = import.meta.env.BASE_URL || '/';
-  const cleanUrl = url.replace(/^\//, '');
-  return baseUrl.endsWith('/') ? `${baseUrl}${cleanUrl}` : `${baseUrl}/${cleanUrl}`;
-};
 
 const SafeImage: React.FC<SafeImageProps> = ({
   src,
