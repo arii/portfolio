@@ -117,7 +117,8 @@ async function captureRoute(
     for (let attempt = 1; attempt <= maxAttempts; attempt++) {
       const page = await context.newPage();
       try {
-        const targetUrl = new URL(route, base).toString();
+        const hashRoute = route.startsWith('/#') ? route : `/#${route}`;
+        const targetUrl = new URL(hashRoute, base).toString();
         // Wait for domcontentloaded, but set a reasonable timeout (e.g., 15s)
         await page.goto(targetUrl, { waitUntil: 'domcontentloaded', timeout: 15_000 });
 
