@@ -20,6 +20,10 @@
     "preinstall": "node -e \"if (process.env.SKIP_BOOMTICK_PKG !== 'true' && process.env.VERCEL !== '1') { try { require('node:child_process').execSync('td-cli doctor', {stdio: 'inherit'}); } catch (e) {} }\"",
     "knip": "knip",
     "audit:dead-code": "pnpm exec knip",
+    "audit:duplication": "jscpd src/",
+    "audit:dependencies": "pnpm audit",
+    "verify": "run-s lint type-check test audit:dead-code audit:duplication audit:dependencies",
+    "ci:local": "pnpm run verify",
     "impact:analysis": "tsx scripts/impact-analysis.ts",
     "impact:build-main": "tsx scripts/impact-build-main.ts",
     "impact:visual-diff": "tsx scripts/impact-visual-diff.ts",
@@ -29,7 +33,7 @@
   },
   "knip": {
     "project": [
-      "src/**/*.{ts,tsx}"
+      "src/**/*.{ts,tsx,css}"
     ],
     "ignoreBinaries": [
       "td-cli"
@@ -74,9 +78,12 @@
     "eslint": "^10.8.1",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-security": "^4.0.1",
     "globals": "^17.10.0",
+    "jscpd": "^5.0.16",
     "jsdom": "^26.0.0",
     "knip": "^6.32.2",
+    "npm-run-all2": "^9.0.3",
     "openai": "^7.5.0",
     "pixelmatch": "^7.2.0",
     "pngjs": "^7.0.0",
