@@ -17,60 +17,118 @@ videoUrl: "https://www.youtube.com/watch?v=UjVatZ3NK5U"
 
 ![BeaverWorks RACECAR students and autonomous vehicles](/assets/research/bw.jpg)
 
-## Autonomous Miniature Racecars & Robotics Education
+## 1. Introduction & Overview
 
-The **BeaverWorks Summer Institute (RACECAR)** program at MIT was an intensive STEM initiative designed to teach high school students advanced robotics, computer vision, and autonomous vehicle navigation using 1/10th scale autonomous racecars.
+**MIT RACECAR** stands for Rapid Autonomous Complex-Environment Competing Ackermann-steering Robot. It is an open-source, project-based robotics platform and course designed for research and education. The platform utilizes 1/10-scale mini race cars equipped with state-of-the-art sensors and computing hardware. Through this program, students learn to program autonomous vehicles, typically starting with a virtual twin simulator before applying their skills to physical robots. The development of the RACECAR platform is a joint effort between MIT Lincoln Laboratory’s Beaver Works Initiative, the Department of Aeronautics & Astronautics, and the Laboratory for Information and Decision Systems.
+
+**BWSI (Beaver Works Summer Institute)** is an intensive, project-based summer STEM program for high school students. Closely associated with MIT and MIT Lincoln Laboratory, the institute introduces students to advanced technical fields, including autonomous systems, machine learning, quantum computing, and cybersecurity. The program provides hands-on, workshop-style experiences, and students are often required to complete online prerequisite coursework to be considered for the four-week intensive summer program. The Autonomous RACECAR course is a flagship offering within the BWSI curriculum.
 
 ---
 
-## Course Highlights & Challenge Demos
+## 2. The Hardware Platform
+
+The RACECAR vehicle platform combines high-performance compute with agile physical dynamics to create a robust research and educational testbed:
+
+- **Compute:** NVIDIA Jetson embedded GPU platform running Ubuntu and ROS (Robot Operating System).
+- **Sensing:** Hokuyo 2D LIDAR, ZED Stereo Camera, and IMU telemetry.
+- **Actuation:** VESC electronic speed controller and brushless DC motor on a 1/10th scale rally chassis with Ackermann steering.
+
+---
+
+## 3. Instructional Roles & Publications
+
+My work with the MIT RACECAR platform spanned two complementary roles, where my responsibilities evolved from supporting the Robotics: Science and Systems (RSS) course to leading instruction at the Beaver Works Summer Institute (BWSI). I also leveraged the curriculum I developed for these courses to author a Model AI assignment.
+
+### 16.405/6.141 Robotics: Science and Systems (RSS) – Teaching Assistant
+In my capacity as a TA for the RSS course with Sertac Karaman, I focused on the technical foundations of the course and direct student guidance.
+- **Curriculum & Support:** I developed course labs—including the visual servoing lab—and provided student teams with the starter code and technical assistance they needed to navigate the semester.
+- **Instruction:** I delivered one unrecorded lecture for the class.
+
+### Beaver Works Summer Institute (BWSI) – Lead Associate Instructor
+As the Lead Associate Instructor for the BWSI RACECAR summer course, my role transitioned to program management, curriculum design, and formal instruction.
+- **Instructional Leadership:** I managed the team of Associate Instructors, coordinated team support, and handled the logistical side of the program, such as lab scheduling and mapping subject titles to the course calendar to ensure consistency.
+- **Curriculum Development:** I developed comprehensive lab handouts for the course.
+- **Lecturing:** I delivered two recorded lectures as part of the formal syllabus:
+  - **Visual Servoing** (July 20, 2017)
+  - **Navigation** (July 27, 2017)
+
+### Model AI Assignment (AAAI/EAAI Publication)
+I authored an Image-Based Visual Servoing (IBVS) curriculum designed for high school and undergraduate students, formalized and published in the Model AI Assignments repository at the AAAI EAAI Symposium (EAAI-17 with Sertac Karaman, where it was accepted for publication).
+
+| Specification | Details |
+| :--- | :--- |
+| **Project Link** | [Model AI: Visual Servoing Assignment ↗](https://modelai.gettysburg.edu/2017/visual-servo/index.html) |
+| **Core Technologies** | Python, C++, OpenCV, and ROS |
+| **Assignment Focus** | Image-Based Visual Servoing (IBVS), orange cone detection and parking, monocular camera line-following, closed-loop proportional control |
+
+---
+
+## 4. Core Curriculum & Lecture Series
+
+The instructional curriculum is structured into core lecture series delivered during the program, blending classical controls, computer vision, and mapping algorithms.
+
+### 📖 Lecture 1: Motion Planning & Localization (with ROS)
+Teaching the transition from low-level control to high-level goals using Robot Operating System (ROS) communications (publisher-subscriber nodes, coordinate transformations `tf`):
+- **Core Focus:** Transitioning from low-level control to high-level achievement goals in robotics (mapping, localization, and motion planning).
+- **Representation:** Explores 2D/3D poses ($X, Y, \theta$) and map types, contrasting continuous vector/landmark maps with discretized occupancy grids.
+- **Localization:** Examines dead reckoning limitations (error accumulation) and sensor-based state estimation using AR tags and filters.
+- **Motion Planning:** Compares the simple online Bug algorithm with optimal, graph-based Visibility Graphs, factoring in robot geometry and obstacle expansion.
+- **Lab Roadmap:** Outlines upcoming hands-on tasks, including AR tag localization, potential field navigation, and a multi-car "leader-follower" demo.
+
+[![Motion Planning Lecture Demonstration](/assets/research/bwsi-racecar/lecture_planning.gif)](https://www.youtube.com/watch?v=CdRs0l9f5WM#no-embed)
+*[Watch Planning Lecture on YouTube ↗](https://www.youtube.com/watch?v=CdRs0l9f5WM#no-embed)*
+
+---
+
+### 📖 Lecture 2: Computer Vision & Visual Servoing (with LIDAR)
+Developing OpenCV-based lane detection, color blob tracking, and feedback control loops integrated with planar LIDAR scans and trajectory limits:
+- **Core Focus:** Introduction to **visual servoing** (controlling a robot using computer vision feedback) for tasks like cone parking and line following.
+- **Control Systems Review:**
+  - *Feed-Forward (Open-Loop):* Sends direct motor commands without feedback; prone to rapid drift and error accumulation.
+  - *Feedback (Closed-Loop):* Uses output signals to dynamically adjust behavior and correct errors against a reference point.
+- **Control Framework & Design Steps:**
+  1. Define a normalized image coordinate system (e.g., width from $-0.5$ to $0.5$).
+  2. Define the desired reference signal ($R(t)$) and system state/error ($Y(t)$).
+  3. Compute the error signal ($E(t) = R(t) - Y(t)$).
+  4. Implement a **Proportional (P) controller** (scaling error by a gain) and expand to **PID** to eliminate steady-state error and oscillations.
+- **Application Implementations:**
+  - *Cone Parking:* Decouples steering control from forward/backward velocity (using cone height/area as a distance metric) while processing planar LIDAR scans for safe obstacle avoidance.
+  - *Line Following:* Modifies the visual servoing approach (e.g., cropping the top half of the image) to keep the car centered on a track.
+- **Practical Tips & OpenCV Tools:** Use **ROS bags** for testing playback, downsample camera resolution to reduce lag, extract custom HSV thresholds directly from your images, and utilize OpenCV functions like `putText`, `findContours`, and `rectangle`.
+
+[![Visual Servoing Lecture Demonstration](/assets/research/bwsi-racecar/lecture_visual_servoing.gif)](https://www.youtube.com/watch?v=bAAatB2IvUM#no-embed)
+*[Watch Visual Servoing Lecture on YouTube ↗](https://www.youtube.com/watch?v=bAAatB2IvUM#no-embed)*
+
+---
+
+## 5. Project Demonstrations & Competition
+
+The practical side of the RACECAR curriculum culminates in student demonstrations and a high-speed, autonomous racing competition.
+
+### 🎥 Part A: Line Following Demonstration
+[![Autonomous Navigation & Visual Servoing Behaviors](/assets/research/bwsi-racecar/racecar_behaviors.gif)](https://www.youtube.com/watch?v=0U0pPbWhLVE#no-embed)
+*[Watch Full Demonstration on YouTube ↗](https://www.youtube.com/watch?v=0U0pPbWhLVE#no-embed)*
+
+Closed-loop proportional control tracking paths using monocular camera input.
+
+---
+
+### 🎥 Part B: Cone Tracking & Visual Servoing
+[![Student Cone Tracking Visual Servoing Demo](/assets/research/bwsi-racecar/racecar_students.gif)](https://www.youtube.com/watch?v=qSe8JmWQnYk#no-embed)
+*[Watch Full Demonstration on YouTube ↗](https://www.youtube.com/watch?v=qSe8JmWQnYk#no-embed)*
+
+Real-time visual tracking, color isolation, and safety-limited collision avoidance.
+
+---
+
+### 🎥 Main RACECAR Challenge Demonstration
+An intensive final-day speed loop challenge where 1/10th scale autonomous racecars navigate complex indoor corridors. Vehicles must perform real-time visual servoing, LIDAR-based obstacle avoidance, and precise wall-following to achieve rapid lap times without collision.
 
 [![Main RACECAR Challenge Demonstration](/assets/research/bwsi-racecar/racecar_main.gif)](https://www.youtube.com/watch?v=UjVatZ3NK5U#no-embed)
-*Figure: High-speed autonomous navigation loops. [Watch Full Video Demonstration on YouTube ↗](https://www.youtube.com/watch?v=UjVatZ3NK5U#no-embed)*
+*[Watch Full Video Demonstration on YouTube ↗](https://www.youtube.com/watch?v=UjVatZ3NK5U#no-embed)*
 
 ---
 
-[![Autonomous Navigation & Visual Servoing Behaviors](/assets/research/bwsi-racecar/racecar_behaviors.gif)](https://www.youtube.com/watch?v=0U0pPbWhLVE#no-embed)
-*Figure: Color tracking and visual servoing. [Watch Full Video Demonstration on YouTube ↗](https://www.youtube.com/watch?v=0U0pPbWhLVE#no-embed)*
+### Educational Impact & Competition
 
----
-
-[![Student Cone Tracking Visual Servoing Demo](/assets/research/bwsi-racecar/racecar_students.gif)](https://www.youtube.com/watch?v=qSe8JmWQnYk#no-embed)
-*Figure: High school student final challenge runs. [Watch Full Video Demonstration on YouTube ↗](https://www.youtube.com/watch?v=qSe8JmWQnYk#no-embed)*
-
----
-
-## Program Overview & Curriculum Design
-
-My involvement with the MIT RACECAR platform started as a graduate teaching assistant for the undergraduate course **6.141J/16.405J: Robotics: Science and Systems (RSS)**, and I later transitioned to a lead instructor role for the **BeaverWorks Summer Institute (BWSI)** summer program for high school students. 
-
-In this capacity, I designed core curriculum—such as the visual servoing lab and cone detector—delivered technical lectures, and oversaw lab sessions where students programmed the cars to execute complex robotic behaviors.
-
-### Model AI Assignments & AAAI Publication
-
-The visual servoing curriculum developed through this work was formalized, submitted, and accepted into the **Model AI Assignments** repository—part of the Educational Advances in Artificial Intelligence (EAAI) symposium at the **AAAI Conference**—where I also presented these educational materials and methodologies.
-
-* **Project Link:** [Model AI: Visual Servoing Assignment](https://modelai.gettysburg.edu/2017/visual-servo/index.html)
-* **Core Technologies:** Python/C++, OpenCV, and ROS.
-* **Assignment Focus:** Students use Image-Based Visual Servoing (IBVS) to program mobile robots to park in front of solid-color objects (like orange cones) or handle line-following tasks using monocular camera input and closed-loop proportional control.
-
-### Core Curricular Pillars & Lectures
-1. **Robot Operating System (ROS):** Teaching publisher-subscriber patterns, node communication, dynamic reconfigure, and sensor data transformation trees (`tf`).
-2. **Motion Planning:** Authored and delivered lectures on core planning algorithms, including path generation and tracking ([Watch Planning Lecture](https://www.youtube.com/watch?v=CdRs0l9f5WM#no-embed)).
-3. **Computer Vision & Visual Servoing:** Developed visual servoing labs, cone detectors, and OpenCV pipelines for lane detection and color blob tracking, accompanied by dedicated instructional lectures ([Watch Visual Servoing Lecture](https://www.youtube.com/watch?v=bAAatB2IvUM#no-embed)).
-4. **LIDAR & Trajectory Control:** Configured planar LIDAR scans and taught high-speed control methodologies such as Pure Pursuit, SLAM, and obstacle avoidance.
-
----
-
-## Hardware Platform & System Specs
-
-The RACECAR vehicle platform combined high-performance compute with agile physical dynamics:
-- **Compute:** NVIDIA Jetson embedded GPU platform running Ubuntu and ROS.
-- **Sensing:** Hokuyo 2D LIDAR, ZED Stereo Camera, and IMU telemetry.
-- **Actuation:** VESC electronic speed controller and brushless DC motor on a 1/10th scale rally chassis.
-
----
-
-## Educational Impact & Competition
-
-Students culminated their intensive workshop by programming the cars to perform a variety of tasks—including pure pursuit, SLAM, and visual servoing—and competing in an autonomous race through complex indoor hallways and obstacle courses.
+Students culminated their intensive workshop by programming the cars to perform a variety of tasks—including pure pursuit, SLAM, and visual servoing—and competing in an autonomous race through complex indoor hallways and obstacle courses, demonstrating high-level execution of integrated software systems on real-world hardware.

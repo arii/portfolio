@@ -4,6 +4,7 @@ import remarkGfm from 'remark-gfm';
 import { ArrowLeft, Calendar, Clock, Download, Video, Play, ExternalLink } from 'lucide-react';
 import { getResearchPostBySlug, RESEARCH_TOOLS } from '@/data/research';
 import { GithubIcon } from '@/components/SocialIcons';
+import SafeImage from '@/components/ui/SafeImage';
 
 export interface ResearchDetailPageProps {
   slug: string;
@@ -331,18 +332,65 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
                 {children}
               </li>
             ),
-            img: ({ src, alt, ...props }) => (
-              <figure className="my-8 space-y-3">
-                <div className="overflow-hidden rounded-2xl border border-line bg-bg shadow-lg">
-                  <img src={src} alt={alt || ''} className="w-full h-auto object-cover" {...props} />
-                </div>
-                {alt && (
-                  <figcaption className="text-center text-xs font-mono text-text-dim px-4 leading-relaxed">
-                    <span className="font-semibold text-accent-sky">Figure:</span> {alt}
-                  </figcaption>
-                )}
-              </figure>
-            )
+            img: ({ src, alt, ...props }) => {
+              const cleanSrc = src ? src.split('#')[0] : '';
+              const hash = src && src.includes('#') ? src.split('#')[1] : '';
+              const shouldInvert = hash.includes('invert-dark') || hash.includes('invert');
+
+              // Extract max-width from hash
+              let maxWidthClass = '';
+              if (hash.includes('max-w-xs')) maxWidthClass = 'max-w-xs mx-auto';
+              else if (hash.includes('max-w-sm')) maxWidthClass = 'max-w-sm mx-auto';
+              else if (hash.includes('max-w-md')) maxWidthClass = 'max-w-md mx-auto';
+              else if (hash.includes('max-w-lg')) maxWidthClass = 'max-w-lg mx-auto';
+              else if (hash.includes('max-w-xl')) maxWidthClass = 'max-w-xl mx-auto';
+              else if (hash.includes('max-w-2xl')) maxWidthClass = 'max-w-2xl mx-auto';
+              else if (hash.includes('max-w-3xl')) maxWidthClass = 'max-w-3xl mx-auto';
+
+              // Parse alt text for pipe-delimited description and link info
+              let displayCaption = alt || '';
+              let linkText = '';
+              let linkUrl = '';
+
+              if (alt && alt.includes('|')) {
+                const parts = alt.split('|');
+                displayCaption = parts[0]?.trim() || '';
+                linkText = parts[1]?.trim() || '';
+                linkUrl = parts[2]?.trim() || '';
+              }
+
+              return (
+                <figure className={`my-8 space-y-3 ${maxWidthClass}`}>
+                  <div className="overflow-hidden rounded-2xl border border-line bg-bg shadow-lg">
+                    <SafeImage
+                      src={cleanSrc}
+                      alt={displayCaption}
+                      className={`w-full h-auto object-cover ${shouldInvert ? 'dark:invert dark:hue-rotate-180 dark:mix-blend-screen' : ''}`}
+                      {...props}
+                    />
+                  </div>
+                  {displayCaption && (
+                    <figcaption className="text-center text-xs font-mono text-text-dim px-4 leading-relaxed">
+                      <span className="font-semibold text-accent-sky">Figure: </span>
+                      {displayCaption}
+                      {linkText && linkUrl && (
+                        <>
+                          {' '}
+                          <a
+                            href={linkUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-accent hover:underline font-semibold"
+                          >
+                            {linkText}
+                          </a>
+                        </>
+                      )}
+                    </figcaption>
+                  )}
+                </figure>
+              );
+            }
           }}
         >
           {post.content}
