@@ -56,7 +56,7 @@ export const flagshipTools: ResearchTool[] = [
     taxonomyBucket: 'product',
     title: 'Reliably Arranging Objects',
     subtitle: 'MIT CSAIL PH.D. THESIS',
-    description: 'I developed a conformant planning approach to reliable robot manipulation under severe sensing and control uncertainty. Combines fixture-augmented plan optimization and physics-driven belief state transitions to increase assembly reliability from 1.9% to 80.7% on a PR2 robot.',
+    description: 'I developed a conformant planning approach to reliable robot manipulation under severe sensing and control uncertainty. Combines fixture-augmented plan optimization and physics-driven belief state transitions to elevate assembly reliability from 1.9% to 80.7% on a PR2 robot.',
     category: 'Robotics & AI',
     status: 'Completed (2019)',
     tags: ['PR2', 'Conformant planning', 'Belief state', 'Manipulation', 'MIT CSAIL'],
