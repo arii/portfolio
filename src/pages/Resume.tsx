@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { resumeData } from '@/data/resume';
 import { ResumeHeader } from '@/components/resume/ResumeHeader';
 import { ExperienceSection } from '@/components/resume/ExperienceSection';
@@ -15,6 +16,31 @@ export interface ResumeProps {
 }
 
 const Resume: React.FC<ResumeProps> = ({ version = 'v2.1' }) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const layoutMode = searchParams.get('layout') === 'full' ? 'full' : 'split';
+  const setLayoutMode = (mode: 'split' | 'full') => {
+    setSearchParams({ layout: mode });
+  };
+
+  // Expand/collapse states for full-width layout (default to true/expanded)
+  const [expandExperience, setExpandExperience] = useState(false); // starts collapsed
+  const [expandSkills, setExpandSkills] = useState(true);
+  const [expandProjects, setExpandProjects] = useState(true);
+  const [expandEducation, setExpandEducation] = useState(true);
+  const [expandPublications, setExpandPublications] = useState(true);
+  const [expandTeaching, setExpandTeaching] = useState(true);
+  const [expandHonors, setExpandHonors] = useState(true);
+
+  const toggleAll = (expand: boolean) => {
+    setExpandExperience(expand);
+    setExpandSkills(expand);
+    setExpandProjects(expand);
+    setExpandEducation(expand);
+    setExpandPublications(expand);
+    setExpandTeaching(expand);
+    setExpandHonors(expand);
+  };
+
   return (
     <div className="max-w-5xl mx-auto space-y-10 pb-16 print:space-y-6 print:pb-0 print:max-w-none">
       <SEO
@@ -24,27 +50,104 @@ const Resume: React.FC<ResumeProps> = ({ version = 'v2.1' }) => {
       />
       <ResumeHeader
         pdfUrl="https://drive.google.com/file/d/14V6KjfEMO12uwNQAhY1OMy2d-_vkGXK_/view"
+        layoutMode={layoutMode}
+        onLayoutModeChange={setLayoutMode}
       />
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 print:block print:gap-0">
-        {/* Left Column: Experience & Impact Projects */}
-        <div className="lg:col-span-7 print:col-span-12 space-y-10 print:space-y-6">
-          <ExperienceSection experiences={resumeData.experience} />
-          <ProjectsSection projects={resumeData.projects} />
-        </div>
-
-        {/* Right Sidebar: Skills, Education, Honors, Teaching, Publications */}
-        <div className="lg:col-span-5 print:col-span-12 space-y-10 print:space-y-6">
-          <SkillsSection skills={resumeData.skills} />
-          <EducationSection education={resumeData.education} />
-          <HonorsSection honors={resumeData.honors} />
-          <TeachingSection teaching={resumeData.teaching} />
-          <PublicationsSection
-            publications={resumeData.publications}
-            scholarUrl={resumeData.scholarUrl}
+      {layoutMode === 'full' ? (
+        <div className="space-y-12 print:space-y-6">
+          {/* Full-width Experience Section */}
+          <ExperienceSection
+            experiences={resumeData.experience}
+            isCollapsible={true}
+            isExpanded={expandExperience}
+            onToggleExpand={() => setExpandExperience(!expandExperience)}
           />
+
+          {/* Collapsible Action Bar */}
+          <div className="flex justify-end gap-3 print:hidden border-b border-border/40 pb-2">
+            <button
+              type="button"
+              onClick={() => toggleAll(true)}
+              className="text-xs font-semibold text-primary hover:underline min-h-[36px] px-2"
+            >
+              Expand All Sections
+            </button>
+            <span className="text-text-dim text-xs select-none flex items-center">|</span>
+            <button
+              type="button"
+              onClick={() => toggleAll(false)}
+              className="text-xs font-semibold text-primary hover:underline min-h-[36px] px-2"
+            >
+              Collapse All Sections
+            </button>
+          </div>
+
+          {/* Full-width Collapsible Single Column List */}
+          <div className="space-y-10">
+            <SkillsSection
+              skills={resumeData.skills}
+              isCollapsible={true}
+              isExpanded={expandSkills}
+              onToggleExpand={() => setExpandSkills(!expandSkills)}
+            />
+            <ProjectsSection
+              projects={resumeData.projects}
+              isCollapsible={true}
+              isExpanded={expandProjects}
+              onToggleExpand={() => setExpandProjects(!expandProjects)}
+            />
+            <EducationSection
+              education={resumeData.education}
+              isCollapsible={true}
+              isExpanded={expandEducation}
+              onToggleExpand={() => setExpandEducation(!expandEducation)}
+            />
+            <PublicationsSection
+              publications={resumeData.publications}
+              scholarUrl={resumeData.scholarUrl}
+              isCollapsible={true}
+              isExpanded={expandPublications}
+              onToggleExpand={() => setExpandPublications(!expandPublications)}
+            />
+            <TeachingSection
+              teaching={resumeData.teaching}
+              isCollapsible={true}
+              isExpanded={expandTeaching}
+              onToggleExpand={() => setExpandTeaching(!expandTeaching)}
+            />
+            <HonorsSection
+              honors={resumeData.honors}
+              isCollapsible={true}
+              isExpanded={expandHonors}
+              onToggleExpand={() => setExpandHonors(!expandHonors)}
+            />
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 print:block print:gap-0">
+          {/* Left Column: Primary Experience Track */}
+          <div className="lg:col-span-7 print:col-span-12 space-y-10 print:space-y-6">
+            <ExperienceSection
+              experiences={resumeData.experience}
+              isCollapsible={false}
+            />
+            <ProjectsSection projects={resumeData.projects} />
+          </div>
+
+          {/* Right Sidebar: Skills, Education, Publications, Teaching & Honors */}
+          <div className="lg:col-span-5 print:col-span-12 space-y-10 print:space-y-6">
+            <SkillsSection skills={resumeData.skills} />
+            <EducationSection education={resumeData.education} />
+            <PublicationsSection
+              publications={resumeData.publications}
+              scholarUrl={resumeData.scholarUrl}
+            />
+            <TeachingSection teaching={resumeData.teaching} />
+            <HonorsSection honors={resumeData.honors} />
+          </div>
+        </div>
+      )}
 
       <div className="hidden print:block text-center pt-8 text-xs text-text-dim font-mono">
         Portfolio generated from arii/portfolio {version}

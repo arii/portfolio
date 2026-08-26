@@ -4,17 +4,40 @@ import { ResumeHonor } from '@/data/resume';
 
 export interface HonorsSectionProps {
   honors: ResumeHonor[];
+  isCollapsible?: boolean;
+  isExpanded?: boolean;
+  onToggleExpand?: () => void;
 }
 
-export const HonorsSection: React.FC<HonorsSectionProps> = ({ honors }) => {
+export const HonorsSection: React.FC<HonorsSectionProps> = ({
+  honors,
+  isCollapsible,
+  isExpanded,
+  onToggleExpand
+}) => {
+  const displayedHonors = isCollapsible && !isExpanded ? honors.slice(0, 1) : honors;
+
   return (
     <section className="mb-12 print:mb-8 print:break-inside-avoid">
-      <div className="flex items-center space-x-3 mb-6 border-b border-border/40 pb-2 print:border-b-2 print:border-black">
-        <Award className="h-6 w-6 text-primary print:text-black" />
-        <h2 className="text-2xl font-bold text-foreground print:text-black uppercase tracking-wider">Honors & Recognition</h2>
+      <div className="flex items-center justify-between mb-6 border-b border-border/40 pb-2 print:border-b-2 print:border-black">
+        <div className="flex items-center space-x-3">
+          <Award className="h-6 w-6 text-primary print:text-black" />
+          <h2 className="text-2xl font-bold text-foreground print:text-black uppercase tracking-wider">Honors & Recognition</h2>
+        </div>
+        {isCollapsible && onToggleExpand && (
+          <button
+            type="button"
+            onClick={onToggleExpand}
+            className="text-xs font-semibold text-primary hover:text-primary/80 bg-primary/10 hover:bg-primary/20 px-3 py-1.5 rounded-full transition-colors print:hidden min-h-[44px] min-w-[80px]"
+            aria-expanded={isExpanded}
+            aria-controls="honors-content"
+          >
+            {isExpanded ? 'Collapse' : 'Expand'}
+          </button>
+        )}
       </div>
-      <div className="space-y-3">
-        {honors.map((honor, idx) => (
+      <div id="honors-content" className="space-y-3">
+        {displayedHonors.map((honor, idx) => (
           <div key={idx} className="flex items-start justify-between gap-3 text-sm">
             <div className="space-y-0.5">
               <div className="flex items-center gap-1.5 flex-wrap">
