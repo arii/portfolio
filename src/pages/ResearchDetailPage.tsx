@@ -586,11 +586,15 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
                 );
               }
 
-              // Prevent block-level child elements (like figures from image renderers) from nesting inside <p>
+              // Prevent block-level child elements (like figures from image renderers or video embeds) from nesting inside <p>
               const hasBlockChild = childrenArray.some(child => {
                 if (React.isValidElement(child)) {
                   const type = child.type;
                   if (type === 'img' || type === 'figure' || (child.props as any)?.src) {
+                    return true;
+                  }
+                  const href = (child.props as any)?.href;
+                  if (typeof href === 'string' && (href.includes('youtube.com') || href.includes('youtu.be'))) {
                     return true;
                   }
                 }
@@ -613,8 +617,9 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
               </li>
             ),
             img: ({ src, alt, ...props }) => {
-              const cleanSrc = src ? src.split('#')[0] : '';
-              const hash = src && src.includes('#') ? src.split('#')[1] : '';
+              const fullSrc = src || '';
+              const cleanSrc = fullSrc.split('#')[0];
+              const hash = fullSrc.includes('#') ? fullSrc.substring(fullSrc.indexOf('#')) : '';
               const shouldInvert = hash.includes('invert-dark') || hash.includes('invert');
 
               // Extract max-width from hash
@@ -626,6 +631,18 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
               else if (hash.includes('max-w-xl')) maxWidthClass = 'max-w-xl mx-auto';
               else if (hash.includes('max-w-2xl')) maxWidthClass = 'max-w-2xl mx-auto';
               else if (hash.includes('max-w-3xl')) maxWidthClass = 'max-w-3xl mx-auto';
+
+              // Aspect ratio parsing
+              let aspectClass = '';
+              if (hash.includes('aspect-4/3') || hash.includes('aspect-4-3')) aspectClass = 'aspect-[4/3]';
+              else if (hash.includes('aspect-video') || hash.includes('aspect-16/9')) aspectClass = 'aspect-video';
+              else if (hash.includes('aspect-square') || hash.includes('aspect-1/1')) aspectClass = 'aspect-square';
+
+              // Object fit parsing
+              let objectFitClass = 'object-contain';
+              if (hash.includes('object-cover') || (aspectClass && !hash.includes('object-contain'))) {
+                objectFitClass = 'object-cover';
+              }
 
               // Parse alt text for pipe-delimited description and link info
               let displayCaption = alt || '';
@@ -641,12 +658,12 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
 
               return (
                 <figure className={`my-6 space-y-2 ${maxWidthClass}`}>
-                  <div className="overflow-hidden rounded-2xl border border-line bg-surface/40 p-2 shadow-lg flex items-center justify-center">
+                  <div className={`overflow-hidden rounded-2xl border border-line bg-surface/40 p-2 shadow-lg flex items-center justify-center ${aspectClass}`}>
                     <SafeImage
                       src={cleanSrc}
                       alt={displayCaption}
-                      containerClassName="w-full flex justify-center"
-                      className={`max-h-[380px] w-full h-auto object-contain rounded-xl ${shouldInvert ? 'dark:invert dark:hue-rotate-180 dark:mix-blend-screen' : ''}`}
+                      containerClassName={`w-full ${aspectClass ? `h-full ${aspectClass}` : ''} flex justify-center items-center`}
+                      className={`${aspectClass ? 'w-full h-full' : 'max-h-[380px] w-full h-auto'} ${objectFitClass} rounded-xl ${shouldInvert ? 'dark:invert dark:hue-rotate-180 dark:mix-blend-screen' : ''}`}
                       {...props}
                     />
                   </div>
