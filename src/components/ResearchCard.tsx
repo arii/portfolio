@@ -57,11 +57,6 @@ const ResearchCard: React.FC<ResearchCardProps> = ({ post, onSelect }) => {
             <span className="flex items-center space-x-1">
               <Calendar className="h-3.5 w-3.5" />
               <time dateTime={post.date}>{post.date}</time>
-              {post.date && new Date(post.date).getFullYear() <= 2024 && (
-                <span className="ml-1.5 rounded bg-muted px-1.5 py-0.5 text-[9px] font-semibold text-muted-foreground uppercase tracking-wider">
-                  Classic
-                </span>
-              )}
             </span>
             <span className="flex items-center space-x-1">
               <Clock className="h-3.5 w-3.5" />

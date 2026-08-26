@@ -1,6 +1,6 @@
 ---
 title: "Automating PR Reviews with GitHub Actions and Gemini"
-date: "2024-05-10"
+date: "2026-05-10"
 author: "Ariel Anders"
 category: "DevAI"
 tags: ["DevOps", "AI", "Gemini", "GitHub Actions", "Playwright"]
