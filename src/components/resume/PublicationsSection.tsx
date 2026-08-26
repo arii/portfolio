@@ -5,12 +5,20 @@ import { ResumePublication } from '@/data/resume';
 export interface PublicationsSectionProps {
   publications: ResumePublication[];
   scholarUrl: string;
+  isCollapsible?: boolean;
+  isExpanded?: boolean;
+  onToggleExpand?: () => void;
 }
 
 export const PublicationsSection: React.FC<PublicationsSectionProps> = ({
   publications,
-  scholarUrl
+  scholarUrl,
+  isCollapsible,
+  isExpanded,
+  onToggleExpand
 }) => {
+  const displayedPublications = isCollapsible && !isExpanded ? publications.slice(0, 1) : publications;
+
   return (
     <section className="mb-10 print:mb-6 print:break-inside-avoid">
       <div className="flex items-center justify-between mb-4 border-b border-border/40 pb-2 print:border-b-2 print:border-black">
@@ -18,19 +26,32 @@ export const PublicationsSection: React.FC<PublicationsSectionProps> = ({
           <FileText className="h-5 w-5 text-primary print:text-black" />
           <h2 className="text-xl font-bold text-foreground print:text-black uppercase tracking-wider">Publications & Theses</h2>
         </div>
-        <a
-          href={scholarUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline print:hidden"
-        >
-          <span>Google Scholar</span>
-          <ExternalLink className="w-3 h-3" />
-        </a>
+        <div className="flex items-center gap-3 print:hidden">
+          {isCollapsible && onToggleExpand && (
+            <button
+              type="button"
+              onClick={onToggleExpand}
+              className="text-xs font-semibold text-primary hover:text-primary/80 bg-primary/10 hover:bg-primary/20 px-3 py-1.5 rounded-full transition-colors print:hidden min-h-[44px] min-w-[80px]"
+              aria-expanded={isExpanded}
+              aria-controls="publications-content"
+            >
+              {isExpanded ? 'Collapse' : 'Expand'}
+            </button>
+          )}
+          <a
+            href={scholarUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline min-h-[44px]"
+          >
+            <span>Google Scholar</span>
+            <ExternalLink className="w-3 h-3" />
+          </a>
+        </div>
       </div>
 
-      <div className="space-y-3">
-        {publications.map((pub) => (
+      <div id="publications-content" className="space-y-3">
+        {displayedPublications.map((pub) => (
           <div
             key={pub.id}
             className="bg-card/40 border border-border/60 p-3.5 rounded-xl space-y-1.5 hover:border-primary/40 transition-colors print:bg-transparent print:border-none print:p-0"

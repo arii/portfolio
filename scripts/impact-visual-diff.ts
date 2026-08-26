@@ -317,6 +317,9 @@ async function main(): Promise<void> {
     ...contentUrls,
     ...impact.routes.filter(route => !route.includes(':'))
   ];
+  if (prioritizedRoutes.includes('/resume')) {
+    prioritizedRoutes.push('/resume?layout=full');
+  }
   const routes = Array.from(new Set(prioritizedRoutes)).slice(0, MAX_ROUTES_TO_REVIEW);
 
   ensureDirectory(ARTIFACTS_DIR);
