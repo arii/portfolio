@@ -23,11 +23,10 @@ export const autonomousTools: ResearchTool[] = [
     category: 'Education',
     status: 'Completed',
     tags: ['Robotics & Autonomy', 'Computer Vision', 'Visual Servoing', 'Motion Planning', 'ROS'],
-    image: 'https://i.ytimg.com/vi/DUp9yURMo2c/hqdefault.jpg',
+    image: '/assets/research/bwsi-racecar/racecar_main.gif',
     imageAlt: 'Students programming miniature autonomous vehicles',
     canonicalPath: '/research/bwsi-racecar',
-    videoUrl: 'https://www.youtube.com/watch?v=DUp9yURMo2c',
-    playlistUrl: 'https://www.youtube.com/playlist?list=PLEcASxU_mgVgnMZvVHgrTGFMUXze0MiOp',
+    videoUrl: 'https://www.youtube.com/watch?v=UjVatZ3NK5U',
     externalUrl: 'https://beaverworks.ll.mit.edu/CMS/bw/bwsi'
   },
   {

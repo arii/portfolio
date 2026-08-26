@@ -334,7 +334,18 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
             ),
             img: ({ src, alt, ...props }) => {
               const cleanSrc = src ? src.split('#')[0] : '';
-              const shouldInvert = src ? src.includes('#invert-dark') || src.includes('#invert') : false;
+              const hash = src && src.includes('#') ? src.split('#')[1] : '';
+              const shouldInvert = hash.includes('invert-dark') || hash.includes('invert');
+
+              // Extract max-width from hash
+              let maxWidthClass = '';
+              if (hash.includes('max-w-xs')) maxWidthClass = 'max-w-xs mx-auto';
+              else if (hash.includes('max-w-sm')) maxWidthClass = 'max-w-sm mx-auto';
+              else if (hash.includes('max-w-md')) maxWidthClass = 'max-w-md mx-auto';
+              else if (hash.includes('max-w-lg')) maxWidthClass = 'max-w-lg mx-auto';
+              else if (hash.includes('max-w-xl')) maxWidthClass = 'max-w-xl mx-auto';
+              else if (hash.includes('max-w-2xl')) maxWidthClass = 'max-w-2xl mx-auto';
+              else if (hash.includes('max-w-3xl')) maxWidthClass = 'max-w-3xl mx-auto';
 
               // Parse alt text for pipe-delimited description and link info
               let displayCaption = alt || '';
@@ -349,7 +360,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
               }
 
               return (
-                <figure className="my-8 space-y-3">
+                <figure className={`my-8 space-y-3 ${maxWidthClass}`}>
                   <div className="overflow-hidden rounded-2xl border border-line bg-bg shadow-lg">
                     <SafeImage
                       src={cleanSrc}
