@@ -14,7 +14,9 @@ A common challenge in modern web development is understanding the "blast radius"
 
 It can be difficult to determine if these automated changes are beneficial or if they inadvertently break existing layouts. Since an AI agent might suggest a large number of modifications, it is not always immediately obvious what those changes are or if they align with your goals. This is why visual impact analysis is crucial when developing with AI agents.
 
-Manual regression testing is slow and error-prone. Full end-to-end suites are expensive to run on every commit. My solution is the **Deployment Impact Analyzer**: a CI/CD pipeline that semantically determines the scope of a change and performs targeted visual validation.
+Manual regression testing is slow and error-prone, and running full end-to-end suites on every commit is expensive. My solution is the **Deployment Impact Analyzer**: a CI/CD pipeline that semantically determines the scope of a change and performs targeted visual validation.
+
+While visual regression testing is effective for verifying that changes do not break existing layouts, it can be overly restrictive when you intend to make visual updates. In cases where design changes are intentional, standard regression testing may produce false positives, requiring a more nuanced approach to validate that the changes align with your goals.
 
 ## The Architecture
 

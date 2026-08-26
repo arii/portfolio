@@ -48,7 +48,7 @@ In this capacity, I designed core curriculum—such as the visual servoing lab a
 
 ### Model AI Assignments & AAAI Publication
 
-I formalized, submitted, and got the visual servoing curriculum developed through this work accepted into the **Model AI Assignments** repository—part of the Educational Advances in Artificial Intelligence (EAAI) symposium at the **AAAI Conference**—where I also presented these educational materials and methodologies.
+As one of the course instructors, I was asked to develop the visual servoing laboratory assignment. I then submitted the curriculum to the Model AI Assignments workshop—part of the Educational Advances in Artificial Intelligence (EAAI) symposium at the AAAI Conference—where I also presented these educational materials and methodologies.
 
 * **Project Link:** [Model AI: Visual Servoing Assignment](https://modelai.gettysburg.edu/2017/visual-servo/index.html)
 * **Core Technologies:** Python/C++, OpenCV, and ROS.

@@ -37,13 +37,13 @@ During my undergraduate studies in Computer Engineering at UC Santa Cruz (UCSC),
 
 ## 68HC11 Microcontroller Board for Mechanical Gripper Control
 
-In 2011, as part of my final microprocessor design laboratory course (CMPE 121), I designed, built, and programmed a custom microcontroller board using the Motorola 68HC11E1 chip configured in expanded bus mode. The primary goal of the project was to create a hardware-based controller capable of direct peripheral management, reducing the reliance on a separate PC software interface.
+In 2011, as part of our final microprocessor design laboratory course (CMPE 121), we designed, built, and programmed a custom microcontroller board using the Motorola 68HC11E1 chip configured in expanded bus mode. The primary goal of the project was to create a hardware-based controller capable of direct peripheral management, reducing the reliance on a separate PC software interface.
 
 ### Hardware Architecture
 
 Building the system required an intensive wire-wrapping and soldering process to construct a custom circuit layout. The hardware configuration consists of the following components:
 
-  * **Microcontroller & Memory:** A Motorola 68HC11E1 chip configured in expanded bus mode operating alongside 8KB external SRAM and 8KB EPROM. I performed rigorous bus interface timing analysis to verify read/write constraints and avoid bus contention across hardware operating modes.
+  * **Microcontroller & Memory:** A Motorola 68HC11E1 chip configured in expanded bus mode operating alongside 8KB external SRAM and 8KB EPROM. We performed rigorous bus interface timing analysis to verify read/write constraints and avoid bus contention across hardware operating modes.
   * **User Controls & Diagnostics:** Two digital I/O push-buttons for manual command triggers, a potentiometer paired with an analog-to-digital (A/D) converter pin to modulate operational parameters, and dedicated diagnostic LED displays for memory test validation.
   * **Power Regulation:** An integrated 7-12V DC power regulation circuit to supply stable power to the logic and peripherals.
   * **Peripherals & Connectivity:** A DB9 serial port connection integrated with standard RS-232 communication lines connected directly to a mechanical gripper, alongside the SPI serial protocol for auxiliary peripheral expansion.

@@ -16,7 +16,12 @@ summary: "Dynamic registration, kinematic calibration, and interactive UI for au
 
 ## Autonomous Surgical Robotics at Bionics Lab UCSC
 
-The **CAD/CAM Robotic Dental Crowning Workflow** project at the **Bionics Lab, University of California, Santa Cruz (UCSC)** focused on semi-autonomous robotic dental restoration. I developed dynamic registration, joint-space kinematic tracking, and surgical control software to align high-precision robotic milling and drilling with patient-specific intraoral geometry.
+The **CAD/CAM Dental Robotics** project at the **Bionics Lab, University of California, Santa Cruz (UCSC)** focused on the development of an autonomous robotic system for semi-autonomous dental restoration. My research encompassed two primary areas:
+
+1.  **Dental Crowning Preparation:** I developed a workflow to generate milling trajectories from 3D-digitized tooth models, enabling the robotic arm to autonomously mill a boundary around the tooth.
+2.  **Dental Implant Preparation:** I extended this work to execute implant placement procedures. To account for patient movement during the procedure, I designed and implemented **dynamic registration**. This involved using a passive robotic arm (Microscribe MX) as a real-time feedback mechanism to track the position of the jaw.
+
+To facilitate this, I developed surgical control software—integrating Visual Studio, Matlab, and ORiN APIs—to synchronize the active robotic arm (Denso VM-B01G) with real-time positional data, allowing for high-precision milling and drilling aligned with patient-specific intraoral geometry.
 
 ![CAD/CAM Robotic Dental Crowning Setup](/assets/research/dental.jpg)
 *Figure 1: Robotic dental crowning experimental setup and software user interface at UCSC Bionics Lab.*

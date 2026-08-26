@@ -5,35 +5,15 @@ author: "Ariel Anders"
 category: "DevAI"
 tags: ["DevOps", "AI", "Gemini", "GitHub Actions", "Playwright"]
 excerpt: "A practical AI review pipeline using GitHub Actions, Google Gemini, and Playwright. Not a replacement for human review, but a way to make first-pass review repeatable."
-readTime: 14
+readTime: 8
 status: "published"
 ---
 
-The first version of my AI review workflow made the classic mistake: I asked the model to do everything.
+# Automating PR Reviews with GitHub Actions and Gemini
 
-It had to understand the repo, inspect the diff, infer the design system, read CI logs, and decide what mattered. Sometimes it worked. Often it produced a confident wall of feedback that was hard to trust.
+The first version of my AI review workflow made the classic mistake: I asked the model to do everything. It had to understand the repo, inspect the diff, infer the design system, read CI logs, and decide what mattered. Sometimes it worked; often it produced a confident wall of feedback that was hard to trust.
 
-The better pattern was smaller and more boring: collect the important pull request context first, then ask the model to review that prepared packet.
-
-This article walks through the review pipeline I use for BoomTick.blog: GitHub Actions collects the context, Gemini reviews it, structured findings decide what blocks the PR, and Playwright screenshots catch UI changes that normal tests miss.
-
-It is not a fully autonomous engineer. It is a review assistant made from scripts, prompts, CI glue, and a few hard safety boundaries.
-
-## What you will build
-
-By the end of this walkthrough, you will understand how to build a review assistant that can:
-
-- collect pull request context and perform token budgeting before calling an LLM
-- send a focused prompt directly to the Gemini API
-- request structured findings instead of vague prose
-- map findings deterministically into GitHub review states
-- optionally use CI logs and Playwright screenshots as review inputs
-
-This is not a replacement for human review. It is a way to make first-pass review more repeatable.
-
----
-
-## The shape of the pipeline
+The better pattern is to shrink the model's job: collect the important pull request context first, then ask the model to review that prepared packet.
 
 ```mermaid
 flowchart TD
@@ -52,88 +32,37 @@ flowchart TD
   Rules[Project review rules] --> Collect
 ```
 
-The important part is not the exact command name. It is the handoff.
-
-The model does not start with a vague instruction like "review this PR." It starts with a prepared packet: the diff, failing logs, linked context, and the project rules that matter for this repo.
-
-That one change makes the review easier to repeat, easier to debug, and easier to distrust when it gets something wrong.
-
 ---
 
-## What is real in this repo?
+## 1. Aggregate PR Context Into a Structured Packet
 
-This article mixes two things:
+Instead of having the model search the repository, run a script to assemble the review context. For BoomTick.blog, I use `dev-tools/td-cli gh audit-pr <PR_NUMBER> --fetch` (or a batch aggregator script like `dev-tools/aggregate-prs.sh`) to bundle:
 
-- the workflow I actually use in this repo
-- the general pattern someone else could copy
+- The PR title and description
+- The changed files and their relative diffs
+- Failing CI logs
+- Linked issue content
+- Project-specific review rules and design-token guidelines
 
-I call that out because AI automation articles often blur the line between "this works today" and "this would be cool if finished."
-
-For this article:
-
-- **Implemented** means the script, command, or workflow exists in the repo.
-- **Experimental** means it exists but still needs manual setup, review, or judgment.
-- **Pattern** means it is the architecture I recommend, even if the exact command name in your repo would be different.
-
----
-
-## Command naming note
-
-This article uses two kinds of commands:
-
-- **Generic example commands** show the shape of the pipeline and you can adapt them.
-- **Repo-specific commands** are the actual commands used in this project.
-
-When a command is repo-specific, I call that out explicitly. When a command is generic, treat it as pseudocode for your own repo.
-
----
-
-## 1. Make the model review a packet, not the repo
-
-The biggest improvement came from taking work away from the model.
-
-A weak review prompt looks like this:
-
-> Review this PR.
-
-That sounds simple, but it hides too many jobs. The model has to discover what changed, infer which files matter, understand the project conventions, notice CI failures, and decide which issues are worth blocking.
-
-A better prompt starts with a prepared context packet.
-
-That packet can include:
-
-- the PR title and description
-- the changed files
-- the relevant diff
-- CI failure logs
-- linked issue text
-- project-specific review rules
-- design-system constraints
-
-Now the model has a narrower job: review the packet and produce findings.
+This gathers everything the model needs into a single `.devai/review-context.md` file.
 
 ```bash
-# Generic example: adjust command names to match your repo
+# Example aggregation pattern
 python dev-tools/aggregate_pr_context.py \
   --target-branch main \
   --output .devai/review-context.md
 ```
 
-> **Implemented:** `dev-tools/td-cli gh audit-pr <PR_NUMBER> --fetch` fetches PR diffs, CI logs, and linked issue context into a structured review packet. `dev-tools/aggregate-prs.sh` handles batch aggregation.
-
-The point is not that my aggregation command is special. The point is that the model should receive a curated artifact instead of wandering through the repo.
-
 ---
 
-## 2. Orchestrate with the Gemini API
+## 2. Orchestrate Inference with the Gemini API
 
-The AI inference should be the least complicated part of the system. I call the Google Gemini API directly, relying on Gemini's large context window to ingest diffs and build artifacts without truncation.
-
-The quality comes from everything around it: the context packet, the review rules, the output schema, and the script that processes the result.
+Call the Google Gemini API directly with the prepared context. Rely on Gemini's large context window to ingest diffs and build artifacts without truncation.
 
 ```python
 import os
 import requests
+import json
 from pathlib import Path
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
@@ -180,21 +109,11 @@ result = response.json()
 print(result["candidates"][0]["content"]["parts"][0]["text"])
 ```
 
-This is intentionally boring. If this part feels magical, the pipeline is probably too hard to debug.
-
-The model should not be responsible for knowing your repo's entire history. It should receive a bounded task, produce bounded output, and leave the final decision to deterministic code.
-
-> **Implemented:** I centralized the AI orchestration logic in `dev-tools/utils.py`.
-
 ---
 
-## 3. Ask for findings the code can understand
+## 3. Generate Structured Findings for Downstream Automation
 
-A paragraph of AI feedback is easy to read and hard to automate.
-
-For a human-only workflow, prose is fine. For a CI workflow, prose is a problem. A script cannot reliably tell whether "this might be worth revisiting" should block a PR.
-
-By configuring Gemini with structured JSON output (`responseMimeType: "application/json"`), the model returns a schema ready for automation:
+Configure Gemini with structured JSON output (`responseMimeType: "application/json"`). This allows scripts to programmatically parse and act on the feedback.
 
 ```json
 {
@@ -215,26 +134,19 @@ By configuring Gemini with structured JSON output (`responseMimeType: "applicati
 }
 ```
 
-The model can still be wrong. The schema does not make it truthful.
-
-What the schema does is make the next step testable. A script can check whether `blocking` is empty, format PR comments consistently, and safely reject malformed output.
-
 ---
 
-## 4. Let scripts decide what blocks the PR
+## 4. Map Review States Deterministically
 
-I do not want the model deciding whether a pull request is approved.
+Do not let the model directly approve or block a pull request. A script should read the JSON findings and map them to GitHub review states.
 
-The model can describe findings. A deterministic script should decide how those findings map to GitHub review states.
+- **Request Changes:** Triggers if there are any items in the `blocking` list (e.g., build failures, accessibility regressions, missing props).
+- **Comment:** Posts non-blocking suggestions (e.g., naming, cleanup, styling tips).
+- **Approve:** Executes only when the `blocking` list is empty.
 
-That separation matters. It keeps the model from turning a stylistic opinion into a blocked PR, and it keeps a serious failure from being buried inside a friendly summary.
-
-- **Blocking:** Use `REQUEST_CHANGES` when the finding should stop the merge: broken builds, accessibility regressions, missing required props, or known design-system violations.
-- **Non-blocking:** Use `COMMENT` for feedback that may be useful but should not stop the PR: naming, refactors, minor cleanup, or subjective UI polish.
-- **Clean:** Use `APPROVE` or a summary comment only when there are no blocking findings.
+For instance, `dev-tools/submit_review.py` reads `.devai/review-result.json` and submits the review payload to the GitHub API.
 
 ```python
-# dev-tools/submit_review.py
 import json
 
 with open(".devai/review-result.json") as f:
@@ -249,55 +161,26 @@ pr.create_review(
 )
 ```
 
-> **Implemented:** `dev-tools/submit_review.py` handles `APPROVE`, `REQUEST_CHANGES`, and `COMMENT` states.
-
-The model proposes the facts. The script applies the policy.
-
-![Automated Pull Request Code Review Feedback posted by github-actions bot with blocking accessibility issue and non-blocking token suggestion](/assets/research/gitops-pr-reviewer-comment.png)
+![Automated Pull Request Code Review Feedback](/assets/research/gitops-pr-reviewer-comment.png)
 
 ---
 
-## 5. Use CI failures as context, not permission to auto-merge
+## 5. Feed CI Failures to the Repair Loop
 
-CI failures are useful because they are specific. They tell the agent where the pain is.
+When CI fails, extract the error logs and treat them as context for a repair agent. Crucially, the agent should only suggest patches or comment on the PR; a human must review and approve before any code is merged.
 
-But a failing test should not give an agent permission to silently rewrite the project. The safer pattern is to treat the failure as context for a repair suggestion.
-
-The workflow is:
-
-1. CI fails.
-2. A script extracts the relevant log section.
-3. The repair agent receives the log, changed files, and recent diff.
-4. The agent comments or proposes a patch.
-5. A human reviews the result before merge.
-
-```mermaid
-sequenceDiagram
-  participant CI as GitHub Actions
-  participant Script as Log extractor
-  participant Agent as Repair agent
-  participant PR as Pull request
-
-  CI->>Script: Build or test failure
-  Script->>Script: Extract relevant error block
-  Script->>Agent: Send logs, diff, and affected files
-  Agent->>PR: Comment or propose patch
-  PR->>PR: Human reviews before merge
-```
-
-That last step is not ceremony. It is the safety boundary.
-
-> **Experimental:** CI failures can trigger `dev-tools/td-cli ai repair`. A GitHub Actions workflow (`jules-fix-trigger.yml`) exists to initiate repair sessions. Treat the output as a suggestion; always review before merge.
+### The CI Repair Flow:
+1. **CI Failure:** GitHub Actions triggers on a build or test failure.
+2. **Log Extraction:** A script extracts the failing log block.
+3. **Repair Inference:** The repair agent receives the logs, diff, and affected files (triggered in this repo via `dev-tools/td-cli ai repair` or `jules-fix-trigger.yml`).
+4. **PR Feedback:** The agent comments or proposes a patch.
+5. **Human Review:** The developer reviews and merges the suggested fix.
 
 ---
 
-## 6. Use Playwright screenshots as a tripwire
+## 6. Integrate Playwright Screenshot Diffing
 
-For a UI-heavy site, "the tests pass" is not the same as "the page still looks right."
-
-A layout can shift. A button can wrap. A mobile nav can cover the page. TypeScript will not care.
-
-That is why I use Playwright screenshots as a tripwire. They do not decide whether a design change is good. They just tell me something changed.
+Unit tests check code logic, but they miss layout shifts or broken responsive designs. Use Playwright screenshots of key pages (home page, articles, nav bars) as a tripwire to detect visual regressions.
 
 ```ts
 import { test, expect } from "@playwright/test";
@@ -310,73 +193,15 @@ test("home page visual smoke test", async ({ page }) => {
 });
 ```
 
-This works best for stable routes: home pages, article pages, navigation states, and important UI shells. It works poorly for pages with constantly changing content unless you mask or stabilize the dynamic areas.
-
-> **Pattern:** Playwright visual regression is the architecture this repo is moving toward. The test runner config exists. Baseline screenshot generation and CI comparison are not yet fully automated; that is the next step.
+Verify changes visually on pull requests before they reach production.
 
 ---
 
-## The smallest useful version
+## Summary of the Architecture
 
-You do not need the whole pipeline to get value from this pattern.
+To set up the minimum viable version:
+1. Create a context aggregator script to output `.devai/review-context.md`.
+2. Send that markdown to the Gemini API requesting JSON output.
+3. Parse the JSON and submit the review to GitHub.
 
-The smallest useful version is just two steps:
-
-1. Create a review context file.
-2. Ask Gemini to review that file.
-
-Everything else, including GitHub comments, review states, CI repair, and screenshot analysis, can come later.
-
-```text
-.devai/
-  review-context.md
-  review-result.json
-
-dev-tools/
-  aggregate_pr_context.py
-```
-
-```bash
-# Generic example: file names are adaptable
-python dev-tools/aggregate_pr_context.py > .devai/review-context.md
-python dev-tools/ai_review.py .devai/review-context.md > .devai/review-result.json
-python dev-tools/submit_review.py .devai/review-result.json
-```
-
-Even if you never post the result back to GitHub automatically, you still get a repeatable review artifact that you can inspect, improve, and rerun.
-
----
-
-## What this does not solve
-
-This pipeline makes review more repeatable. It does not make the model infallible.
-
-LLMs can still:
-
-- hallucinate non-existent file paths
-- miss subtle edge cases or race conditions
-- over-focus on cosmetic style choices
-- misunderstand implicit project conventions
-- produce confident but invalid suggestions
-
-That is why I box the model in on both sides.
-
-Before the model, deterministic scripts collect the context. After the model, deterministic scripts decide how to handle the findings.
-
-The model is useful, but it is not the source of truth.
-
----
-
-## The lesson: shrink the model's job
-
-The biggest improvement was not switching models. It was changing the shape of the task.
-
-> Ask the model to inspect the repo, infer the architecture, find the diff, understand CI, and review the code.
-
-That is the bad pattern. It produces feedback that is hard to trust and harder to automate.
-
-> Give the model a prepared packet and ask it to perform one narrow review task.
-
-That is the better pattern.
-
-Deterministic code should handle everything before and after the inference step: context gathering, token budgeting, format validation, and review state mapping. Start by shrinking the job.
+By keeping the orchestration simple and placing deterministic boundary scripts before and after the inference step, you make your automated code review predictable, testable, and reliable.
