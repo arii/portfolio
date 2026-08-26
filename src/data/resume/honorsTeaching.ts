@@ -39,13 +39,28 @@ export const honorsData: ResumeHonor[] = [
 
 export const teachingData: ResumeTeaching[] = [
   {
-    title: "Frederick C. Hennie III Teaching Award",
-    period: "2017",
-    details: "MIT EECS Department Award for extraordinary dedication and excellence in instruction."
+    title: "Lecturer / Adjunct Instructor",
+    period: "2020",
+    details: "Olin College of Engineering. Taught autonomous robotics and systems courses, designing curriculum and leading project-based hands-on laboratory instruction."
   },
   {
-    title: "Educational Outreach & Technical Instructor",
-    period: "2015 – 2019",
-    details: "Instructor for MIT BeaverWorks Summer Institute and mentor for undergraduate robotics laboratories."
+    title: "Graduate Teaching Assistant",
+    period: "2015 – 2017",
+    details: "MIT EECS & AeroAstro. TA for 6.141 / 16.405 (Robotics: Science and Systems) and 6.101 (Introductory Analog Electronics Laboratory). Developed lab assignments, led lab sections, and mentored student teams."
+  },
+  {
+    title: "Lead Associate Instructor & Curriculum Developer",
+    period: "2016 – 2019",
+    details: "MIT Beaver Works Summer Institute (BWSI). Co-designed and taught the flagship autonomous RACECAR summer course for high school students. Authored published Model AI visual servoing curriculum."
+  },
+  {
+    title: "Undergraduate Teaching Assistant & Tutor",
+    period: "2010 – 2012",
+    details: "UC Santa Cruz. Supported undergraduate mathematics and computer engineering courses, including Precalculus, College Algebra, and intro STEM courses."
+  },
+  {
+    title: "Frederick C. Hennie III Teaching Award",
+    period: "2017",
+    details: "MIT EECS Department Award recognizing extraordinary dedication and excellence in instruction."
   }
 ];
