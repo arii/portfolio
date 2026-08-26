@@ -338,7 +338,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
                         {language}
                       </div>
                     )}
-                    <pre className="p-4 overflow-x-auto text-sm font-mono text-accent-sky leading-relaxed bg-bg whitespace-pre-wrap break-words">
+                    <pre className="p-4 overflow-x-auto text-sm font-mono text-accent-sky/90 leading-relaxed bg-bg whitespace-pre-wrap break-words">
                       <code>{children}</code>
                     </pre>
                   </div>

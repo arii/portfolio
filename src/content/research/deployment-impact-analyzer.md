@@ -25,12 +25,12 @@ graph TB
     classDef linkText fill:none,color:#cbd5e1,font-size:11px;
     
     %% Environments as System Boundaries
-    subgraph GitHub_Platform [GitHub Environment]
+    subgraph GitHub_Platform ["GitHub Environment"]
         A[Pull Request Event]
         G[PR Comment / Status Check]
     end
 
-    subgraph CI_Runner [GitHub Actions Runner]
+    subgraph CI_Runner ["GitHub Actions Runner"]
         B[Identify Changed Files]
         C[dependency-cruiser Analysis]
         D[Map to Affected Routes]
@@ -38,7 +38,7 @@ graph TB
         F[Severity Scoring Engine]
     end
 
-    subgraph Target_Environments [Network / Environments]
+    subgraph Target_Environments ["Network / Environments"]
         Prod[Production Main Baseline]
         Branch[Feature Branch Deploy Preview]
     end
