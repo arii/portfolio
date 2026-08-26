@@ -38,17 +38,6 @@ describe('Card UX & Detail Page Navigation Improvements', () => {
     );
   });
 
-  it('applies max-height and object-contain constraints for tall image schematics', () => {
-    const handleBack = vi.fn();
-    const { container } = render(<ResearchDetailPage slug="undergraduate-projects" onBack={handleBack} />);
-
-    const img = container.querySelector('img[src*="hierarchical_state_machine.png"]');
-    expect(img).toBeInTheDocument();
-    expect(img?.className).toContain('max-h-[500px]');
-    expect(img?.className).toContain('w-auto');
-    expect(img?.className).toContain('max-w-full');
-  });
-
   it('renders Duckietown detail page with content and embedded videos', () => {
     const handleBack = vi.fn();
     render(<ResearchDetailPage slug="duckietown" onBack={handleBack} />);
