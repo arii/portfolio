@@ -21,17 +21,17 @@ A structured checklist and roadmap for replacing direct YouTube iframe embeds wi
 - [x] Preview the page to verify quality, frame rate, and asset sizes.
 
 ## Phase 4: Formatting & Layout Audit
-- [ ] Ensure all modified articles follow the exact clickable GIF link syntax:
+- [x] Ensure all modified articles follow the exact clickable GIF link syntax:
   ```markdown
   [![Alt Text | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=XXXXXX#no-embed](/path/to/image.gif)](https://www.youtube.com/watch?v=XXXXXX#no-embed)
   ```
-- [ ] Verify that all target YouTube links have the `#no-embed` suffix to prevent double embeds.
-- [ ] Audit pages like `undergraduate-projects.md` and `graduate-engineering-projects.md` to ensure no duplicate figures or broken layouts exist.
+- [x] Verify that all target YouTube links have the `#no-embed` suffix to prevent double embeds.
+- [x] Audit pages like `undergraduate-projects.md` and `graduate-engineering-projects.md` to ensure no duplicate figures or broken layouts exist.
 
 ## Definition of Done (DoD)
 - [x] **Discovery Complete:** Full inventory of all YouTube URLs in markdown content compiled.
 - [x] **Script Functional:** The conversion script successfully runs and creates optimized GIFs from YouTube sources.
 - [x] **Test Verified:** At least one page fully optimized, rendered, and verified working.
-- [ ] **Correct Formatting:** Clickable GIF wrapper syntax with `#no-embed` used correctly across all pages.
-- [ ] **No Double Figures:** Double rendering of video players and GIFs has been audited and resolved.
+- [x] **Correct Formatting:** Clickable GIF wrapper syntax with `#no-embed` used correctly across all pages.
+- [x] **No Double Figures:** Double rendering of video players and GIFs has been audited and resolved.
 - [x] **Build & Lint Success:** Workspace compiles successfully and passes all checks.
