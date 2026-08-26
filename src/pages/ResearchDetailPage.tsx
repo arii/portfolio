@@ -520,7 +520,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
 
                 if (embedUrl && isEmbedLink) {
                   return (
-                    <span className="block space-y-2">
+                    <div className="block space-y-2">
                       <div className="relative aspect-video w-full rounded-2xl overflow-hidden border border-line bg-surface shadow-md">
                         <iframe
                           src={embedUrl}
@@ -539,7 +539,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
                       >
                         Open on YouTube ↗
                       </a>
-                    </span>
+                    </div>
                   );
                 }
 
@@ -599,12 +599,18 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
                 );
               }
 
-              // Prevent block-level child elements (like figures from image renderers) from nesting inside <p>
+              // Prevent block-level child elements (like figures from image renderers or video divs inside links) from nesting inside <p>
               const hasBlockChild = childrenArray.some(child => {
                 if (React.isValidElement(child)) {
                   const type = child.type;
-                  if (type === 'img' || type === 'figure' || (child.props as any)?.src) {
+                  if (type === 'img' || type === 'figure' || type === 'div' || (child.props as any)?.src) {
                     return true;
+                  }
+                  if (type === 'a' || (child.props as any)?.href) {
+                    const childProps = child.props as any;
+                    if (childProps && childProps.href && (childProps.href.includes('youtube.com') || childProps.href.includes('youtu.be')) && !childProps.href.includes('no-embed')) {
+                      return true;
+                    }
                   }
                 }
                 return false;

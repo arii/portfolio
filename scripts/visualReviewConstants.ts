@@ -6,7 +6,7 @@ export const VIEWPORTS = [
   { name: 'Mobile', width: 375, height: 667, suffix: '-mobile', isMobile: true }
 ];
 
-export const ARTIFACTS_DIR = path.join(process.cwd(), 'artifacts');
+export const ARTIFACTS_DIR = process.env.IMPACT_ARTIFACTS_DIR ?? path.join(process.cwd(), 'artifacts');
 export const DEFAULT_VIEWPORTS = [
   { name: 'Desktop', width: 1440, height: 900, suffix: '' },
   { name: 'Mobile', width: 375, height: 667, suffix: '-mobile' }

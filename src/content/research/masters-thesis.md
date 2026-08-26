@@ -11,7 +11,6 @@ tags:
   - MIT CSAIL
 category: "Robotics & AI"
 summary: "My Master's thesis on learning robust whole-arm and bimanual grasping policies to cradle and secure bulky, unmodeled objects under physical and pose uncertainty."
-videoUrl: "https://www.youtube.com/watch?v=pmdjquZoJkE"
 pdfUrl: "https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_ml.pdf"
 ---
 
@@ -20,14 +19,6 @@ pdfUrl: "https://raw.githubusercontent.com/arii/arii.github.io/main/reports/repo
 * **Author:** Ariel Anders
 * **Advisors:** Prof. Leslie Pack Kaelbling & Prof. Tomás Lozano-Pérez
 * **Institution:** Massachusetts Institute of Technology (MIT CSAIL)
-
----
-
-## Demonstration Video
-
-https://www.youtube.com/watch?v=pmdjquZoJkE
-
-*Whole-arm and bimanual grasping demonstrations securing bulky, irregular objects on the PR2.*
 
 ---
 
@@ -82,7 +73,6 @@ Validation of my learned whole-arm manipulation policies on the physical PR2:
 * [PR2 Grasping Demonstration 1](https://www.youtube.com/watch?v=2mGN3ka_7i0)
 * [PR2 Grasping Demonstration 2](https://www.youtube.com/watch?v=-V2KtcETAi8)
 * [PR2 Grasping Demonstration 3](https://www.youtube.com/watch?v=QgoJKaoZ3dY)
-* [PR2 Grasping Demonstration 4](https://www.youtube.com/watch?v=WfJ6xRo0Y9Y)
 
 ---
 

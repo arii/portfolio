@@ -140,7 +140,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
               {getCalloutIcon(feature.iconName)}
               <div className="space-y-1">
                 <h3 className="text-sm sm:text-base font-bold text-text-main text-balance">{feature.title}</h3>
-                <p className="text-xs sm:text-sm text-slate-400 leading-relaxed text-pretty">{feature.description}</p>
+                <p className="text-xs sm:text-sm text-text-dim leading-relaxed text-pretty">{feature.description}</p>
               </div>
             </div>
           ))}

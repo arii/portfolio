@@ -132,6 +132,7 @@ __pycache__/
 
 # Local screenshots
 screenshot_*.png
+test-results/
 
 # Temporary task markdown files
 issues.md
@@ -139,3 +140,5 @@ mit_bwsi.md
 
 # Temporary baseline worktree
 .tmp-main/
+.tmp-main-old/
+.tmp-main-new/

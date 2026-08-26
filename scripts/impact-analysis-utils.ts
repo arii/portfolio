@@ -500,11 +500,12 @@ function getAffectedUrlsByPublicFiles(changedFiles: string[]): string[] {
  * Generates and writes the impact analysis reports.
  */
 export function generateReports(report: ImpactReport, changedFiles: string[], affectedDynamicImportsSet: string[]) {
-  const outputDir = path.join(process.cwd(), 'artifacts', 'impact-analysis');
+  const artifactsDir = process.env.IMPACT_ARTIFACTS_DIR ?? path.join(process.cwd(), 'artifacts');
+  const outputDir = path.join(artifactsDir, 'impact-analysis');
   if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir, { recursive: true });
 
   fs.writeFileSync(path.join(outputDir, 'impact.json'), JSON.stringify(report, null, 2));
-  fs.writeFileSync(path.join(process.cwd(), 'artifacts', 'impact-analysis.json'), JSON.stringify(report, null, 2));
+  fs.writeFileSync(path.join(artifactsDir, 'impact-analysis.json'), JSON.stringify(report, null, 2));
 
   let baseUrl = process.env.VITE_APP_URL || 'https://boomtick.blog';
   if (process.env.GITHUB_PAGES_URL) {
