@@ -586,6 +586,21 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
                 );
               }
 
+              // Prevent block-level child elements (like figures from image renderers) from nesting inside <p>
+              const hasBlockChild = childrenArray.some(child => {
+                if (React.isValidElement(child)) {
+                  const type = child.type;
+                  if (type === 'img' || type === 'figure' || (child.props as any)?.src) {
+                    return true;
+                  }
+                }
+                return false;
+              });
+
+              if (hasBlockChild) {
+                return <div className="mb-6">{children}</div>;
+              }
+
               return (
                 <p className="text-text-body text-base leading-relaxed mb-6" {...props}>
                   {children}

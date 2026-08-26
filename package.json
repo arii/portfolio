@@ -35,9 +35,10 @@
       "td-cli"
     ],
     "ignoreDependencies": [
-      "autoprefixer",
-      "postcss",
-      "tailwindcss"
+      "dependency-cruiser",
+      "openai",
+      "@types/diff",
+      "@types/pixelmatch"
     ],
     "ignoreExportsUsedInFile": true
   },
