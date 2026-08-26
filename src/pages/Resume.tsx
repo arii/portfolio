@@ -23,6 +23,7 @@ const Resume: React.FC<ResumeProps> = ({ version = 'v2.1' }) => {
   };
 
   // Expand/collapse states for full-width layout (default to true/expanded)
+  const [expandExperience, setExpandExperience] = useState(false); // starts collapsed
   const [expandSkills, setExpandSkills] = useState(true);
   const [expandProjects, setExpandProjects] = useState(true);
   const [expandEducation, setExpandEducation] = useState(true);
@@ -31,6 +32,7 @@ const Resume: React.FC<ResumeProps> = ({ version = 'v2.1' }) => {
   const [expandHonors, setExpandHonors] = useState(true);
 
   const toggleAll = (expand: boolean) => {
+    setExpandExperience(expand);
     setExpandSkills(expand);
     setExpandProjects(expand);
     setExpandEducation(expand);
@@ -55,7 +57,12 @@ const Resume: React.FC<ResumeProps> = ({ version = 'v2.1' }) => {
       {layoutMode === 'full' ? (
         <div className="space-y-12 print:space-y-6">
           {/* Full-width Experience Section */}
-          <ExperienceSection experiences={resumeData.experience} />
+          <ExperienceSection
+            experiences={resumeData.experience}
+            isCollapsible={true}
+            isExpanded={expandExperience}
+            onToggleExpand={() => setExpandExperience(!expandExperience)}
+          />
 
           {/* Collapsible Action Bar */}
           <div className="flex justify-end gap-3 print:hidden border-b border-border/40 pb-2">
@@ -121,7 +128,12 @@ const Resume: React.FC<ResumeProps> = ({ version = 'v2.1' }) => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 print:block print:gap-0">
           {/* Left Column: Primary Experience Track */}
           <div className="lg:col-span-7 print:col-span-12 space-y-10 print:space-y-6">
-            <ExperienceSection experiences={resumeData.experience} />
+            <ExperienceSection
+              experiences={resumeData.experience}
+              isCollapsible={true}
+              isExpanded={expandExperience}
+              onToggleExpand={() => setExpandExperience(!expandExperience)}
+            />
             <ProjectsSection projects={resumeData.projects} />
           </div>
 
