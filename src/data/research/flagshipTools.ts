@@ -8,8 +8,10 @@ export const flagshipTools: ResearchTool[] = [
     title: 'HRM (Heart Rate Monitor)',
     description: 'I developed Web Bluetooth heart-rate telemetry synced across multiple clients via persistent WebSocket server, with Spotify API integration and a synchronized timer. Built end-to-end as a DevAI-assisted engineering project.',
     category: 'Product Development',
-    status: 'Local only',
+    status: 'Live',
     tags: ['React', 'Web Bluetooth', 'Spotify API', 'Product'],
+    externalUrl: 'https://arii.github.io/hrm/',
+    externalLinkDisplayLabel: 'Live Demo',
     sourceUrl: 'https://github.com/arii/hrm',
     isFlagship: true,
     imageAlt: 'Screenshot of the HRM heart rate monitor training dashboard with real-time biometric telemetry and Spotify integration'
