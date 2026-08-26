@@ -60,7 +60,7 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
       }`}
     >
       {tool.customPreview ? (
-        <div className="p-6 bg-bg border-b border-line min-h-[140px] flex flex-col justify-center space-y-2">
+        <div className="p-6 bg-bg border-b border-line aspect-[16/10] max-h-48 sm:max-h-64 flex flex-col justify-center space-y-2">
           <div className="text-accent font-extrabold text-sm tracking-wider font-display">
             {tool.customPreview.logo.prefix}<span className="text-text-main">{tool.customPreview.logo.accent}</span><span className="text-text-dim font-light">{tool.customPreview.logo.suffix}</span>
           </div>
@@ -106,7 +106,7 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
             <h3 className="text-xl font-bold text-text-main mt-1 font-display group-hover:text-accent transition-colors">{tool.title}</h3>
             {tool.subtitle && <p className="text-xs text-accent font-semibold tracking-wide mt-1 uppercase font-sans">{tool.subtitle}</p>}
           </div>
-          <p className="text-sm text-text-dim leading-relaxed line-clamp-3">{tool.description}</p>
+          <p className="text-sm text-text-dim leading-relaxed ">{tool.description}</p>
         </div>
 
         <div className="space-y-4 pt-4 border-t border-line">

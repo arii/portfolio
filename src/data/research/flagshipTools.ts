@@ -21,7 +21,7 @@ export const flagshipTools: ResearchTool[] = [
     inDevMessage: { highlight: 'Available now for testing', rest: ' with your own repository.' },
     taxonomyBucket: 'product',
     title: 'RepoAuditor',
-    description: 'I created an automated GitHub PR auditing tool built on a Gemini-driven CI/CD pipeline with Jules autonomous coding agent integration. An independent project demonstrating agentic engineering workflow — not prior paid work.',
+    description: 'A DevAI Agent Orchestration console engineered for automated repository auditing and continuous health monitoring. Combines LLM-driven PR analysis, custom review constraints, and Jules autonomous coding agent environments to accelerate development triage pipelines.',
     category: 'DevAI Tooling',
     status: 'Live',
     tags: ['DevAI', 'GitHub API', 'Multi-agent', 'Workflow'],
