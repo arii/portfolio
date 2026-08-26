@@ -37,9 +37,9 @@ describe('Resume Page', () => {
     expect(screen.getByText(/Robohub’s 30 Women in Robotics You Need to Know About/i)).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: /^Teaching & Leadership$/i })).toBeInTheDocument();
     expect(screen.getByText(/Olin College of Engineering/i)).toBeInTheDocument();
-    expect(screen.getByText(/6\.141 \/ 16\.405/i)).toBeInTheDocument();
-    expect(screen.getByText(/6\.101/i)).toBeInTheDocument();
-    expect(screen.getByText(/Precalculus, College Algebra/i)).toBeInTheDocument();
+    expect(screen.getByText(/6\.141\/16\.405/i)).toBeInTheDocument();
+    expect(screen.getByText(/6\.01/i)).toBeInTheDocument();
+    expect(screen.getByText(/Math 2 Stretch/i)).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: /^Impact Projects$/i })).toBeInTheDocument();
 
     // Experience timeline & nested sub-roles

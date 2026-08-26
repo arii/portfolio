@@ -39,24 +39,24 @@ export const honorsData: ResumeHonor[] = [
 
 export const teachingData: ResumeTeaching[] = [
   {
-    title: "Lecturer / Adjunct Instructor",
-    period: "2020",
-    details: "Olin College of Engineering. Taught autonomous robotics and systems courses, designing curriculum and leading project-based hands-on laboratory instruction."
+    title: "Instructor, Dynamics (ENGR 2340)",
+    period: "Fall 2017",
+    details: "Olin College of Engineering. Served as instructor for core course covering particle/rigid body dynamics and linear systems theory. Delivered lectures, led labs, and integrated MATLAB and Box2D physics simulator into curriculum."
+  },
+  {
+    title: "Technical Instructor & Lead Associate Instructor",
+    period: "Summer 2016 – Summer 2017",
+    details: "MIT Beaver Works Summer Institute (BWSI). Taught Autonomous Mini Grand Prix course (RACECAR platform running ROS) for high school students. Led associate instructors, created lab curriculum, and authored published Model AI visual servoing materials."
   },
   {
     title: "Graduate Teaching Assistant",
-    period: "2015 – 2017",
-    details: "MIT EECS & AeroAstro. TA for 6.141 / 16.405 (Robotics: Science and Systems) and 6.101 (Introductory Analog Electronics Laboratory). Developed lab assignments, led lab sections, and mentored student teams."
+    period: "Spring 2015 – Spring 2017",
+    details: "MIT EECS & AeroAstro. TA for Robotics: Science and Systems (6.141/16.405), Intro to EECS (6.01), and Introductory Analog Electronics Lab (6.101). Guided students in sensing, computation, kinematics, state estimation, and system modeling."
   },
   {
-    title: "Lead Associate Instructor & Curriculum Developer",
-    period: "2016 – 2019",
-    details: "MIT Beaver Works Summer Institute (BWSI). Co-designed and taught the flagship autonomous RACECAR summer course for high school students. Authored published Model AI visual servoing curriculum."
-  },
-  {
-    title: "Undergraduate Teaching Assistant & Tutor",
-    period: "2010 – 2012",
-    details: "UC Santa Cruz. Supported undergraduate mathematics and computer engineering courses, including Precalculus, College Algebra, and intro STEM courses."
+    title: "Undergraduate Teaching Assistant & ACE Co-leader",
+    period: "Winter 2009 – Winter 2012",
+    details: "UC Santa Cruz. Course TA for Math 2 Stretch (College Algebra for Calculus) and Math 2 & 3 (College Algebra & Pre-calculus). Co-led Academic Excellence (ACE) sections for Math 19B (Calculus) and taught Girls in Engineering robotics workshops."
   },
   {
     title: "Frederick C. Hennie III Teaching Award",
