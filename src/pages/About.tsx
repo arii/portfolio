@@ -3,10 +3,16 @@ import roboticistPhoto from '@/assets/roboticist.jpg';
 import { profileData } from '@/data/aboutData';
 import { CareerHighlightsSection, AtAGlanceSidebar } from '@/components/about/AboutSections';
 import { resolveAssetUrl } from '@/utils/asset';
+import SEO from '@/components/SEO';
 
 const About: React.FC = () => {
   return (
     <div className="space-y-8 sm:space-y-12">
+      <SEO
+        title="About Ariel"
+        description="Ariel Anders, PhD: MIT CSAIL robotics background, research history, technology career, and personal interests."
+        canonicalUrl="/about"
+      />
       <header className="space-y-3 border-b border-line/20 pb-6 sm:pb-8">
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-text-main leading-tight">
           About Ariel

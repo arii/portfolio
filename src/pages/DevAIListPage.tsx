@@ -5,7 +5,7 @@ import ResearchCard from '@/components/ResearchCard';
 import FlagshipCard from '@/components/FlagshipCard';
 import ImageLightbox from '@/components/ImageLightbox';
 import { Layers } from 'lucide-react';
-import { Helmet } from 'react-helmet-async';
+import SEO from '@/components/SEO';
 
 export interface DevAIListPageProps {
   onNavigate: (slug: string) => void;
@@ -60,12 +60,11 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
 
   return (
     <div className="space-y-12 sm:space-y-16">
-      <Helmet>
-        <title>DevAI &amp; Software Systems | Ariel Anders</title>
-        <meta name="description" content="System architectures, agentic CI/CD pipelines, autonomous developer tooling, and shipped production applications." />
-        <meta property="og:title" content="DevAI &amp; Software Systems | Ariel Anders" />
-        <meta property="og:description" content="System architectures, agentic CI/CD pipelines, autonomous developer tooling, and shipped production applications." />
-      </Helmet>
+      <SEO
+        title="DevAI & Software Systems"
+        description="System architectures, agentic CI/CD pipelines, autonomous developer tooling, and shipped production applications."
+        canonicalUrl="/devai"
+      />
 
       <header className="space-y-3 border-b border-line/20 pb-6 sm:pb-8">
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-text-main leading-tight">DevAI &amp; Software Systems</h1>
