@@ -132,6 +132,7 @@ __pycache__/
 
 # Local screenshots
 screenshot_*.png
+test-results/
 
 # Temporary task markdown files
 issues.md
