@@ -40,8 +40,8 @@ const config: Config = {
       fontFamily: {
         // Updated to a non-AI default typeface (Plus Jakarta Sans)
         sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
-        display: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
-        serif: ['"Georgia"', 'serif'],
+        display: ['"Playfair Display"', 'system-ui', 'sans-serif'],
+        serif: ['"Playfair Display"', 'Georgia', 'serif'],
         mono: ['"SFMono-Regular"', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
       },
     },

@@ -269,7 +269,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
         <p className="mt-2 text-text-dim">The requested research paper could not be found.</p>
         <button
           onClick={onBack}
-          className="mt-6 inline-flex items-center space-x-2 rounded-xl bg-accent-sky hover:bg-accent-sky/90 text-bg px-4 py-2 text-sm font-semibold transition-colors min-h-[44px]"
+          className="mt-6 inline-flex items-center space-x-2 rounded-xl bg-surface border border-line hover:bg-surface-alt text-text-main px-4 py-2 text-sm font-semibold transition-colors min-h-[44px]"
         >
           <ArrowLeft className="h-4 w-4" />
           <span>Back to Research</span>
