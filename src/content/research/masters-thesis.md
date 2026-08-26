@@ -68,6 +68,8 @@ Simulation trials evaluating policy convergence, trajectory generation, and stab
   [![RL Simulation Run 5 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=s1vjsvnPfdc#no-embed](/assets/research/masters-thesis/rl_sim_5.gif#max-w-xl)](https://www.youtube.com/watch?v=s1vjsvnPfdc#no-embed)
 * **RL Simulation Run 6**
   [![RL Simulation Run 6 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=gf2vNOKEKXc#no-embed](/assets/research/masters-thesis/rl_sim_6.gif#max-w-xl)](https://www.youtube.com/watch?v=gf2vNOKEKXc#no-embed)
+* **RL Simulation Run 7**
+  [![RL Simulation Run 7 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=-V2KtcETAi8#no-embed](/assets/research/masters-thesis/rl_sim_7.gif#max-w-xl)](https://www.youtube.com/watch?v=-V2KtcETAi8#no-embed)
 
 ---
 
@@ -78,11 +80,9 @@ Validation of my learned whole-arm manipulation policies on the physical PR2:
 * **PR2 Grasping Demonstration 1**
   [![PR2 Grasping Demonstration 1 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=2mGN3ka_7i0#no-embed](/assets/research/masters-thesis/pr2_grasp_1.gif#max-w-xl)](https://www.youtube.com/watch?v=2mGN3ka_7i0#no-embed)
 * **PR2 Grasping Demonstration 2**
-  [![PR2 Grasping Demonstration 2 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=-V2KtcETAi8#no-embed](/assets/research/masters-thesis/pr2_grasp_2.gif#max-w-xl)](https://www.youtube.com/watch?v=-V2KtcETAi8#no-embed)
+  [![PR2 Grasping Demonstration 2 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=QgoJKaoZ3dY#no-embed](/assets/research/masters-thesis/pr2_grasp_2.gif#max-w-xl)](https://www.youtube.com/watch?v=QgoJKaoZ3dY#no-embed)
 * **PR2 Grasping Demonstration 3**
-  [![PR2 Grasping Demonstration 3 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=QgoJKaoZ3dY#no-embed](/assets/research/masters-thesis/pr2_grasp_3.gif#max-w-xl)](https://www.youtube.com/watch?v=QgoJKaoZ3dY#no-embed)
-* **PR2 Grasping Demonstration 4**
-  [![PR2 Grasping Demonstration 4 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=bgHzqflrkCE#no-embed](/assets/research/masters-thesis/pr2_grasp_4.gif#max-w-xl)](https://www.youtube.com/watch?v=bgHzqflrkCE#no-embed)
+  [![PR2 Grasping Demonstration 3 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=bgHzqflrkCE#no-embed](/assets/research/masters-thesis/pr2_grasp_3.gif#max-w-xl)](https://www.youtube.com/watch?v=bgHzqflrkCE#no-embed)
 
 ---
 
