@@ -116,8 +116,10 @@ export function ensureDirectory(directory: string): void {
 export function routeToSlug(route: string): string {
   if (route === '/') return 'home';
 
-  const withoutQuery = route.split('?')[0] ?? route;
-  const slug = withoutQuery
+  const parts = route.split('?');
+  const pathPart = parts[0] ?? route;
+  const queryPart = parts[1] ? '-' + parts[1].replace(/[^a-zA-Z0-9-]+/g, '-') : '';
+  const slug = (pathPart + queryPart)
     .replace(/^\/+|\/+$/g, '')
     .replace(/[:*]/g, '')
     .replace(/[^a-zA-Z0-9-]+/g, '-')

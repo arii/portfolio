@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import Resume from '../Resume';
 import { describe, it, expect } from 'vitest';
 
@@ -12,7 +13,11 @@ window.matchMedia = window.matchMedia || function() {
 
 describe('Resume Page', () => {
   it('renders all sections and updated content correctly', () => {
-    render(<Resume />);
+    render(
+      <MemoryRouter>
+        <Resume />
+      </MemoryRouter>
+    );
 
     // Header title & PDF button
     expect(screen.getByText('Resume')).toBeInTheDocument();
