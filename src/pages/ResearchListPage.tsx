@@ -1,11 +1,9 @@
 import React, { useState, useMemo } from 'react';
-import { ACADEMIC_PAPERS } from '@/data/academicResearch';
 import { RESEARCH_AUTONOMOUS, RESEARCH_THESIS } from '@/data/research-papers';
-import AcademicCard from '@/components/AcademicCard';
 import FlagshipCard from '@/components/FlagshipCard';
 import ToolCard from '@/components/ToolCard';
 import ImageLightbox from '@/components/ImageLightbox';
-import { BookOpen, Layers, Wrench } from 'lucide-react';
+import { Layers, Wrench } from 'lucide-react';
 import SEO from '@/components/SEO';
 
 export interface ResearchListPageProps {
@@ -38,16 +36,6 @@ const ResearchListPage: React.FC<ResearchListPageProps> = ({ onNavigate }) => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl">
           {thesisTools.map((tool) => (<FlagshipCard key={tool.id} tool={tool} onNavigate={onNavigate} onImageClick={setLightboxImage} />))}
-        </div>
-      </section>
-
-      <section className="space-y-8" id="academic">
-        <div className="border-b border-line pb-3 flex items-center justify-between">
-          <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-text-main flex items-center space-x-2 font-display"><BookOpen className="h-5 w-5 text-accent" /><span>Peer-Reviewed Publications</span></h2>
-          <span className="text-xs text-text-dim uppercase tracking-widest">ICRA, IJRR, ISEC</span>
-        </div>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {ACADEMIC_PAPERS.filter(p => !p.title.includes('PhD Thesis') && p.type !== "Master's Thesis").map((paper) => (<AcademicCard key={paper.id} paper={paper} />))}
         </div>
       </section>
 
