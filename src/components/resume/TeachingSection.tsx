@@ -28,7 +28,7 @@ export const TeachingSection: React.FC<TeachingSectionProps> = ({
           <button
             type="button"
             onClick={onToggleExpand}
-            className="text-xs font-semibold text-primary hover:text-primary/80 bg-primary/10 hover:bg-primary/20 px-3 py-1.5 rounded-full transition-colors print:hidden min-h-[44px] min-w-[80px]"
+            className="text-xs font-semibold text-primary hover:text-primary/80 bg-primary/10 hover:bg-primary/20 px-3 py-1.5 rounded-md transition-colors print:hidden min-h-[44px] min-w-[80px]"
             aria-expanded={isExpanded}
             aria-controls="teaching-content"
           >
@@ -41,7 +41,7 @@ export const TeachingSection: React.FC<TeachingSectionProps> = ({
           <div key={idx} className="space-y-1">
             <div className="flex items-baseline justify-between gap-2">
               <h3 className="text-sm font-bold text-foreground print:text-black">{item.title}</h3>
-              <span className="text-xs font-mono text-muted-foreground print:text-text-dim shrink-0">{item.period}</span>
+              <span className="text-xs text-muted-foreground font-medium print:text-text-dim shrink-0">{item.period}</span>
             </div>
             <p className="text-xs text-muted-foreground leading-relaxed print:text-text-body">{item.details}</p>
           </div>

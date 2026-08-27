@@ -43,7 +43,7 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({
             </a>
           )}
         </div>
-        <span className="text-xs font-mono text-muted-foreground print:text-text-dim whitespace-nowrap mt-1 sm:mt-0">{exp.period}</span>
+        <span className="text-xs text-muted-foreground font-medium print:text-text-dim whitespace-nowrap mt-1 sm:mt-0">{exp.period}</span>
       </div>
       <div className="text-primary font-semibold mb-2 text-base print:text-black print:mb-1">{exp.company}</div>
       {exp.description && (
@@ -69,7 +69,7 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({
             <div key={sIdx} className="space-y-2 pl-4 border-l-2 border-border/60 print:border-border">
               <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
                 <span className="text-sm font-bold text-foreground print:text-black">{subRole.title}</span>
-                <span className="text-xs font-mono text-muted-foreground print:text-text-dim">{subRole.period}</span>
+                <span className="text-xs text-muted-foreground font-medium print:text-text-dim">{subRole.period}</span>
               </div>
               <ul className="space-y-1.5">
                 {subRole.points.map((point, pIdx) => (
@@ -100,7 +100,7 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({
             <button
               type="button"
               onClick={onToggleExpand}
-              className="text-xs font-semibold text-primary hover:text-primary/80 bg-primary/10 hover:bg-primary/20 px-4 py-2 rounded-full transition-colors min-h-[44px]"
+              className="text-xs font-semibold text-primary hover:text-primary/80 bg-primary/10 hover:bg-primary/20 px-4 py-2 rounded-md transition-colors min-h-[44px]"
               aria-expanded={isExpanded}
               aria-controls="legacy-experience"
             >

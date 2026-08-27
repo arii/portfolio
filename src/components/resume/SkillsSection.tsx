@@ -28,7 +28,7 @@ export const SkillsSection: React.FC<SkillsSectionProps> = ({
           <button
             type="button"
             onClick={onToggleExpand}
-            className="text-xs font-semibold text-primary hover:text-primary/80 bg-primary/10 hover:bg-primary/20 px-3 py-1.5 rounded-full transition-colors print:hidden min-h-[44px] min-w-[80px]"
+            className="text-xs font-semibold text-primary hover:text-primary/80 bg-primary/10 hover:bg-primary/20 px-3 py-1.5 rounded-md transition-colors print:hidden min-h-[44px] min-w-[80px]"
             aria-expanded={isExpanded}
             aria-controls="skills-content"
           >

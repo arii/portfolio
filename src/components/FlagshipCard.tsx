@@ -61,7 +61,7 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
     >
       {tool.customPreview ? (
         <div className="p-6 bg-bg border-b border-line aspect-[16/10] max-h-48 sm:max-h-64 flex flex-col justify-center space-y-2">
-          <div className="text-accent font-extrabold text-sm tracking-wider font-display">
+          <div className="text-accent font-extrabold text-sm font-display">
             {tool.customPreview.logo.prefix}<span className="text-text-main">{tool.customPreview.logo.accent}</span><span className="text-text-dim font-light">{tool.customPreview.logo.suffix}</span>
           </div>
           <div className="text-text-main font-black text-lg leading-tight font-display">
@@ -92,7 +92,7 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
             <div className="h-10 w-10 rounded-2xl bg-accent/10 flex items-center justify-center border border-accent/20"><ToolIcon className="h-5 w-5 text-accent" /></div>
             {tool.id !== 'phd-thesis' && tool.id !== 'masters-thesis' && (
               <div className="flex items-center space-x-1.5 bg-surface border border-line px-2 py-1 rounded-md">
-                <span className={`w-2 h-2 rounded-full ${
+                <span className={`w-2 h-2 rounded-md ${
                   tool.status === 'Live' ? 'bg-accent' :
                   tool.status === 'Local only' ? 'bg-accent' :
                   tool.status === 'In development' ? 'bg-accent-sky' : 'bg-muted-foreground'
@@ -103,16 +103,16 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
           </div>
           <div>
             <span className="text-xs text-accent font-semibold block font-sans">{tool.category}</span>
-            <h3 className="text-xl font-bold text-text-main mt-1 font-display group-hover:text-accent transition-colors">{tool.title}</h3>
-            {tool.subtitle && <p className="text-xs text-accent font-semibold tracking-wide mt-1 uppercase font-sans">{tool.subtitle}</p>}
+            <h3 className="text-xl font-bold text-text-main mt-1 font-display group-hover:text-accent transition-colors text-balance">{tool.title}</h3>
+            {tool.subtitle && <p className="text-xs text-accent font-semibold mt-1 text-balance">{tool.subtitle}</p>}
           </div>
-          <p className="text-sm text-text-dim leading-relaxed ">{tool.description}</p>
+          <p className="text-sm text-text-dim leading-relaxed text-pretty">{tool.description}</p>
         </div>
 
         <div className="space-y-4 pt-4 border-t border-line">
           <div className="flex flex-wrap gap-1.5">
             {tool.tags.map((tag) => (
-              <span key={tag} className="px-2.5 py-0.5 rounded-full text-[10px] font-sans bg-surface text-text-dim border border-line">{tag}</span>
+              <span key={tag} className="px-2.5 py-0.5 rounded-md text-[10px] bg-surface text-text-dim border border-line">{tag}</span>
             ))}
           </div>
 

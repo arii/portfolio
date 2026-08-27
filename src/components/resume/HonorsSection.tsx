@@ -28,7 +28,7 @@ export const HonorsSection: React.FC<HonorsSectionProps> = ({
           <button
             type="button"
             onClick={onToggleExpand}
-            className="text-xs font-semibold text-primary hover:text-primary/80 bg-primary/10 hover:bg-primary/20 px-3 py-1.5 rounded-full transition-colors print:hidden min-h-[44px] min-w-[80px]"
+            className="text-xs font-semibold text-primary hover:text-primary/80 bg-primary/10 hover:bg-primary/20 px-3 py-1.5 rounded-md transition-colors print:hidden min-h-[44px] min-w-[80px]"
             aria-expanded={isExpanded}
             aria-controls="honors-content"
           >
@@ -52,7 +52,7 @@ export const HonorsSection: React.FC<HonorsSectionProps> = ({
                 <span className="text-xs text-muted-foreground print:text-text-dim block">{honor.organization}</span>
               )}
             </div>
-            <span className="text-xs font-mono text-muted-foreground print:text-text-dim whitespace-nowrap shrink-0">{honor.year}</span>
+            <span className="text-xs text-muted-foreground font-medium print:text-text-dim whitespace-nowrap shrink-0">{honor.year}</span>
           </div>
         ))}
       </div>

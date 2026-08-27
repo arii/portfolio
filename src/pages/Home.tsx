@@ -59,7 +59,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-text-main tracking-tight leading-tight text-balance">
                 {heroContent.name}
               </h1>
-              <p className="text-text-body font-semibold text-lg sm:text-xl font-mono text-balance">
+              <p className="text-text-body font-semibold text-lg sm:text-xl text-balance">
                 {heroContent.title}
               </p>
             </div>

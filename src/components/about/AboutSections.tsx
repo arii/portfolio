@@ -10,7 +10,7 @@ export const CareerHighlightsSection: React.FC<{ highlights: ProfileData['highli
     <div className="space-y-4">
       {highlights.map((item, idx) => (
         <div key={idx} className="flex flex-col sm:flex-row sm:items-baseline justify-between border-b border-line/20 pb-3 last:border-0 last:pb-0 gap-1 sm:gap-4">
-          <div className="shrink-0 w-32 text-xs font-mono font-bold text-accent">
+          <div className="shrink-0 w-32 text-xs font-bold text-accent">
             {item.period}
           </div>
           <div className="grow space-y-0.5">
