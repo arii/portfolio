@@ -56,10 +56,10 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-line/80">
           <div className="space-y-3 max-w-3xl">
             <div className="space-y-1">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-text-main tracking-tight leading-tight text-balance font-display">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-text-main tracking-tight leading-tight text-balance">
                 {heroContent.name}
               </h1>
-              <p className="text-text-body font-semibold text-lg sm:text-xl font-mono text-balance">
+              <p className="text-text-body font-semibold text-lg sm:text-xl text-balance">
                 {heroContent.title}
               </p>
             </div>
