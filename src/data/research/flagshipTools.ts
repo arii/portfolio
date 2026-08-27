@@ -10,6 +10,7 @@ export const flagshipTools: ResearchTool[] = [
     category: 'Product Development',
     status: 'Live',
     tags: ['React', 'Web Bluetooth', 'Spotify API', 'Product'],
+    canonicalPath: '/research/hrm-architecture',
     externalUrl: 'https://arii.github.io/hrm/',
     externalLinkDisplayLabel: 'Live Demo',
     sourceUrl: 'https://github.com/arii/hrm',
