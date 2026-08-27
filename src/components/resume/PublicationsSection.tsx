@@ -20,7 +20,7 @@ export const PublicationsSection: React.FC<PublicationsSectionProps> = ({
   const displayedPublications = isCollapsible && !isExpanded ? publications.slice(0, 1) : publications;
 
   return (
-    <section className="mb-10 print:mb-6 print:break-inside-avoid">
+    <section id="publications" className="mb-10 print:mb-6 print:break-inside-avoid scroll-mt-24">
       <div className="flex items-center justify-between mb-4 border-b border-border/40 pb-2 print:border-b-2 print:border-black">
         <div className="flex items-center space-x-2.5">
           <FileText className="h-5 w-5 text-primary print:text-black" />
