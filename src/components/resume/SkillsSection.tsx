@@ -18,7 +18,7 @@ export const SkillsSection: React.FC<SkillsSectionProps> = ({
   const displayedSkills = isCollapsible && !isExpanded ? skills.slice(0, 2) : skills;
 
   return (
-    <section className="mb-12 print:mb-8 print:break-inside-avoid">
+    <section id="skills" className="mb-12 print:mb-8 print:break-inside-avoid scroll-mt-24">
       <div className="flex items-center justify-between mb-6 border-b border-border/40 pb-2 print:border-b-2 print:border-black">
         <div className="flex items-center space-x-3">
           <Code2 className="h-6 w-6 text-primary print:text-black" />

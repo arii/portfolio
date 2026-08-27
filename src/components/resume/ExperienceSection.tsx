@@ -87,7 +87,7 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({
   );
 
   return (
-    <section className="mb-12 print:mb-8">
+    <section id="experience" className="mb-12 print:mb-8 scroll-mt-24">
       <div className="flex items-center space-x-3 mb-6 border-b border-border/40 pb-2 print:border-b-2 print:border-black">
         <Briefcase className="h-6 w-6 text-primary print:text-black" />
         <h2 className="text-2xl font-semibold text-foreground print:text-black">Experience</h2>
