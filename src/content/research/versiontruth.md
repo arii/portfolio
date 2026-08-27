@@ -26,6 +26,22 @@ Host: boomtick.blog
 { "ecosystem": "gh-action", "name": "actions/checkout", "latest": "v6.0.1" }
 ```
 
+## Root Cause Incident: The Out-of-Distribution Downgrade
+
+The catalyst for VersionTruth was a recurring failure in agentic code review workflows. When deploying targeted reviewer agents—designed for low token usage, minimal context, and fast execution—both primary coding and reviewer agents confidently recommended downgrading `actions/checkout` to `@v4`.
+
+For historical context, `v4.1.0` was released in September 2023, while `v5.0.1` launched in November 2025, and subsequent stable releases reached `v7.0.0`.
+
+![AI incorrectly flagging v6 as invalid and suggesting a downgrade to v4](/images/studies/ai-incorrect-v4-suggestion.webp)
+
+This represents a classic out-of-distribution data error. The models encountered version tags (e.g., `v6`) released after their training cutoffs. Lacking real-time registry access, they hallucinated that the unfamiliar version was invalid and suggested reverting to the latest version present in their training data.
+
+This failure was not isolated to lightweight models like `gpt-4o-mini`. Testing confirmed that larger reasoning models, including Gemini 3.1 Pro, exhibited the exact same regression behavior, falsely identifying `v4` as the latest stable major release.
+
+![GitHub Releases showing v7.0.0, confirming versions beyond v4 are stable](/images/studies/github-checkout-v7-release.webp)
+
+While Agentic DevAI increases engineering velocity, this incident highlights the critical need for deterministic, external validation when handling dynamic infrastructure dependencies.
+
 ## Architectural Overview
 
 ```mermaid
