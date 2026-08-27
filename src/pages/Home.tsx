@@ -53,8 +53,8 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
       {/* Restructured to Balanced Vertical Layout with Optimized Spacing */}
       <section className="bg-surface/60 border border-line rounded-2xl p-6 sm:p-8 shadow-xl backdrop-blur-sm space-y-6">
         {/* Top block: Bio and CTAs */}
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-line/80">
-          <div className="space-y-3 max-w-3xl">
+        <div className="flex flex-col gap-6 pb-6 border-b border-line/80">
+          <div className="space-y-3 max-w-4xl">
             <div className="space-y-1">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-text-main tracking-tight leading-tight text-balance">
                 {heroContent.name}
@@ -72,7 +72,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
           </div>
 
           {/* CTA Buttons - High Contrast Solid buttons with dark text to fix accessibility */}
-          <div className="flex flex-col sm:flex-row lg:flex-col xl:flex-row items-stretch gap-3 shrink-0 lg:w-72 xl:w-auto">
+          <div className="flex flex-col sm:flex-row gap-4 pt-2">
             <Link
               to="/devai"
               onClick={(e) => {
