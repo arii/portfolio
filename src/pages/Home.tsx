@@ -53,13 +53,13 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
       {/* Restructured to Balanced Vertical Layout with Optimized Spacing */}
       <section className="bg-surface/60 border border-line rounded-2xl p-6 sm:p-8 shadow-xl backdrop-blur-sm space-y-6">
         {/* Top block: Bio and CTAs */}
-        <div className="flex flex-col gap-6 pb-6 border-b border-line/80">
-          <div className="space-y-3 max-w-4xl">
+        <div className="flex flex-col lg:flex-row lg:justify-between gap-6 lg:gap-8 pb-6 border-b border-line/80">
+          <div className="space-y-3 flex-1">
             <div className="space-y-1">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-text-main tracking-tight leading-tight text-balance">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-text-main tracking-tight leading-tight">
                 {heroContent.name}
               </h1>
-              <p className="text-text-body font-semibold text-lg sm:text-xl font-mono text-balance">
+              <p className="text-text-body font-semibold text-lg sm:text-xl font-mono">
                 {heroContent.title}
               </p>
             </div>
@@ -72,7 +72,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
           </div>
 
           {/* CTA Buttons - High Contrast Solid buttons with dark text to fix accessibility */}
-          <div className="flex flex-col sm:flex-row gap-4 pt-2">
+          <div className="flex flex-col gap-3 w-full lg:w-56 shrink-0 pt-2 lg:pt-0">
             <Link
               to="/devai"
               onClick={(e) => {
@@ -81,7 +81,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                    handleNav('devai');
                 }
               }}
-              className="inline-flex items-center justify-center gap-2 rounded-md bg-text-main hover:opacity-90 text-bg px-5 py-2.5 text-sm font-bold shadow transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-main min-h-[44px]"
+              className="inline-flex items-center justify-center gap-2 rounded-md bg-text-main hover:opacity-90 text-bg px-5 py-2.5 w-full text-sm font-bold shadow transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-main min-h-[44px]"
             >
               <Bot className="w-4 h-4" />
               <span>View Agentic DevAI Work</span>
@@ -96,7 +96,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                   handleNav('research');
                 }
               }}
-              className="inline-flex items-center justify-center gap-2 rounded-md border border-border bg-transparent text-text-body hover:text-text-main hover:bg-surface-elevated px-5 py-2.5 text-sm font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-border min-h-[44px]"
+              className="inline-flex items-center justify-center gap-2 rounded-md border border-border bg-transparent text-text-body hover:text-text-main hover:bg-surface-elevated px-5 py-2.5 w-full text-sm font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-border min-h-[44px]"
             >
               <Cpu className="w-4 h-4" />
               <span>View Robotics Research</span>
