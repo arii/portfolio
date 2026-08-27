@@ -52,7 +52,7 @@ const HeroPathCard: React.FC<HeroPathCardProps> = ({ card, onNavigate }) => {
         <Link
           to={card.href}
           onClick={handleClick}
-          className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-accent group-hover:underline focus:outline-none after:absolute after:inset-0"
+          className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-accent group-hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent after:absolute after:inset-0"
           aria-label={`${card.title} - ${card.ctaText}`}
         >
           <span>{card.ctaText}</span>
