@@ -18,7 +18,7 @@ export const EducationSection: React.FC<EducationSectionProps> = ({
   const displayedEducation = isCollapsible && !isExpanded ? education.slice(0, 1) : education;
 
   return (
-    <section className="mb-12 print:mb-8 print:break-inside-avoid">
+    <section id="education" className="mb-12 print:mb-8 print:break-inside-avoid scroll-mt-24">
       <div className="flex items-center justify-between mb-6 border-b border-border/40 pb-2 print:border-b-2 print:border-black">
         <div className="flex items-center space-x-3">
           <GraduationCap className="h-6 w-6 text-primary print:text-black" />
