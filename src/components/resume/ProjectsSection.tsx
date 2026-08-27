@@ -22,7 +22,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
       <div className="flex items-center justify-between mb-4 border-b border-border/40 pb-2 print:border-b-2 print:border-black">
         <div className="flex items-center space-x-2.5">
           <FolderGit2 className="h-5 w-5 text-primary print:text-black" />
-          <h2 className="text-xl font-bold text-foreground print:text-black uppercase tracking-wider font-display">Impact Projects</h2>
+          <h2 className="text-xl font-bold text-foreground print:text-black uppercase tracking-wider ">Impact Projects</h2>
         </div>
         {isCollapsible && onToggleExpand && (
           <button
@@ -49,7 +49,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                 )}
               </div>
               {project.metric && (
-                <span className="shrink-0 px-2 py-0.5 text-[10px] font-mono font-semibold rounded-md bg-primary/10 text-primary border border-primary/20 print:border-border print:text-black print:bg-transparent">
+                <span className="shrink-0 px-2 py-0.5 text-[10px]  font-semibold rounded-md bg-primary/10 text-primary border border-primary/20 print:border-border print:text-black print:bg-transparent">
                   {project.metric}
                 </span>
               )}
@@ -58,7 +58,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
             {project.techStack && (
               <div className="flex flex-wrap gap-1 pt-1 print:hidden">
                 {project.techStack.map((tech, tIdx) => (
-                  <span key={tIdx} className="px-1.5 py-0.5 text-[9px] font-mono rounded bg-secondary/80 text-foreground border border-border/50">
+                  <span key={tIdx} className="px-1.5 py-0.5 text-[9px]  rounded bg-secondary/80 text-foreground border border-border/50">
                     {tech}
                   </span>
                 ))}

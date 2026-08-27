@@ -43,7 +43,7 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({
             </a>
           )}
         </div>
-        <span className="text-xs font-mono text-muted-foreground print:text-text-dim whitespace-nowrap mt-1 sm:mt-0">{exp.period}</span>
+        <span className="text-xs  text-muted-foreground print:text-text-dim whitespace-nowrap mt-1 sm:mt-0">{exp.period}</span>
       </div>
       <div className="text-primary font-semibold mb-2 text-base print:text-black print:mb-1">{exp.company}</div>
       {exp.description && (
@@ -69,7 +69,7 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({
             <div key={sIdx} className="space-y-2 pl-4 border-l-2 border-border/60 print:border-border">
               <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
                 <span className="text-sm font-bold text-foreground print:text-black">{subRole.title}</span>
-                <span className="text-xs font-mono text-muted-foreground print:text-text-dim">{subRole.period}</span>
+                <span className="text-xs  text-muted-foreground print:text-text-dim">{subRole.period}</span>
               </div>
               <ul className="space-y-1.5">
                 {subRole.points.map((point, pIdx) => (
@@ -90,7 +90,7 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({
     <section className="mb-12 print:mb-8">
       <div className="flex items-center space-x-3 mb-6 border-b border-border/40 pb-2 print:border-b-2 print:border-black">
         <Briefcase className="h-6 w-6 text-primary print:text-black" />
-        <h2 className="text-2xl font-bold text-foreground print:text-black uppercase tracking-wider font-display">Experience</h2>
+        <h2 className="text-2xl font-bold text-foreground print:text-black uppercase tracking-wider ">Experience</h2>
       </div>
       <div className="space-y-8 print:space-y-6">
         {primaryExperiences.map((exp, idx) => renderExperienceItem(exp, idx))}

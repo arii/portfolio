@@ -67,14 +67,14 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
       />
 
       <header className="space-y-3 border-b border-line/20 pb-6 sm:pb-8">
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-text-main leading-tight font-display">DevAI &amp; Software Systems</h1>
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-text-main leading-tight ">DevAI &amp; Software Systems</h1>
         <p className="text-text-dim text-sm sm:text-base leading-relaxed">System architectures, agentic CI/CD pipelines, autonomous developer tooling, and shipped production applications.</p>
       </header>
 
       <section className="space-y-8" id="flagship">
         <div className="border-b border-line pb-3 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
           <div className="space-y-1">
-            <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-text-main flex items-center space-x-2 font-display">
+            <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-text-main flex items-center space-x-2 ">
               <Layers className="h-5 w-5 text-accent" />
               <span>Products built with DevAI</span>
             </h2>
@@ -92,7 +92,7 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
       <section className="space-y-8" id="articles">
         <div className="border-b border-line pb-3 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
           <div className="space-y-1">
-            <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-text-main flex items-center space-x-2 font-display">
+            <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-text-main flex items-center space-x-2 ">
               <Layers className="h-5 w-5 text-accent" />
               <span>Engineering Deep-Dives</span>
             </h2>

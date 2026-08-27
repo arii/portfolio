@@ -22,7 +22,7 @@ export const HonorsSection: React.FC<HonorsSectionProps> = ({
       <div className="flex items-center justify-between mb-6 border-b border-border/40 pb-2 print:border-b-2 print:border-black">
         <div className="flex items-center space-x-3">
           <Award className="h-6 w-6 text-primary print:text-black" />
-          <h2 className="text-2xl font-bold text-foreground print:text-black uppercase tracking-wider font-display">Honors & Recognition</h2>
+          <h2 className="text-2xl font-bold text-foreground print:text-black uppercase tracking-wider ">Honors & Recognition</h2>
         </div>
         {isCollapsible && onToggleExpand && (
           <button
@@ -52,7 +52,7 @@ export const HonorsSection: React.FC<HonorsSectionProps> = ({
                 <span className="text-xs text-muted-foreground print:text-text-dim block">{honor.organization}</span>
               )}
             </div>
-            <span className="text-xs font-mono text-muted-foreground print:text-text-dim whitespace-nowrap shrink-0">{honor.year}</span>
+            <span className="text-xs  text-muted-foreground print:text-text-dim whitespace-nowrap shrink-0">{honor.year}</span>
           </div>
         ))}
       </div>

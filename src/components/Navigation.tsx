@@ -47,7 +47,7 @@ const Navigation: React.FC = () => {
               <span className="text-sm sm:text-base font-bold tracking-tight text-foreground">
                 {heroContent.brandTitle}
               </span>
-              <span className="hidden sm:block text-xs text-muted-foreground font-mono">
+              <span className="hidden sm:block text-xs text-muted-foreground ">
                 {heroContent.brandRole}
               </span>
             </div>

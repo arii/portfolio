@@ -37,7 +37,7 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
         </div>
       )}
       <div className="flex justify-between items-start gap-2">
-        <h3 className="font-bold text-text-main text-sm font-display group-hover:text-accent transition-colors">{tool.title}</h3>
+        <h3 className="font-bold text-text-main text-sm  group-hover:text-accent transition-colors">{tool.title}</h3>
         <span className="text-[8px] bg-accent/10 text-accent px-1.5 py-0.5 rounded border border-accent/20 shrink-0">
           {tool.status}
         </span>
