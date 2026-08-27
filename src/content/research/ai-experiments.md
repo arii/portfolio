@@ -24,13 +24,13 @@ A collection of custom dev tools, background ETL pipelines, and automated UI tes
 
 ## 1. WCS Event Telemetry Scraping & ETL Pipeline
 
-**Stack:** Python • Pydantic • GitHub Actions • BeautifulSoup
+**Stack:** React • TypeScript • Python • Pydantic • GitHub Actions • BeautifulSoup
 
 ![WCS Telemetry Scraper execution console and schema validation interface](/assets/research/ai-experiments/wcs-scraper.png)
 
 Tracking regional West Coast Swing event schedules and dancer registries from the [World Swing Dance Council](https://worldwestcoastswingcouncil.com/events/) manually was a headache. Registration links broke often, and dates fell out of sync.
 
-To fix this, I wrote a lightweight scraper using `BeautifulSoup` and `Pydantic`. It handles missing registry links by creating fallback temporary hashes (`tmp_{hash(name)}`) so valid events never get dropped during ingestion.
+To fix this, I wrote a lightweight scraper using `BeautifulSoup` and `Pydantic`. It ensures HTML table parsing resilience by searching across structural variations (such as both `tr.event-row` and `div.event-item` containers). It also handles missing registry links by creating fallback temporary hashes (`tmp_{hash(name)}`) so valid events never get dropped during ingestion.
 
 ```python
 # etl/scraper.py - Pydantic validation & fallback hashing
@@ -65,7 +65,27 @@ The pipeline runs on a weekly GitHub Actions cron job. Before committing changes
     fi
 ```
 
-- **The Result:** The pipeline runs quietly in the background every Monday, keeping my frontend JSON data fresh with zero manual maintenance.
+To prevent bundle bloat, the React client consumes this data via a custom `useWCSData` hook that asynchronously fetches `public/data/event_queue.json`:
+
+```typescript
+// src/features/research/useWCSData.ts
+import { useState, useEffect } from 'react';
+
+export function useWCSData() {
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    fetch('/data/event_queue.json')
+      .then(res => res.json())
+      .then(data => setEvents(data))
+      .catch(err => console.error("Failed to load WCS events", err));
+  }, []);
+
+  return events;
+}
+```
+
+- **The Result:** The pipeline runs quietly in the background every Monday, keeping my frontend JSON data fresh with zero manual maintenance, while the lightweight client fetching prevents initial bundle bloat.
 
 ---
 
