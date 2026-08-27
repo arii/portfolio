@@ -72,7 +72,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
           </div>
 
           {/* CTA Buttons - High Contrast Solid buttons with dark text to fix accessibility */}
-          <div className="flex flex-col gap-3 w-full lg:w-56 shrink-0 pt-2 lg:pt-0">
+          <div className="flex flex-col sm:flex-row lg:flex-col gap-3 w-full sm:w-auto lg:w-56 shrink-0 pt-2 lg:pt-0">
             <Link
               to="/devai"
               onClick={(e) => {
@@ -81,7 +81,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                    handleNav('devai');
                 }
               }}
-              className="inline-flex items-center justify-center gap-2 rounded-md bg-text-main hover:opacity-90 text-bg px-5 py-2.5 w-full text-sm font-bold shadow transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-main min-h-[44px]"
+              className="inline-flex items-center justify-center gap-2 rounded-md bg-text-main hover:bg-text-body text-bg px-5 py-2.5 w-full max-w-xs sm:max-w-none sm:w-auto lg:w-full text-sm font-bold shadow transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-main min-h-[44px]"
             >
               <Bot className="w-4 h-4" />
               <span>View Agentic DevAI Work</span>
@@ -96,7 +96,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                   handleNav('research');
                 }
               }}
-              className="inline-flex items-center justify-center gap-2 rounded-md border border-border bg-transparent text-text-body hover:text-text-main hover:bg-surface-elevated px-5 py-2.5 w-full text-sm font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-border min-h-[44px]"
+              className="inline-flex items-center justify-center gap-2 rounded-md border border-border bg-transparent text-text-body hover:text-text-main hover:bg-surface-elevated px-5 py-2.5 w-full max-w-xs sm:max-w-none sm:w-auto lg:w-full text-sm font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-border min-h-[44px]"
             >
               <Cpu className="w-4 h-4" />
               <span>View Robotics Research</span>
