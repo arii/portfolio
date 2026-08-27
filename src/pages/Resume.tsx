@@ -126,24 +126,24 @@ const Resume: React.FC<ResumeProps> = ({ version = 'v2.1' }) => {
         </div>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 print:block print:gap-0">
-          {/* Left Column: Primary Experience Track */}
-          <div className="lg:col-span-7 print:col-span-12 space-y-10 print:space-y-6">
+          {/* Left Column: Primary Experience Track, Projects & Teaching */}
+          <div className="lg:col-span-6 print:col-span-12 space-y-10 print:space-y-6">
             <ExperienceSection
               experiences={resumeData.experience}
               isCollapsible={false}
             />
             <ProjectsSection projects={resumeData.projects} />
+            <TeachingSection teaching={resumeData.teaching} />
           </div>
 
-          {/* Right Sidebar: Skills, Education, Publications, Teaching & Honors */}
-          <div className="lg:col-span-5 print:col-span-12 space-y-10 print:space-y-6">
+          {/* Right Sidebar: Skills, Education, Publications & Honors */}
+          <div className="lg:col-span-6 print:col-span-12 space-y-10 print:space-y-6">
             <SkillsSection skills={resumeData.skills} />
             <EducationSection education={resumeData.education} />
             <PublicationsSection
               publications={resumeData.publications}
               scholarUrl={resumeData.scholarUrl}
             />
-            <TeachingSection teaching={resumeData.teaching} />
             <HonorsSection honors={resumeData.honors} />
           </div>
         </div>
