@@ -55,11 +55,9 @@ python dev-tools/aggregate_pr_context.py \
 
 ---
 
-## 2. Orchestrate Hybrid Inference with Azure and Gemini
+## 2. Orchestrate Inference with the Gemini API
 
-I engineered a hybrid model orchestration strategy to balance cost, latency, and capability. For complex codebase reasoning, I rely on Azure GitHub Models (`models.inference.ai.azure.com`) to handle deep logical analysis, while I utilize the Google Gemini Generative API for high-volume context ingestion and structured JSON output enforcement.
-
-This hybrid approach allows the pipeline to ingest massive diffs and build artifacts without truncation via Gemini's large context window, while offloading specific logic checks to Azure endpoints.
+I engineered the inference orchestration to call the Google Gemini API directly with the prepared context. I deliberately rely on Gemini's large context window to ingest massive diffs and build artifacts without truncation, ensuring the review agent has a complete picture before generating feedback.
 
 ```python
 import os
