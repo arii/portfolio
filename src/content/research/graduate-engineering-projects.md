@@ -7,7 +7,7 @@ tags:
   - Machine Learning
   - Hardware Acceleration
   - MIT
-category: "Graduate Engineering"
+category: "Robotics & Hardware"
 summary: "A showcase of advanced graduate-level engineering systems developed at MIT. These projects span real-time computer vision control, ordinal machine learning ranking, and parameterized hardware accelerators built using Bluespec SystemVerilog."
 ---
 

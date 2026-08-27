@@ -48,7 +48,7 @@ export const autonomousTools: ResearchTool[] = [
     title: 'Graduate Engineering Projects',
     subtitle: 'MIT Advanced Systems',
     description: 'I built advanced graduate-level engineering systems at MIT spanning real-time computer vision control, ordinal machine learning ranking, and parameterized hardware accelerators.',
-    category: 'Graduate Engineering',
+    category: 'Robotics & Hardware',
     status: 'Completed',
     tags: ['Robotics', 'Machine learning', 'Hardware acceleration', 'MIT'],
     image: '/assets/research/drone_follow.gif',

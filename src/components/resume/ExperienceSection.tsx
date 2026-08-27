@@ -33,7 +33,7 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({
       id={isLegacy && idx === 4 ? "legacy-experience" : undefined}
       className="relative pl-4 sm:pl-6 border-l-2 border-border print:border-black print:pl-4 focus:outline-none focus:ring-2 focus:ring-primary/20 rounded-lg"
     >
-      <div className="absolute w-3 h-3 bg-primary rounded-full -left-[7px] top-1.5 print:bg-black" />
+      <div className="absolute w-3 h-3 bg-primary rounded-md -left-[7px] top-1.5 print:bg-black" />
       <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-1 print:flex-row print:justify-between print:mb-0.5">
         <div className="flex items-center gap-2 flex-wrap">
           <h3 className="text-lg font-bold text-foreground print:text-black leading-tight">{exp.title}</h3>

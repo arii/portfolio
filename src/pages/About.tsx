@@ -44,7 +44,7 @@ const About: React.FC = () => {
 
           <div className="border border-accent/20 bg-accent/5 rounded-3xl p-6 sm:p-8 space-y-3">
             <span className="text-sm font-semibold text-text-main flex items-center space-x-1.5">
-              <span className="h-2 w-2 rounded-full bg-accent animate-pulse"></span>
+              <span className="h-2 w-2 rounded-md bg-accent animate-pulse"></span>
               <span>Current Availability</span>
             </span>
             <p className="text-sm text-text-body leading-relaxed">

@@ -65,7 +65,7 @@ const Navigation: React.FC = () => {
                   className={`flex items-center space-x-2 rounded-md px-4 py-2 text-sm font-medium transition-colors min-h-[48px] ${
                     active
                       ? 'bg-secondary text-foreground'
-                      : 'text-slate-400 hover:bg-muted hover:text-foreground'
+                      : 'text-text-dim hover:bg-muted hover:text-foreground'
                   }`}
                 >
                   <Icon className="h-4 w-4" />
