@@ -44,7 +44,7 @@ export const SkillsSection: React.FC<SkillsSectionProps> = ({
 
           return (
             <div key={idx} className="space-y-2">
-              <h3 className="text-xs  uppercase tracking-widest text-muted-foreground print:text-black font-bold">
+              <h3 className="text-xs uppercase tracking-widest text-muted-foreground print:text-black font-bold">
                 {skillGroup.category}
               </h3>
               <div className="flex flex-wrap gap-1.5">

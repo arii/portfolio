@@ -49,7 +49,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                 )}
               </div>
               {project.metric && (
-                <span className="shrink-0 px-2 py-0.5 text-[10px]  font-semibold rounded-md bg-primary/10 text-primary border border-primary/20 print:border-border print:text-black print:bg-transparent">
+                <span className="shrink-0 px-2 py-0.5 text-[10px] font-semibold rounded-md bg-primary/10 text-primary border border-primary/20 print:border-border print:text-black print:bg-transparent">
                   {project.metric}
                 </span>
               )}
@@ -58,7 +58,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
             {project.techStack && (
               <div className="flex flex-wrap gap-1 pt-1 print:hidden">
                 {project.techStack.map((tech, tIdx) => (
-                  <span key={tIdx} className="px-1.5 py-0.5 text-[9px]  rounded bg-secondary/80 text-foreground border border-border/50">
+                  <span key={tIdx} className="px-1.5 py-0.5 text-[9px] rounded bg-secondary/80 text-foreground border border-border/50">
                     {tech}
                   </span>
                 ))}

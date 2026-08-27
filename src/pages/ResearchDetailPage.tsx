@@ -409,18 +409,18 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
                 return (
                   <div className="my-6 rounded-2xl border border-line overflow-hidden bg-bg">
                     {language && (
-                      <div className="bg-surface px-4 py-2 border-b border-line text-[10px]  font-bold uppercase tracking-wider text-text-dim">
+                      <div className="bg-surface px-4 py-2 border-b border-line text-[10px] font-mono font-bold uppercase tracking-wider text-text-dim">
                         {language}
                       </div>
                     )}
-                    <pre className="p-4 overflow-x-auto text-sm  text-accent-sky/90 leading-relaxed bg-bg whitespace-pre-wrap break-words">
+                    <pre className="p-4 overflow-x-auto text-sm font-mono text-accent-sky/90 leading-relaxed bg-bg whitespace-pre-wrap break-words">
                       <code>{children}</code>
                     </pre>
                   </div>
                 );
               }
               return (
-                <code className="bg-surface text-text-main px-1.5 py-0.5 rounded  text-xs border border-line normal-case" {...props}>
+                <code className="bg-surface text-text-main px-1.5 py-0.5 rounded font-mono text-xs border border-line normal-case" {...props}>
                   {children}
                 </code>
               );
@@ -676,7 +676,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
                     />
                   </div>
                   {displayCaption && (
-                    <figcaption className="text-center text-xs  text-text-dim px-2 leading-relaxed">
+                    <figcaption className="text-center text-xs text-text-dim px-2 leading-relaxed">
                       {!displayCaption.toLowerCase().startsWith('figure') && (
                         <span className="font-semibold text-accent-sky">Figure: </span>
                       )}

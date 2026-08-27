@@ -37,6 +37,8 @@ This portfolio workspace contains self-contained scripts to perform local deploy
 
 To run these tools locally:
 
+**MANDATORY AGENT RULE**: When modifying UI/Frontend code (e.g. TSX, CSS, Tailwind configuration), agents **must** use these local tools sequentially to visually verify changes before finalizing the task. Do not rely exclusively on text-based unit tests for visual changes. You must run steps 1-3 sequentially, locate the generated visual diffs in `artifacts/visual-review/`, and manually view them using standard image inspection tools (like `read_image_file`) since the automated AI APIs may not always be available in your environment.
+
 1. **Deployment Impact Analysis**:
    - Run `pnpm run impact:analysis` to generate a dependency blast-radius analysis report under `artifacts/impact-analysis/`. This identifies which user-facing routes are affected by the changes.
 
@@ -44,7 +46,7 @@ To run these tools locally:
    - Run `pnpm run impact:build-main` to checkout a baseline worktree of the latest main branch under `.tmp-main/` and build it.
 
 3. **Visual Diff Comparison**:
-   - Run `pnpm run impact:visual-diff` to spin up local previews of both the baseline and current head, capture screenshots of the impacted routes, perform visual pixel diffs, and save them to `artifacts/visual-review/`.
+   - Run `pnpm run impact:visual-diff` to spin up local previews of both the baseline and current head, capture screenshots of the impacted routes, perform visual pixel diffs, and save them to `artifacts/visual-review/`. Agents must use image viewing tools (e.g. `read_image_file`) to manually inspect the generated `diff.png` artifacts to ensure UI layouts have not broken.
 
 4. **DOM Diff Generation**:
    - Run `pnpm run impact:dom-diff` to compare the normalized DOM trees of baseline vs head, output detailed analysis results to `artifacts/dom-review/`, and generate a main markdown review summary at `artifacts/deployment-review.md`.

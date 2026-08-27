@@ -41,7 +41,7 @@ export const EducationSection: React.FC<EducationSectionProps> = ({
           <div key={idx} className="space-y-1.5">
             <div className="flex flex-col justify-between gap-1">
               <h3 className="text-sm font-bold text-foreground print:text-black leading-snug">{edu.degree}</h3>
-              <span className="text-xs  text-muted-foreground print:text-text-dim">{edu.period}</span>
+              <span className="text-xs text-muted-foreground print:text-text-dim">{edu.period}</span>
             </div>
             <div className="text-xs font-semibold text-primary print:text-black">{edu.institution}</div>
             {edu.details && (

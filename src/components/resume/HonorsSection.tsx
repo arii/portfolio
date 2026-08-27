@@ -52,7 +52,7 @@ export const HonorsSection: React.FC<HonorsSectionProps> = ({
                 <span className="text-xs text-muted-foreground print:text-text-dim block">{honor.organization}</span>
               )}
             </div>
-            <span className="text-xs  text-muted-foreground print:text-text-dim whitespace-nowrap shrink-0">{honor.year}</span>
+            <span className="text-xs text-muted-foreground print:text-text-dim whitespace-nowrap shrink-0">{honor.year}</span>
           </div>
         ))}
       </div>

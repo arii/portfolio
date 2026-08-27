@@ -36,7 +36,7 @@ export const ResumeHeader: React.FC<ResumeHeaderProps> = ({
                   layoutMode === 'split'
                     ? 'bg-primary/20 text-primary font-semibold'
                     : 'text-text-dim hover:text-text-main'
-                }`}
+            }`}
                 aria-label="Two Column Split View"
                 title="Two Column View"
               >
@@ -52,7 +52,7 @@ export const ResumeHeader: React.FC<ResumeHeaderProps> = ({
                   layoutMode === 'full'
                     ? 'bg-primary/20 text-primary font-semibold'
                     : 'text-text-dim hover:text-text-main'
-                }`}
+            }`}
                 aria-label="Full Width View"
                 title="Full Width Experience View"
               >
