@@ -11,11 +11,11 @@ export interface HeroPathCardProps {
 const getCredibilityBadge = (id: string) => {
   switch (id) {
     case 'devai-products':
-      return 'Selected Work';
+      return '3 live products';
     case 'devai-tools':
-      return 'Engineering';
+      return 'Agentic Tooling';
     case 'robotics-research':
-      return 'Research';
+      return 'MIT CSAIL · PhD';
     default:
       return null;
   }
