@@ -22,13 +22,13 @@ export const SkillsSection: React.FC<SkillsSectionProps> = ({
       <div className="flex items-center justify-between mb-6 border-b border-border/40 pb-2 print:border-b-2 print:border-black">
         <div className="flex items-center space-x-3">
           <Code2 className="h-6 w-6 text-primary print:text-black" />
-          <h2 className="text-2xl font-bold text-foreground print:text-black uppercase tracking-wider">Technical Skills</h2>
+          <h2 className="text-2xl font-semibold text-foreground print:text-black">Technical Skills</h2>
         </div>
         {isCollapsible && onToggleExpand && (
           <button
             type="button"
             onClick={onToggleExpand}
-            className="text-xs font-semibold text-primary hover:text-primary/80 bg-primary/10 hover:bg-primary/20 px-3 py-1.5 rounded-full transition-colors print:hidden min-h-[44px] min-w-[80px]"
+            className="text-xs font-semibold text-primary hover:text-primary/80 bg-primary/10 hover:bg-primary/20 px-3 py-1.5 rounded-md transition-colors print:hidden min-h-[44px] min-w-[80px]"
             aria-expanded={isExpanded}
             aria-controls="skills-content"
           >
@@ -44,7 +44,7 @@ export const SkillsSection: React.FC<SkillsSectionProps> = ({
 
           return (
             <div key={idx} className="space-y-2">
-              <h3 className="text-xs font-mono uppercase tracking-widest text-muted-foreground print:text-black font-bold">
+              <h3 className="text-sm font-semibold font-sans text-muted-foreground print:text-black">
                 {skillGroup.category}
               </h3>
               <div className="flex flex-wrap gap-1.5">

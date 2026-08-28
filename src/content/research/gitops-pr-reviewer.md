@@ -57,7 +57,7 @@ python dev-tools/aggregate_pr_context.py \
 
 ## 2. Orchestrate Inference with the Gemini API
 
-Call the Google Gemini API directly with the prepared context. Rely on Gemini's large context window to ingest diffs and build artifacts without truncation.
+I engineered the inference orchestration to call the Google Gemini API directly with the prepared context. I deliberately rely on Gemini's large context window to ingest massive diffs and build artifacts without truncation, ensuring the review agent has a complete picture before generating feedback.
 
 ```python
 import os
@@ -138,11 +138,11 @@ Configure Gemini with structured JSON output (`responseMimeType: "application/js
 
 ## 4. Map Review States Deterministically
 
-Do not let the model directly approve or block a pull request. A script should read the JSON findings and map them to GitHub review states.
+I designed the pipeline to explicitly prohibit the model from directly approving or blocking a pull request. Instead, a deterministic script reads the structured JSON findings and maps them strictly to GitHub review states:
 
-- **Request Changes:** Triggers if there are any items in the `blocking` list (e.g., build failures, accessibility regressions, missing props).
-- **Comment:** Posts non-blocking suggestions (e.g., naming, cleanup, styling tips).
-- **Approve:** Executes only when the `blocking` list is empty.
+- **`REQUEST_CHANGES`:** Triggers automatically if there are any items populated in the `blocking` list (e.g., build failures, accessibility regressions, missing props).
+- **`COMMENT`:** Posts non-blocking suggestions from the `non_blocking` list (e.g., naming, cleanup, styling tips).
+- **`APPROVE`:** Executes safely only when the `blocking` list is completely empty.
 
 For instance, `dev-tools/submit_review.py` reads `.devai/review-result.json` and submits the review payload to the GitHub API.
 
@@ -165,16 +165,18 @@ pr.create_review(
 
 ---
 
-## 5. Feed CI Failures to the Repair Loop
+## 5. The Autonomous Repair Loop
 
-When CI fails, extract the error logs and treat them as context for a repair agent. Crucially, the agent should only suggest patches or comment on the PR; a human must review and approve before any code is merged.
+To close the gap between detection and resolution, I engineered an autonomous repair loop utilizing Jules and specialized coding agents. When the CI pipeline fails, it does not just report the error—it triggers an active repair session.
+
+The process is orchestrated via `.github/workflows/jules-fix-trigger.yml`, which detects CI failures and executes `dev-tools/td-cli ai repair`. This workflow bundles the failing CI logs, the active PR diff, and project-specific constraints into a secure repair context packet.
 
 ### The CI Repair Flow:
-1. **CI Failure:** GitHub Actions triggers on a build or test failure.
-2. **Log Extraction:** A script extracts the failing log block.
-3. **Repair Inference:** The repair agent receives the logs, diff, and affected files (triggered in this repo via `dev-tools/td-cli ai repair` or `jules-fix-trigger.yml`).
-4. **PR Feedback:** The agent comments or proposes a patch.
-5. **Human Review:** The developer reviews and merges the suggested fix.
+1. **CI Failure Detection:** GitHub Actions detects a failing test, linting error, or build step.
+2. **Context Aggregation:** A script extracts the exact failing log block and relevant source diffs.
+3. **Autonomous Repair Session:** `jules-fix-trigger.yml` initiates a coding agent session (via Jules or TD CLI) armed with the failing logs, diffs, and project constraints.
+4. **Patch Generation:** The agent synthesizes a patch addressing the specific failure and either commits it directly to a fix branch or proposes it as PR feedback.
+5. **Human Verification:** I review and merge the synthesized fix, ensuring human oversight remains in the loop.
 
 ---
 

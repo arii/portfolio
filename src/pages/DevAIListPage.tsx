@@ -82,7 +82,7 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
               Live full-stack consumer apps and platforms built with autonomous agent workflows.
             </p>
           </div>
-          <span className="text-xs text-text-dim uppercase tracking-widest shrink-0">View Products</span>
+          <span className="text-sm font-semibold text-text-dim shrink-0">View Products</span>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {flagshipTools.map((tool) => (<FlagshipCard key={tool.id} tool={tool} onNavigate={onNavigate} onImageClick={setLightboxImage} />))}
@@ -100,7 +100,7 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
               How I build: Engineering multi-agent workflows, automated code-auditing guardrails, and agentic CI/CD pipelines to enforce production standards.
             </p>
           </div>
-          <span className="text-xs text-text-dim uppercase tracking-widest shrink-0">{filteredPosts.length} Articles</span>
+          <span className="text-sm font-semibold text-text-dim shrink-0">{filteredPosts.length} Articles</span>
         </div>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">

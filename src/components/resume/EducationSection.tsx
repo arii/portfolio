@@ -22,13 +22,13 @@ export const EducationSection: React.FC<EducationSectionProps> = ({
       <div className="flex items-center justify-between mb-6 border-b border-border/40 pb-2 print:border-b-2 print:border-black">
         <div className="flex items-center space-x-3">
           <GraduationCap className="h-6 w-6 text-primary print:text-black" />
-          <h2 className="text-2xl font-bold text-foreground print:text-black uppercase tracking-wider">Education</h2>
+          <h2 className="text-2xl font-semibold text-foreground print:text-black">Education</h2>
         </div>
         {isCollapsible && onToggleExpand && (
           <button
             type="button"
             onClick={onToggleExpand}
-            className="text-xs font-semibold text-primary hover:text-primary/80 bg-primary/10 hover:bg-primary/20 px-3 py-1.5 rounded-full transition-colors print:hidden min-h-[44px] min-w-[80px]"
+            className="text-xs font-semibold text-primary hover:text-primary/80 bg-primary/10 hover:bg-primary/20 px-3 py-1.5 rounded-md transition-colors print:hidden min-h-[44px] min-w-[80px]"
             aria-expanded={isExpanded}
             aria-controls="education-content"
           >
@@ -41,7 +41,7 @@ export const EducationSection: React.FC<EducationSectionProps> = ({
           <div key={idx} className="space-y-1.5">
             <div className="flex flex-col justify-between gap-1">
               <h3 className="text-sm font-bold text-foreground print:text-black leading-snug">{edu.degree}</h3>
-              <span className="text-xs font-mono text-muted-foreground print:text-text-dim">{edu.period}</span>
+              <span className="text-xs text-muted-foreground font-medium print:text-text-dim">{edu.period}</span>
             </div>
             <div className="text-xs font-semibold text-primary print:text-black">{edu.institution}</div>
             {edu.details && (

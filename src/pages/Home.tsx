@@ -59,7 +59,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-text-main tracking-tight leading-tight">
                 {heroContent.name}
               </h1>
-              <p className="text-text-body font-semibold text-lg sm:text-xl font-mono">
+              <p className="text-text-body font-semibold text-lg sm:text-xl text-balance">
                 {heroContent.title}
               </p>
             </div>
@@ -109,7 +109,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
         <div className="space-y-3 bg-surface-alt/40 p-4 rounded-xl border border-line/60">
           <div className="flex items-center gap-2 pb-1">
             <Cpu className="w-5 h-5 text-accent" />
-            <h2 className="text-xs sm:text-sm font-bold text-accent tracking-widest uppercase">Engineering Philosophy</h2>
+            <h2 className="text-sm font-semibold text-accent">Engineering Philosophy</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

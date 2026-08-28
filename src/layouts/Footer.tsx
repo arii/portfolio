@@ -13,7 +13,7 @@ const Footer: React.FC<FooterProps> = ({ className = '' }) => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
           <div className="flex flex-col gap-1">
-            <p className="text-xs tracking-wider text-text-body font-medium">
+            <p className="text-xs text-text-body font-medium">
               &copy; {new Date().getFullYear()} Ariel Anders, PhD
             </p>
             <p className="text-xs italic text-text-body/90 font-serif">
