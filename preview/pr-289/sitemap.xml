@@ -169,14 +169,26 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://arii.github.io/devai/graduate-engineering-projects</loc>
+    <loc>https://arii.github.io/research/graduate-engineering-projects</loc>
     <lastmod>2015-12-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://arii.github.io/#/devai/graduate-engineering-projects</loc>
+    <loc>https://arii.github.io/#/research/graduate-engineering-projects</loc>
     <lastmod>2015-12-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://arii.github.io/devai/hrm-architecture</loc>
+    <lastmod>2026-05-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://arii.github.io/#/devai/hrm-architecture</loc>
+    <lastmod>2026-05-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
