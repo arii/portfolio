@@ -56,7 +56,7 @@ While Agentic DevAI increases engineering velocity, this incident highlights the
 
 Instead of just diagnosing the failure mode, I packaged the live-registry-lookup logic as a small public API called VersionTruth, along with a hosted `SKILL.md` that tells any agent how to use it. The instruction to the agent is deliberately blunt: if you don't recognize a version string, that's a reason to *check*, not a reason to *revert*. Unfamiliarity isn't evidence of error.
 
-![VersionTruth Solution Architecture](https://boomtick.blog/images/studies/AI_Version_Hallucination_Solution.webp)
+![VersionTruth Solution Architecture](/images/studies/AI_Version_Hallucination_Solution.webp)
 
 The API lives as serverless functions sitting next to an existing Vite SPA—operating with zero changes to primary application codebases.
 
