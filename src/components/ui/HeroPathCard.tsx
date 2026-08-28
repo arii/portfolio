@@ -13,7 +13,7 @@ const getCredibilityBadge = (id: string) => {
     case 'devai-products':
       return '3 live products';
     case 'devai-tools':
-      return 'CI pipeline: active';
+      return 'Agentic Tooling';
     case 'robotics-research':
       return 'MIT CSAIL · PhD';
     default:
@@ -37,7 +37,7 @@ const HeroPathCard: React.FC<HeroPathCardProps> = ({ card, onNavigate }) => {
     >
       <div className="space-y-2.5">
         {badge && (
-          <span className="relative z-10 inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-bold tracking-wider bg-slate-blue/20 text-slate-300 uppercase">
+          <span className="relative z-10 inline-flex items-center px-2 py-0.5 rounded-md text-xs font-semibold text-text-dim border border-line bg-surface/50">
             {badge}
           </span>
         )}

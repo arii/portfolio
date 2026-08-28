@@ -31,13 +31,13 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
             containerClassName="w-full h-full"
             loading="lazy"
           />
-          <span className="absolute top-2 right-2 z-10 rounded-full bg-bg/80 px-2.5 py-0.5 text-[10px] font-semibold text-text-main backdrop-blur-sm border border-line">
+          <span className="absolute top-2 right-2 z-10 rounded-md bg-bg/80 px-2.5 py-0.5 text-[10px] font-semibold text-text-main backdrop-blur-sm border border-line">
             {tool.category}
           </span>
         </div>
       )}
       <div className="flex justify-between items-start gap-2">
-        <h3 className="font-bold text-text-main text-sm font-display group-hover:text-accent transition-colors">{tool.title}</h3>
+        <h3 className="font-bold text-text-main text-sm font-display group-hover:text-accent transition-colors text-balance">{tool.title}</h3>
         <span className="text-[8px] bg-accent/10 text-accent px-1.5 py-0.5 rounded border border-accent/20 shrink-0">
           {tool.status}
         </span>
@@ -54,7 +54,7 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
           <a
             href="#flagship"
             onClick={handleParentClick}
-            className="inline-flex items-center gap-1 text-[10px] bg-accent/10 text-accent hover:bg-accent/20 border border-accent/20 px-2 py-0.5 rounded-full font-medium transition-colors focus:outline-none focus:ring-1 focus:ring-accent"
+            className="inline-flex items-center gap-1 text-[10px] bg-accent/10 text-accent hover:bg-accent/20 border border-accent/20 px-2 py-0.5 rounded-md font-medium transition-colors focus:outline-none focus:ring-1 focus:ring-accent"
             aria-label={`Part of ${tool.parentFlagship.title} flagship project`}
           >
             <span>Part of <strong className="font-semibold">{tool.parentFlagship.title}</strong></span>
@@ -62,7 +62,7 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
         </div>
       )}
 
-      <p className="text-xs text-text-dim leading-relaxed whitespace-pre-line">{tool.description}</p>
+      <p className="text-xs text-text-dim leading-relaxed whitespace-pre-line text-pretty">{tool.description}</p>
 
       <div className="flex flex-wrap gap-1.5 pt-1">
         {tool.pdfUrl && (
@@ -95,7 +95,7 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
           </a>
         ))}
         {tool.tags.map(tag => (
-          <span key={tag} className="text-[9px] bg-surface px-2 py-0.5 text-text-dim border border-line rounded-full">{tag}</span>
+          <span key={tag} className="text-[9px] bg-surface px-2 py-0.5 text-text-dim border border-line rounded-md">{tag}</span>
         ))}
       </div>
     </div>

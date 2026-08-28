@@ -307,7 +307,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
               key={tag}
               px={3}
               py={1}
-              className="rounded-full bg-accent-sky/10 text-[10px] font-semibold uppercase tracking-wider text-accent-sky border border-accent-sky/15"
+              className="rounded-md bg-accent-sky/10 text-xs font-semibold text-accent-sky border border-accent-sky/15"
             >
               {tag}
             </Box>
@@ -409,7 +409,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
                 return (
                   <div className="my-6 rounded-2xl border border-line overflow-hidden bg-bg">
                     {language && (
-                      <div className="bg-surface px-4 py-2 border-b border-line text-[10px] font-mono font-bold uppercase tracking-wider text-text-dim">
+                      <div className="bg-surface px-4 py-2 border-b border-line text-xs font-semibold text-text-dim">
                         {language}
                       </div>
                     )}
@@ -676,7 +676,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
                     />
                   </div>
                   {displayCaption && (
-                    <figcaption className="text-center text-xs font-mono text-text-dim px-2 leading-relaxed">
+                    <figcaption className="text-center text-xs text-text-dim px-2 leading-relaxed">
                       {!displayCaption.toLowerCase().startsWith('figure') && (
                         <span className="font-semibold text-accent-sky">Figure: </span>
                       )}
