@@ -54,7 +54,7 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
           <a
             href="#flagship"
             onClick={handleParentClick}
-            className="inline-flex items-center gap-1 text-[10px] bg-accent/10 text-accent hover:bg-accent/20 border border-accent/20 px-2 py-0.5 rounded-full font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            className="inline-flex items-center gap-1 text-[10px] bg-accent/10 text-accent hover:bg-accent/20 border border-accent/20 px-2 py-0.5 rounded-full font-medium transition-colors focus-ring"
             aria-label={`Part of ${tool.parentFlagship.title} flagship project`}
           >
             <span>Part of <strong className="font-semibold">{tool.parentFlagship.title}</strong></span>

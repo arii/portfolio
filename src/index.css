@@ -31,4 +31,7 @@ body {
   .text-glow {
     text-shadow: 0 0 15px rgba(245, 158, 11, 0.3);
   }
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg;
+  }
 }

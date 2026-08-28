@@ -31,7 +31,7 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({
       ref={isLegacy && idx === 4 ? legacyRef : undefined}
       tabIndex={isLegacy && idx === 4 ? -1 : undefined}
       id={isLegacy && idx === 4 ? "legacy-experience" : undefined}
-      className="relative pl-4 sm:pl-6 border-l-2 border-border print:border-black print:pl-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/20 rounded-lg"
+      className="relative pl-4 sm:pl-6 border-l-2 border-border print:border-black print:pl-4 focus-ring rounded-lg"
     >
       <div className="absolute w-3 h-3 bg-primary rounded-full -left-[7px] top-1.5 print:bg-black" />
       <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-1 print:flex-row print:justify-between print:mb-0.5">

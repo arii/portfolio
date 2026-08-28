@@ -81,7 +81,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                    handleNav('devai');
                 }
               }}
-              className="inline-flex items-center justify-center gap-2 rounded-md bg-text-main text-bg hover:opacity-90 px-5 py-2.5 text-sm font-bold shadow transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent min-h-[44px]"
+              className="inline-flex items-center justify-center gap-2 rounded-md bg-text-main text-bg hover:opacity-90 px-5 py-2.5 text-sm font-bold shadow transition-all focus-ring min-h-[44px]"
             >
               <Bot className="w-4 h-4" />
               <span>View Agentic DevAI Work</span>
@@ -96,7 +96,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                   handleNav('research');
                 }
               }}
-              className="inline-flex items-center justify-center gap-2 rounded-md border border-line text-text-main hover:bg-surface-alt px-5 py-2.5 text-sm font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent min-h-[44px]"
+              className="inline-flex items-center justify-center gap-2 rounded-md border border-line text-text-main hover:bg-surface-alt px-5 py-2.5 text-sm font-bold transition-all focus-ring min-h-[44px]"
             >
               <Cpu className="w-4 h-4" />
               <span>View Robotics Research</span>
