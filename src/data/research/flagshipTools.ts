@@ -6,7 +6,7 @@ export const flagshipTools: ResearchTool[] = [
     inDevMessage: { highlight: 'Intended to run locally on your own server.', rest: ' No live site available.' },
     taxonomyBucket: 'product',
     title: 'HRM (Heart Rate Monitor)',
-    description: "Real-time Web Bluetooth HR telemetry synchronized across multi-client sessions via WebSockets, featuring dynamic zone calculations, Spotify SDK automation, and workout analytics. Originally prototyped in 2020 for remote training, HRM's v2 rewrite served as the foundational testbed for [RepoAuditor](https://github.com/arii/portfolio) and autonomous CI/CD PR review guardrails.",
+    description: "Real-time Web Bluetooth HR telemetry synchronized across multi-client sessions via WebSockets, featuring dynamic zone calculations, Spotify SDK automation, and workout analytics. Originally prototyped in 2020 for remote training, HRM's v2 rewrite served as the foundational testbed for [RepoAuditor](https://repo-auditor-ai.vercel.app/) and autonomous CI/CD PR review guardrails.",
     category: 'Product Development',
     status: 'Live',
     tags: ['React', 'Web Bluetooth', 'WebSockets', 'Spotify API', 'DevAI Testbed'],
