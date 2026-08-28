@@ -4,13 +4,13 @@ import { ProfileData } from '@/data/aboutData';
 
 export const CareerHighlightsSection: React.FC<{ highlights: ProfileData['highlights'] }> = ({ highlights }) => (
   <div className="space-y-6 bg-surface p-6 sm:p-8 rounded-3xl border border-line">
-    <h2 className="text-2xl font-bold text-text-main pb-3 border-b border-line/30 font-display">
+    <h2 className="text-2xl font-bold text-text-main pb-3 border-b border-line/30 ">
       Career Highlights
     </h2>
     <div className="space-y-4">
       {highlights.map((item, idx) => (
         <div key={idx} className="flex flex-col sm:flex-row sm:items-baseline justify-between border-b border-line/20 pb-3 last:border-0 last:pb-0 gap-1 sm:gap-4">
-          <div className="shrink-0 w-32 text-xs font-mono font-bold text-accent">
+          <div className="shrink-0 w-32 text-xs font-bold text-accent">
             {item.period}
           </div>
           <div className="grow space-y-0.5">

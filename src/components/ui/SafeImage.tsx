@@ -94,7 +94,7 @@ const SafeImage: React.FC<SafeImageProps> = ({
         />
       ) : (
         <div
-          className="flex h-full w-full items-center justify-center bg-surface-alt/80 px-4 text-center text-xs font-mono text-text-dim"
+          className="flex h-full w-full items-center justify-center bg-surface-alt/80 px-4 text-center text-xs  text-text-dim"
           role="img"
           aria-label={alt}
         >

@@ -14,7 +14,7 @@ const About: React.FC = () => {
         canonicalUrl="/about"
       />
       <header className="space-y-3 border-b border-line/20 pb-6 sm:pb-8">
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-text-main leading-tight font-display">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-text-main leading-tight ">
           About Ariel
         </h1>
         <p className="text-text-dim text-sm sm:text-base leading-relaxed">
@@ -25,7 +25,7 @@ const About: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
         <section className="lg:col-span-8 space-y-8 sm:space-y-10 order-2 lg:order-1">
           <div className="space-y-6 bg-surface p-6 sm:p-8 rounded-3xl border border-line">
-            <h2 className="text-xl sm:text-2xl font-bold text-text-main pb-3 border-b border-line/30 font-display">
+            <h2 className="text-xl sm:text-2xl font-bold text-text-main pb-3 border-b border-line/30 ">
               Biography
             </h2>
             <div className="space-y-4 text-text-body leading-relaxed text-sm sm:text-base">

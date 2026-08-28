@@ -265,7 +265,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
     return (
       <div className="mx-auto max-w-3xl px-4 py-16 text-center rounded-3xl bg-surface/40 border border-line">
         <SEO title="Article Not Found" description="The requested research paper could not be found." />
-        <h2 className="text-2xl font-bold text-text-main font-display">Article Not Found</h2>
+        <h2 className="text-2xl font-bold text-text-main ">Article Not Found</h2>
         <p className="mt-2 text-text-dim">The requested research paper could not be found.</p>
         <button
           onClick={onBack}
@@ -313,7 +313,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
             </Box>
           ))}
         </Stack>
-        <h1 className="text-3xl sm:text-4xl font-black text-text-main leading-tight font-display">
+        <h1 className="text-3xl sm:text-4xl font-black text-text-main leading-tight ">
           {post.title}
         </h1>
         <div className="flex items-center space-x-6 text-xs text-text-dim">
@@ -443,7 +443,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
               </td>
             ),
             h1: ({ children, ...props }) => (
-              <h1 className="text-3xl font-black text-text-main mt-12 mb-4 font-display" {...props}>
+              <h1 className="text-3xl font-black text-text-main mt-12 mb-4 " {...props}>
                 {children}
               </h1>
             ),
@@ -456,7 +456,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
               }
               const id = textContent.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
               return (
-                <h2 id={id || undefined} className="text-2xl font-bold text-text-main mt-12 mb-4 pb-2 border-b border-line font-display" {...props}>
+                <h2 id={id || undefined} className="text-2xl font-bold text-text-main mt-12 mb-4 pb-2 border-b border-line " {...props}>
                   {children}
                 </h2>
               );
@@ -676,7 +676,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
                     />
                   </div>
                   {displayCaption && (
-                    <figcaption className="text-center text-xs font-mono text-text-dim px-2 leading-relaxed">
+                    <figcaption className="text-center text-xs text-text-dim px-2 leading-relaxed">
                       {!displayCaption.toLowerCase().startsWith('figure') && (
                         <span className="font-semibold text-accent-sky">Figure: </span>
                       )}

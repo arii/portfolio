@@ -37,7 +37,7 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
         </div>
       )}
       <div className="flex justify-between items-start gap-2">
-        <h3 className="font-bold text-text-main text-sm font-display group-hover:text-accent transition-colors">{tool.title}</h3>
+        <h3 className="font-bold text-text-main text-sm group-hover:text-accent transition-colors">{tool.title}</h3>
         <span className="text-[8px] bg-accent/10 text-accent px-1.5 py-0.5 rounded border border-accent/20 shrink-0">
           {tool.status}
         </span>
@@ -54,7 +54,7 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
           <a
             href="#flagship"
             onClick={handleParentClick}
-            className="inline-flex items-center gap-1 text-[10px] bg-accent/10 text-accent hover:bg-accent/20 border border-accent/20 px-2 py-0.5 rounded-full font-medium transition-colors focus:outline-none focus:ring-1 focus:ring-accent"
+            className="inline-flex items-center gap-1 text-[10px] bg-accent/10 text-accent hover:bg-accent/20 border border-accent/20 px-2 py-0.5 rounded-full font-medium transition-colors focus-ring"
             aria-label={`Part of ${tool.parentFlagship.title} flagship project`}
           >
             <span>Part of <strong className="font-semibold">{tool.parentFlagship.title}</strong></span>

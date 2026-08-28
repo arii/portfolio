@@ -47,7 +47,7 @@ const Navigation: React.FC = () => {
               <span className="text-sm sm:text-base font-bold tracking-tight text-foreground">
                 {heroContent.brandTitle}
               </span>
-              <span className="hidden sm:block text-xs text-muted-foreground font-mono">
+              <span className="hidden sm:block text-xs text-muted-foreground ">
                 {heroContent.brandRole}
               </span>
             </div>
@@ -66,7 +66,7 @@ const Navigation: React.FC = () => {
                     active
                       ? 'bg-secondary text-foreground'
                       : 'text-slate-400 hover:bg-muted hover:text-foreground'
-                  }`}
+              }`}
                 >
                   <Icon className="h-4 w-4" />
                   <span>{link.name}</span>
@@ -125,7 +125,7 @@ const Navigation: React.FC = () => {
                         active
                           ? 'bg-accent/15 text-accent border border-accent/30'
                           : 'text-text-body hover:bg-surface hover:text-text-main'
-                      }`}
+                  }`}
                     >
                       <Icon className="h-5 w-5" />
                       <span>{link.name}</span>

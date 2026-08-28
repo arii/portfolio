@@ -57,14 +57,14 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
       role={isClickable ? 'button' : undefined}
       className={`group rounded-3xl border border-line bg-surface p-0 flex flex-col justify-between overflow-hidden transition-all hover:border-accent hover:shadow-glow ${
         isClickable ? 'cursor-pointer' : ''
-      }`}
+  }`}
     >
       {tool.customPreview ? (
         <div className="p-6 bg-bg border-b border-line aspect-[16/10] max-h-48 sm:max-h-64 flex flex-col justify-center space-y-2">
-          <div className="text-accent font-extrabold text-sm tracking-wider font-display">
+          <div className="text-accent font-extrabold text-sm tracking-wider ">
             {tool.customPreview.logo.prefix}<span className="text-text-main">{tool.customPreview.logo.accent}</span><span className="text-text-dim font-light">{tool.customPreview.logo.suffix}</span>
           </div>
-          <div className="text-text-main font-black text-lg leading-tight font-display">
+          <div className="text-text-main font-black text-lg leading-tight ">
             {tool.customPreview.headline.map((line, idx) => (<span key={idx} className={line.accent ? 'text-accent' : ''}>{line.text}{' '}</span>))}
           </div>
           <div className="text-xs text-text-dim">{tool.customPreview.tagline}</div>
@@ -96,14 +96,14 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
                   tool.status === 'Live' ? 'bg-accent' :
                   tool.status === 'Local only' ? 'bg-accent' :
                   tool.status === 'In development' ? 'bg-accent-sky' : 'bg-muted-foreground'
-                }`}></span>
+            }`}></span>
                 <span className="text-[10px] font-bold uppercase tracking-wider text-text-main pr-0.5">{tool.status}</span>
               </div>
             )}
           </div>
           <div>
             <span className="text-[10px] text-accent font-bold uppercase tracking-wider block font-sans">{tool.category}</span>
-            <h3 className="text-xl font-bold text-text-main mt-1 font-display group-hover:text-accent transition-colors">{tool.title}</h3>
+            <h3 className="text-xl font-bold text-text-main mt-1 group-hover:text-accent transition-colors">{tool.title}</h3>
             {tool.subtitle && <p className="text-xs text-accent font-semibold tracking-wide mt-1 uppercase font-sans">{tool.subtitle}</p>}
           </div>
           <p className="text-sm text-text-dim leading-relaxed ">{tool.description}</p>
@@ -151,7 +151,7 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
                   tool.canonicalPath
                     ? 'bg-surface border border-line text-text-dim hover:bg-surface-alt hover:text-text-main'
                     : 'bg-accent/10 border border-accent/20 text-accent hover:bg-accent/20'
-                }`}
+            }`}
               >
                 <span>{tool.externalLinkDisplayLabel || 'Open Link'}</span><ExternalLink className="h-3.5 w-3.5" />
               </a>

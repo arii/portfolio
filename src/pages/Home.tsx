@@ -56,10 +56,10 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-line/80">
           <div className="space-y-3 max-w-3xl">
             <div className="space-y-1">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-text-main tracking-tight leading-tight text-balance font-display">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-text-main tracking-tight leading-tight text-balance">
                 {heroContent.name}
               </h1>
-              <p className="text-text-body font-semibold text-lg sm:text-xl font-mono text-balance">
+              <p className="text-text-body font-semibold text-lg sm:text-xl text-balance">
                 {heroContent.title}
               </p>
             </div>
@@ -81,7 +81,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                    handleNav('devai');
                 }
               }}
-              className="inline-flex items-center justify-center gap-2 rounded-md bg-text-main text-bg hover:opacity-90 px-5 py-2.5 text-sm font-bold shadow transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent min-h-[44px]"
+              className="inline-flex items-center justify-center gap-2 rounded-md bg-text-main text-bg hover:opacity-90 px-5 py-2.5 text-sm font-bold shadow transition-all focus-ring min-h-[44px]"
             >
               <Bot className="w-4 h-4" />
               <span>View Agentic DevAI Work</span>
@@ -96,7 +96,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                   handleNav('research');
                 }
               }}
-              className="inline-flex items-center justify-center gap-2 rounded-md border border-line text-text-main hover:bg-surface-alt px-5 py-2.5 text-sm font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent min-h-[44px]"
+              className="inline-flex items-center justify-center gap-2 rounded-md border border-line text-text-main hover:bg-surface-alt px-5 py-2.5 text-sm font-bold transition-all focus-ring min-h-[44px]"
             >
               <Cpu className="w-4 h-4" />
               <span>View Robotics Research</span>

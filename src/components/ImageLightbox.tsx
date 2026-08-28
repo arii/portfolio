@@ -26,7 +26,7 @@ const ImageLightbox: React.FC<ImageLightboxProps> = ({
       onClick={onClose}
     >
       <button
-        className="absolute top-4 right-4 text-text-main hover:text-accent p-2 transition-colors focus:outline-none cursor-pointer"
+        className="absolute top-4 right-4 text-text-main hover:text-accent p-2 transition-colors focus-ring cursor-pointer"
         onClick={onClose}
         aria-label="Close modal"
       >

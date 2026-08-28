@@ -24,7 +24,7 @@ export const PublicationsSection: React.FC<PublicationsSectionProps> = ({
       <div className="flex items-center justify-between mb-4 border-b border-border/40 pb-2 print:border-b-2 print:border-black">
         <div className="flex items-center space-x-2.5">
           <FileText className="h-5 w-5 text-primary print:text-black" />
-          <h2 className="text-xl font-bold text-foreground print:text-black uppercase tracking-wider font-display">Publications & Theses</h2>
+          <h2 className="text-xl font-bold text-foreground print:text-black uppercase tracking-wider ">Publications & Theses</h2>
         </div>
         <div className="flex items-center gap-3 print:hidden">
           {isCollapsible && onToggleExpand && (
@@ -59,10 +59,10 @@ export const PublicationsSection: React.FC<PublicationsSectionProps> = ({
             <div className="flex items-start justify-between gap-2">
               <div className="space-y-0.5">
                 <div className="flex items-center gap-1.5 flex-wrap">
-                  <span className="px-1.5 py-0.5 text-[9px] font-mono uppercase font-bold rounded bg-secondary text-foreground print:bg-transparent print:text-black print:border print:border-black">
+                  <span className="px-1.5 py-0.5 text-[9px] uppercase font-bold rounded bg-secondary text-foreground print:bg-transparent print:text-black print:border print:border-black">
                     {pub.type}
                   </span>
-                  <span className="text-[11px] text-muted-foreground font-mono">{pub.year}</span>
+                  <span className="text-[11px] text-muted-foreground ">{pub.year}</span>
                 </div>
                 <h3 className="text-xs font-bold text-foreground print:text-black leading-snug">
                   {pub.title}

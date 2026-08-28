@@ -17,7 +17,7 @@ export const ResumeHeader: React.FC<ResumeHeaderProps> = ({
     <Box as="header" className="border-b border-line/20 pb-6 sm:pb-8">
       <Stack direction="row" justify="between" align="center" className="flex-col sm:flex-row gap-4">
         <Stack direction="col" className="space-y-1">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-text-main leading-tight font-display">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-text-main leading-tight ">
             <span className="print:hidden">Resume</span>
             <span className="hidden print:inline text-black">Ariel Anders, PhD</span>
           </h1>
@@ -36,7 +36,7 @@ export const ResumeHeader: React.FC<ResumeHeaderProps> = ({
                   layoutMode === 'split'
                     ? 'bg-primary/20 text-primary font-semibold'
                     : 'text-text-dim hover:text-text-main'
-                }`}
+            }`}
                 aria-label="Two Column Split View"
                 title="Two Column View"
               >
@@ -52,7 +52,7 @@ export const ResumeHeader: React.FC<ResumeHeaderProps> = ({
                   layoutMode === 'full'
                     ? 'bg-primary/20 text-primary font-semibold'
                     : 'text-text-dim hover:text-text-main'
-                }`}
+            }`}
                 aria-label="Full Width View"
                 title="Full Width Experience View"
               >
