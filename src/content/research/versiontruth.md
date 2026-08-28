@@ -89,6 +89,8 @@ sequenceDiagram
 
 ---
 
+Developers can interactively test the live API and explore the skill definition at [https://boomtick.blog/versiontruth](https://boomtick.blog/versiontruth).
+
 ## API & Tool Specification
 
 VersionTruth exposes lightweight HTTP endpoints that accept ecosystem queries and return structured status metadata.
@@ -178,3 +180,8 @@ if __name__ == "__main__":
     if not valid:
         sys.exit(1)
 ```
+### What's Next: Handling EOL and Deprecation
+
+While preventing out-of-distribution downgrades is the immediate fix, the next evolution of VersionTruth will address the opposite problem: agents confidently recommending versions that have reached End-of-Life (EOL) or have been explicitly deprecated by maintainers.
+
+Future iterations of the `/api/compare-version` endpoint will expand its upstream registry integrations to query vulnerability databases and deprecation metadata, allowing the `isDeprecated` flag to proactively guide agents away from unmaintained branches (like Node 18) towards current LTS releases.
