@@ -44,12 +44,9 @@ For historical context, `v4.1.0` was released in September 2023, while `v5.0.1` 
 
 This represents a classic out-of-distribution data error. The models encountered version tags (e.g., `v6`) released after their training cutoffs. Lacking real-time registry access, they hallucinated that the unfamiliar version was invalid and suggested reverting to the latest version present in their training data.
 
-![Screenshot of Boomtick.blog showing confidently incorrect AI suggesting downgrade](/images/studies/confidently-incorrect-screenshot-1.png)
 
 This failure was not isolated to lightweight models like `gpt-4o-mini`. Testing confirmed that larger reasoning models, including Gemini 3.1 Pro, exhibited the exact same regression behavior, falsely identifying `v4` as the latest stable major release.
 
-![Screenshot showing Gemini 3.1 Pro also making the same mistake](/images/studies/confidently-incorrect-screenshot-2.png)
-![Screenshot confirming Gemini 3.1 Pro incorrectly identifying v4](/images/studies/confidently-incorrect-screenshot-3.png)
 
 ![GitHub Releases showing v7.0.0, confirming versions beyond v4 are stable](/images/studies/github-checkout-v7-release.webp)
 
@@ -59,7 +56,7 @@ While Agentic DevAI increases engineering velocity, this incident highlights the
 
 Instead of just diagnosing the failure mode, I packaged the live-registry-lookup logic as a small public API called VersionTruth, along with a hosted `SKILL.md` that tells any agent how to use it. The instruction to the agent is deliberately blunt: if you don't recognize a version string, that's a reason to *check*, not a reason to *revert*. Unfamiliarity isn't evidence of error.
 
-![VersionTruth Solution Architecture](/images/studies/AI_Version_Hallucination_Solution.webp)
+![VersionTruth Solution Architecture](https://boomtick.blog/images/studies/AI_Version_Hallucination_Solution.webp)
 
 The API lives as serverless functions sitting next to an existing Vite SPA—operating with zero changes to primary application codebases.
 
