@@ -82,10 +82,10 @@ The following diagram illustrates the data flow and system topology, from the bi
 
 ```mermaid
 graph TD
-    classDef hardware fill:#0f172a,stroke:#3b82f6,stroke-width:2px,color:#ffffff,font-weight:bold;
-    classDef client fill:#1e293b,stroke:#10b981,stroke-width:2px,color:#ffffff,font-weight:bold;
-    classDef server fill:#1e293b,stroke:#f59e0b,stroke-width:2px,color:#ffffff,font-weight:bold;
-    classDef api fill:#0f172a,stroke:#6366f1,stroke-width:2px,color:#ffffff,font-weight:bold;
+    classDef hardware fill:#0f172a,stroke:#3b82f6,stroke-width:2px,color:#ffffff
+    classDef client fill:#1e293b,stroke:#10b981,stroke-width:2px,color:#ffffff
+    classDef server fill:#1e293b,stroke:#f59e0b,stroke-width:2px,color:#ffffff
+    classDef api fill:#0f172a,stroke:#6366f1,stroke-width:2px,color:#ffffff
 
     Peripheral[Bluetooth HR Sensor] ::: hardware
     WebClient[Participant Web Client] ::: client
@@ -93,9 +93,9 @@ graph TD
     WSServer[WebSocket Sync Server] ::: server
     Spotify[Spotify Web API] ::: api
 
-    Peripheral -- "GATT Data" --> WebClient
-    WebClient -- "State Updates" --> WSServer
-    WSServer -- "Broadcast Sync" --> WebClient
-    WSServer -- "Broadcast Sync" --> Instructor
-    WebClient -- "OAuth & Playback" --> Spotify
+    Peripheral -->|GATT Data| WebClient
+    WebClient -->|State Updates| WSServer
+    WSServer -->|Broadcast Sync| WebClient
+    WSServer -->|Broadcast Sync| Instructor
+    WebClient -->|OAuth & Playback| Spotify
 ```
