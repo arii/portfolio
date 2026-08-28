@@ -85,7 +85,7 @@ export function useWCSData() {
 }
 ```
 
-- **The Result:** The pipeline runs quietly in the background every Monday, keeping my frontend JSON data fresh with zero manual maintenance, while the lightweight client fetching prevents initial bundle bloat.
+- **The Result:** The pipeline runs quietly in the background every Wednesday, keeping my frontend JSON data fresh with zero manual maintenance, while the lightweight client fetching prevents initial bundle bloat.
 
 ---
 
