@@ -15,21 +15,21 @@ HRM was originally conceived and built during the COVID-19 pandemic for my mothe
 
 ### Iteration 1: OpenCV Video Loopback
 
-![Iteration 1](/assets/research/hrm/evolve1.png#max-w-xl#aspect-video)
+![Iteration 1](/assets/research/hrm/evolve1.webp#max-w-xl#aspect-video)
 
 Initially, I captured BLE heart rate data via Python, overlaid a HUD text display onto the active video stream using `cv2.putText`, and outputted the composited stream to a `v4l2loopback` virtual camera device. I quickly abandoned this approach due to cross-platform OS driver fragility (struggling with DirectShow on Windows versus v4l2 on Linux).
 
 ### Iteration 2: Web Bluetooth + OBS VirtualCam
 
-![Iteration 2](/assets/research/hrm/evolve2.png#max-w-xl#aspect-video)
+![Iteration 2](/assets/research/hrm/evolve2.webp#max-w-xl#aspect-video)
 
 The second iteration utilized a Web Bluetooth client rendered in a browser window, which I composited into Zoom using OBS Studio VirtualCam. I abandoned this due to Zoom aggressively locking camera devices, video mirroring inconsistencies, and window resize scaling artifacts that broke the HUD alignment.
 
 ### v2 Distributed Topology (2026)
 
-![Iteration 3](/assets/research/hrm/evolve3.png#max-w-xl#aspect-video)
+![Iteration 3](/assets/research/hrm/evolve3.webp#max-w-xl#aspect-video)
 
-![Client Connection](/assets/research/hrm/client_connect.png#max-w-xl#aspect-video)
+![Client Connection](/assets/research/hrm/client_connect.webp#max-w-xl#aspect-video)
 
 The final architecture moved to a decoupled, multi-client web topology. Browser clients stream BLE telemetry to a persistent WebSocket server, relaying active zone metrics, calorie calculations, and Tabata timer state to a unified trainer dashboard.
 
@@ -42,7 +42,7 @@ Refactoring the multi-client WebSocket topology and complex Web Bluetooth mock s
 
 ### Web Bluetooth GATT Lifecycle & Decoding
 
-![Browser Capability](/assets/research/hrm/browser_capability.png#max-w-xl#aspect-video)
+![Browser Capability](/assets/research/hrm/browser_capability.webp#max-w-xl#aspect-video)
 
 
 The foundation relies on the Web Bluetooth API to connect with peripheral sensors using the standard Bluetooth 4.0 / ANT+ Heart Rate Profile.
@@ -66,14 +66,14 @@ Multi-client synchronization is handled over Socket.io. To maintain a reliable d
 
 ### Mock Simulator Test Harness
 
-![Mock Simulator](/assets/research/hrm/mock.png#max-w-xl#aspect-video)
+![Mock Simulator](/assets/research/hrm/mock.webp#max-w-xl#aspect-video)
 
 
 To ensure the system could scale and handle network jitter, I built a dedicated mocking engine (`/hrm_mock`). This simulator allows for multi-user stress testing and synthetic biometric signal generation without requiring physical peripherals.
 
 ### Synchronized Workout Intervals & Spotify API
 
-![Running Application](/assets/research/hrm/running.png#max-w-xl#aspect-video)
+![Running Application](/assets/research/hrm/running.webp#max-w-xl#aspect-video)
 
 
 The central server orchestrates a synchronized Tabata HIIT timer (countdown, work intervals, rest periods, audio feedback beeps) across all client views, guaranteeing sub-100ms latency for state replication.
@@ -86,7 +86,7 @@ The live application features interactive controls with a dual-mode timer (Tabat
 
 ## System Topology
 
-![HRM Server Dashboard](/assets/research/hrm/hrm_server.png#max-w-xl#aspect-video)
+![HRM Server Dashboard](/assets/research/hrm/hrm_server.webp#max-w-xl#aspect-video)
 
 
 The following diagram illustrates the data flow and system topology, from the biometric peripheral through the web client to the synchronized servers and external APIs.
