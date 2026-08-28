@@ -5,8 +5,8 @@ on:
     types: [opened, synchronize, reopened, closed]
 
 concurrency:
-  group: preview-gh-pages
-  cancel-in-progress: false
+  group: preview-${{ github.event.number }}
+  cancel-in-progress: true
 
 jobs:
   preview:
