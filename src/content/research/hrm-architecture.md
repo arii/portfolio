@@ -2,14 +2,16 @@
 title: "HRM: Real-Time Biometric Telemetry & Distributed Workout Synchronization"
 author: "Ariel Anders, PhD"
 category: "DevAI"
-tags: ["React", "Web Bluetooth", "WebSockets", "Spotify API", "Telemetry"]
+tags: ["React", "Web Bluetooth", "WebSockets", "Spotify API", "DevAI Testbed", "Telemetry"]
+date: "2026-05-01"
+snippet: "The architectural journey of HRM: from a 2020 OpenCV virtual camera pandemic prototype to a full-stack, DevAI-driven v2 overhaul that inspired the creation of RepoAuditor and agentic CI review pipelines."
 ---
 
-I developed the Heart Rate Monitor (HRM) as a comprehensive system for real-time biometric telemetry and distributed workout synchronization. HRM bridges personal fitness hardware with immersive, multi-device software environments, integrating low-level Bluetooth communication, real-time WebSocket state replication, and responsive media controls.
+The Heart Rate Monitor (HRM) project bridges consumer fitness hardware with real-time browser environments. Originally built in 2020 as a fast remote-training prototype, HRM was completely re-architected in 2026 as a flagship testbed for DevAI workflows—proving how autonomous PR auditing, agentic CI/CD pipelines, and multi-client telemetry can streamline full-stack system delivery.
 
 ## Origin Story & Architectural Evolution
 
-HRM was originally conceived and built during the COVID-19 pandemic for my mother, myself, and our personal trainer, Tim (from FitForLife gym). The goal was to maintain real-time biometric telemetry during remote group workouts when physical gyms were closed. Achieving a stable, frictionless experience required three distinct architectural iterations:
+HRM was originally conceived and built during the COVID-19 pandemic for my mother, myself, and our personal trainer, Tim (from FitForLife gym). The goal was to maintain real-time biometric telemetry during remote group workouts when physical gyms were closed. Achieving a stable, frictionless experience required distinct architectural phases:
 
 ### Iteration 1: OpenCV Video Loopback
 
@@ -23,15 +25,20 @@ Initially, I captured BLE heart rate data via Python, overlaid a HUD text displa
 
 The second iteration utilized a Web Bluetooth client rendered in a browser window, which I composited into Zoom using OBS Studio VirtualCam. I abandoned this due to Zoom aggressively locking camera devices, video mirroring inconsistencies, and window resize scaling artifacts that broke the HUD alignment.
 
-### Iteration 3: Distributed Web Client + WebSocket Relay
+### v2 Distributed Topology (2026)
 
 ![Iteration 3](/assets/research/hrm/evolve3.png#max-w-xl#aspect-video)
 
 ![Client Connection](/assets/research/hrm/client_connect.png#max-w-xl#aspect-video)
 
-The final and current architecture moved to a decoupled, multi-client web topology. Individual participants connect their standard Bluetooth HR sensors (e.g., Polar, Garmin, Wahoo) to a local web client. This client streams telemetry to a central WebSocket server. The instructor views an aggregated, real-time dashboard displaying everyone's metrics, heart rate zones, and a synchronized Tabata interval timer.
+The final architecture moved to a decoupled, multi-client web topology. Browser clients stream BLE telemetry to a persistent WebSocket server, relaying active zone metrics, calorie calculations, and Tabata timer state to a unified trainer dashboard.
 
-## Deep Technical Implementation
+
+## The DevAI Catalyst (v1 -> v2 Rewrite)
+
+Refactoring the multi-client WebSocket topology and complex Web Bluetooth mock states in v2 became tedious to verify manually. Managing continuous multi-client refactors directly prompted me to build RepoAuditor and automated PR review bots in GitHub Actions. Using GitHub Actions, Gemini-powered PR reviews, and automated visual regression testing (Playwright), I was able to validate complex Web Bluetooth mock states and UI layout integrity across updates.
+
+## Core Technical Implementation
 
 ### Web Bluetooth GATT Lifecycle & Decoding
 
@@ -73,6 +80,10 @@ The central server orchestrates a synchronized Tabata HIIT timer (countdown, wor
 
 Furthermore, I integrated the Spotify API and Web Playback SDK to synchronize music with the active workout state using OAuth PKCE for client-side token negotiation. A background token refresh loop maintains an uninterrupted session. The system exerts real-time playback control synced directly to the HIIT intervals, automatically adjusting playback based on the current timer phase.
 
+### Interactive Controls & Analytics
+
+The live application features interactive controls with a dual-mode timer (Tabata vs. Stopwatch), audio feedback cues, and in-browser Spotify player token management. I also built a workout history and analytics persistence layer that tracks elapsed duration, active calories burned, and historical session logs across multiple dates.
+
 ## System Topology
 
 ![HRM Server Dashboard](/assets/research/hrm/hrm_server.png#max-w-xl#aspect-video)
@@ -81,21 +92,25 @@ Furthermore, I integrated the Spotify API and Web Playback SDK to synchronize mu
 The following diagram illustrates the data flow and system topology, from the biometric peripheral through the web client to the synchronized servers and external APIs.
 
 ```mermaid
-graph TD
-    classDef hardware fill:#0f172a,stroke:#3b82f6,stroke-width:2px,color:#ffffff
-    classDef client fill:#1e293b,stroke:#10b981,stroke-width:2px,color:#ffffff
-    classDef server fill:#1e293b,stroke:#f59e0b,stroke-width:2px,color:#ffffff
-    classDef api fill:#0f172a,stroke:#6366f1,stroke-width:2px,color:#ffffff
+flowchart TD
+    subgraph Client ["Client Device (Browser)"]
+        BLE[BLE HR Sensor] -->|GATT 0x180D| WB[Web Bluetooth Client]
+        WB --> ZE[Zone Engine & Analytics]
+        WB --> MOCK[Mock Simulator Harness]
+    end
 
-    Peripheral[Bluetooth HR Sensor] ::: hardware
-    WebClient[Participant Web Client] ::: client
-    Instructor[Instructor Dashboard] ::: client
-    WSServer[WebSocket Sync Server] ::: server
-    Spotify[Spotify Web API] ::: api
+    subgraph Relays ["Server & Media Layer"]
+        ZE -->|Socket.io Telemetry| WS[WebSocket Server]
+        ZE -->|OAuth PKCE| SPOT[Spotify Web Playback SDK]
+    end
 
-    Peripheral -->|GATT Data| WebClient
-    WebClient -->|State Updates| WSServer
-    WSServer -->|Broadcast Sync| WebClient
-    WSServer -->|Broadcast Sync| Instructor
-    WebClient -->|OAuth & Playback| Spotify
+    subgraph Outputs ["Unified Views & Integrations"]
+        WS --> DASH[Trainer & Multi-Client Dashboard]
+        ZE -.->|OAuth In Development| STRAVA[Strava API]
+    end
+
+    subgraph CI ["DevAI & Quality Guardrails"]
+        REPO[RepoAuditor PR Reviewer] --> GA[GitHub Actions CI/CD]
+        GA --> PW[Playwright E2E & Visual Diff Tests]
+    end
 ```
