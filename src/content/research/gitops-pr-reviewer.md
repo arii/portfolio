@@ -13,7 +13,7 @@ The first version of my AI review workflow made a classic mistake: I asked the m
 
 The better pattern is to shrink the model's job: collect the important pull request context first, then ask the model to review that prepared packet through structured tools.
 
-I engineered the **Boomtick DevAI Ecosystem** around this exact principle. At its core is a **Dual-Layer Architecture** combining `boomtick-mcp` (a Model Context Protocol server for structured macro-agent tool invocation) and `td-cli` (a standalone terminal CLI serving as a deterministic local execution layer and human fallback). Together with a **Zero-Submodule Strategy** and a multi-tiered AI review system, this architecture provides unified governance across agentic and developer workflows.
+I engineered the **Boomtick DevAI Ecosystem** (open source across [arii/boomtick](https://github.com/arii/boomtick) and [arii/tech-dancer](https://github.com/arii/tech-dancer)) around this exact principle. At its core is a **Dual-Layer Architecture** combining `boomtick-mcp` (a Model Context Protocol server for structured macro-agent tool invocation) and `td-cli` (a standalone terminal CLI serving as a deterministic local execution layer and human fallback). Together with a **Zero-Submodule Strategy** and a multi-tiered AI review system, this architecture provides unified governance across agentic and developer workflows.
 
 ---
 
@@ -56,7 +56,7 @@ flowchart TD
 
 ### Key Architectural Principles
 
-- **Zero-Submodule Strategy**: Rather than embedding tooling via Git submodules across downstream repositories, tools are distributed as zero-dependency binaries and standalone execution packages resolved dynamically via path resolution scripts (`scripts/resolve-cli.sh`).
+- **Zero-Submodule Strategy**: Rather than embedding tooling via Git submodules across downstream repositories, tools are distributed as zero-dependency binaries and standalone execution packages resolved dynamically via workspace path resolution scripts (`scripts/resolve-cli.sh` in [arii/boomtick](https://github.com/arii/boomtick)).
 - **Multi-Tier AI Review System**: Incoming pull requests trigger structural evaluation pipelines where macro-agents utilize `boomtick-mcp` tools or `td-cli` commands to inspect diffs, verify static analysis artifacts, and render structured review recommendations (`APPROVE`, `REQUEST_CHANGES`, or `COMMENT`).
 - **Strict Tool Hierarchy**: `boomtick-mcp` exposes strongly typed, schema-validated tools to the agent. If the MCP protocol layer is unreachable or running in an isolated environment, the agent or developer seamlessly falls back to direct `td-cli` command execution.
 
@@ -89,7 +89,7 @@ $ td-cli gh audit-pr --pr 42 --fetch
 
 ## 2. Boomtick MCP Server (`boomtick-mcp`) for Agentic Workflows
 
-The primary interface for AI agents is `boomtick-mcp`, built natively on the Model Context Protocol (MCP). It translates abstract agent intents into validated, schema-constrained operations.
+The primary interface for AI agents is `boomtick-mcp`, built natively on the Model Context Protocol (MCP) specification ([modelcontextprotocol.io](https://modelcontextprotocol.io)). It translates abstract agent intents into validated, schema-constrained operations.
 
 ### Schema Safety and Context Optimization
 
@@ -123,7 +123,7 @@ By utilizing JSON Schema definitions for every exposed tool, `boomtick-mcp` prev
 
 ## 3. Tier 2 Fallback: Terminal CLI (`td-cli`)
 
-While `boomtick-mcp` serves agentic clients, `td-cli` provides the underlying deterministic command-line execution engine. It ensures that developers and CI/CD scripts maintain identical execution capabilities independently of LLM availability.
+While `boomtick-mcp` serves agentic clients, `td-cli` (maintained in the open-source [arii/tech-dancer](https://github.com/arii/tech-dancer/tree/main/dev-tools) repository) provides the underlying deterministic command-line execution engine. It ensures that developers and CI/CD scripts maintain identical execution capabilities independently of LLM availability.
 
 ```bash
 # Running local environment verification and PR audit fallback
@@ -242,7 +242,7 @@ For instance, `td-cli ai review` or `scripts/send-jules-impact.py` submits the r
 
 To close the gap between detection and resolution, I engineered an autonomous repair loop utilizing Jules and specialized coding agents. When the CI pipeline fails, it does not just report the error—it triggers an active repair session.
 
-The process is orchestrated via `.github/workflows/jules-fix-trigger.yml`, which detects CI failures and executes `td-cli ai repair`. This workflow bundles the failing CI logs, the active PR diff, and project-specific constraints into a secure repair context packet.
+The process is orchestrated via `.github/workflows/jules-fix-trigger.yml` in [arii/boomtick](https://github.com/arii/boomtick), which detects CI failures and executes `td-cli ai repair`. This workflow bundles the failing CI logs, the active PR diff, and project-specific constraints into a secure repair context packet.
 
 ### The CI Repair Flow:
 1. **CI Failure Detection:** GitHub Actions detects a failing test, linting error, or build step.
@@ -253,12 +253,12 @@ The process is orchestrated via `.github/workflows/jules-fix-trigger.yml`, which
 
 ---
 
-## Summary of the Architecture
+## Summary of the Architecture & Open Source Repositories
 
 By consolidating the PR review orchestration into the **Boomtick DevAI Ecosystem**:
 1. Agents interact via structured Model Context Protocol tools (`boomtick-mcp`).
-2. Developers and CI workflows utilize deterministic CLI fallbacks (`td-cli`).
+2. Developers and CI workflows utilize deterministic CLI fallbacks (`td-cli` open-sourced at [github.com/arii/tech-dancer](https://github.com/arii/tech-dancer)).
 3. Google Gemini generates structured JSON findings over complete context packets.
 4. Deterministic gatekeeper scripts apply GitHub review states without hallucination risks.
 
-Placing deterministic boundary scripts before and after the inference step ensures automated code reviews remain predictable, audit-compliant, and reliable across all repositories.
+All pipeline code, path resolution scripts (`scripts/resolve-cli.sh`), and GitHub Actions workflow triggers are publicly accessible in [arii/boomtick](https://github.com/arii/boomtick) and [arii/tech-dancer](https://github.com/arii/tech-dancer).
