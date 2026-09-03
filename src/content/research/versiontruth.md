@@ -66,24 +66,24 @@ The API lives as serverless functions sitting next to an existing Vite SPA—ope
 sequenceDiagram
     autonumber
 
-    actor Agent as AI Coding Agent<br/>(Jules / Claude)
-    participant Skill as SKILL.md<br/>Specification
-    participant API as VersionTruth API<br/>(Vercel Edge)
-    participant Reg as Upstream Registry<br/>(npm / GitHub / Node)
+    actor Agent as AI Coding Agent (Jules / Claude)
+    participant Skill as SKILL.md Specification
+    participant API as VersionTruth API (Vercel Edge)
+    participant Reg as Upstream Registry (npm / GitHub / Node)
 
     Agent->>Skill: Reads tool definition & endpoints
     activate Skill
     Skill-->>Agent: Returns schema & parameters
     deactivate Skill
 
-    Agent->>+API: GET /api/compare-version<br/>?ecosystem=gh-action<br/>&name=actions/checkout<br/>&candidate=v4
+    Agent->>+API: GET /api/compare-version (ecosystem=gh-action, candidate=v4)
 
     API->>+Reg: Fetches real-time releases & tags
-    Reg-->>-API: Returns latest tagged release (e.g. v6.0.1)
+    Reg-->>-API: Returns latest tagged release (v6.0.1)
 
-    API-->>-Agent: 200 OK: { candidate: "v4",<br/>latest: "v6.0.1", isOutdated: true }
+    API-->>-Agent: 200 OK: candidate="v4", latest="v6.0.1", isOutdated=true
 
-    Agent->>Agent: Retains v6 instead of<br/>hallucinated downgrade
+    Agent->>Agent: Retains v6 instead of hallucinated downgrade
 ```
 
 

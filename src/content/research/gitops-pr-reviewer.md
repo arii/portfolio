@@ -17,19 +17,32 @@ The better pattern is to shrink the model's job: collect the important pull requ
 
 ```mermaid
 flowchart TD
-  PR[Pull request opened] --> Collect[Collect review context]
-  Collect --> Packet[Create review-context.md]
+    subgraph Trigger_Context ["Trigger & Context Gathering"]
+        PR[Pull Request Opened] --> Collect[Collect Review Context]
+        CI[CI Logs] --> Collect
+        Diff[PR Diff] --> Collect
+        Rules[Project Guidelines] --> Collect
+        Collect --> Packet[Create review-context.md]
+    end
 
-  Packet --> Models[Send packet to Gemini API]
-  Models --> Findings[Return structured findings]
+    subgraph Inference_Orchestration ["Gemini AI Inference"]
+        Packet --> Models[Send Packet to Gemini API]
+        Models --> Findings[Return Structured JSON Findings]
+    end
 
-  Findings --> Decide{Any blocking issues?}
-  Decide -->|Yes| Changes[Request changes]
-  Decide -->|No| Summary[Post summary or approve]
+    subgraph Decision_Boundary ["Deterministic Gatekeeper"]
+        Findings --> Decide{Any Blocking Issues?}
+        Decide -->|Yes| Changes[Request Changes]
+        Decide -->|No| Summary[Post Summary / Approve]
+    end
 
-  CI[CI logs] --> Collect
-  Diff[PR diff] --> Collect
-  Rules[Project review rules] --> Collect
+    classDef trigger fill:#1e293b,stroke:#38bdf8,stroke-width:2px,color:#f8fafc;
+    classDef ai fill:#0f172a,stroke:#a855f7,stroke-width:2px,color:#f8fafc;
+    classDef gate fill:#064e3b,stroke:#34d399,stroke-width:2px,color:#f8fafc;
+
+    class PR,CI,Diff,Rules,Collect,Packet trigger;
+    class Models,Findings ai;
+    class Decide,Changes,Summary gate;
 ```
 
 ---

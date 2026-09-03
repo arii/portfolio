@@ -17,53 +17,30 @@ I built the **Deployment Impact Analyzer** to catch these discrepancies automati
 ## The Architecture
 
 ```mermaid
-graph TB
-    %% Strict High-Visibility Class Definitions
-    classDef gitHub fill:#232d38,stroke:#60a5fa,stroke-width:2px,color:#ffffff,font-weight:bold;
-    classDef runner fill:#1e293b,stroke:#3b82f6,stroke-width:2px,color:#ffffff,font-weight:bold;
-    classDef external fill:#064e3b,stroke:#34d399,stroke-width:2px,color:#ffffff,font-weight:bold;
-    classDef linkText fill:none,color:#cbd5e1,font-size:11px;
+flowchart TD
+    A[Pull Request Event] -->|Webhook Trigger| B[Identify Changed Files]
+    B -->|git diff-tree| C[dependency-cruiser Analysis]
+    C -->|Blast Radius Array| D[Map to Affected Routes]
     
-    %% Environments as System Boundaries
-    subgraph GitHub_Platform ["GitHub Environment"]
-        A[Pull Request Event]
-        G[PR Comment / Status Check]
+    subgraph Envs ["Target Environments"]
+        Prod[Production Baseline]
+        Branch[Feature Branch Preview]
     end
 
-    subgraph CI_Runner ["GitHub Actions Runner"]
-        B[Identify Changed Files]
-        C[dependency-cruiser Analysis]
-        D[Map to Affected Routes]
-        E[Playwright Engine]
-        F[Severity Scoring Engine]
-    end
-
-    subgraph Target_Environments ["Network / Environments"]
-        Prod[Production Main Baseline]
-        Branch[Feature Branch Deploy Preview]
-    end
-
-    %% Pipeline Logic & High-Contrast Connectors
-    A ==>|Webhook Trigger| B
-    B ==>|git diff-tree| C
-    C ==>|Blast Radius Array| D
+    D -->|Target URLs| E[Playwright Screenshot Engine]
+    Prod -.->|HTTP GET| E
+    Branch -.->|HTTP GET| E
     
-    D ==>|Target URLs| E
-    Prod -.->|HTTP Get| E
-    Branch -.->|HTTP Get| E
-    
-    E ==>|Pixel Delta Map| F
-    F ==>|Markdown Report| G
+    E -->|Pixel Delta Map| F[Severity Scoring Engine]
+    F -->|Markdown Report| G[PR Comment & Status Check]
 
-    %% Assign Classes
-    class A,G gitHub;
+    classDef trigger fill:#1e293b,stroke:#38bdf8,stroke-width:2px,color:#f8fafc;
+    classDef runner fill:#0f172a,stroke:#818cf8,stroke-width:2px,color:#f8fafc;
+    classDef env fill:#064e3b,stroke:#34d399,stroke-width:2px,color:#f8fafc;
+
+    class A,G trigger;
     class B,C,D,E,F runner;
-    class Prod,Branch external;
-
-    %% Subgraph Contrast Overrides
-    style GitHub_Platform fill:#0d1117,stroke:#4b5563,stroke-width:2px,color:#f3f4f6
-    style CI_Runner fill:#0b0f19,stroke:#4b5563,stroke-width:2px,color:#f3f4f6
-    style Target_Environments fill:#022c22,stroke:#047857,stroke-width:2px,color:#a7f3d0
+    class Prod,Branch env;
 ```
 
 - **Dependency Graph Parsing**: Traces modified files up to entry points to establish an explicit visual blast radius.
