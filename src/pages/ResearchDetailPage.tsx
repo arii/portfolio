@@ -697,9 +697,14 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
                 objectFitClass = 'object-contain';
               }
 
-              // Extract height constraint
-              const isTall = hash.includes('tall');
-              const defaultMaxHeight = isTall ? 'max-h-[500px]' : 'max-h-[380px]';
+              // Extract max-height from hash if present, or set default based on #tall / #contain
+              let maxHeightClass = 'max-h-[380px]';
+              const maxHMatch = hash.match(/max-h-\[[^\]]+\]|max-h-[a-zA-Z0-9]+/);
+              if (maxHMatch) {
+                maxHeightClass = maxHMatch[0];
+              } else if (hash.includes('tall') || hash.includes('contain')) {
+                maxHeightClass = 'max-h-[500px]';
+              }
 
               // Parse alt text for pipe-delimited description and link info
               let displayCaption = alt || '';
@@ -715,11 +720,11 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
 
               const containerClasses = aspectClass
                 ? `w-full ${aspectClass} relative flex justify-center items-center`
-                : 'w-full flex justify-center';
+                : 'w-full flex justify-center items-center';
 
               const imgClasses = aspectClass
                 ? `w-full h-full ${objectFitClass} rounded-xl ${shouldInvert ? 'dark:invert dark:hue-rotate-180 dark:mix-blend-screen' : ''}`
-                : `${defaultMaxHeight} w-full h-auto ${objectFitClass} rounded-xl ${shouldInvert ? 'dark:invert dark:hue-rotate-180 dark:mix-blend-screen' : ''}`;
+                : `${maxHeightClass} w-auto max-w-full h-auto ${objectFitClass} rounded-xl ${shouldInvert ? 'dark:invert dark:hue-rotate-180 dark:mix-blend-screen' : ''}`;
 
               return (
                 <figure className={`my-6 space-y-2 ${maxWidthClass}`}>

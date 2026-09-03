@@ -69,4 +69,16 @@ describe('Card UX & Detail Page Navigation Improvements', () => {
     const imageContainer = galleryImage?.closest('.aspect-\\[4\\/3\\]');
     expect(imageContainer).toBeInTheDocument();
   });
+
+  it('renders tall state machine diagram with max-h-[500px] and object-contain classes on undergraduate projects page', () => {
+    const handleBack = vi.fn();
+    const { container } = render(<ResearchDetailPage slug="undergraduate-projects" onBack={handleBack} />);
+
+    const images = Array.from(container.querySelectorAll('img'));
+    const stateMachineImg = images.find(img => img.getAttribute('src') === '/assets/research/report-ce118-mechatronics/hierarchical_state_machine.png');
+
+    expect(stateMachineImg).toBeInTheDocument();
+    expect(stateMachineImg?.className).toContain('max-h-[500px]');
+    expect(stateMachineImg?.className).toContain('object-contain');
+  });
 });
