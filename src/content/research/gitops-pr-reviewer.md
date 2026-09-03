@@ -197,6 +197,30 @@ result = response.json()
 print(result["candidates"][0]["content"]["parts"][0]["text"])
 ```
 
+### Example Structured Review Output
+
+Configuring Gemini with structured JSON output (`responseMimeType: "application/json"`) ensures that downstream gatekeepers can parse and act on findings programmatically:
+
+```json
+{
+  "recommendation": "REQUEST_CHANGES",
+  "blocking": [
+    {
+      "file": "src/components/Navigation.tsx",
+      "reason": "Navigation item missing required min-h-[48px] touch target for mobile accessibility",
+      "suggestion": "Add min-h-[48px] class to interactive link elements"
+    }
+  ],
+  "non_blocking": [
+    {
+      "file": "src/data/home.ts",
+      "reason": "Consider extracting role title constant"
+    }
+  ],
+  "summary": "Found 1 accessibility regression requiring changes before merging."
+}
+```
+
 ---
 
 ## 5. Map Review States Deterministically
