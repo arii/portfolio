@@ -4,14 +4,14 @@ export const systemTools: ResearchTool[] = [
   {
     id: 'gitops-pr-reviewer',
     taxonomyBucket: 'infrastructure',
-    title: 'GitHub Actions LLM Code Review Automated',
-    subtitle: 'Automated PR Auditing',
-    description: 'I developed an LLM-powered PR auditing pipeline that performs automated review and structured feedback on pull requests.',
+    title: 'Boomtick DevAI PR Reviewer & MCP Architecture',
+    subtitle: 'Automated PR Auditing & Dual-Layer Harness',
+    description: 'I engineered an LLM-powered PR auditing pipeline and dual-layer harness combining boomtick-mcp for agentic tool calls and td-cli for deterministic execution and GitHub Actions automation.',
     category: 'DevAI System',
     status: 'Active',
-    tags: ['GitHub Actions', 'LLM', 'PR automation'],
+    tags: ['GitHub Actions', 'MCP', 'CLI', 'Gemini', 'DevAI', 'PR automation'],
     canonicalPath: '/research/gitops-pr-reviewer',
-    sourceUrl: 'https://github.com/arii/tech-dancer/tree/main/dev-tools',
+    sourceUrl: 'https://github.com/arii/boomtick',
     parentFlagship: {
       id: 'repo-auditor-ai',
       title: 'RepoAuditor'
