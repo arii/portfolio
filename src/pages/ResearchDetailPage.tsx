@@ -638,19 +638,33 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
               </li>
             ),
             img: ({ src, alt, ...props }) => {
-              const cleanSrc = src ? src.split('#')[0] : '';
-              const hash = src && src.includes('#') ? src.split('#')[1] : '';
-              const shouldInvert = hash.includes('invert-dark') || hash.includes('invert');
+              const [cleanSrc, ...hashParts] = src ? src.split('#') : [''];
+              const hashString = hashParts.join('#');
+
+              const isTall = hashString.includes('tall');
+              const isContain = hashString.includes('contain');
+              const isCover = hashString.includes('cover');
+              const shouldInvert = hashString.includes('invert-dark') || hashString.includes('invert');
 
               // Extract max-width from hash
               let maxWidthClass = '';
-              if (hash.includes('max-w-xs')) maxWidthClass = 'max-w-xs mx-auto';
-              else if (hash.includes('max-w-sm')) maxWidthClass = 'max-w-sm mx-auto';
-              else if (hash.includes('max-w-md')) maxWidthClass = 'max-w-md mx-auto';
-              else if (hash.includes('max-w-lg')) maxWidthClass = 'max-w-lg mx-auto';
-              else if (hash.includes('max-w-xl')) maxWidthClass = 'max-w-xl mx-auto';
-              else if (hash.includes('max-w-2xl')) maxWidthClass = 'max-w-2xl mx-auto';
-              else if (hash.includes('max-w-3xl')) maxWidthClass = 'max-w-3xl mx-auto';
+              if (hashString.includes('max-w-xs')) maxWidthClass = 'max-w-xs mx-auto';
+              else if (hashString.includes('max-w-sm')) maxWidthClass = 'max-w-sm mx-auto';
+              else if (hashString.includes('max-w-md')) maxWidthClass = 'max-w-md mx-auto';
+              else if (hashString.includes('max-w-lg')) maxWidthClass = 'max-w-lg mx-auto';
+              else if (hashString.includes('max-w-xl')) maxWidthClass = 'max-w-xl mx-auto';
+              else if (hashString.includes('max-w-2xl')) maxWidthClass = 'max-w-2xl mx-auto';
+              else if (hashString.includes('max-w-3xl')) maxWidthClass = 'max-w-3xl mx-auto';
+
+              // Extract aspect ratio from hash
+              let aspectClass = '';
+              if (hashString.includes('aspect-video')) aspectClass = 'aspect-video';
+              else if (hashString.includes('aspect-square')) aspectClass = 'aspect-square';
+              else if (hashString.includes('aspect-4/3')) aspectClass = 'aspect-[4/3]';
+
+              // Height and object-fit constraints
+              const heightClass = (isTall || isContain) ? 'max-h-[500px]' : 'max-h-[380px]';
+              const objectFitClass = isCover ? 'object-cover' : 'object-contain';
 
               // Parse alt text for pipe-delimited description and link info
               let displayCaption = alt || '';
@@ -666,12 +680,12 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
 
               return (
                 <figure className={`my-6 space-y-2 ${maxWidthClass}`}>
-                  <div className="overflow-hidden rounded-2xl border border-line bg-surface/40 p-2 shadow-lg flex items-center justify-center">
+                  <div className={`overflow-hidden rounded-2xl border border-line bg-surface/40 shadow-lg flex items-center justify-center ${isTall || isContain ? 'p-4 bg-surface/60' : 'p-2'}`}>
                     <SafeImage
                       src={cleanSrc}
                       alt={displayCaption}
-                      containerClassName="w-full flex justify-center"
-                      className={`max-h-[380px] w-full h-auto object-contain rounded-xl ${shouldInvert ? 'dark:invert dark:hue-rotate-180 dark:mix-blend-screen' : ''}`}
+                      containerClassName="w-full flex justify-center items-center"
+                      className={`${heightClass} w-auto max-w-full h-auto ${objectFitClass} ${aspectClass} rounded-xl ${shouldInvert ? 'dark:invert dark:hue-rotate-180 dark:mix-blend-screen' : ''}`}
                       {...props}
                     />
                   </div>

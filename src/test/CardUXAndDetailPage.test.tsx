@@ -55,4 +55,17 @@ describe('Card UX & Detail Page Navigation Improvements', () => {
     expect(imageSrcs).toContain('/assets/research/duckietown/navigation_2.gif');
     expect(imageSrcs).toContain('/assets/research/duckietown/navigation_1.gif');
   });
+
+  it('renders tall diagrams with height constraints and object-contain styling on ResearchDetailPage', () => {
+    const handleBack = vi.fn();
+    const { container } = render(<ResearchDetailPage slug="undergraduate-projects" onBack={handleBack} />);
+
+    // Find the state machine image
+    const images = Array.from(container.querySelectorAll('img'));
+    const stateMachineImg = images.find(img => img.getAttribute('src') === '/assets/research/report-ce118-mechatronics/hierarchical_state_machine.png');
+
+    expect(stateMachineImg).toBeInTheDocument();
+    expect(stateMachineImg).toHaveClass('max-h-[500px]');
+    expect(stateMachineImg).toHaveClass('object-contain');
+  });
 });
