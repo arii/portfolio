@@ -113,4 +113,14 @@ flowchart TD
         REPO[RepoAuditor PR Reviewer] --> GA[GitHub Actions CI/CD]
         GA --> PW[Playwright E2E & Visual Diff Tests]
     end
+
+    classDef client fill:#1e293b,stroke:#38bdf8,stroke-width:2px,color:#f8fafc;
+    classDef server fill:#0f172a,stroke:#818cf8,stroke-width:2px,color:#f8fafc;
+    classDef output fill:#064e3b,stroke:#34d399,stroke-width:2px,color:#f8fafc;
+    classDef devai fill:#312e81,stroke:#a855f7,stroke-width:2px,color:#f8fafc;
+
+    class BLE,WB,ZE,MOCK client;
+    class WS,SPOT server;
+    class DASH,STRAVA output;
+    class REPO,GA,PW devai;
 ```
