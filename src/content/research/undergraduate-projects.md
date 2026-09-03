@@ -125,11 +125,11 @@ In **CMPE-118 Introduction to Mechatronics** at UC Santa Cruz, my team (Matthew 
 
 ### **System & Component Gallery**
 
-![MAK Attack Front View | MAK Attack Autonomous Robot Assembly](/assets/research/undergraduate-projects/ce118-001.webp) ![Sensory & Signal Processing Circuits | Sensory and Signal Processing Circuitry](/assets/research/undergraduate-projects/ce118-007.webp)
+![MAK Attack Front View | MAK Attack Autonomous Robot Assembly](/assets/research/undergraduate-projects/ce118-001.webp#aspect-4/3#object-cover) ![Sensory & Signal Processing Circuits | Sensory and Signal Processing Circuitry](/assets/research/undergraduate-projects/ce118-007.webp#aspect-4/3#object-cover)
 
-![Chassis Interior | Top-Down Chassis Interior](/assets/research/undergraduate-projects/ce118-008.webp) ![Chassis SolidWorks Design | CAD Chassis Model & Structural Layout](/assets/research/undergraduate-projects/ce118-009.webp)
+![Chassis Interior | Top-Down Chassis Interior](/assets/research/undergraduate-projects/ce118-008.webp#aspect-4/3#object-cover) ![Chassis SolidWorks Design | CAD Chassis Model & Structural Layout](/assets/research/undergraduate-projects/ce118-009.webp#aspect-4/3#object-cover)
 
-![Complete System Setup | Complete System with Sensor Array](/assets/research/undergraduate-projects/ce118-010.webp)
+![Complete System Setup | Complete System with Sensor Array](/assets/research/undergraduate-projects/ce118-010.webp#aspect-4/3#object-cover#max-w-2xl)
 
 ---
 

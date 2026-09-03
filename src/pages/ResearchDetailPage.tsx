@@ -639,7 +639,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
             ),
             img: ({ src, alt, ...props }) => {
               const cleanSrc = src ? src.split('#')[0] : '';
-              const hash = src && src.includes('#') ? src.split('#')[1] : '';
+              const hash = src && src.includes('#') ? src.split('#').slice(1).join('#') : '';
               const shouldInvert = hash.includes('invert-dark') || hash.includes('invert');
 
               // Extract max-width from hash
@@ -651,6 +651,24 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
               else if (hash.includes('max-w-xl')) maxWidthClass = 'max-w-xl mx-auto';
               else if (hash.includes('max-w-2xl')) maxWidthClass = 'max-w-2xl mx-auto';
               else if (hash.includes('max-w-3xl')) maxWidthClass = 'max-w-3xl mx-auto';
+
+              // Extract aspect ratio from hash
+              let aspectClass = '';
+              if (hash.includes('aspect-4/3')) aspectClass = 'aspect-[4/3]';
+              else if (hash.includes('aspect-video')) aspectClass = 'aspect-video';
+              else if (hash.includes('aspect-square')) aspectClass = 'aspect-square';
+
+              // Extract object-fit from hash
+              let objectFitClass = 'object-contain';
+              if (hash.includes('object-cover')) {
+                objectFitClass = 'object-cover';
+              } else if (hash.includes('object-contain') || hash.includes('contain')) {
+                objectFitClass = 'object-contain';
+              }
+
+              // Extract height constraint
+              const isTall = hash.includes('tall');
+              const defaultMaxHeight = isTall ? 'max-h-[500px]' : 'max-h-[380px]';
 
               // Parse alt text for pipe-delimited description and link info
               let displayCaption = alt || '';
@@ -664,14 +682,22 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
                 linkUrl = parts[2]?.trim() || '';
               }
 
+              const containerClasses = aspectClass
+                ? `w-full ${aspectClass} relative flex justify-center items-center`
+                : 'w-full flex justify-center';
+
+              const imgClasses = aspectClass
+                ? `w-full h-full ${objectFitClass} rounded-xl ${shouldInvert ? 'dark:invert dark:hue-rotate-180 dark:mix-blend-screen' : ''}`
+                : `${defaultMaxHeight} w-full h-auto ${objectFitClass} rounded-xl ${shouldInvert ? 'dark:invert dark:hue-rotate-180 dark:mix-blend-screen' : ''}`;
+
               return (
                 <figure className={`my-6 space-y-2 ${maxWidthClass}`}>
                   <div className="overflow-hidden rounded-2xl border border-line bg-surface/40 p-2 shadow-lg flex items-center justify-center">
                     <SafeImage
                       src={cleanSrc}
                       alt={displayCaption}
-                      containerClassName="w-full flex justify-center"
-                      className={`max-h-[380px] w-full h-auto object-contain rounded-xl ${shouldInvert ? 'dark:invert dark:hue-rotate-180 dark:mix-blend-screen' : ''}`}
+                      containerClassName={containerClasses}
+                      className={imgClasses}
                       {...props}
                     />
                   </div>
