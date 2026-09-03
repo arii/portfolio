@@ -18,12 +18,14 @@ During my undergraduate studies in Computer Engineering at UC Santa Cruz (UCSC),
 
 ---
 
-## CMPE 100: Logic Design
+## CMPE 100: Digital Logic Design
 
 * **Focus:** Fundamental combinational and sequential logic design, gate-level implementations, and hardware verification.
 * **Highlights:** Designed and tested robust digital subsystems, finite state machines, and hardware description language workflows on FPGA development boards.
 
-### CMPE 100L Laboratory: Breadboard D Flip-Flop
+### Breadboard D Flip-Flop Circuit & Hardware Testing
+
+**Timeline:** Fall 2010 | **Role:** Digital Logic Designer | **Tech Stack:** Breadboard TTL Logic, D Flip-Flops, Oscilloscope, Logic Analyzer
 
 [![Breadboard D Flip-Flop hardware loops. | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=G0uw5PP9fuw#no-embed](/assets/research/undergraduate-projects/flip_flop.gif#max-w-2xl)](https://www.youtube.com/watch?v=G0uw5PP9fuw#no-embed)
 
@@ -35,6 +37,8 @@ During my undergraduate studies in Computer Engineering at UC Santa Cruz (UCSC),
 * **Highlights:** Engineered a fully integrated microcontroller-based system, managing custom peripheral drivers, interrupt service routines, and serial communication protocols.
 
 ### 68HC11 Microcontroller Board for Mechanical Gripper Control
+
+**Timeline:** Spring 2011 | **Role:** Embedded Systems & Hardware Engineer | **Tech Stack:** Motorola 68HC11, C / Assembly, RS-232 UART, SRAM / EPROM Bus Interfacing, Soldering & Wire-Wrap
 
 For **CMPE-121 Microprocessor System Design** at UC Santa Cruz, we designed, hand-soldered, and programmed a custom embedded computer board based on the **Motorola 68HC11E1 microcontroller**, bringing bare silicon up to full operational capability to control a mechanical gripper without a host computer.
 
@@ -77,22 +81,19 @@ We structured the software to manage real-time communication and hardware feedba
 
 ### MAK Attack Autonomous Mechatronic System
 
+**Timeline:** Winter 2012 | **Role:** Systems Engineer, Programming Lead & Circuit Debugger | **Tech Stack:** PIC32 Microcontroller, C, Hierarchical State Machines, IR Sensors, Op-Amp Filters, PWM Motor Control, SolidWorks
+
 In **CMPE-118 Introduction to Mechatronics** at UC Santa Cruz, my team (Matthew Luxton, Kyle Huey, and I) designed, constructed, and programmed **MAK Attack**—an autonomous mobile robot built to solve real-time arena navigation and object manipulation challenges under strict operational deadlines.
 
 ![The MAK Attack autonomous mobile robot platform, highlighting optical sensors, bumper switches, and custom motor drive electronics.](/assets/research/report-ce118-mechatronics/mak_attack_robot.png#max-w-2xl)
 
-#### **At a Glance**
+#### Project Overview & Core Requirements
 
-  * **Objective**: Designed and engineered an 11" x 11" x 11" fully autonomous robot programmed to navigate an 8' x 8' competitive course, locate and engage an opponent island via infrared beacons, deploy a mechanical projectile system, and return safely to the home island.
-  * **Roles**: Served as Systems Engineer, Programming Lead, and Circuit Debugger.
-  * **Timeline**: Winter 2012 (Completed Mar 19, 2012).
-  * **Core Technologies**: PIC32 Microcontroller, Mechatronic State Machine Architecture, Infrared (IR) Sensor Arrays, Dual-Motor Differential Drive, Analog Hardware Debounce & Filtering, PWM Motor Regulation.
+Designed and engineered an 11" x 11" x 11" fully autonomous robot programmed to navigate an 8' x 8' competitive course, locate and engage an opponent island via infrared beacons, deploy a mechanical projectile system, and return safely to the home island.
 
------
+#### Engineering Design & Implementation
 
-#### **Engineering Design & Implementation**
-
-##### **1. Software Architecture & Control Systems**
+##### 1. Software Architecture & Control Systems
 
   * **Hierarchical Finite State Machine (FSM)**: Architected and programmed a complex control structure featuring modular sub-state machines (e.g., dedicated centering algorithms and localized sensor-sampling logic).
 
@@ -101,29 +102,27 @@ In **CMPE-118 Introduction to Mechatronics** at UC Santa Cruz, my team (Matthew 
   * **Ambient-Resilient Event Detection**: Developed a differential sampling state machine for the robot’s IR tape sensors. By capturing active and passive states sequentially, the software calculated ambient light deltas to stabilize detection thresholds under variable environmental lighting.
   * **Adaptive Battery Voltage Scaling**: Engineered an algorithmic solution to address supply fluctuations (from a 14.4V dual-battery series configuration). Built continuous PWM duty-cycle scaling code utilizing a 10-bit ADC reference to normalize motor outputs relative to a steady 12V operational baseline, ensuring consistent maneuverability and projectile power.
 
-##### **2. Hardware & Electrical Engineering**
+##### 2. Hardware & Electrical Engineering
 
   * **Mixed-Signal Circuit Debugging**: Led the integration, isolation, and validation of the robot's sensory circuits, including high-pass and low-pass trans-resistive op-amp filter stages to clean noisy phototransistor signals.
   * **Sensor & Actuator Integration**: Successfully implemented an active-high IR beacon-tracking filter, basic binary bump-sensor networks, a high-current H-bridge driver circuit, and dedicated TIP122 Darlington transistor circuits to govern mechanical subsystems.
 
-##### **3. Mechanical Design Strategy**
+##### 3. Mechanical Design Strategy
 
   * **Modular Parametric Chassis**: Participated in the collaborative design of a modular CAD framework in SolidWorks. The architecture isolated structural power distribution and drive elements from specialized operational modules, simplifying physical debugging and enabling efficient on-the-fly hardware replacement.
   * **Servo-Driven Launching Mechanism**: Integrated dual high-velocity toy motors paired with a high-torque servo-actuated feeding mechanism to sequentially chamber and discharge ping-pong projectiles at target vectors.
 
------
-
-#### **Key Results & Engineering Takeaways**
+#### Key Results & Engineering Takeaways
 
   * **Integration-Driven Development**: Successfully mitigated integration bottlenecks by designing testing harnesses and sub-assembly code in parallel with mechanical builds throughout a 5-week integration runway.
   * **High-Precision Target Acquisition**: Achieved exceptional accuracy with the projectile launcher, consistently landing multiple impacts on target by relying on dynamic software thresholding to counter complex external ambient light interference.
   * **Agile Problem Solving**: Overcame a critical, late-stage failure of the robot's primary micro-servos by adapting the physical chassis to house robust, larger-scale servos and utilizing custom ground shielding around signaling lines to eliminate high-current motor noise.
 
-#### **Downloads**
+#### Downloads
 
 - 📄 [Download Mechatronics Lab Report (PDF)](https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_ce118.pdf)
 
-### **System & Component Gallery**
+#### System & Component Gallery
 
 ![MAK Attack Front View | MAK Attack Autonomous Robot Assembly](/assets/research/undergraduate-projects/ce118-001.webp) ![Sensory & Signal Processing Circuits | Sensory and Signal Processing Circuitry](/assets/research/undergraduate-projects/ce118-007.webp)
 
@@ -133,14 +132,16 @@ In **CMPE-118 Introduction to Mechatronics** at UC Santa Cruz, my team (Matthew 
 
 ---
 
-## Standalone Side Project: Microcontroller-Based LED Game
+## Standalone Embedded Hardware Projects
 
 * **Focus:** Interactive embedded hardware, custom firmware state machines, and resource-constrained peripheral control.
-* **Highlights:** Developed a portable arcade-style LED game powered by a standalone microcontroller, featuring custom multiplexed matrix displays, debounced user inputs, and responsive gameplay logic.
+* **Highlights:** Developed portable arcade-style embedded hardware projects powered by standalone microcontrollers, featuring custom multiplexed matrix displays, debounced user inputs, and responsive gameplay logic.
 
 ### Microcontroller-Based LED Ring Reaction Game for UCSC Engineering Week
 
-We created this interactive arcade game for the Tau Beta Pi student organization during Engineering Week at UC Santa Cruz in February 2020. Built by Ariel Anders, Nathan Abercrombie, and Julian Dahan, the game challenges players to press a large button and stop a fast-moving light on a specific target LED.
+**Timeline:** February 2012 | **Role:** Embedded Hardware Developer (Team with Nathan Abercrombie & Julian Dahan) | **Tech Stack:** Microcontroller, C, LED Output Multiplexing, Analog Input Sensing, Serial Communications
+
+We created this interactive arcade game for the Tau Beta Pi student organization during Engineering Week at UC Santa Cruz in February 2012. Built by Ariel Anders, Nathan Abercrombie, and Julian Dahan, the game challenges players to press a large button and stop a fast-moving light on a specific target LED.
 
 We wired an array of 28 individual LEDs across digital output pins 22 through 49. The code lights up one LED at a time with a quick 10ms delay, making the light look like it is spinning in a continuous circle. The game button connects to an analog input pin (A0). The microcontroller constantly reads this pin, and when the button press drops the reading below our set threshold of 500, the movement loop stops completely. This freezes the light, sends the final score data through a 9600 baud Serial pipeline, and keeps the game at the end screen until you press reset to play again.
 
