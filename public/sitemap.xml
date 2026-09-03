@@ -73,6 +73,18 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://arii.github.io/devai/boomtick-devai-tools</loc>
+    <lastmod>2026-03-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://arii.github.io/#/devai/boomtick-devai-tools</loc>
+    <lastmod>2026-03-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://arii.github.io/devai/boop-light-detector</loc>
     <lastmod>2016-08-10</lastmod>
     <changefreq>monthly</changefreq>
