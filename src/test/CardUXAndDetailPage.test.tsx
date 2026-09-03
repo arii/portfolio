@@ -55,4 +55,18 @@ describe('Card UX & Detail Page Navigation Improvements', () => {
     expect(imageSrcs).toContain('/assets/research/duckietown/navigation_2.gif');
     expect(imageSrcs).toContain('/assets/research/duckietown/navigation_1.gif');
   });
+
+  it('renders standardized aspect ratio and object-cover classes for undergraduate projects gallery images', () => {
+    const handleBack = vi.fn();
+    const { container } = render(<ResearchDetailPage slug="undergraduate-projects" onBack={handleBack} />);
+
+    const images = Array.from(container.querySelectorAll('img'));
+    const galleryImage = images.find(img => img.getAttribute('src') === '/assets/research/undergraduate-projects/ce118-001.webp');
+
+    expect(galleryImage).toBeInTheDocument();
+    expect(galleryImage?.className).toContain('object-cover');
+
+    const imageContainer = galleryImage?.closest('.aspect-\\[4\\/3\\]');
+    expect(imageContainer).toBeInTheDocument();
+  });
 });
