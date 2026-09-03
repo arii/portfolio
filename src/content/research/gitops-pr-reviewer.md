@@ -1,55 +1,73 @@
 ---
-title: "Automating PR Reviews with GitHub Actions and Gemini"
+title: "Automating PR Reviews with GitHub Actions, Gemini, and Boomtick DevAI"
 date: "2026-05-10"
-author: "Ariel Anders"
+author: "Ariel Anders, PhD"
 category: "DevAI"
-tags: ["DevOps", "AI", "Gemini", "GitHub Actions", "Playwright"]
-excerpt: "A practical AI review pipeline using GitHub Actions, Google Gemini, and Playwright. Not a replacement for human review, but a way to make first-pass review repeatable."
-readTime: 8
+tags: ["DevOps", "AI", "Gemini", "GitHub Actions", "MCP", "CLI", "Boomtick"]
+excerpt: "A comprehensive deep dive into the Boomtick DevAI ecosystem—featuring a dual-layer architecture with boomtick-mcp for agentic tool calls, td-cli for deterministic fallbacks, and Gemini-powered PR review pipelines."
+readTime: 12
 status: "published"
 ---
 
-# Automating PR Reviews with GitHub Actions and Gemini
+The first version of my AI review workflow made a classic mistake: I asked the model to do everything. It had to understand the repo, inspect the diff, infer the design system, read CI logs, and decide what mattered. Sometimes it worked; often it produced a confident wall of feedback that was hard to trust.
 
-The first version of my AI review workflow made the classic mistake: I asked the model to do everything. It had to understand the repo, inspect the diff, infer the design system, read CI logs, and decide what mattered. Sometimes it worked; often it produced a confident wall of feedback that was hard to trust.
+The better pattern is to shrink the model's job: collect the important pull request context first, then ask the model to review that prepared packet through structured tools.
 
-The better pattern is to shrink the model's job: collect the important pull request context first, then ask the model to review that prepared packet.
+I engineered the **Boomtick DevAI Ecosystem** (open source across [arii/boomtick](https://github.com/arii/boomtick) and [arii/tech-dancer](https://github.com/arii/tech-dancer)) around this exact principle. At its core is a **Dual-Layer Architecture** combining `boomtick-mcp` (a Model Context Protocol server for structured macro-agent tool invocation) and `td-cli` (a standalone terminal CLI serving as a deterministic local execution layer and human fallback). Together with a **Zero-Submodule Strategy** and a multi-tiered AI review system, this architecture provides unified governance across agentic and developer workflows.
+
+---
+
+## Dual-Layer Control & Execution Architecture
+
+The Boomtick architecture strictly separates the control plane (agentic reasoning via MCP) from the data and execution plane (deterministic CLI commands and API integrations).
 
 ```mermaid
 flowchart TD
-    subgraph Trigger_Context ["Trigger & Context Gathering"]
-        PR[Pull Request Opened] --> Collect[Collect Review Context]
-        CI[CI Logs] --> Collect
-        Diff[PR Diff] --> Collect
-        Rules[Project Guidelines] --> Collect
-        Collect --> Packet[Create review-context.md]
+    subgraph ControlPlane ["Tier 1: Agentic Control Plane"]
+        Agent[Macro-Agent / Jules / Claude]
+        MCP[boomtick-mcp Server]
+        Agent <-->|JSON-RPC / MCP Protocol| MCP
     end
 
-    subgraph Inference_Orchestration ["Gemini AI Inference"]
-        Packet --> Models[Send Packet to Gemini API]
-        Models --> Findings[Return Structured JSON Findings]
+    subgraph ExecutionPlane ["Tier 2: Execution & Fallback"]
+        CLI[td-cli Terminal Engine]
+        Doctor[td-cli doctor / Health Checks]
+        Audit[td-cli gh audit-pr]
+        MCP -->|Direct Local Invocation| CLI
+        CLI --> Doctor
+        CLI --> Audit
     end
 
-    subgraph Decision_Boundary ["Deterministic Gatekeeper"]
-        Findings --> Decide{Any Blocking Issues?}
-        Decide -->|Yes| Changes[Request Changes]
-        Decide -->|No| Summary[Post Summary / Approve]
+    subgraph ExternalAPIs ["Target Infrastructure"]
+        GH[GitHub REST / GraphQL API]
+        Repo[Local File System & Git Engine]
+        Audit -->|REST / Event Telemetry| GH
+        CLI <-->|Git Diff & Import Graph| Repo
     end
 
-    classDef trigger fill:#1e293b,stroke:#38bdf8,stroke-width:2px,color:#f8fafc;
-    classDef ai fill:#0f172a,stroke:#a855f7,stroke-width:2px,color:#f8fafc;
-    classDef gate fill:#064e3b,stroke:#34d399,stroke-width:2px,color:#f8fafc;
+    classDef agent fill:#1e293b,stroke:#38bdf8,stroke-width:2px,color:#f8fafc;
+    classDef mcp fill:#0f172a,stroke:#818cf8,stroke-width:2px,color:#f8fafc;
+    classDef cli fill:#064e3b,stroke:#34d399,stroke-width:2px,color:#f8fafc;
 
-    class PR,CI,Diff,Rules,Collect,Packet trigger;
-    class Models,Findings ai;
-    class Decide,Changes,Summary gate;
+    class Agent agent;
+    class MCP mcp;
+    class CLI,Doctor,Audit cli;
 ```
+
+### Key Architectural Principles
+
+- **Zero-Submodule Strategy**: Rather than embedding tooling via Git submodules across downstream repositories, tools are distributed as zero-dependency binaries and standalone execution packages resolved dynamically via workspace path resolution scripts (`scripts/resolve-cli.sh` in [arii/boomtick](https://github.com/arii/boomtick)).
+- **Multi-Tier AI Review System**: Incoming pull requests trigger structural evaluation pipelines where macro-agents utilize `boomtick-mcp` tools or `td-cli` commands to inspect diffs, verify static analysis artifacts, and render structured review recommendations (`APPROVE`, `REQUEST_CHANGES`, or `COMMENT`).
+- **Strict Tool Hierarchy**: `boomtick-mcp` exposes strongly typed, schema-validated tools to the agent. If the MCP protocol layer is unreachable or running in an isolated environment, the agent or developer seamlessly falls back to direct `td-cli` command execution.
+
+![Boomtick Ecosystem Architecture Overview](/assets/research/boomtick-devai-tools/boomtick-arch.png)
+*Figure 1: High-level system map illustrating the dual-layer flow from macro-agents down to local CLI fallback and GitHub API endpoints.*
 
 ---
 
 ## 1. Aggregate PR Context Into a Structured Packet
 
-Instead of having the model search the repository, run a script to assemble the review context. For BoomTick.blog, I use `dev-tools/td-cli gh audit-pr <PR_NUMBER> --fetch` (or a batch aggregator script like `dev-tools/aggregate-prs.sh`) to bundle:
+Instead of having the model search the repository, run a script to assemble the review context. For BoomTick.blog and portfolio repos, I use `td-cli gh audit-pr <PR_NUMBER>` (or `boomtick-mcp.audit_pull_request`) to bundle:
 
 - The PR title and description
 - The changed files and their relative diffs
@@ -60,15 +78,72 @@ Instead of having the model search the repository, run a script to assemble the 
 This gathers everything the model needs into a single `.devai/review-context.md` file.
 
 ```bash
-# Example aggregation pattern
-python dev-tools/aggregate_pr_context.py \
-  --target-branch main \
-  --output .devai/review-context.md
+# Example aggregation pattern via td-cli engine
+$ td-cli gh audit-pr --pr 42 --fetch
+[INFO] Inspecting PR #42 diff against target branch 'main'...
+[INFO] Parsing import dependency graph via dependency-cruiser...
+[SUCCESS] Assembled .devai/review-context.md context packet
 ```
 
 ---
 
-## 2. Orchestrate Inference with the Gemini API
+## 2. Boomtick MCP Server (`boomtick-mcp`) for Agentic Workflows
+
+The primary interface for AI agents is `boomtick-mcp`, built natively on the Model Context Protocol (MCP) specification ([modelcontextprotocol.io](https://modelcontextprotocol.io)). It translates abstract agent intents into validated, schema-constrained operations.
+
+### Schema Safety and Context Optimization
+
+By utilizing JSON Schema definitions for every exposed tool, `boomtick-mcp` prevents parameter hallucination before execution reaches the system shell.
+
+```json
+{
+  "name": "audit_pull_request",
+  "description": "Executes a multi-stage pull request health and impact audit.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "pr_number": {
+        "type": "integer",
+        "description": "Target GitHub Pull Request number"
+      },
+      "include_impact_analysis": {
+        "type": "boolean",
+        "default": true
+      }
+    },
+    "required": ["pr_number"]
+  }
+}
+```
+
+![Boomtick MCP Integration in Desktop Client](/assets/research/boomtick-devai-tools/boomtick-mcp-desktop.png)
+*Figure 2: `boomtick-mcp` loaded inside an agentic desktop interface, exposing structured audit and repository analysis tools.*
+
+---
+
+## 3. Tier 2 Fallback: Terminal CLI (`td-cli`)
+
+While `boomtick-mcp` serves agentic clients, `td-cli` (maintained in the open-source [arii/tech-dancer](https://github.com/arii/tech-dancer/tree/main/dev-tools) repository) provides the underlying deterministic command-line execution engine. It ensures that developers and CI/CD scripts maintain identical execution capabilities independently of LLM availability.
+
+```bash
+# Running local environment verification and PR audit fallback
+$ td-cli doctor
+[OK] Node.js environment detected (v24.x)
+[OK] PATH resolution script active (/github/workspace/scripts/resolve-cli.sh)
+[OK] GitHub API authentication verified
+
+$ td-cli gh audit-pr --pr 42
+[INFO] Inspecting PR #42 diff...
+[INFO] Impact Analysis: 3 components affected across 2 routes
+[SUCCESS] Multi-model review generated: APPROVE
+```
+
+![td-cli Terminal Execution and Health Check](/assets/research/boomtick-devai-tools/boomtick-cli-audit.png)
+*Figure 3: High-contrast terminal output demonstrating `td-cli gh audit-pr` and `td-cli doctor` health checks in action.*
+
+---
+
+## 4. Orchestrate Inference with the Gemini API
 
 I engineered the inference orchestration to call the Google Gemini API directly with the prepared context. I deliberately rely on Gemini's large context window to ingest massive diffs and build artifacts without truncation, ensuring the review agent has a complete picture before generating feedback.
 
@@ -122,34 +197,33 @@ result = response.json()
 print(result["candidates"][0]["content"]["parts"][0]["text"])
 ```
 
----
+### Example Structured Review Output
 
-## 3. Generate Structured Findings for Downstream Automation
-
-Configure Gemini with structured JSON output (`responseMimeType: "application/json"`). This allows scripts to programmatically parse and act on the feedback.
+Configuring Gemini with structured JSON output (`responseMimeType: "application/json"`) ensures that downstream gatekeepers can parse and act on findings programmatically:
 
 ```json
 {
+  "recommendation": "REQUEST_CHANGES",
   "blocking": [
     {
-      "file": "src/components/Nav.tsx",
-      "reason": "Mobile menu button has no accessible label",
-      "suggestion": "Add aria-label=\"Open navigation menu\""
+      "file": "src/components/Navigation.tsx",
+      "reason": "Navigation item missing required min-h-[48px] touch target for mobile accessibility",
+      "suggestion": "Add min-h-[48px] class to interactive link elements"
     }
   ],
   "non_blocking": [
     {
-      "file": "src/styles/tokens.ts",
-      "reason": "Spacing token could be reused here"
+      "file": "src/data/home.ts",
+      "reason": "Consider extracting role title constant"
     }
   ],
-  "summary": "One blocking accessibility issue found."
+  "summary": "Found 1 accessibility regression requiring changes before merging."
 }
 ```
 
 ---
 
-## 4. Map Review States Deterministically
+## 5. Map Review States Deterministically
 
 I designed the pipeline to explicitly prohibit the model from directly approving or blocking a pull request. Instead, a deterministic script reads the structured JSON findings and maps them strictly to GitHub review states:
 
@@ -157,32 +231,18 @@ I designed the pipeline to explicitly prohibit the model from directly approving
 - **`COMMENT`:** Posts non-blocking suggestions from the `non_blocking` list (e.g., naming, cleanup, styling tips).
 - **`APPROVE`:** Executes safely only when the `blocking` list is completely empty.
 
-For instance, `dev-tools/submit_review.py` reads `.devai/review-result.json` and submits the review payload to the GitHub API.
-
-```python
-import json
-
-with open(".devai/review-result.json") as f:
-    findings = json.load(f)
-
-event = "REQUEST_CHANGES" if findings["blocking"] else "APPROVE"
-
-pr.create_review(
-    body=findings["summary"],
-    comments=findings["blocking"] + findings["non_blocking"],
-    event=event,
-)
-```
+For instance, `td-cli ai review` or `scripts/send-jules-impact.py` submits the review payload directly to the GitHub API.
 
 ![Automated Pull Request Code Review Feedback](/assets/research/gitops-pr-reviewer-comment.png)
+*Figure 4: Automated review feedback comment posted directly to a GitHub Pull Request.*
 
 ---
 
-## 5. The Autonomous Repair Loop
+## 6. The Autonomous Repair Loop
 
 To close the gap between detection and resolution, I engineered an autonomous repair loop utilizing Jules and specialized coding agents. When the CI pipeline fails, it does not just report the error—it triggers an active repair session.
 
-The process is orchestrated via `.github/workflows/jules-fix-trigger.yml`, which detects CI failures and executes `dev-tools/td-cli ai repair`. This workflow bundles the failing CI logs, the active PR diff, and project-specific constraints into a secure repair context packet.
+The process is orchestrated via `.github/workflows/jules-fix-trigger.yml` in [arii/boomtick](https://github.com/arii/boomtick), which detects CI failures and executes `td-cli ai repair`. This workflow bundles the failing CI logs, the active PR diff, and project-specific constraints into a secure repair context packet.
 
 ### The CI Repair Flow:
 1. **CI Failure Detection:** GitHub Actions detects a failing test, linting error, or build step.
@@ -193,30 +253,12 @@ The process is orchestrated via `.github/workflows/jules-fix-trigger.yml`, which
 
 ---
 
-## 6. Integrate Playwright Screenshot Diffing
+## Summary of the Architecture & Open Source Repositories
 
-Unit tests check code logic, but they miss layout shifts or broken responsive designs. Use Playwright screenshots of key pages (home page, articles, nav bars) as a tripwire to detect visual regressions.
+By consolidating the PR review orchestration into the **Boomtick DevAI Ecosystem**:
+1. Agents interact via structured Model Context Protocol tools (`boomtick-mcp`).
+2. Developers and CI workflows utilize deterministic CLI fallbacks (`td-cli` open-sourced at [github.com/arii/tech-dancer](https://github.com/arii/tech-dancer)).
+3. Google Gemini generates structured JSON findings over complete context packets.
+4. Deterministic gatekeeper scripts apply GitHub review states without hallucination risks.
 
-```ts
-import { test, expect } from "@playwright/test";
-
-test("home page visual smoke test", async ({ page }) => {
-  await page.goto("/");
-  await expect(page).toHaveScreenshot("home-page.png", {
-    fullPage: true,
-  });
-});
-```
-
-Verify changes visually on pull requests before they reach production.
-
----
-
-## Summary of the Architecture
-
-To set up the minimum viable version:
-1. Create a context aggregator script to output `.devai/review-context.md`.
-2. Send that markdown to the Gemini API requesting JSON output.
-3. Parse the JSON and submit the review to GitHub.
-
-By keeping the orchestration simple and placing deterministic boundary scripts before and after the inference step, you make your automated code review predictable, testable, and reliable.
+All pipeline code, path resolution scripts (`scripts/resolve-cli.sh`), and GitHub Actions workflow triggers are publicly accessible in [arii/boomtick](https://github.com/arii/boomtick) and [arii/tech-dancer](https://github.com/arii/tech-dancer).
