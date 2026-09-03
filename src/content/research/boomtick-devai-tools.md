@@ -76,6 +76,29 @@ flowchart TD
 
 ---
 
+## Relationship to Sister DevAI Tooling
+
+While my previous articles focus on specific DevAI capabilities—such as the [Deployment Impact Analyzer](/research/deployment-impact-analyzer) (visual screenshot diffing) and the [GitOps PR Reviewer](/research/gitops-pr-reviewer) (automated Gemini review prompts)—`boomtick-mcp` and `td-cli` serve as the **underlying control and execution harness** that unifies them.
+
+Rather than running standalone scripts for each audit step, the Boomtick ecosystem encapsulates these pipelines into standardized primitives:
+
+- **Deployment Impact Analysis** is invoked via `td-cli impact:analysis` or the `run_impact_analysis` MCP tool.
+- **GitOps Code Reviews** are dispatched via `td-cli gh audit-pr` or the `audit_pull_request` MCP tool.
+- **Version Hallucination Guards** run through `td-cli versiontruth` or the `verify_versions` MCP tool.
+
+By wrapping these distinct pipelines behind a single interface, agentic callers do not need to learn custom environment variables or CLI flags for every sub-tool.
+
+---
+
+## Active Operational Usage Today
+
+In production and daily engineering workflows across my repositories, these tools operate across two primary modes:
+
+1. **Interactive Agent Mode (`boomtick-mcp`)**: Loaded into MCP-compliant desktop clients (e.g. Claude Desktop, Jules agent sessions). When I instruct an agent to *"Audit PR #42 for visual and security regressions"*, the agent calls `boomtick-mcp.audit_pull_request` via JSON-RPC, executing the multi-stage check without spawning unconstrained terminal commands.
+2. **Headless CI/CD & CLI Mode (`td-cli`)**: Executed inside GitHub Actions workflows (`.github/workflows/jules-fix-trigger.yml`) and local terminal environments. Containerized CI jobs invoke `scripts/resolve-cli.sh` to route execution directly to `td-cli gh audit-pr`, ensuring exact parity between developer terminal runs and automated pull request gates.
+
+---
+
 ## Boomtick MCP Server (`boomtick-mcp`)
 
 The primary interface for AI agents is `boomtick-mcp`, built natively on the Model Context Protocol (MCP). It translates abstract agent intents into validated, schema-constrained operations.
