@@ -26,7 +26,41 @@ Host: boomtick.blog
 { "ecosystem": "gh-action", "name": "actions/checkout", "latest": "v6.0.1" }
 ```
 
-## Architectural Overview
+## Root Cause Incident: The Out-of-Distribution Downgrade
+
+The pattern repeats across three surfaces in modern repositories:
+
+- `package.json` dependency versions
+- `.nvmrc` / `.node-version` / `engines.node`
+- `.github/workflows/*.yml` `uses:` pins
+
+In every case, the failure is the same: an agent's internal sense of "the latest version I know about" silently overrides what's actually true right now.
+
+The catalyst for VersionTruth was a recurring failure in agentic code review workflows. When deploying targeted reviewer agents—designed for low token usage, minimal context, and fast execution—both primary coding and reviewer agents confidently recommended downgrading `actions/checkout` to `@v4`.
+
+For historical context, `v4.1.0` was released in September 2023, while `v5.0.1` launched in November 2025, and subsequent stable releases reached `v7.0.0`.
+
+![AI incorrectly flagging v6 as invalid and suggesting a downgrade to v4](/images/studies/ai-incorrect-v4-suggestion.webp)
+
+This represents a classic out-of-distribution data error. The models encountered version tags (e.g., `v6`) released after their training cutoffs. Lacking real-time registry access, they hallucinated that the unfamiliar version was invalid and suggested reverting to the latest version present in their training data.
+
+
+This failure was not isolated to lightweight models like `gpt-4o-mini`. Testing confirmed that larger reasoning models, including Gemini 3.1 Pro, exhibited the exact same regression behavior, falsely identifying `v4` as the latest stable major release.
+
+
+![GitHub Releases showing v7.0.0, confirming versions beyond v4 are stable](/images/studies/github-checkout-v7-release.webp)
+
+While Agentic DevAI increases engineering velocity, this incident highlights the critical need for deterministic, external validation when handling dynamic infrastructure dependencies.
+
+## The Solution: VersionTruth Architecture
+
+Instead of just diagnosing the failure mode, I packaged the live-registry-lookup logic as a small public API called VersionTruth, along with a hosted `SKILL.md` that tells any agent how to use it. The instruction to the agent is deliberately blunt: if you don't recognize a version string, that's a reason to *check*, not a reason to *revert*. Unfamiliarity isn't evidence of error.
+
+![VersionTruth Solution Architecture](/images/studies/AI_Version_Hallucination_Solution.webp)
+
+The API lives as serverless functions sitting next to an existing Vite SPA—operating with zero changes to primary application codebases.
+
+
 
 ```mermaid
 sequenceDiagram
@@ -52,7 +86,10 @@ sequenceDiagram
     Agent->>Agent: Retains v6 instead of<br/>hallucinated downgrade
 ```
 
+
 ---
+
+Developers can interactively test the live API and explore the skill definition at [https://boomtick.blog/versiontruth](https://boomtick.blog/versiontruth).
 
 ## API & Tool Specification
 
@@ -143,3 +180,8 @@ if __name__ == "__main__":
     if not valid:
         sys.exit(1)
 ```
+### What's Next: Handling EOL and Deprecation
+
+While preventing out-of-distribution downgrades is the immediate fix, the next evolution of VersionTruth will address the opposite problem: agents confidently recommending versions that have reached End-of-Life (EOL) or have been explicitly deprecated by maintainers.
+
+Future iterations of the `/api/compare-version` endpoint will expand its upstream registry integrations to query vulnerability databases and deprecation metadata, allowing the `isDeprecated` flag to proactively guide agents away from unmaintained branches (like Node 18) towards current LTS releases.
