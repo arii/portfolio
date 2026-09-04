@@ -49,8 +49,10 @@ describe('index.html SEO & Accessibility Tags', () => {
 
     const faviconHref = faviconMatch![1].replace(/^\//, '');
     const faviconPath = path.resolve(__dirname, '../../public', faviconHref);
+    // eslint-disable-next-line security/detect-non-literal-fs-filename
     expect(fs.existsSync(faviconPath)).toBe(true);
 
+    // eslint-disable-next-line security/detect-non-literal-fs-filename
     const svgContent = fs.readFileSync(faviconPath, 'utf-8');
     expect(svgContent).toContain('<svg');
     expect(svgContent).toContain('viewBox="0 0 256 256"');
