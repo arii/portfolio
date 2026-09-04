@@ -5,6 +5,7 @@ import ToolCard from '@/components/ToolCard';
 import ImageLightbox from '@/components/ImageLightbox';
 import { Layers, Wrench } from 'lucide-react';
 import SEO from '@/components/SEO';
+import { getPersonAndProfileSchema, getServiceSchema, getSoftwareSchema } from '@/utils/schema';
 
 export interface ResearchListPageProps {
   onNavigate: (slug: string) => void;
@@ -16,12 +17,26 @@ const ResearchListPage: React.FC<ResearchListPageProps> = ({ onNavigate }) => {
   const autonomousTools = useMemo(() => RESEARCH_AUTONOMOUS, []);
   const thesisTools = useMemo(() => RESEARCH_THESIS, []);
 
+  const researchSchemas = useMemo(() => {
+    const allTools = [...thesisTools, ...autonomousTools];
+    const softwareSchemas = allTools.map((tool) =>
+      getSoftwareSchema({
+        name: tool.title,
+        description: tool.description,
+        url: tool.canonicalPath ? `https://arii.github.io${tool.canonicalPath}` : undefined,
+        codeRepository: tool.sourceUrl,
+      })
+    );
+    return [getPersonAndProfileSchema('/research'), getServiceSchema(), ...softwareSchemas];
+  }, [thesisTools, autonomousTools]);
+
   return (
     <div className="space-y-12 sm:space-y-16">
       <SEO
-        title="Robotics & Algorithmic Research"
-        description="Planning under uncertainty, conformant belief-state manipulation, multi-robot coordination, and hardware automation systems."
+        title="Robotics & Autonomous Research"
+        description="Discover robotics software research in conformant planning, belief-state manipulation, and autonomous systems by Ariel Anders, PhD (MIT CSAIL)."
         canonicalUrl="/research"
+        jsonLd={researchSchemas}
       />
 
       <header className="space-y-3 border-b border-line/20 pb-6 sm:pb-8">

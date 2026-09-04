@@ -10,6 +10,7 @@ import { HonorsSection } from '@/components/resume/HonorsSection';
 import { TeachingSection } from '@/components/resume/TeachingSection';
 import { PublicationsSection } from '@/components/resume/PublicationsSection';
 import SEO from '@/components/SEO';
+import { getPersonAndProfileSchema, getServiceSchema } from '@/utils/schema';
 
 export interface ResumeProps {
   version?: string;
@@ -41,12 +42,15 @@ const Resume: React.FC<ResumeProps> = ({ version = 'v2.1' }) => {
     setExpandHonors(expand);
   };
 
+  const resumeSchemas = [getPersonAndProfileSchema('/resume'), getServiceSchema()];
+
   return (
     <div className="max-w-5xl mx-auto space-y-10 pb-16 print:space-y-6 print:pb-0 print:max-w-none">
       <SEO
-        title="Resume & Technical Experience"
-        description="Professional resume and technical experience of Ariel Anders, PhD — Senior Roboticist and Senior Software Engineer."
+        title="Resume & Career Highlights"
+        description="View the technical resume and experience of Ariel Anders, PhD (MIT CSAIL): expertise in robotics engineering, AI architecture, and software systems."
         canonicalUrl="/resume"
+        jsonLd={resumeSchemas}
       />
       <ResumeHeader
         pdfUrl="https://drive.google.com/file/d/14V6KjfEMO12uwNQAhY1OMy2d-_vkGXK_/view"

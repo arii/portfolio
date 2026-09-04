@@ -9,6 +9,7 @@ import SafeImage from '@/components/ui/SafeImage';
 import { Box, Stack } from '@/components/layout';
 import svgPanZoom from 'svg-pan-zoom';
 import SEO from '@/components/SEO';
+import { getTechArticleSchema } from '@/utils/schema';
 
 export interface ResearchDetailPageProps {
   slug: string;
@@ -313,6 +314,15 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
   const firstImage = imgMatch ? imgMatch[1].split('#')[0] : undefined;
   const ogImage = firstImage || matchingTool?.image;
 
+  const techArticleSchema = getTechArticleSchema({
+    headline: post.title,
+    description: post.summary,
+    canonicalPath: `/research/${post.slug}`,
+    datePublished: post.date,
+    image: ogImage,
+    keywords: post.tags,
+  });
+
   return (
     <article className="mx-auto max-w-4xl px-4 py-12 space-y-8">
       <SEO
@@ -321,6 +331,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
         canonicalUrl={`/research/${post.slug}`}
         ogType="article"
         ogImage={ogImage}
+        jsonLd={techArticleSchema}
       />
       <button
         onClick={onBack}

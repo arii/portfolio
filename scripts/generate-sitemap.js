@@ -37,29 +37,14 @@ export function generateSitemap() {
   const today = new Date().toISOString().split('T')[0];
   const entries = [];
 
-  // Core Pages
-  const corePages = [
-    { path: '/', hash: '', priority: '1.0', changefreq: 'weekly' },
-    { path: '/devai', hash: '/#/devai', priority: '0.9', changefreq: 'weekly' },
-    { path: '/research', hash: '/#/research', priority: '0.9', changefreq: 'weekly' },
-    { path: '/about', hash: '/#/about', priority: '0.8', changefreq: 'monthly' },
-    { path: '/resume', hash: '/#/resume', priority: '0.8', changefreq: 'monthly' },
-  ];
+  // Core Canonical Pages
+  const corePages = ['/', '/devai', '/research', '/about', '/resume'];
 
-  for (const page of corePages) {
-    if (page.path !== '') {
-      entries.push({
-        url: `${SITE_URL}${page.path}`,
-        lastmod: today,
-        changefreq: page.changefreq,
-        priority: page.priority,
-      });
-    }
+  for (const pagePath of corePages) {
+    const url = pagePath === '/' ? `${SITE_URL}/` : `${SITE_URL}${pagePath}`;
     entries.push({
-      url: `${SITE_URL}${page.hash}`,
+      url,
       lastmod: today,
-      changefreq: page.changefreq,
-      priority: page.priority,
     });
   }
 
@@ -80,14 +65,6 @@ export function generateSitemap() {
       entries.push({
         url: `${SITE_URL}/${primarySection}/${slug}`,
         lastmod,
-        changefreq: 'monthly',
-        priority: '0.7',
-      });
-      entries.push({
-        url: `${SITE_URL}/#/${primarySection}/${slug}`,
-        lastmod,
-        changefreq: 'monthly',
-        priority: '0.7',
       });
     }
   }
@@ -106,8 +83,6 @@ ${uniqueEntries
     (e) => `  <url>
     <loc>${e.url}</loc>
     <lastmod>${e.lastmod}</lastmod>
-    <changefreq>${e.changefreq}</changefreq>
-    <priority>${e.priority}</priority>
   </url>`
   )
   .join('\n')}
@@ -120,7 +95,7 @@ ${uniqueEntries
 
   const outputPath = path.join(PUBLIC_DIR, 'sitemap.xml');
   fs.writeFileSync(outputPath, xmlContent, 'utf-8');
-  console.log(`✅ Generated sitemap.xml with ${uniqueEntries.length} routes at ${outputPath}`);
+  console.log(`✅ Generated clean sitemap.xml with ${uniqueEntries.length} canonical routes at ${outputPath}`);
 }
 
 // Run directly if called as main module
