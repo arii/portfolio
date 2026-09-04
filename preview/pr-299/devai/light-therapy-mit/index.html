@@ -11,6 +11,20 @@
     />
     <link rel="canonical" href="https://arii.github.io/" />
 
+    <!-- SPA redirect handling for GitHub Pages subpaths -->
+    <script>
+      (function(l) {
+        if (l.search[1] === '/' ) {
+          var decoded = l.search.slice(1).split('&').map(function(s) {
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          window.history.replaceState(null, null,
+              l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location));
+    </script>
+
     <!-- Open Graph / Facebook -->
     <meta property="og:site_name" content="Ariel Anders Portfolio" />
     <meta property="og:title" content="AI &amp; Robotics Engineering Portfolio | Ariel Anders, PhD" />
@@ -72,7 +86,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <script type="module" crossorigin src="/portfolio/preview/pr-299/assets/index-BYN5wHTN.js"></script>
+    <script type="module" crossorigin src="/portfolio/preview/pr-299/assets/index-Cvr7Ad3-.js"></script>
     <link rel="stylesheet" crossorigin href="/portfolio/preview/pr-299/assets/index-CmcRDAXu.css">
   </head>
   <body>
