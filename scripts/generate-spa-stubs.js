@@ -29,9 +29,23 @@ export function generateSpaStubs() {
 
   const indexHtmlContent = fs.readFileSync(indexHtmlPath, 'utf-8');
 
-  // 1. Copy dist/index.html to dist/404.html for GitHub Pages fallback
+  // 1. Generate dist/404.html for GitHub Pages fallback with sessionStorage redirect script
+  const spa404Script = `<script>
+    (function() {
+      var path = window.location.pathname + window.location.search + window.location.hash;
+      sessionStorage.setItem('ghpages_redirect', path);
+    })();
+  </script>`;
+
+  let html404Content = indexHtmlContent;
+  if (html404Content.includes('<head>')) {
+    html404Content = html404Content.replace('<head>', `<head>\n    ${spa404Script}`);
+  } else {
+    html404Content = spa404Script + html404Content;
+  }
+
   const fallbackPath = path.join(DIST_DIR, '404.html');
-  fs.writeFileSync(fallbackPath, indexHtmlContent, 'utf-8');
+  fs.writeFileSync(fallbackPath, html404Content, 'utf-8');
   console.log(`✅ Generated GitHub Pages fallback at ${fallbackPath}`);
 
   // 2. Core routes to stub

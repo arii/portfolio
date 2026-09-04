@@ -3,8 +3,17 @@ import react from '@vitejs/plugin-react';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { fileURLToPath } from 'url';
 
+export function getBasePath(): string {
+  if (process.env.VERCEL === '1' || process.env.VERCEL) return '/';
+  if (process.env.VITE_BASE_PATH) {
+    return ('/' + process.env.VITE_BASE_PATH + '/').replace(/\/+/g, '/');
+  }
+  if (process.env.GITHUB_ACTIONS === 'true') return '/portfolio/';
+  return '/';
+}
+
 export default defineConfig(() => {
-  const base = process.env.VITE_BASE_PATH ?? '/';
+  const base = getBasePath();
 
   return {
     plugins: [
