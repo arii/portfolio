@@ -11,7 +11,7 @@
   "scripts": {
     "dev": "vite --port 3000",
     "build:media": "node scripts/optimize-media.js",
-    "build": "node scripts/generate-sitemap.js && pnpm run build:media && tsc && vite build",
+    "build": "node scripts/generate-sitemap.js && pnpm run build:media && tsc && vite build && node scripts/generate-spa-stubs.js",
     "preview": "vite preview --port 3000",
     "type-check": "tsc --noEmit",
     "lint": "eslint .",

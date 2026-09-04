@@ -1,10 +1,10 @@
 import React from 'react';
 import { RouterProvider } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import type { createHashRouter } from 'react-router-dom';
+import type { createBrowserRouter, createHashRouter } from 'react-router-dom';
 
 export interface AppProps {
-  router: ReturnType<typeof createHashRouter>;
+  router: ReturnType<typeof createBrowserRouter | typeof createHashRouter>;
 }
 
 const App: React.FC<AppProps> = ({ router }) => {

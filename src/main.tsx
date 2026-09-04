@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { createHashRouter } from 'react-router-dom';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 import App from '@/App';
 import Layout from '@/components/Layout';
-import { Navigate } from 'react-router-dom';
 import Home from '@/pages/Home';
 import Research from '@/pages/Research';
 import DevAI from '@/pages/DevAI';
@@ -11,7 +10,7 @@ import Resume from '@/pages/Resume';
 import About from '@/pages/About';
 import '@/index.css';
 
-const router = createHashRouter([
+const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
