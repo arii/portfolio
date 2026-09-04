@@ -9,7 +9,7 @@ import SafeImage from '@/components/ui/SafeImage';
 import { Box, Stack } from '@/components/layout';
 import svgPanZoom from 'svg-pan-zoom';
 import SEO from '@/components/SEO';
-import { getTechArticleSchema } from '@/utils/schema';
+import { getTechArticleSchema, getScholarlyArticleSchema, getBreadcrumbSchema } from '@/utils/schema';
 
 export interface ResearchDetailPageProps {
   slug: string;
@@ -314,24 +314,48 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
   const firstImage = imgMatch ? imgMatch[1].split('#')[0] : undefined;
   const ogImage = firstImage || matchingTool?.image;
 
-  const techArticleSchema = getTechArticleSchema({
-    headline: post.title,
-    description: post.summary,
-    canonicalPath: `/research/${post.slug}`,
-    datePublished: post.date,
-    image: ogImage,
-    keywords: post.tags,
-  });
+  const primarySection = (post.category || '').toLowerCase().includes('robotics') ? 'research' : 'devai';
+
+  const isScholarly =
+    primarySection === 'research' ||
+    post.slug.includes('thesis') ||
+    post.slug.includes('planning') ||
+    post.slug.includes('report');
+
+  const articleSchema = isScholarly
+    ? getScholarlyArticleSchema({
+        headline: post.title,
+        abstract: post.summary,
+        canonicalPath: `/${primarySection}/${post.slug}`,
+        datePublished: post.date,
+        image: ogImage,
+      })
+    : getTechArticleSchema({
+        headline: post.title,
+        description: post.summary,
+        canonicalPath: `/${primarySection}/${post.slug}`,
+        datePublished: post.date,
+        image: ogImage,
+        keywords: post.tags,
+      });
+
+  const breadcrumbSchema = getBreadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: primarySection === 'research' ? 'Robotics Research' : 'DevAI & Software Systems', path: `/${primarySection}` },
+    { name: post.title, path: `/${primarySection}/${post.slug}` },
+  ]);
+
+  const detailSchemas = [articleSchema, breadcrumbSchema];
 
   return (
     <article className="mx-auto max-w-4xl px-4 py-12 space-y-8">
       <SEO
         title={post.title}
         description={post.summary}
-        canonicalUrl={`/research/${post.slug}`}
+        canonicalUrl={`/${primarySection}/${post.slug}`}
         ogType="article"
         ogImage={ogImage}
-        jsonLd={techArticleSchema}
+        jsonLd={detailSchemas}
       />
       <button
         onClick={onBack}

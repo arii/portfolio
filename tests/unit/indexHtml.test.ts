@@ -27,15 +27,17 @@ describe('index.html SEO & Accessibility Tags', () => {
     expect(titleContent).toContain('AI & Robotics Engineering Portfolio | Ariel Anders, PhD');
   });
 
-  it('contains structured fallback JSON-LD script matching ProfilePage & Person', () => {
+  it('contains structured fallback JSON-LD @graph script matching Person & Service', () => {
     const indexPath = path.resolve(__dirname, '../../index.html');
     const htmlContent = fs.readFileSync(indexPath, 'utf-8');
 
     expect(htmlContent).toContain('<script type="application/ld+json">');
-    expect(htmlContent).toContain('"@type": "ProfilePage"');
+    expect(htmlContent).toContain('"@graph":');
+    expect(htmlContent).toContain('"@type": "Person"');
     expect(htmlContent).toContain('"name": "Ariel Anders, PhD"');
-    expect(htmlContent).toContain('"jobTitle": "Roboticist & AI Engineer"');
+    expect(htmlContent).toContain('"jobTitle": "Robotics & AI Consulting Engineer"');
     expect(htmlContent).toContain('"name": "Massachusetts Institute of Technology (MIT)"');
+    expect(htmlContent).toContain('"@type": "Service"');
   });
 
   it('links to valid favicon SVG with brand lettermark elements', () => {

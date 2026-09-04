@@ -1,11 +1,13 @@
 export const SITE_URL = 'https://arii.github.io';
 export const AUTHOR_NAME = 'Ariel Anders, PhD';
-export const AUTHOR_JOB_TITLE = 'Roboticist & AI Engineer';
+export const AUTHOR_JOB_TITLE = 'Robotics & AI Consulting Engineer';
 export const AUTHOR_ALUMNI = 'Massachusetts Institute of Technology (MIT)';
+export const AUTHOR_EMAIL = 'anders.ariel@gmail.com';
+export const AUTHOR_IMAGE = `${SITE_URL}/assets/roboticist.jpg`;
 
 export const AUTHOR_SAME_AS = [
-  'https://github.com/arii',
   'https://www.linkedin.com/in/ariel-anders/',
+  'https://github.com/arii',
   'https://scholar.google.com/citations?user=NM6SfiEAAAAJ&hl=en',
   'https://boomtick.blog',
 ];
@@ -37,33 +39,122 @@ export interface TechArticleSchemaOptions {
   keywords?: string[];
 }
 
+export interface ScholarlyArticleSchemaOptions {
+  headline: string;
+  canonicalPath: string;
+  datePublished?: string;
+  abstract?: string;
+  image?: string;
+}
+
+export interface BreadcrumbItem {
+  name: string;
+  path: string;
+}
+
 export function getPersonAndProfileSchema(canonicalUrl: string = '/') {
   const normalized = canonicalUrl.startsWith('/') ? canonicalUrl : '/' + canonicalUrl;
   const fullUrl = SITE_URL + normalized;
 
-  const personSchema = {
+  const personEntity = {
     '@type': 'Person',
-    '@id': SITE_URL + '/#person',
+    '@id': `${SITE_URL}/about#person`,
+    url: `${SITE_URL}/about`,
     name: AUTHOR_NAME,
     jobTitle: AUTHOR_JOB_TITLE,
-    url: SITE_URL,
-    image: SITE_URL + '/assets/roboticist.jpg',
+    email: AUTHOR_EMAIL,
+    image: AUTHOR_IMAGE,
     alumniOf: {
       '@type': 'EducationalOrganization',
       name: AUTHOR_ALUMNI,
       url: 'https://www.mit.edu',
     },
+    hasCredential: [
+      {
+        '@type': 'EducationalOccupationalCredential',
+        credentialCategory: 'degree',
+        name: 'Doctor of Philosophy (Ph.D.) in Electrical Engineering and Computer Science',
+        recognizedBy: {
+          '@type': 'EducationalOrganization',
+          name: AUTHOR_ALUMNI,
+          url: 'https://www.mit.edu',
+        },
+      },
+      {
+        '@type': 'EducationalOccupationalCredential',
+        credentialCategory: 'degree',
+        name: 'Master of Science (S.M.) in Electrical Engineering and Computer Science',
+        recognizedBy: {
+          '@type': 'EducationalOrganization',
+          name: AUTHOR_ALUMNI,
+          url: 'https://www.mit.edu',
+        },
+      },
+    ],
     knowsAbout: AUTHOR_KNOWS_ABOUT,
     sameAs: AUTHOR_SAME_AS,
   };
 
-  return {
-    '@context': 'https://schema.org',
+  const serviceEntity = {
+    '@type': 'Service',
+    '@id': `${SITE_URL}/about#consulting-service`,
+    url: `${SITE_URL}/about`,
+    name: 'Robotics & Multi-Agent AI Consulting',
+    serviceType: 'Technical & Engineering Consulting',
+    description:
+      'Advisory and architecture services bridging robotics, autonomous navigation, and agentic AI systems for software engineering teams.',
+    provider: {
+      '@id': `${SITE_URL}/about#person`,
+    },
+    areaServed: [
+      {
+        '@type': 'AdministrativeArea',
+        name: 'San Francisco Bay Area',
+      },
+      {
+        '@type': 'Country',
+        name: 'United States',
+      },
+    ],
+    audience: {
+      '@type': 'Audience',
+      audienceType: 'Tech Startups, Engineering Leaders, Robotics Ventures',
+    },
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Consulting Services',
+      itemListElement: [
+        {
+          '@type': 'Offer',
+          'itemOffered': {
+            '@type': 'Service',
+            name: 'Autonomous Navigation & Motion Planning Architecture',
+          },
+        },
+        {
+          '@type': 'Offer',
+          'itemOffered': {
+            '@type': 'Service',
+            name: 'Multi-Agent AI Workflows & Developer Infrastructure',
+          },
+        },
+      ],
+    },
+  };
+
+  const profilePageEntity = {
     '@type': 'ProfilePage',
     '@id': fullUrl + '#profilepage',
     url: fullUrl,
     name: 'Profile of ' + AUTHOR_NAME,
-    mainEntity: personSchema,
+    mainEntity: {
+      '@id': `${SITE_URL}/about#person`,
+    },
+  };
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [personEntity, serviceEntity, profilePageEntity],
   };
 }
 
@@ -71,43 +162,45 @@ export function getServiceSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'Service',
-    '@id': SITE_URL + '/#services',
-    serviceType: 'AI & Robotics Consulting & Software Engineering Services',
+    '@id': `${SITE_URL}/about#consulting-service`,
+    url: `${SITE_URL}/about`,
+    name: 'Robotics & Multi-Agent AI Consulting',
+    serviceType: 'Technical & Engineering Consulting',
+    description:
+      'Advisory and architecture services bridging robotics, autonomous navigation, and agentic AI systems for software engineering teams.',
     provider: {
-      '@type': 'Person',
-      name: AUTHOR_NAME,
-      url: SITE_URL,
+      '@id': `${SITE_URL}/about#person`,
     },
-    areaServed: 'Global',
+    areaServed: [
+      {
+        '@type': 'AdministrativeArea',
+        name: 'San Francisco Bay Area',
+      },
+      {
+        '@type': 'Country',
+        name: 'United States',
+      },
+    ],
+    audience: {
+      '@type': 'Audience',
+      audienceType: 'Tech Startups, Engineering Leaders, Robotics Ventures',
+    },
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
-      name: 'Technical Consulting & Software Engineering Offerings',
+      name: 'Consulting Services',
       itemListElement: [
         {
           '@type': 'Offer',
           'itemOffered': {
             '@type': 'Service',
-            name: 'AI Architecture',
-            description:
-              'Design and implementation of stateful multi-agent workflows, LLM orchestration, and high-reliability AI software architecture.',
+            name: 'Autonomous Navigation & Motion Planning Architecture',
           },
         },
         {
           '@type': 'Offer',
           'itemOffered': {
             '@type': 'Service',
-            name: 'Robotics Software Systems',
-            description:
-              'Autonomous systems development, motion planning under uncertainty, conformant belief-state manipulation, and ROS 2 ecosystem integration.',
-          },
-        },
-        {
-          '@type': 'Offer',
-          'itemOffered': {
-            '@type': 'Service',
-            name: 'Developer Automation',
-            description:
-              'Agentic CI/CD pipelines, automated code auditing guardrails, Model Context Protocol (MCP) integrations, and static analysis tooling.',
+            name: 'Multi-Agent AI Workflows & Developer Infrastructure',
           },
         },
       ],
@@ -126,9 +219,11 @@ export function getSoftwareSchema(options: SoftwareSchemaOptions) {
     description: options.description,
     codeRepository: codeRepo,
     programmingLanguage: options.programmingLanguage || 'TypeScript',
+    runtimePlatform: 'Linux / Cross-platform',
     applicationCategory: options.applicationCategory || 'Developer Application',
     author: {
       '@type': 'Person',
+      '@id': `${SITE_URL}/about#person`,
       name: AUTHOR_NAME,
       url: SITE_URL,
     },
@@ -142,7 +237,7 @@ export function getTechArticleSchema(options: TechArticleSchemaOptions) {
     ? options.image.startsWith('http')
       ? options.image
       : SITE_URL + (options.image.startsWith('/') ? '' : '/') + options.image
-    : SITE_URL + '/assets/roboticist.jpg';
+    : AUTHOR_IMAGE;
 
   return {
     '@context': 'https://schema.org',
@@ -152,21 +247,67 @@ export function getTechArticleSchema(options: TechArticleSchemaOptions) {
     description: options.description,
     url: fullUrl,
     image,
+    mainEntityOfPage: fullUrl,
     proficiencyLevel: 'Expert',
     articleSection: 'Robotics & AI',
     datePublished: options.datePublished || '2026-01-01',
     author: {
       '@type': 'Person',
+      '@id': `${SITE_URL}/about#person`,
       name: AUTHOR_NAME,
       url: SITE_URL,
     },
     publisher: {
       '@type': 'Person',
+      '@id': `${SITE_URL}/about#person`,
       name: AUTHOR_NAME,
       url: SITE_URL,
     },
     keywords: options.keywords
       ? options.keywords.join(', ')
       : 'Artificial Intelligence, Robotics Software Engineering, Autonomous Systems, Agentic Workflows',
+  };
+}
+
+export function getScholarlyArticleSchema(options: ScholarlyArticleSchemaOptions) {
+  const normalized = options.canonicalPath.startsWith('/') ? options.canonicalPath : '/' + options.canonicalPath;
+  const fullUrl = SITE_URL + normalized;
+  const image = options.image
+    ? options.image.startsWith('http')
+      ? options.image
+      : SITE_URL + (options.image.startsWith('/') ? '' : '/') + options.image
+    : AUTHOR_IMAGE;
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ScholarlyArticle',
+    '@id': `${fullUrl}#article`,
+    name: options.headline,
+    headline: options.headline,
+    url: fullUrl,
+    image,
+    abstract: options.abstract || options.headline,
+    datePublished: options.datePublished || '2021-05-01',
+    author: [
+      {
+        '@type': 'Person',
+        '@id': `${SITE_URL}/about#person`,
+        name: AUTHOR_NAME,
+      },
+    ],
+    sameAs: 'https://scholar.google.com/citations?user=NM6SfiEAAAAJ&hl=en',
+  };
+}
+
+export function getBreadcrumbSchema(items: BreadcrumbItem[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: `${SITE_URL}${item.path.startsWith('/') ? item.path : `/${item.path}`}`,
+    })),
   };
 }
