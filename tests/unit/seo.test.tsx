@@ -6,25 +6,36 @@ import SEO from '@/components/SEO';
 import fs from 'node:fs';
 import path from 'node:path';
 import { generateSitemap } from '../../scripts/generate-sitemap.js';
+import {
+  getPersonAndProfileSchema,
+  getServiceSchema,
+  getSoftwareSchema,
+  getTechArticleSchema,
+  getScholarlyArticleSchema,
+  getBreadcrumbSchema,
+} from '@/utils/schema';
 
 describe('SEO Component & Search Configuration', () => {
   it('renders title, description, canonical link, and social tags via Helmet', async () => {
+    const testJsonLd = getPersonAndProfileSchema('/devai/versiontruth');
+
     render(
       <HelmetProvider>
         <SEO
           title="Custom Page Title"
-          description="Custom page description for testing."
+          description="Explore custom page description for testing technical SEO metadata compliance across the portfolio framework."
           canonicalUrl="/devai/versiontruth"
           ogType="article"
           ogImage="/assets/research/versiontruth.png"
+          jsonLd={testJsonLd}
         />
       </HelmetProvider>
     );
 
-    expect(document.title).toBe('Custom Page Title | Ariel Anders');
+    expect(document.title).toBe('Custom Page Title | Ariel Anders, PhD');
 
     const descMeta = document.querySelector('meta[name="description"]');
-    expect(descMeta?.getAttribute('content')).toBe('Custom page description for testing.');
+    expect(descMeta?.getAttribute('content')).toContain('Explore custom page description');
 
     const canonicalLink = document.querySelector('link[rel="canonical"]');
     expect(canonicalLink?.getAttribute('href')).toBe('https://arii.github.io/devai/versiontruth');
@@ -37,20 +48,33 @@ describe('SEO Component & Search Configuration', () => {
 
     const twitterCardMeta = document.querySelector('meta[name="twitter:card"]');
     expect(twitterCardMeta?.getAttribute('content')).toBe('summary_large_image');
+
+    const jsonLdScript = document.querySelector('script[type="application/ld+json"]');
+    expect(jsonLdScript).not.toBeNull();
+    expect(jsonLdScript?.textContent).toContain('"@graph"');
+    expect(jsonLdScript?.textContent).toContain('"name":"Ariel Anders, PhD"');
   });
 
-  it('verifies public/robots.txt rules and Sitemap URL', () => {
+  it('verifies public/robots.txt and public/llms.txt existence and contents', () => {
     const robotsPath = path.resolve(__dirname, '../../public/robots.txt');
     expect(fs.existsSync(robotsPath)).toBe(true);
 
-    const content = fs.readFileSync(robotsPath, 'utf-8');
-    expect(content).toContain('User-agent: *');
-    expect(content).toContain('Allow: /');
-    expect(content).toContain('Disallow: /artifacts/');
-    expect(content).toContain('Sitemap: https://arii.github.io/sitemap.xml');
+    const robotsContent = fs.readFileSync(robotsPath, 'utf-8');
+    expect(robotsContent).toContain('User-agent: *');
+    expect(robotsContent).toContain('Allow: /');
+    expect(robotsContent).toContain('Disallow: /artifacts/');
+    expect(robotsContent).toContain('Sitemap: https://arii.github.io/sitemap.xml');
+
+    const llmsPath = path.resolve(__dirname, '../../public/llms.txt');
+    expect(fs.existsSync(llmsPath)).toBe(true);
+
+    const llmsContent = fs.readFileSync(llmsPath, 'utf-8');
+    expect(llmsContent).toContain('# Ariel Anders, PhD');
+    expect(llmsContent).toContain('https://arii.github.io/about');
+    expect(llmsContent).toContain('https://github.com/arii');
   });
 
-  it('generates public/sitemap.xml containing all active routes', () => {
+  it('generates clean public/sitemap.xml containing active canonical routes without hashes or deprecated tags', () => {
     generateSitemap();
 
     const sitemapPath = path.resolve(__dirname, '../../public/sitemap.xml');
@@ -60,11 +84,60 @@ describe('SEO Component & Search Configuration', () => {
     expect(xml).toContain('<?xml version="1.0" encoding="UTF-8"?>');
     expect(xml).toContain('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">');
     expect(xml).toContain('<loc>https://arii.github.io/</loc>');
-    expect(xml).toContain('<loc>https://arii.github.io/#/devai</loc>');
-    expect(xml).toContain('<loc>https://arii.github.io/#/research</loc>');
-    expect(xml).toContain('<loc>https://arii.github.io/#/about</loc>');
-    expect(xml).toContain('<loc>https://arii.github.io/#/resume</loc>');
-    expect(xml).toContain('duckietown');
-    expect(xml).toContain('versiontruth');
+    expect(xml).toContain('<loc>https://arii.github.io/devai</loc>');
+    expect(xml).toContain('<loc>https://arii.github.io/research</loc>');
+    expect(xml).toContain('<loc>https://arii.github.io/about</loc>');
+    expect(xml).toContain('<loc>https://arii.github.io/resume</loc>');
+    expect(xml).not.toContain('<priority>');
+    expect(xml).not.toContain('<changefreq>');
+    expect(xml).not.toContain('/#/devai');
+  });
+
+  it('validates JSON-LD schema generators for Google Search Gallery and Schema.org standards', () => {
+    const profile = getPersonAndProfileSchema('/about');
+    expect(profile['@graph']).toBeDefined();
+    const person = profile['@graph'].find((e: any) => e['@type'] === 'Person');
+    expect(person.name).toBe('Ariel Anders, PhD');
+    expect(person.jobTitle).toBe('Robotics & AI Consulting Engineer');
+    expect(person.email).toBe('anders.ariel@gmail.com');
+    expect(person.hasCredential).toHaveLength(2);
+
+    const service = getServiceSchema();
+    expect(service['@type']).toBe('Service');
+    expect(service.name).toBe('Robotics & Multi-Agent AI Consulting');
+    expect(service.hasOfferCatalog.itemListElement).toHaveLength(2);
+
+    const software = getSoftwareSchema({
+      name: 'GitOps PR Reviewer',
+      description: 'Autonomous AI-powered pull request reviewer.',
+      codeRepository: 'https://github.com/arii/portfolio',
+    });
+    expect(software['@type']).toBe('SoftwareSourceCode');
+    expect(software.name).toBe('GitOps PR Reviewer');
+    expect(software.author['@id']).toContain('/about#person');
+
+    const techArticle = getTechArticleSchema({
+      headline: 'Multi-Agent Workflows',
+      description: 'Multi-agent orchestration.',
+      canonicalPath: '/devai/gitops-pr-reviewer',
+    });
+    expect(techArticle['@type']).toBe('TechArticle');
+    expect(techArticle.proficiencyLevel).toBe('Expert');
+
+    const scholarlyArticle = getScholarlyArticleSchema({
+      headline: 'Conformant Planning and Manipulation',
+      abstract: 'PhD research on planning under uncertainty.',
+      canonicalPath: '/research/conformant-planning-manipulation',
+    });
+    expect(scholarlyArticle['@type']).toBe('ScholarlyArticle');
+    expect(scholarlyArticle.sameAs).toBe('https://scholar.google.com/citations?user=NM6SfiEAAAAJ&hl=en');
+
+    const breadcrumb = getBreadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: 'Research', path: '/research' },
+      { name: 'Conformant Planning', path: '/research/conformant-planning-manipulation' },
+    ]);
+    expect(breadcrumb['@type']).toBe('BreadcrumbList');
+    expect(breadcrumb.itemListElement).toHaveLength(3);
   });
 });

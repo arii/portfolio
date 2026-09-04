@@ -8,11 +8,12 @@ export interface SEOProps {
   ogType?: 'website' | 'article';
   ogImage?: string;
   twitterCard?: 'summary' | 'summary_large_image';
+  jsonLd?: Record<string, any> | Record<string, any>[];
 }
 
-const DEFAULT_TITLE = 'Ariel Anders | Roboticist & Senior Software Engineer';
+const DEFAULT_TITLE = 'AI & Robotics Engineering Portfolio | Ariel Anders, PhD';
 const DEFAULT_DESCRIPTION =
-  "Ariel Anders' Technical Portfolio: Robotics research (MIT CSAIL PhD), agentic DevAI tools, autonomous systems, and software engineering.";
+  'Explore AI consulting, robotics software engineering, and autonomous systems research by Ariel Anders, PhD (MIT). View open-source tools and deep dives.';
 const SITE_URL = 'https://arii.github.io';
 const DEFAULT_IMAGE = `${SITE_URL}/assets/roboticist.jpg`;
 
@@ -23,8 +24,16 @@ const SEO: React.FC<SEOProps> = ({
   ogType = 'website',
   ogImage = DEFAULT_IMAGE,
   twitterCard = 'summary_large_image',
+  jsonLd,
 }) => {
-  const fullTitle = title ? `${title} | Ariel Anders` : DEFAULT_TITLE;
+  let fullTitle = DEFAULT_TITLE;
+  if (title) {
+    if (title.includes('Ariel Anders')) {
+      fullTitle = title;
+    } else {
+      fullTitle = `${title} | Ariel Anders, PhD`;
+    }
+  }
 
   const normalizedPath = canonicalUrl ? (canonicalUrl.startsWith('/') ? canonicalUrl : `/${canonicalUrl}`) : '';
   const fullUrl = `${SITE_URL}${normalizedPath}`;
@@ -32,6 +41,10 @@ const SEO: React.FC<SEOProps> = ({
   const image = ogImage.startsWith('http')
     ? ogImage
     : `${SITE_URL}${ogImage.startsWith('/') ? '' : '/'}${ogImage}`;
+
+  const jsonLdContent = jsonLd
+    ? JSON.stringify(Array.isArray(jsonLd) ? jsonLd : jsonLd)
+    : null;
 
   return (
     <Helmet>
@@ -53,6 +66,11 @@ const SEO: React.FC<SEOProps> = ({
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={image} />
+
+      {/* Structured JSON-LD Schema */}
+      {jsonLdContent && (
+        <script type="application/ld+json">{jsonLdContent}</script>
+      )}
     </Helmet>
   );
 };

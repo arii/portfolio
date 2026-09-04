@@ -6,6 +6,7 @@ import FlagshipCard from '@/components/FlagshipCard';
 import ImageLightbox from '@/components/ImageLightbox';
 import { Layers } from 'lucide-react';
 import SEO from '@/components/SEO';
+import { getPersonAndProfileSchema, getServiceSchema, getSoftwareSchema } from '@/utils/schema';
 
 export interface DevAIListPageProps {
   onNavigate: (slug: string) => void;
@@ -58,12 +59,25 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
     });
   }, [posts]);
 
+  const devAiSchemas = useMemo(() => {
+    const softwareSchemas = flagshipTools.map((tool) =>
+      getSoftwareSchema({
+        name: tool.title,
+        description: tool.description,
+        url: tool.canonicalPath ? `https://arii.github.io${tool.canonicalPath}` : undefined,
+        codeRepository: tool.sourceUrl,
+      })
+    );
+    return [getPersonAndProfileSchema('/devai'), getServiceSchema(), ...softwareSchemas];
+  }, [flagshipTools]);
+
   return (
     <div className="space-y-12 sm:space-y-16">
       <SEO
-        title="DevAI & Software Systems"
-        description="System architectures, agentic CI/CD pipelines, autonomous developer tooling, and shipped production applications."
+        title="DevAI & Agentic Automation"
+        description="Explore agentic DevAI tools, multi-agent CI/CD workflows, and developer automation software engineered by Ariel Anders, PhD (MIT CSAIL)."
         canonicalUrl="/devai"
+        jsonLd={devAiSchemas}
       />
 
       <header className="space-y-3 border-b border-line/20 pb-6 sm:pb-8">
