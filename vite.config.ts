@@ -8,7 +8,6 @@ export function getBasePath(): string {
   if (process.env.VITE_BASE_PATH) {
     return ('/' + process.env.VITE_BASE_PATH + '/').replace(/\/+/g, '/');
   }
-  if (process.env.GITHUB_ACTIONS === 'true') return '/portfolio/';
   return '/';
 }
 
