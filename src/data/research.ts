@@ -1,56 +1,21 @@
+import { parse } from 'yaml';
 import { ResearchPost } from '@/types/research';
 export { RESEARCH_TOOLS } from './researchTools';
 
 export function parseFrontmatter(content: string) {
   const match = content.match(/^---\r?\n([\s\S]+?)\r?\n---\r?\n([\s\S]*)$/);
-  if (!match) return { data: {} as Record<string, any>, content };
+  if (!match) return { data: {} as any, content };
 
   const yamlStr = match[1];
   const body = match[2];
 
-  const data: Record<string, any> = {};
-  const lines = yamlStr.split(/\r?\n/);
-  let currentKey: string | null = null;
-
-  for (const line of lines) {
-    const trimmed = line.trim();
-    if (!trimmed || trimmed.startsWith('#')) continue;
-
-    const keyValMatch = line.match(/^([a-zA-Z0-9_-]+):\s*(.*)$/);
-    if (keyValMatch) {
-      const key = keyValMatch[1].trim();
-      let val = keyValMatch[2].trim();
-
-      if (val.startsWith('[') && val.endsWith(']')) {
-        const items = val
-          .slice(1, -1)
-          .split(',')
-          .map((s) => s.trim().replace(/^['"]|['"]$/g, ''))
-          .filter(Boolean);
-        data[key] = items;
-        currentKey = null;
-      } else if (val === '') {
-        currentKey = key;
-        data[key] = [];
-      } else {
-        if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
-          val = val.slice(1, -1);
-        }
-        data[key] = val;
-        currentKey = null;
-      }
-    } else if (currentKey && trimmed.startsWith('-')) {
-      let itemVal = trimmed.slice(1).trim();
-      if ((itemVal.startsWith('"') && itemVal.endsWith('"')) || (itemVal.startsWith("'") && itemVal.endsWith("'"))) {
-        itemVal = itemVal.slice(1, -1);
-      }
-      if (Array.isArray(data[currentKey])) {
-        data[currentKey].push(itemVal);
-      }
-    }
+  try {
+    const data = parse(yamlStr);
+    return { data: data && typeof data === 'object' ? data : {}, content: body };
+  } catch (e) {
+    console.error('Error parsing frontmatter:', e);
+    return { data: {}, content: body };
   }
-
-  return { data, content: body };
 }
 
 const modules = (import.meta as any).glob('/src/content/research/*.md', { eager: true, query: '?raw' }) as Record<string, { default: string }>;
