@@ -8,7 +8,10 @@ import Research from '@/pages/Research';
 import DevAI from '@/pages/DevAI';
 import Resume from '@/pages/Resume';
 import About from '@/pages/About';
+import { registerServiceWorker } from '@/registerServiceWorker';
 import '@/index.css';
+
+registerServiceWorker();
 
 const getBasename = (): string => {
   return import.meta.env.BASE_URL || '/';
