@@ -13,6 +13,10 @@ import {
   getTechArticleSchema,
   getScholarlyArticleSchema,
   getBreadcrumbSchema,
+  getOrganizationSchema,
+  getSiteNavigationSchema,
+  getFAQSchema,
+  getVideoObjectSchema,
 } from '@/utils/schema';
 
 describe('SEO Component & Search Configuration', () => {
@@ -101,10 +105,30 @@ describe('SEO Component & Search Configuration', () => {
     expect(person.email).toBe('anders.ariel@gmail.com');
     expect(person.hasCredential).toHaveLength(2);
 
+    const orgInProfile = profile['@graph'].find((e: any) =>
+      Array.isArray(e['@type']) ? e['@type'].includes('ProfessionalService') : e['@type'] === 'ProfessionalService'
+    );
+    expect(orgInProfile).toBeDefined();
+    expect(orgInProfile.name).toBe('Ariel Anders AI & Robotics Consulting');
+
+    const siteNavInProfile = profile['@graph'].filter((e: any) => e['@type'] === 'SiteNavigationElement');
+    expect(siteNavInProfile.length).toBeGreaterThanOrEqual(5);
+
     const service = getServiceSchema();
     expect(service['@type']).toBe('Service');
     expect(service.name).toBe('Robotics & Multi-Agent AI Consulting');
     expect(service.hasOfferCatalog.itemListElement).toHaveLength(2);
+
+    const org = getOrganizationSchema();
+    expect(org['@type']).toEqual(['ProfessionalService', 'Organization']);
+    expect(org.name).toBe('Ariel Anders AI & Robotics Consulting');
+    expect(org.logo['@type']).toBe('ImageObject');
+    expect(org.address.addressLocality).toBe('San Francisco');
+
+    const siteNav = getSiteNavigationSchema();
+    expect(siteNav).toHaveLength(5);
+    expect(siteNav[0].name).toBe('Overview');
+    expect(siteNav[0].url).toBe('https://arii.github.io');
 
     const software = getSoftwareSchema({
       name: 'GitOps PR Reviewer',
@@ -122,6 +146,8 @@ describe('SEO Component & Search Configuration', () => {
     });
     expect(techArticle['@type']).toBe('TechArticle');
     expect(techArticle.proficiencyLevel).toBe('Expert');
+    expect(techArticle.image['@type']).toBe('ImageObject');
+    expect(techArticle.image.width).toBe(1200);
 
     const scholarlyArticle = getScholarlyArticleSchema({
       headline: 'Conformant Planning and Manipulation',
@@ -130,6 +156,7 @@ describe('SEO Component & Search Configuration', () => {
     });
     expect(scholarlyArticle['@type']).toBe('ScholarlyArticle');
     expect(scholarlyArticle.sameAs).toBe('https://scholar.google.com/citations?user=NM6SfiEAAAAJ&hl=en');
+    expect(scholarlyArticle.image['@type']).toBe('ImageObject');
 
     const breadcrumb = getBreadcrumbSchema([
       { name: 'Home', path: '/' },
@@ -138,5 +165,22 @@ describe('SEO Component & Search Configuration', () => {
     ]);
     expect(breadcrumb['@type']).toBe('BreadcrumbList');
     expect(breadcrumb.itemListElement).toHaveLength(3);
+
+    const faq = getFAQSchema([
+      { question: 'What services do you offer?', answer: 'AI and robotics consulting.' },
+    ]);
+    expect(faq['@type']).toBe('FAQPage');
+    expect(faq.mainEntity).toHaveLength(1);
+    expect(faq.mainEntity[0].name).toBe('What services do you offer?');
+
+    const video = getVideoObjectSchema({
+      name: 'Duckietown Autonomous Driving',
+      description: 'Autonomous lane following and obstacle avoidance.',
+      contentUrl: 'https://www.youtube.com/watch?v=rPpewHIF2KU',
+      embedUrl: 'https://www.youtube.com/embed/rPpewHIF2KU',
+    });
+    expect(video['@type']).toBe('VideoObject');
+    expect(video.name).toBe('Duckietown Autonomous Driving');
+    expect(video.embedUrl).toBe('https://www.youtube.com/embed/rPpewHIF2KU');
   });
 });

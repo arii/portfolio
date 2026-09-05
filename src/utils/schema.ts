@@ -36,6 +36,9 @@ export interface TechArticleSchemaOptions {
   canonicalPath: string;
   datePublished?: string;
   image?: string;
+  imageCaption?: string;
+  imageWidth?: number;
+  imageHeight?: number;
   keywords?: string[];
 }
 
@@ -45,6 +48,9 @@ export interface ScholarlyArticleSchemaOptions {
   datePublished?: string;
   abstract?: string;
   image?: string;
+  imageCaption?: string;
+  imageWidth?: number;
+  imageHeight?: number;
 }
 
 export interface BreadcrumbItem {
@@ -52,9 +58,89 @@ export interface BreadcrumbItem {
   path: string;
 }
 
+export interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+export interface VideoObjectSchemaOptions {
+  name: string;
+  description: string;
+  thumbnailUrl?: string;
+  contentUrl?: string;
+  embedUrl?: string;
+  uploadDate?: string;
+}
+
+export function getOrganizationSchema() {
+  return {
+    '@type': ['ProfessionalService', 'Organization'],
+    '@id': `${SITE_URL}/#organization`,
+    name: 'Ariel Anders AI & Robotics Consulting',
+    alternateName: 'Ariel Anders Consulting',
+    url: `${SITE_URL}/about`,
+    logo: {
+      '@type': 'ImageObject',
+      '@id': `${SITE_URL}/vite.svg#logo`,
+      url: `${SITE_URL}/vite.svg`,
+      width: 512,
+      height: 512,
+      caption: 'Ariel Anders Engineering Logo',
+    },
+    image: {
+      '@type': 'ImageObject',
+      '@id': `${AUTHOR_IMAGE}#image`,
+      url: AUTHOR_IMAGE,
+      caption: 'Ariel Anders, PhD - AI & Robotics Consulting Engineer',
+      width: 1200,
+      height: 1200,
+    },
+    description:
+      'Professional AI software engineering, autonomous robotics architecture, and agentic multi-agent systems consulting.',
+    founder: {
+      '@id': `${SITE_URL}/about#person`,
+    },
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'San Francisco',
+      addressRegion: 'CA',
+      addressCountry: 'US',
+    },
+    areaServed: [
+      {
+        '@type': 'AdministrativeArea',
+        name: 'San Francisco Bay Area',
+      },
+      {
+        '@type': 'Country',
+        name: 'United States',
+      },
+    ],
+    sameAs: AUTHOR_SAME_AS,
+  };
+}
+
+export function getSiteNavigationSchema() {
+  const navItems = [
+    { name: 'Overview', path: '/' },
+    { name: 'DevAI', path: '/devai' },
+    { name: 'Research', path: '/research' },
+    { name: 'Resume', path: '/resume' },
+    { name: 'About Ariel', path: '/about' },
+  ];
+
+  return navItems.map((item, index) => ({
+    '@type': 'SiteNavigationElement',
+    '@id': `${SITE_URL}${item.path}#sitenav-${index + 1}`,
+    position: index + 1,
+    name: item.name,
+    url: `${SITE_URL}${item.path === '/' ? '' : item.path}`,
+  }));
+}
+
 export function getPersonAndProfileSchema(canonicalUrl: string = '/') {
   const normalized = canonicalUrl.startsWith('/') ? canonicalUrl : '/' + canonicalUrl;
-  const fullUrl = SITE_URL + normalized;
+  const fullUrl = SITE_URL + (normalized === '/' ? '' : normalized);
 
   const personEntity = {
     '@type': 'Person',
@@ -63,7 +149,14 @@ export function getPersonAndProfileSchema(canonicalUrl: string = '/') {
     name: AUTHOR_NAME,
     jobTitle: AUTHOR_JOB_TITLE,
     email: AUTHOR_EMAIL,
-    image: AUTHOR_IMAGE,
+    image: {
+      '@type': 'ImageObject',
+      '@id': `${AUTHOR_IMAGE}#image`,
+      url: AUTHOR_IMAGE,
+      caption: `${AUTHOR_NAME} - ${AUTHOR_JOB_TITLE}`,
+      width: 1200,
+      height: 1200,
+    },
     alumniOf: {
       '@type': 'EducationalOrganization',
       name: AUTHOR_ALUMNI,
@@ -152,9 +245,12 @@ export function getPersonAndProfileSchema(canonicalUrl: string = '/') {
     },
   };
 
+  const organizationEntity = getOrganizationSchema();
+  const siteNavElements = getSiteNavigationSchema();
+
   return {
     '@context': 'https://schema.org',
-    '@graph': [personEntity, serviceEntity, profilePageEntity],
+    '@graph': [personEntity, serviceEntity, profilePageEntity, organizationEntity, ...siteNavElements],
   };
 }
 
@@ -233,11 +329,20 @@ export function getSoftwareSchema(options: SoftwareSchemaOptions) {
 export function getTechArticleSchema(options: TechArticleSchemaOptions) {
   const normalized = options.canonicalPath.startsWith('/') ? options.canonicalPath : '/' + options.canonicalPath;
   const fullUrl = SITE_URL + normalized;
-  const image = options.image
+  const rawImageUrl = options.image
     ? options.image.startsWith('http')
       ? options.image
       : SITE_URL + (options.image.startsWith('/') ? '' : '/') + options.image
     : AUTHOR_IMAGE;
+
+  const imageObject = {
+    '@type': 'ImageObject',
+    '@id': `${rawImageUrl}#image`,
+    url: rawImageUrl,
+    caption: options.imageCaption || options.headline,
+    width: options.imageWidth || 1200,
+    height: options.imageHeight || 630,
+  };
 
   return {
     '@context': 'https://schema.org',
@@ -246,7 +351,7 @@ export function getTechArticleSchema(options: TechArticleSchemaOptions) {
     headline: options.headline,
     description: options.description,
     url: fullUrl,
-    image,
+    image: imageObject,
     mainEntityOfPage: fullUrl,
     proficiencyLevel: 'Expert',
     articleSection: 'Robotics & AI',
@@ -272,11 +377,20 @@ export function getTechArticleSchema(options: TechArticleSchemaOptions) {
 export function getScholarlyArticleSchema(options: ScholarlyArticleSchemaOptions) {
   const normalized = options.canonicalPath.startsWith('/') ? options.canonicalPath : '/' + options.canonicalPath;
   const fullUrl = SITE_URL + normalized;
-  const image = options.image
+  const rawImageUrl = options.image
     ? options.image.startsWith('http')
       ? options.image
       : SITE_URL + (options.image.startsWith('/') ? '' : '/') + options.image
     : AUTHOR_IMAGE;
+
+  const imageObject = {
+    '@type': 'ImageObject',
+    '@id': `${rawImageUrl}#image`,
+    url: rawImageUrl,
+    caption: options.imageCaption || options.headline,
+    width: options.imageWidth || 1200,
+    height: options.imageHeight || 630,
+  };
 
   return {
     '@context': 'https://schema.org',
@@ -285,7 +399,7 @@ export function getScholarlyArticleSchema(options: ScholarlyArticleSchemaOptions
     name: options.headline,
     headline: options.headline,
     url: fullUrl,
-    image,
+    image: imageObject,
     abstract: options.abstract || options.headline,
     datePublished: options.datePublished || '2021-05-01',
     author: [
@@ -307,7 +421,38 @@ export function getBreadcrumbSchema(items: BreadcrumbItem[]) {
       '@type': 'ListItem',
       position: index + 1,
       name: item.name,
-      item: `${SITE_URL}${item.path.startsWith('/') ? item.path : `/${item.path}`}`,
+      item: `${SITE_URL}${item.path === '/' ? '' : (item.path.startsWith('/') ? item.path : `/${item.path}`)}`,
     })),
+  };
+}
+
+export function getFAQSchema(faqs: FAQItem[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    '@id': `${SITE_URL}/about#faq`,
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  };
+}
+
+export function getVideoObjectSchema(options: VideoObjectSchemaOptions) {
+  const url = options.embedUrl || options.contentUrl || SITE_URL;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'VideoObject',
+    '@id': `${url}#video`,
+    name: options.name,
+    description: options.description,
+    thumbnailUrl: options.thumbnailUrl || AUTHOR_IMAGE,
+    uploadDate: options.uploadDate || '2024-01-01',
+    contentUrl: options.contentUrl,
+    embedUrl: options.embedUrl,
   };
 }

@@ -9,7 +9,12 @@ import SafeImage from '@/components/ui/SafeImage';
 import { Box, Stack } from '@/components/layout';
 import svgPanZoom from 'svg-pan-zoom';
 import SEO from '@/components/SEO';
-import { getTechArticleSchema, getScholarlyArticleSchema, getBreadcrumbSchema } from '@/utils/schema';
+import {
+  getTechArticleSchema,
+  getScholarlyArticleSchema,
+  getBreadcrumbSchema,
+  getVideoObjectSchema,
+} from '@/utils/schema';
 
 export interface ResearchDetailPageProps {
   slug: string;
@@ -345,7 +350,46 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
     { name: post.title, path: `/${primarySection}/${post.slug}` },
   ]);
 
-  const detailSchemas = [articleSchema, breadcrumbSchema];
+  const videoSchemas = [];
+  if (matchingTool?.videoUrl) {
+    const rawUrl = matchingTool.videoUrl;
+    const ytMatch = rawUrl.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+    const embedUrl = ytMatch ? `https://www.youtube.com/embed/${ytMatch[1]}` : rawUrl;
+    videoSchemas.push(
+      getVideoObjectSchema({
+        name: `${post.title} - Demonstration Video`,
+        description: post.summary,
+        contentUrl: rawUrl,
+        embedUrl: embedUrl,
+        thumbnailUrl: ogImage,
+        uploadDate: post.date,
+      })
+    );
+  } else {
+    // Check if post content has youtube links
+    const ytLinks = post.content.match(/https?:\/\/(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)[a-zA-Z0-9_-]{11}/g);
+    if (ytLinks && ytLinks.length > 0) {
+      const uniqueLinks = Array.from(new Set(ytLinks));
+      uniqueLinks.slice(0, 3).forEach((link, idx) => {
+        const match = link.match(/([a-zA-Z0-9_-]{11})/);
+        if (match) {
+          const videoId = match[1];
+          videoSchemas.push(
+            getVideoObjectSchema({
+              name: `${post.title} - Video Clip ${idx + 1}`,
+              description: post.summary,
+              contentUrl: link,
+              embedUrl: `https://www.youtube.com/embed/${videoId}`,
+              thumbnailUrl: `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`,
+              uploadDate: post.date,
+            })
+          );
+        }
+      });
+    }
+  }
+
+  const detailSchemas = [articleSchema, breadcrumbSchema, ...videoSchemas];
 
   return (
     <article className="mx-auto max-w-4xl px-4 py-12 space-y-8">
