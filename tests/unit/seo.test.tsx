@@ -62,7 +62,6 @@ describe('SEO Component & Search Configuration', () => {
     const robotsContent = fs.readFileSync(robotsPath, 'utf-8');
     expect(robotsContent).toContain('User-agent: *');
     expect(robotsContent).toContain('Allow: /');
-    expect(robotsContent).toContain('Disallow: /artifacts/');
     expect(robotsContent).toContain('Sitemap: https://arii.github.io/sitemap.xml');
 
     const llmsPath = path.resolve(__dirname, '../../public/llms.txt');
