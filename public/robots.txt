@@ -1,7 +1,4 @@
 User-agent: *
 Allow: /
 
-Disallow: /artifacts/
-Disallow: /previews/
-
 Sitemap: https://arii.github.io/sitemap.xml
