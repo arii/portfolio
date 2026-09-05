@@ -55,7 +55,7 @@ describe('SEO Component & Search Configuration', () => {
     expect(jsonLdScript?.textContent).toContain('"name":"Ariel Anders, PhD"');
   });
 
-  it('verifies public/robots.txt and public/llms.txt existence and contents', () => {
+  it('verifies public/robots.txt, public/llms.txt, and public/llms-full.txt compliance', () => {
     const robotsPath = path.resolve(__dirname, '../../public/robots.txt');
     expect(fs.existsSync(robotsPath)).toBe(true);
 
@@ -68,9 +68,23 @@ describe('SEO Component & Search Configuration', () => {
     expect(fs.existsSync(llmsPath)).toBe(true);
 
     const llmsContent = fs.readFileSync(llmsPath, 'utf-8');
-    expect(llmsContent).toContain('# Ariel Anders, PhD');
-    expect(llmsContent).toContain('https://arii.github.io/about');
-    expect(llmsContent).toContain('https://github.com/arii');
+    expect(llmsContent).toMatch(/^# Ariel Anders, PhD/m);
+    expect(llmsContent).toMatch(/^> /m);
+    expect(llmsContent).toContain('## Core Pages');
+    expect(llmsContent).toContain('## Agentic DevAI & Infrastructure');
+    expect(llmsContent).toContain('## Robotics & AI Research');
+    expect(llmsContent).toContain('## External Links & Profiles');
+    expect(llmsContent).toContain('## Optional');
+    expect(llmsContent).toContain('- [Home](https://arii.github.io/):');
+    expect(llmsContent).toContain('https://arii.github.io/llms-full.txt');
+
+    const llmsFullPath = path.resolve(__dirname, '../../public/llms-full.txt');
+    expect(fs.existsSync(llmsFullPath)).toBe(true);
+
+    const llmsFullContent = fs.readFileSync(llmsFullPath, 'utf-8');
+    expect(llmsFullContent).toContain('# Ariel Anders, PhD — Full Portfolio & Engineering Documentation');
+    expect(llmsFullContent).toContain('## Document: Automating PR Reviews with GitHub Actions, Gemini, and Boomtick DevAI (gitops-pr-reviewer)');
+    expect(llmsFullContent).toContain('## Document: Reliably Arranging Objects: A Conformant Planning Approach to Robot Manipulation (conformant-planning-manipulation)');
   });
 
   it('generates clean public/sitemap.xml containing active canonical routes without hashes or deprecated tags', () => {
