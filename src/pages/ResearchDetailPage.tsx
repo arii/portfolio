@@ -1,13 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import mermaid from 'mermaid';
 import { ArrowLeft, Calendar, Clock, Download, Video, Play, ExternalLink } from 'lucide-react';
 import { getResearchPostBySlug, RESEARCH_TOOLS } from '@/data/research';
 import { GithubIcon } from '@/components/SocialIcons';
 import SafeImage from '@/components/ui/SafeImage';
 import { Box, Stack } from '@/components/layout';
-import svgPanZoom from 'svg-pan-zoom';
 import SEO from '@/components/SEO';
 import { getTechArticleSchema, getScholarlyArticleSchema, getBreadcrumbSchema } from '@/utils/schema';
 
@@ -28,91 +26,102 @@ const MermaidChart = ({ codeString }: { codeString: string }) => {
       responsiveCodeString = responsiveCodeString.replace(/graph LR/g, 'graph TD').replace(/flowchart LR/g, 'flowchart TD');
     }
 
-    mermaid.initialize({
-      startOnLoad: false,
-      theme: 'dark',
-      themeVariables: {
-        fontFamily: 'Plus Jakarta Sans, system-ui, -apple-system, sans-serif',
-        primaryColor: '#1e293b',
-        primaryTextColor: '#f8fafc',
-        primaryBorderColor: '#38bdf8',
-        lineColor: '#94a3b8',
-        textColor: '#f8fafc',
-        nodeBorder: '#38bdf8',
-        mainBkg: 'transparent',
-        actorBkg: '#1e293b',
-        actorBorder: '#38bdf8',
-        actorTextColor: '#f8fafc',
-        actorLineColor: '#64748b',
-        signalColor: '#38bdf8',
-        signalTextColor: '#f8fafc',
-        labelBoxBkgColor: '#0f172a',
-        labelBoxBorderColor: '#334155',
-        labelTextColor: '#f8fafc',
-        noteBkgColor: '#0f172a',
-        noteBorderColor: '#38bdf8',
-        noteTextColor: '#f8fafc',
-        clusterBkg: '#0b0f19',
-        clusterBorder: '#334155',
-      },
-      securityLevel: 'loose', // Allows interactive click events
-      flowchart: {
-        useMaxWidth: false,
-        htmlLabels: true,
-        curve: 'linear',
-        padding: 36,
-      },
-      sequence: {
-        actorFontFamily: 'Plus Jakarta Sans, system-ui, -apple-system, sans-serif',
-        noteFontFamily: 'Plus Jakarta Sans, system-ui, -apple-system, sans-serif',
-        messageFontFamily: 'Plus Jakarta Sans, system-ui, -apple-system, sans-serif',
-        boxMargin: 16,
-        boxTextMargin: 8,
-        noteMargin: 12,
-        messageMargin: 10,
-        width: 170,
-        height: 65,
-        useMaxWidth: false,
-      }
-    });
+    let isCancelled = false;
 
     const renderDiagram = async () => {
-      if (ref.current) {
-        try {
-          // Generate a unique ID for the SVG
-          const id = `mermaid-${Math.random().toString(36).substr(2, 9)}`;
-          const { svg } = await mermaid.render(id, responsiveCodeString);
-          ref.current.innerHTML = svg;
+      if (!ref.current) return;
+      try {
+        const [{ default: mermaid }, { default: svgPanZoom }] = await Promise.all([
+          import('mermaid'),
+          import('svg-pan-zoom'),
+        ]);
 
-          // Find the injected SVG and apply pan-zoom
-          const svgElement = ref.current.querySelector('svg');
-          if (svgElement) {
-            // Apply standard dimensions so the container doesn't collapse
-            svgElement.style.maxWidth = '100%';
-            svgElement.style.height = 'auto';
-            svgElement.style.minHeight = '350px';
-            svgElement.style.overflow = 'visible';
+        if (isCancelled) return;
 
-            // Only initialize svg-pan-zoom on desktop viewports to avoid gesture conflicts on mobile
-            const isMobileView = window.innerWidth < 768;
-            if (!isMobileView) {
-              svgPanZoom(svgElement, {
-                zoomEnabled: true,
-                controlIconsEnabled: false,
-                fit: true,
-                center: true,
-                minZoom: 0.5,
-                maxZoom: 10
-              });
-            }
+        mermaid.initialize({
+          startOnLoad: false,
+          theme: 'dark',
+          themeVariables: {
+            fontFamily: 'Plus Jakarta Sans, system-ui, -apple-system, sans-serif',
+            primaryColor: '#1e293b',
+            primaryTextColor: '#f8fafc',
+            primaryBorderColor: '#38bdf8',
+            lineColor: '#94a3b8',
+            textColor: '#f8fafc',
+            nodeBorder: '#38bdf8',
+            mainBkg: 'transparent',
+            actorBkg: '#1e293b',
+            actorBorder: '#38bdf8',
+            actorTextColor: '#f8fafc',
+            actorLineColor: '#64748b',
+            signalColor: '#38bdf8',
+            signalTextColor: '#f8fafc',
+            labelBoxBkgColor: '#0f172a',
+            labelBoxBorderColor: '#334155',
+            labelTextColor: '#f8fafc',
+            noteBkgColor: '#0f172a',
+            noteBorderColor: '#38bdf8',
+            noteTextColor: '#f8fafc',
+            clusterBkg: '#0b0f19',
+            clusterBorder: '#334155',
+          },
+          securityLevel: 'loose', // Allows interactive click events
+          flowchart: {
+            useMaxWidth: false,
+            htmlLabels: true,
+            curve: 'linear',
+            padding: 36,
+          },
+          sequence: {
+            actorFontFamily: 'Plus Jakarta Sans, system-ui, -apple-system, sans-serif',
+            noteFontFamily: 'Plus Jakarta Sans, system-ui, -apple-system, sans-serif',
+            messageFontFamily: 'Plus Jakarta Sans, system-ui, -apple-system, sans-serif',
+            boxMargin: 16,
+            boxTextMargin: 8,
+            noteMargin: 12,
+            messageMargin: 10,
+            width: 170,
+            height: 65,
+            useMaxWidth: false,
+          },
+        });
+
+        const id = `mermaid-${Math.random().toString(36).substr(2, 9)}`;
+        const { svg } = await mermaid.render(id, responsiveCodeString);
+
+        if (isCancelled || !ref.current) return;
+        ref.current.innerHTML = svg;
+
+        // Find the injected SVG and apply pan-zoom
+        const svgElement = ref.current.querySelector('svg');
+        if (svgElement) {
+          svgElement.style.maxWidth = '100%';
+          svgElement.style.height = 'auto';
+          svgElement.style.minHeight = '350px';
+          svgElement.style.overflow = 'visible';
+
+          const isMobileView = window.innerWidth < 768;
+          if (!isMobileView) {
+            svgPanZoom(svgElement, {
+              zoomEnabled: true,
+              controlIconsEnabled: false,
+              fit: true,
+              center: true,
+              minZoom: 0.5,
+              maxZoom: 10,
+            });
           }
-        } catch (error) {
-          console.error("Mermaid rendering failed", error);
         }
+      } catch (error) {
+        console.error('Mermaid rendering failed', error);
       }
     };
 
     renderDiagram();
+
+    return () => {
+      isCancelled = true;
+    };
   }, [codeString]);
 
   return (

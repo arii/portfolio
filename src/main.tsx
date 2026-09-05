@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import App from '@/App';
 import Layout from '@/components/Layout';
 import Home from '@/pages/Home';
-import Research from '@/pages/Research';
-import DevAI from '@/pages/DevAI';
-import Resume from '@/pages/Resume';
-import About from '@/pages/About';
 import '@/index.css';
+
+const Research = lazy(() => import('@/pages/Research'));
+const DevAI = lazy(() => import('@/pages/DevAI'));
+const Resume = lazy(() => import('@/pages/Resume'));
+const About = lazy(() => import('@/pages/About'));
+
+const PageLoader = () => (
+  <div className="flex items-center justify-center min-h-[50vh]">
+    <div className="h-8 w-8 animate-spin rounded-full border-2 border-accent border-t-transparent" />
+  </div>
+);
 
 const getBasename = (): string => {
   return import.meta.env.BASE_URL || '/';
@@ -44,27 +51,51 @@ const routes = [
       },
       {
         path: 'about',
-        element: <About />,
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <About />
+          </Suspense>
+        ),
       },
       {
         path: 'devai',
-        element: <DevAI />,
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <DevAI />
+          </Suspense>
+        ),
       },
       {
         path: 'devai/:slug',
-        element: <DevAI />,
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <DevAI />
+          </Suspense>
+        ),
       },
       {
         path: 'research',
-        element: <Research />,
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <Research />
+          </Suspense>
+        ),
       },
       {
         path: 'research/:slug',
-        element: <Research />,
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <Research />
+          </Suspense>
+        ),
       },
       {
         path: 'resume',
-        element: <Resume />,
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <Resume />
+          </Suspense>
+        ),
       },
     ],
   },
