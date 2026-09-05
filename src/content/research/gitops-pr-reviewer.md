@@ -261,4 +261,4 @@ By consolidating the PR review orchestration into the **Boomtick DevAI Ecosystem
 3. Google Gemini generates structured JSON findings over complete context packets.
 4. Deterministic gatekeeper scripts apply GitHub review states without hallucination risks.
 
-All pipeline code, path resolution scripts (`scripts/resolve-cli.sh`), and GitHub Actions workflow triggers are publicly accessible in [arii/boomtick](https://github.com/arii/boomtick) and [arii/tech-dancer](https://github.com/arii/tech-dancer).
+All pipeline code, path resolution scripts (`scripts/resolve-cli.sh`), and GitHub Actions workflow triggers are publicly accessible in [arii/boomtick](https://github.com/arii/boomtick) and [arii/tech-dancer](https://github.com/arii/tech-dancer). For technical advisory or custom agentic CI integration, learn more about my [consulting on multi-agent architectures](https://arii.github.io/about) and developer tooling.

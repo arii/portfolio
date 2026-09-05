@@ -50,7 +50,7 @@ This failure was not isolated to lightweight models like `gpt-4o-mini`. Testing 
 
 ![GitHub Releases showing v7.0.0, confirming versions beyond v4 are stable](/images/studies/github-checkout-v7-release.webp)
 
-While Agentic DevAI increases engineering velocity, this incident highlights the critical need for deterministic, external validation when handling dynamic infrastructure dependencies.
+While Agentic DevAI increases engineering velocity, this incident highlights the critical need for deterministic, external validation when handling dynamic infrastructure dependencies. Learn more about my [agentic AI tooling consulting](https://arii.github.io/about) services for developer infrastructure.
 
 ## The Solution: VersionTruth Architecture
 

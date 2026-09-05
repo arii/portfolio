@@ -138,5 +138,48 @@ describe('SEO Component & Search Configuration', () => {
     ]);
     expect(breadcrumb['@type']).toBe('BreadcrumbList');
     expect(breadcrumb.itemListElement).toHaveLength(3);
+    expect(breadcrumb.itemListElement[0]).toEqual({
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: 'https://arii.github.io/',
+    });
+    expect(breadcrumb.itemListElement[1]).toEqual({
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Research',
+      item: 'https://arii.github.io/research',
+    });
+    expect(breadcrumb.itemListElement[2]).toEqual({
+      '@type': 'ListItem',
+      position: 3,
+      name: 'Conformant Planning',
+      item: 'https://arii.github.io/research/conformant-planning-manipulation',
+    });
+  });
+
+  it('verifies internal linking strategy targeting https://arii.github.io/about in portfolio articles', () => {
+    const researchDir = path.resolve(__dirname, '../../src/content/research');
+    const mdFiles = fs.readdirSync(researchDir).filter((file) => file.endsWith('.md'));
+
+    const internalLinks: Array<{ file: string; match: string; anchorText: string }> = [];
+
+    for (const file of mdFiles) {
+      const content = fs.readFileSync(path.join(researchDir, file), 'utf-8');
+      const regex = /\[([^\]]+)\]\((https:\/\/arii\.github\.io\/about|\/about)\)/g;
+      let match: RegExpExecArray | null;
+      while ((match = regex.exec(content)) !== null) {
+        internalLinks.push({
+          file,
+          anchorText: match[1],
+          match: match[0],
+        });
+      }
+    }
+
+    expect(internalLinks.length).toBeGreaterThan(0);
+    const anchorTexts = internalLinks.map((l) => l.anchorText);
+    expect(anchorTexts.some((text) => text.includes('consulting'))).toBe(true);
+    expect(anchorTexts.some((text) => text.includes('advisory'))).toBe(true);
   });
 });

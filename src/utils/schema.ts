@@ -303,11 +303,18 @@ export function getBreadcrumbSchema(items: BreadcrumbItem[]) {
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
-    itemListElement: items.map((item, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      name: item.name,
-      item: `${SITE_URL}${item.path.startsWith('/') ? item.path : `/${item.path}`}`,
-    })),
+    itemListElement: items.map((item, index) => {
+      let fullUrl = item.path;
+      if (!fullUrl.startsWith('http')) {
+        const normalizedPath = fullUrl.startsWith('/') ? fullUrl : `/${fullUrl}`;
+        fullUrl = `${SITE_URL}${normalizedPath === '/' ? '/' : normalizedPath}`;
+      }
+      return {
+        '@type': 'ListItem',
+        position: index + 1,
+        name: item.name,
+        item: fullUrl,
+      };
+    }),
   };
 }
