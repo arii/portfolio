@@ -1,3 +1,5 @@
+import { NAV_ITEMS } from '@/data/navigation';
+
 export const SITE_URL = 'https://arii.github.io';
 export const AUTHOR_NAME = 'Ariel Anders, PhD';
 export const AUTHOR_JOB_TITLE = 'Robotics & AI Consulting Engineer';
@@ -121,15 +123,7 @@ export function getOrganizationSchema() {
 }
 
 export function getSiteNavigationSchema() {
-  const navItems = [
-    { name: 'Overview', path: '/' },
-    { name: 'DevAI', path: '/devai' },
-    { name: 'Research', path: '/research' },
-    { name: 'Resume', path: '/resume' },
-    { name: 'About Ariel', path: '/about' },
-  ];
-
-  return navItems.map((item, index) => ({
+  return NAV_ITEMS.map((item, index) => ({
     '@type': 'SiteNavigationElement',
     '@id': `${SITE_URL}${item.path}#sitenav-${index + 1}`,
     position: index + 1,
