@@ -1,0 +1,1 @@
+const r=t=>{if(!t)return;if(t.startsWith("http://")||t.startsWith("https://")||t.startsWith("data:"))return t;const s="/portfolio/preview/pr-311/";if(t.startsWith(s))return t;const e=t.replace(/^\//,"");return s.endsWith("/")?`${s}${e}`:`${s}/${e}`};export{r};
