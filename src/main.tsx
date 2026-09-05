@@ -4,6 +4,7 @@ import { createBrowserRouter, Navigate } from 'react-router-dom';
 import App from '@/App';
 import Layout from '@/components/Layout';
 import Home from '@/pages/Home';
+import { Stack } from '@/components/layout';
 import '@/index.css';
 
 const Research = lazy(() => import('@/pages/Research'));
@@ -12,9 +13,9 @@ const Resume = lazy(() => import('@/pages/Resume'));
 const About = lazy(() => import('@/pages/About'));
 
 const PageLoader = () => (
-  <div className="flex items-center justify-center min-h-[50vh]">
+  <Stack align="center" justify="center" minH="50vh">
     <div className="h-8 w-8 animate-spin rounded-full border-2 border-accent border-t-transparent" />
-  </div>
+  </Stack>
 );
 
 const getBasename = (): string => {
