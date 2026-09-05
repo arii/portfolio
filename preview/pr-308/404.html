@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script>
+    (function() {
+      var path = window.location.pathname + window.location.search + window.location.hash;
+      sessionStorage.setItem('ghpages_redirect', path);
+    })();
+  </script>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/portfolio/preview/pr-308/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>AI &amp; Robotics Engineering Portfolio | Ariel Anders, PhD</title>
+    <meta
+      name="description"
+      content="Explore AI consulting, robotics software engineering, and autonomous systems research by Ariel Anders, PhD (MIT). View open-source tools and deep dives."
+    />
+    <link rel="canonical" href="https://arii.github.io/" />
+    <meta name="google-site-verification" content="FGbpuhF_c3YUFon1LzrzqmW1jvVPFygugss24n0wn5k" />
+
+    <!-- SPA redirect handling for GitHub Pages subpaths -->
+    <script>
+      (function(l) {
+        if (l.search[1] === '/' ) {
+          var decoded = l.search.slice(1).split('&').map(function(s) {
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          window.history.replaceState(null, null,
+              l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location));
+    </script>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:site_name" content="Ariel Anders Portfolio" />
+    <meta property="og:title" content="AI &amp; Robotics Engineering Portfolio | Ariel Anders, PhD" />
+    <meta
+      property="og:description"
+      content="Explore AI consulting, robotics software engineering, and autonomous systems research by Ariel Anders, PhD (MIT). View open-source tools and deep dives."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://arii.github.io/" />
+    <meta property="og:image" content="https://arii.github.io/assets/roboticist.jpg" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="AI &amp; Robotics Engineering Portfolio | Ariel Anders, PhD" />
+    <meta
+      name="twitter:description"
+      content="Explore AI consulting, robotics software engineering, and autonomous systems research by Ariel Anders, PhD (MIT). View open-source tools and deep dives."
+    />
+    <meta name="twitter:image" content="https://arii.github.io/assets/roboticist.jpg" />
+
+    <!-- Default JSON-LD Schema Fallback -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://arii.github.io/about#person",
+          "url": "https://arii.github.io/about",
+          "name": "Ariel Anders, PhD",
+          "jobTitle": "Robotics & AI Consulting Engineer",
+          "email": "anders.ariel@gmail.com",
+          "image": "https://arii.github.io/assets/roboticist.jpg",
+          "alumniOf": {
+            "@type": "EducationalOrganization",
+            "name": "Massachusetts Institute of Technology (MIT)",
+            "url": "https://www.mit.edu"
+          },
+          "knowsAbout": [
+            "Artificial Intelligence",
+            "Robotics Software Engineering",
+            "Autonomous Systems",
+            "Agentic Workflows",
+            "Motion Planning",
+            "Computer Vision"
+          ],
+          "sameAs": [
+            "https://www.linkedin.com/in/ariel-anders/",
+            "https://github.com/arii",
+            "https://scholar.google.com/citations?user=NM6SfiEAAAAJ&hl=en",
+            "https://boomtick.blog"
+          ]
+        },
+        {
+          "@type": "Service",
+          "@id": "https://arii.github.io/about#consulting-service",
+          "url": "https://arii.github.io/about",
+          "name": "Robotics & Multi-Agent AI Consulting",
+          "serviceType": "Technical & Engineering Consulting",
+          "description": "Advisory and architecture services bridging robotics, autonomous navigation, and agentic AI systems for software engineering teams.",
+          "provider": {
+            "@id": "https://arii.github.io/about#person"
+          },
+          "areaServed": [
+            {
+              "@type": "AdministrativeArea",
+              "name": "San Francisco Bay Area"
+            },
+            {
+              "@type": "Country",
+              "name": "United States"
+            }
+          ],
+          "audience": {
+            "@type": "Audience",
+            "audienceType": "Tech Startups, Engineering Leaders, Robotics Ventures"
+          },
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Consulting Services",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Autonomous Navigation & Motion Planning Architecture"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Multi-Agent AI Workflows & Developer Infrastructure"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script type="module" crossorigin src="/portfolio/preview/pr-308/assets/index-CsvSRXgo.js"></script>
+    <link rel="stylesheet" crossorigin href="/portfolio/preview/pr-308/assets/index-BS3TWVqn.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
