@@ -4,22 +4,20 @@ import { createBrowserRouter, Navigate } from 'react-router-dom';
 import App from '@/App';
 import Layout from '@/components/Layout';
 import Home from '@/pages/Home';
+import PageFallback from '@/components/ui/PageFallback';
 import { registerServiceWorker } from '@/registerServiceWorker';
-import { Stack } from '@/components/layout';
 import '@/index.css';
 
 registerServiceWorker();
 
-const Research = lazy(() => import('@/pages/Research'));
-const DevAI = lazy(() => import('@/pages/DevAI'));
-const Resume = lazy(() => import('@/pages/Resume'));
-const About = lazy(() => import('@/pages/About'));
-
-const PageLoader = () => (
-  <Stack align="center" justify="center" minH="50vh">
-    <div className="h-8 w-8 animate-spin rounded-full border-2 border-accent border-t-transparent" />
-  </Stack>
-);
+const lazyLoad = (importFn: () => Promise<{ default: React.ComponentType<any> }>) => {
+  const Component = lazy(importFn);
+  return (
+    <Suspense fallback={<PageFallback />}>
+      <Component />
+    </Suspense>
+  );
+};
 
 const getBasename = (): string => {
   return import.meta.env.BASE_URL || '/';
@@ -55,51 +53,27 @@ const routes = [
       },
       {
         path: 'about',
-        element: (
-          <Suspense fallback={<PageLoader />}>
-            <About />
-          </Suspense>
-        ),
+        element: lazyLoad(() => import('@/pages/About')),
       },
       {
         path: 'devai',
-        element: (
-          <Suspense fallback={<PageLoader />}>
-            <DevAI />
-          </Suspense>
-        ),
+        element: lazyLoad(() => import('@/pages/DevAI')),
       },
       {
         path: 'devai/:slug',
-        element: (
-          <Suspense fallback={<PageLoader />}>
-            <DevAI />
-          </Suspense>
-        ),
+        element: lazyLoad(() => import('@/pages/DevAI')),
       },
       {
         path: 'research',
-        element: (
-          <Suspense fallback={<PageLoader />}>
-            <Research />
-          </Suspense>
-        ),
+        element: lazyLoad(() => import('@/pages/Research')),
       },
       {
         path: 'research/:slug',
-        element: (
-          <Suspense fallback={<PageLoader />}>
-            <Research />
-          </Suspense>
-        ),
+        element: lazyLoad(() => import('@/pages/Research')),
       },
       {
         path: 'resume',
-        element: (
-          <Suspense fallback={<PageLoader />}>
-            <Resume />
-          </Suspense>
-        ),
+        element: lazyLoad(() => import('@/pages/Resume')),
       },
     ],
   },
