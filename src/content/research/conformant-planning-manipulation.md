@@ -14,7 +14,7 @@ summary: "My MIT CSAIL PhD dissertation on conformant planning for robot manipul
 
 ## Overview
 
-This research forms the core of my PhD dissertation at **MIT CSAIL**, advised by **Prof. Leslie Pack Kaelbling** and **Prof. Tomás Lozano-Pérez**, with committee member **Prof. Sertac Karaman**. My work enables general-purpose helper robots to reliably arrange unanchored objects into desired target configurations despite severe pose uncertainty caused by inaccurate sensing, control errors, and unknown physical friction.
+This research forms the core of my PhD dissertation at **MIT CSAIL**, advised by **Prof. Leslie Pack Kaelbling** and **Prof. Tomás Lozano-Pérez**, with committee member **Prof. Sertac Karaman**. My work enables general-purpose helper robots to reliably arrange unanchored objects into desired target configurations despite severe pose uncertainty caused by inaccurate sensing, control errors, and unknown physical friction. If you are developing physical automation systems and seeking [autonomous systems advisory](https://arii.github.io/about), explore my consulting background and engineering experience.
 
 [![Figure 1: Willow Garage PR2 robot performing physical conformant manipulation to arrange blocks into tight arrangements under pose uncertainty without visual feedback. | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=omdHFeBBYZ0#no-embed](/assets/research/phd/icra_presentation.gif#max-w-2xl)](https://www.youtube.com/watch?v=omdHFeBBYZ0#no-embed)
 
