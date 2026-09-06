@@ -1,0 +1,48 @@
+# Ariel Anders, PhD — AI & Robotics Engineering Portfolio
+
+> Ariel Anders, PhD (MIT CSAIL) is a Senior Roboticist, AI Consulting Engineer, and Senior Software Engineer based in San Francisco, CA, specializing in Agentic DevAI infrastructure, stateful LLM orchestration, ROS 2, conformant belief-state robot manipulation, and autonomous systems.
+
+## Core Pages
+
+- [Home](https://arii.github.io/): Main portfolio landing page highlighting core domain pillars, flagship DevAI tools, and robotics research.
+- [About & Bio](https://arii.github.io/about): Career background, doctoral research at MIT CSAIL, industry leadership, and consulting services.
+- [Agentic DevAI Projects](https://arii.github.io/devai): Showcase of stateful multi-agent developer workflows, MCP servers, CI/CD guardrails, and AI code reviewing infrastructure.
+- [Robotics Research](https://arii.github.io/research): Comprehensive PhD/Master's thesis research, peer-reviewed publications, motion planning under uncertainty, and hardware projects.
+- [Technical Resume](https://arii.github.io/resume): Interactive career experience, publication record, technical skills, and downloadable PDF resume.
+
+## Agentic DevAI & Infrastructure
+
+- [GitOps PR Reviewer](https://arii.github.io/devai/gitops-pr-reviewer): Multi-agent AI pull request reviewer with automated static analysis, security auditing, and rule enforcement guardrails.
+- [VersionTruth](https://arii.github.io/devai/versiontruth): Automated dependency synchronization, lockfile validation, and security audit verification tool for Node and Python ecosystems.
+- [Deployment Impact Analyzer](https://arii.github.io/devai/deployment-impact-analyzer): Multi-model DOM and visual diff engine for detecting layout regressions in pull requests before deployment.
+- [HRM Architecture](https://arii.github.io/devai/hrm-architecture): Hierarchical Reasoning & Memory framework for long-running agentic LLM context management and tool execution.
+- [AI Experiments](https://arii.github.io/devai/ai-experiments): Exploration of stateful agent execution, prompt engineering patterns, and autonomous agent loops.
+
+## Robotics & AI Research
+
+- [Conformant Planning for Manipulation](https://arii.github.io/research/conformant-planning-manipulation): Doctoral thesis research at MIT CSAIL on conformant planning under actuation and sensing uncertainty without full state feedback.
+- [Whole-Arm Grasping](https://arii.github.io/research/masters-thesis): Master's thesis on tactile-driven whole-arm grasping and manipulation strategies.
+- [Duckietown](https://arii.github.io/research/duckietown): Open-source education platform and vision-based autonomous driving navigation research.
+- [BWSI Racecar](https://arii.github.io/research/bwsi-racecar): High-speed autonomous navigation platform with LiDAR and visual odometry integration.
+- [LEAC Monitoring Software](https://arii.github.io/research/leac-monitoring-software): Real-time telemetry monitoring and diagnostic system for autonomous experimental setups.
+- [Boop Light Detector](https://arii.github.io/research/boop-light-detector): Visual detection and tracking system for optical calibration and robot feedback loops.
+
+## Academic & Hardware Projects
+
+- [Graduate Engineering Projects](https://arii.github.io/research/graduate-engineering-projects): Portfolio of advanced graduate course projects in robotics, embedded systems, and control.
+- [Undergraduate Projects](https://arii.github.io/research/undergraduate-projects): Portfolio of undergraduate mechatronics, circuits, and robotics projects at UC Berkeley.
+- [Delivery Bots](https://arii.github.io/research/delivery-bots): Autonomous indoor delivery robot navigation and fleet orchestration.
+- [Light Therapy MIT](https://arii.github.io/research/light-therapy-mit): Biomedical optics and light therapy hardware research developed at MIT.
+- [CAD/CAM Dental Workflow](https://arii.github.io/research/cad-cam-dental-workflow): Automated 3D modeling and toolpath planning for custom dental prosthetics.
+- [Robocon MIT](https://arii.github.io/research/robocon-mit): Autonomous robot competition hardware and control software architecture.
+
+## External Links & Profiles
+
+- [GitHub Profile](https://github.com/arii): Open-source repositories, developer tools, and code contributions.
+- [LinkedIn Profile](https://www.linkedin.com/in/ariel-anders/): Professional experience, career updates, and industry connections.
+- [Google Scholar](https://scholar.google.com/citations?user=NM6SfiEAAAAJ&hl=en): Citation record and peer-reviewed academic publications.
+- [BoomTick Blog](https://boomtick.blog): Technical articles, engineering deep-dives, and insights on AI and robotics.
+
+## Optional
+
+- [Full Portfolio Content (llms-full.txt)](https://arii.github.io/llms-full.txt): Complete Markdown text aggregation of all research articles, project deep-dives, and portfolio documentation for LLM context ingestion.
