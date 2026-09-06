@@ -11,7 +11,7 @@ export function parseFrontmatter(content: string) {
 
   try {
     const data = parse(yamlStr);
-    return { data: (data && typeof data === 'object') ? data : {}, content: body };
+    return { data: data && typeof data === 'object' ? data : {}, content: body };
   } catch (e) {
     console.error('Error parsing frontmatter:', e);
     return { data: {}, content: body };
