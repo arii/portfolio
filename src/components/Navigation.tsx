@@ -1,19 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Layers, Activity, User, FileText } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { heroContent } from '@/data/home';
+import { NAV_ITEMS } from '@/data/navigation';
 
 const Navigation: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
-
-  const navLinks = [
-    { name: 'Overview', path: '/', icon: Activity },
-    { name: 'DevAI', path: '/devai', icon: Layers },
-    { name: 'Research', path: '/research', icon: Layers },
-    { name: 'Resume', path: '/resume', icon: FileText },
-    { name: 'About Ariel', path: '/about', icon: User },
-  ];
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -55,7 +48,7 @@ const Navigation: React.FC = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex md:items-center gap-3">
-            {navLinks.map((link) => {
+            {NAV_ITEMS.map((link) => {
               const Icon = link.icon;
               const active = isActive(link.path);
               return (
@@ -68,7 +61,7 @@ const Navigation: React.FC = () => {
                       : 'text-text-dim hover:bg-muted hover:text-foreground'
                   }`}
                 >
-                  <Icon className="h-4 w-4" />
+                  {Icon && <Icon className="h-4 w-4" />}
                   <span>{link.name}</span>
                 </Link>
               );
@@ -113,7 +106,7 @@ const Navigation: React.FC = () => {
               </div>
 
               <div className="flex flex-col space-y-2">
-                {navLinks.map((link) => {
+                {NAV_ITEMS.map((link) => {
                   const Icon = link.icon;
                   const active = isActive(link.path);
                   return (
@@ -127,7 +120,7 @@ const Navigation: React.FC = () => {
                           : 'text-text-body hover:bg-surface hover:text-text-main'
                       }`}
                     >
-                      <Icon className="h-5 w-5" />
+                      {Icon && <Icon className="h-5 w-5" />}
                       <span>{link.name}</span>
                     </Link>
                   );

@@ -1,6 +1,7 @@
 import React from 'react';
 import { MapPin, GraduationCap, Award, LucideIcon } from 'lucide-react';
 import { MailIcon, LinkedinIcon, GithubIcon, BoomTickIcon, ScholarIcon } from '@/components/SocialIcons';
+import { FAQItem } from '@/utils/schema';
 
 export interface ProfileDetail {
   label: string;
@@ -22,6 +23,7 @@ export interface ProfileData {
   details: ProfileDetail[];
   availability: string;
   highlights: HighlightItem[];
+  faqs: FAQItem[];
   socials: { label: string; url: string; icon: React.FC<{ className?: string }> }[];
 }
 
@@ -85,6 +87,23 @@ export const profileData: ProfileData = {
       title: "Civ Robotics",
       detail: "Navigation & localization for autonomous forklifts (C++, Python, ROS 2)."
     }
+  ],
+  faqs: [
+    {
+      question: 'What types of AI and robotics consulting services do you offer?',
+      answer:
+        'I provide technical advisory and engineering consulting across autonomous motion planning, ROS 2 navigation architectures, multi-agent AI workflows, developer tooling, and custom agentic infrastructure for tech ventures.',
+    },
+    {
+      question: 'What is your research background in robotics and AI?',
+      answer:
+        'I earned my PhD and Master of Science from MIT CSAIL in Electrical Engineering and Computer Science, specializing in conformant planning under sensing and actuation uncertainty, whole-arm grasping, and physics-based models.',
+    },
+    {
+      question: 'Are you available for contract, advisory, or full-time roles?',
+      answer:
+        'Yes, I am available for Staff/Senior SWE roles, specialized robotics engineering contracts, and multi-agent DevAI advisory engagements in the San Francisco Bay Area and remote.',
+    },
   ],
   socials: [
     { label: "Email", url: "mailto:anders.ariel@gmail.com", icon: MailIcon },

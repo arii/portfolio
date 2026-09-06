@@ -4,10 +4,15 @@ import { profileData } from '@/data/aboutData';
 import { CareerHighlightsSection, AtAGlanceSidebar } from '@/components/about/AboutSections';
 import { resolveAssetUrl } from '@/utils/asset';
 import SEO from '@/components/SEO';
-import { getPersonAndProfileSchema, getServiceSchema } from '@/utils/schema';
+import { getPersonAndProfileSchema, getServiceSchema, getFAQSchema } from '@/utils/schema';
+import { Box, Stack } from '@/components/layout';
 
 const About: React.FC = () => {
-  const aboutSchemas = [getPersonAndProfileSchema('/about'), getServiceSchema()];
+  const aboutSchemas = [
+    getPersonAndProfileSchema('/about'),
+    getServiceSchema(),
+    getFAQSchema(profileData.faqs),
+  ];
 
   return (
     <div className="space-y-8 sm:space-y-12">
@@ -57,6 +62,25 @@ const About: React.FC = () => {
           </div>
 
           <CareerHighlightsSection highlights={profileData.highlights} />
+
+          {/* FAQ Section for Rich Search Snippets */}
+          <Box className="bg-surface p-6 sm:p-8 rounded-3xl border border-line">
+            <h2 className="text-xl sm:text-2xl font-bold text-text-main pb-3 border-b border-line/30 mb-6">
+              Frequently Asked Questions
+            </h2>
+            <Stack className="space-y-6">
+              {profileData.faqs.map((faq, index) => (
+                <Box key={index} className="space-y-2">
+                  <h3 className="text-base font-bold text-text-main">
+                    {faq.question}
+                  </h3>
+                  <p className="text-sm text-text-body leading-relaxed">
+                    {faq.answer}
+                  </p>
+                </Box>
+              ))}
+            </Stack>
+          </Box>
         </section>
 
         <aside className="lg:col-span-4 space-y-6 sm:space-y-8 order-1 lg:order-2">

@@ -7,7 +7,13 @@ import { GithubIcon } from '@/components/SocialIcons';
 import SafeImage from '@/components/ui/SafeImage';
 import { Box, Stack } from '@/components/layout';
 import SEO from '@/components/SEO';
-import { getTechArticleSchema, getScholarlyArticleSchema, getBreadcrumbSchema } from '@/utils/schema';
+import {
+  getTechArticleSchema,
+  getScholarlyArticleSchema,
+  getBreadcrumbSchema,
+  getVideoObjectSchema,
+} from '@/utils/schema';
+import { parseVideoUrl, extractVideoUrlsFromMarkdown } from '@/utils/video';
 
 export interface ResearchDetailPageProps {
   slug: string;
@@ -354,7 +360,43 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
     { name: post.title, path: `/${primarySection}/${post.slug}` },
   ]);
 
-  const detailSchemas = [articleSchema, breadcrumbSchema];
+  const videoSchemas = [];
+  if (matchingTool?.videoUrl) {
+    const rawUrl = matchingTool.videoUrl;
+    const parsed = parseVideoUrl(rawUrl);
+    videoSchemas.push(
+      getVideoObjectSchema({
+        name: `${post.title} - Demonstration Video`,
+        description: post.summary,
+        contentUrl: rawUrl,
+        embedUrl: parsed.embedUrl || rawUrl,
+        thumbnailUrl: parsed.thumbnailUrl || ogImage,
+        uploadDate: post.date,
+      })
+    );
+  } else {
+    // Check if post content has youtube links
+    const ytLinks = extractVideoUrlsFromMarkdown(post.content);
+    if (ytLinks.length > 0) {
+      ytLinks.slice(0, 3).forEach((link, idx) => {
+        const parsed = parseVideoUrl(link);
+        if (parsed.embedUrl) {
+          videoSchemas.push(
+            getVideoObjectSchema({
+              name: `${post.title} - Video Clip ${idx + 1}`,
+              description: post.summary,
+              contentUrl: link,
+              embedUrl: parsed.embedUrl,
+              thumbnailUrl: parsed.thumbnailUrl || ogImage,
+              uploadDate: post.date,
+            })
+          );
+        }
+      });
+    }
+  }
+
+  const detailSchemas = [articleSchema, breadcrumbSchema, ...videoSchemas];
 
   return (
     <article className="mx-auto max-w-4xl px-4 py-12 space-y-8">
@@ -579,26 +621,15 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
                 const isNoEmbed = href.includes('no-embed');
                 const cleanHref = href.replace(/[?#]no-embed/, '');
 
-                // Extract video ID or playlist ID
-                let embedUrl: string | null = null;
-                const ytMatch = cleanHref.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
-                const listMatch = cleanHref.match(/youtube\.com\/.*[?&]list=([a-zA-Z0-9_-]+)/);
-
-                if (ytMatch) {
-                  embedUrl = `https://www.youtube.com/embed/${ytMatch[1]}${listMatch ? `?list=${listMatch[1]}` : ''}`;
-                } else if (listMatch) {
-                  embedUrl = `https://www.youtube.com/embed/videoseries?list=${listMatch[1]}`;
-                }
-
-                // If children is an image (thumbnail preview) or link text asking to play video
+                const parsed = parseVideoUrl(cleanHref);
                 const isEmbedLink = (cleanHref.includes('youtube.com') || cleanHref.includes('youtu.be')) && !isNoEmbed;
 
-                if (embedUrl && isEmbedLink) {
+                if (parsed.embedUrl && isEmbedLink) {
                   return (
                     <div className="block space-y-2">
                       <div className="relative aspect-video w-full rounded-2xl overflow-hidden border border-line bg-surface shadow-md">
                         <iframe
-                          src={embedUrl}
+                          src={parsed.embedUrl}
                           title={typeof children === 'string' ? children : 'YouTube video player'}
                           className="absolute top-0 left-0 w-full h-full border-0"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
