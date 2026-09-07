@@ -6,7 +6,12 @@ import FlagshipCard from '@/components/FlagshipCard';
 import ImageLightbox from '@/components/ImageLightbox';
 import { Layers } from 'lucide-react';
 import SEO from '@/components/SEO';
-import { getPersonAndProfileSchema, getServiceSchema, getSoftwareSchema } from '@/utils/schema';
+import {
+  getPersonAndProfileSchema,
+  getServiceSchema,
+  getSoftwareSchema,
+  getCollectionPageSchema,
+} from '@/utils/schema';
 
 export interface DevAIListPageProps {
   onNavigate: (slug: string) => void;
@@ -68,8 +73,30 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
         codeRepository: tool.sourceUrl,
       })
     );
-    return [getPersonAndProfileSchema('/devai'), getServiceSchema(), ...softwareSchemas];
-  }, [flagshipTools]);
+
+    const collectionItems = [
+      ...flagshipTools.map((t) => ({
+        name: t.title,
+        description: t.description,
+        url: t.canonicalPath || `/devai/${t.id}`,
+        image: t.image,
+      })),
+      ...filteredPosts.map((p) => ({
+        name: p.title,
+        description: p.summary,
+        url: `/devai/${p.slug}`,
+      })),
+    ];
+
+    const collectionSchema = getCollectionPageSchema({
+      name: 'DevAI & Agentic Automation Systems',
+      description: 'System architectures, agentic CI/CD pipelines, autonomous developer tooling, and shipped production applications.',
+      canonicalPath: '/devai',
+      items: collectionItems,
+    });
+
+    return [getPersonAndProfileSchema('/devai'), getServiceSchema(), collectionSchema, ...softwareSchemas];
+  }, [flagshipTools, filteredPosts]);
 
   return (
     <div className="space-y-12 sm:space-y-16">

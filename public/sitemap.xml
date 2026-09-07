@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://arii.github.io/</loc>
     <lastmod>2026-09-07</lastmod>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/roboticist.jpg</image:loc>
+      <image:title>Ariel Anders, PhD - AI &amp; Robotics Engineer</image:title>
+      <image:caption>Ariel Anders, PhD in Electrical Engineering and Computer Science from MIT CSAIL.</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
   </url>
   <url>
     <loc>https://arii.github.io/devai</loc>
@@ -15,6 +23,12 @@
   <url>
     <loc>https://arii.github.io/about</loc>
     <lastmod>2026-09-07</lastmod>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/roboticist.jpg</image:loc>
+      <image:title>Ariel Anders, PhD - AI &amp; Robotics Engineer</image:title>
+      <image:caption>Ariel Anders, PhD in Electrical Engineering and Computer Science from MIT CSAIL.</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
   </url>
   <url>
     <loc>https://arii.github.io/resume</loc>
@@ -23,69 +37,615 @@
   <url>
     <loc>https://arii.github.io/devai/ai-experiments</loc>
     <lastmod>2026-08-15</lastmod>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/ai-experiments/wcs-scraper.png</image:loc>
+      <image:title>AI Experiments (In Progress)</image:title>
+      <image:caption>WCS Telemetry Scraper execution console and schema validation interface</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/ai-experiments/ecommerce-automation.png</image:loc>
+      <image:title>AI Experiments (In Progress)</image:title>
+      <image:caption>Printful REST API integration console showing automated variant mapping and catalog synchronization</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/ai-experiments/blog-drafter.png</image:loc>
+      <image:title>AI Experiments (In Progress)</image:title>
+      <image:caption>AI Blog Drafter prompt generation and contextual vector retrieval interface</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
   </url>
   <url>
     <loc>https://arii.github.io/devai/boop-light-detector</loc>
     <lastmod>2016-08-10</lastmod>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/app_testing.jpg</image:loc>
+      <image:title>Boop Light Detector App</image:title>
+      <image:caption>Boop Light Detector app testing during development and user trials</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
   </url>
   <url>
     <loc>https://arii.github.io/devai/bwsi-racecar</loc>
     <lastmod>2018-07-01</lastmod>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/bw.jpg</image:loc>
+      <image:title>BeaverWorks Summer Institute (RACECAR)</image:title>
+      <image:caption>BeaverWorks RACECAR students and autonomous vehicles</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/bwsi-racecar/lecture_planning.gif</image:loc>
+      <image:title>BeaverWorks Summer Institute (RACECAR)</image:title>
+      <image:caption>Motion Planning Lecture Demonstration</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/bwsi-racecar/lecture_visual_servoing.gif</image:loc>
+      <image:title>BeaverWorks Summer Institute (RACECAR)</image:title>
+      <image:caption>Visual Servoing Lecture Demonstration</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/bwsi-racecar/racecar_behaviors.gif</image:loc>
+      <image:title>BeaverWorks Summer Institute (RACECAR)</image:title>
+      <image:caption>Autonomous Navigation &amp; Visual Servoing Behaviors</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/bwsi-racecar/racecar_students.gif</image:loc>
+      <image:title>BeaverWorks Summer Institute (RACECAR)</image:title>
+      <image:caption>Student Cone Tracking Visual Servoing Demo</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/bwsi-racecar/racecar_main.gif</image:loc>
+      <image:title>BeaverWorks Summer Institute (RACECAR)</image:title>
+      <image:caption>Main RACECAR Challenge Demonstration</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
   </url>
   <url>
     <loc>https://arii.github.io/research/cad-cam-dental-workflow</loc>
     <lastmod>2014-06-01</lastmod>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/dental.jpg</image:loc>
+      <image:title>CAD/CAM Robotic Dental Crowning Workflow</image:title>
+      <image:caption>CAD/CAM Robotic Dental Crowning Setup</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/dental/dental_robotics-000.png</image:loc>
+      <image:title>CAD/CAM Robotic Dental Crowning Workflow</image:title>
+      <image:caption>Robotic Dental System Architecture</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/dental/dental_robotics-001.png</image:loc>
+      <image:title>CAD/CAM Robotic Dental Crowning Workflow</image:title>
+      <image:caption>Coordinate Frame Mapping</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/dental/dental_robotics-002.png</image:loc>
+      <image:title>CAD/CAM Robotic Dental Crowning Workflow</image:title>
+      <image:caption>Transform Chain Flowchart</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/dental/dental_robotics-008.png</image:loc>
+      <image:title>CAD/CAM Robotic Dental Crowning Workflow</image:title>
+      <image:caption>Implant Target Frame Transformation</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/dental/dental_robotics-003.png</image:loc>
+      <image:title>CAD/CAM Robotic Dental Crowning Workflow</image:title>
+      <image:caption>Closed Loop Controller Architecture</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/dental/dental_robotics-004.png</image:loc>
+      <image:title>CAD/CAM Robotic Dental Crowning Workflow</image:title>
+      <image:caption>Real-time Tracking Control Software UI</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/dental/dental_robotics-006.png</image:loc>
+      <image:title>CAD/CAM Robotic Dental Crowning Workflow</image:title>
+      <image:caption>Positional Tracking Error Plot</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/dental/dental_robotics-007.png</image:loc>
+      <image:title>CAD/CAM Robotic Dental Crowning Workflow</image:title>
+      <image:caption>Drill Tip Alignment Accuracy Plot</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/dental/dental_robotics.gif</image:loc>
+      <image:title>CAD/CAM Robotic Dental Crowning Workflow</image:title>
+      <image:caption>Dental Robotics Demonstration Video</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
   </url>
   <url>
     <loc>https://arii.github.io/research/conformant-planning-manipulation</loc>
     <lastmod>2021-05-20</lastmod>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/phd/icra_presentation.gif</image:loc>
+      <image:title>Reliably Arranging Objects: A Conformant Planning Approach to Robot Manipulation</image:title>
+      <image:caption>Figure 1: Willow Garage PR2 robot performing physical conformant manipulation to arrange blocks into tight arrangements under pose uncertainty without visual feedback.</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/phd/conformant_demo.gif</image:loc>
+      <image:title>Reliably Arranging Objects: A Conformant Planning Approach to Robot Manipulation</image:title>
+      <image:caption>Figure 2: ICRA 2018 paper presentation and conference spotlight breakdown.</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/phd/belief_1.gif</image:loc>
+      <image:title>Reliably Arranging Objects: A Conformant Planning Approach to Robot Manipulation</image:title>
+      <image:caption>Nominal Trajectory: Plan Improvement with Fixture Placement</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/phd/belief_2.gif</image:loc>
+      <image:title>Reliably Arranging Objects: A Conformant Planning Approach to Robot Manipulation</image:title>
+      <image:caption>Failure Mode: Open-Loop Drift Under Uncertainty</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/phd/refinement.gif</image:loc>
+      <image:title>Reliably Arranging Objects: A Conformant Planning Approach to Robot Manipulation</image:title>
+      <image:caption>Robust Execution: Passive Mechanical Funneling via Fixture Placement</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/phd/sliding_2.gif</image:loc>
+      <image:title>Reliably Arranging Objects: A Conformant Planning Approach to Robot Manipulation</image:title>
+      <image:caption>The initial object placement uncertainty for the PR2 robot was modeled as ±0.2 inches in both x and y coordinates and ±15 degrees in rotation based on physical experiment data</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/phd/sixblock.png</image:loc>
+      <image:title>Reliably Arranging Objects: A Conformant Planning Approach to Robot Manipulation</image:title>
+      <image:caption>Six block arrangement task on PR2</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/phd/sliding_1.gif</image:loc>
+      <image:title>Reliably Arranging Objects: A Conformant Planning Approach to Robot Manipulation</image:title>
+      <image:caption>Belief State Overlay Visualization</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/phd/noise_model.gif</image:loc>
+      <image:title>Reliably Arranging Objects: A Conformant Planning Approach to Robot Manipulation</image:title>
+      <image:caption>Table and Board Relative Localization Pipeline</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/phd/eric.png</image:loc>
+      <image:title>Reliably Arranging Objects: A Conformant Planning Approach to Robot Manipulation</image:title>
+      <image:caption>Eric the Robot Thesis Mascot</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/phd/eric2.png</image:loc>
+      <image:title>Reliably Arranging Objects: A Conformant Planning Approach to Robot Manipulation</image:title>
+      <image:caption>Blindfolded Eric mascot illustrating sensorless manipulation</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/phd/eric1.png</image:loc>
+      <image:title>Reliably Arranging Objects: A Conformant Planning Approach to Robot Manipulation</image:title>
+      <image:caption>Picketing Eric mascot illustrating open-loop failure modes</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
   </url>
   <url>
     <loc>https://arii.github.io/devai/delivery-bots</loc>
     <lastmod>2015-07-12</lastmod>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/beer.png</image:loc>
+      <image:title>Delivery Bots: Multi-Robot Coordination under Uncertainty</image:title>
+      <image:caption>Autonomous Delivery Bot Transporting Item</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/delivery-bots/coordination.gif</image:loc>
+      <image:title>Delivery Bots: Multi-Robot Coordination under Uncertainty</image:title>
+      <image:caption>Decentralized Beerbot Delivery Coordination</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
   </url>
   <url>
     <loc>https://arii.github.io/devai/deployment-impact-analyzer</loc>
     <lastmod>2026-06-19</lastmod>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/studies/deployment-impact-analyzer/before.svg</image:loc>
+      <image:title>Visual Impact / UX Audit</image:title>
+      <image:caption>Baseline</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/studies/deployment-impact-analyzer/after.svg</image:loc>
+      <image:title>Visual Impact / UX Audit</image:title>
+      <image:caption>Current</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/studies/deployment-impact-analyzer/diff.svg</image:loc>
+      <image:title>Visual Impact / UX Audit</image:title>
+      <image:caption>Visual Delta</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/studies/deployment-impact-analyzer/before-mobile.svg</image:loc>
+      <image:title>Visual Impact / UX Audit</image:title>
+      <image:caption>404 Error</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/studies/deployment-impact-analyzer/diff-mobile.svg</image:loc>
+      <image:title>Visual Impact / UX Audit</image:title>
+      <image:caption>Regression Delta</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/studies/deployment-impact-analyzer/after-mobile.svg</image:loc>
+      <image:title>Visual Impact / UX Audit</image:title>
+      <image:caption>Resolution</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
   </url>
   <url>
     <loc>https://arii.github.io/research/duckietown</loc>
     <lastmod>2016-05-01</lastmod>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/duckietown/navigation_1.gif</image:loc>
+      <image:title>MIT Duckietown (Autonomous Taxi Fleet)</image:title>
+      <image:caption>Duckietown Autonomous Driving Demonstration 1</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/duckietown.jpg</image:loc>
+      <image:title>MIT Duckietown (Autonomous Taxi Fleet)</image:title>
+      <image:caption>Inaugural MIT 2.166 Duckietown Class</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/duckietown/oreo_wheelie.gif</image:loc>
+      <image:title>MIT Duckietown (Autonomous Taxi Fleet)</image:title>
+      <image:caption>First Functional Build Verification (Oreo)</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/duckietown/navigation_2.gif</image:loc>
+      <image:title>MIT Duckietown (Autonomous Taxi Fleet)</image:title>
+      <image:caption>Standalone Obstacle Isolation</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
   </url>
   <url>
     <loc>https://arii.github.io/devai/gitops-pr-reviewer</loc>
     <lastmod>2026-05-10</lastmod>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/boomtick-devai-tools/boomtick-arch.png</image:loc>
+      <image:title>Automating PR Reviews with GitHub Actions, Gemini, and Boomtick DevAI</image:title>
+      <image:caption>Boomtick Ecosystem Architecture Overview</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/boomtick-devai-tools/boomtick-mcp-desktop.png</image:loc>
+      <image:title>Automating PR Reviews with GitHub Actions, Gemini, and Boomtick DevAI</image:title>
+      <image:caption>Boomtick MCP Integration in Desktop Client</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/boomtick-devai-tools/boomtick-cli-audit.png</image:loc>
+      <image:title>Automating PR Reviews with GitHub Actions, Gemini, and Boomtick DevAI</image:title>
+      <image:caption>td-cli Terminal Execution and Health Check</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/gitops-pr-reviewer-comment.png</image:loc>
+      <image:title>Automating PR Reviews with GitHub Actions, Gemini, and Boomtick DevAI</image:title>
+      <image:caption>Automated Pull Request Code Review Feedback</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
   </url>
   <url>
     <loc>https://arii.github.io/research/graduate-engineering-projects</loc>
     <lastmod>2015-12-05</lastmod>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/drone_follow.gif</image:loc>
+      <image:title>Graduate Engineering Projects</image:title>
+      <image:caption>Rolling Spider micro-drone executing closed-loop visual path tracking along yellow floor-marked trajectories.</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/report-ml-lis/fig1_score_discrepancy.png</image:loc>
+      <image:title>Graduate Engineering Projects</image:title>
+      <image:caption>Distance discrepancy decay functions evaluated to transform spatial offsets into bounding box confidence scores.</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/report-ml-lis/fig2_ranking_performance.png</image:loc>
+      <image:title>Graduate Engineering Projects</image:title>
+      <image:caption>Performance evaluation showing how our learned weight vectors successfully improve high-precision bounding box candidate scores.</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/report-6375-rsa/rsa_hardware_architecture.png</image:loc>
+      <image:title>Graduate Engineering Projects</image:title>
+      <image:caption>System architecture of the RSA accelerator showing memory interface, control rule state machines, and modular exponentiation datapath.</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/report-6375-rsa/montgomery_multiplier_datapath.png</image:loc>
+      <image:title>Graduate Engineering Projects</image:title>
+      <image:caption>Pipelined Montgomery modular multiplication unit designed for high-throughput integer exponentiation.</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
   </url>
   <url>
     <loc>https://arii.github.io/devai/hrm-architecture</loc>
     <lastmod>2026-05-01</lastmod>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/hrm/evolve1.webp</image:loc>
+      <image:title>HRM: Real-Time Biometric Telemetry &amp; Distributed Workout Synchronization</image:title>
+      <image:caption>Iteration 1</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/hrm/evolve2.webp</image:loc>
+      <image:title>HRM: Real-Time Biometric Telemetry &amp; Distributed Workout Synchronization</image:title>
+      <image:caption>Iteration 2</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/hrm/evolve3.webp</image:loc>
+      <image:title>HRM: Real-Time Biometric Telemetry &amp; Distributed Workout Synchronization</image:title>
+      <image:caption>Iteration 3</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/hrm/client_connect.webp</image:loc>
+      <image:title>HRM: Real-Time Biometric Telemetry &amp; Distributed Workout Synchronization</image:title>
+      <image:caption>Client Connection</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/hrm/browser_capability.webp</image:loc>
+      <image:title>HRM: Real-Time Biometric Telemetry &amp; Distributed Workout Synchronization</image:title>
+      <image:caption>Browser Capability</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/hrm/mock.webp</image:loc>
+      <image:title>HRM: Real-Time Biometric Telemetry &amp; Distributed Workout Synchronization</image:title>
+      <image:caption>Mock Simulator</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/hrm/running.webp</image:loc>
+      <image:title>HRM: Real-Time Biometric Telemetry &amp; Distributed Workout Synchronization</image:title>
+      <image:caption>Running Application</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/hrm/hrm_server.webp</image:loc>
+      <image:title>HRM: Real-Time Biometric Telemetry &amp; Distributed Workout Synchronization</image:title>
+      <image:caption>HRM Server Dashboard</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
   </url>
   <url>
     <loc>https://arii.github.io/devai/leac-monitoring-software</loc>
     <lastmod>2017-05-15</lastmod>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/leac.jpg</image:loc>
+      <image:title>Lab Energy Assessment Center (LEAC) Monitoring Software</image:title>
+      <image:caption>LEAC Fume Hood Network Monitoring Interface</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
   </url>
   <url>
     <loc>https://arii.github.io/devai/light-therapy-mit</loc>
     <lastmod>2016-11-12</lastmod>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/light.jpg</image:loc>
+      <image:title>Light Therapy at MIT</image:title>
+      <image:caption>Light therapy campus setup</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
   </url>
   <url>
     <loc>https://arii.github.io/research/masters-thesis</loc>
     <lastmod>2014-06-01</lastmod>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/swag.jpg</image:loc>
+      <image:title>Learning a Strategy for Whole-Arm Grasping</image:title>
+      <image:caption>Whole-arm grasping experimental setup</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/thesis_wordle.png</image:loc>
+      <image:title>Learning a Strategy for Whole-Arm Grasping</image:title>
+      <image:caption>Thesis Key Concepts Word Cloud</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/masters-thesis/rl_sim_1.gif</image:loc>
+      <image:title>Learning a Strategy for Whole-Arm Grasping</image:title>
+      <image:caption>Run 1 \</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/masters-thesis/rl_sim_2.gif</image:loc>
+      <image:title>Learning a Strategy for Whole-Arm Grasping</image:title>
+      <image:caption>Run 2 \</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/masters-thesis/rl_sim_3.gif</image:loc>
+      <image:title>Learning a Strategy for Whole-Arm Grasping</image:title>
+      <image:caption>Run 3 \</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/masters-thesis/rl_sim_4.gif</image:loc>
+      <image:title>Learning a Strategy for Whole-Arm Grasping</image:title>
+      <image:caption>Run 4 \</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/masters-thesis/rl_sim_5.gif</image:loc>
+      <image:title>Learning a Strategy for Whole-Arm Grasping</image:title>
+      <image:caption>RL Simulation Run 5</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/masters-thesis/rl_sim_6.gif</image:loc>
+      <image:title>Learning a Strategy for Whole-Arm Grasping</image:title>
+      <image:caption>RL Simulation Run 6</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/masters-thesis/rl_sim_7.gif</image:loc>
+      <image:title>Learning a Strategy for Whole-Arm Grasping</image:title>
+      <image:caption>RL Simulation Run 7</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/masters-thesis/pr2_grasp_1.gif</image:loc>
+      <image:title>Learning a Strategy for Whole-Arm Grasping</image:title>
+      <image:caption>PR2 Grasping Demonstration 1</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/masters-thesis/pr2_grasp_2.gif</image:loc>
+      <image:title>Learning a Strategy for Whole-Arm Grasping</image:title>
+      <image:caption>PR2 Grasping Demonstration 2</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/masters-thesis/pr2_grasp_3.gif</image:loc>
+      <image:title>Learning a Strategy for Whole-Arm Grasping</image:title>
+      <image:caption>PR2 Grasping Demonstration 3</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
   </url>
   <url>
     <loc>https://arii.github.io/research/robocon-mit</loc>
     <lastmod>2018-04-20</lastmod>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/robocon.jpg</image:loc>
+      <image:title>RoboCon MIT</image:title>
+      <image:caption>RoboCon event portal showcase</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
   </url>
   <url>
     <loc>https://arii.github.io/research/undergraduate-projects</loc>
     <lastmod>2012-06-15</lastmod>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/undergraduate-projects/flip_flop.gif</image:loc>
+      <image:title>Undergraduate Engineering Projects</image:title>
+      <image:caption>Breadboard D Flip-Flop hardware loops.</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/report-ce121-microprocessor/68hc11_board_schematic.png</image:loc>
+      <image:title>Undergraduate Engineering Projects</image:title>
+      <image:caption>Complete hardware schematic for the custom Motorola 68HC11E1 microcontroller system board.</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/report-ce121-microprocessor/memory_address_decoding.png</image:loc>
+      <image:title>Undergraduate Engineering Projects</image:title>
+      <image:caption>Memory address decoding block diagram mapping 8KB SRAM and EPROM windows into the 68HC11 memory space.</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/undergraduate-projects/gripper_control.gif</image:loc>
+      <image:title>Undergraduate Engineering Projects</image:title>
+      <image:caption>68HC11 Microcontroller Board and Mechanical Gripper hardware loops.</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/report-ce118-mechatronics/mak_attack_robot.png</image:loc>
+      <image:title>Undergraduate Engineering Projects</image:title>
+      <image:caption>The MAK Attack autonomous mobile robot platform, highlighting optical sensors, bumper switches, and custom motor drive electronics.</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/report-ce118-mechatronics/hierarchical_state_machine.png</image:loc>
+      <image:title>Undergraduate Engineering Projects</image:title>
+      <image:caption>Hierarchical event-driven state machine architecture governing autonomous robot behavior during arena trials.</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/undergraduate-projects/ce118-001.webp</image:loc>
+      <image:title>Undergraduate Engineering Projects</image:title>
+      <image:caption>MAK Attack Front View</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/undergraduate-projects/ce118-007.webp</image:loc>
+      <image:title>Undergraduate Engineering Projects</image:title>
+      <image:caption>Sensory &amp; Signal Processing Circuits</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/undergraduate-projects/ce118-008.webp</image:loc>
+      <image:title>Undergraduate Engineering Projects</image:title>
+      <image:caption>Chassis Interior</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/undergraduate-projects/ce118-009.webp</image:loc>
+      <image:title>Undergraduate Engineering Projects</image:title>
+      <image:caption>Chassis SolidWorks Design</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/undergraduate-projects/ce118-010.webp</image:loc>
+      <image:title>Undergraduate Engineering Projects</image:title>
+      <image:caption>Complete System Setup</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/assets/research/undergraduate-projects/led_game.gif</image:loc>
+      <image:title>Undergraduate Engineering Projects</image:title>
+      <image:caption>Microcontroller-Based LED Ring Reaction Game hardware loops.</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
   </url>
   <url>
     <loc>https://arii.github.io/devai/versiontruth</loc>
     <lastmod>2026-07-10</lastmod>
+    <image:image>
+      <image:loc>https://arii.github.io/images/studies/AI_Version_Hallucination_Solution.webp</image:loc>
+      <image:title>VersionTruth: Eliminating Version Hallucinations in Agentic CI</image:title>
+      <image:caption>VersionTruth Solution</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/images/studies/ai-incorrect-v4-suggestion.webp</image:loc>
+      <image:title>VersionTruth: Eliminating Version Hallucinations in Agentic CI</image:title>
+      <image:caption>AI incorrectly flagging v6 as invalid and suggesting a downgrade to v4</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://arii.github.io/images/studies/github-checkout-v7-release.webp</image:loc>
+      <image:title>VersionTruth: Eliminating Version Hallucinations in Agentic CI</image:title>
+      <image:caption>GitHub Releases showing v7.0.0, confirming versions beyond v4 are stable</image:caption>
+      <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+    </image:image>
   </url>
 </urlset>
