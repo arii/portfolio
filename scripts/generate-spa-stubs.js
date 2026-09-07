@@ -2,11 +2,23 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { resumeData } from '../src/data/resume/index.ts';
+import { profileData } from '../src/data/aboutData.ts';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const DIST_DIR = path.resolve(__dirname, '../dist');
 const CONTENT_DIR = path.resolve(__dirname, '../src/content/research');
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
 
 function parseFrontmatter(content) {
   const match = content.match(/^---\r?\n([\s\S]+?)\r?\n---/);
@@ -19,13 +31,432 @@ function parseFrontmatter(content) {
   return { title, excerpt, date, category };
 }
 
+function markdownToHtml(md) {
+  if (!md) return '';
+
+  // 1. Strip frontmatter if present
+  let text = md.replace(/^---\r?\n[\s\S]+?\r?\n---\r?\n?/, '');
+
+  // 2. Extract code blocks and store them to avoid formatting inside code
+  const codeBlocks = [];
+  text = text.replace(/```(\w*)\r?\n([\s\S]*?)```/g, (match, lang, code) => {
+    const escapedCode = escapeHtml(code.trim());
+    const placeholder = `__CODE_BLOCK_${codeBlocks.length}__`;
+    codeBlocks.push(`<pre><code class="language-${lang || 'text'}">${escapedCode}</code></pre>`);
+    return placeholder;
+  });
+
+  // 3. Process line-by-line
+  const lines = text.split(/\r?\n/);
+  const htmlOutput = [];
+  let inList = false;
+  let listType = null; // 'ul' or 'ol'
+  let inBlockquote = false;
+  let blockquoteLines = [];
+
+  function flushList() {
+    if (inList) {
+      htmlOutput.push(`</${listType}>`);
+      inList = false;
+      listType = null;
+    }
+  }
+
+  function flushBlockquote() {
+    if (inBlockquote) {
+      const bqContent = blockquoteLines.map((l) => formatInline(l)).join('<br />');
+      htmlOutput.push(`<blockquote><p>${bqContent}</p></blockquote>`);
+      inBlockquote = false;
+      blockquoteLines = [];
+    }
+  }
+
+  function formatInline(str) {
+    if (!str) return '';
+    let result = str;
+
+    // 1. Extract inline code blocks first to prevent formatting inside code
+    const inlineCodes = [];
+    result = result.replace(/`([^`]+)`/g, (m, code) => {
+      const placeholder = `__INLINE_CODE_${inlineCodes.length}__`;
+      inlineCodes.push(`<code>${escapeHtml(code)}</code>`);
+      return placeholder;
+    });
+
+    // 2. Images: ![alt](url) -> <figure><img src="url" alt="alt" /><figcaption>alt</figcaption></figure>
+    result = result.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (m, alt, url) => {
+      const cleanUrl = url.split('#')[0].trim();
+      const cleanAlt = escapeHtml(alt.replace(/^Figure:\s*/i, ''));
+      return `<figure><img src="${escapeHtml(cleanUrl)}" alt="${cleanAlt}" /><figcaption>${cleanAlt}</figcaption></figure>`;
+    });
+
+    // 3. Links: [text](url)
+    result = result.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (m, txt, url) => {
+      return `<a href="${escapeHtml(url)}">${txt}</a>`;
+    });
+
+    // 4. Bold: **text** or __text__
+    result = result.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+    result = result.replace(/(^|\s)__([^_]+)__(\s|$)/g, '$1<strong>$2</strong>$3');
+
+    // 5. Italics: *text* or _text_
+    result = result.replace(/(^|\s)_([^_]+)_(\s|$)/g, '$1<em>$2</em>$3');
+    result = result.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+
+    // 6. Restore inline code
+    for (let idx = 0; idx < inlineCodes.length; idx++) {
+      result = result.replace(`__INLINE_CODE_${idx}__`, inlineCodes[idx]);
+    }
+
+    return result;
+  }
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].trim();
+
+    // Check code block placeholder
+    if (line.startsWith('__CODE_BLOCK_')) {
+      flushList();
+      flushBlockquote();
+      htmlOutput.push(line);
+      continue;
+    }
+
+    // Empty line
+    if (!line) {
+      flushList();
+      flushBlockquote();
+      continue;
+    }
+
+    // Blockquote
+    if (line.startsWith('>')) {
+      flushList();
+      inBlockquote = true;
+      blockquoteLines.push(line.replace(/^>\s*/, ''));
+      continue;
+    } else {
+      flushBlockquote();
+    }
+
+    // Headings
+    if (line.startsWith('#')) {
+      flushList();
+      const levelMatch = line.match(/^(#{1,6})\s+(.*)$/);
+      if (levelMatch) {
+        const level = levelMatch[1].length;
+        const hText = formatInline(levelMatch[2]);
+        htmlOutput.push(`<h${level}>${hText}</h${level}>`);
+        continue;
+      }
+    }
+
+    // Horizontal Rule
+    if (/^---+$|^\*\*\*+$|^___+$/.test(line)) {
+      flushList();
+      htmlOutput.push('<hr />');
+      continue;
+    }
+
+    // Unordered List (- or *)
+    const ulMatch = line.match(/^[-*]\s+(.*)$/);
+    if (ulMatch) {
+      if (!inList || listType !== 'ul') {
+        flushList();
+        inList = true;
+        listType = 'ul';
+        htmlOutput.push('<ul>');
+      }
+      htmlOutput.push(`<li>${formatInline(ulMatch[1])}</li>`);
+      continue;
+    }
+
+    // Ordered List (1., 2.)
+    const olMatch = line.match(/^\d+\.\s+(.*)$/);
+    if (olMatch) {
+      if (!inList || listType !== 'ol') {
+        flushList();
+        inList = true;
+        listType = 'ol';
+        htmlOutput.push('<ol>');
+      }
+      htmlOutput.push(`<li>${formatInline(olMatch[1])}</li>`);
+      continue;
+    }
+
+    // Standard paragraph line
+    flushList();
+    htmlOutput.push(`<p>${formatInline(line)}</p>`);
+  }
+
+  flushList();
+  flushBlockquote();
+
+  let htmlStr = htmlOutput.join('\n');
+
+  // Restore code blocks
+  for (let idx = 0; idx < codeBlocks.length; idx++) {
+    htmlStr = htmlStr.replace(`__CODE_BLOCK_${idx}__`, codeBlocks[idx]);
+  }
+
+  return htmlStr;
+}
+
+function renderResumeHtml() {
+  const { name, title, summary, experience, education, publications, skills, projects, honors, teaching } = resumeData;
+
+  let html = `<main style="max-width:1100px;margin:0 auto;padding:2rem 1rem;">`;
+  html += `<header><h1>${escapeHtml(name)}</h1><p><strong>${escapeHtml(title)}</strong></p><p>${escapeHtml(summary)}</p></header>`;
+
+  // Employment History
+  html += `<section><h2>Employment History</h2>`;
+  for (const job of experience) {
+    html += `<article><h3>${escapeHtml(job.title)} — ${escapeHtml(job.company)}</h3>`;
+    html += `<p><em>${escapeHtml(job.period)}</em>${job.link ? ` | <a href="${escapeHtml(job.link)}">${escapeHtml(job.company)}</a>` : ''}</p>`;
+    if (job.description) {
+      html += `<p>${escapeHtml(job.description)}</p>`;
+    }
+    if (job.points && job.points.length > 0) {
+      html += `<ul>${job.points.map((p) => `<li>${escapeHtml(p)}</li>`).join('')}</ul>`;
+    }
+    if (job.subRoles && job.subRoles.length > 0) {
+      for (const sub of job.subRoles) {
+        html += `<div><h4>${escapeHtml(sub.title)} (<em>${escapeHtml(sub.period)}</em>)</h4>`;
+        if (sub.points && sub.points.length > 0) {
+          html += `<ul>${sub.points.map((p) => `<li>${escapeHtml(p)}</li>`).join('')}</ul>`;
+        }
+        html += `</div>`;
+      }
+    }
+    html += `</article>`;
+  }
+  html += `</section>`;
+
+  // Education
+  html += `<section><h2>Education</h2>`;
+  for (const edu of education) {
+    html += `<article><h3>${escapeHtml(edu.degree)}</h3>`;
+    html += `<p><strong>${escapeHtml(edu.institution)}</strong> | <em>${escapeHtml(edu.period)}</em></p>`;
+    if (edu.details) html += `<p>${escapeHtml(edu.details)}</p>`;
+    if (edu.researchFocus) html += `<p>${escapeHtml(edu.researchFocus)}</p>`;
+    html += `</article>`;
+  }
+  html += `</section>`;
+
+  // Publications
+  html += `<section><h2>Publications</h2><ul>`;
+  for (const pub of publications) {
+    html += `<li><strong>${escapeHtml(pub.title)}</strong> (${escapeHtml(pub.year)})<br />${escapeHtml(pub.authors.join(', '))}<br /><em>${escapeHtml(pub.venue)}</em>${pub.link ? `<br /><a href="${escapeHtml(pub.link)}">Publication Link</a>` : ''}</li>`;
+  }
+  html += `</ul></section>`;
+
+  // Skills
+  html += `<section><h2>Skills</h2>`;
+  for (const group of skills) {
+    html += `<p><strong>${escapeHtml(group.category)}:</strong> ${group.skills.map((s) => escapeHtml(s)).join(', ')}</p>`;
+  }
+  html += `</section>`;
+
+  // Key Projects
+  html += `<section><h2>Selected Projects</h2>`;
+  for (const proj of projects) {
+    html += `<article><h3>${escapeHtml(proj.title)}</h3>`;
+    html += `<p>${escapeHtml(proj.description)}</p>`;
+    html += `<p><strong>Impact:</strong> ${escapeHtml(proj.metric)} | <strong>Tech Stack:</strong> ${proj.techStack.map((s) => escapeHtml(s)).join(', ')}</p>`;
+    html += `</article>`;
+  }
+  html += `</section>`;
+
+  // Honors & Awards
+  html += `<section><h2>Honors & Awards</h2><ul>`;
+  for (const honor of honors) {
+    html += `<li><strong>${escapeHtml(honor.title)}</strong> (${escapeHtml(honor.year)}) — ${escapeHtml(honor.organization)}${honor.details ? `: ${escapeHtml(honor.details)}` : ''}</li>`;
+  }
+  html += `</ul></section>`;
+
+  // Teaching Experience
+  html += `<section><h2>Teaching Experience</h2>`;
+  for (const t of teaching) {
+    html += `<article><h3>${escapeHtml(t.title)}</h3><p><em>${escapeHtml(t.period)}</em></p><p>${escapeHtml(t.details)}</p></article>`;
+  }
+  html += `</section>`;
+
+  html += `</main>`;
+  return html;
+}
+
+function renderAboutHtml() {
+  const { name, role, availability, highlights, faqs } = profileData;
+
+  let html = `<main style="max-width:1100px;margin:0 auto;padding:2rem 1rem;">`;
+  html += `<header><h1>About ${escapeHtml(name)}</h1><p><strong>${escapeHtml(role)}</strong></p></header>`;
+
+  html += `<section><h2>Executive Biography</h2>`;
+  html += `<p>I am an MIT CSAIL roboticist whose work focuses on building reliable autonomous systems. My research focused on learning physics-based models for planning under uncertainty. I bring deep experience across research and industry, from robot manipulation to social navigation in dynamic indoor environments and autonomous driving.</p>`;
+  html += `<p>Over the past year, I’ve built stateful, multi-agent workflows for software development, using AI to engineer feature-rich applications while maintaining code quality and architectural standards, bringing robotics-grade reliability to DevAI.</p>`;
+  html += `<p>Outside of robotics and AI, you’ll usually find me on the dance floor or exploring San Francisco. I am an active West Coast Swing dancer who travels for regional events, perform in improv comedy jams, stay fit with high-intensity workouts, and love a good game of chess.</p>`;
+  html += `</section>`;
+
+  html += `<section><h2>Key Details &amp; Availability</h2>`;
+  html += `<p><strong>Location:</strong> San Francisco, CA</p>`;
+  html += `<p><strong>Education:</strong> MIT EECS PhD 2019 · SM 2014</p>`;
+  html += `<p><strong>Availability:</strong> ${escapeHtml(availability)}</p>`;
+  html += `</section>`;
+
+  html += `<section><h2>Career Timeline Highlights</h2>`;
+  for (const h of highlights) {
+    html += `<article><h3>${escapeHtml(h.title)} (${escapeHtml(h.period)})</h3><p>${escapeHtml(h.detail)}</p></article>`;
+  }
+  html += `</section>`;
+
+  html += `<section><h2>Frequently Asked Questions</h2>`;
+  for (const faq of faqs) {
+    html += `<article><h3>${escapeHtml(faq.question)}</h3><p>${escapeHtml(faq.answer)}</p></article>`;
+  }
+  html += `</section>`;
+
+  html += `</main>`;
+  return html;
+}
+
+function getArticleList(contentDir, targetCategory) {
+  const articles = [];
+  if (!fs.existsSync(contentDir)) return articles;
+
+  const files = fs.readdirSync(contentDir).filter((f) => f.endsWith('.md'));
+  for (const file of files) {
+    const slug = file.replace('.md', '');
+    const fullPath = path.join(contentDir, file);
+    const content = fs.readFileSync(fullPath, 'utf-8');
+    const match = content.match(/^---\r?\n([\s\S]+?)\r?\n---/);
+    if (!match) continue;
+
+    const yaml = match[1];
+    const title = yaml.match(/title:\s*["']?([^"'\n]+)["']?/)?.[1] || '';
+    const excerpt = yaml.match(/(?:excerpt|summary):\s*["']?([^"'\n]+)["']?/)?.[1] || '';
+    const date = yaml.match(/date:\s*["']?([^"'\n]+)["']?/)?.[1] || '';
+    const category = yaml.match(/category:\s*["']?([^"'\n]+)["']?/)?.[1] || 'DevAI';
+    const tagsMatch = yaml.match(/tags:\s*\[(.*?)\]/)?.[1] || '';
+    const tags = tagsMatch
+      .split(',')
+      .map((t) => t.replace(/["']/g, '').trim())
+      .filter(Boolean);
+
+    const isRobotics = category.toLowerCase().includes('robotics');
+    const primarySection = isRobotics ? 'research' : 'devai';
+
+    if ((targetCategory === 'devai' && !isRobotics) || (targetCategory === 'research' && isRobotics)) {
+      articles.push({ slug, title, excerpt, date, category, tags, primarySection });
+    }
+  }
+
+  return articles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+}
+
+function renderDevAiHtml(contentDir) {
+  const articles = getArticleList(contentDir, 'devai');
+
+  let html = `<main style="max-width:1100px;margin:0 auto;padding:2rem 1rem;">`;
+  html += `<header><h1>DevAI &amp; Software Systems</h1><p>System architectures, agentic CI/CD pipelines, autonomous developer tooling, and shipped production applications.</p></header>`;
+
+  html += `<section><h2>Agentic Tools & Architecture Deep Dives</h2>`;
+  for (const article of articles) {
+    html += `<article><h3><a href="/devai/${article.slug}">${escapeHtml(article.title)}</a></h3>`;
+    html += `<p><em>${escapeHtml(article.date)}</em>${article.tags.length > 0 ? ` | Tags: ${escapeHtml(article.tags.join(', '))}` : ''}</p>`;
+    html += `<p>${escapeHtml(article.excerpt)}</p>`;
+    html += `</article>`;
+  }
+  html += `</section></main>`;
+  return html;
+}
+
+function renderResearchHtml(contentDir) {
+  const articles = getArticleList(contentDir, 'research');
+
+  let html = `<main style="max-width:1100px;margin:0 auto;padding:2rem 1rem;">`;
+  html += `<header><h1>Robotics &amp; Algorithmic Research</h1><p>Planning under uncertainty, conformant belief-state manipulation, multi-robot coordination, and hardware automation systems.</p></header>`;
+
+  html += `<section><h2>Research Deep Dives & Projects</h2>`;
+  for (const article of articles) {
+    html += `<article><h3><a href="/research/${article.slug}">${escapeHtml(article.title)}</a></h3>`;
+    html += `<p><em>${escapeHtml(article.date)}</em>${article.tags.length > 0 ? ` | Tags: ${escapeHtml(article.tags.join(', '))}` : ''}</p>`;
+    html += `<p>${escapeHtml(article.excerpt)}</p>`;
+    html += `</article>`;
+  }
+  html += `</section></main>`;
+  return html;
+}
+
+function renderArticleHtml(slug, contentDir) {
+  const mdPath = path.join(contentDir, `${slug}.md`);
+  if (!fs.existsSync(mdPath)) return '';
+
+  const rawContent = fs.readFileSync(mdPath, 'utf-8');
+  const match = rawContent.match(/^---\r?\n([\s\S]+?)\r?\n---\r?\n([\s\S]*)$/);
+  if (!match) return `<main style="max-width:1100px;margin:0 auto;padding:2rem 1rem;">${markdownToHtml(rawContent)}</main>`;
+
+  const yaml = match[1];
+  const body = match[2];
+
+  const title = yaml.match(/title:\s*["']?([^"'\n]+)["']?/)?.[1] || 'Research & Engineering Deep-Dive';
+  const author = yaml.match(/author:\s*["']?([^"'\n]+)["']?/)?.[1] || 'Ariel Anders, PhD';
+  const date = yaml.match(/date:\s*["']?([^"'\n]+)["']?/)?.[1] || '';
+  const category = yaml.match(/category:\s*["']?([^"'\n]+)["']?/)?.[1] || 'DevAI';
+  const excerpt = yaml.match(/(?:excerpt|summary):\s*["']?([^"'\n]+)["']?/)?.[1] || '';
+  const tagsMatch = yaml.match(/tags:\s*\[(.*?)\]/)?.[1] || '';
+  const tags = tagsMatch
+    .split(',')
+    .map((t) => t.replace(/["']/g, '').trim())
+    .filter(Boolean);
+
+  let html = `<main style="max-width:1100px;margin:0 auto;padding:2rem 1rem;">`;
+  html += `<header><h1>${escapeHtml(title)}</h1>`;
+  html += `<p><strong>Author:</strong> ${escapeHtml(author)} | <strong>Date:</strong> ${escapeHtml(date)} | <strong>Category:</strong> ${escapeHtml(category)}</p>`;
+  if (tags.length > 0) {
+    html += `<p><strong>Tags:</strong> ${escapeHtml(tags.join(', '))}</p>`;
+  }
+  if (excerpt) {
+    html += `<p><em>${escapeHtml(excerpt)}</em></p>`;
+  }
+  html += `</header><hr />`;
+
+  html += `<article>${markdownToHtml(body)}</article>`;
+  html += `</main>`;
+  return html;
+}
+
+function getPrerenderedBody(route, meta, contentDir) {
+  if (route === 'resume') {
+    return `<div id="root">${renderResumeHtml()}</div>`;
+  }
+  if (route === 'about') {
+    return `<div id="root">${renderAboutHtml()}</div>`;
+  }
+  if (route === 'devai') {
+    return `<div id="root">${renderDevAiHtml(contentDir)}</div>`;
+  }
+  if (route === 'research') {
+    return `<div id="root">${renderResearchHtml(contentDir)}</div>`;
+  }
+  if (route.startsWith('devai/') || route.startsWith('research/')) {
+    const slug = route.split('/')[1];
+    const articleBody = renderArticleHtml(slug, contentDir);
+    if (articleBody) {
+      return `<div id="root">${articleBody}</div>`;
+    }
+  }
+
+  return `<div id="root"><main style="max-width:1100px;margin:0 auto;padding:2rem 1rem;"><h1>${escapeHtml(meta.heading)}</h1><p>${escapeHtml(meta.bodyText)}</p></main></div>`;
+}
+
 function getRouteMetadata(route, contentDir) {
   const SITE_URL = 'https://arii.github.io';
-  
+
   if (route === 'about') {
     return {
       title: 'About & Background | Ariel Anders, PhD',
-      description: 'Learn about Ariel Anders, PhD (MIT CSAIL): roboticist, AI software engineer, research background, current availability, and personal projects.',
+      description:
+        'Learn about Ariel Anders, PhD (MIT CSAIL): roboticist, AI software engineer, research background, current availability, and personal projects.',
       canonical: `${SITE_URL}/about`,
       heading: 'About Ariel',
       bodyText: 'Robotics background, research history, and personal interests. MIT EECS PhD 2019 · SM 2014.',
@@ -35,30 +466,36 @@ function getRouteMetadata(route, contentDir) {
   if (route === 'devai') {
     return {
       title: 'DevAI & Agentic Automation | Ariel Anders, PhD',
-      description: 'Explore agentic DevAI tools, multi-agent CI/CD workflows, and developer automation software engineered by Ariel Anders, PhD (MIT CSAIL).',
+      description:
+        'Explore agentic DevAI tools, multi-agent CI/CD workflows, and developer automation software engineered by Ariel Anders, PhD (MIT CSAIL).',
       canonical: `${SITE_URL}/devai`,
       heading: 'DevAI & Software Systems',
-      bodyText: 'System architectures, agentic CI/CD pipelines, autonomous developer tooling, and shipped production applications.',
+      bodyText:
+        'System architectures, agentic CI/CD pipelines, autonomous developer tooling, and shipped production applications.',
     };
   }
 
   if (route === 'research') {
     return {
       title: 'Robotics & Autonomous Research | Ariel Anders, PhD',
-      description: 'Discover robotics software research in conformant planning, belief-state manipulation, and autonomous systems by Ariel Anders, PhD (MIT CSAIL).',
+      description:
+        'Discover robotics software research in conformant planning, belief-state manipulation, and autonomous systems by Ariel Anders, PhD (MIT CSAIL).',
       canonical: `${SITE_URL}/research`,
       heading: 'Robotics & Algorithmic Research',
-      bodyText: 'Planning under uncertainty, conformant belief-state manipulation, multi-robot coordination, and hardware automation systems.',
+      bodyText:
+        'Planning under uncertainty, conformant belief-state manipulation, multi-robot coordination, and hardware automation systems.',
     };
   }
 
   if (route === 'resume') {
     return {
       title: 'Resume & Career Highlights | Ariel Anders, PhD',
-      description: 'View the technical resume and experience of Ariel Anders, PhD (MIT CSAIL): expertise in robotics engineering, AI architecture, and software systems.',
+      description:
+        'View the technical resume and experience of Ariel Anders, PhD (MIT CSAIL): expertise in robotics engineering, AI architecture, and software systems.',
       canonical: `${SITE_URL}/resume`,
       heading: 'Resume & Career Highlights',
-      bodyText: 'Roboticist and Senior Software Engineer with an MIT CSAIL PhD and track record across Waymo, Robust.AI, and Civ Robotics.',
+      bodyText:
+        'Roboticist and Senior Software Engineer with an MIT CSAIL PhD and track record across Waymo, Robust.AI, and Civ Robotics.',
     };
   }
 
@@ -69,7 +506,9 @@ function getRouteMetadata(route, contentDir) {
       const content = fs.readFileSync(mdPath, 'utf-8');
       const { title, excerpt } = parseFrontmatter(content);
       const cleanTitle = title ? `${title} | Ariel Anders, PhD` : 'AI & Robotics Engineering Portfolio | Ariel Anders, PhD';
-      const cleanDesc = excerpt || 'Explore AI consulting, robotics software engineering, and autonomous systems research by Ariel Anders, PhD (MIT).';
+      const cleanDesc =
+        excerpt ||
+        'Explore AI consulting, robotics software engineering, and autonomous systems research by Ariel Anders, PhD (MIT).';
       return {
         title: cleanTitle,
         description: cleanDesc,
@@ -82,14 +521,15 @@ function getRouteMetadata(route, contentDir) {
 
   return {
     title: 'AI & Robotics Engineering Portfolio | Ariel Anders, PhD',
-    description: 'Explore AI consulting, robotics software engineering, and autonomous systems research by Ariel Anders, PhD (MIT). View open-source tools and deep dives.',
+    description:
+      'Explore AI consulting, robotics software engineering, and autonomous systems research by Ariel Anders, PhD (MIT). View open-source tools and deep dives.',
     canonical: `${SITE_URL}/${route}`,
     heading: 'AI & Robotics Engineering Portfolio',
     bodyText: '',
   };
 }
 
-function customizeHtmlForRoute(baseHtml, meta) {
+function customizeHtmlForRoute(baseHtml, meta, route, contentDir) {
   let customized = baseHtml;
 
   // Replace Title
@@ -130,7 +570,7 @@ function customizeHtmlForRoute(baseHtml, meta) {
   );
 
   // Inject Pre-rendered Semantic HTML into root for non-JS crawlers
-  const prerenderedBody = `<div id="root"><main style="max-width:1100px;margin:0 auto;padding:2rem 1rem;"><h1>${meta.heading}</h1><p>${meta.bodyText}</p></main></div>`;
+  const prerenderedBody = getPrerenderedBody(route, meta, contentDir);
   customized = customized.replace(/<div id="root"><\/div>/, prerenderedBody);
 
   return customized;
@@ -191,7 +631,7 @@ export function generateSpaStubs() {
   let stubCount = 0;
   for (const route of uniqueRoutes) {
     const meta = getRouteMetadata(route, CONTENT_DIR);
-    const customizedContent = customizeHtmlForRoute(indexHtmlContent, meta);
+    const customizedContent = customizeHtmlForRoute(indexHtmlContent, meta, route, CONTENT_DIR);
 
     const routeDir = path.join(DIST_DIR, route);
     if (!fs.existsSync(routeDir)) {
