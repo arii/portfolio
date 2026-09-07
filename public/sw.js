@@ -4,8 +4,8 @@ const CACHE_NAME = 'arii-portfolio-v1';
 const PRECACHE_URLS = [
   '/',
   '/index.html',
-  '/manifest.json',
   '/vite.svg',
+  '/favicon.ico',
 ];
 
 // Helper to determine if a URL represents a static media asset or font
