@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/portfolio/preview/pr-325/vite.svg" />
+    <link rel="alternate icon" href="/portfolio/preview/pr-325/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Visual Impact / UX Audit | Ariel Anders, PhD</title>
+    <meta name="description" content="How I built a semantic visual impact analysis pipeline using dependency-cruiser, Playwright screenshot diffing, and automated severity scoring." />
+    <link rel="canonical" href="https://arii.github.io/devai/deployment-impact-analyzer" />
+    <meta name="google-site-verification" content="FGbpuhF_c3YUFon1LzrzqmW1jvVPFygugss24n0wn5k" />
+
+    <!-- SPA redirect handling for GitHub Pages subpaths -->
+    <script>
+      (function(l) {
+        if (l.search[1] === '/' ) {
+          var decoded = l.search.slice(1).split('&').map(function(s) {
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          window.history.replaceState(null, null,
+              l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location));
+    </script>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:site_name" content="Ariel Anders Portfolio" />
+    <meta property="og:title" content="Visual Impact / UX Audit | Ariel Anders, PhD" />
+    <meta property="og:description" content="How I built a semantic visual impact analysis pipeline using dependency-cruiser, Playwright screenshot diffing, and automated severity scoring." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://arii.github.io/devai/deployment-impact-analyzer" />
+    <meta property="og:image" content="https://arii.github.io/assets/roboticist.jpg" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Visual Impact / UX Audit | Ariel Anders, PhD" />
+    <meta name="twitter:description" content="How I built a semantic visual impact analysis pipeline using dependency-cruiser, Playwright screenshot diffing, and automated severity scoring." />
+    <meta name="twitter:image" content="https://arii.github.io/assets/roboticist.jpg" />
+
+    <!-- Default JSON-LD Schema Fallback -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://arii.github.io/about#person",
+          "url": "https://arii.github.io/about",
+          "name": "Ariel Anders, PhD",
+          "jobTitle": "Robotics & AI Consulting Engineer",
+          "email": "anders.ariel@gmail.com",
+          "image": "https://arii.github.io/assets/roboticist.jpg",
+          "alumniOf": {
+            "@type": "EducationalOrganization",
+            "name": "Massachusetts Institute of Technology (MIT)",
+            "url": "https://www.mit.edu"
+          },
+          "knowsAbout": [
+            "Artificial Intelligence",
+            "Robotics Software Engineering",
+            "Autonomous Systems",
+            "Agentic Workflows",
+            "Motion Planning",
+            "Computer Vision"
+          ],
+          "sameAs": [
+            "https://www.linkedin.com/in/ariel-anders/",
+            "https://github.com/arii",
+            "https://scholar.google.com/citations?user=NM6SfiEAAAAJ&hl=en",
+            "https://boomtick.blog"
+          ]
+        },
+        {
+          "@type": "Service",
+          "@id": "https://arii.github.io/about#consulting-service",
+          "url": "https://arii.github.io/about",
+          "name": "Robotics & Multi-Agent AI Consulting",
+          "serviceType": "Technical & Engineering Consulting",
+          "description": "Advisory and architecture services bridging robotics, autonomous navigation, and agentic AI systems for software engineering teams.",
+          "provider": {
+            "@id": "https://arii.github.io/about#person"
+          },
+          "areaServed": [
+            {
+              "@type": "AdministrativeArea",
+              "name": "San Francisco Bay Area"
+            },
+            {
+              "@type": "Country",
+              "name": "United States"
+            }
+          ],
+          "audience": {
+            "@type": "Audience",
+            "audienceType": "Tech Startups, Engineering Leaders, Robotics Ventures"
+          },
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Consulting Services",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Autonomous Navigation & Motion Planning Architecture"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Multi-Agent AI Workflows & Developer Infrastructure"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    </noscript>
+    <script type="module" crossorigin src="/portfolio/preview/pr-325/assets/index-0s8AFQMp.js"></script>
+    <link rel="modulepreload" crossorigin href="/portfolio/preview/pr-325/assets/vendor-react-BD-e1e1Q.js">
+    <link rel="stylesheet" crossorigin href="/portfolio/preview/pr-325/assets/index-Do-st99S.css">
+  </head>
+  <body>
+    <div id="root"><main style="max-width:1100px;margin:0 auto;padding:2rem 1rem;"><header><h1>Visual Impact / UX Audit</h1><p><strong>Author:</strong> Ariel Anders, PhD | <strong>Date:</strong> 2026-06-19 | <strong>Category:</strong> DevAI</p><p><strong>Tags:</strong> Playwright, CI/CD, UX Audit, Dependency Graph, Automation</p><p><em>How I built a semantic visual impact analysis pipeline using dependency-cruiser, Playwright screenshot diffing, and automated severity scoring.</em></p></header><hr /><article><p>LLM code generation introduces unintended visual side effects—hallucinated UI components, modified badge styles, shifted accents, or unintended layout changes. Reviewing these multi-file diffs manually is error-prone, running full end-to-end test suites on every commit is too slow, and standard unit tests completely miss visual artifacts.</p>
+<p>I built the <strong>Deployment Impact Analyzer</strong> to catch these discrepancies automatically. The pipeline traces every code modification through the project's dependency graph, identifies which user-facing routes are touched, and triggers targeted Playwright visual diffs using Pixelmatch. By scoping screenshots strictly to impacted views, it flags hallucinated elements and styling shifts directly in the pull request while cutting visual testing volume by up to 90%.</p>
+<h2>The Architecture</h2>
+<pre><code class="language-mermaid">flowchart TD
+    A[Pull Request Event] --&gt;|Webhook Trigger| B[Identify Changed Files]
+    B --&gt;|git diff-tree| C[dependency-cruiser Analysis]
+    C --&gt;|Blast Radius Array| D[Map to Affected Routes]
+    
+    subgraph Envs [&quot;Target Environments&quot;]
+        Prod[Production Baseline]
+        Branch[Feature Branch Preview]
+    end
+
+    D --&gt;|Target URLs| E[Playwright Screenshot Engine]
+    Prod -.-&gt;|HTTP GET| E
+    Branch -.-&gt;|HTTP GET| E
+    
+    E --&gt;|Pixel Delta Map| F[Severity Scoring Engine]
+    F --&gt;|Markdown Report| G[PR Comment &amp; Status Check]
+
+    classDef trigger fill:#1e293b,stroke:#38bdf8,stroke-width:2px,color:#f8fafc;
+    classDef runner fill:#0f172a,stroke:#818cf8,stroke-width:2px,color:#f8fafc;
+    classDef env fill:#064e3b,stroke:#34d399,stroke-width:2px,color:#f8fafc;
+
+    class A,G trigger;
+    class B,C,D,E,F runner;
+    class Prod,Branch env;</code></pre>
+<ul>
+<li><strong>Dependency Graph Parsing</strong>: Traces modified files up to entry points to establish an explicit visual blast radius.</li>
+<li><strong>Route Resolution</strong>: Maps structural code entry points directly to active application routing domains.</li>
+<li><strong>Targeted Visual Diffing</strong>: Executes localized Playwright automated captures against a production baseline.</li>
+<li><strong>Asynchronous PR Feedback</strong>: Generates layout shift metrics and updates the pull request conversation via GitHub APIs.</li>
+</ul>
+<hr />
+<h2>1. Import Graph Parsing with dependency-cruiser</h2>
+<p>I didn't want to test every page if only the "About" section changed. To achieve targeted testing, I use <code>dependency-cruiser</code> to analyze the project's import graph.</p>
+<p>When modifying a file, I trace its dependents up the tree until I reach an entry point (a route or a page component).</p>
+<pre><code class="language-bash"># Example logic for finding dependents
+npx depcruise --exclude &quot;^node_modules&quot; --output-type json src | \
+  jq '.modules[] | select(.dependencies[].resolved == &quot;src/components/Button.tsx&quot;) | .source'</code></pre>
+<hr />
+<h2>2. Automated Playwright Screenshot Diffing</h2>
+<p>Once I have a list of affected routes, I trigger a Playwright-based capture service.</p>
+<p>The pipeline performs a "sandwich" comparison:</p>
+<ol>
+<li><strong>Baseline</strong>: Capture screenshots of the affected routes on the <code>main</code> branch.</li>
+<li><strong>Current</strong>: Capture screenshots of the same routes on the feature branch.</li>
+<li><strong>Diff</strong>: Use <code>pixelmatch</code> to generate a pixel-level delta.</li>
+</ol>
+<p>To improve the signal-to-noise ratio, I automatically crop the diff to the bounding box of the changed area. This helps reviewers focus on the specific UI shift rather than scanning a full-page screenshot.</p>
+<hr />
+<h2>3. Severity Scoring & Reporting</h2>
+<p>Pixel diffs aren't all equal. A 1px shift in a footer is different from a broken hero section.</p>
+<p>My scoring engine calculates a <strong>Severity Score</strong> based on:</p>
+<ul>
+<li><strong>Pixel Count</strong>: The absolute number of changed pixels.</li>
+<li><strong>Percentage</strong>: The ratio of changed pixels to the total area.</li>
+<li><strong>Layout Shift</strong>: Detection of significant element movement.</li>
+</ul>
+<p>If the score exceeds a configurable threshold, the pipeline marks the check as failed and requests a manual visual review.</p>
+<hr />
+<h2>4. GitHub Actions Integration</h2>
+<p>I orchestrated the entire system via GitHub Actions. I've optimized the workflow to use caching for the <code>dependency-cruiser</code> graph and parallelize Playwright workers to keep execution times under 5 minutes.</p>
+<pre><code class="language-yaml">name: Deployment Impact Analysis
+on: [pull_request]
+
+jobs:
+  impact:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: pnpm install
+      - name: Run Impact Analysis
+        run: pnpm run impact:analysis
+      - name: Visual Diffing
+        run: pnpm run impact:visual-diff
+      - name: Post Report
+        run: python scripts/send-jules-impact.py</code></pre>
+<h3>Example Report Output</h3>
+<p>When opening a PR, the analyzer posts a summary directly to the GitHub conversation. This allows developers to see the impact at a glance without leaving their workflow.</p>
+<p>| Route | Visual Diff | Severity | Action |</p>
+<p>| :--- | :--- | :--- | :--- |</p>
+<p>| <code>/blog/:slug</code> | 12.4% | 🔴 HIGH | Manual Review Required |</p>
+<p>| <code>/about</code> | 0.0% | 🟢 LOW | Auto-passed |</p>
+<p>| <code>/merch</code> | 1.2% | 🟡 MEDIUM | Review Suggested |</p>
+<blockquote><p><strong>Implemented:</strong> I use the <code>cropped</code> diff artifacts to show exactly where the pixels changed, saving reviewers from playing "spot the difference" on full-page screenshots.</p></blockquote>
+<p>| Before | After | Diff |</p>
+<p>| :---: | :---: | :---: |</p>
+<p>| <figure><img src="/assets/studies/deployment-impact-analyzer/before.svg" alt="Baseline" /><figcaption>Baseline</figcaption></figure> | <figure><img src="/assets/studies/deployment-impact-analyzer/after.svg" alt="Current" /><figcaption>Current</figcaption></figure> | <figure><img src="/assets/studies/deployment-impact-analyzer/diff.svg" alt="Visual Delta" /><figcaption>Visual Delta</figcaption></figure> |</p>
+<p><em>A "sandwich" comparison showing the baseline, the new state, and the highlighted pixel delta.</em></p>
+<h3>Real-World Finding: From 404 to Overflow Resolution</h3>
+<p>Visual regression testing is particularly effective for catching "cumulative" bugs—issues that only appear once I integrate multiple components. During the development of this tool, I encountered a three-stage regression that perfectly illustrated the system's value.</p>
+<h4>1. The Initial State (Missing Route)</h4>
+<p>Initially, a routing configuration error caused the analyzer to hit a "Content Not Found" page. While the code for the tool existed, I hadn't registered the dynamic route in the main portfolio index.</p>
+<h4>2. The Regression (Text Overflow)</h4>
+<p>After fixing the routing, the page rendered, but a new issue emerged on mobile viewports. Long file paths in the <code>ArchitecturalAssetsList</code> component were overflowing their containers, breaking the layout and pushing the "Category" labels off-screen. This is a classic "invisible" regression that passes unit tests and type-checks but fails the "eyeball test."</p>
+<h4>3. The Resolution (Truncation & Wrapping)</h4>
+<p>I implemented a fix using Tailwind's <code>truncate</code> and <code>flex-wrap</code> utilities, ensuring that assets are readable even on the narrowest devices.</p>
+<p>| 1. Missing | 2. Diff | 3. Fixed |</p>
+<p>| :---: | :---: | :---: |</p>
+<p>| <figure><img src="/assets/studies/deployment-impact-analyzer/before-mobile.svg" alt="404 Error" /><figcaption>404 Error</figcaption></figure> | <figure><img src="/assets/studies/deployment-impact-analyzer/diff-mobile.svg" alt="Regression Delta" /><figcaption>Regression Delta</figcaption></figure> | <figure><img src="/assets/studies/deployment-impact-analyzer/after-mobile.svg" alt="Resolution" /><figcaption>Resolution</figcaption></figure> |</p>
+<p><em>The mobile resolution sequence: from a 404 state to an overflow regression, and finally the resolved responsive layout.</em></p>
+<h2>Lessons Learned</h2>
+<p>The core engineering insight from this project is the value of multi-layered verification. Static analysis maps the system's structural vulnerabilities, but visual diffing provides the actual confirmation of interface integrity. Merging these workflows converts unpredictable visual evaluation into a deterministic, programmatic check.</p>
+<p>The next evolution of this tool involves agentic auto-resolution: using LLMs to analyze the visual diff and decide if a change is an intentional improvement or an accidental regression.</p></article></main></div>
+  </body>
+</html>

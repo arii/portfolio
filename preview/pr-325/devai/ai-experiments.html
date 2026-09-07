@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/portfolio/preview/pr-325/vite.svg" />
+    <link rel="alternate icon" href="/portfolio/preview/pr-325/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>AI Experiments (In Progress) | Ariel Anders, PhD</title>
+    <meta name="description" content="A collection of custom dev tools, background ETL pipelines, and automated UI testing workflows I am currently building." />
+    <link rel="canonical" href="https://arii.github.io/devai/ai-experiments" />
+    <meta name="google-site-verification" content="FGbpuhF_c3YUFon1LzrzqmW1jvVPFygugss24n0wn5k" />
+
+    <!-- SPA redirect handling for GitHub Pages subpaths -->
+    <script>
+      (function(l) {
+        if (l.search[1] === '/' ) {
+          var decoded = l.search.slice(1).split('&').map(function(s) {
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          window.history.replaceState(null, null,
+              l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location));
+    </script>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:site_name" content="Ariel Anders Portfolio" />
+    <meta property="og:title" content="AI Experiments (In Progress) | Ariel Anders, PhD" />
+    <meta property="og:description" content="A collection of custom dev tools, background ETL pipelines, and automated UI testing workflows I am currently building." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://arii.github.io/devai/ai-experiments" />
+    <meta property="og:image" content="https://arii.github.io/assets/roboticist.jpg" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="AI Experiments (In Progress) | Ariel Anders, PhD" />
+    <meta name="twitter:description" content="A collection of custom dev tools, background ETL pipelines, and automated UI testing workflows I am currently building." />
+    <meta name="twitter:image" content="https://arii.github.io/assets/roboticist.jpg" />
+
+    <!-- Default JSON-LD Schema Fallback -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://arii.github.io/about#person",
+          "url": "https://arii.github.io/about",
+          "name": "Ariel Anders, PhD",
+          "jobTitle": "Robotics & AI Consulting Engineer",
+          "email": "anders.ariel@gmail.com",
+          "image": "https://arii.github.io/assets/roboticist.jpg",
+          "alumniOf": {
+            "@type": "EducationalOrganization",
+            "name": "Massachusetts Institute of Technology (MIT)",
+            "url": "https://www.mit.edu"
+          },
+          "knowsAbout": [
+            "Artificial Intelligence",
+            "Robotics Software Engineering",
+            "Autonomous Systems",
+            "Agentic Workflows",
+            "Motion Planning",
+            "Computer Vision"
+          ],
+          "sameAs": [
+            "https://www.linkedin.com/in/ariel-anders/",
+            "https://github.com/arii",
+            "https://scholar.google.com/citations?user=NM6SfiEAAAAJ&hl=en",
+            "https://boomtick.blog"
+          ]
+        },
+        {
+          "@type": "Service",
+          "@id": "https://arii.github.io/about#consulting-service",
+          "url": "https://arii.github.io/about",
+          "name": "Robotics & Multi-Agent AI Consulting",
+          "serviceType": "Technical & Engineering Consulting",
+          "description": "Advisory and architecture services bridging robotics, autonomous navigation, and agentic AI systems for software engineering teams.",
+          "provider": {
+            "@id": "https://arii.github.io/about#person"
+          },
+          "areaServed": [
+            {
+              "@type": "AdministrativeArea",
+              "name": "San Francisco Bay Area"
+            },
+            {
+              "@type": "Country",
+              "name": "United States"
+            }
+          ],
+          "audience": {
+            "@type": "Audience",
+            "audienceType": "Tech Startups, Engineering Leaders, Robotics Ventures"
+          },
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Consulting Services",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Autonomous Navigation & Motion Planning Architecture"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Multi-Agent AI Workflows & Developer Infrastructure"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    </noscript>
+    <script type="module" crossorigin src="/portfolio/preview/pr-325/assets/index-0s8AFQMp.js"></script>
+    <link rel="modulepreload" crossorigin href="/portfolio/preview/pr-325/assets/vendor-react-BD-e1e1Q.js">
+    <link rel="stylesheet" crossorigin href="/portfolio/preview/pr-325/assets/index-Do-st99S.css">
+  </head>
+  <body>
+    <div id="root"><main style="max-width:1100px;margin:0 auto;padding:2rem 1rem;"><header><h1>AI Experiments (In Progress)</h1><p><strong>Author:</strong> Ariel Anders | <strong>Date:</strong> 2026-08-15 | <strong>Category:</strong> AI Experiments</p><p><strong>Tags:</strong> ETL, WCS Scraper, Printful API, LLM, RAG, Automation, Visual Testing</p><p><em>A collection of custom dev tools, background ETL pipelines, and automated UI testing workflows I am currently building.</em></p></header><hr /><article><p>A collection of custom dev tools, background ETL pipelines, and automated UI testing workflows I am currently building.</p>
+<hr />
+<h3>Quick Status</h3>
+<ul>
+<li><strong><a href="#1-wcs-event-telemetry-scraping-etl-pipeline">WCS Scraping & ETL</a></strong> <em>(Production)</em> — 100% automated weekly sync with zero manual maintenance.</li>
+<li><strong><a href="#2-ecommerce-merchandising-storefront-automation">Storefront Automation</a></strong> <em>(Active)</em> — Converts vector art and pushes variant configurations directly to Printful.</li>
+<li><strong><a href="#3-context-aware-technical-blog-drafter">RAG AI Blog Drafter</a></strong> <em>(In Progress)</em> — Speeds up first-draft technical writing by 4x using past posts as core context.</li>
+</ul>
+<hr />
+<h2>1. WCS Event Telemetry Scraping & ETL Pipeline</h2>
+<p><strong>Stack:</strong> React • TypeScript • Python • Pydantic • GitHub Actions • BeautifulSoup</p>
+<p><figure><img src="/assets/research/ai-experiments/wcs-scraper.png" alt="WCS Telemetry Scraper execution console and schema validation interface" /><figcaption>WCS Telemetry Scraper execution console and schema validation interface</figcaption></figure></p>
+<p>Tracking regional West Coast Swing event schedules and dancer registries from the <a href="https://worldwestcoastswingcouncil.com/events/">World Swing Dance Council</a> manually was a headache. Registration links broke often, and dates fell out of sync.</p>
+<p>To fix this, I wrote a lightweight scraper using <code>BeautifulSoup</code> and <code>Pydantic</code>. It ensures HTML table parsing resilience by searching across structural variations (such as both <code>tr.event-row</code> and <code>div.event-item</code> containers). It also handles missing registry links by creating fallback temporary hashes (<code>tmp_{hash(name)}</code>) so valid events never get dropped during ingestion.</p>
+<pre><code class="language-python"># etl/scraper.py - Pydantic validation &amp; fallback hashing
+from pydantic import BaseModel, Field
+from typing import Optional
+
+class WCSEvent(BaseModel):
+    name: str = Field(..., min_length=1)
+    location: str
+    date: str
+    registry_id: Optional[str] = None
+
+# Fallback generator for missing WSDC registry IDs
+def parse_registry_id(link_tag, event_name: str) -&gt; str:
+    if link_tag and 'href' in link_tag.attrs:
+        return link_tag['href'].split('/')[-1]
+    return f&quot;tmp_{hash(event_name)}&quot;</code></pre>
+<p>The pipeline runs on a weekly GitHub Actions cron job. Before committing changes to <code>public/data/event_queue.json</code>, it checks <code>git diff --staged</code> to make sure I don't spam commit logs when event data hasn't changed.</p>
+<pre><code class="language-yaml"># .github/workflows/wcs_etl.yml - Git diff guardrail
+- name: Commit and Push Data
+  run: |
+    git add public/data/event_queue.json
+    if git diff --staged --quiet; then
+      echo &quot;No changes in event data. Skipping commit.&quot;
+    else
+      git commit -m &quot;chore: Sync latest WSDC Event Data&quot;
+      git push
+    fi</code></pre>
+<p>To prevent bundle bloat, the React client consumes this data via a custom <code>useWCSData</code> hook that asynchronously fetches <code>public/data/event_queue.json</code>:</p>
+<pre><code class="language-typescript">// src/features/research/useWCSData.ts
+import { useState, useEffect } from 'react';
+
+export function useWCSData() {
+  const [events, setEvents] = useState([]);
+
+  useEffect(() =&gt; {
+    fetch('/data/event_queue.json')
+      .then(res =&gt; res.json())
+      .then(data =&gt; setEvents(data))
+      .catch(err =&gt; console.error(&quot;Failed to load WCS events&quot;, err));
+  }, []);
+
+  return events;
+}</code></pre>
+<ul>
+<li><strong>The Result:</strong> The pipeline runs quietly in the background every Wednesday, keeping my frontend JSON data fresh with zero manual maintenance, while the lightweight client fetching prevents initial bundle bloat.</li>
+</ul>
+<hr />
+<h2>2. Ecommerce Merchandising & Storefront Automation</h2>
+<p><strong>Stack:</strong> TypeScript • Printful REST API • Vector Processing</p>
+<p><figure><img src="/assets/research/ai-experiments/ecommerce-automation.png" alt="Printful REST API integration console showing automated variant mapping and catalog synchronization" /><figcaption>Printful REST API integration console showing automated variant mapping and catalog synchronization</figcaption></figure></p>
+<p>Setting up products manually on Printful—uploading artwork, recalculating margins, and mapping variants—became incredibly repetitive. To fix this, I built an automated pipeline that ingests source vector files, auto-clips dimensions to stay safely inside print zones, and syncs variants directly via the <a href="https://developers.printful.com/docs/">Printful API</a>.</p>
+<pre><code class="language-typescript">// sync/printful.ts - Automated variant payload creation
+export async function syncProductVariant(variantId: number, printFileUrl: string) {
+  const res = await fetch(`https://api.printful.com/store/products/${variantId}`, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      sync_product: { name: 'BoomTick Commemorative Apparel' },
+      sync_variants: [{ retail_price: '28.00', files: [{ type: 'default', url: printFileUrl }] }]
+    })
+  });
+  return res.json();
+}</code></pre>
+<ul>
+<li><strong>Why it matters:</strong> It removes the manual merchandising overhead and keeps product pricing and catalog nodes aligned in real time.</li>
+</ul>
+<hr />
+<h2>3. Context-Aware Technical Blog Drafter</h2>
+<p><strong>Stack:</strong> Vector DB • LLM • Markdown</p>
+<p><figure><img src="/assets/research/ai-experiments/blog-drafter.png" alt="AI Blog Drafter prompt generation and contextual vector retrieval interface" /><figcaption>AI Blog Drafter prompt generation and contextual vector retrieval interface</figcaption></figure></p>
+<p>Drafting technical posts from scratch usually means wasting time fixing inconsistent code formatting or drift from established style guidelines.</p>
+<p>To speed up my workflow, I built a local RAG tool. It indexes previous Markdown posts into a local vector store, pulling my exact writing style, phrasing preferences, and code conventions straight into the LLM prompts.</p>
+<ul>
+<li><strong>The Impact:</strong> It hits the right structural hierarchy on the first try, cutting down initial drafting times by roughly 4x while keeping human editorial control.</li>
+</ul>
+<hr /></article></main></div>
+  </body>
+</html>
