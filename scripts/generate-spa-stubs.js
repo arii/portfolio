@@ -11,6 +11,11 @@ const __dirname = path.dirname(__filename);
 const DIST_DIR = path.resolve(__dirname, '../dist');
 const CONTENT_DIR = path.resolve(__dirname, '../src/content/research');
 
+const SITE_URL = 'https://arii.github.io';
+const AUTHOR_NAME = 'Ariel Anders, PhD';
+const DEFAULT_IMAGE = `${SITE_URL}/assets/roboticist.jpg`;
+const DEFAULT_LICENSE = 'https://creativecommons.org/licenses/by-nc-nd/4.0/';
+
 function escapeHtml(str) {
   if (!str) return '';
   return String(str)
@@ -28,7 +33,17 @@ function parseFrontmatter(content) {
   const excerpt = yamlStr.match(/(?:excerpt|summary):\s*["']?([^"'\n]+)["']?/)?.[1] || '';
   const date = yamlStr.match(/date:\s*["']?([^"'\n]+)["']?/)?.[1] || '';
   const category = yamlStr.match(/category:\s*["']?([^"'\n]+)["']?/)?.[1] || 'DevAI';
-  return { title, excerpt, date, category };
+  const image = yamlStr.match(/image:\s*["']?([^"'\n]+)["']?/)?.[1] || '';
+  const tagsStr = yamlStr.match(/tags:\s*\[(.*?)\]/)?.[1] || '';
+  const tags = tagsStr ? tagsStr.split(',').map((t) => t.trim().replace(/^["']|["']$/g, '')) : [];
+  return { title, excerpt, date, category, image, tags };
+}
+
+function extractFirstMarkdownImage(content) {
+  const match = content.match(/!\[.*?\]\((.*?)\)/);
+  if (!match) return null;
+  const rawUrl = match[1].split('#')[0].trim();
+  return rawUrl || null;
 }
 
 function markdownToHtml(md) {
@@ -451,8 +466,6 @@ function getPrerenderedBody(route, meta, contentDir) {
 }
 
 function getRouteMetadata(route, contentDir) {
-  const SITE_URL = 'https://arii.github.io';
-
   if (route === 'about') {
     return {
       title: 'About & Background | Ariel Anders, PhD',
@@ -461,6 +474,8 @@ function getRouteMetadata(route, contentDir) {
       canonical: `${SITE_URL}/about`,
       heading: 'About Ariel',
       bodyText: 'Robotics background, research history, and personal interests. MIT EECS PhD 2019 · SM 2014.',
+      image: DEFAULT_IMAGE,
+      type: 'profile',
     };
   }
 
@@ -471,8 +486,9 @@ function getRouteMetadata(route, contentDir) {
         'Explore agentic DevAI tools, multi-agent CI/CD workflows, and developer automation software engineered by Ariel Anders, PhD (MIT CSAIL).',
       canonical: `${SITE_URL}/devai`,
       heading: 'DevAI & Software Systems',
-      bodyText:
-        'System architectures, agentic CI/CD pipelines, autonomous developer tooling, and shipped production applications.',
+      bodyText: 'System architectures, agentic CI/CD pipelines, autonomous developer tooling, and shipped production applications.',
+      image: DEFAULT_IMAGE,
+      type: 'collection',
     };
   }
 
@@ -483,8 +499,9 @@ function getRouteMetadata(route, contentDir) {
         'Discover robotics software research in conformant planning, belief-state manipulation, and autonomous systems by Ariel Anders, PhD (MIT CSAIL).',
       canonical: `${SITE_URL}/research`,
       heading: 'Robotics & Algorithmic Research',
-      bodyText:
-        'Planning under uncertainty, conformant belief-state manipulation, multi-robot coordination, and hardware automation systems.',
+      bodyText: 'Planning under uncertainty, conformant belief-state manipulation, multi-robot coordination, and hardware automation systems.',
+      image: DEFAULT_IMAGE,
+      type: 'collection',
     };
   }
 
@@ -495,8 +512,9 @@ function getRouteMetadata(route, contentDir) {
         'View the technical resume and experience of Ariel Anders, PhD (MIT CSAIL): expertise in robotics engineering, AI architecture, and software systems.',
       canonical: `${SITE_URL}/resume`,
       heading: 'Resume & Career Highlights',
-      bodyText:
-        'Roboticist and Senior Software Engineer with an MIT CSAIL PhD and track record across Waymo, Robust.AI, and Civ Robotics.',
+      bodyText: 'Roboticist and Senior Software Engineer with an MIT CSAIL PhD and track record across Waymo, Robust.AI, and Civ Robotics.',
+      image: DEFAULT_IMAGE,
+      type: 'profile',
     };
   }
 
@@ -505,17 +523,34 @@ function getRouteMetadata(route, contentDir) {
     const mdPath = path.join(contentDir, `${slug}.md`);
     if (fs.existsSync(mdPath)) {
       const content = fs.readFileSync(mdPath, 'utf-8');
-      const { title, excerpt } = parseFrontmatter(content);
+      const { title, excerpt, date, category, image: fmImage, tags } = parseFrontmatter(content);
       const cleanTitle = title ? `${title} | Ariel Anders, PhD` : 'AI & Robotics Engineering Portfolio | Ariel Anders, PhD';
-      const cleanDesc =
-        excerpt ||
-        'Explore AI consulting, robotics software engineering, and autonomous systems research by Ariel Anders, PhD (MIT).';
+      const cleanDesc = excerpt || 'Explore AI consulting, robotics software engineering, and autonomous systems research by Ariel Anders, PhD (MIT).';
+
+      const firstMdImg = extractFirstMarkdownImage(content);
+      const rawImage = fmImage || firstMdImg;
+      const fullImageUrl = rawImage
+        ? (rawImage.startsWith('http') ? rawImage : `${SITE_URL}${rawImage.startsWith('/') ? '' : '/'}${rawImage}`)
+        : DEFAULT_IMAGE;
+
+      const isScholarly =
+        category.toLowerCase().includes('robotics') ||
+        slug.includes('thesis') ||
+        slug.includes('planning') ||
+        slug.includes('report');
+
       return {
         title: cleanTitle,
         description: cleanDesc,
         canonical: `${SITE_URL}/${route}`,
         heading: title || 'Research & Engineering Deep-Dive',
         bodyText: excerpt || '',
+        image: fullImageUrl,
+        date: date || '2025-01-01',
+        tags,
+        category,
+        slug,
+        type: isScholarly ? 'ScholarlyArticle' : 'TechArticle',
       };
     }
   }
@@ -529,6 +564,156 @@ function getRouteMetadata(route, contentDir) {
     canonical: canonicalUrl,
     heading: 'AI & Robotics Engineering Portfolio',
     bodyText: '',
+    image: DEFAULT_IMAGE,
+    type: 'website',
+  };
+}
+
+function generateJsonLdForRoute(meta) {
+  const personEntity = {
+    '@type': 'Person',
+    '@id': `${SITE_URL}/about#person`,
+    url: `${SITE_URL}/about`,
+    name: AUTHOR_NAME,
+    jobTitle: 'Robotics & AI Consulting Engineer',
+    email: 'anders.ariel@gmail.com',
+    image: DEFAULT_IMAGE,
+    alumniOf: {
+      '@type': 'EducationalOrganization',
+      name: 'Massachusetts Institute of Technology (MIT)',
+      url: 'https://www.mit.edu',
+    },
+    knowsAbout: [
+      'Artificial Intelligence',
+      'Robotics Software Engineering',
+      'Autonomous Systems',
+      'Agentic Workflows',
+      'Motion Planning',
+      'Computer Vision',
+    ],
+    sameAs: [
+      'https://www.linkedin.com/in/ariel-anders/',
+      'https://github.com/arii',
+      'https://scholar.google.com/citations?user=NM6SfiEAAAAJ&hl=en',
+      'https://boomtick.blog',
+    ],
+  };
+
+  if (meta.type === 'TechArticle') {
+    const articleEntity = {
+      '@type': 'TechArticle',
+      '@id': `${meta.canonical}#article`,
+      headline: meta.heading,
+      description: meta.description,
+      url: meta.canonical,
+      image: {
+        '@type': 'ImageObject',
+        '@id': `${meta.image}#image`,
+        url: meta.image,
+        caption: meta.heading,
+        width: 1200,
+        height: 630,
+        license: DEFAULT_LICENSE,
+      },
+      mainEntityOfPage: meta.canonical,
+      proficiencyLevel: 'Expert',
+      articleSection: meta.category || 'Robotics & AI',
+      datePublished: meta.date,
+      author: {
+        '@type': 'Person',
+        '@id': `${SITE_URL}/about#person`,
+        name: AUTHOR_NAME,
+        url: SITE_URL,
+      },
+      publisher: {
+        '@type': 'Person',
+        '@id': `${SITE_URL}/about#person`,
+        name: AUTHOR_NAME,
+        url: SITE_URL,
+      },
+      keywords: meta.tags && meta.tags.length > 0
+        ? meta.tags.join(', ')
+        : 'Artificial Intelligence, Robotics Software Engineering, Autonomous Systems, Agentic Workflows',
+    };
+
+    const breadcrumbEntity = {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+        { '@type': 'ListItem', position: 2, name: 'DevAI & Software Systems', item: `${SITE_URL}/devai` },
+        { '@type': 'ListItem', position: 3, name: meta.heading, item: meta.canonical },
+      ],
+    };
+
+    return {
+      '@context': 'https://schema.org',
+      '@graph': [articleEntity, breadcrumbEntity, personEntity],
+    };
+  }
+
+  if (meta.type === 'ScholarlyArticle') {
+    const articleEntity = {
+      '@type': 'ScholarlyArticle',
+      '@id': `${meta.canonical}#article`,
+      name: meta.heading,
+      headline: meta.heading,
+      url: meta.canonical,
+      image: {
+        '@type': 'ImageObject',
+        '@id': `${meta.image}#image`,
+        url: meta.image,
+        caption: meta.heading,
+        width: 1200,
+        height: 630,
+        license: DEFAULT_LICENSE,
+      },
+      abstract: meta.description,
+      datePublished: meta.date,
+      author: [
+        {
+          '@type': 'Person',
+          '@id': `${SITE_URL}/about#person`,
+          name: AUTHOR_NAME,
+        },
+      ],
+      sameAs: 'https://scholar.google.com/citations?user=NM6SfiEAAAAJ&hl=en',
+    };
+
+    const breadcrumbEntity = {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+        { '@type': 'ListItem', position: 2, name: 'Robotics Research', item: `${SITE_URL}/research` },
+        { '@type': 'ListItem', position: 3, name: meta.heading, item: meta.canonical },
+      ],
+    };
+
+    return {
+      '@context': 'https://schema.org',
+      '@graph': [articleEntity, breadcrumbEntity, personEntity],
+    };
+  }
+
+  if (meta.type === 'profile') {
+    const profilePageEntity = {
+      '@type': 'ProfilePage',
+      '@id': `${meta.canonical}#profilepage`,
+      url: meta.canonical,
+      name: meta.title,
+      mainEntity: {
+        '@id': `${SITE_URL}/about#person`,
+      },
+    };
+
+    return {
+      '@context': 'https://schema.org',
+      '@graph': [personEntity, profilePageEntity],
+    };
+  }
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [personEntity],
   };
 }
 
@@ -556,12 +741,12 @@ function customizeHtmlForRoute(baseHtml, meta, route, contentDir) {
     `    <meta property="og:description" content="${escapedDesc}" />`,
     `    <meta property="og:type" content="website" />`,
     `    <meta property="og:url" content="${meta.canonical}" />`,
-    `    <meta property="og:image" content="https://arii.github.io/assets/roboticist.jpg" />`,
+    `    <meta property="og:image" content="${meta.image || DEFAULT_IMAGE}" />`,
     `    <!-- Twitter Card -->`,
     `    <meta name="twitter:card" content="summary_large_image" />`,
     `    <meta name="twitter:title" content="${escapedTitle}" />`,
     `    <meta name="twitter:description" content="${escapedDesc}" />`,
-    `    <meta name="twitter:image" content="https://arii.github.io/assets/roboticist.jpg" />`,
+    `    <meta name="twitter:image" content="${meta.image || DEFAULT_IMAGE}" />`,
   ].join('\n');
 
   // Insert custom head tags right after viewport meta tag or inside <head>
@@ -569,6 +754,13 @@ function customizeHtmlForRoute(baseHtml, meta, route, contentDir) {
     customized = customized.replace(/(<meta\s+name="viewport"[\s\S]*?\/?>)/i, `$1\n${seoHeadTags}`);
   } else {
     customized = customized.replace('</head>', `${seoHeadTags}\n  </head>`);
+  }
+
+  // Replace Default JSON-LD Schema Fallback
+  const jsonLd = generateJsonLdForRoute(meta);
+  if (jsonLd) {
+    const jsonLdScript = `<script type="application/ld+json">\n${JSON.stringify(jsonLd, null, 2)}\n    </script>`;
+    customized = customized.replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/, jsonLdScript);
   }
 
   // Inject Pre-rendered Semantic HTML into root for non-JS crawlers
