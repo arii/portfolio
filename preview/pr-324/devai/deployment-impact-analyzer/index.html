@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/portfolio/preview/pr-324/vite.svg" />
+    <link rel="alternate icon" href="/portfolio/preview/pr-324/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Visual Impact / UX Audit | Ariel Anders, PhD</title>
+    <meta name="description" content="How I built a semantic visual impact analysis pipeline using dependency-cruiser, Playwright screenshot diffing, and automated severity scoring." />
+    <link rel="canonical" href="https://arii.github.io/devai/deployment-impact-analyzer" />
+    <meta name="google-site-verification" content="FGbpuhF_c3YUFon1LzrzqmW1jvVPFygugss24n0wn5k" />
+
+    <!-- SPA redirect handling for GitHub Pages subpaths -->
+    <script>
+      (function(l) {
+        if (l.search[1] === '/' ) {
+          var decoded = l.search.slice(1).split('&').map(function(s) {
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          window.history.replaceState(null, null,
+              l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location));
+    </script>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:site_name" content="Ariel Anders Portfolio" />
+    <meta property="og:title" content="Visual Impact / UX Audit | Ariel Anders, PhD" />
+    <meta property="og:description" content="How I built a semantic visual impact analysis pipeline using dependency-cruiser, Playwright screenshot diffing, and automated severity scoring." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://arii.github.io/devai/deployment-impact-analyzer" />
+    <meta property="og:image" content="https://arii.github.io/assets/studies/deployment-impact-analyzer/before.svg" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Visual Impact / UX Audit | Ariel Anders, PhD" />
+    <meta name="twitter:description" content="How I built a semantic visual impact analysis pipeline using dependency-cruiser, Playwright screenshot diffing, and automated severity scoring." />
+    <meta name="twitter:image" content="https://arii.github.io/assets/studies/deployment-impact-analyzer/before.svg" />
+
+    <!-- Default JSON-LD Schema Fallback -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "@id": "https://arii.github.io/devai/deployment-impact-analyzer#article",
+      "headline": "Visual Impact / UX Audit",
+      "description": "How I built a semantic visual impact analysis pipeline using dependency-cruiser, Playwright screenshot diffing, and automated severity scoring.",
+      "url": "https://arii.github.io/devai/deployment-impact-analyzer",
+      "image": {
+        "@type": "ImageObject",
+        "@id": "https://arii.github.io/assets/studies/deployment-impact-analyzer/before.svg#image",
+        "url": "https://arii.github.io/assets/studies/deployment-impact-analyzer/before.svg",
+        "caption": "Visual Impact / UX Audit",
+        "width": 1200,
+        "height": 630,
+        "license": "https://creativecommons.org/licenses/by-nc-nd/4.0/"
+      },
+      "mainEntityOfPage": "https://arii.github.io/devai/deployment-impact-analyzer",
+      "proficiencyLevel": "Expert",
+      "articleSection": "DevAI",
+      "datePublished": "2026-06-19",
+      "author": {
+        "@type": "Person",
+        "@id": "https://arii.github.io/about#person",
+        "name": "Ariel Anders, PhD",
+        "url": "https://arii.github.io"
+      },
+      "publisher": {
+        "@type": "Person",
+        "@id": "https://arii.github.io/about#person",
+        "name": "Ariel Anders, PhD",
+        "url": "https://arii.github.io"
+      },
+      "keywords": "Playwright, CI/CD, UX Audit, Dependency Graph, Automation"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://arii.github.io/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "DevAI & Software Systems",
+          "item": "https://arii.github.io/devai"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Visual Impact / UX Audit",
+          "item": "https://arii.github.io/devai/deployment-impact-analyzer"
+        }
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://arii.github.io/about#person",
+      "url": "https://arii.github.io/about",
+      "name": "Ariel Anders, PhD",
+      "jobTitle": "Robotics & AI Consulting Engineer",
+      "email": "anders.ariel@gmail.com",
+      "image": "https://arii.github.io/assets/roboticist.jpg",
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "Massachusetts Institute of Technology (MIT)",
+        "url": "https://www.mit.edu"
+      },
+      "knowsAbout": [
+        "Artificial Intelligence",
+        "Robotics Software Engineering",
+        "Autonomous Systems",
+        "Agentic Workflows",
+        "Motion Planning",
+        "Computer Vision"
+      ],
+      "sameAs": [
+        "https://www.linkedin.com/in/ariel-anders/",
+        "https://github.com/arii",
+        "https://scholar.google.com/citations?user=NM6SfiEAAAAJ&hl=en",
+        "https://boomtick.blog"
+      ]
+    }
+  ]
+}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    </noscript>
+    <script type="module" crossorigin src="/portfolio/preview/pr-324/assets/index-dO2Ekoxe.js"></script>
+    <link rel="modulepreload" crossorigin href="/portfolio/preview/pr-324/assets/vendor-react-BD-e1e1Q.js">
+    <link rel="stylesheet" crossorigin href="/portfolio/preview/pr-324/assets/index-Do-st99S.css">
+  </head>
+  <body>
+    <div id="root"><main style="max-width:1100px;margin:0 auto;padding:2rem 1rem;"><h1>Visual Impact / UX Audit</h1><p>How I built a semantic visual impact analysis pipeline using dependency-cruiser, Playwright screenshot diffing, and automated severity scoring.</p></main></div>
+  </body>
+</html>
