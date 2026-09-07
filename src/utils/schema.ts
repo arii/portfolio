@@ -98,8 +98,8 @@ export function getOrganizationSchema() {
     url: `${SITE_URL}/about`,
     logo: {
       '@type': 'ImageObject',
-      '@id': `${SITE_URL}/vite.svg#logo`,
-      url: `${SITE_URL}/vite.svg`,
+      '@id': `${SITE_URL}/favicon.svg#logo`,
+      url: `${SITE_URL}/favicon.svg`,
       width: 512,
       height: 512,
       caption: 'Ariel Anders Engineering Logo',

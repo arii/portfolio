@@ -40,14 +40,15 @@ describe('index.html SEO & Accessibility Tags', () => {
     expect(htmlContent).toContain('"@type": "Service"');
   });
 
-  it('links to valid favicon SVG with brand lettermark elements', () => {
+  it('links to valid favicon SVG with brand lettermark elements and raster variants', () => {
     const indexPath = path.resolve(__dirname, '../../index.html');
     const htmlContent = fs.readFileSync(indexPath, 'utf-8');
 
-    const faviconMatch = htmlContent.match(/<link[^>]*rel="icon"[^>]*href="([^"]+)"/);
+    const faviconMatch = htmlContent.match(/<link[^>]*rel="icon"[^>]*type="image\/svg\+xml"[^>]*href="([^"]+)"/);
     expect(faviconMatch).not.toBeNull();
 
     const faviconHref = faviconMatch![1].replace(/^\//, '');
+    expect(faviconHref).toBe('favicon.svg');
     const faviconPath = path.resolve(__dirname, '../../public', faviconHref);
     // eslint-disable-next-line security/detect-non-literal-fs-filename
     expect(fs.existsSync(faviconPath)).toBe(true);
@@ -57,5 +58,21 @@ describe('index.html SEO & Accessibility Tags', () => {
     expect(svgContent).toContain('<svg');
     expect(svgContent).toContain('viewBox="0 0 256 256"');
     expect(svgContent).toContain('#f59e0b'); // Brand amber accent color
+
+    // Check raster variants linked in head
+    expect(htmlContent).toContain('href="/apple-touch-icon.png"');
+    expect(htmlContent).toContain('href="/favicon.png"');
+    expect(htmlContent).toContain('href="/favicon.ico"');
+
+    const appleTouchPath = path.resolve(__dirname, '../../public/apple-touch-icon.png');
+    const faviconPngPath = path.resolve(__dirname, '../../public/favicon.png');
+    const faviconIcoPath = path.resolve(__dirname, '../../public/favicon.ico');
+
+    // eslint-disable-next-line security/detect-non-literal-fs-filename
+    expect(fs.existsSync(appleTouchPath)).toBe(true);
+    // eslint-disable-next-line security/detect-non-literal-fs-filename
+    expect(fs.existsSync(faviconPngPath)).toBe(true);
+    // eslint-disable-next-line security/detect-non-literal-fs-filename
+    expect(fs.existsSync(faviconIcoPath)).toBe(true);
   });
 });
