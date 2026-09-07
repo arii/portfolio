@@ -6,6 +6,7 @@ import SEO from '@/components/SEO';
 import fs from 'node:fs';
 import path from 'node:path';
 import { generateSitemap } from '../../scripts/generate-sitemap.js';
+import { generateSpaStubs } from '../../scripts/generate-spa-stubs.js';
 import {
   getPersonAndProfileSchema,
   getServiceSchema,
@@ -91,6 +92,40 @@ describe('SEO Component & Search Configuration', () => {
     expect(llmsFullContent).toContain('# Ariel Anders, PhD — Full Portfolio & Engineering Documentation');
     expect(llmsFullContent).toContain('## Document: Automating PR Reviews with GitHub Actions, Gemini, and Boomtick DevAI (gitops-pr-reviewer)');
     expect(llmsFullContent).toContain('## Document: Reliably Arranging Objects: A Conformant Planning Approach to Robot Manipulation (conformant-planning-manipulation)');
+  });
+
+  it('generates build-time SPA stubs with route-specific canonical tags and pre-baked HTML metadata', () => {
+    // Ensure dist/index.html exists for testing generateSpaStubs
+    const distDir = path.resolve(__dirname, '../../dist');
+    if (!fs.existsSync(distDir)) {
+      fs.mkdirSync(distDir, { recursive: true });
+    }
+    const indexPath = path.resolve(__dirname, '../../index.html');
+    const indexContent = fs.readFileSync(indexPath, 'utf-8');
+    fs.writeFileSync(path.join(distDir, 'index.html'), indexContent, 'utf-8');
+
+    generateSpaStubs();
+
+    const rootDistHtml = fs.readFileSync(path.join(distDir, 'index.html'), 'utf-8');
+    expect(rootDistHtml).toContain('<link rel="canonical" href="https://arii.github.io/" />');
+
+    // eslint-disable-next-line security/detect-non-literal-fs-filename
+    const researchStubHtml = fs.readFileSync(path.join(distDir, 'research/index.html'), 'utf-8');
+    expect(researchStubHtml).toContain('<link rel="canonical" href="https://arii.github.io/research" />');
+    expect(researchStubHtml).toContain('<title>Robotics & Autonomous Research | Ariel Anders, PhD</title>');
+    expect((researchStubHtml.match(/<title/g) || []).length).toBe(1);
+    expect((researchStubHtml.match(/<link\s+rel="canonical"/g) || []).length).toBe(1);
+    expect((researchStubHtml.match(/<meta\s+name="description"/g) || []).length).toBe(1);
+
+    // eslint-disable-next-line security/detect-non-literal-fs-filename
+    const devaiStubHtml = fs.readFileSync(path.join(distDir, 'devai/index.html'), 'utf-8');
+    expect(devaiStubHtml).toContain('<link rel="canonical" href="https://arii.github.io/devai" />');
+    expect(devaiStubHtml).toContain('<title>DevAI & Agentic Automation | Ariel Anders, PhD</title>');
+    expect((devaiStubHtml.match(/<title/g) || []).length).toBe(1);
+    expect((devaiStubHtml.match(/<link\s+rel="canonical"/g) || []).length).toBe(1);
+
+    const resumeStubHtml = fs.readFileSync(path.join(distDir, 'resume/index.html'), 'utf-8');
+    expect(resumeStubHtml).toContain('<link rel="canonical" href="https://arii.github.io/resume" />');
   });
 
   it('generates clean public/sitemap.xml containing active canonical routes and Google Image sitemap tags', () => {

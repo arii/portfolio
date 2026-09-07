@@ -120,10 +120,13 @@ function getRouteMetadata(route, contentDir) {
     }
   }
 
+  const cleanRoutePath = route ? (route.startsWith('/') ? route : `/${route}`) : '/';
+  const canonicalUrl = `${SITE_URL}${cleanRoutePath === '/' ? '/' : cleanRoutePath}`;
+
   return {
     title: 'AI & Robotics Engineering Portfolio | Ariel Anders, PhD',
     description: 'Explore AI consulting, robotics software engineering, and autonomous systems research by Ariel Anders, PhD (MIT). View open-source tools and deep dives.',
-    canonical: `${SITE_URL}/${route}`,
+    canonical: canonicalUrl,
     heading: 'AI & Robotics Engineering Portfolio',
     bodyText: '',
     image: DEFAULT_IMAGE,
@@ -282,51 +285,41 @@ function generateJsonLdForRoute(meta) {
 function customizeHtmlForRoute(baseHtml, meta) {
   let customized = baseHtml;
 
-  // Replace Title
-  customized = customized.replace(/<title>.*?<\/title>/, `<title>${meta.title}</title>`);
+  // 1. Strip ALL existing title, description, canonical, OG, and Twitter tags
+  customized = customized.replace(/<title[\s\S]*?<\/title>/gi, '');
+  customized = customized.replace(/<meta\s+name="description"[\s\S]*?\/?>/gi, '');
+  customized = customized.replace(/<link\s+rel="canonical"[\s\S]*?\/?>/gi, '');
+  customized = customized.replace(/<meta\s+property="og:(?:title|description|url|site_name|type|image)"[\s\S]*?\/?>/gi, '');
+  customized = customized.replace(/<meta\s+name="twitter:(?:card|title|description|image)"[\s\S]*?\/?>/gi, '');
 
-  // Replace Meta Description
-  customized = customized.replace(
-    /<meta\s+name="description"\s+content=".*?"\s*\/?>/,
-    `<meta name="description" content="${meta.description.replace(/"/g, '&quot;')}" />`
-  );
+  const escapedTitle = meta.title.replace(/"/g, '&quot;');
+  const escapedDesc = meta.description.replace(/"/g, '&quot;');
 
-  // Replace Canonical Tag
-  customized = customized.replace(
-    /<link\s+rel="canonical"\s+href=".*?"\s*\/?>/,
-    `<link rel="canonical" href="${meta.canonical}" />`
-  );
+  // 2. Build explicit, clean head metadata block
+  const seoHeadTags = [
+    `    <title>${meta.title}</title>`,
+    `    <meta name="description" content="${escapedDesc}" />`,
+    `    <link rel="canonical" href="${meta.canonical}" />`,
+    `    <!-- Open Graph / Facebook -->`,
+    `    <meta property="og:site_name" content="Ariel Anders Portfolio" />`,
+    `    <meta property="og:title" content="${escapedTitle}" />`,
+    `    <meta property="og:description" content="${escapedDesc}" />`,
+    `    <meta property="og:type" content="website" />`,
+    `    <meta property="og:url" content="${meta.canonical}" />`,
+    `    <meta property="og:image" content="${meta.image || DEFAULT_IMAGE}" />`,
+    `    <!-- Twitter Card -->`,
+    `    <meta name="twitter:card" content="summary_large_image" />`,
+    `    <meta name="twitter:title" content="${escapedTitle}" />`,
+    `    <meta name="twitter:description" content="${escapedDesc}" />`,
+    `    <meta name="twitter:image" content="${meta.image || DEFAULT_IMAGE}" />`,
+  ].join('\n');
 
-  // Replace Open Graph / Twitter Tags
-  customized = customized.replace(
-    /<meta\s+property="og:title"\s+content=".*?"\s*\/?>/,
-    `<meta property="og:title" content="${meta.title.replace(/"/g, '&quot;')}" />`
-  );
-  customized = customized.replace(
-    /<meta\s+property="og:description"\s+content=".*?"\s*\/?>/,
-    `<meta property="og:description" content="${meta.description.replace(/"/g, '&quot;')}" />`
-  );
-  customized = customized.replace(
-    /<meta\s+property="og:url"\s+content=".*?"\s*\/?>/,
-    `<meta property="og:url" content="${meta.canonical}" />`
-  );
-  customized = customized.replace(
-    /<meta\s+property="og:image"\s+content=".*?"\s*\/?>/,
-    `<meta property="og:image" content="${meta.image}" />`
-  );
-
-  customized = customized.replace(
-    /<meta\s+name="twitter:title"\s+content=".*?"\s*\/?>/,
-    `<meta name="twitter:title" content="${meta.title.replace(/"/g, '&quot;')}" />`
-  );
-  customized = customized.replace(
-    /<meta\s+name="twitter:description"\s+content=".*?"\s*\/?>/,
-    `<meta name="twitter:description" content="${meta.description.replace(/"/g, '&quot;')}" />`
-  );
-  customized = customized.replace(
-    /<meta\s+name="twitter:image"\s+content=".*?"\s*\/?>/,
-    `<meta name="twitter:image" content="${meta.image}" />`
-  );
+  // Insert custom head tags right after viewport meta tag or inside <head>
+  if (/<meta\s+name="viewport"[\s\S]*?\/?>/i.test(customized)) {
+    customized = customized.replace(/(<meta\s+name="viewport"[\s\S]*?\/?>)/i, `$1\n${seoHeadTags}`);
+  } else {
+    customized = customized.replace('</head>', `${seoHeadTags}\n  </head>`);
+  }
 
   // Replace Default JSON-LD Schema Fallback
   const jsonLd = generateJsonLdForRoute(meta);
@@ -350,6 +343,12 @@ export function generateSpaStubs() {
   }
 
   const indexHtmlContent = fs.readFileSync(indexHtmlPath, 'utf-8');
+
+  // 0. Update root dist/index.html with root canonical tag
+  const rootMeta = getRouteMetadata('', CONTENT_DIR);
+  const customizedRootHtml = customizeHtmlForRoute(indexHtmlContent, rootMeta);
+  fs.writeFileSync(indexHtmlPath, customizedRootHtml, 'utf-8');
+  console.log(`✅ Updated root dist/index.html with pre-rendered canonical ${rootMeta.canonical}`);
 
   // 1. Generate dist/404.html for GitHub Pages fallback with sessionStorage redirect script
   const spa404Script = `<script>
