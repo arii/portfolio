@@ -95,46 +95,28 @@ function getRouteMetadata(route, contentDir) {
 function customizeHtmlForRoute(baseHtml, meta) {
   let customized = baseHtml;
 
-  // Replace Title
-  customized = customized.replace(/<title>.*?<\/title>/, `<title>${meta.title}</title>`);
+  // Remove existing tags to prevent duplicates
+  customized = customized.replace(/<title>.*?<\/title>/g, '');
+  customized = customized.replace(/<meta\s+name="description"\s+content=".*?"\s*\/?>/g, '');
+  customized = customized.replace(/<link\s+rel="canonical"\s+href=".*?"\s*\/?>/g, '');
+  customized = customized.replace(/<meta\s+property="og:title"\s+content=".*?"\s*\/?>/g, '');
+  customized = customized.replace(/<meta\s+property="og:description"\s+content=".*?"\s*\/?>/g, '');
+  customized = customized.replace(/<meta\s+property="og:url"\s+content=".*?"\s*\/?>/g, '');
+  customized = customized.replace(/<meta\s+name="twitter:title"\s+content=".*?"\s*\/?>/g, '');
+  customized = customized.replace(/<meta\s+name="twitter:description"\s+content=".*?"\s*\/?>/g, '');
 
-  // Replace Meta Description
-  customized = customized.replace(
-    /<meta\s+name="description"\s+content=".*?"\s*\/?>/,
-    `<meta name="description" content="${meta.description.replace(/"/g, '&quot;')}" />`
-  );
+  // Inject consolidated meta tags
+  const tagsToInject = `
+    <title>${meta.title}</title>
+    <meta name="description" content="${meta.description.replace(/"/g, '&quot;')}" />
+    <link rel="canonical" href="${meta.canonical}" />
+    <meta property="og:title" content="${meta.title.replace(/"/g, '&quot;')}" />
+    <meta property="og:description" content="${meta.description.replace(/"/g, '&quot;')}" />
+    <meta property="og:url" content="${meta.canonical}" />
+    <meta name="twitter:title" content="${meta.title.replace(/"/g, '&quot;')}" />
+    <meta name="twitter:description" content="${meta.description.replace(/"/g, '&quot;')}" />`;
 
-  // Replace or Insert Canonical Tag
-  if (/<link\s+rel="canonical"\s+href=".*?"\s*\/?>/.test(customized)) {
-    customized = customized.replace(
-      /<link\s+rel="canonical"\s+href=".*?"\s*\/?>/,
-      `<link rel="canonical" href="${meta.canonical}" />`
-    );
-  } else {
-    customized = customized.replace('</head>', `  <link rel="canonical" href="${meta.canonical}" />\n  </head>`);
-  }
-
-  // Replace Open Graph / Twitter Tags
-  customized = customized.replace(
-    /<meta\s+property="og:title"\s+content=".*?"\s*\/?>/,
-    `<meta property="og:title" content="${meta.title.replace(/"/g, '&quot;')}" />`
-  );
-  customized = customized.replace(
-    /<meta\s+property="og:description"\s+content=".*?"\s*\/?>/,
-    `<meta property="og:description" content="${meta.description.replace(/"/g, '&quot;')}" />`
-  );
-  customized = customized.replace(
-    /<meta\s+property="og:url"\s+content=".*?"\s*\/?>/,
-    `<meta property="og:url" content="${meta.canonical}" />`
-  );
-  customized = customized.replace(
-    /<meta\s+name="twitter:title"\s+content=".*?"\s*\/?>/,
-    `<meta name="twitter:title" content="${meta.title.replace(/"/g, '&quot;')}" />`
-  );
-  customized = customized.replace(
-    /<meta\s+name="twitter:description"\s+content=".*?"\s*\/?>/,
-    `<meta name="twitter:description" content="${meta.description.replace(/"/g, '&quot;')}" />`
-  );
+  customized = customized.replace('</head>', `${tagsToInject}\n  </head>`);
 
   // Inject Pre-rendered Semantic HTML into root for non-JS crawlers
   const prerenderedBody = `<div id="root"><main style="max-width:1100px;margin:0 auto;padding:2rem 1rem;"><h1>${meta.heading}</h1><p>${meta.bodyText}</p></main></div>`;
