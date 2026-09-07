@@ -10,7 +10,11 @@ import { HonorsSection } from '@/components/resume/HonorsSection';
 import { TeachingSection } from '@/components/resume/TeachingSection';
 import { PublicationsSection } from '@/components/resume/PublicationsSection';
 import SEO from '@/components/SEO';
-import { getPersonAndProfileSchema, getServiceSchema } from '@/utils/schema';
+import {
+  getPersonAndProfileSchema,
+  getServiceSchema,
+  getResumeCareerSchema,
+} from '@/utils/schema';
 
 export interface ResumeProps {
   version?: string;
@@ -42,7 +46,11 @@ const Resume: React.FC<ResumeProps> = ({ version = 'v2.1' }) => {
     setExpandHonors(expand);
   };
 
-  const resumeSchemas = [getPersonAndProfileSchema('/resume'), getServiceSchema()];
+  const resumeSchemas = [
+    getPersonAndProfileSchema('/resume'),
+    getServiceSchema(),
+    getResumeCareerSchema(),
+  ];
 
   return (
     <div className="max-w-5xl mx-auto space-y-10 pb-16 print:space-y-6 print:pb-0 print:max-w-none">

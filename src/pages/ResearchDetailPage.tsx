@@ -8,6 +8,8 @@ import SafeImage from '@/components/ui/SafeImage';
 import { Box, Stack } from '@/components/layout';
 import SEO from '@/components/SEO';
 import {
+  SITE_URL,
+  DEFAULT_LICENSE,
   getTechArticleSchema,
   getScholarlyArticleSchema,
   getBreadcrumbSchema,
@@ -360,7 +362,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
     { name: post.title, path: `/${primarySection}/${post.slug}` },
   ]);
 
-  const videoSchemas = [];
+  const videoSchemas: any[] = [];
   if (matchingTool?.videoUrl) {
     const rawUrl = matchingTool.videoUrl;
     const parsed = parseVideoUrl(rawUrl);
@@ -396,7 +398,50 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
     }
   }
 
-  const detailSchemas = [articleSchema, breadcrumbSchema, ...videoSchemas];
+  // Extract all markdown images to build full ImageObject entities for @graph
+  const imageSchemas: any[] = [];
+  const mdImageRegex = /!\[([^\]]*)\]\(([^)]+)\)/g;
+  let imgMatchIter;
+  const seenImageUrls = new Set<string>();
+
+  while ((imgMatchIter = mdImageRegex.exec(post.content)) !== null) {
+    const altText = imgMatchIter[1] || '';
+    const rawUrl = imgMatchIter[2] || '';
+    const cleanPath = rawUrl.split('#')[0].trim();
+    if (!cleanPath) continue;
+
+    const fullImgUrl = cleanPath.startsWith('http')
+      ? cleanPath
+      : `${SITE_URL}${cleanPath.startsWith('/') ? '' : '/'}${cleanPath}`;
+
+    if (!seenImageUrls.has(fullImgUrl)) {
+      seenImageUrls.add(fullImgUrl);
+      let caption = altText.includes('|') ? altText.split('|')[0].trim() : altText;
+      caption = caption.replace(/^Figure:\s*/i, '').replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').trim();
+
+      imageSchemas.push({
+        '@context': 'https://schema.org',
+        '@type': 'ImageObject',
+        '@id': `${fullImgUrl}#image`,
+        url: fullImgUrl,
+        caption: caption || post.title,
+        width: 1200,
+        height: 630,
+        license: DEFAULT_LICENSE,
+      });
+    }
+  }
+
+  // Unified @graph structure incorporating TechArticle/ScholarlyArticle, BreadcrumbList, ImageObjects, and VideoObjects
+  const graphSchema = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      articleSchema,
+      breadcrumbSchema,
+      ...imageSchemas,
+      ...videoSchemas,
+    ],
+  };
 
   return (
     <article className="mx-auto max-w-4xl px-4 py-12 space-y-8">
@@ -406,7 +451,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
         canonicalUrl={`/${primarySection}/${post.slug}`}
         ogType="article"
         ogImage={ogImage}
-        jsonLd={detailSchemas}
+        jsonLd={graphSchema}
       />
       <button
         onClick={onBack}

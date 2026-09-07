@@ -6,6 +6,7 @@ export const AUTHOR_JOB_TITLE = 'Robotics & AI Consulting Engineer';
 export const AUTHOR_ALUMNI = 'Massachusetts Institute of Technology (MIT)';
 export const AUTHOR_EMAIL = 'anders.ariel@gmail.com';
 export const AUTHOR_IMAGE = `${SITE_URL}/assets/roboticist.jpg`;
+export const DEFAULT_LICENSE = 'https://creativecommons.org/licenses/by-nc-nd/4.0/';
 
 export const AUTHOR_SAME_AS = [
   'https://www.linkedin.com/in/ariel-anders/',
@@ -42,6 +43,7 @@ export interface TechArticleSchemaOptions {
   imageWidth?: number;
   imageHeight?: number;
   keywords?: string[];
+  license?: string;
 }
 
 export interface ScholarlyArticleSchemaOptions {
@@ -53,6 +55,19 @@ export interface ScholarlyArticleSchemaOptions {
   imageCaption?: string;
   imageWidth?: number;
   imageHeight?: number;
+  license?: string;
+}
+
+export interface CollectionPageSchemaOptions {
+  name: string;
+  description: string;
+  canonicalPath: string;
+  items: Array<{
+    name: string;
+    description?: string;
+    url: string;
+    image?: string;
+  }>;
 }
 
 export interface BreadcrumbItem {
@@ -96,6 +111,7 @@ export function getOrganizationSchema() {
       caption: 'Ariel Anders, PhD - AI & Robotics Consulting Engineer',
       width: 1200,
       height: 1200,
+      license: DEFAULT_LICENSE,
     },
     description:
       'Professional AI software engineering, autonomous robotics architecture, and agentic multi-agent systems consulting.',
@@ -150,6 +166,7 @@ export function getPersonAndProfileSchema(canonicalUrl: string = '/') {
       caption: `${AUTHOR_NAME} - ${AUTHOR_JOB_TITLE}`,
       width: 1200,
       height: 1200,
+      license: DEFAULT_LICENSE,
     },
     alumniOf: {
       '@type': 'EducationalOrganization',
@@ -336,6 +353,7 @@ export function getTechArticleSchema(options: TechArticleSchemaOptions) {
     caption: options.imageCaption || options.headline,
     width: options.imageWidth || 1200,
     height: options.imageHeight || 630,
+    license: options.license || DEFAULT_LICENSE,
   };
 
   return {
@@ -384,6 +402,7 @@ export function getScholarlyArticleSchema(options: ScholarlyArticleSchemaOptions
     caption: options.imageCaption || options.headline,
     width: options.imageWidth || 1200,
     height: options.imageHeight || 630,
+    license: options.license || DEFAULT_LICENSE,
   };
 
   return {
@@ -404,6 +423,188 @@ export function getScholarlyArticleSchema(options: ScholarlyArticleSchemaOptions
       },
     ],
     sameAs: 'https://scholar.google.com/citations?user=NM6SfiEAAAAJ&hl=en',
+  };
+}
+
+export function getCollectionPageSchema(options: CollectionPageSchemaOptions) {
+  const normalized = options.canonicalPath.startsWith('/') ? options.canonicalPath : '/' + options.canonicalPath;
+  const fullUrl = SITE_URL + normalized;
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    '@id': `${fullUrl}#collection`,
+    url: fullUrl,
+    name: options.name,
+    description: options.description,
+    mainEntity: {
+      '@type': 'ItemList',
+      '@id': `${fullUrl}#itemlist`,
+      numberOfItems: options.items.length,
+      itemListElement: options.items.map((item, index) => {
+        const itemUrl = item.url.startsWith('http')
+          ? item.url
+          : `${SITE_URL}${item.url.startsWith('/') ? '' : '/'}${item.url}`;
+
+        const listItem: any = {
+          '@type': 'ListItem',
+          position: index + 1,
+          name: item.name,
+          url: itemUrl,
+        };
+
+        if (item.description) {
+          listItem.description = item.description;
+        }
+
+        if (item.image) {
+          const imgUrl = item.image.startsWith('http')
+            ? item.image
+            : `${SITE_URL}${item.image.startsWith('/') ? '' : '/'}${item.image}`;
+          listItem.image = {
+            '@type': 'ImageObject',
+            url: imgUrl,
+            caption: item.name,
+          };
+        }
+
+        return listItem;
+      }),
+    },
+  };
+}
+
+export function getResumeCareerSchema() {
+  const fullUrl = `${SITE_URL}/resume`;
+
+  const occupation = {
+    '@type': 'Occupation',
+    '@id': `${fullUrl}#occupation`,
+    name: 'Senior Software Engineer & Roboticist',
+    occupationLocation: {
+      '@type': 'City',
+      name: 'San Francisco',
+    },
+    skills: [
+      'ROS / ROS 2',
+      'C++',
+      'Python',
+      'TypeScript',
+      'Motion Planning',
+      'Reactive Navigation',
+      'Agentic DevAI',
+      'CI/CD Pipelines',
+      'State Estimation',
+    ],
+    responsibilities: [
+      'Architecting onboard motion planning and decision-making software for autonomous vehicles and robotics fleets.',
+      'Building agentic CI/CD automation pipelines, telemetry streaming systems, and developer tooling.',
+    ],
+  };
+
+  const workExperiences = [
+    {
+      '@type': 'WorkExperience',
+      title: 'Senior Algorithms Developer',
+      organization: {
+        '@type': 'Organization',
+        name: 'Civ Robotics',
+        url: 'https://www.civrobotics.com/',
+      },
+      startDate: '2025-09',
+      endDate: '2026-04',
+      description: 'Developing core navigation and localization software for autonomous forklifts using C++, Python, and ROS 2.',
+    },
+    {
+      '@type': 'WorkExperience',
+      title: 'Independent AI Engineering & Research',
+      organization: {
+        '@type': 'Organization',
+        name: 'Autonomous Fitness Ecosystem & AI DevOps Pipeline',
+        url: 'https://github.com/arii/hrm',
+      },
+      startDate: '2025-01',
+      description: 'Dedicated research & development period focused on agentic AI pipelines and telemetry infrastructure.',
+    },
+    {
+      '@type': 'WorkExperience',
+      title: 'Senior Software Engineer',
+      organization: {
+        '@type': 'Organization',
+        name: 'Waymo',
+        url: 'https://waymo.com/',
+      },
+      startDate: '2022-11',
+      endDate: '2024-12',
+      description: 'Roboticist in the Planning team, developing onboard motion planning and decision-making software for safe self-driving technology.',
+    },
+    {
+      '@type': 'WorkExperience',
+      title: 'Senior Roboticist & Tech Lead',
+      organization: {
+        '@type': 'Organization',
+        name: 'Robust.AI',
+        url: 'https://www.robust.ai/',
+      },
+      startDate: '2019-07',
+      endDate: '2022-10',
+      description: 'First roboticist hire for building industrial-grade cognitive engines and social navigation architectures.',
+    },
+    {
+      '@type': 'WorkExperience',
+      title: 'Researcher',
+      organization: {
+        '@type': 'EducationalOrganization',
+        name: 'Learning and Intelligent Systems, CSAIL MIT',
+        url: 'https://www.csail.mit.edu/',
+      },
+      startDate: '2012',
+      endDate: '2019',
+      description: 'Robot manipulation research under uncertainty on Willow Garage PR2 robot.',
+    },
+  ];
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ProfilePage',
+    '@id': `${fullUrl}#resume-profile`,
+    url: fullUrl,
+    name: 'Career & Resume of ' + AUTHOR_NAME,
+    mainEntity: {
+      '@type': 'Person',
+      '@id': `${SITE_URL}/about#person`,
+      name: AUTHOR_NAME,
+      jobTitle: AUTHOR_JOB_TITLE,
+      email: AUTHOR_EMAIL,
+      url: `${SITE_URL}/resume`,
+      hasOccupation: occupation,
+      hasCredential: [
+        {
+          '@type': 'EducationalOccupationalCredential',
+          credentialCategory: 'degree',
+          name: 'Doctor of Philosophy (Ph.D.) in Electrical Engineering and Computer Science',
+          recognizedBy: {
+            '@type': 'EducationalOrganization',
+            name: AUTHOR_ALUMNI,
+            url: 'https://www.mit.edu',
+          },
+        },
+        {
+          '@type': 'EducationalOccupationalCredential',
+          credentialCategory: 'degree',
+          name: 'Master of Science (S.M.) in Electrical Engineering and Computer Science',
+          recognizedBy: {
+            '@type': 'EducationalOrganization',
+            name: AUTHOR_ALUMNI,
+            url: 'https://www.mit.edu',
+          },
+        },
+      ],
+      knowsAbout: AUTHOR_KNOWS_ABOUT,
+      sameAs: AUTHOR_SAME_AS,
+      worksFor: workExperiences.map((exp) => exp.organization),
+    },
+    hasPart: workExperiences,
   };
 }
 

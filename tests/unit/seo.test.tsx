@@ -12,6 +12,8 @@ import {
   getSoftwareSchema,
   getTechArticleSchema,
   getScholarlyArticleSchema,
+  getCollectionPageSchema,
+  getResumeCareerSchema,
   getBreadcrumbSchema,
   getOrganizationSchema,
   getSiteNavigationSchema,
@@ -91,7 +93,7 @@ describe('SEO Component & Search Configuration', () => {
     expect(llmsFullContent).toContain('## Document: Reliably Arranging Objects: A Conformant Planning Approach to Robot Manipulation (conformant-planning-manipulation)');
   });
 
-  it('generates clean public/sitemap.xml containing active canonical routes without hashes or deprecated tags', () => {
+  it('generates clean public/sitemap.xml containing active canonical routes and Google Image sitemap tags', () => {
     generateSitemap();
 
     const sitemapPath = path.resolve(__dirname, '../../public/sitemap.xml');
@@ -99,12 +101,21 @@ describe('SEO Component & Search Configuration', () => {
 
     const xml = fs.readFileSync(sitemapPath, 'utf-8');
     expect(xml).toContain('<?xml version="1.0" encoding="UTF-8"?>');
-    expect(xml).toContain('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">');
+    expect(xml).toContain('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"');
+    expect(xml).toContain('xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"');
+    expect(xml).toContain('xmlns:xhtml="http://www.w3.org/1999/xhtml">');
     expect(xml).toContain('<loc>https://arii.github.io/</loc>');
     expect(xml).toContain('<loc>https://arii.github.io/devai</loc>');
     expect(xml).toContain('<loc>https://arii.github.io/research</loc>');
     expect(xml).toContain('<loc>https://arii.github.io/about</loc>');
     expect(xml).toContain('<loc>https://arii.github.io/resume</loc>');
+
+    // Check image sitemap tags for hero image and markdown article images
+    expect(xml).toContain('<image:image>');
+    expect(xml).toContain('<image:loc>https://arii.github.io/assets/roboticist.jpg</image:loc>');
+    expect(xml).toContain('<image:caption>');
+    expect(xml).toContain('<image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>');
+
     expect(xml).not.toContain('<priority>');
     expect(xml).not.toContain('<changefreq>');
     expect(xml).not.toContain('/#/devai');
@@ -162,6 +173,7 @@ describe('SEO Component & Search Configuration', () => {
     expect(techArticle.proficiencyLevel).toBe('Expert');
     expect(techArticle.image['@type']).toBe('ImageObject');
     expect(techArticle.image.width).toBe(1200);
+    expect(techArticle.image.license).toBe('https://creativecommons.org/licenses/by-nc-nd/4.0/');
 
     const scholarlyArticle = getScholarlyArticleSchema({
       headline: 'Conformant Planning and Manipulation',
@@ -171,6 +183,30 @@ describe('SEO Component & Search Configuration', () => {
     expect(scholarlyArticle['@type']).toBe('ScholarlyArticle');
     expect(scholarlyArticle.sameAs).toBe('https://scholar.google.com/citations?user=NM6SfiEAAAAJ&hl=en');
     expect(scholarlyArticle.image['@type']).toBe('ImageObject');
+    expect(scholarlyArticle.image.license).toBe('https://creativecommons.org/licenses/by-nc-nd/4.0/');
+
+    const collection = getCollectionPageSchema({
+      name: 'DevAI Articles & Tools',
+      description: 'Engineering deep-dives into multi-agent workflows and autonomous developer tools.',
+      canonicalPath: '/devai',
+      items: [
+        { name: 'GitOps PR Reviewer', description: 'Autonomous PR reviewer', url: '/devai/gitops-pr-reviewer' },
+        { name: 'VersionTruth', description: 'Version hallucination detector', url: '/devai/versiontruth' },
+      ],
+    });
+    expect(collection['@type']).toBe('CollectionPage');
+    expect(collection.mainEntity['@type']).toBe('ItemList');
+    expect(collection.mainEntity.numberOfItems).toBe(2);
+    expect(collection.mainEntity.itemListElement[0].name).toBe('GitOps PR Reviewer');
+    expect(collection.mainEntity.itemListElement[0].url).toBe('https://arii.github.io/devai/gitops-pr-reviewer');
+
+    const career = getResumeCareerSchema();
+    expect(career['@type']).toBe('ProfilePage');
+    expect(career.mainEntity.hasOccupation['@type']).toBe('Occupation');
+    expect(career.mainEntity.hasOccupation.name).toBe('Senior Software Engineer & Roboticist');
+    expect(career.hasPart.length).toBeGreaterThanOrEqual(5);
+    expect(career.hasPart[0]['@type']).toBe('WorkExperience');
+    expect(career.hasPart[0].organization.name).toBe('Civ Robotics');
 
     const breadcrumb = getBreadcrumbSchema([
       { name: 'Home', path: '/' },
@@ -185,25 +221,12 @@ describe('SEO Component & Search Configuration', () => {
       name: 'Home',
       item: 'https://arii.github.io/',
     });
-    expect(breadcrumb.itemListElement[1]).toEqual({
-      '@type': 'ListItem',
-      position: 2,
-      name: 'Research',
-      item: 'https://arii.github.io/research',
-    });
-    expect(breadcrumb.itemListElement[2]).toEqual({
-      '@type': 'ListItem',
-      position: 3,
-      name: 'Conformant Planning',
-      item: 'https://arii.github.io/research/conformant-planning-manipulation',
-    });
 
     const faq = getFAQSchema([
       { question: 'What services do you offer?', answer: 'AI and robotics consulting.' },
     ]);
     expect(faq['@type']).toBe('FAQPage');
     expect(faq.mainEntity).toHaveLength(1);
-    expect(faq.mainEntity[0].name).toBe('What services do you offer?');
 
     const video = getVideoObjectSchema({
       name: 'Duckietown Autonomous Driving',

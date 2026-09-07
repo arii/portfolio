@@ -5,7 +5,12 @@ import ToolCard from '@/components/ToolCard';
 import ImageLightbox from '@/components/ImageLightbox';
 import { Layers, Wrench } from 'lucide-react';
 import SEO from '@/components/SEO';
-import { getPersonAndProfileSchema, getServiceSchema, getSoftwareSchema } from '@/utils/schema';
+import {
+  getPersonAndProfileSchema,
+  getServiceSchema,
+  getSoftwareSchema,
+  getCollectionPageSchema,
+} from '@/utils/schema';
 
 export interface ResearchListPageProps {
   onNavigate: (slug: string) => void;
@@ -27,7 +32,22 @@ const ResearchListPage: React.FC<ResearchListPageProps> = ({ onNavigate }) => {
         codeRepository: tool.sourceUrl,
       })
     );
-    return [getPersonAndProfileSchema('/research'), getServiceSchema(), ...softwareSchemas];
+
+    const collectionItems = allTools.map((tool) => ({
+      name: tool.title,
+      description: tool.description,
+      url: tool.canonicalPath || `/research/${tool.id}`,
+      image: tool.image,
+    }));
+
+    const collectionSchema = getCollectionPageSchema({
+      name: 'Robotics & Autonomous Systems Research',
+      description: 'Planning under uncertainty, conformant belief-state manipulation, multi-robot coordination, and hardware automation systems.',
+      canonicalPath: '/research',
+      items: collectionItems,
+    });
+
+    return [getPersonAndProfileSchema('/research'), getServiceSchema(), collectionSchema, ...softwareSchemas];
   }, [thesisTools, autonomousTools]);
 
   return (
