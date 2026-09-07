@@ -16,6 +16,13 @@ describe('index.html SEO & Accessibility Tags', () => {
     expect(descContent.length).toBeLessThanOrEqual(158);
   });
 
+  it('does not contain a hardcoded root canonical link tag', () => {
+    const indexPath = path.resolve(__dirname, '../../index.html');
+    const htmlContent = fs.readFileSync(indexPath, 'utf-8');
+
+    expect(htmlContent).not.toContain('<link rel="canonical"');
+  });
+
   it('contains title under 60 characters with front-loaded keywords', () => {
     const indexPath = path.resolve(__dirname, '../../index.html');
     const htmlContent = fs.readFileSync(indexPath, 'utf-8');

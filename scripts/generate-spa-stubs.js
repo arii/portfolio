@@ -80,10 +80,13 @@ function getRouteMetadata(route, contentDir) {
     }
   }
 
+  const cleanRoutePath = route ? (route.startsWith('/') ? route : `/${route}`) : '/';
+  const canonicalUrl = `${SITE_URL}${cleanRoutePath === '/' ? '/' : cleanRoutePath}`;
+
   return {
     title: 'AI & Robotics Engineering Portfolio | Ariel Anders, PhD',
     description: 'Explore AI consulting, robotics software engineering, and autonomous systems research by Ariel Anders, PhD (MIT). View open-source tools and deep dives.',
-    canonical: `${SITE_URL}/${route}`,
+    canonical: canonicalUrl,
     heading: 'AI & Robotics Engineering Portfolio',
     bodyText: '',
   };
@@ -101,11 +104,15 @@ function customizeHtmlForRoute(baseHtml, meta) {
     `<meta name="description" content="${meta.description.replace(/"/g, '&quot;')}" />`
   );
 
-  // Replace Canonical Tag
-  customized = customized.replace(
-    /<link\s+rel="canonical"\s+href=".*?"\s*\/?>/,
-    `<link rel="canonical" href="${meta.canonical}" />`
-  );
+  // Replace or Insert Canonical Tag
+  if (/<link\s+rel="canonical"\s+href=".*?"\s*\/?>/.test(customized)) {
+    customized = customized.replace(
+      /<link\s+rel="canonical"\s+href=".*?"\s*\/?>/,
+      `<link rel="canonical" href="${meta.canonical}" />`
+    );
+  } else {
+    customized = customized.replace('</head>', `  <link rel="canonical" href="${meta.canonical}" />\n  </head>`);
+  }
 
   // Replace Open Graph / Twitter Tags
   customized = customized.replace(
@@ -144,6 +151,12 @@ export function generateSpaStubs() {
   }
 
   const indexHtmlContent = fs.readFileSync(indexHtmlPath, 'utf-8');
+
+  // 0. Update root dist/index.html with root canonical tag
+  const rootMeta = getRouteMetadata('', CONTENT_DIR);
+  const customizedRootHtml = customizeHtmlForRoute(indexHtmlContent, rootMeta);
+  fs.writeFileSync(indexHtmlPath, customizedRootHtml, 'utf-8');
+  console.log(`✅ Updated root dist/index.html with pre-rendered canonical ${rootMeta.canonical}`);
 
   // 1. Generate dist/404.html for GitHub Pages fallback with sessionStorage redirect script
   const spa404Script = `<script>
