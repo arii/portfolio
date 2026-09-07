@@ -71,19 +71,29 @@ export function generateSpaStubs() {
   // Deduplicate routes
   const uniqueRoutes = Array.from(new Set(routes));
 
-  // 4. Create directory stub index.html for each route
+  // 4. Create directory stub index.html and route.html for each route
   let stubCount = 0;
   for (const route of uniqueRoutes) {
     const routeDir = path.join(DIST_DIR, route);
     if (!fs.existsSync(routeDir)) {
       fs.mkdirSync(routeDir, { recursive: true });
     }
+    // Directory index: /about/ -> 200 OK
     const stubFilePath = path.join(routeDir, 'index.html');
     fs.writeFileSync(stubFilePath, indexHtmlContent, 'utf-8');
+
+    // Direct HTML file: /about or /about.html -> 200 OK on GitHub Pages without 301 redirect
+    const directHtmlPath = path.join(DIST_DIR, `${route}.html`);
+    const directParentDir = path.dirname(directHtmlPath);
+    if (!fs.existsSync(directParentDir)) {
+      fs.mkdirSync(directParentDir, { recursive: true });
+    }
+    fs.writeFileSync(directHtmlPath, indexHtmlContent, 'utf-8');
+
     stubCount++;
   }
 
-  console.log(`✅ Generated ${stubCount} SPA 200 OK directory stubs in dist/`);
+  console.log(`✅ Generated ${stubCount} SPA 200 OK directory and direct HTML stubs in dist/`);
 }
 
 // Run directly if called as main module
