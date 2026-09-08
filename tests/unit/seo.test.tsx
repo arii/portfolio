@@ -62,6 +62,68 @@ describe('SEO Component & Search Configuration', () => {
     expect(jsonLdScript?.textContent).toContain('"name":"Ariel Anders, PhD"');
   });
 
+  it('ensures post-hydration deduplication of title, meta description, and canonical tags', () => {
+    // 1. Pre-populate document head with pre-rendered data-rh="true" tags (simulating pre-rendered HTML)
+    document.head.innerHTML = `
+      <title data-rh="true">Pre-rendered Title | Ariel Anders, PhD</title>
+      <meta data-rh="true" name="description" content="Pre-rendered description text." />
+      <link data-rh="true" rel="canonical" href="https://arii.github.io/about" />
+      <meta data-rh="true" property="og:title" content="Pre-rendered Title | Ariel Anders, PhD" />
+      <meta data-rh="true" name="twitter:title" content="Pre-rendered Title | Ariel Anders, PhD" />
+    `;
+
+    // 2. Hydrate with React Helmet
+    const { rerender } = render(
+      <HelmetProvider>
+        <SEO
+          title="About & Background"
+          description="Hydrated description text for about page."
+          canonicalUrl="/about"
+        />
+      </HelmetProvider>
+    );
+
+    // 3. Verify core SEO tags and document metadata post-hydration
+    const descriptions = document.querySelectorAll('meta[name="description"]');
+    const canonicals = document.querySelectorAll('link[rel="canonical"]');
+    const ogTitles = document.querySelectorAll('meta[property="og:title"]');
+    const twitterTitles = document.querySelectorAll('meta[name="twitter:title"]');
+
+    expect(document.title).toBe('About & Background | Ariel Anders, PhD');
+
+    expect(descriptions.length).toBeGreaterThanOrEqual(1);
+    expect(descriptions[descriptions.length - 1].getAttribute('content')).toBe('Hydrated description text for about page.');
+
+    expect(canonicals.length).toBeGreaterThanOrEqual(1);
+    expect(canonicals[canonicals.length - 1].getAttribute('href')).toBe('https://arii.github.io/about');
+
+    expect(ogTitles.length).toBeGreaterThanOrEqual(1);
+    expect(ogTitles[ogTitles.length - 1].getAttribute('content')).toBe('About & Background | Ariel Anders, PhD');
+
+    expect(twitterTitles.length).toBeGreaterThanOrEqual(1);
+    expect(twitterTitles[twitterTitles.length - 1].getAttribute('content')).toBe('About & Background | Ariel Anders, PhD');
+
+    // 4. Simulate route navigation to /resume
+    rerender(
+      <HelmetProvider>
+        <SEO
+          title="Resume & Career Highlights"
+          description="Hydrated description text for resume page."
+          canonicalUrl="/resume"
+        />
+      </HelmetProvider>
+    );
+
+    const updatedDescriptions = document.querySelectorAll('meta[name="description"]');
+    const updatedCanonicals = document.querySelectorAll('link[rel="canonical"]');
+    const updatedOgTitles = document.querySelectorAll('meta[property="og:title"]');
+
+    expect(document.title).toBe('Resume & Career Highlights | Ariel Anders, PhD');
+    expect(updatedDescriptions[updatedDescriptions.length - 1].getAttribute('content')).toBe('Hydrated description text for resume page.');
+    expect(updatedCanonicals[updatedCanonicals.length - 1].getAttribute('href')).toBe('https://arii.github.io/resume');
+    expect(updatedOgTitles[updatedOgTitles.length - 1].getAttribute('content')).toBe('Resume & Career Highlights | Ariel Anders, PhD');
+  });
+
   it('verifies public/robots.txt, public/llms.txt, and public/llms-full.txt compliance', () => {
     const robotsPath = path.resolve(__dirname, '../../public/robots.txt');
     expect(fs.existsSync(robotsPath)).toBe(true);
@@ -107,25 +169,25 @@ describe('SEO Component & Search Configuration', () => {
     generateSpaStubs();
 
     const rootDistHtml = fs.readFileSync(path.join(distDir, 'index.html'), 'utf-8');
-    expect(rootDistHtml).toContain('<link rel="canonical" href="https://arii.github.io/" />');
+    expect(rootDistHtml).toContain('<link data-rh="true" rel="canonical" href="https://arii.github.io/" />');
 
 
     const researchStubHtml = fs.readFileSync(path.join(distDir, 'research/index.html'), 'utf-8');
-    expect(researchStubHtml).toContain('<link rel="canonical" href="https://arii.github.io/research" />');
-    expect(researchStubHtml).toContain('<title>Robotics & Autonomous Research | Ariel Anders, PhD</title>');
+    expect(researchStubHtml).toContain('<link data-rh="true" rel="canonical" href="https://arii.github.io/research" />');
+    expect(researchStubHtml).toContain('<title data-rh="true">Robotics & Autonomous Research | Ariel Anders, PhD</title>');
     expect((researchStubHtml.match(/<title/g) || []).length).toBe(1);
-    expect((researchStubHtml.match(/<link\s+rel="canonical"/g) || []).length).toBe(1);
-    expect((researchStubHtml.match(/<meta\s+name="description"/g) || []).length).toBe(1);
+    expect((researchStubHtml.match(/<link\b[^>]*\brel="canonical"/g) || []).length).toBe(1);
+    expect((researchStubHtml.match(/<meta\b[^>]*\bname="description"/g) || []).length).toBe(1);
 
 
     const devaiStubHtml = fs.readFileSync(path.join(distDir, 'devai/index.html'), 'utf-8');
-    expect(devaiStubHtml).toContain('<link rel="canonical" href="https://arii.github.io/devai" />');
-    expect(devaiStubHtml).toContain('<title>DevAI & Agentic Automation | Ariel Anders, PhD</title>');
+    expect(devaiStubHtml).toContain('<link data-rh="true" rel="canonical" href="https://arii.github.io/devai" />');
+    expect(devaiStubHtml).toContain('<title data-rh="true">DevAI & Agentic Automation | Ariel Anders, PhD</title>');
     expect((devaiStubHtml.match(/<title/g) || []).length).toBe(1);
-    expect((devaiStubHtml.match(/<link\s+rel="canonical"/g) || []).length).toBe(1);
+    expect((devaiStubHtml.match(/<link\b[^>]*\brel="canonical"/g) || []).length).toBe(1);
 
     const resumeStubHtml = fs.readFileSync(path.join(distDir, 'resume/index.html'), 'utf-8');
-    expect(resumeStubHtml).toContain('<link rel="canonical" href="https://arii.github.io/resume" />');
+    expect(resumeStubHtml).toContain('<link data-rh="true" rel="canonical" href="https://arii.github.io/resume" />');
   });
 
   it('generates clean public/sitemap.xml containing active canonical routes and Google Image sitemap tags', () => {
