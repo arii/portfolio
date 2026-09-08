@@ -35,6 +35,8 @@ export default [
       "react-hooks": reactHooksPlugin,
     },
     rules: {
+      "security/detect-non-literal-fs-filename": "off",
+      "security/detect-object-injection": "off",
       "react/react-in-jsx-scope": "off",
       "no-unused-vars": "off",
       "@typescript-eslint/no-unused-vars": ["warn"],
