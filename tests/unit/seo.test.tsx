@@ -45,7 +45,7 @@ describe('SEO Component & Search Configuration', () => {
     expect(descMeta?.getAttribute('content')).toContain('Explore custom page description');
 
     const canonicalLink = document.querySelector('link[rel="canonical"]');
-    expect(canonicalLink?.getAttribute('href')).toBe('https://arii.github.io/devai/versiontruth');
+    expect(canonicalLink?.getAttribute('href')).toBe('https://arii.github.io/devai/versiontruth/');
 
     const ogTypeMeta = document.querySelector('meta[property="og:type"]');
     expect(ogTypeMeta?.getAttribute('content')).toBe('article');
@@ -111,7 +111,7 @@ describe('SEO Component & Search Configuration', () => {
 
 
     const researchStubHtml = fs.readFileSync(path.join(distDir, 'research/index.html'), 'utf-8');
-    expect(researchStubHtml).toContain('<link rel="canonical" href="https://arii.github.io/research" />');
+    expect(researchStubHtml).toContain('<link rel="canonical" href="https://arii.github.io/research/" />');
     expect(researchStubHtml).toContain('<title>Robotics & Autonomous Research | Ariel Anders, PhD</title>');
     expect((researchStubHtml.match(/<title/g) || []).length).toBe(1);
     expect((researchStubHtml.match(/<link\s+rel="canonical"/g) || []).length).toBe(1);
@@ -119,13 +119,13 @@ describe('SEO Component & Search Configuration', () => {
 
 
     const devaiStubHtml = fs.readFileSync(path.join(distDir, 'devai/index.html'), 'utf-8');
-    expect(devaiStubHtml).toContain('<link rel="canonical" href="https://arii.github.io/devai" />');
+    expect(devaiStubHtml).toContain('<link rel="canonical" href="https://arii.github.io/devai/" />');
     expect(devaiStubHtml).toContain('<title>DevAI & Agentic Automation | Ariel Anders, PhD</title>');
     expect((devaiStubHtml.match(/<title/g) || []).length).toBe(1);
     expect((devaiStubHtml.match(/<link\s+rel="canonical"/g) || []).length).toBe(1);
 
     const resumeStubHtml = fs.readFileSync(path.join(distDir, 'resume/index.html'), 'utf-8');
-    expect(resumeStubHtml).toContain('<link rel="canonical" href="https://arii.github.io/resume" />');
+    expect(resumeStubHtml).toContain('<link rel="canonical" href="https://arii.github.io/resume/" />');
   });
 
   it('generates clean public/sitemap.xml containing active canonical routes and Google Image sitemap tags', () => {
@@ -140,10 +140,10 @@ describe('SEO Component & Search Configuration', () => {
     expect(xml).toContain('xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"');
     expect(xml).toContain('xmlns:xhtml="http://www.w3.org/1999/xhtml">');
     expect(xml).toContain('<loc>https://arii.github.io/</loc>');
-    expect(xml).toContain('<loc>https://arii.github.io/devai</loc>');
-    expect(xml).toContain('<loc>https://arii.github.io/research</loc>');
-    expect(xml).toContain('<loc>https://arii.github.io/about</loc>');
-    expect(xml).toContain('<loc>https://arii.github.io/resume</loc>');
+    expect(xml).toContain('<loc>https://arii.github.io/devai/</loc>');
+    expect(xml).toContain('<loc>https://arii.github.io/research/</loc>');
+    expect(xml).toContain('<loc>https://arii.github.io/about/</loc>');
+    expect(xml).toContain('<loc>https://arii.github.io/resume/</loc>');
 
     // Check image sitemap tags for hero image and markdown article images
     expect(xml).toContain('<image:image>');
@@ -188,7 +188,7 @@ describe('SEO Component & Search Configuration', () => {
     const siteNav = getSiteNavigationSchema();
     expect(siteNav).toHaveLength(5);
     expect(siteNav[0].name).toBe('Overview');
-    expect(siteNav[0].url).toBe('https://arii.github.io');
+    expect(siteNav[0].url).toBe('https://arii.github.io/');
 
     const software = getSoftwareSchema({
       name: 'GitOps PR Reviewer',
@@ -233,7 +233,7 @@ describe('SEO Component & Search Configuration', () => {
     expect(collection.mainEntity['@type']).toBe('ItemList');
     expect(collection.mainEntity.numberOfItems).toBe(2);
     expect(collection.mainEntity.itemListElement[0].name).toBe('GitOps PR Reviewer');
-    expect(collection.mainEntity.itemListElement[0].url).toBe('https://arii.github.io/devai/gitops-pr-reviewer');
+    expect(collection.mainEntity.itemListElement[0].url).toBe('https://arii.github.io/devai/gitops-pr-reviewer/');
 
     const career = getResumeCareerSchema();
     expect(career['@type']).toBe('ProfilePage');
@@ -282,7 +282,7 @@ describe('SEO Component & Search Configuration', () => {
 
     for (const file of mdFiles) {
       const content = fs.readFileSync(path.join(researchDir, file), 'utf-8');
-      const regex = /\[([^\]]+)\]\((https:\/\/arii\.github\.io\/about|\/about)\)/g;
+      const regex = /\[([^\]]+)\]\((https:\/\/arii\.github\.io\/about\/|\/about\/)\)/g;
       let match: RegExpExecArray | null;
       while ((match = regex.exec(content)) !== null) {
         internalLinks.push({

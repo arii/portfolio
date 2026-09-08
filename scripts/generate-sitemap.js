@@ -121,11 +121,11 @@ export function generateSitemap() {
   };
 
   // Core Canonical Pages
-  const corePages = ['/', '/devai', '/research', '/about', '/resume'];
+  const corePages = ['/', '/devai/', '/research/', '/about/', '/resume/'];
 
   for (const pagePath of corePages) {
-    const url = pagePath === '/' ? `${SITE_URL}/` : `${SITE_URL}${pagePath}`;
-    const images = (pagePath === '/' || pagePath === '/about') ? [heroPortrait] : [];
+    const url = `${SITE_URL}${pagePath.startsWith('/') ? '' : '/'}${pagePath}`;
+    const images = (pagePath === '/' || pagePath === '/about/' || pagePath === '/about') ? [heroPortrait] : [];
     entries.push({
       url,
       lastmod: today,
@@ -151,7 +151,7 @@ export function generateSitemap() {
       const images = extractMarkdownImages(articleTitle, content);
 
       entries.push({
-        url: `${SITE_URL}/${primarySection}/${slug}`,
+        url: `${SITE_URL}/${primarySection}/${slug}/`,
         lastmod,
         images,
       });

@@ -74,7 +74,7 @@ describe('IndexNow Integration', () => {
         const urls = parseSitemapUrls(sitemapPath);
         expect(urls.length).toBeGreaterThan(0);
         expect(urls).toContain('https://arii.github.io/');
-        expect(urls).toContain('https://arii.github.io/devai');
+        expect(urls).toContain('https://arii.github.io/devai/');
       }
     });
   });

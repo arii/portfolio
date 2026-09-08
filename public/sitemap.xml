@@ -13,15 +13,15 @@
     </image:image>
   </url>
   <url>
-    <loc>https://arii.github.io/devai</loc>
+    <loc>https://arii.github.io/devai/</loc>
     <lastmod>2026-09-08</lastmod>
   </url>
   <url>
-    <loc>https://arii.github.io/research</loc>
+    <loc>https://arii.github.io/research/</loc>
     <lastmod>2026-09-08</lastmod>
   </url>
   <url>
-    <loc>https://arii.github.io/about</loc>
+    <loc>https://arii.github.io/about/</loc>
     <lastmod>2026-09-08</lastmod>
     <image:image>
       <image:loc>https://arii.github.io/assets/roboticist.jpg</image:loc>
@@ -31,11 +31,11 @@
     </image:image>
   </url>
   <url>
-    <loc>https://arii.github.io/resume</loc>
+    <loc>https://arii.github.io/resume/</loc>
     <lastmod>2026-09-08</lastmod>
   </url>
   <url>
-    <loc>https://arii.github.io/devai/ai-experiments</loc>
+    <loc>https://arii.github.io/devai/ai-experiments/</loc>
     <lastmod>2026-08-15</lastmod>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/ai-experiments/wcs-scraper.png</image:loc>
@@ -57,7 +57,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://arii.github.io/devai/boop-light-detector</loc>
+    <loc>https://arii.github.io/devai/boop-light-detector/</loc>
     <lastmod>2016-08-10</lastmod>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/app_testing.jpg</image:loc>
@@ -67,7 +67,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://arii.github.io/devai/bwsi-racecar</loc>
+    <loc>https://arii.github.io/devai/bwsi-racecar/</loc>
     <lastmod>2018-07-01</lastmod>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/bw.jpg</image:loc>
@@ -107,7 +107,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://arii.github.io/research/cad-cam-dental-workflow</loc>
+    <loc>https://arii.github.io/research/cad-cam-dental-workflow/</loc>
     <lastmod>2014-06-01</lastmod>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/dental.jpg</image:loc>
@@ -171,7 +171,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://arii.github.io/research/conformant-planning-manipulation</loc>
+    <loc>https://arii.github.io/research/conformant-planning-manipulation/</loc>
     <lastmod>2021-05-20</lastmod>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/phd/icra_presentation.gif</image:loc>
@@ -247,7 +247,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://arii.github.io/devai/delivery-bots</loc>
+    <loc>https://arii.github.io/devai/delivery-bots/</loc>
     <lastmod>2015-07-12</lastmod>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/beer.png</image:loc>
@@ -263,7 +263,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://arii.github.io/devai/deployment-impact-analyzer</loc>
+    <loc>https://arii.github.io/devai/deployment-impact-analyzer/</loc>
     <lastmod>2026-06-19</lastmod>
     <image:image>
       <image:loc>https://arii.github.io/assets/studies/deployment-impact-analyzer/before.svg</image:loc>
@@ -303,7 +303,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://arii.github.io/research/duckietown</loc>
+    <loc>https://arii.github.io/research/duckietown/</loc>
     <lastmod>2016-05-01</lastmod>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/duckietown/navigation_1.gif</image:loc>
@@ -331,7 +331,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://arii.github.io/devai/gitops-pr-reviewer</loc>
+    <loc>https://arii.github.io/devai/gitops-pr-reviewer/</loc>
     <lastmod>2026-05-10</lastmod>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/boomtick-devai-tools/boomtick-arch.png</image:loc>
@@ -359,7 +359,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://arii.github.io/research/graduate-engineering-projects</loc>
+    <loc>https://arii.github.io/research/graduate-engineering-projects/</loc>
     <lastmod>2015-12-05</lastmod>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/drone_follow.gif</image:loc>
@@ -393,7 +393,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://arii.github.io/devai/hrm-architecture</loc>
+    <loc>https://arii.github.io/devai/hrm-architecture/</loc>
     <lastmod>2026-05-01</lastmod>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/hrm/evolve1.webp</image:loc>
@@ -445,7 +445,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://arii.github.io/devai/leac-monitoring-software</loc>
+    <loc>https://arii.github.io/devai/leac-monitoring-software/</loc>
     <lastmod>2017-05-15</lastmod>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/leac.jpg</image:loc>
@@ -455,7 +455,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://arii.github.io/devai/light-therapy-mit</loc>
+    <loc>https://arii.github.io/devai/light-therapy-mit/</loc>
     <lastmod>2016-11-12</lastmod>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/light.jpg</image:loc>
@@ -465,7 +465,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://arii.github.io/research/masters-thesis</loc>
+    <loc>https://arii.github.io/research/masters-thesis/</loc>
     <lastmod>2014-06-01</lastmod>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/swag.jpg</image:loc>
@@ -541,7 +541,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://arii.github.io/research/robocon-mit</loc>
+    <loc>https://arii.github.io/research/robocon-mit/</loc>
     <lastmod>2018-04-20</lastmod>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/robocon.jpg</image:loc>
@@ -551,7 +551,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://arii.github.io/research/undergraduate-projects</loc>
+    <loc>https://arii.github.io/research/undergraduate-projects/</loc>
     <lastmod>2012-06-15</lastmod>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/undergraduate-projects/flip_flop.gif</image:loc>
@@ -627,7 +627,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://arii.github.io/devai/versiontruth</loc>
+    <loc>https://arii.github.io/devai/versiontruth/</loc>
     <lastmod>2026-07-10</lastmod>
     <image:image>
       <image:loc>https://arii.github.io/images/studies/AI_Version_Hallucination_Solution.webp</image:loc>

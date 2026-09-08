@@ -62,6 +62,6 @@ describe('FlagshipCard Deep-Dive Linking', () => {
     const impactTool = { ...systemTools.find((t) => t.id === 'deployment-impact-analyzer')! };
     impactTool.externalUrl = undefined;
     impactTool.sourceUrl = undefined;
-    verifyDeepDiveNavigation(impactTool, '/research/deployment-impact-analyzer', 'deployment-impact-analyzer');
+    verifyDeepDiveNavigation(impactTool, '/research/deployment-impact-analyzer/', 'deployment-impact-analyzer');
   });
 });

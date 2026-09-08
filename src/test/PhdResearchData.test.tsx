@@ -5,7 +5,7 @@ describe('PhD Research Data Consolidation', () => {
   it('links PhD thesis flagship card to the consolidated conformant planning article', () => {
     const phdFlagship = flagshipTools.find((tool) => tool.id === 'phd-thesis');
     expect(phdFlagship).toBeDefined();
-    expect(phdFlagship?.canonicalPath).toBe('/research/conformant-planning-manipulation');
+    expect(phdFlagship?.canonicalPath).toBe('/research/conformant-planning-manipulation/');
     expect(phdFlagship?.description).toContain('1.9%');
     expect(phdFlagship?.description).toContain('80.7%');
   });
