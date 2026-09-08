@@ -57,10 +57,8 @@ describe('index.html SEO & Accessibility Tags', () => {
     const faviconHref = faviconMatch![1].replace(/^\//, '');
     expect(faviconHref).toBe('favicon.svg');
     const faviconPath = path.resolve(__dirname, '../../public', faviconHref);
-    // eslint-disable-next-line security/detect-non-literal-fs-filename
     expect(fs.existsSync(faviconPath)).toBe(true);
 
-    // eslint-disable-next-line security/detect-non-literal-fs-filename
     const svgContent = fs.readFileSync(faviconPath, 'utf-8');
     expect(svgContent).toContain('<svg');
     expect(svgContent).toContain('viewBox="0 0 256 256"');
@@ -75,11 +73,8 @@ describe('index.html SEO & Accessibility Tags', () => {
     const faviconPngPath = path.resolve(__dirname, '../../public/favicon.png');
     const faviconIcoPath = path.resolve(__dirname, '../../public/favicon.ico');
 
-    // eslint-disable-next-line security/detect-non-literal-fs-filename
     expect(fs.existsSync(appleTouchPath)).toBe(true);
-    // eslint-disable-next-line security/detect-non-literal-fs-filename
     expect(fs.existsSync(faviconPngPath)).toBe(true);
-    // eslint-disable-next-line security/detect-non-literal-fs-filename
     expect(fs.existsSync(faviconIcoPath)).toBe(true);
   });
 });
