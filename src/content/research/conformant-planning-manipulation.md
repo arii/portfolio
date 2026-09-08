@@ -1,5 +1,5 @@
 ---
-title: "Reliably Arranging Objects: A Conformant Planning Approach to Robot Manipulation"
+title: "Reliably Arranging Objects: Conformant Planning"
 date: "2021-05-20"
 readTime: 12
 tags:

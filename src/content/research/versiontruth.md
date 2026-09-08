@@ -1,6 +1,6 @@
 ---
 type: study
-title: "VersionTruth: Eliminating Version Hallucinations in Agentic CI"
+title: "VersionTruth: Fix Version Hallucinations in CI"
 date: "2026-07-10"
 author: "Ariel Anders, PhD"
 category: "DevAI"

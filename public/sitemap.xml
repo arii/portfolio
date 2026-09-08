@@ -175,73 +175,73 @@
     <lastmod>2021-05-20</lastmod>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/phd/icra_presentation.gif</image:loc>
-      <image:title>Reliably Arranging Objects: A Conformant Planning Approach to Robot Manipulation</image:title>
+      <image:title>Reliably Arranging Objects: Conformant Planning</image:title>
       <image:caption>Figure 1: Willow Garage PR2 robot performing physical conformant manipulation to arrange blocks into tight arrangements under pose uncertainty without visual feedback.</image:caption>
       <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
     </image:image>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/phd/conformant_demo.gif</image:loc>
-      <image:title>Reliably Arranging Objects: A Conformant Planning Approach to Robot Manipulation</image:title>
+      <image:title>Reliably Arranging Objects: Conformant Planning</image:title>
       <image:caption>Figure 2: ICRA 2018 paper presentation and conference spotlight breakdown.</image:caption>
       <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
     </image:image>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/phd/belief_1.gif</image:loc>
-      <image:title>Reliably Arranging Objects: A Conformant Planning Approach to Robot Manipulation</image:title>
+      <image:title>Reliably Arranging Objects: Conformant Planning</image:title>
       <image:caption>Nominal Trajectory: Plan Improvement with Fixture Placement</image:caption>
       <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
     </image:image>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/phd/belief_2.gif</image:loc>
-      <image:title>Reliably Arranging Objects: A Conformant Planning Approach to Robot Manipulation</image:title>
+      <image:title>Reliably Arranging Objects: Conformant Planning</image:title>
       <image:caption>Failure Mode: Open-Loop Drift Under Uncertainty</image:caption>
       <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
     </image:image>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/phd/refinement.gif</image:loc>
-      <image:title>Reliably Arranging Objects: A Conformant Planning Approach to Robot Manipulation</image:title>
+      <image:title>Reliably Arranging Objects: Conformant Planning</image:title>
       <image:caption>Robust Execution: Passive Mechanical Funneling via Fixture Placement</image:caption>
       <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
     </image:image>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/phd/sliding_2.gif</image:loc>
-      <image:title>Reliably Arranging Objects: A Conformant Planning Approach to Robot Manipulation</image:title>
+      <image:title>Reliably Arranging Objects: Conformant Planning</image:title>
       <image:caption>The initial object placement uncertainty for the PR2 robot was modeled as ±0.2 inches in both x and y coordinates and ±15 degrees in rotation based on physical experiment data</image:caption>
       <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
     </image:image>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/phd/sixblock.png</image:loc>
-      <image:title>Reliably Arranging Objects: A Conformant Planning Approach to Robot Manipulation</image:title>
+      <image:title>Reliably Arranging Objects: Conformant Planning</image:title>
       <image:caption>Six block arrangement task on PR2</image:caption>
       <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
     </image:image>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/phd/sliding_1.gif</image:loc>
-      <image:title>Reliably Arranging Objects: A Conformant Planning Approach to Robot Manipulation</image:title>
+      <image:title>Reliably Arranging Objects: Conformant Planning</image:title>
       <image:caption>Belief State Overlay Visualization</image:caption>
       <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
     </image:image>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/phd/noise_model.gif</image:loc>
-      <image:title>Reliably Arranging Objects: A Conformant Planning Approach to Robot Manipulation</image:title>
+      <image:title>Reliably Arranging Objects: Conformant Planning</image:title>
       <image:caption>Table and Board Relative Localization Pipeline</image:caption>
       <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
     </image:image>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/phd/eric.png</image:loc>
-      <image:title>Reliably Arranging Objects: A Conformant Planning Approach to Robot Manipulation</image:title>
+      <image:title>Reliably Arranging Objects: Conformant Planning</image:title>
       <image:caption>Eric the Robot Thesis Mascot</image:caption>
       <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
     </image:image>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/phd/eric2.png</image:loc>
-      <image:title>Reliably Arranging Objects: A Conformant Planning Approach to Robot Manipulation</image:title>
+      <image:title>Reliably Arranging Objects: Conformant Planning</image:title>
       <image:caption>Blindfolded Eric mascot illustrating sensorless manipulation</image:caption>
       <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
     </image:image>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/phd/eric1.png</image:loc>
-      <image:title>Reliably Arranging Objects: A Conformant Planning Approach to Robot Manipulation</image:title>
+      <image:title>Reliably Arranging Objects: Conformant Planning</image:title>
       <image:caption>Picketing Eric mascot illustrating open-loop failure modes</image:caption>
       <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
     </image:image>
@@ -251,13 +251,13 @@
     <lastmod>2015-07-12</lastmod>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/beer.png</image:loc>
-      <image:title>Delivery Bots: Multi-Robot Coordination under Uncertainty</image:title>
+      <image:title>Delivery Bots: Multi-Robot Coordination</image:title>
       <image:caption>Autonomous Delivery Bot Transporting Item</image:caption>
       <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
     </image:image>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/delivery-bots/coordination.gif</image:loc>
-      <image:title>Delivery Bots: Multi-Robot Coordination under Uncertainty</image:title>
+      <image:title>Delivery Bots: Multi-Robot Coordination</image:title>
       <image:caption>Decentralized Beerbot Delivery Coordination</image:caption>
       <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
     </image:image>
@@ -335,25 +335,25 @@
     <lastmod>2026-05-10</lastmod>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/boomtick-devai-tools/boomtick-arch.png</image:loc>
-      <image:title>Automating PR Reviews with GitHub Actions, Gemini, and Boomtick DevAI</image:title>
+      <image:title>Automating PR Reviews with Gemini &amp; GitHub Actions</image:title>
       <image:caption>Boomtick Ecosystem Architecture Overview</image:caption>
       <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
     </image:image>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/boomtick-devai-tools/boomtick-mcp-desktop.png</image:loc>
-      <image:title>Automating PR Reviews with GitHub Actions, Gemini, and Boomtick DevAI</image:title>
+      <image:title>Automating PR Reviews with Gemini &amp; GitHub Actions</image:title>
       <image:caption>Boomtick MCP Integration in Desktop Client</image:caption>
       <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
     </image:image>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/boomtick-devai-tools/boomtick-cli-audit.png</image:loc>
-      <image:title>Automating PR Reviews with GitHub Actions, Gemini, and Boomtick DevAI</image:title>
+      <image:title>Automating PR Reviews with Gemini &amp; GitHub Actions</image:title>
       <image:caption>td-cli Terminal Execution and Health Check</image:caption>
       <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
     </image:image>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/gitops-pr-reviewer-comment.png</image:loc>
-      <image:title>Automating PR Reviews with GitHub Actions, Gemini, and Boomtick DevAI</image:title>
+      <image:title>Automating PR Reviews with Gemini &amp; GitHub Actions</image:title>
       <image:caption>Automated Pull Request Code Review Feedback</image:caption>
       <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
     </image:image>
@@ -397,49 +397,49 @@
     <lastmod>2026-05-01</lastmod>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/hrm/evolve1.webp</image:loc>
-      <image:title>HRM: Real-Time Biometric Telemetry &amp; Distributed Workout Synchronization</image:title>
+      <image:title>HRM: Real-Time Biometric Telemetry &amp; Workouts</image:title>
       <image:caption>Iteration 1</image:caption>
       <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
     </image:image>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/hrm/evolve2.webp</image:loc>
-      <image:title>HRM: Real-Time Biometric Telemetry &amp; Distributed Workout Synchronization</image:title>
+      <image:title>HRM: Real-Time Biometric Telemetry &amp; Workouts</image:title>
       <image:caption>Iteration 2</image:caption>
       <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
     </image:image>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/hrm/evolve3.webp</image:loc>
-      <image:title>HRM: Real-Time Biometric Telemetry &amp; Distributed Workout Synchronization</image:title>
+      <image:title>HRM: Real-Time Biometric Telemetry &amp; Workouts</image:title>
       <image:caption>Iteration 3</image:caption>
       <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
     </image:image>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/hrm/client_connect.webp</image:loc>
-      <image:title>HRM: Real-Time Biometric Telemetry &amp; Distributed Workout Synchronization</image:title>
+      <image:title>HRM: Real-Time Biometric Telemetry &amp; Workouts</image:title>
       <image:caption>Client Connection</image:caption>
       <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
     </image:image>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/hrm/browser_capability.webp</image:loc>
-      <image:title>HRM: Real-Time Biometric Telemetry &amp; Distributed Workout Synchronization</image:title>
+      <image:title>HRM: Real-Time Biometric Telemetry &amp; Workouts</image:title>
       <image:caption>Browser Capability</image:caption>
       <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
     </image:image>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/hrm/mock.webp</image:loc>
-      <image:title>HRM: Real-Time Biometric Telemetry &amp; Distributed Workout Synchronization</image:title>
+      <image:title>HRM: Real-Time Biometric Telemetry &amp; Workouts</image:title>
       <image:caption>Mock Simulator</image:caption>
       <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
     </image:image>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/hrm/running.webp</image:loc>
-      <image:title>HRM: Real-Time Biometric Telemetry &amp; Distributed Workout Synchronization</image:title>
+      <image:title>HRM: Real-Time Biometric Telemetry &amp; Workouts</image:title>
       <image:caption>Running Application</image:caption>
       <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
     </image:image>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/hrm/hrm_server.webp</image:loc>
-      <image:title>HRM: Real-Time Biometric Telemetry &amp; Distributed Workout Synchronization</image:title>
+      <image:title>HRM: Real-Time Biometric Telemetry &amp; Workouts</image:title>
       <image:caption>HRM Server Dashboard</image:caption>
       <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
     </image:image>
@@ -449,7 +449,7 @@
     <lastmod>2017-05-15</lastmod>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/leac.jpg</image:loc>
-      <image:title>Lab Energy Assessment Center (LEAC) Monitoring Software</image:title>
+      <image:title>LEAC: Lab Energy Assessment Monitoring Software</image:title>
       <image:caption>LEAC Fume Hood Network Monitoring Interface</image:caption>
       <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
     </image:image>
@@ -631,19 +631,19 @@
     <lastmod>2026-07-10</lastmod>
     <image:image>
       <image:loc>https://arii.github.io/images/studies/AI_Version_Hallucination_Solution.webp</image:loc>
-      <image:title>VersionTruth: Eliminating Version Hallucinations in Agentic CI</image:title>
+      <image:title>VersionTruth: Fix Version Hallucinations in CI</image:title>
       <image:caption>VersionTruth Solution</image:caption>
       <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
     </image:image>
     <image:image>
       <image:loc>https://arii.github.io/images/studies/ai-incorrect-v4-suggestion.webp</image:loc>
-      <image:title>VersionTruth: Eliminating Version Hallucinations in Agentic CI</image:title>
+      <image:title>VersionTruth: Fix Version Hallucinations in CI</image:title>
       <image:caption>AI incorrectly flagging v6 as invalid and suggesting a downgrade to v4</image:caption>
       <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
     </image:image>
     <image:image>
       <image:loc>https://arii.github.io/images/studies/github-checkout-v7-release.webp</image:loc>
-      <image:title>VersionTruth: Eliminating Version Hallucinations in Agentic CI</image:title>
+      <image:title>VersionTruth: Fix Version Hallucinations in CI</image:title>
       <image:caption>GitHub Releases showing v7.0.0, confirming versions beyond v4 are stable</image:caption>
       <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
     </image:image>

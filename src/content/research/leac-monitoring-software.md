@@ -1,5 +1,5 @@
 ---
-title: "Lab Energy Assessment Center (LEAC) Monitoring Software"
+title: "LEAC: Lab Energy Assessment Monitoring Software"
 date: "2017-05-15"
 readTime: 5
 tags:

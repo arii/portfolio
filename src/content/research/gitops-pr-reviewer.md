@@ -1,5 +1,5 @@
 ---
-title: "Automating PR Reviews with GitHub Actions, Gemini, and Boomtick DevAI"
+title: "Automating PR Reviews with Gemini & GitHub Actions"
 date: "2026-05-10"
 author: "Ariel Anders, PhD"
 category: "DevAI"

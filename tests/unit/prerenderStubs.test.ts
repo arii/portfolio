@@ -57,7 +57,7 @@ describe('Pre-rendered SPA Stubs & Semantic Body Markup', () => {
     const devAiArticleHtml = fs.readFileSync(devAiArticlePath, 'utf-8');
 
     expect(devAiArticleHtml).toContain('<article>');
-    expect(devAiArticleHtml).toContain('Automating PR Reviews with GitHub Actions, Gemini, and Boomtick DevAI');
+    expect(devAiArticleHtml).toContain('Automating PR Reviews with Gemini &amp; GitHub Actions');
     expect(devAiArticleHtml).toContain('Boomtick DevAI Ecosystem');
     expect(devAiArticleHtml).toContain('boomtick-mcp');
     expect(devAiArticleHtml).toContain('td-cli');
@@ -71,7 +71,7 @@ describe('Pre-rendered SPA Stubs & Semantic Body Markup', () => {
     const researchArticleHtml = fs.readFileSync(researchArticlePath, 'utf-8');
 
     expect(researchArticleHtml).toContain('<article>');
-    expect(researchArticleHtml).toContain('Reliably Arranging Objects: A Conformant Planning Approach to Robot Manipulation');
+    expect(researchArticleHtml).toContain('Reliably Arranging Objects: Conformant Planning');
     expect(researchArticleHtml).toContain('Massachusetts Institute of Technology');
 
     // 4. Verify overview stubs
