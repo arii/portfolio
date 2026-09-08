@@ -1,5 +1,5 @@
 ---
-title: "Delivery Bots: Multi-Robot Coordination under Uncertainty"
+title: "Delivery Bots: Multi-Robot Coordination"
 date: "2015-07-12"
 readTime: 7
 tags:

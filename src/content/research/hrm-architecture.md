@@ -1,5 +1,5 @@
 ---
-title: "HRM: Real-Time Biometric Telemetry & Distributed Workout Synchronization"
+title: "HRM: Real-Time Biometric Telemetry & Workouts"
 author: "Ariel Anders, PhD"
 category: "DevAI"
 tags: ["React", "Web Bluetooth", "WebSockets", "Spotify API", "DevAI Testbed", "Telemetry"]
