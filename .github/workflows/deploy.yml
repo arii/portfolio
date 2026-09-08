@@ -32,6 +32,7 @@ jobs:
           cp -r public/previews dist/previews
         env:
           VITE_BASE_PATH: /
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
 
       - name: Create GitHub App Token
         uses: actions/create-github-app-token@v1
@@ -59,3 +60,8 @@ jobs:
             reports/
             rj/
             .nojekyll
+
+      - name: Notify IndexNow Search Engines
+        run: node scripts/ping-indexnow.js
+        env:
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}

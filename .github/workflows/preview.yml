@@ -51,6 +51,7 @@ jobs:
           cp -r public/previews dist/previews
         env:
           VITE_BASE_PATH: /portfolio/preview/pr-${{ github.event.number }}/
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
 
       - name: Deploy Preview to gh-pages branch
         if: github.event.action != 'closed'
