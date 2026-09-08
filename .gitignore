@@ -142,3 +142,9 @@ mit_bwsi.md
 .tmp-main/
 .tmp-main-old/
 .tmp-main-new/
+
+# Dynamically generated IndexNow verification text files in public/
+public/*.txt
+!public/robots.txt
+!public/llms.txt
+!public/llms-full.txt

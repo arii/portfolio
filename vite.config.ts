@@ -1,7 +1,39 @@
-import { defineConfig } from 'vitest/config';
+import { defineConfig, Plugin } from 'vitest/config';
 import react from '@vitejs/plugin-react';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { fileURLToPath } from 'url';
+import fs from 'node:fs';
+import path from 'node:path';
+
+function indexNowPlugin(): Plugin {
+  return {
+    name: 'indexnow-key-generator',
+    buildStart() {
+      const key = (process.env.INDEXNOW_KEY || process.env.VITE_INDEXNOW_KEY || '').trim();
+      if (!key) return;
+
+      const rootDir = process.cwd();
+      const publicDir = path.join(rootDir, 'public');
+      if (fs.existsSync(publicDir)) {
+        const publicFilePath = path.join(publicDir, `${key}.txt`);
+        fs.writeFileSync(publicFilePath, `${key}\n`, 'utf-8');
+        console.log(`[indexnow-plugin] Wrote verification file: ${publicFilePath}`);
+      }
+    },
+    closeBundle() {
+      const key = (process.env.INDEXNOW_KEY || process.env.VITE_INDEXNOW_KEY || '').trim();
+      if (!key) return;
+
+      const rootDir = process.cwd();
+      const distDir = path.join(rootDir, 'dist');
+      if (fs.existsSync(distDir)) {
+        const distFilePath = path.join(distDir, `${key}.txt`);
+        fs.writeFileSync(distFilePath, `${key}\n`, 'utf-8');
+        console.log(`[indexnow-plugin] Wrote verification file to dist: ${distFilePath}`);
+      }
+    },
+  };
+}
 
 export function getBasePath(): string {
   if (process.env.VERCEL === '1' || process.env.VERCEL) return '/';
@@ -17,6 +49,7 @@ export default defineConfig(() => {
   return {
     plugins: [
       react(),
+      indexNowPlugin(),
       visualizer({
         filename: 'artifacts/stats.html',
         open: false,
