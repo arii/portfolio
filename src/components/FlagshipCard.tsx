@@ -24,7 +24,9 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
   const imageSrc = tool.id === 'hrm-flagship' ? '/assets/research/hrm-flagship.png' : tool.id === 'repo-auditor-ai' ? '/assets/research/repo-auditor-ai.png' : tool.image || null;
 
   const isClickable = !!(tool.externalUrl || tool.sourceUrl || tool.canonicalPath);
-  const targetSlug = tool.canonicalPath ? tool.canonicalPath.replace('/research/', '') : '';
+  const targetSlug = tool.canonicalPath
+    ? tool.canonicalPath.replace(/^\/(research|devai)\//, '').replace(/\/$/, '')
+    : '';
 
   const executePrimaryAction = () => {
     if (tool.canonicalPath && targetSlug) {
