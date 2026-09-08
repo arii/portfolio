@@ -59,3 +59,7 @@ jobs:
             reports/
             rj/
             .nojekyll
+
+      - name: Submit IndexNow Instant Indexing Ping
+        run: node scripts/ping-indexnow.js
+        continue-on-error: true
