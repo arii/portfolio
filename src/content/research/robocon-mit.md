@@ -11,7 +11,7 @@ category: "Robotics Community"
 summary: "Co-organizing a student-run robotics conference and building its static web platform at MIT."
 ---
 
-# RoboCon MIT
+## RoboCon MIT
 
 ![RoboCon event portal showcase](/assets/research/robocon.jpg)
 

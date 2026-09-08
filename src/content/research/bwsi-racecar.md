@@ -13,7 +13,7 @@ summary: "Instructional curricula and course lead for autonomous miniature racec
 videoUrl: "https://www.youtube.com/watch?v=UjVatZ3NK5U"
 ---
 
-# BeaverWorks Summer Institute (RACECAR)
+## BeaverWorks Summer Institute (RACECAR)
 
 ![BeaverWorks RACECAR students and autonomous vehicles](/assets/research/bw.jpg)
 

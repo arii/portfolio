@@ -11,7 +11,7 @@ category: "Sustainability & Energy"
 summary: "Network monitoring software and energy audit infrastructure for fume hood efficiency (MIT Green Labs Innovation Award)."
 ---
 
-# LEAC Fume Hood Energy Monitoring Software
+## LEAC Fume Hood Energy Monitoring Software
 
 ## Laboratory Sustainability & Telemetry Infrastructure
 

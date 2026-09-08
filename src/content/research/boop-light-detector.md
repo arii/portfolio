@@ -11,7 +11,7 @@ category: "Accessibility & Mobile"
 summary: "iOS accessibility utility translating ambient light intensity into audible frequencies for visually impaired users (6,000+ downloads)."
 ---
 
-# Boop Light Detector App
+## Boop Light Detector App
 
 ## iOS Assistive Technology for Visually Impaired Users
 
