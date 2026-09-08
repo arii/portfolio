@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/portfolio/preview/pr-329/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/portfolio/preview/pr-329/favicon.png" />
+    <link rel="alternate icon" href="/portfolio/preview/pr-329/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/portfolio/preview/pr-329/apple-touch-icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>VersionTruth: Eliminating Version Hallucinations in Agentic CI | Ariel Anders, PhD</title>
+    <meta name="description" content="A step-by-step technical guide and reference report on building and deploying VersionTruth: a real-time ground-truth registry lookup API and agent skill for hallucination mitigation." />
+    <link rel="canonical" href="https://arii.github.io/devai/versiontruth" />
+    <!-- Open Graph / Facebook -->
+    <meta property="og:site_name" content="Ariel Anders Portfolio" />
+    <meta property="og:title" content="VersionTruth: Eliminating Version Hallucinations in Agentic CI | Ariel Anders, PhD" />
+    <meta property="og:description" content="A step-by-step technical guide and reference report on building and deploying VersionTruth: a real-time ground-truth registry lookup API and agent skill for hallucination mitigation." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://arii.github.io/devai/versiontruth" />
+    <meta property="og:image" content="https://arii.github.io/images/studies/AI_Version_Hallucination_Solution.webp" />
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="VersionTruth: Eliminating Version Hallucinations in Agentic CI | Ariel Anders, PhD" />
+    <meta name="twitter:description" content="A step-by-step technical guide and reference report on building and deploying VersionTruth: a real-time ground-truth registry lookup API and agent skill for hallucination mitigation." />
+    <meta name="twitter:image" content="https://arii.github.io/images/studies/AI_Version_Hallucination_Solution.webp" />
+    
+    
+    <meta name="google-site-verification" content="FGbpuhF_c3YUFon1LzrzqmW1jvVPFygugss24n0wn5k" />
+
+    <!-- SPA redirect handling for GitHub Pages subpaths -->
+    <script>
+      (function(l) {
+        if (l.search[1] === '/' ) {
+          var decoded = l.search.slice(1).split('&').map(function(s) {
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          window.history.replaceState(null, null,
+              l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location));
+    </script>
+
+    <!-- Open Graph / Facebook -->
+    
+    
+    
+    
+    
+    
+
+    <!-- Twitter Card -->
+    
+    
+    
+    
+
+    <!-- Default JSON-LD Schema Fallback -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "@id": "https://arii.github.io/devai/versiontruth#article",
+      "headline": "VersionTruth: Eliminating Version Hallucinations in Agentic CI",
+      "description": "A step-by-step technical guide and reference report on building and deploying VersionTruth: a real-time ground-truth registry lookup API and agent skill for hallucination mitigation.",
+      "url": "https://arii.github.io/devai/versiontruth",
+      "image": {
+        "@type": "ImageObject",
+        "@id": "https://arii.github.io/images/studies/AI_Version_Hallucination_Solution.webp#image",
+        "url": "https://arii.github.io/images/studies/AI_Version_Hallucination_Solution.webp",
+        "caption": "VersionTruth: Eliminating Version Hallucinations in Agentic CI",
+        "width": 1200,
+        "height": 630,
+        "license": "https://creativecommons.org/licenses/by-nc-nd/4.0/"
+      },
+      "mainEntityOfPage": "https://arii.github.io/devai/versiontruth",
+      "proficiencyLevel": "Expert",
+      "articleSection": "DevAI",
+      "datePublished": "2026-07-10",
+      "author": {
+        "@type": "Person",
+        "@id": "https://arii.github.io/about#person",
+        "name": "Ariel Anders, PhD",
+        "url": "https://arii.github.io"
+      },
+      "publisher": {
+        "@type": "Person",
+        "@id": "https://arii.github.io/about#person",
+        "name": "Ariel Anders, PhD",
+        "url": "https://arii.github.io"
+      },
+      "keywords": "automation, ci, dependencies, ai, NandaHack, Agent Skill"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://arii.github.io/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "DevAI & Software Systems",
+          "item": "https://arii.github.io/devai"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "VersionTruth: Eliminating Version Hallucinations in Agentic CI",
+          "item": "https://arii.github.io/devai/versiontruth"
+        }
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://arii.github.io/about#person",
+      "url": "https://arii.github.io/about",
+      "name": "Ariel Anders, PhD",
+      "jobTitle": "Robotics & AI Consulting Engineer",
+      "email": "anders.ariel@gmail.com",
+      "image": "https://arii.github.io/assets/roboticist.jpg",
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "Massachusetts Institute of Technology (MIT)",
+        "url": "https://www.mit.edu"
+      },
+      "knowsAbout": [
+        "Artificial Intelligence",
+        "Robotics Software Engineering",
+        "Autonomous Systems",
+        "Agentic Workflows",
+        "Motion Planning",
+        "Computer Vision"
+      ],
+      "sameAs": [
+        "https://www.linkedin.com/in/ariel-anders/",
+        "https://github.com/arii",
+        "https://scholar.google.com/citations?user=NM6SfiEAAAAJ&hl=en",
+        "https://boomtick.blog"
+      ]
+    }
+  ]
+}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    </noscript>
+    <script type="module" crossorigin src="/portfolio/preview/pr-329/assets/index-DQAN3Hc8.js"></script>
+    <link rel="modulepreload" crossorigin href="/portfolio/preview/pr-329/assets/vendor-react-BD-e1e1Q.js">
+    <link rel="stylesheet" crossorigin href="/portfolio/preview/pr-329/assets/index-Do-st99S.css">
+  </head>
+  <body>
+    <div id="root"><main style="max-width:1100px;margin:0 auto;padding:2rem 1rem;"><header><h1>VersionTruth: Eliminating Version Hallucinations in Agentic CI</h1><p><strong>Author:</strong> Ariel Anders, PhD | <strong>Date:</strong> 2026-07-10 | <strong>Category:</strong> DevAI</p><p><strong>Tags:</strong> automation, ci, dependencies, ai, NandaHack, Agent Skill</p><p><em>A step-by-step technical guide and reference report on building and deploying VersionTruth: a real-time ground-truth registry lookup API and agent skill for hallucination mitigation.</em></p></header><hr /><article><p>When LLMs and autonomous coding agents edit software repositories, they frequently suffer from <strong>out-of-distribution version hallucinations</strong>: when an agent encounters a version tag newer than its training cutoff (for example, <code>actions/checkout@v6</code>), it often assumes the tag is invalid and silently downgrades it to an older, cached version (such as <code>v4</code>) — a subtle regression that's easy to miss in review.</p>
+<p>To eliminate this failure mode, I built and submitted <strong>VersionTruth</strong> at <strong>NandaHack</strong> (MIT Media Lab's agentic-AI hackathon) — a live ground-truth lookup service paired with a standardized <code>SKILL.md</code> that lets coding agents verify dependency versions against official registries <em>before</em> writing changes.</p>
+<p><figure><img src="/images/studies/AI_Version_Hallucination_Solution.webp" alt="VersionTruth Solution" /><figcaption>VersionTruth Solution</figcaption></figure></p>
+<p>VersionTruth operates as an out-of-band ground-truth oracle for AI coding assistants. Instead of trusting its own training data for "is this version real," the agent asks VersionTruth's API, which checks the live upstream registry.</p>
+<pre><code class="language-http">GET /api/latest-version?ecosystem=gh-action&amp;name=actions/checkout HTTP/1.1
+Host: boomtick.blog
+
+200 OK
+{ &quot;ecosystem&quot;: &quot;gh-action&quot;, &quot;name&quot;: &quot;actions/checkout&quot;, &quot;latest&quot;: &quot;v6.0.1&quot; }</code></pre>
+<h2>Root Cause Incident: The Out-of-Distribution Downgrade</h2>
+<p>The pattern repeats across three surfaces in modern repositories:</p>
+<ul>
+<li><code>package.json</code> dependency versions</li>
+<li><code>.nvmrc</code> / <code>.node-version</code> / <code>engines.node</code></li>
+<li><code>.github/workflows/*.yml</code> <code>uses:</code> pins</li>
+</ul>
+<p>In every case, the failure is the same: an agent's internal sense of "the latest version I know about" silently overrides what's actually true right now.</p>
+<p>The catalyst for VersionTruth was a recurring failure in agentic code review workflows. When deploying targeted reviewer agents—designed for low token usage, minimal context, and fast execution—both primary coding and reviewer agents confidently recommended downgrading <code>actions/checkout</code> to <code>@v4</code>.</p>
+<p>For historical context, <code>v4.1.0</code> was released in September 2023, while <code>v5.0.1</code> launched in November 2025, and subsequent stable releases reached <code>v7.0.0</code>.</p>
+<p><figure><img src="/images/studies/ai-incorrect-v4-suggestion.webp" alt="AI incorrectly flagging v6 as invalid and suggesting a downgrade to v4" /><figcaption>AI incorrectly flagging v6 as invalid and suggesting a downgrade to v4</figcaption></figure></p>
+<p>This represents a classic out-of-distribution data error. The models encountered version tags (e.g., <code>v6</code>) released after their training cutoffs. Lacking real-time registry access, they hallucinated that the unfamiliar version was invalid and suggested reverting to the latest version present in their training data.</p>
+<p>This failure was not isolated to lightweight models like <code>gpt-4o-mini</code>. Testing confirmed that larger reasoning models, including Gemini 3.1 Pro, exhibited the exact same regression behavior, falsely identifying <code>v4</code> as the latest stable major release.</p>
+<p><figure><img src="/images/studies/github-checkout-v7-release.webp" alt="GitHub Releases showing v7.0.0, confirming versions beyond v4 are stable" /><figcaption>GitHub Releases showing v7.0.0, confirming versions beyond v4 are stable</figcaption></figure></p>
+<p>While Agentic DevAI increases engineering velocity, this incident highlights the critical need for deterministic, external validation when handling dynamic infrastructure dependencies. Learn more about my <a href="https://arii.github.io/about">agentic AI tooling consulting</a> services for developer infrastructure.</p>
+<h2>The Solution: VersionTruth Architecture</h2>
+<p>Instead of just diagnosing the failure mode, I packaged the live-registry-lookup logic as a small public API called VersionTruth, along with a hosted <code>SKILL.md</code> that tells any agent how to use it. The instruction to the agent is deliberately blunt: if you don't recognize a version string, that's a reason to <em>check</em>, not a reason to <em>revert</em>. Unfamiliarity isn't evidence of error.</p>
+<p><figure><img src="/images/studies/AI_Version_Hallucination_Solution.webp" alt="VersionTruth Solution Architecture" /><figcaption>VersionTruth Solution Architecture</figcaption></figure></p>
+<p>The API lives as serverless functions sitting next to an existing Vite SPA—operating with zero changes to primary application codebases.</p>
+<pre><code class="language-mermaid">sequenceDiagram
+    autonumber
+
+    actor Agent as AI Coding Agent (Jules / Claude)
+    participant Skill as SKILL.md Specification
+    participant API as VersionTruth API (Vercel Edge)
+    participant Reg as Upstream Registry (npm / GitHub / Node)
+
+    Agent-&gt;&gt;Skill: Reads tool definition &amp; endpoints
+    activate Skill
+    Skill--&gt;&gt;Agent: Returns schema &amp; parameters
+    deactivate Skill
+
+    Agent-&gt;&gt;+API: GET /api/compare-version (ecosystem=gh-action, candidate=v4)
+
+    API-&gt;&gt;+Reg: Fetches real-time releases &amp; tags
+    Reg--&gt;&gt;-API: Returns latest tagged release (v6.0.1)
+
+    API--&gt;&gt;-Agent: 200 OK: candidate=&quot;v4&quot;, latest=&quot;v6.0.1&quot;, isOutdated=true
+
+    Agent-&gt;&gt;Agent: Retains v6 instead of hallucinated downgrade</code></pre>
+<hr />
+<p>Developers can interactively test the live API and explore the skill definition at <a href="https://boomtick.blog/versiontruth">https://boomtick.blog/versiontruth</a>.</p>
+<h2>API & Tool Specification</h2>
+<p>VersionTruth exposes lightweight HTTP endpoints that accept ecosystem queries and return structured status metadata.</p>
+<h3>1. Latest Version Query</h3>
+<pre><code class="language-http">GET /api/latest-version?ecosystem=gh-action&amp;name=actions/checkout HTTP/1.1
+Host: boomtick.blog</code></pre>
+<p><strong>Response (<code>200 OK</code>):</strong></p>
+<pre><code class="language-json">{
+  &quot;ecosystem&quot;: &quot;gh-action&quot;,
+  &quot;name&quot;: &quot;actions/checkout&quot;,
+  &quot;latest&quot;: &quot;v6.0.1&quot;,
+  &quot;updatedAt&quot;: &quot;2026-07-08T12:00:00Z&quot;
+}</code></pre>
+<h3>2. Candidate Version Comparison</h3>
+<pre><code class="language-http">GET /api/compare-version?ecosystem=gh-action&amp;name=actions/checkout&amp;candidate=v4 HTTP/1.1
+Host: boomtick.blog</code></pre>
+<p><strong>Response (<code>200 OK</code>):</strong></p>
+<pre><code class="language-json">{
+  &quot;candidate&quot;: &quot;v4&quot;,
+  &quot;latest&quot;: &quot;v6.0.1&quot;,
+  &quot;isOutdated&quot;: true,
+  &quot;isDeprecated&quot;: false,
+  &quot;recommendation&quot;: &quot;Do not downgrade. v6.0.1 is valid and current.&quot;
+}</code></pre>
+<hr />
+<h2>Step-by-Step Reproduction & Agent Integration Guide</h2>
+<p>Follow this guide to integrate VersionTruth into your own agentic dev pipeline or AI review agent context.</p>
+<h3>Step 1: Add the SKILL.md Definition</h3>
+<p>In your repository's <code>.github/skills/versiontruth.md</code> or system prompt configuration, include the tool directive:</p>
+<pre><code class="language-markdown"># VersionTruth Agent Skill
+
+When editing dependency files (`package.json`, `.node-version`, GitHub Actions workflows),
+ALWAYS check candidate versions before reverting unfamiliar version strings.
+
+- Oracle API: `https://boomtick.blog/api/compare-version`
+- Ecosystems supported: `npm`, `node`, `gh-action`
+
+Rule: Unfamiliarity is NOT evidence of hallucination.
+If a version exceeds your training context cut-off, query VersionTruth first.</code></pre>
+<h3>Step 2: Implement the Deterministic Backstop in CI</h3>
+<p>Combine the pre-edit agent skill with an explicit post-edit CI check script (<code>scripts/verify_versions.py</code>):</p>
+<pre><code class="language-python">import sys
+import requests
+
+def verify_action_version(action_name, candidate_version):
+    url = (
+        &quot;https://boomtick.blog/api/compare-version&quot;
+        f&quot;?ecosystem=gh-action&amp;name={action_name}&amp;candidate={candidate_version}&quot;
+    )
+    res = requests.get(url, timeout=5).json()
+    if res.get(&quot;isOutdated&quot;):
+        print(
+            f&quot;⚠️ Warning: {action_name}@{candidate_version} is outdated.\n&quot;
+            f&quot;Real latest is {res.get('latest')}&quot;
+        )
+        return False
+    return True
+
+if __name__ == &quot;__main__&quot;:
+    valid = verify_action_version(&quot;actions/checkout&quot;, &quot;v4&quot;)
+    if not valid:
+        sys.exit(1)</code></pre>
+<h3>What's Next: Handling EOL and Deprecation</h3>
+<p>While preventing out-of-distribution downgrades is the immediate fix, the next evolution of VersionTruth will address the opposite problem: agents confidently recommending versions that have reached End-of-Life (EOL) or have been explicitly deprecated by maintainers.</p>
+<p>Future iterations of the <code>/api/compare-version</code> endpoint will expand its upstream registry integrations to query vulnerability databases and deprecation metadata, allowing the <code>isDeprecated</code> flag to proactively guide agents away from unmaintained branches (like Node 18) towards current LTS releases.</p></article></main></div>
+  </body>
+</html>
