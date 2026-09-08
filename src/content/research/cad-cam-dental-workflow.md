@@ -12,7 +12,7 @@ category: "Medical Robotics"
 summary: "Dynamic registration, kinematic calibration, and interactive UI for autonomous dental crowning."
 ---
 
-# CAD/CAM Robotic Dental Crowning & Dynamic Registration Workflow
+## CAD/CAM Robotic Dental Crowning & Dynamic Registration Workflow
 
 ## Autonomous Surgical Robotics at Bionics Lab UCSC
 

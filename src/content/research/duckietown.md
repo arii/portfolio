@@ -14,7 +14,7 @@ summary: "An open-source, low-cost robotics education and research platform for 
 videoUrl: "[![Duckietown Autonomous Driving Demonstration 1 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=rPpewHIF2KU#no-embed](/assets/research/duckietown/navigation_1.gif#max-w-2xl)](https://www.youtube.com/watch?v=rPpewHIF2KU#no-embed)"
 ---
 
-# Duckietown: Autonomous Taxi Fleet
+## Duckietown: Autonomous Taxi Fleet
 
 ![Inaugural MIT 2.166 Duckietown Class](/assets/research/duckietown.jpg)
 

@@ -11,7 +11,7 @@ category: "Multi-Robot Systems"
 summary: "Decentralized multi-agent package delivery in dynamic human environments (RSS 2015 Best Paper Finalist & IJRR journal publication)."
 ---
 
-# Delivery Bots: Multi-Robot Coordination under Uncertainty
+## Delivery Bots: Multi-Robot Coordination under Uncertainty
 
 ![Autonomous Delivery Bot Transporting Item](/assets/research/beer.png)
 

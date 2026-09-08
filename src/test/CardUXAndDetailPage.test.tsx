@@ -81,4 +81,27 @@ describe('Card UX & Detail Page Navigation Improvements', () => {
     expect(stateMachineImg?.className).toContain('max-h-[500px]');
     expect(stateMachineImg?.className).toContain('object-contain');
   });
+
+  it('renders exactly one h1 tag on detail pages across all research and devai slugs', () => {
+    const affectedSlugs = [
+      'duckietown',
+      'cad-cam-dental-workflow',
+      'delivery-bots',
+      'leac-monitoring-software',
+      'boop-light-detector',
+      'robocon-mit',
+      'light-therapy-mit',
+      'bwsi-racecar',
+    ];
+
+    affectedSlugs.forEach((slug) => {
+      const { container, unmount } = render(
+        <ResearchDetailPage slug={slug} onBack={() => {}} />
+      );
+
+      const h1s = container.querySelectorAll('h1');
+      expect(h1s.length).toBe(1);
+      unmount();
+    });
+  });
 });

@@ -11,7 +11,7 @@ category: "Community Health & Wellness"
 summary: "Campus-wide seasonal affective disorder (SAD) wellness initiative funded by the MindHandHeart Innovation Fund."
 ---
 
-# Light Therapy at MIT
+## Light Therapy at MIT
 
 ## Mitigating Seasonal Affective Disorder Across Campus
 

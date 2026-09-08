@@ -604,11 +604,20 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
                 {children}
               </td>
             ),
-            h1: ({ children, ...props }) => (
-              <h1 className="text-3xl font-black text-text-main mt-12 mb-4" {...props}>
-                {children}
-              </h1>
-            ),
+            h1: ({ children, ...props }) => {
+              let textContent = '';
+              if (typeof children === 'string') {
+                textContent = children;
+              } else if (Array.isArray(children)) {
+                textContent = children.map(c => typeof c === 'string' ? c : '').join('');
+              }
+              const id = textContent.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+              return (
+                <h2 id={id || undefined} className="text-2xl font-bold text-text-main mt-12 mb-4 pb-2 border-b border-line" {...props}>
+                  {children}
+                </h2>
+              );
+            },
             h2: ({ children, ...props }) => {
               let textContent = '';
               if (typeof children === 'string') {
