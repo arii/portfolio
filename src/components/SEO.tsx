@@ -50,29 +50,29 @@ const SEO: React.FC<SEOProps> = ({
     : null;
 
   return (
-    <Helmet>
+    <Helmet defer={false}>
       {/* Primary HTML Meta Tags */}
-      <title>{fullTitle}</title>
-      <meta name="description" content={description} />
-      <link rel="canonical" href={fullUrl} />
+      <title data-rh="true">{fullTitle}</title>
+      <meta data-rh="true" name="description" content={description} />
+      <link data-rh="true" rel="canonical" href={fullUrl} />
 
       {/* Open Graph / Facebook Meta Tags */}
-      <meta property="og:site_name" content="Ariel Anders Portfolio" />
-      <meta property="og:title" content={fullTitle} />
-      <meta property="og:description" content={description} />
-      <meta property="og:type" content={ogType} />
-      <meta property="og:url" content={fullUrl} />
-      <meta property="og:image" content={image} />
+      <meta data-rh="true" property="og:site_name" content="Ariel Anders Portfolio" />
+      <meta data-rh="true" property="og:title" content={fullTitle} />
+      <meta data-rh="true" property="og:description" content={description} />
+      <meta data-rh="true" property="og:type" content={ogType} />
+      <meta data-rh="true" property="og:url" content={fullUrl} />
+      <meta data-rh="true" property="og:image" content={image} />
 
       {/* Twitter Card Meta Tags */}
-      <meta name="twitter:card" content={twitterCard} />
-      <meta name="twitter:title" content={fullTitle} />
-      <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={image} />
+      <meta data-rh="true" name="twitter:card" content={twitterCard} />
+      <meta data-rh="true" name="twitter:title" content={fullTitle} />
+      <meta data-rh="true" name="twitter:description" content={description} />
+      <meta data-rh="true" name="twitter:image" content={image} />
 
       {/* Structured JSON-LD Schema */}
       {jsonLdContent && (
-        <script type="application/ld+json">{jsonLdContent}</script>
+        <script data-rh="true" type="application/ld+json">{jsonLdContent}</script>
       )}
     </Helmet>
   );
