@@ -13,10 +13,10 @@
 ## Core Pages
 
 - [Home](https://arii.github.io/): Main portfolio landing page highlighting core domain pillars, flagship DevAI tools, and robotics research.
-- [About & Bio](https://arii.github.io/about): Career background, doctoral research at MIT CSAIL, industry leadership, and consulting services.
-- [Agentic DevAI Projects](https://arii.github.io/devai): Showcase of stateful multi-agent developer workflows, MCP servers, CI/CD guardrails, and AI code reviewing infrastructure.
-- [Robotics Research](https://arii.github.io/research): Comprehensive PhD/Master's thesis research, peer-reviewed publications, motion planning under uncertainty, and hardware projects.
-- [Technical Resume](https://arii.github.io/resume): Interactive career experience, publication record, technical skills, and downloadable PDF resume.
+- [About & Bio](https://arii.github.io/about/): Career background, doctoral research at MIT CSAIL, industry leadership, and consulting services.
+- [Agentic DevAI Projects](https://arii.github.io/devai/): Showcase of stateful multi-agent developer workflows, MCP servers, CI/CD guardrails, and AI code reviewing infrastructure.
+- [Robotics Research](https://arii.github.io/research/): Comprehensive PhD/Master's thesis research, peer-reviewed publications, motion planning under uncertainty, and hardware projects.
+- [Technical Resume](https://arii.github.io/resume/): Interactive career experience, publication record, technical skills, and downloadable PDF resume.
 
 ## Agentic DevAI & Infrastructure
 

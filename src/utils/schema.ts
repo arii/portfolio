@@ -89,13 +89,22 @@ export interface VideoObjectSchemaOptions {
   uploadDate?: string;
 }
 
+function normalizeUrlPath(pathStr: string): string {
+  if (!pathStr) return '/';
+  let normalized = pathStr.startsWith('/') ? pathStr : `/${pathStr}`;
+  if (normalized !== '/' && !normalized.endsWith('/') && !/\.[a-z0-9]+$/i.test(normalized)) {
+    normalized = `${normalized}/`;
+  }
+  return normalized;
+}
+
 export function getOrganizationSchema() {
   return {
     '@type': ['ProfessionalService', 'Organization'],
     '@id': `${SITE_URL}/#organization`,
     name: 'Ariel Anders AI & Robotics Consulting',
     alternateName: 'Ariel Anders Consulting',
-    url: `${SITE_URL}/about`,
+    url: `${SITE_URL}/about/`,
     logo: {
       '@type': 'ImageObject',
       '@id': `${SITE_URL}/favicon.svg#logo`,
@@ -139,23 +148,27 @@ export function getOrganizationSchema() {
 }
 
 export function getSiteNavigationSchema() {
-  return NAV_ITEMS.map((item, index) => ({
-    '@type': 'SiteNavigationElement',
-    '@id': `${SITE_URL}${item.path}#sitenav-${index + 1}`,
-    position: index + 1,
-    name: item.name,
-    url: `${SITE_URL}${item.path === '/' ? '' : item.path}`,
-  }));
+  return NAV_ITEMS.map((item, index) => {
+    const normPath = normalizeUrlPath(item.path);
+    const itemUrl = normPath === '/' ? `${SITE_URL}/` : `${SITE_URL}${normPath}`;
+    return {
+      '@type': 'SiteNavigationElement',
+      '@id': `${itemUrl}#sitenav-${index + 1}`,
+      position: index + 1,
+      name: item.name,
+      url: itemUrl,
+    };
+  });
 }
 
 export function getPersonAndProfileSchema(canonicalUrl: string = '/') {
-  const normalized = canonicalUrl.startsWith('/') ? canonicalUrl : '/' + canonicalUrl;
-  const fullUrl = SITE_URL + (normalized === '/' ? '' : normalized);
+  const normalized = normalizeUrlPath(canonicalUrl);
+  const fullUrl = SITE_URL + (normalized === '/' ? '/' : normalized);
 
   const personEntity = {
     '@type': 'Person',
-    '@id': `${SITE_URL}/about#person`,
-    url: `${SITE_URL}/about`,
+    '@id': `${SITE_URL}/about/#person`,
+    url: `${SITE_URL}/about/`,
     name: AUTHOR_NAME,
     jobTitle: AUTHOR_JOB_TITLE,
     email: AUTHOR_EMAIL,
@@ -269,8 +282,8 @@ export function getServiceSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'Service',
-    '@id': `${SITE_URL}/about#consulting-service`,
-    url: `${SITE_URL}/about`,
+    '@id': `${SITE_URL}/about/#consulting-service`,
+    url: `${SITE_URL}/about/`,
     name: 'Robotics & Multi-Agent AI Consulting',
     serviceType: 'Technical & Engineering Consulting',
     description:
@@ -338,7 +351,7 @@ export function getSoftwareSchema(options: SoftwareSchemaOptions) {
 }
 
 export function getTechArticleSchema(options: TechArticleSchemaOptions) {
-  const normalized = options.canonicalPath.startsWith('/') ? options.canonicalPath : '/' + options.canonicalPath;
+  const normalized = normalizeUrlPath(options.canonicalPath);
   const fullUrl = SITE_URL + normalized;
   const rawImageUrl = options.image
     ? options.image.startsWith('http')
@@ -387,7 +400,7 @@ export function getTechArticleSchema(options: TechArticleSchemaOptions) {
 }
 
 export function getScholarlyArticleSchema(options: ScholarlyArticleSchemaOptions) {
-  const normalized = options.canonicalPath.startsWith('/') ? options.canonicalPath : '/' + options.canonicalPath;
+  const normalized = normalizeUrlPath(options.canonicalPath);
   const fullUrl = SITE_URL + normalized;
   const rawImageUrl = options.image
     ? options.image.startsWith('http')
@@ -427,7 +440,7 @@ export function getScholarlyArticleSchema(options: ScholarlyArticleSchemaOptions
 }
 
 export function getCollectionPageSchema(options: CollectionPageSchemaOptions) {
-  const normalized = options.canonicalPath.startsWith('/') ? options.canonicalPath : '/' + options.canonicalPath;
+  const normalized = normalizeUrlPath(options.canonicalPath);
   const fullUrl = SITE_URL + normalized;
 
   return {
@@ -442,9 +455,17 @@ export function getCollectionPageSchema(options: CollectionPageSchemaOptions) {
       '@id': `${fullUrl}#itemlist`,
       numberOfItems: options.items.length,
       itemListElement: options.items.map((item, index) => {
-        const itemUrl = item.url.startsWith('http')
-          ? item.url
-          : `${SITE_URL}${item.url.startsWith('/') ? '' : '/'}${item.url}`;
+        let itemUrl = item.url;
+        if (!itemUrl.startsWith('http')) {
+          itemUrl = `${SITE_URL}${normalizeUrlPath(itemUrl)}`;
+        } else {
+          // ensure trailing slash if directory URL
+          const parsed = new URL(itemUrl);
+          if (parsed.pathname && !parsed.pathname.endsWith('/') && !/\.[a-z0-9]+$/i.test(parsed.pathname)) {
+            parsed.pathname = `${parsed.pathname}/`;
+            itemUrl = parsed.toString();
+          }
+        }
 
         const listItem: any = {
           '@type': 'ListItem',
@@ -475,7 +496,7 @@ export function getCollectionPageSchema(options: CollectionPageSchemaOptions) {
 }
 
 export function getResumeCareerSchema() {
-  const fullUrl = `${SITE_URL}/resume`;
+  const fullUrl = `${SITE_URL}/resume/`;
 
   const occupation = {
     '@type': 'Occupation',
@@ -615,8 +636,7 @@ export function getBreadcrumbSchema(items: BreadcrumbItem[]) {
     itemListElement: items.map((item, index) => {
       let fullUrl = item.path;
       if (!fullUrl.startsWith('http')) {
-        const normalizedPath = fullUrl.startsWith('/') ? fullUrl : `/${fullUrl}`;
-        fullUrl = `${SITE_URL}${normalizedPath === '/' ? '/' : normalizedPath}`;
+        fullUrl = `${SITE_URL}${normalizeUrlPath(fullUrl)}`;
       }
       return {
         '@type': 'ListItem',
