@@ -27,7 +27,7 @@ describe('index.html SEO & Accessibility Tags', () => {
     const indexPath = path.resolve(__dirname, '../../index.html');
     const htmlContent = fs.readFileSync(indexPath, 'utf-8');
 
-    const titleMatch = htmlContent.match(/<title>([^<]+)<\/title>/);
+    const titleMatch = htmlContent.match(/<title[^>]*>([^<]+)<\/title>/);
     expect(titleMatch).not.toBeNull();
     const titleContent = titleMatch![1].replace(/&amp;/g, '&');
     expect(titleContent.length).toBeLessThanOrEqual(60);
@@ -38,7 +38,7 @@ describe('index.html SEO & Accessibility Tags', () => {
     const indexPath = path.resolve(__dirname, '../../index.html');
     const htmlContent = fs.readFileSync(indexPath, 'utf-8');
 
-    expect(htmlContent).toContain('<script type="application/ld+json">');
+    expect(htmlContent).toMatch(/<script\s+[^>]*type="application\/ld\+json">/);
     expect(htmlContent).toContain('"@graph":');
     expect(htmlContent).toContain('"@type": "Person"');
     expect(htmlContent).toContain('"name": "Ariel Anders, PhD"');

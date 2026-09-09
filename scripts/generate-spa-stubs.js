@@ -722,31 +722,31 @@ function customizeHtmlForRoute(baseHtml, meta, route, contentDir) {
 
   // 1. Strip ALL existing title, description, canonical, OG, and Twitter tags
   customized = customized.replace(/<title[\s\S]*?<\/title>/gi, '');
-  customized = customized.replace(/<meta\s+name="description"[\s\S]*?\/?>/gi, '');
-  customized = customized.replace(/<link\s+rel="canonical"[\s\S]*?\/?>/gi, '');
-  customized = customized.replace(/<meta\s+property="og:(?:title|description|url|site_name|type|image)"[\s\S]*?\/?>/gi, '');
-  customized = customized.replace(/<meta\s+name="twitter:(?:card|title|description|image)"[\s\S]*?\/?>/gi, '');
+  customized = customized.replace(/<meta\b[^>]*\bname="description"[^>]*\/?>/gi, '');
+  customized = customized.replace(/<link\b[^>]*\brel="canonical"[^>]*\/?>/gi, '');
+  customized = customized.replace(/<meta\b[^>]*\bproperty="og:(?:title|description|url|site_name|type|image)"[^>]*\/?>/gi, '');
+  customized = customized.replace(/<meta\b[^>]*\bname="twitter:(?:card|title|description|image)"[^>]*\/?>/gi, '');
 
   const escapedTitle = meta.title.replace(/"/g, '&quot;');
   const escapedDesc = meta.description.replace(/"/g, '&quot;');
 
   // 2. Build explicit, clean head metadata block
   const seoHeadTags = [
-    `    <title>${meta.title}</title>`,
-    `    <meta name="description" content="${escapedDesc}" />`,
-    `    <link rel="canonical" href="${meta.canonical}" />`,
+    `    <title data-rh="true">${meta.title}</title>`,
+    `    <meta data-rh="true" name="description" content="${escapedDesc}" />`,
+    `    <link data-rh="true" rel="canonical" href="${meta.canonical}" />`,
     `    <!-- Open Graph / Facebook -->`,
-    `    <meta property="og:site_name" content="Ariel Anders Portfolio" />`,
-    `    <meta property="og:title" content="${escapedTitle}" />`,
-    `    <meta property="og:description" content="${escapedDesc}" />`,
-    `    <meta property="og:type" content="website" />`,
-    `    <meta property="og:url" content="${meta.canonical}" />`,
-    `    <meta property="og:image" content="${meta.image || DEFAULT_IMAGE}" />`,
+    `    <meta data-rh="true" property="og:site_name" content="Ariel Anders Portfolio" />`,
+    `    <meta data-rh="true" property="og:title" content="${escapedTitle}" />`,
+    `    <meta data-rh="true" property="og:description" content="${escapedDesc}" />`,
+    `    <meta data-rh="true" property="og:type" content="website" />`,
+    `    <meta data-rh="true" property="og:url" content="${meta.canonical}" />`,
+    `    <meta data-rh="true" property="og:image" content="${meta.image || DEFAULT_IMAGE}" />`,
     `    <!-- Twitter Card -->`,
-    `    <meta name="twitter:card" content="summary_large_image" />`,
-    `    <meta name="twitter:title" content="${escapedTitle}" />`,
-    `    <meta name="twitter:description" content="${escapedDesc}" />`,
-    `    <meta name="twitter:image" content="${meta.image || DEFAULT_IMAGE}" />`,
+    `    <meta data-rh="true" name="twitter:card" content="${meta.twitterCard || 'summary_large_image'}" />`,
+    `    <meta data-rh="true" name="twitter:title" content="${escapedTitle}" />`,
+    `    <meta data-rh="true" name="twitter:description" content="${escapedDesc}" />`,
+    `    <meta data-rh="true" name="twitter:image" content="${meta.image || DEFAULT_IMAGE}" />`,
   ].join('\n');
 
   // Insert custom head tags right after viewport meta tag or inside <head>
@@ -759,8 +759,8 @@ function customizeHtmlForRoute(baseHtml, meta, route, contentDir) {
   // Replace Default JSON-LD Schema Fallback
   const jsonLd = generateJsonLdForRoute(meta);
   if (jsonLd) {
-    const jsonLdScript = `<script type="application/ld+json">\n${JSON.stringify(jsonLd, null, 2)}\n    </script>`;
-    customized = customized.replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/, jsonLdScript);
+    const jsonLdScript = `<script data-rh="true" type="application/ld+json">\n${JSON.stringify(jsonLd, null, 2)}\n    </script>`;
+    customized = customized.replace(/<script\s+(?:data-rh="true"\s+)?type="application\/ld\+json">[\s\S]*?<\/script>/, jsonLdScript);
   }
 
   // Inject Pre-rendered Semantic HTML into root for non-JS crawlers
