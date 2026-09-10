@@ -33,6 +33,8 @@ jobs:
         env:
           VITE_BASE_PATH: /
           INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+          VITE_CALCOM_EVENT_SLUG: ${{ secrets.CALCOM_EVENT_SLUG }}
+          CALCOM_API_KEY: ${{ secrets.CALCOM_API_KEY }}
 
       - name: Create GitHub App Token
         uses: actions/create-github-app-token@v1
