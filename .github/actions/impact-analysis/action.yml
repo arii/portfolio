@@ -65,7 +65,7 @@ runs:
         except ValueError:
             max_reviews = 3
 
-        fetch_url = f"https://api.github.com/repos/{github_repo}/issues/{pr_number}/comments?per_page=100"
+        fetch_url = f"https://api.github.com/repos/{github_repo}/pulls/{pr_number}/reviews?per_page=100"
         bot_comment_count = 0
         existing_body = ''
 
@@ -78,7 +78,7 @@ runs:
                 with urllib.request.urlopen(req) as response:
                     comments = json.loads(response.read().decode('utf-8'))
                     for c in comments:
-                        if c.get('user', {}).get('type') == 'Bot' and '## Deployment Impact Analysis' in c.get('body', ''):
+                        if c.get('user', {}).get('type') == 'Bot' and '<!-- ai-review-count:' in c.get('body', ''):
                             existing_body = c.get('body', '')
                             bot_comment_count += 1
 
