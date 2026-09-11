@@ -266,6 +266,7 @@ export function getPersonAndProfileSchema(canonicalUrl: string = '/') {
 }
 
 export function getConsultingSchema() {
+  const eventSlug = import.meta.env.VITE_CALCOM_EVENT_SLUG || 'arielanders/consulting';
   return {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
@@ -315,7 +316,7 @@ export function getConsultingSchema() {
       '@type': 'ReserveAction',
       target: {
         '@type': 'EntryPoint',
-        urlTemplate: 'https://cal.com/arielanders/consulting',
+        urlTemplate: `https://cal.com/${eventSlug}`,
         actionPlatform: [
           'http://schema.org/DesktopWebPlatform',
           'http://schema.org/MobileWebPlatform',

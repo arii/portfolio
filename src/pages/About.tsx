@@ -50,9 +50,11 @@ const About: React.FC = () => {
     const Cal = (window as any).Cal;
     Cal("init", "consulting", { origin: "https://cal.com" });
 
+    const eventSlug = import.meta.env.VITE_CALCOM_EVENT_SLUG || "arielanders/consulting";
+
     Cal.ns.consulting("inline", {
       elementOrSelector: "#cal-inline-embed",
-      calLink: "arielanders/consulting",
+      calLink: eventSlug,
       layout: "month_view",
       config: {
         theme: "dark"
