@@ -40,6 +40,9 @@ jobs:
 
       - name: Build Application
         run: pnpm run build
+        env:
+          VITE_CALCOM_EVENT_SLUG: ${{ secrets.CALCOM_EVENT_SLUG }}
+          CALCOM_API_KEY: ${{ secrets.CALCOM_API_KEY }}
 
       - name: Create GitHub App Token
         if: (github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch') && env.BOOMTICK_APP_ID != ''
