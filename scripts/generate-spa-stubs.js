@@ -357,7 +357,8 @@ function getArticleList(contentDir, targetCategory) {
       .map((t) => t.replace(/["']/g, '').trim())
       .filter(Boolean);
 
-    const isRobotics = category.toLowerCase().includes('robotics');
+    const researchOnlySlugs = ['bwsi-racecar', 'delivery-bots', 'leac-monitoring-software', 'light-therapy-mit', 'boop-light-detector', 'autonomous-drone-line-following'];
+    const isRobotics = category.toLowerCase().includes('robotics') || researchOnlySlugs.includes(slug);
     const primarySection = isRobotics ? 'research' : 'devai';
 
     if ((targetCategory === 'devai' && !isRobotics) || (targetCategory === 'research' && isRobotics)) {
@@ -817,7 +818,8 @@ export function generateSpaStubs() {
       const content = fs.readFileSync(filePath, 'utf-8');
       const { category = 'DevAI' } = parseFrontmatter(content);
 
-      const isRobotics = category.toLowerCase().includes('robotics');
+      const researchOnlySlugs = ['bwsi-racecar', 'delivery-bots', 'leac-monitoring-software', 'light-therapy-mit', 'boop-light-detector', 'autonomous-drone-line-following'];
+      const isRobotics = category.toLowerCase().includes('robotics') || researchOnlySlugs.includes(slug);
       const primarySection = isRobotics ? 'research' : 'devai';
 
       routes.push(`${primarySection}/${slug}`);
