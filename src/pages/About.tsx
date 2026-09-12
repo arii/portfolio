@@ -132,7 +132,27 @@ const About: React.FC = () => {
               Book a technical advisory session for agentic orchestration, robotics architecture, or system design.
             </p>
 
-            <div id="cal-inline-embed" style={{ width: '100%', height: '100%', overflow: 'scroll' }}></div>
+            {/* Added styling to Cal container to handle long lists in a grid layout */}
+            <style>
+              {`
+                /* Target the scrollable internal container of Cal.com */
+                .cal-embed-wrapper [data-testid="time-options"] {
+                  display: grid !important;
+                  grid-template-columns: repeat(2, 1fr) !important;
+                  gap: 8px !important;
+                  max-height: 380px !important;
+                  overflow-y: auto !important;
+                }
+
+                @media (min-width: 640px) {
+                  .cal-embed-wrapper [data-testid="time-options"] {
+                    grid-template-columns: repeat(3, 1fr) !important;
+                  }
+                }
+              `}
+            </style>
+
+            <div id="cal-inline-embed" className="cal-embed-wrapper" style={{ width: '100%', height: '100%', minHeight: '400px', overflow: 'hidden' }}></div>
           </section>
         </section>
 
