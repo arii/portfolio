@@ -145,7 +145,8 @@ export function generateSitemap() {
       const lastmod = parseFrontmatterDate(content);
       const category = parseFrontmatterCategory(content);
 
-      const isRobotics = category.toLowerCase().includes('robotics');
+      const researchOnlySlugs = ['bwsi-racecar', 'delivery-bots', 'leac-monitoring-software', 'light-therapy-mit', 'boop-light-detector', 'autonomous-drone-line-following'];
+      const isRobotics = category.toLowerCase().includes('robotics') || researchOnlySlugs.includes(slug);
       const primarySection = isRobotics ? 'research' : 'devai';
 
       const images = extractMarkdownImages(articleTitle, content);
