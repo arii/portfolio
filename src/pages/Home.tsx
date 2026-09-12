@@ -106,6 +106,21 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
               <span>View Robotics Research</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
+
+            <Link
+              to="/about#schedule"
+              onClick={(e) => {
+                if (onNavigate) {
+                  e.preventDefault();
+                  handleNav('about#schedule');
+                }
+              }}
+              className="inline-flex items-center justify-center gap-2 rounded-md border border-border bg-transparent text-text-body hover:text-text-main hover:bg-surface-elevated px-5 py-2.5 w-full max-w-xs sm:max-w-none sm:w-auto lg:w-full text-sm font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-border min-h-[44px]"
+            >
+              <Bot className="w-4 h-4" />
+              <span>Book Consultation</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
 

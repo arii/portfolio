@@ -52,6 +52,8 @@ jobs:
         env:
           VITE_BASE_PATH: /portfolio/preview/pr-${{ github.event.number }}/
           INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+          VITE_CALCOM_EVENT_SLUG: ${{ secrets.CALCOM_EVENT_SLUG }}
+          CALCOM_API_KEY: ${{ secrets.CALCOM_API_KEY }}
 
       - name: Deploy Preview to gh-pages branch
         if: github.event.action != 'closed'

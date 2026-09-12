@@ -265,6 +265,71 @@ export function getPersonAndProfileSchema(canonicalUrl: string = '/') {
   };
 }
 
+export function getConsultingSchema() {
+  const eventSlug = import.meta.env.VITE_CALCOM_EVENT_SLUG || 'arielanders/consulting';
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ProfessionalService',
+    '@id': `${SITE_URL}/#business`,
+    name: 'Ariel Anders Consulting',
+    url: SITE_URL,
+    image: AUTHOR_IMAGE,
+    description: 'Robotics architecture, autonomous navigation, and agentic DevAI systems engineering consulting.',
+    priceRange: '$$$',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'San Francisco',
+      addressRegion: 'CA',
+      addressCountry: 'US',
+    },
+    founder: {
+      '@type': 'Person',
+      name: AUTHOR_NAME,
+      jobTitle: AUTHOR_JOB_TITLE,
+      url: `${SITE_URL}/about`,
+    },
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Consulting Services',
+      itemListElement: [
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Robotics & Motion Planning Advisory',
+            description: 'Advisory for onboard autonomy, ROS 2 integration, and real-time planning systems.',
+            serviceType: 'Robotics Engineering Consulting',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Agentic DevAI Architecture',
+            description: 'Design and implementation of multi-agent development workflows and automated CI/CD guardrails.',
+            serviceType: 'AI Systems Consulting',
+          },
+        },
+      ],
+    },
+    potentialAction: {
+      '@type': 'ReserveAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `https://cal.com/${eventSlug}`,
+        actionPlatform: [
+          'http://schema.org/DesktopWebPlatform',
+          'http://schema.org/MobileWebPlatform',
+        ],
+      },
+      result: {
+        '@type': 'Reservation',
+        name: 'Technical Consultation Booking',
+      },
+    },
+  };
+}
+
 export function getServiceSchema() {
   return {
     '@context': 'https://schema.org',

@@ -1,18 +1,74 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import roboticistPhoto from '@/assets/roboticist.jpg';
 import { profileData } from '@/data/aboutData';
 import { CareerHighlightsSection, AtAGlanceSidebar } from '@/components/about/AboutSections';
 import { FAQSection } from '@/components/about/FAQSection';
 import { resolveAssetUrl } from '@/utils/asset';
 import SEO from '@/components/SEO';
-import { getPersonAndProfileSchema, getServiceSchema, getFAQSchema } from '@/utils/schema';
+import { getPersonAndProfileSchema, getServiceSchema, getFAQSchema, getConsultingSchema } from '@/utils/schema';
 
 const About: React.FC = () => {
   const aboutSchemas = [
     getPersonAndProfileSchema('/about'),
     getServiceSchema(),
     getFAQSchema(profileData.faqs),
+    getConsultingSchema(),
   ];
+
+  useEffect(() => {
+    (function (C: any, A: string, L: string) {
+      let p = function (a: any, ar: any) { a.q.push(ar); };
+      let d = C.document;
+      C.Cal = C.Cal || function () {
+        let cal = C.Cal;
+        let ar = arguments;
+        if (!cal.loaded) {
+          cal.ns = {};
+          cal.q = cal.q || [] as any[];
+          const script = d.createElement("script");
+          script.src = A;
+          d.head.appendChild(script);
+          cal.loaded = true;
+        }
+        if (ar[0] === L) {
+          const api: any = function () { p(api, arguments); };
+          const namespace = ar[1];
+          api.q = api.q || [] as any[];
+          if (typeof namespace === "string") {
+            cal.ns[namespace] = cal.ns[namespace] || api;
+            p(cal.ns[namespace], ar);
+            p(cal, ["initLoaded"]);
+            return;
+          }
+          p(cal, ar);
+          return;
+        }
+        p(cal, ar);
+      };
+    })(window, "https://app.cal.com/embed/embed.js", "init");
+
+    const Cal = (window as any).Cal;
+    Cal("init", "consulting", { origin: "https://cal.com" });
+
+    const eventSlug = import.meta.env.VITE_CALCOM_EVENT_SLUG || "arielanders/consulting";
+
+    Cal.ns.consulting("inline", {
+      elementOrSelector: "#cal-inline-embed",
+      calLink: eventSlug,
+      layout: "month_view",
+      config: {
+        theme: "dark"
+      }
+    });
+
+    Cal.ns.consulting("ui", {
+      theme: "dark",
+      styles: {
+        branding: { brandColor: "#3b82f6" }
+      },
+      hideEventTypeDetails: true
+    });
+  }, []);
 
   return (
     <div className="space-y-8 sm:space-y-12">
@@ -65,6 +121,21 @@ const About: React.FC = () => {
 
           {/* FAQ Section for Rich Search Snippets */}
           <FAQSection faqs={profileData.faqs} />
+
+          {/* Cal.com Booking Section */}
+          <section id="schedule" className="space-y-6 bg-surface p-6 sm:p-8 rounded-3xl border border-line">
+            <span className="inline-block px-3 py-1 text-xs font-semibold rounded-md bg-accent/10 text-accent mb-2">Advisory & Consulting</span>
+            <h2 className="text-xl sm:text-2xl font-bold text-text-main pb-3 border-b border-line/30">
+              Schedule a Consultation
+            </h2>
+            <p className="text-sm text-text-body leading-relaxed mb-6">
+              Book a technical advisory session for agentic orchestration, robotics architecture, or system design.
+            </p>
+
+            <div style={{ maxHeight: "600px", overflowY: "auto", borderRadius: "8px" }} className="border border-border bg-surface-base">
+              <div id="cal-inline-embed" style={{ width: '100%', height: '100%' }}></div>
+            </div>
+          </section>
         </section>
 
         <aside className="lg:col-span-4 space-y-6 sm:space-y-8 order-1 lg:order-2">
