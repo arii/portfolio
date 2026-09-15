@@ -4,7 +4,7 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://arii.github.io/</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <image:image>
       <image:loc>https://arii.github.io/assets/roboticist.jpg</image:loc>
       <image:title>Ariel Anders, PhD - AI &amp; Robotics Engineer</image:title>
@@ -14,15 +14,15 @@
   </url>
   <url>
     <loc>https://arii.github.io/devai</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-12</lastmod>
   </url>
   <url>
     <loc>https://arii.github.io/research</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-12</lastmod>
   </url>
   <url>
     <loc>https://arii.github.io/about</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <image:image>
       <image:loc>https://arii.github.io/assets/roboticist.jpg</image:loc>
       <image:title>Ariel Anders, PhD - AI &amp; Robotics Engineer</image:title>
@@ -32,7 +32,7 @@
   </url>
   <url>
     <loc>https://arii.github.io/resume</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-12</lastmod>
   </url>
   <url>
     <loc>https://arii.github.io/devai/ai-experiments</loc>
@@ -57,7 +57,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://arii.github.io/devai/boop-light-detector</loc>
+    <loc>https://arii.github.io/research/boop-light-detector</loc>
     <lastmod>2016-08-10</lastmod>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/app_testing.jpg</image:loc>
@@ -67,7 +67,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://arii.github.io/devai/bwsi-racecar</loc>
+    <loc>https://arii.github.io/research/bwsi-racecar</loc>
     <lastmod>2018-07-01</lastmod>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/bw.jpg</image:loc>
@@ -247,7 +247,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://arii.github.io/devai/delivery-bots</loc>
+    <loc>https://arii.github.io/research/delivery-bots</loc>
     <lastmod>2015-07-12</lastmod>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/beer.png</image:loc>
@@ -445,7 +445,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://arii.github.io/devai/leac-monitoring-software</loc>
+    <loc>https://arii.github.io/research/leac-monitoring-software</loc>
     <lastmod>2017-05-15</lastmod>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/leac.jpg</image:loc>
@@ -455,7 +455,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://arii.github.io/devai/light-therapy-mit</loc>
+    <loc>https://arii.github.io/research/light-therapy-mit</loc>
     <lastmod>2016-11-12</lastmod>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/light.jpg</image:loc>
