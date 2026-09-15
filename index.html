@@ -25,6 +25,8 @@
           window.history.replaceState(null, null,
               l.pathname.slice(0, -1) + decoded + l.hash
           );
+          sessionStorage.removeItem('ghpages_redirect');
+          sessionStorage.removeItem('ghpages_redirect_count');
         }
       }(window.location));
     </script>

@@ -785,24 +785,30 @@ export function generateSpaStubs() {
   fs.writeFileSync(indexHtmlPath, customizedRootHtml, 'utf-8');
   console.log(`✅ Updated root dist/index.html with pre-rendered canonical ${rootMeta.canonical}`);
 
-  // 1. Generate dist/404.html for GitHub Pages fallback with sessionStorage redirect script
-  const spa404Script = `<script>
-    (function() {
-      var path = window.location.pathname + window.location.search + window.location.hash;
-      sessionStorage.setItem('ghpages_redirect', path);
-    })();
-  </script>`;
-
-  let html404Content = indexHtmlContent;
-  if (html404Content.includes('<head>')) {
-    html404Content = html404Content.replace('<head>', `<head>\n    ${spa404Script}`);
-  } else {
-    html404Content = spa404Script + html404Content;
-  }
-
+  // 1. Copy public/404.html to dist/404.html for GitHub Pages fallback
+  const public404Path = path.resolve(__dirname, '../public/404.html');
   const fallbackPath = path.join(DIST_DIR, '404.html');
-  fs.writeFileSync(fallbackPath, html404Content, 'utf-8');
-  console.log(`✅ Generated GitHub Pages fallback at ${fallbackPath}`);
+
+  if (fs.existsSync(public404Path)) {
+    fs.copyFileSync(public404Path, fallbackPath);
+    console.log(`✅ Copied public/404.html fallback to ${fallbackPath}`);
+  } else {
+    const spa404Script = `<script>
+      (function() {
+        var path = window.location.pathname + window.location.search + window.location.hash;
+        sessionStorage.setItem('ghpages_redirect', path);
+      })();
+    </script>`;
+
+    let html404Content = indexHtmlContent;
+    if (html404Content.includes('<head>')) {
+      html404Content = html404Content.replace('<head>', `<head>\n    ${spa404Script}`);
+    } else {
+      html404Content = spa404Script + html404Content;
+    }
+    fs.writeFileSync(fallbackPath, html404Content, 'utf-8');
+    console.log(`✅ Generated GitHub Pages fallback at ${fallbackPath}`);
+  }
 
   // 2. Core routes to stub
   const routes = ['about', 'devai', 'research', 'resume', 'portfolio'];
