@@ -123,7 +123,7 @@ const About: React.FC = () => {
           <FAQSection faqs={profileData.faqs} />
 
           {/* Cal.com Booking Section */}
-          <section id="schedule" className="space-y-6 bg-surface p-6 sm:p-8 rounded-3xl border border-line">
+<section id="schedule" className="space-y-6 bg-surface p-6 sm:p-8 rounded-3xl border border-line">
             <span className="inline-block px-3 py-1 text-xs font-semibold rounded-md bg-accent/10 text-accent mb-2">Advisory & Consulting</span>
             <h2 className="text-xl sm:text-2xl font-bold text-text-main pb-3 border-b border-line/30">
               Schedule a Consultation
@@ -132,10 +132,11 @@ const About: React.FC = () => {
               Book a technical advisory session for agentic orchestration, robotics architecture, or system design.
             </p>
 
-            <div style={{ maxHeight: "600px", overflowY: "auto", borderRadius: "8px" }} className="border border-border bg-surface-base">
+            <div style={{ maxHeight: "650px", overflowY: "auto", borderRadius: "8px" }} className="border border-border bg-surface-base">
               <div id="cal-inline-embed" style={{ width: '100%', height: '100%' }}></div>
             </div>
           </section>
+
         </section>
 
         <aside className="lg:col-span-4 space-y-6 sm:space-y-8 order-1 lg:order-2">
@@ -175,6 +176,7 @@ const About: React.FC = () => {
           </div>
         </aside>
       </div>
+
     </div>
   );
 };
