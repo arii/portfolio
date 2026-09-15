@@ -123,19 +123,7 @@ const About: React.FC = () => {
           <FAQSection faqs={profileData.faqs} />
 
           {/* Cal.com Booking Section */}
-<section id="schedule" className="space-y-6 bg-surface p-6 sm:p-8 rounded-3xl border border-line">
-            <span className="inline-block px-3 py-1 text-xs font-semibold rounded-md bg-accent/10 text-accent mb-2">Advisory & Consulting</span>
-            <h2 className="text-xl sm:text-2xl font-bold text-text-main pb-3 border-b border-line/30">
-              Schedule a Consultation
-            </h2>
-            <p className="text-sm text-text-body leading-relaxed mb-6">
-              Book a technical advisory session for agentic orchestration, robotics architecture, or system design.
-            </p>
 
-            <div style={{ maxHeight: "650px", overflowY: "auto", borderRadius: "8px" }} className="border border-border bg-surface-base">
-              <div id="cal-inline-embed" style={{ width: '100%', height: '100%' }}></div>
-            </div>
-          </section>
 
         </section>
 
@@ -177,6 +165,23 @@ const About: React.FC = () => {
         </aside>
       </div>
 
+
+      {/* Full-width Cal.com Booking Section */}
+      <section id="schedule" className="w-full space-y-6 bg-surface p-6 sm:p-8 md:p-10 rounded-3xl border border-line mt-8 lg:mt-12 mb-8">
+        <div className="flex flex-col space-y-2">
+          <span className="inline-block px-3 py-1 text-xs font-semibold rounded-md bg-accent/10 text-accent self-start mb-1">Advisory & Consulting</span>
+          <h2 className="text-2xl sm:text-3xl font-bold text-text-main pb-3 border-b border-line/30">
+            Schedule a Consultation
+          </h2>
+          <p className="text-sm sm:text-base text-text-body leading-relaxed max-w-2xl">
+            Book a technical advisory session for agentic orchestration, robotics architecture, or system design.
+          </p>
+        </div>
+
+        <div style={{ maxHeight: "650px", overflowY: "auto", borderRadius: "12px" }} className="border border-border bg-surface-base shadow-sm mt-6">
+          <div id="cal-inline-embed" style={{ width: '100%', height: '100%' }}></div>
+        </div>
+      </section>
     </div>
   );
 };
