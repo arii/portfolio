@@ -10,7 +10,7 @@ export const flagshipTools: ResearchTool[] = [
     category: 'Product Development',
     status: 'Live',
     tags: ['React', 'Web Bluetooth', 'WebSockets', 'Spotify API', 'DevAI Testbed'],
-    canonicalPath: '/devai/hrm-architecture',
+    canonicalPath: '/devai/hrm-architecture/',
     externalUrl: 'https://arii.github.io/hrm/',
     externalLinkDisplayLabel: 'Live Demo',
     sourceUrl: 'https://github.com/arii/hrm',
@@ -62,7 +62,7 @@ export const flagshipTools: ResearchTool[] = [
     status: 'Completed (2019)',
     tags: ['PR2', 'Conformant planning', 'Belief state', 'Manipulation', 'MIT CSAIL'],
     isFlagship: true,
-    canonicalPath: '/research/conformant-planning-manipulation',
+    canonicalPath: '/research/conformant-planning-manipulation/',
     image: '/assets/research/phd/icra_presentation.gif',
     imageAlt: 'PR2 robot executing conformant planning manipulation and reliable block alignment during ICRA presentation',
     externalUrl: 'https://dspace.mit.edu/entities/publication/d489a172-efbf-4e35-b81c-04e4acf3d24d',
@@ -80,7 +80,7 @@ export const flagshipTools: ResearchTool[] = [
     isFlagship: true,
     image: '/assets/research/masters-thesis/pr2_grasp_3.gif',
     imageAlt: 'PR2 robot executing whole-arm contact and grasping strategy on irregular objects',
-    canonicalPath: '/research/masters-thesis',
+    canonicalPath: '/research/masters-thesis/',
     externalUrl: 'https://dspace.mit.edu/entities/publication/ead0c10d-3401-46a1-bcc5-42f5a56fe0b8',
     externalLinkDisplayLabel: 'MIT DSpace Thesis'
   }

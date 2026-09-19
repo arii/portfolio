@@ -14,13 +14,18 @@ function run(command: string, args: string[], cwd = process.cwd()): void {
 }
 
 function removeExistingWorktree(): void {
-  if (!fs.existsSync(worktreePath)) return;
-
   try {
-    run('git', ['worktree', 'remove', '--force', worktreePath]);
+    if (fs.existsSync(worktreePath)) {
+      run('git', ['worktree', 'remove', '--force', worktreePath]);
+    }
   } catch {
     fs.rmSync(worktreePath, { recursive: true, force: true });
-    run('git', ['worktree', 'prune']);
+  } finally {
+    try {
+      run('git', ['worktree', 'prune']);
+    } catch {
+      // Ignore prune errors if any
+    }
   }
 }
 

@@ -10,7 +10,7 @@ export const systemTools: ResearchTool[] = [
     category: 'DevAI System',
     status: 'Active',
     tags: ['GitHub Actions', 'MCP', 'CLI', 'Gemini', 'DevAI', 'PR automation'],
-    canonicalPath: '/research/gitops-pr-reviewer',
+    canonicalPath: '/research/gitops-pr-reviewer/',
     sourceUrl: 'https://github.com/arii/boomtick',
     parentFlagship: {
       id: 'repo-auditor-ai',
@@ -26,7 +26,7 @@ export const systemTools: ResearchTool[] = [
     category: 'DevAI System',
     status: 'Active',
     tags: ['Playwright', 'CI/CD', 'UX Audit', 'Dependency graph', 'Pixelmatch'],
-    canonicalPath: '/research/deployment-impact-analyzer',
+    canonicalPath: '/research/deployment-impact-analyzer/',
     sourceUrl: 'https://github.com/arii/boomtick',
     isFlagship: true
   },
@@ -39,7 +39,7 @@ export const systemTools: ResearchTool[] = [
     category: 'AI Experiments',
     status: 'In Progress',
     tags: ['ETL', 'WCS Scraper', 'Printful API', 'LLM', 'RAG', 'Automation'],
-    canonicalPath: '/research/ai-experiments'
+    canonicalPath: '/research/ai-experiments/'
   },
   {
     id: 'versiontruth',
@@ -51,7 +51,7 @@ export const systemTools: ResearchTool[] = [
     category: 'DevAI Tooling',
     status: 'Active',
     tags: ['Versions', 'CI', 'Dependencies', 'Hallucination-mitigation', 'npm', 'Node', 'GitHub Actions', 'Agents'],
-    canonicalPath: '/research/versiontruth',
+    canonicalPath: '/research/versiontruth/',
     sourceUrl: 'https://github.com/arii/tech-dancer/tree/main/api'
   }
 ];

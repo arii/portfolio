@@ -472,7 +472,7 @@ function getRouteMetadata(route, contentDir) {
       title: 'About & Background | Ariel Anders, PhD',
       description:
         'Learn about Ariel Anders, PhD (MIT CSAIL): roboticist, AI software engineer, research background, current availability, and personal projects.',
-      canonical: `${SITE_URL}/about`,
+      canonical: `${SITE_URL}/about/`,
       heading: 'About Ariel',
       bodyText: 'Robotics background, research history, and personal interests. MIT EECS PhD 2019 · SM 2014.',
       image: DEFAULT_IMAGE,
@@ -485,7 +485,7 @@ function getRouteMetadata(route, contentDir) {
       title: 'DevAI & Agentic Automation | Ariel Anders, PhD',
       description:
         'Explore agentic DevAI tools, multi-agent CI/CD workflows, and developer automation software engineered by Ariel Anders, PhD (MIT CSAIL).',
-      canonical: `${SITE_URL}/devai`,
+      canonical: `${SITE_URL}/devai/`,
       heading: 'DevAI & Software Systems',
       bodyText: 'System architectures, agentic CI/CD pipelines, autonomous developer tooling, and shipped production applications.',
       image: DEFAULT_IMAGE,
@@ -498,7 +498,7 @@ function getRouteMetadata(route, contentDir) {
       title: 'Robotics & Autonomous Research | Ariel Anders, PhD',
       description:
         'Discover robotics software research in conformant planning, belief-state manipulation, and autonomous systems by Ariel Anders, PhD (MIT CSAIL).',
-      canonical: `${SITE_URL}/research`,
+      canonical: `${SITE_URL}/research/`,
       heading: 'Robotics & Algorithmic Research',
       bodyText: 'Planning under uncertainty, conformant belief-state manipulation, multi-robot coordination, and hardware automation systems.',
       image: DEFAULT_IMAGE,
@@ -511,7 +511,7 @@ function getRouteMetadata(route, contentDir) {
       title: 'Resume & Career Highlights | Ariel Anders, PhD',
       description:
         'View the technical resume and experience of Ariel Anders, PhD (MIT CSAIL): expertise in robotics engineering, AI architecture, and software systems.',
-      canonical: `${SITE_URL}/resume`,
+      canonical: `${SITE_URL}/resume/`,
       heading: 'Resume & Career Highlights',
       bodyText: 'Roboticist and Senior Software Engineer with an MIT CSAIL PhD and track record across Waymo, Robust.AI, and Civ Robotics.',
       image: DEFAULT_IMAGE,
@@ -543,7 +543,7 @@ function getRouteMetadata(route, contentDir) {
       return {
         title: cleanTitle,
         description: cleanDesc,
-        canonical: `${SITE_URL}/${route}`,
+        canonical: `${SITE_URL}/${route}/`,
         heading: title || 'Research & Engineering Deep-Dive',
         bodyText: excerpt || '',
         image: fullImageUrl,
@@ -556,8 +556,11 @@ function getRouteMetadata(route, contentDir) {
     }
   }
 
-  const cleanRoutePath = route ? (route.startsWith('/') ? route : `/${route}`) : '/';
-  const canonicalUrl = `${SITE_URL}${cleanRoutePath === '/' ? '/' : cleanRoutePath}`;
+  let cleanRoutePath = route ? (route.startsWith('/') ? route : `/${route}`) : '/';
+  if (cleanRoutePath !== '/' && !cleanRoutePath.endsWith('/') && !/\.[a-z0-9]+$/i.test(cleanRoutePath)) {
+    cleanRoutePath = `${cleanRoutePath}/`;
+  }
+  const canonicalUrl = `${SITE_URL}${cleanRoutePath}`;
 
   return {
     title: 'AI & Robotics Engineering Portfolio | Ariel Anders, PhD',
