@@ -1,0 +1,1903 @@
+# Ariel Anders, PhD — Full Portfolio & Engineering Documentation (llms-full.txt)
+
+> Complete documentation, deep-dives, research publications, and project details for Ariel Anders, PhD.
+
+---
+
+## Index & Overview (llms.txt)
+
+# Ariel Anders, PhD — AI & Robotics Engineering Portfolio
+
+> Ariel Anders, PhD (MIT CSAIL) is a Senior Roboticist, AI Consulting Engineer, and Senior Software Engineer based in San Francisco, CA, specializing in Agentic DevAI infrastructure, stateful LLM orchestration, ROS 2, conformant belief-state robot manipulation, and autonomous systems.
+
+## Core Pages
+
+- [Home](https://arii.github.io/): Main portfolio landing page highlighting core domain pillars, flagship DevAI tools, and robotics research.
+- [About & Bio](https://arii.github.io/about): Career background, doctoral research at MIT CSAIL, industry leadership, and consulting services.
+- [Agentic DevAI Projects](https://arii.github.io/devai): Showcase of stateful multi-agent developer workflows, MCP servers, CI/CD guardrails, and AI code reviewing infrastructure.
+- [Robotics Research](https://arii.github.io/research): Comprehensive PhD/Master's thesis research, peer-reviewed publications, motion planning under uncertainty, and hardware projects.
+- [Technical Resume](https://arii.github.io/resume): Interactive career experience, publication record, technical skills, and downloadable PDF resume.
+
+## Agentic DevAI & Infrastructure
+
+- [GitOps PR Reviewer](https://arii.github.io/devai/gitops-pr-reviewer): Multi-agent AI pull request reviewer with automated static analysis, security auditing, and rule enforcement guardrails.
+- [VersionTruth](https://arii.github.io/devai/versiontruth): Automated dependency synchronization, lockfile validation, and security audit verification tool for Node and Python ecosystems.
+- [Deployment Impact Analyzer](https://arii.github.io/devai/deployment-impact-analyzer): Multi-model DOM and visual diff engine for detecting layout regressions in pull requests before deployment.
+- [HRM Architecture](https://arii.github.io/devai/hrm-architecture): Hierarchical Reasoning & Memory framework for long-running agentic LLM context management and tool execution.
+- [AI Experiments](https://arii.github.io/devai/ai-experiments): Exploration of stateful agent execution, prompt engineering patterns, and autonomous agent loops.
+
+## Robotics & AI Research
+
+- [Conformant Planning for Manipulation](https://arii.github.io/research/conformant-planning-manipulation): Doctoral thesis research at MIT CSAIL on conformant planning under actuation and sensing uncertainty without full state feedback.
+- [Whole-Arm Grasping](https://arii.github.io/research/masters-thesis): Master's thesis on tactile-driven whole-arm grasping and manipulation strategies.
+- [Duckietown](https://arii.github.io/research/duckietown): Open-source education platform and vision-based autonomous driving navigation research.
+- [BWSI Racecar](https://arii.github.io/research/bwsi-racecar): High-speed autonomous navigation platform with LiDAR and visual odometry integration.
+- [LEAC Monitoring Software](https://arii.github.io/research/leac-monitoring-software): Real-time telemetry monitoring and diagnostic system for autonomous experimental setups.
+- [Boop Light Detector](https://arii.github.io/research/boop-light-detector): Visual detection and tracking system for optical calibration and robot feedback loops.
+
+## Academic & Hardware Projects
+
+- [Graduate Engineering Projects](https://arii.github.io/research/graduate-engineering-projects): Portfolio of advanced graduate course projects in robotics, embedded systems, and control.
+- [Undergraduate Projects](https://arii.github.io/research/undergraduate-projects): Portfolio of undergraduate mechatronics, circuits, and robotics projects at UC Berkeley.
+- [Delivery Bots](https://arii.github.io/research/delivery-bots): Autonomous indoor delivery robot navigation and fleet orchestration.
+- [Light Therapy MIT](https://arii.github.io/research/light-therapy-mit): Biomedical optics and light therapy hardware research developed at MIT.
+- [CAD/CAM Dental Workflow](https://arii.github.io/research/cad-cam-dental-workflow): Automated 3D modeling and toolpath planning for custom dental prosthetics.
+- [Robocon MIT](https://arii.github.io/research/robocon-mit): Autonomous robot competition hardware and control software architecture.
+
+## External Links & Profiles
+
+- [GitHub Profile](https://github.com/arii): Open-source repositories, developer tools, and code contributions.
+- [LinkedIn Profile](https://www.linkedin.com/in/ariel-anders/): Professional experience, career updates, and industry connections.
+- [Google Scholar](https://scholar.google.com/citations?user=NM6SfiEAAAAJ&hl=en): Citation record and peer-reviewed academic publications.
+- [BoomTick Blog](https://boomtick.blog): Technical articles, engineering deep-dives, and insights on AI and robotics.
+
+## Optional
+
+- [Full Portfolio Content (llms-full.txt)](https://arii.github.io/llms-full.txt): Complete Markdown text aggregation of all research articles, project deep-dives, and portfolio documentation for LLM context ingestion.
+
+
+---
+
+# Full Technical Articles & Research Content
+
+## Document: AI Experiments (In Progress) (ai-experiments)
+A collection of custom dev tools, background ETL pipelines, and automated UI testing workflows I am currently building.
+
+---
+
+### Quick Status
+
+- **[WCS Scraping & ETL](#1-wcs-event-telemetry-scraping-etl-pipeline)** *(Production)* — 100% automated weekly sync with zero manual maintenance.
+- **[Storefront Automation](#2-ecommerce-merchandising-storefront-automation)** *(Active)* — Converts vector art and pushes variant configurations directly to Printful.
+- **[RAG AI Blog Drafter](#3-context-aware-technical-blog-drafter)** *(In Progress)* — Speeds up first-draft technical writing by 4x using past posts as core context.
+
+---
+
+## 1. WCS Event Telemetry Scraping & ETL Pipeline
+
+**Stack:** React • TypeScript • Python • Pydantic • GitHub Actions • BeautifulSoup
+
+![WCS Telemetry Scraper execution console and schema validation interface](/assets/research/ai-experiments/wcs-scraper.png)
+
+Tracking regional West Coast Swing event schedules and dancer registries from the [World Swing Dance Council](https://worldwestcoastswingcouncil.com/events/) manually was a headache. Registration links broke often, and dates fell out of sync.
+
+To fix this, I wrote a lightweight scraper using `BeautifulSoup` and `Pydantic`. It ensures HTML table parsing resilience by searching across structural variations (such as both `tr.event-row` and `div.event-item` containers). It also handles missing registry links by creating fallback temporary hashes (`tmp_{hash(name)}`) so valid events never get dropped during ingestion.
+
+```python
+# etl/scraper.py - Pydantic validation & fallback hashing
+from pydantic import BaseModel, Field
+from typing import Optional
+
+class WCSEvent(BaseModel):
+    name: str = Field(..., min_length=1)
+    location: str
+    date: str
+    registry_id: Optional[str] = None
+
+# Fallback generator for missing WSDC registry IDs
+def parse_registry_id(link_tag, event_name: str) -> str:
+    if link_tag and 'href' in link_tag.attrs:
+        return link_tag['href'].split('/')[-1]
+    return f"tmp_{hash(event_name)}"
+```
+
+The pipeline runs on a weekly GitHub Actions cron job. Before committing changes to `public/data/event_queue.json`, it checks `git diff --staged` to make sure I don't spam commit logs when event data hasn't changed.
+
+```yaml
+# .github/workflows/wcs_etl.yml - Git diff guardrail
+- name: Commit and Push Data
+  run: |
+    git add public/data/event_queue.json
+    if git diff --staged --quiet; then
+      echo "No changes in event data. Skipping commit."
+    else
+      git commit -m "chore: Sync latest WSDC Event Data"
+      git push
+    fi
+```
+
+To prevent bundle bloat, the React client consumes this data via a custom `useWCSData` hook that asynchronously fetches `public/data/event_queue.json`:
+
+```typescript
+// src/features/research/useWCSData.ts
+import { useState, useEffect } from 'react';
+
+export function useWCSData() {
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    fetch('/data/event_queue.json')
+      .then(res => res.json())
+      .then(data => setEvents(data))
+      .catch(err => console.error("Failed to load WCS events", err));
+  }, []);
+
+  return events;
+}
+```
+
+- **The Result:** The pipeline runs quietly in the background every Wednesday, keeping my frontend JSON data fresh with zero manual maintenance, while the lightweight client fetching prevents initial bundle bloat.
+
+---
+
+## 2. Ecommerce Merchandising & Storefront Automation
+
+**Stack:** TypeScript • Printful REST API • Vector Processing
+
+![Printful REST API integration console showing automated variant mapping and catalog synchronization](/assets/research/ai-experiments/ecommerce-automation.png)
+
+Setting up products manually on Printful—uploading artwork, recalculating margins, and mapping variants—became incredibly repetitive. To fix this, I built an automated pipeline that ingests source vector files, auto-clips dimensions to stay safely inside print zones, and syncs variants directly via the [Printful API](https://developers.printful.com/docs/).
+
+```typescript
+// sync/printful.ts - Automated variant payload creation
+export async function syncProductVariant(variantId: number, printFileUrl: string) {
+  const res = await fetch(`https://api.printful.com/store/products/${variantId}`, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      sync_product: { name: 'BoomTick Commemorative Apparel' },
+      sync_variants: [{ retail_price: '28.00', files: [{ type: 'default', url: printFileUrl }] }]
+    })
+  });
+  return res.json();
+}
+```
+
+- **Why it matters:** It removes the manual merchandising overhead and keeps product pricing and catalog nodes aligned in real time.
+
+---
+
+## 3. Context-Aware Technical Blog Drafter
+
+**Stack:** Vector DB • LLM • Markdown
+
+![AI Blog Drafter prompt generation and contextual vector retrieval interface](/assets/research/ai-experiments/blog-drafter.png)
+
+Drafting technical posts from scratch usually means wasting time fixing inconsistent code formatting or drift from established style guidelines.
+
+To speed up my workflow, I built a local RAG tool. It indexes previous Markdown posts into a local vector store, pulling my exact writing style, phrasing preferences, and code conventions straight into the LLM prompts.
+
+- **The Impact:** It hits the right structural hierarchy on the first try, cutting down initial drafting times by roughly 4x while keeping human editorial control.
+
+---
+
+---
+
+## Document: Boop Light Detector App (boop-light-detector)
+# Boop Light Detector App
+
+## iOS Assistive Technology for Visually Impaired Users
+
+**Boop Light Detector** is an iOS accessibility application designed to translate ambient light levels into audible frequencies and tactile haptic feedback. I developed the app following the **MIT Assistive Technology Hackathon (ATHack 2016)**, and it has served blind and visually impaired users worldwide with over **6,000+ downloads** on the Apple App Store.
+
+![Boop Light Detector app testing during development and user trials](/assets/research/app_testing.jpg)
+
+---
+
+## The Problem & Motivation
+
+When I developed this at an assistive technology hackathon in 2016, modern smartphones were not yet equipped with the advanced image recognition and accessibility tools they have today. At that time, for blind and visually impaired individuals, simple daily tasks—such as checking whether household lights are on, verifying whether a Wi-Fi router status light is active, or locating open windows during the daytime—required specialized tools.
+
+Existing light detection apps were often:
+1. **Expensive or ad-laden**
+2. **Inaccurate**, relying solely on raw camera pixel values without adjusting for automatic camera exposure and sensitivity adjustments.
+3. **Slow or unresponsive**, requiring navigation through complex multi-screen UI menus.
+4. **Lacking tactile feedback** for quiet environments like libraries or offices.
+
+---
+
+## Engineering Design & Key Features
+
+I engineered Boop from the ground up with a minimalist, accessible single-screen architecture:
+
+### 1. Multi-Factor Luminescence Sensing Algorithm
+Rather than computing simple pixel RGB averages, my light calculation factors in:
+- Camera ISO sensitivity
+- Frame exposure duration
+- Lens aperture and RGB pixel brightness at the center of the viewport
+
+This produces a normalized luminescence rating from **0 to 100**, enabling precise directional light tracking (e.g., pinpointing a small LED indicator on an appliance).
+
+### 2. Real-Time Audio & Haptic Telemetry
+- **Audible Pitch Modulation:** As light intensity increases, Boop modulates the frequency of an audible tone in real time.
+- **Haptic Vibration Feedback:** For quiet environments, users can toggle vibration mode. The frequency of vibration pulses scales directly with light intensity.
+
+### 3. Deep iOS VoiceOver Integration
+- **Magic Tap Gesture:** Full support for two-finger double-tap ("Magic Tap") to instantly exit or control the application.
+- **Escape Scrub Gesture:** Supports two-finger Z-scrub gesture for rapid accessibility navigation.
+- **Audible Value Speech:** Tapping the center of the screen prompts VoiceOver to announce the exact numeric luminescence score.
+
+---
+
+## Community Impact & Outreach
+
+- **6,000+ Downloads:** Published on the Apple App Store as a completely free tool with zero ads, data collection, or tracking.
+- **ATHack 2016 Awardee:** Received Honorable Mention at MIT ATHack 2016 in collaboration with co-creators and blind accessibility advocate Jonathan Gale.
+- **Recommended Accessibility Tool:** Highlighted on community directories supporting independent living for blind individuals.
+
+---
+
+## Document: BeaverWorks Summer Institute (RACECAR) (bwsi-racecar)
+# BeaverWorks Summer Institute (RACECAR)
+
+![BeaverWorks RACECAR students and autonomous vehicles](/assets/research/bw.jpg)
+
+## 1. Introduction & Overview
+
+**MIT RACECAR** stands for Rapid Autonomous Complex-Environment Competing Ackermann-steering Robot. It is an open-source, project-based robotics platform and course designed for research and education. The platform utilizes 1/10-scale mini race cars equipped with state-of-the-art sensors and computing hardware. Through this program, students learn to program autonomous vehicles, typically starting with a virtual twin simulator before applying their skills to physical robots. The development of the RACECAR platform is a joint effort between MIT Lincoln Laboratory’s Beaver Works Initiative, the Department of Aeronautics & Astronautics, and the Laboratory for Information and Decision Systems.
+
+**BWSI (Beaver Works Summer Institute)** is an intensive, project-based summer STEM program for high school students. Closely associated with MIT and MIT Lincoln Laboratory, the institute introduces students to advanced technical fields, including autonomous systems, machine learning, quantum computing, and cybersecurity. The program provides hands-on, workshop-style experiences, and students are often required to complete online prerequisite coursework to be considered for the four-week intensive summer program. The Autonomous RACECAR course is a flagship offering within the BWSI curriculum.
+
+---
+
+## 2. The Hardware Platform
+
+The RACECAR vehicle platform combines high-performance compute with agile physical dynamics to create a robust research and educational testbed:
+
+- **Compute:** NVIDIA Jetson embedded GPU platform running Ubuntu and ROS (Robot Operating System).
+- **Sensing:** Hokuyo 2D LIDAR, ZED Stereo Camera, and IMU telemetry.
+- **Actuation:** VESC electronic speed controller and brushless DC motor on a 1/10th scale rally chassis with Ackermann steering.
+
+---
+
+## 3. Instructional Roles & Publications
+
+My work with the MIT RACECAR platform spanned two complementary roles, where my responsibilities evolved from supporting the Robotics: Science and Systems (RSS) course to leading instruction at the Beaver Works Summer Institute (BWSI). I also used the curriculum I developed for these courses to author a Model AI assignment.
+
+### 16.405/6.141 Robotics: Science and Systems (RSS) – Teaching Assistant
+In my capacity as a TA for the RSS course with Sertac Karaman, I focused on the technical foundations of the course and direct student guidance.
+- **Curriculum & Support:** I developed course labs—including the visual servoing lab—and provided student teams with the starter code and technical assistance they needed to navigate the semester.
+- **Instruction:** I delivered one unrecorded lecture for the class.
+
+### Beaver Works Summer Institute (BWSI) – Lead Associate Instructor
+As the Lead Associate Instructor for the BWSI RACECAR summer course, my role transitioned to program management, curriculum design, and formal instruction.
+- **Instructional Leadership:** I managed the team of Associate Instructors, coordinated team support, and handled the logistical side of the program, such as lab scheduling and mapping subject titles to the course calendar to ensure consistency.
+- **Curriculum Development:** I developed comprehensive lab handouts for the course.
+- **Lecturing:** I delivered two recorded lectures as part of the formal syllabus:
+  - **Visual Servoing** (July 20, 2017)
+  - **Navigation** (July 27, 2017)
+
+### Model AI Assignment (AAAI/EAAI Publication)
+As one of the course instructors, I was asked to develop the visual servoing laboratory assignment. I then submitted the curriculum to the Model AI Assignments workshop—part of the Educational Advances in Artificial Intelligence (EAAI) symposium at the AAAI Conference—where I also presented these educational materials and methodologies.
+
+| Specification | Details |
+| :--- | :--- |
+| **Project Link** | [Model AI: Visual Servoing Assignment ↗](https://modelai.gettysburg.edu/2017/visual-servo/index.html) |
+| **Core Technologies** | Python, C++, OpenCV, and ROS |
+| **Assignment Focus** | Image-Based Visual Servoing (IBVS), orange cone detection and parking, monocular camera line-following, closed-loop proportional control |
+
+---
+
+## 4. Core Curriculum & Lecture Series
+
+The instructional curriculum is structured into core lecture series delivered during the program, blending classical controls, computer vision, and mapping algorithms.
+
+### 📖 Lecture 1: Motion Planning & Localization (with ROS)
+Teaching the transition from low-level control to high-level goals using Robot Operating System (ROS) communications (publisher-subscriber nodes, coordinate transformations `tf`):
+- **Core Focus:** Transitioning from low-level control to high-level achievement goals in robotics (mapping, localization, and motion planning).
+- **Representation:** Explores 2D/3D poses ($X, Y, \theta$) and map types, contrasting continuous vector/landmark maps with discretized occupancy grids.
+- **Localization:** Examines dead reckoning limitations (error accumulation) and sensor-based state estimation using AR tags and filters.
+- **Motion Planning:** Compares the simple online Bug algorithm with optimal, graph-based Visibility Graphs, factoring in robot geometry and obstacle expansion.
+- **Lab Roadmap:** Outlines upcoming hands-on tasks, including AR tag localization, potential field navigation, and a multi-car "leader-follower" demo.
+
+[![Motion Planning Lecture Demonstration](/assets/research/bwsi-racecar/lecture_planning.gif)](https://www.youtube.com/watch?v=CdRs0l9f5WM#no-embed)
+*[Watch Planning Lecture on YouTube ↗](https://www.youtube.com/watch?v=CdRs0l9f5WM#no-embed)*
+
+---
+
+### 📖 Lecture 2: Computer Vision & Visual Servoing (with LIDAR)
+Developing OpenCV-based lane detection, color blob tracking, and feedback control loops integrated with planar LIDAR scans and trajectory limits:
+- **Core Focus:** Introduction to **visual servoing** (controlling a robot using computer vision feedback) for tasks like cone parking and line following.
+- **Control Systems Review:**
+  - *Feed-Forward (Open-Loop):* Sends direct motor commands without feedback; prone to rapid drift and error accumulation.
+  - *Feedback (Closed-Loop):* Uses output signals to dynamically adjust behavior and correct errors against a reference point.
+- **Control Framework & Design Steps:**
+  1. Define a normalized image coordinate system (e.g., width from $-0.5$ to $0.5$).
+  2. Define the desired reference signal ($R(t)$) and system state/error ($Y(t)$).
+  3. Compute the error signal ($E(t) = R(t) - Y(t)$).
+  4. Implement a **Proportional (P) controller** (scaling error by a gain) and expand to **PID** to eliminate steady-state error and oscillations.
+- **Application Implementations:**
+  - *Cone Parking:* Decouples steering control from forward/backward velocity (using cone height/area as a distance metric) while processing planar LIDAR scans for safe obstacle avoidance.
+  - *Line Following:* Modifies the visual servoing approach (e.g., cropping the top half of the image) to keep the car centered on a track.
+- **Practical Tips & OpenCV Tools:** Use **ROS bags** for testing playback, downsample camera resolution to reduce lag, extract custom HSV thresholds directly from your images, and utilize OpenCV functions like `putText`, `findContours`, and `rectangle`.
+
+[![Visual Servoing Lecture Demonstration](/assets/research/bwsi-racecar/lecture_visual_servoing.gif)](https://www.youtube.com/watch?v=bAAatB2IvUM#no-embed)
+*[Watch Visual Servoing Lecture on YouTube ↗](https://www.youtube.com/watch?v=bAAatB2IvUM#no-embed)*
+
+---
+
+## 5. Project Demonstrations & Competition
+
+The practical side of the RACECAR curriculum culminates in student demonstrations and a high-speed, autonomous racing competition.
+
+### 🎥 Part A: Line Following Demonstration
+[![Autonomous Navigation & Visual Servoing Behaviors](/assets/research/bwsi-racecar/racecar_behaviors.gif)](https://www.youtube.com/watch?v=0U0pPbWhLVE#no-embed)
+*[Watch Full Demonstration on YouTube ↗](https://www.youtube.com/watch?v=0U0pPbWhLVE#no-embed)*
+
+Closed-loop proportional control tracking paths using monocular camera input.
+
+---
+
+### 🎥 Part B: Cone Tracking & Visual Servoing
+[![Student Cone Tracking Visual Servoing Demo](/assets/research/bwsi-racecar/racecar_students.gif)](https://www.youtube.com/watch?v=qSe8JmWQnYk#no-embed)
+*[Watch Full Demonstration on YouTube ↗](https://www.youtube.com/watch?v=qSe8JmWQnYk#no-embed)*
+
+Real-time visual tracking, color isolation, and safety-limited collision avoidance.
+
+---
+
+### 🎥 Main RACECAR Challenge Demonstration
+An intensive final-day speed loop challenge where 1/10th scale autonomous racecars navigate complex indoor corridors. Vehicles must perform real-time visual servoing, LIDAR-based obstacle avoidance, and precise wall-following to achieve rapid lap times without collision.
+
+[![Main RACECAR Challenge Demonstration](/assets/research/bwsi-racecar/racecar_main.gif)](https://www.youtube.com/watch?v=UjVatZ3NK5U#no-embed)
+*[Watch Full Video Demonstration on YouTube ↗](https://www.youtube.com/watch?v=UjVatZ3NK5U#no-embed)*
+
+---
+
+### Educational Impact & Competition
+
+Students culminated their intensive workshop by programming the cars to perform a variety of tasks—including pure pursuit, SLAM, and visual servoing—and competing in an autonomous race through complex indoor hallways and obstacle courses, demonstrating high-level execution of integrated software systems on real-world hardware.
+
+---
+
+## Document: CAD/CAM Robotic Dental Crowning Workflow (cad-cam-dental-workflow)
+# CAD/CAM Robotic Dental Crowning & Dynamic Registration Workflow
+
+## Autonomous Surgical Robotics at Bionics Lab UCSC
+
+The **CAD/CAM Dental Robotics** project at the **Bionics Lab, University of California, Santa Cruz (UCSC)** focused on the development of an autonomous robotic system for semi-autonomous dental restoration. My research encompassed two primary areas:
+
+1.  **Dental Crowning Preparation:** I developed a workflow to generate milling trajectories from 3D-digitized tooth models, enabling the robotic arm to autonomously mill a boundary around the tooth.
+2.  **Dental Implant Preparation:** I extended this work to execute implant placement procedures. To account for patient movement during the procedure, I designed and implemented **dynamic registration**. This involved using a passive robotic arm (Microscribe MX) as a real-time feedback mechanism to track the position of the jaw.
+
+To facilitate this, I developed surgical control software—integrating Visual Studio, Matlab, and ORiN APIs—to synchronize the active robotic arm (Denso VM-B01G) with real-time positional data, allowing for high-precision milling and drilling aligned with patient-specific intraoral geometry.
+
+![CAD/CAM Robotic Dental Crowning Setup](/assets/research/dental.jpg)
+*Figure 1: Robotic dental crowning experimental setup and software user interface at UCSC Bionics Lab.*
+
+---
+
+## Technical Context & Surgical Challenge
+
+Traditional dental restoration and implant preparation rely on manual handpieces, impression molds, and mechanical jigs. Integrating industrial 6-DOF robotic arms (such as the Denso VM-B01G) with real-time tracking (via MicroScribe 3D digitization arms) enables sub-millimeter precision during enamel preparation and crown alignment.
+
+![Robotic Dental System Architecture](/assets/research/dental/dental_robotics-000.png)
+*Figure 2: Architectural diagram of the dynamic registration dental robotics setup, featuring the Denso 6-DOF robot arm, MicroScribe tracking arm, and intraoral jaw model.*
+
+Key engineering challenges included:
+1. **Dynamic Kinematic Registration:** Continuously updating target coordinates as patient/jaw movement occurs during drilling.
+2. **Homogeneous Transformation Chain:** Computing frame transformations between the robot base, MicroScribe base, end-effector tool tip, and patient implant site.
+3. **Safety-Critical Clinician UI:** Providing real-time toolpath visual feedback, registration status monitoring, and emergency override controls.
+
+---
+
+## Kinematic Formulation & Frame Calibration
+
+To achieve precise alignment between the robotic tool tip and the target tooth site, I established coordinate frames across the arm and tracking sensor:
+
+![Coordinate Frame Mapping](/assets/research/dental/dental_robotics-001.png)
+*Figure 3: Kinematic coordinate frame mapping between robot base D{0}, end-effector D{6}, tracking base MX{0}, and tracking probe tip MX{6}.*
+
+![Transform Chain Flowchart](/assets/research/dental/dental_robotics-002.png)
+*Figure 4: Kinematic transformation chain flow used to solve for relative tool-to-implant spatial transforms.*
+
+### Homogeneous Transformation Math
+
+I solved the spatial position of the target tooth implant site relative to the robot end-effector `M6_P_ImplantLoc` through the transformation chain:
+
+```
+T_Implant = T_D6_to_Base * T_Base_to_MXBase * T_MXBase_to_MX6 * P_Tip
+```
+
+Where:
+- `T_D6_to_Base`: Forward kinematics matrix of the Denso 6-DOF arm.
+- `T_Base_to_MXBase`: Static calibration transform between robot base frame `D{0}` and MicroScribe base frame `MX{0}`.
+- `T_MXBase_to_MX6`: Joint position readout matrix from the MicroScribe tracking arm.
+- `P_Tip`: Offset vector for the target point relative to the probe tip frame `MX{6}`.
+
+![Implant Target Frame Transformation](/assets/research/dental/dental_robotics-008.png)
+*Figure 5: Vector transformation diagram mapping target implant location vector M6_P_ImplantLoc within the end-effector frame.*
+
+---
+
+## Closed-Loop Dynamic Tracking System
+
+I implemented a closed-loop controller that continuously queries the tracking arm position and adjusts the Denso robot manipulator commands in real time.
+
+![Closed Loop Controller Architecture](/assets/research/dental/dental_robotics-003.png)
+*Figure 6: Closed-loop dynamic tracking control system diagram for real-time jaw motion compensation.*
+
+![Real-time Tracking Control Software UI](/assets/research/dental/dental_robotics-004.png)
+*Figure 7: Real-time surgical monitoring software interface showing active frame tracking and toolpath progress.*
+
+---
+
+## Experimental Results & Tracking Accuracy
+
+I benchmarked tracking accuracy across simulated patient motion profiles using anatomical dental phantom models.
+
+![Positional Tracking Error Plot](/assets/research/dental/dental_robotics-006.png)
+*Figure 8: Measured 3D positional tracking error over time during dynamic compensation testing.*
+
+![Drill Tip Alignment Accuracy Plot](/assets/research/dental/dental_robotics-007.png)
+*Figure 9: Alignment error distribution across experimental drilling trials, demonstrating sub-millimeter geometric accuracy.*
+
+Experimental results verified:
+- **Mean Spatial Tracking Accuracy:** Sub-millimeter position accuracy (< 0.45 mm) across dynamic movement profiles.
+- **Control Loop Rate:** Real-time compensation loop running at 100 Hz update frequency.
+
+---
+
+## Video Demonstrations & Media
+
+[![Dental Robotics Demonstration Video | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=tXif7xeZmGI#no-embed](/assets/research/dental/dental_robotics.gif#max-w-2xl)](https://www.youtube.com/watch?v=tXif7xeZmGI#no-embed)
+
+---
+
+## Downloadable Technical Report
+
+- 📄 [Download Dynamic Registration for Dental Robotics Report (PDF)](https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_dental.pdf)
+
+---
+
+## Research Significance
+
+- Demonstrated real-time dynamic registration for dental implant preparation and crowning.
+- Verified sub-millimeter trajectory execution under clinician-in-the-loop oversight.
+
+---
+
+## Document: Reliably Arranging Objects: A Conformant Planning Approach to Robot Manipulation (conformant-planning-manipulation)
+## Overview
+
+This research forms the core of my PhD dissertation at **MIT CSAIL**, advised by **Prof. Leslie Pack Kaelbling** and **Prof. Tomás Lozano-Pérez**, with committee member **Prof. Sertac Karaman**. My work enables general-purpose helper robots to reliably arrange unanchored objects into desired target configurations despite severe pose uncertainty caused by inaccurate sensing, control errors, and unknown physical friction.
+
+[![Figure 1: Willow Garage PR2 robot performing physical conformant manipulation to arrange blocks into tight arrangements under pose uncertainty without visual feedback. | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=omdHFeBBYZ0#no-embed](/assets/research/phd/icra_presentation.gif#max-w-2xl)](https://www.youtube.com/watch?v=omdHFeBBYZ0#no-embed)
+
+
+---
+
+### Approaches Explored
+
+This research explores two distinct paradigms for conformant manipulation under severe uncertainty:
+
+1. **Plan Improvement via Fixtures:** Optimizing open-loop trajectories using physical guide fences and contact dynamics to funnel parts into deterministic poses.
+2. **Belief-State Search (Planning by Construction):** Formulating multi-step manipulation as a search over belief spaces, guaranteeing monotonic uncertainty reduction without real-time visual feedback.
+
+The belief-state approach is detailed in our **ICRA 2018** paper:
+* **Paper & Overview:** [Reliably Arranging Objects in the Real World (ICRA 2018) ↗](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=NM6SfiEAAAAJ&citation_for_view=NM6SfiEAAAAJ:MXK_kJrjxJIC)
+
+---
+
+[![Figure 2: ICRA 2018 paper presentation and conference spotlight breakdown. | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=so-9kkQXlxc#no-embed](/assets/research/phd/conformant_demo.gif#max-w-2xl)](https://www.youtube.com/watch?v=so-9kkQXlxc#no-embed)
+
+---
+
+## Part 1: Conformant Planning through Plan Improvement
+
+When manipulators perform multi-step assembly or packaging tasks—such as placing 1-inch polyomino Tetris blocks into tight grid slots—small position and angle errors accumulate across sequential actions. Open-loop trajectory execution frequently fails because slight misalignments cause binding, jamming, or collision.
+
+Furthermore, camera lines-of-sight are frequently obstructed by robot end-effectors or nearby fixtures. **Conformant planning** overcomes these perception dead-zones by synthesizing control strategies that apply contact mechanics (such as pushing, sliding, and funneling) to systematically reduce state uncertainty purely through physical interactions without requiring continuous visual feedback.
+
+### Fixture-Augmented Trajectory Optimization
+- **Concept:** Augments open-loop trajectories by introducing **movable fixtures** (fences or guide structures) for the robot to push parts against.
+- **Optimization:** Solves for ideal fixture geometry, contact angles, and push trajectories, transforming high-variance placements into deterministic funnels.
+
+
+#### Plan Improvement Video Breakdowns
+
+### 1. Nominal Trajectory: Plan Improvement with Fixture Placement (1/3)
+
+[![Nominal Trajectory: Plan Improvement with Fixture Placement | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=MBsnNbD18tU#no-embed](/assets/research/phd/belief_1.gif#max-w-2xl)](https://www.youtube.com/watch?v=MBsnNbD18tU#no-embed)
+
+* **Goal:** Execute planar assembly of disjoint block clusters into a single composite structure via non-prehensile pushing and fixturing.
+* **Execution:** A linear pusher translates the lower cluster along an open-loop trajectory to mate seamlessly with the stationary upper target.
+* **Outcome:** Demonstrates deterministic nominal kinematics in the absence of initial pose or actuation noise.
+
+---
+
+### 2. Failure Mode: Open-Loop Drift Under Uncertainty (2/3)
+
+[![Failure Mode: Open-Loop Drift Under Uncertainty | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=yjhySqcgLi4#no-embed](/assets/research/phd/belief_2.gif#max-w-2xl)](https://www.youtube.com/watch?v=yjhySqcgLi4#no-embed)
+
+* **Perturbation:** Introduced stochastic noise into initial object poses and actuation dynamics.
+* **Failure Mechanism:** Unconstrained degrees of freedom lead to compounding kinematic drift and premature rotation.
+* **Outcome:** Assembly fails as the sub-assemblies scatter and miss contact interfaces without active state feedback.
+
+---
+
+### 3. Robust Execution: Passive Mechanical Funneling via Fixture Placement (3/3)
+
+[![Robust Execution: Passive Mechanical Funneling via Fixture Placement | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=ubUMq8Rnb18#no-embed](/assets/research/phd/refinement.gif#max-w-2xl)](https://www.youtube.com/watch?v=ubUMq8Rnb18#no-embed)
+
+* **Strategy:** Augment the action space with static intermediate fixtures (e.g., L-brackets) along the configuration boundary.
+* **Mechanism:** Fixtures act as physical invariant sets, passively arresting off-axis drift and squaring block orientations upon contact.
+* **Outcome:** Re-establishes conformant convergence, guaranteeing monotonic support reduction ($\text{Support}(b_{t+1}) \subseteq \text{Support}(b_t)$) without sensor-in-the-loop control.
+---
+
+## Part 2: Conformant Planning by Construction (Belief-State Transition Search & Noise Characterization)
+
+The second core paradigm formulates manipulation as an explicit forward search over non-parametric belief probability distributions `b(s) = P(s)`.
+
+### Belief-State Transition Search
+- **Concept:** Searches directly in belief space to find sequence of actions that guarantee bounded final pose uncertainty.
+- **Dynamics:** Combines physics engines (Box2D / Bullet) with empirical transition models `P(b' | b, a)` under contact interactions.
+- **Shrinkage Guarantee:** Identifies action sequences `a ∈ A` that guarantee monotonic support reduction prior to final insertion:
+
+```text
+Support(b_{t+1}) ⊆ Support(b_t)
+```
+
+![The initial object placement uncertainty for the PR2 robot was modeled as ±0.2 inches in both x and y coordinates and ±15 degrees in rotation based on physical experiment data](/assets/research/phd/sliding_2.gif) ![Six block arrangement task on PR2](/assets/research/phd/sixblock.png)
+*Figure 3 & 4: Precision placement via contact funneling (left) and six-block arrangement setup on PR2 (right).*
+
+
+
+### Belief State Overlay & Action Noise Characterization
+To ground simulated transitions in physical reality, empirical noise characterization and spatial particle overlays visualize contact uncertainty during execution.
+
+![Belief State Overlay Visualization](/assets/research/phd/sliding_1.gif#max-w-xl)
+*Figure 10: Algorithm belief-state overlay depicting particle distributions and empirical contact confidence bounds during manipulation.*
+
+### Table and Board Relative Localization Pipeline
+
+- **Coarse Visual Estimation:** The PR2 performs initial obstacle and table-edge detection using point cloud data from the perception pipeline, broadcasting a coarse table-frame estimate via TF at 2–3 Hz.
+- **Tactile Surface Exploration:** To resolve visual occlusions and calibration offsets, the robot switches to a compliant Cartesian controller, guiding its end-effector/paddle to slide directly against the rigid reference edges (e.g., the sides of the fixture/board).
+- **Pose Registration & Transform Fitting:** By logging the contact trajectory along the physical boundaries, the system fits a rigid geometric transform, producing a high-precision spatial calibration between the PR2 base and the workspace.
+
+[![Table and Board Relative Localization Pipeline | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=bWjzn89H1x4#no-embed](/assets/research/phd/noise_model.gif#max-w-2xl)](https://www.youtube.com/watch?v=bWjzn89H1x4#no-embed)
+
+
+---
+
+## Citation & Thesis Downloads
+
+### IEEE ICRA Paper & Dissertation Record
+* **Thesis Title:** *Reliably Arranging Objects: A Conformant Planning Approach to Robot Manipulation*
+* **Author:** Ariel S. Anders, PhD
+* **Advisors:** Prof. Leslie Pack Kaelbling & Prof. Tomás Lozano-Pérez
+* **Committee:** Prof. Sertac Karaman
+* **Institution:** Massachusetts Institute of Technology (MIT CSAIL, 2019)
+* **MIT DSpace Publication:** [MIT DSpace Record](https://dspace.mit.edu/entities/publication/d489a172-efbf-4e35-b81c-04e4acf3d24d)
+* **Google Scholar:** [Citation Record](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=NM6SfiEAAAAJ&citation_for_view=NM6SfiEAAAAJ:4DMP91E08xMC)
+* **Conference Publication:** *Reliably Arranging Objects in Uncertain Domains*, IEEE International Conference on Robotics and Automation (ICRA), 2018.
+
+### BibTeX Citation
+
+```bibtex
+@phdthesis{anders2019reliably,
+  author       = {Anders, Ariel S.},
+  title        = {Reliably Arranging Objects: A Conformant Planning Approach to Robot Manipulation},
+  school       = {Massachusetts Institute of Technology},
+  year         = {2019},
+  url          = {https://dspace.mit.edu/entities/publication/d489a172-efbf-4e35-b81c-04e4acf3d24d}
+}
+```
+
+---
+
+## Defense Presentation & Visuals
+
+![Eric the Robot Thesis Mascot](/assets/research/phd/eric.png#max-w-md)
+*Figure 12: "Eric", the robot thesis mascot used to visually convey belief-state uncertainty and contact constraints.*
+
+### Thesis Mascot: "Eric" the Robot
+To communicate these theoretical planning concepts during the defense presentation and dissertation, I created graphics of **"Eric the red robot"**, a cartoon robot mascot inspired by Leslie's stick figures:
+- **"Blindfolded Eric":** Illustrating sensorless manipulation sequences where physical contact boundaries replace visual perception.
+- **"Picketing Eric":** Highlighting edge cases where open-loop trajectories fail due to unexpected friction or rotational torque.
+
+![Blindfolded Eric mascot illustrating sensorless manipulation](/assets/research/phd/eric2.png#max-w-sm) ![Picketing Eric mascot illustrating open-loop failure modes](/assets/research/phd/eric1.png#max-w-sm)
+*Figure 13 & 14: "Blindfolded Eric" demonstrating sensorless contact funnels (left) and "Picketing Eric" illustrating trajectory failure modes under friction (right).*
+
+---
+
+## Document: Delivery Bots: Multi-Robot Coordination under Uncertainty (delivery-bots)
+# Delivery Bots: Multi-Robot Coordination under Uncertainty
+
+![Autonomous Delivery Bot Transporting Item](/assets/research/beer.png)
+
+## Decentralized Autonomous Logistics in Dynamic Human Environments
+
+The **Delivery Bots** research initiative addressed the challenge of deploying multi-robot autonomous fleets for package and item delivery within complex, populated indoor environments (such as university campuses and hospital corridors) where human motion and task durations are highly uncertain.
+
+To demonstrate the system in action, I converted the MIT CSAIL lab into a miniature "bar" featuring a PR2 robot "bartender" and two Turtlebot "waiters". As the demo lead for this project, I guided the live demonstration showcasing how decentralized robots can coordinate efficiently even with intermittent communication.
+
+### Decentralized Beerbot Handoff & Delivery Demonstration
+The following demonstration showcases the complete decentralized multi-robot coordination pipeline operating in real-time within the MIT CSAIL corridors. A PR2 robotic bartender prepares and hands off a beverage to a Turtlebot delivery agent, which then autonomously navigates dynamic human obstacles to perform a successful delivery:
+
+[![Decentralized Beerbot Delivery Coordination | Watch Full Video on YouTube ↗ | https://www.youtube.com/watch?v=Jfzun9pP74U#no-embed](/assets/research/delivery-bots/coordination.gif#max-w-xl)](https://www.youtube.com/watch?v=Jfzun9pP74U#no-embed)
+
+---
+
+## Research Significance & Honors
+
+- **Demo Leadership & Awards:** Led the live project demonstration and won 2nd place at the **CSAIL Research Highlights (Spring 2015)**.
+- **RSS 2015 Best Paper Finalist:** Recognized at the *Robotics: Science and Systems (RSS)* conference in Rome, Italy.
+- **IJRR Journal Publication:** Expanded into a comprehensive journal paper for *The International Journal of Robotics Research (IJRR)*, submitted in December 2015 following an October 2015 invitation, with major revisions completed in June 2016.
+- **Authorship:** Authored alongside Christopher Amato, George Konidaris, Gabriel Cruz, Jonathan P. How, and Leslie P. Kaelbling under the paper title *"Policy Search for Multi-Robot Coordination under Uncertainty"*.
+
+---
+
+## Core Technical Challenges
+
+Multi-agent coordination in shared human spaces suffers from severe unpredictability:
+1. **Dynamic Human Obstacles:** Pedestrians temporarily block hallways, slow down delivery routes, or interact unpredictably with vehicles.
+2. **Task Duration Uncertainty:** Item pickup and handoff times vary widely based on human availability and response time.
+3. **Communication Latency & Drops:** Centralized controllers fail when network bandwidth drops or when agents move into wireless dead zones.
+
+---
+
+## Algorithmic Architecture & System Design
+
+To solve these challenges, the team developed the MacDec-POMDP algorithm utilizing macro-actions and finite-state controllers for general multi-robot coordination under uncertainty:
+
+### 1. Decentralized Task Allocation
+- Robots negotiate task assignments locally without requiring continuous connection to a central server.
+- Formulation incorporates probabilistic models of route traversal times and human delays.
+
+### 2. Macro-Action Planning under Uncertainty
+- Replaces primitive motion commands with high-level macro-actions (e.g., "Navigate to Room 320 via East Hallway").
+- Evaluates risk-aware belief states to dynamically re-route around crowded hallways or stalled elevator banks.
+
+### 3. Real-World Autonomous Deployment & Fleet Integration
+- Managed the end-to-end design and deployment of the autonomous multi-robot delivery fleet, owning the full lifecycle spanning hardware integration, robotic locomotion, and decentralized POMDP-based planning architectures.
+- Collaborated with the CSAIL Machine Shop to mount coolers onto the TurtleBots.
+- Built hard-wired interaction buttons integrated with an Ubuntu-based system using the espeak library for verbal interaction.
+- Evaluated on a fleet of autonomous mobile robots operating in MIT building corridors over multi-day deployment trials.
+- Demonstrated robust package delivery throughput despite unexpected corridor blockages and variable human interaction delays.
+
+---
+
+## Media Impact & Government Legacy
+
+The project drew widespread public interest for using beer delivery as a fun and relatable proxy to test complex multi-robot algorithms intended for critical logistics, such as transporting medical supplies or navigating disaster zones:
+- **Featured in MIT News & National Media:** Highlighted across outlets like the *Los Angeles Times*, *HuffPost*, *Popular Science*, and *UPI* for advancing real-world multi-agent coordination.
+- **A Legislative Milestone:** The project achieved unexpected fame when U.S. Senator Jeff Flake introduced an amendment to the Department of Defense appropriations bill specifically targeting the research to ban federal funding for "beerbots and other robot bartenders"—cementing its unique place in both robotics history and legislative trivia.
+
+---
+
+## Document: Visual Impact / UX Audit (deployment-impact-analyzer)
+LLM code generation introduces unintended visual side effects—hallucinated UI components, modified badge styles, shifted accents, or unintended layout changes. Reviewing these multi-file diffs manually is error-prone, running full end-to-end test suites on every commit is too slow, and standard unit tests completely miss visual artifacts.
+
+I built the **Deployment Impact Analyzer** to catch these discrepancies automatically. The pipeline traces every code modification through the project's dependency graph, identifies which user-facing routes are touched, and triggers targeted Playwright visual diffs using Pixelmatch. By scoping screenshots strictly to impacted views, it flags hallucinated elements and styling shifts directly in the pull request while cutting visual testing volume by up to 90%.
+
+## The Architecture
+
+```mermaid
+flowchart TD
+    A[Pull Request Event] -->|Webhook Trigger| B[Identify Changed Files]
+    B -->|git diff-tree| C[dependency-cruiser Analysis]
+    C -->|Blast Radius Array| D[Map to Affected Routes]
+
+    subgraph Envs ["Target Environments"]
+        Prod[Production Baseline]
+        Branch[Feature Branch Preview]
+    end
+
+    D -->|Target URLs| E[Playwright Screenshot Engine]
+    Prod -.->|HTTP GET| E
+    Branch -.->|HTTP GET| E
+
+    E -->|Pixel Delta Map| F[Severity Scoring Engine]
+    F -->|Markdown Report| G[PR Comment & Status Check]
+
+    classDef trigger fill:#1e293b,stroke:#38bdf8,stroke-width:2px,color:#f8fafc;
+    classDef runner fill:#0f172a,stroke:#818cf8,stroke-width:2px,color:#f8fafc;
+    classDef env fill:#064e3b,stroke:#34d399,stroke-width:2px,color:#f8fafc;
+
+    class A,G trigger;
+    class B,C,D,E,F runner;
+    class Prod,Branch env;
+```
+
+- **Dependency Graph Parsing**: Traces modified files up to entry points to establish an explicit visual blast radius.
+- **Route Resolution**: Maps structural code entry points directly to active application routing domains.
+- **Targeted Visual Diffing**: Executes localized Playwright automated captures against a production baseline.
+- **Asynchronous PR Feedback**: Generates layout shift metrics and updates the pull request conversation via GitHub APIs.
+
+---
+
+## 1. Import Graph Parsing with dependency-cruiser
+
+I didn't want to test every page if only the "About" section changed. To achieve targeted testing, I use `dependency-cruiser` to analyze the project's import graph.
+
+When modifying a file, I trace its dependents up the tree until I reach an entry point (a route or a page component).
+
+```bash
+# Example logic for finding dependents
+npx depcruise --exclude "^node_modules" --output-type json src | \
+  jq '.modules[] | select(.dependencies[].resolved == "src/components/Button.tsx") | .source'
+```
+
+---
+
+## 2. Automated Playwright Screenshot Diffing
+
+Once I have a list of affected routes, I trigger a Playwright-based capture service.
+
+The pipeline performs a "sandwich" comparison:
+1.  **Baseline**: Capture screenshots of the affected routes on the `main` branch.
+2.  **Current**: Capture screenshots of the same routes on the feature branch.
+3.  **Diff**: Use `pixelmatch` to generate a pixel-level delta.
+
+To improve the signal-to-noise ratio, I automatically crop the diff to the bounding box of the changed area. This helps reviewers focus on the specific UI shift rather than scanning a full-page screenshot.
+
+---
+
+## 3. Severity Scoring & Reporting
+
+Pixel diffs aren't all equal. A 1px shift in a footer is different from a broken hero section.
+
+My scoring engine calculates a **Severity Score** based on:
+- **Pixel Count**: The absolute number of changed pixels.
+- **Percentage**: The ratio of changed pixels to the total area.
+- **Layout Shift**: Detection of significant element movement.
+
+If the score exceeds a configurable threshold, the pipeline marks the check as failed and requests a manual visual review.
+
+---
+
+## 4. GitHub Actions Integration
+
+I orchestrated the entire system via GitHub Actions. I've optimized the workflow to use caching for the `dependency-cruiser` graph and parallelize Playwright workers to keep execution times under 5 minutes.
+
+```yaml
+name: Deployment Impact Analysis
+on: [pull_request]
+
+jobs:
+  impact:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: pnpm install
+      - name: Run Impact Analysis
+        run: pnpm run impact:analysis
+      - name: Visual Diffing
+        run: pnpm run impact:visual-diff
+      - name: Post Report
+        run: python scripts/send-jules-impact.py
+```
+
+### Example Report Output
+
+When opening a PR, the analyzer posts a summary directly to the GitHub conversation. This allows developers to see the impact at a glance without leaving their workflow.
+
+| Route | Visual Diff | Severity | Action |
+| :--- | :--- | :--- | :--- |
+| `/blog/:slug` | 12.4% | 🔴 HIGH | Manual Review Required |
+| `/about` | 0.0% | 🟢 LOW | Auto-passed |
+| `/merch` | 1.2% | 🟡 MEDIUM | Review Suggested |
+
+> **Implemented:** I use the `cropped` diff artifacts to show exactly where the pixels changed, saving reviewers from playing "spot the difference" on full-page screenshots.
+
+| Before | After | Diff |
+| :---: | :---: | :---: |
+| ![Baseline](/assets/studies/deployment-impact-analyzer/before.svg) | ![Current](/assets/studies/deployment-impact-analyzer/after.svg) | ![Visual Delta](/assets/studies/deployment-impact-analyzer/diff.svg) |
+
+*A "sandwich" comparison showing the baseline, the new state, and the highlighted pixel delta.*
+
+### Real-World Finding: From 404 to Overflow Resolution
+
+Visual regression testing is particularly effective for catching "cumulative" bugs—issues that only appear once I integrate multiple components. During the development of this tool, I encountered a three-stage regression that perfectly illustrated the system's value.
+
+#### 1. The Initial State (Missing Route)
+Initially, a routing configuration error caused the analyzer to hit a "Content Not Found" page. While the code for the tool existed, I hadn't registered the dynamic route in the main portfolio index.
+
+#### 2. The Regression (Text Overflow)
+After fixing the routing, the page rendered, but a new issue emerged on mobile viewports. Long file paths in the `ArchitecturalAssetsList` component were overflowing their containers, breaking the layout and pushing the "Category" labels off-screen. This is a classic "invisible" regression that passes unit tests and type-checks but fails the "eyeball test."
+
+#### 3. The Resolution (Truncation & Wrapping)
+I implemented a fix using Tailwind's `truncate` and `flex-wrap` utilities, ensuring that assets are readable even on the narrowest devices.
+
+| 1. Missing | 2. Diff | 3. Fixed |
+| :---: | :---: | :---: |
+| ![404 Error](/assets/studies/deployment-impact-analyzer/before-mobile.svg) | ![Regression Delta](/assets/studies/deployment-impact-analyzer/diff-mobile.svg) | ![Resolution](/assets/studies/deployment-impact-analyzer/after-mobile.svg) |
+
+*The mobile resolution sequence: from a 404 state to an overflow regression, and finally the resolved responsive layout.*
+
+## Lessons Learned
+
+The core engineering insight from this project is the value of multi-layered verification. Static analysis maps the system's structural vulnerabilities, but visual diffing provides the actual confirmation of interface integrity. Merging these workflows converts unpredictable visual evaluation into a deterministic, programmatic check.
+
+The next evolution of this tool involves agentic auto-resolution: using LLMs to analyze the visual diff and decide if a change is an intentional improvement or an accidental regression.
+
+---
+
+## Document: MIT Duckietown (Autonomous Taxi Fleet) (duckietown)
+# Duckietown: Autonomous Taxi Fleet
+
+![Inaugural MIT 2.166 Duckietown Class](/assets/research/duckietown.jpg)
+
+## Overview & Inaugural MIT 2.166 Class
+
+**Duckietown** is an open-source, hands-on robotics platform created at MIT to make autonomy education accessible and standardized. The project features a fleet of miniature autonomous vehicles ("Duckiebots") navigating scaled urban environments ("Duckietowns") populated by rubber duck passengers.
+
+I was a member of the inaugural MIT 2.166 class taking Duckietown as a student as part of my major requirements for my doctorate degree. Working directly on the platform in its founding year, I helped develop and test fundamental autonomous driving pipelines—including visual lane detection, state estimation, and multi-robot fleet coordination under real-world sensing constraints. This pedagogical framework has grown from our initial MIT classroom cohorts into an international benchmark for robotics education and research competitions (such as the AI Driving Olympics), bridging the gap between clean simulated environments and deployed autonomous systems characterized by physical uncertainties and low-cost hardware limitations.
+
+For more background on the class and its history:
+- [MIT News: Self-driving cars, meet rubber duckies](https://news.mit.edu/2016/duckietown-self-driving-car-class-0420)
+- [A Brief History of Duckietown](https://www.duckietown.org/about/history)
+
+## System Architecture & Technical Components
+
+The Duckietown platform represents a powerful integration of classical computer vision, real-time feedback control, and hands-on robotics education. By translating complex autonomous driving concepts into a standardized, low-cost physical testbed, it bridges the gap between simulated environments and deployed autonomous systems characterized by physical uncertainties.
+
+The modular software architecture utilizes a distributed ROS (Robot Operating System) stack:
+
+- **Monocular Vision & Lane Tracking:** Processing onboard single-camera input to detect line segments, fit road lane boundaries, and compute heading errors using color space transformations and Hough transforms.
+- **State Estimation & Kinematics:** Utilizing differential-drive robot kinematics and extended Kalman filtering to estimate position relative to lane centerlines.
+- **Intersection & Signal Navigation:** Detecting visual AprilTags at intersections to handle right-of-way rules, stop sign negotiation, and multi-robot traffic flow.
+- **ROS Middleware Architecture:** Modular ROS nodes for camera pipelines, controller loops, motor PWM output, and inter-bot wireless state broadcasting.
+- **Classroom Easter Eggs & Quirks:**
+  - *Accidental Duck Detection:* The color-segmentation pipeline engineered specifically to isolate orange traffic cones unexpectedly cross-detected the rubber duck fleet passengers by locking perfectly onto their bright orange beaks.
+  - *Midnight Calibration Quirks:* The initial baseline tuning thresholds for visual lane detection and line-following control were over-optimized during late-night engineering sessions in the laboratory, meaning the system only successfully worked in evening lighting conditions.
+
+---
+
+## Demonstrations & Fleet Videos
+
+Every Duckiebot started its journey as a disassembled kit of raw components. Before deployable autonomy could be developed, we had to assemble the differential-drive chassis, interface the Raspberry Pi and motor controller shields, and calibrate the open-loop motor velocities.
+
+### Phase 1: Hardware Assembly & Open-Loop Calibration
+
+Our initial milestone was the physical assembly and electrical integration of the robot chassis. Once the hardware setup was completed, we focused on calibrating the pulse-width modulation (PWM) signals to align the raw motor outputs, ensuring the robot would drive in a straight line during open-loop tests.
+
+[![First Functional Build Verification (Oreo) | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=YTB2FgN_4zo#no-embed](/assets/research/duckietown/oreo_wheelie.gif#max-w-2xl)](https://www.youtube.com/watch?v=YTB2FgN_4zo#no-embed)
+
+Initial hardware test of my personal Duckiebot, affectionately named Oreo, immediately following its first complete assembly. The video documents an unexpected wheelie milestone during early open-loop motor calibration.
+
+---
+
+### Phase 2: Isolated Visual Perception & Color Segmentation
+
+With the physical robot calibrated, we transitioned to developing the visual perception pipelines. Before establishing closed-loop control, we isolated and verified our color-segmentation algorithms, tuning visual threshold filters to detect orange features under variable classroom lighting conditions.
+
+[![Standalone Obstacle Isolation | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=HfS5Yj63H34#no-embed](/assets/research/duckietown/navigation_2.gif#max-w-2xl)](https://www.youtube.com/watch?v=HfS5Yj63H34#no-embed)
+
+Demonstration of a custom color-segmentation pipeline originally tuned for orange traffic cones, which successfully cross-detects rubber duck obstacles via their orange beaks.
+
+---
+
+### Phase 3: Fully Integrated Closed-Loop Control & Avoidance
+
+This phase showcases the full integration of the individual perception and control stacks driving in closed-loop. The system links the real-time vision-based lane tracking pipeline directly with a proportional-derivative (PD) heading controller, while concurrently running the standalone obstacle detector to trigger a reactive safety override whenever a hazard appears.
+
+[![Fully Integrated Autonomous Lane Following & Avoidance | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=rPpewHIF2KU#no-embed](/assets/research/duckietown/navigation_1.gif#max-w-2xl)](https://www.youtube.com/watch?v=rPpewHIF2KU#no-embed)
+
+Demonstration of the combined lines-and-obstacle pipeline working in tandem to maintain lane centerlines while reliably executing safety-stops for proximity hazards.
+
+---
+
+## Document: Automating PR Reviews with GitHub Actions, Gemini, and Boomtick DevAI (gitops-pr-reviewer)
+The first version of my AI review workflow made a classic mistake: I asked the model to do everything. It had to understand the repo, inspect the diff, infer the design system, read CI logs, and decide what mattered. Sometimes it worked; often it produced a confident wall of feedback that was hard to trust.
+
+The better pattern is to shrink the model's job: collect the important pull request context first, then ask the model to review that prepared packet through structured tools.
+
+I engineered the **Boomtick DevAI Ecosystem** (open source across [arii/boomtick](https://github.com/arii/boomtick) and [arii/tech-dancer](https://github.com/arii/tech-dancer)) around this exact principle. At its core is a **Dual-Layer Architecture** combining `boomtick-mcp` (a Model Context Protocol server for structured macro-agent tool invocation) and `td-cli` (a standalone terminal CLI serving as a deterministic local execution layer and human fallback). Together with a **Zero-Submodule Strategy** and a multi-tiered AI review system, this architecture provides unified governance across agentic and developer workflows.
+
+---
+
+## Dual-Layer Control & Execution Architecture
+
+The Boomtick architecture strictly separates the control plane (agentic reasoning via MCP) from the data and execution plane (deterministic CLI commands and API integrations).
+
+```mermaid
+flowchart TD
+    subgraph ControlPlane ["Tier 1: Agentic Control Plane"]
+        Agent[Macro-Agent / Jules / Claude]
+        MCP[boomtick-mcp Server]
+        Agent <-->|JSON-RPC / MCP Protocol| MCP
+    end
+
+    subgraph ExecutionPlane ["Tier 2: Execution & Fallback"]
+        CLI[td-cli Terminal Engine]
+        Doctor[td-cli doctor / Health Checks]
+        Audit[td-cli gh audit-pr]
+        MCP -->|Direct Local Invocation| CLI
+        CLI --> Doctor
+        CLI --> Audit
+    end
+
+    subgraph ExternalAPIs ["Target Infrastructure"]
+        GH[GitHub REST / GraphQL API]
+        Repo[Local File System & Git Engine]
+        Audit -->|REST / Event Telemetry| GH
+        CLI <-->|Git Diff & Import Graph| Repo
+    end
+
+    classDef agent fill:#1e293b,stroke:#38bdf8,stroke-width:2px,color:#f8fafc;
+    classDef mcp fill:#0f172a,stroke:#818cf8,stroke-width:2px,color:#f8fafc;
+    classDef cli fill:#064e3b,stroke:#34d399,stroke-width:2px,color:#f8fafc;
+
+    class Agent agent;
+    class MCP mcp;
+    class CLI,Doctor,Audit cli;
+```
+
+### Key Architectural Principles
+
+- **Zero-Submodule Strategy**: Rather than embedding tooling via Git submodules across downstream repositories, tools are distributed as zero-dependency binaries and standalone execution packages resolved dynamically via workspace path resolution scripts (`scripts/resolve-cli.sh` in [arii/boomtick](https://github.com/arii/boomtick)).
+- **Multi-Tier AI Review System**: Incoming pull requests trigger structural evaluation pipelines where macro-agents utilize `boomtick-mcp` tools or `td-cli` commands to inspect diffs, verify static analysis artifacts, and render structured review recommendations (`APPROVE`, `REQUEST_CHANGES`, or `COMMENT`).
+- **Strict Tool Hierarchy**: `boomtick-mcp` exposes strongly typed, schema-validated tools to the agent. If the MCP protocol layer is unreachable or running in an isolated environment, the agent or developer seamlessly falls back to direct `td-cli` command execution.
+
+![Boomtick Ecosystem Architecture Overview](/assets/research/boomtick-devai-tools/boomtick-arch.png)
+*Figure 1: High-level system map illustrating the dual-layer flow from macro-agents down to local CLI fallback and GitHub API endpoints.*
+
+---
+
+## 1. Aggregate PR Context Into a Structured Packet
+
+Instead of having the model search the repository, run a script to assemble the review context. For BoomTick.blog and portfolio repos, I use `td-cli gh audit-pr <PR_NUMBER>` (or `boomtick-mcp.audit_pull_request`) to bundle:
+
+- The PR title and description
+- The changed files and their relative diffs
+- Failing CI logs
+- Linked issue content
+- Project-specific review rules and design-token guidelines
+
+This gathers everything the model needs into a single `.devai/review-context.md` file.
+
+```bash
+# Example aggregation pattern via td-cli engine
+$ td-cli gh audit-pr --pr 42 --fetch
+[INFO] Inspecting PR #42 diff against target branch 'main'...
+[INFO] Parsing import dependency graph via dependency-cruiser...
+[SUCCESS] Assembled .devai/review-context.md context packet
+```
+
+---
+
+## 2. Boomtick MCP Server (`boomtick-mcp`) for Agentic Workflows
+
+The primary interface for AI agents is `boomtick-mcp`, built natively on the Model Context Protocol (MCP) specification ([modelcontextprotocol.io](https://modelcontextprotocol.io)). It translates abstract agent intents into validated, schema-constrained operations.
+
+### Schema Safety and Context Optimization
+
+By utilizing JSON Schema definitions for every exposed tool, `boomtick-mcp` prevents parameter hallucination before execution reaches the system shell.
+
+```json
+{
+  "name": "audit_pull_request",
+  "description": "Executes a multi-stage pull request health and impact audit.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "pr_number": {
+        "type": "integer",
+        "description": "Target GitHub Pull Request number"
+      },
+      "include_impact_analysis": {
+        "type": "boolean",
+        "default": true
+      }
+    },
+    "required": ["pr_number"]
+  }
+}
+```
+
+![Boomtick MCP Integration in Desktop Client](/assets/research/boomtick-devai-tools/boomtick-mcp-desktop.png)
+*Figure 2: `boomtick-mcp` loaded inside an agentic desktop interface, exposing structured audit and repository analysis tools.*
+
+---
+
+## 3. Tier 2 Fallback: Terminal CLI (`td-cli`)
+
+While `boomtick-mcp` serves agentic clients, `td-cli` (maintained in the open-source [arii/tech-dancer](https://github.com/arii/tech-dancer/tree/main/dev-tools) repository) provides the underlying deterministic command-line execution engine. It ensures that developers and CI/CD scripts maintain identical execution capabilities independently of LLM availability.
+
+```bash
+# Running local environment verification and PR audit fallback
+$ td-cli doctor
+[OK] Node.js environment detected (v24.x)
+[OK] PATH resolution script active (/github/workspace/scripts/resolve-cli.sh)
+[OK] GitHub API authentication verified
+
+$ td-cli gh audit-pr --pr 42
+[INFO] Inspecting PR #42 diff...
+[INFO] Impact Analysis: 3 components affected across 2 routes
+[SUCCESS] Multi-model review generated: APPROVE
+```
+
+![td-cli Terminal Execution and Health Check](/assets/research/boomtick-devai-tools/boomtick-cli-audit.png)
+*Figure 3: High-contrast terminal output demonstrating `td-cli gh audit-pr` and `td-cli doctor` health checks in action.*
+
+---
+
+## 4. Orchestrate Inference with the Gemini API
+
+I engineered the inference orchestration to call the Google Gemini API directly with the prepared context. I deliberately rely on Gemini's large context window to ingest massive diffs and build artifacts without truncation, ensuring the review agent has a complete picture before generating feedback.
+
+```python
+import os
+import requests
+import json
+from pathlib import Path
+
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+ENDPOINT = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-pro:generateContent?key={GEMINI_API_KEY}"
+
+context = Path(".devai/review-context.md").read_text()
+
+prompt = f"""
+You are reviewing a pull request.
+
+Focus on:
+1. correctness bugs
+2. broken UI states
+3. accessibility regressions
+4. design-token violations
+5. missing tests
+
+Return valid JSON with this schema:
+{{
+  "blocking": [{{"file": "string", "reason": "string", "suggestion": "string"}}],
+  "non_blocking": [{{"file": "string", "reason": "string"}}],
+  "summary": "string"
+}}
+
+Context:
+{context}
+"""
+
+response = requests.post(
+    ENDPOINT,
+    headers={"Content-Type": "application/json"},
+    json={
+        "contents": [{"parts": [{"text": prompt}]}],
+        "generationConfig": {
+            "responseMimeType": "application/json",
+            "temperature": 0.2
+        }
+    },
+    timeout=120,
+)
+
+response.raise_for_status()
+result = response.json()
+print(result["candidates"][0]["content"]["parts"][0]["text"])
+```
+
+### Example Structured Review Output
+
+Configuring Gemini with structured JSON output (`responseMimeType: "application/json"`) ensures that downstream gatekeepers can parse and act on findings programmatically:
+
+```json
+{
+  "recommendation": "REQUEST_CHANGES",
+  "blocking": [
+    {
+      "file": "src/components/Navigation.tsx",
+      "reason": "Navigation item missing required min-h-[48px] touch target for mobile accessibility",
+      "suggestion": "Add min-h-[48px] class to interactive link elements"
+    }
+  ],
+  "non_blocking": [
+    {
+      "file": "src/data/home.ts",
+      "reason": "Consider extracting role title constant"
+    }
+  ],
+  "summary": "Found 1 accessibility regression requiring changes before merging."
+}
+```
+
+---
+
+## 5. Map Review States Deterministically
+
+I designed the pipeline to explicitly prohibit the model from directly approving or blocking a pull request. Instead, a deterministic script reads the structured JSON findings and maps them strictly to GitHub review states:
+
+- **`REQUEST_CHANGES`:** Triggers automatically if there are any items populated in the `blocking` list (e.g., build failures, accessibility regressions, missing props).
+- **`COMMENT`:** Posts non-blocking suggestions from the `non_blocking` list (e.g., naming, cleanup, styling tips).
+- **`APPROVE`:** Executes safely only when the `blocking` list is completely empty.
+
+For instance, `td-cli ai review` or `scripts/send-jules-impact.py` submits the review payload directly to the GitHub API.
+
+![Automated Pull Request Code Review Feedback](/assets/research/gitops-pr-reviewer-comment.png)
+*Figure 4: Automated review feedback comment posted directly to a GitHub Pull Request.*
+
+---
+
+## 6. The Autonomous Repair Loop
+
+To close the gap between detection and resolution, I engineered an autonomous repair loop utilizing Jules and specialized coding agents. When the CI pipeline fails, it does not just report the error—it triggers an active repair session.
+
+The process is orchestrated via `.github/workflows/jules-fix-trigger.yml` in [arii/boomtick](https://github.com/arii/boomtick), which detects CI failures and executes `td-cli ai repair`. This workflow bundles the failing CI logs, the active PR diff, and project-specific constraints into a secure repair context packet.
+
+### The CI Repair Flow:
+1. **CI Failure Detection:** GitHub Actions detects a failing test, linting error, or build step.
+2. **Context Aggregation:** A script extracts the exact failing log block and relevant source diffs.
+3. **Autonomous Repair Session:** `jules-fix-trigger.yml` initiates a coding agent session (via Jules or TD CLI) armed with the failing logs, diffs, and project constraints.
+4. **Patch Generation:** The agent synthesizes a patch addressing the specific failure and either commits it directly to a fix branch or proposes it as PR feedback.
+5. **Human Verification:** I review and merge the synthesized fix, ensuring human oversight remains in the loop.
+
+---
+
+## Summary of the Architecture & Open Source Repositories
+
+By consolidating the PR review orchestration into the **Boomtick DevAI Ecosystem**:
+1. Agents interact via structured Model Context Protocol tools (`boomtick-mcp`).
+2. Developers and CI workflows utilize deterministic CLI fallbacks (`td-cli` open-sourced at [github.com/arii/tech-dancer](https://github.com/arii/tech-dancer)).
+3. Google Gemini generates structured JSON findings over complete context packets.
+4. Deterministic gatekeeper scripts apply GitHub review states without hallucination risks.
+
+All pipeline code, path resolution scripts (`scripts/resolve-cli.sh`), and GitHub Actions workflow triggers are publicly accessible in [arii/boomtick](https://github.com/arii/boomtick) and [arii/tech-dancer](https://github.com/arii/tech-dancer).
+
+---
+
+## Document: Graduate Engineering Projects (graduate-engineering-projects)
+A showcase of advanced graduate-level engineering systems developed at MIT. These projects span real-time computer vision control, ordinal machine learning ranking, and parameterized hardware accelerators built using Bluespec SystemVerilog.
+
+---
+
+## 1. Autonomous Quadrotor Control — MIT 16.30 / 16.31 (C / MATLAB)
+
+### Designing Closed-Loop Vision Trajectory Tracking for Micro-Quadrotors
+
+The **Drone Line Following Autonomous Controller** ("Follow the Yellow Brick Road") project was a collaborative effort with teammates Raghav Aggarwal, Julia Sokol, and Patrick Lowe to engineer a real-time computer vision and state feedback control loop for a micro quadrotor (Parrot Rolling Spider) to autonomously detect, align with, and track floor-marked paths.
+
+[![Rolling Spider micro-drone executing closed-loop visual path tracking along yellow floor-marked trajectories. | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=f5l8GA1PHm8#no-embed](/assets/research/drone_follow.gif)](https://www.youtube.com/watch?v=f5l8GA1PHm8#no-embed)
+
+### System Architecture & Control Loop
+
+Autonomous flight using low-cost micro-drones poses severe real-time compute and sensor noise constraints. My primary contributions focused on the image processing architecture and integration into the Rolling Spider framework:
+
+#### A. Offline Image Processing & Data Capture Pipeline
+- **Yavta Integration:** Developed custom scripts utilizing the Yet Another V4L2 Test Application (`yavta`) to rapidly capture and download test images directly from the quadcopter.
+- **Format Conversion & Testing:** Rendered images in JPEG and raw YUV formats, analyzing luminance (Y) components to separate line targets from varying floor textures without heavy RGB conversion overhead.
+- **Pixel Offset Calculation:** Implemented a lightweight line detection algorithm iterating over pixel arrays to compute the position-wise pixel offset relative to the center line.
+
+#### B. Cascaded Control & System Integration
+- **Bang-Bang Controller Prototype:** Initially integrated the pixel offset algorithm into a bang-bang controller modifying `rsedu_vis.c` and `rsedu_control.c` to test custom input command streaming.
+- **Refined Flight Controllers:** While the initial bang-bang approach served as a foundational proof-of-concept, teammates (Julia Sokol and Raghav Aggarwal) integrated more advanced PID controllers and yaw/position estimations to achieve stable trajectory tracking across continuous curved paths and sharp turns.
+
+### Hardware & Flight Verification
+
+- **Platform:** Parrot Rolling Spider micro quadrotor equipped with a down-facing camera, pressure sensor, and ultrasonic altitude sensor.
+- **Ground Station Interface:** Custom MATLAB/Simulink and Python communication links transmitting control packets at high refresh rates.
+- **Experimental Results:** Successfully achieved closed-loop flight tracking across continuous paths and distinct floor markers (such as yellow or black tape) with reliable state estimation.
+
+---
+
+## 2. Bounding Box Reranking — MIT 6.867 Machine Learning (Python)
+
+### Evaluating Learning Algorithms for Bounding Box Reranking
+
+In this research project for **6.867 Machine Learning** at MIT CSAIL, my teammate Sanja Popovic and I evaluated learning algorithms to refine object detection ranking and confidence scoring for the **Learning and Intelligent Systems (LIS) group**.
+
+![Distance discrepancy decay functions evaluated to transform spatial offsets into bounding box confidence scores.](/assets/research/report-ml-lis/fig1_score_discrepancy.png)
+
+### Core Problem & Approach
+
+Object detection models running on mobile manipulation platforms frequently generate dozens of candidate bounding boxes around cluttered household items. Standard linear regression models treat candidate confidence as absolute values, failing to prioritize relative ranking order—which often leads the robot to attempt grasps on low-confidence background artifacts.
+
+To solve this issue, I focused on formulating learning-to-rank models specifically tailored for robotic scene perception:
+
+1. **Ordinal Regression:** Formulated pairwise loss functions to prioritize high-precision target detections over ambiguous background noise.
+2. **P-Norm Push:** Implemented the P-norm push ranking algorithm, placing higher mathematical penalty on errors at the top of the ranked list so the robot's top choice is correct.
+3. **Experimental Validation:** Evaluated bounding box candidate scoring across real-world cluttered kitchen environments captured by mobile manipulators.
+
+![Performance evaluation showing how our learned weight vectors successfully improve high-precision bounding box candidate scores.](/assets/research/report-ml-lis/fig2_ranking_performance.png)
+
+### Key Results & Takeaways
+
+- **Superior Candidate Ranking:** Demonstrated significant candidate ranking accuracy improvements compared to baseline linear regression models.
+- **Robust Feature Representation:** Identified optimal spatial feature representations for candidate reranking in household manipulation tasks.
+- **Direct Practical Impact:** Provided the LIS research group with a framework to filter candidate clutter before passing target poses to motion planners.
+
+### Downloads
+
+- 📄 [Download Machine Learning Technical Report (PDF)](https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_ml.pdf)
+
+---
+
+## 3. Parameterized Cryptographic Accelerator — MIT 6.375 Complex Digital Systems (Bluespec SystemVerilog)
+
+### Implementing Parameterized Montgomery Modular Arithmetic
+
+For **MIT 6.375 Complex Digital Systems**, my teammates Timur Balbekov, Neil Forrester, and I engineered a high-performance, parameterized **Hardware RSA Accelerator** using **Bluespec SystemVerilog (BSV)**.
+
+![System architecture of the RSA accelerator showing memory interface, control rule state machines, and modular exponentiation datapath.](/assets/research/report-6375-rsa/rsa_hardware_architecture.png#invert-dark)
+
+### Architecture & Hardware Specification
+
+RSA public-key cryptography relies heavily on modular exponentiation over large integers—an operation that poses significant computational bottlenecks when executed in software.
+
+To achieve maximum hardware throughput, I designed and synthesized custom datapath blocks:
+
+1. **Montgomery Modular Multiplication:** Implemented Montgomery multiplication units to compute large integer modular arithmetic without relying on costly hardware division steps.
+2. **Pipelined Datapath Design:** Built a flexible, parameterized bit-width datapath that allows developers to trade off FPGA area against target clock frequency and throughput.
+3. **BSV Guarded Atomic Actions:** Modeled execution concurrency using BSV rule synthesizability, ensuring deadlock-free hardware scheduling and clean control logic.
+
+![Pipelined Montgomery modular multiplication unit designed for high-throughput integer exponentiation.](/assets/research/report-6375-rsa/montgomery_multiplier_datapath.png#invert-dark)
+
+### Technical Outcomes & Lessons Learned
+
+- **Cycle-Accurate Performance:** Achieved efficient, low-latency execution for multi-hundred bit RSA key processing targeted at FPGA platforms.
+- **Formal Verification in Hardware:** Validated hardware verification methodologies to ensure strict formal correctness and memory safety across cryptographic state transitions.
+- **Parameterized Design:** Created a modular codebase that can scale key lengths based on available hardware logic slices.
+
+### Downloads
+
+- 📄 [Download Hardware RSA Accelerator Report (PDF)](https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_6375.pdf)
+
+---
+
+## Document: HRM: Real-Time Biometric Telemetry & Distributed Workout Synchronization (hrm-architecture)
+The Heart Rate Monitor (HRM) project bridges consumer fitness hardware with real-time browser environments. Originally built in 2020 as a fast remote-training prototype, HRM was completely re-architected in 2026 as a flagship testbed for DevAI workflows—proving how autonomous PR auditing, agentic CI/CD pipelines, and multi-client telemetry can streamline full-stack system delivery.
+
+## Origin Story & Architectural Evolution
+
+HRM was originally conceived and built during the COVID-19 pandemic for my mother, myself, and our personal trainer, Tim (from FitForLife gym). The goal was to maintain real-time biometric telemetry during remote group workouts when physical gyms were closed. Achieving a stable, frictionless experience required distinct architectural phases:
+
+### Iteration 1: OpenCV Video Loopback
+
+![Iteration 1](/assets/research/hrm/evolve1.webp#max-w-xl#aspect-video)
+
+Initially, I captured BLE heart rate data via Python, overlaid a HUD text display onto the active video stream using `cv2.putText`, and outputted the composited stream to a `v4l2loopback` virtual camera device. I quickly abandoned this approach due to cross-platform OS driver fragility (struggling with DirectShow on Windows versus v4l2 on Linux).
+
+### Iteration 2: Web Bluetooth + OBS VirtualCam
+
+![Iteration 2](/assets/research/hrm/evolve2.webp#max-w-xl#aspect-video)
+
+The second iteration utilized a Web Bluetooth client rendered in a browser window, which I composited into Zoom using OBS Studio VirtualCam. I abandoned this due to Zoom aggressively locking camera devices, video mirroring inconsistencies, and window resize scaling artifacts that broke the HUD alignment.
+
+### v2 Distributed Topology (2026)
+
+![Iteration 3](/assets/research/hrm/evolve3.webp#max-w-xl#aspect-video)
+
+![Client Connection](/assets/research/hrm/client_connect.webp#max-w-xl#aspect-video)
+
+The final architecture moved to a decoupled, multi-client web topology. Browser clients stream BLE telemetry to a persistent WebSocket server, relaying active zone metrics, calorie calculations, and Tabata timer state to a unified trainer dashboard.
+
+
+## The DevAI Catalyst (v1 -> v2 Rewrite)
+
+Refactoring the multi-client WebSocket topology and complex Web Bluetooth mock states in v2 became tedious to verify manually. Managing continuous multi-client refactors directly prompted me to build RepoAuditor and automated PR review bots in GitHub Actions. Using GitHub Actions, Gemini-powered PR reviews, and automated visual regression testing (Playwright), I was able to validate complex Web Bluetooth mock states and UI layout integrity across updates.
+
+## Core Technical Implementation
+
+### Web Bluetooth GATT Lifecycle & Decoding
+
+![Browser Capability](/assets/research/hrm/browser_capability.webp#max-w-xl#aspect-video)
+
+
+The foundation relies on the Web Bluetooth API to connect with peripheral sensors using the standard Bluetooth 4.0 / ANT+ Heart Rate Profile.
+
+The client lifecycle begins by scanning for devices advertising the Heart Rate Service (UUID `0x180D`). Once connected, it subscribes to the Heart Rate Measurement Characteristic (`0x2A37`). The incoming data streams as a raw byte buffer. I decode the flags byte in real-time to determine if the HR value is 8-bit or 16-bit, and to extract optional fields like energy expended or RR-interval buffers. The client includes an auto-reconnect handler that gracefully manages transient signal losses.
+
+### Zone Engine
+
+To provide immediate visual feedback, I implemented a Zone Engine based on the standard maximum heart rate formula: $HR_{max} = 220 - \text{age}$.
+
+The telemetry is mapped into dynamic zone buckets:
+- **Zone 1 (Grey):** 50-60% (Very Light)
+- **Zone 2 (Blue):** 60-70% (Light)
+- **Zone 3 (Green):** 70-80% (Moderate)
+- **Zone 4 (Orange):** 80-90% (Hard)
+- **Zone 5 (Red):** 90-100% (Maximum)
+
+### WebSocket Protocol & Stale Data Guardrails
+
+Multi-client synchronization is handled over Socket.io. To maintain a reliable dashboard, I engineered strict stale data guardrails and heartbeat handling. If telemetry from a client ceases for more than 4 seconds, the dashboard displays `--`. If the client remains inactive for over 30 seconds, the user's card automatically unmounts from the instructor's grid to prevent clutter.
+
+### Mock Simulator Test Harness
+
+![Mock Simulator](/assets/research/hrm/mock.webp#max-w-xl#aspect-video)
+
+
+To ensure the system could scale and handle network jitter, I built a dedicated mocking engine (`/hrm_mock`). This simulator allows for multi-user stress testing and synthetic biometric signal generation without requiring physical peripherals.
+
+### Synchronized Workout Intervals & Spotify API
+
+![Running Application](/assets/research/hrm/running.webp#max-w-xl#aspect-video)
+
+
+The central server orchestrates a synchronized Tabata HIIT timer (countdown, work intervals, rest periods, audio feedback beeps) across all client views, guaranteeing sub-100ms latency for state replication.
+
+Furthermore, I integrated the Spotify API and Web Playback SDK to synchronize music with the active workout state using OAuth PKCE for client-side token negotiation. A background token refresh loop maintains an uninterrupted session. The system exerts real-time playback control synced directly to the HIIT intervals, automatically adjusting playback based on the current timer phase.
+
+### Interactive Controls & Analytics
+
+The live application features interactive controls with a dual-mode timer (Tabata vs. Stopwatch), audio feedback cues, and in-browser Spotify player token management. I also built a workout history and analytics persistence layer that tracks elapsed duration, active calories burned, and historical session logs across multiple dates.
+
+## System Topology
+
+![HRM Server Dashboard](/assets/research/hrm/hrm_server.webp#max-w-xl#aspect-video)
+
+
+The following diagram illustrates the data flow and system topology, from the biometric peripheral through the web client to the synchronized servers and external APIs.
+
+```mermaid
+flowchart TD
+    subgraph Client ["Client Device (Browser)"]
+        BLE[BLE HR Sensor] -->|GATT 0x180D| WB[Web Bluetooth Client]
+        WB --> ZE[Zone Engine & Analytics]
+        WB --> MOCK[Mock Simulator Harness]
+    end
+
+    subgraph Relays ["Server & Media Layer"]
+        ZE -->|Socket.io Telemetry| WS[WebSocket Server]
+        ZE -->|OAuth PKCE| SPOT[Spotify Web Playback SDK]
+    end
+
+    subgraph Outputs ["Unified Views & Integrations"]
+        WS --> DASH[Trainer & Multi-Client Dashboard]
+        ZE -.->|OAuth In Development| STRAVA[Strava API]
+    end
+
+    subgraph CI ["DevAI & Quality Guardrails"]
+        REPO[RepoAuditor PR Reviewer] --> GA[GitHub Actions CI/CD]
+        GA --> PW[Playwright E2E & Visual Diff Tests]
+    end
+
+    classDef client fill:#1e293b,stroke:#38bdf8,stroke-width:2px,color:#f8fafc;
+    classDef server fill:#0f172a,stroke:#818cf8,stroke-width:2px,color:#f8fafc;
+    classDef output fill:#064e3b,stroke:#34d399,stroke-width:2px,color:#f8fafc;
+    classDef devai fill:#312e81,stroke:#a855f7,stroke-width:2px,color:#f8fafc;
+
+    class BLE,WB,ZE,MOCK client;
+    class WS,SPOT server;
+    class DASH,STRAVA output;
+    class REPO,GA,PW devai;
+```
+
+---
+
+## Document: Lab Energy Assessment Center (LEAC) Monitoring Software (leac-monitoring-software)
+# LEAC Fume Hood Energy Monitoring Software
+
+## Laboratory Sustainability & Telemetry Infrastructure
+
+The **Lab Energy Assessment Center (LEAC)** project ([leac-mit.github.io](https://leac-mit.github.io/)) engineered networked telemetry infrastructure and assessment methodologies to track and optimize energy consumption across academic research laboratories at MIT. Serving as the Lead Technology Developer, I designed the project's website, wrote the initial core telemetry prototypes (`green_net`), and mentored undergraduate researchers who conducted comprehensive energy assessments across campus labs.
+
+---
+
+## The Challenge: Laboratory Energy Intensity
+
+MIT buildings containing research laboratories consume over 300% more energy per square foot than non-lab academic facilities. Variable Air Volume (VAV) fume hoods, high-powered equipment, and constant lighting draw massive electrical and HVAC loads. For example, a single open fume hood sash can draw as much conditioned air as multiple average American homes, costing thousands of dollars per year in wasted energy.
+
+Without low-cost, automated telemetry, laboratory managers and sustainability teams lacked granular visibility into equipment power draw, unutilized open sash positions, and campus-wide energy waste.
+
+---
+
+## System Architecture & Software Implementation
+
+![LEAC Fume Hood Network Monitoring Interface](/assets/research/leac.jpg)
+
+To address these challenges, I built and deployed a multi-faceted monitoring platform tailored for academic research environments:
+
+### 1. Smart Outlet Network Monitoring (`green_net`)
+- Developed Python-based telemetry scripts utilizing the Ouimeaux API to interface with smart plugs (such as WeMo Insight switches), scanning local networks, querying real-time power draw, and outputting structured time-series logs (`data.csv`).
+- Designed the initial data logging architecture and command-line execution flows to capture high-frequency power measurements.
+
+### 2. Computer Vision State Detection
+- For hardwired laboratory equipment such as fume hoods and overhead lighting where inline smart plugs cannot be inserted, we incorporated lightweight computer vision pipelines to identify on/off states and sash positions.
+
+---
+
+## Student Mentorship & Program Execution
+
+Following initial prototype development, I worked closely with the team—including co-founders, EHS liaisons, and talented undergraduate researchers—to support campus-wide audits:
+- **Mentorship:** Guided undergraduate team members (such as Dheekshita Kumar, Juan Ferrua, and Maxwell Drake) in configuring hardware, managing data logging repositories, and analyzing lab power draw.
+- **Collaborative Research:** This work contributed to broader campus sustainability frameworks and publications, including collaborative findings detailed in *Energy Reports* (Becerra et al., 2018).
+
+---
+
+## Grant Recognition & Impact
+
+- **MIT Green Labs Innovation Award:** Recognized with the 2017 Innovation Award ($5,000) for developing sustainable campus technology.
+- **Actionable Telemetry:** Provided free, minimally invasive energy audits and data-driven recommendations to campus research groups, establishing a scalable model for lab decarbonization.
+
+---
+
+## Document: Light Therapy at MIT (light-therapy-mit)
+# Light Therapy at MIT
+
+## Mitigating Seasonal Affective Disorder Across Campus
+
+As a fourth-year PhD student in EECS at the Massachusetts Institute of Technology, I created **Light Therapy at MIT**—a community wellness initiative conceived, funded, and deployed to combat Seasonal Affective Disorder (SAD) and winter depression among students and researchers.
+
+*(Read the full feature on my work in [MIT News](https://news.mit.edu/2016/stata-center-phone-booths-light-therapy-aims-to-brighten-moods-0729).)*
+
+---
+
+## Background & Personal Context
+
+![Light therapy campus setup](/assets/research/light.jpg)
+
+Moving to Boston from California, I was initially terrified of the harsh New England winter. During my second winter, working long hours between my office, the lab, and the gym in the Ray and Maria Stata Center, I developed severe wrist pain and fatigue. A doctor diagnosed me with a vitamin D deficiency linked to a lack of sunlight.
+
+Once I started taking supplements, spending extra time walking in the morning sun, and using a light box at my desk, my mood lifted and my physical symptoms cleared up within a couple of weeks. When the MindHandHeart Innovation Fund launched, it felt like a natural step to bring light boxes to campus spaces so others could experience that same relief.
+
+Clinical research demonstrates that daily exposure to artificial light therapy effectively treats SAD by mimicking natural outdoor light to regulate circadian rhythms and melatonin levels in the hypothalamus. However, high-grade phototherapy lightboxes can be bulky and expensive for individual students to purchase.
+
+---
+
+## Project Execution & Campus Deployment
+
+Supported by the **MIT MindHandHeart Innovation Fund**, I proposed and executed a campus-wide phototherapy deployment plan:
+
+### 1. EHS Approval & Safety Coordination
+I coordinated with MIT Environment, Health & Safety (EHS) and MIT Medical to establish safety guidelines and provide contact info for campus wellness resources.
+
+### 2. Strategic Placement and Campus Outreach
+To maximize impact, I reached out to various mailing lists, requesting that project announcements be forwarded to dorms and laboratories. I strategically placed light therapy stations in high-traffic shared spaces across several dorms and residences, in addition to the CSAIL phone booths within the Stata Center.
+
+### 3. User Autonomy and Light Management
+A primary requirement for the project was ensuring that light usage remained strictly voluntary for students. I prioritized user comfort by giving everyone full control to switch the lamps on or off based on their personal preference. Furthermore, I carefully installed the equipment; for instance, inside the Stata Center phone booths, I angled the lamps away from the windows to ensure that passersby were not subjected to unintentional light exposure. I also collected ongoing feedback via suggestion boxes and my project website to evaluate the pilot's success.
+
+---
+
+## Outcomes & Legacy
+
+- **Institutional Funding:** Successfully secured initial grant funding from MindHandHeart's inaugural Innovation Fund round.
+- **Mental Health Awareness:** Educated the campus community about SAD—a condition that Massachusetts residents are particularly vulnerable to during long winter months.
+- **Campus Adoption:** The pilot project served as a template for expanding mental health support and student-led wellness initiatives across MIT dormitories and departments.
+
+---
+
+## Document: Learning a Strategy for Whole-Arm Grasping (masters-thesis)
+## MIT S.M. Thesis — Computer Science and Artificial Intelligence Laboratory (CSAIL)
+
+* **Author:** Ariel Anders
+* **Advisors:** Prof. Leslie Pack Kaelbling & Prof. Tomás Lozano-Pérez
+* **Institution:** Massachusetts Institute of Technology (MIT CSAIL)
+
+---
+
+## Project Overview
+
+Traditional robotic grasping separates the problem into two distinct stages: finding optimal contact points for the fingertips and planning collision-free trajectories to reach them. While effective for small items with known CAD models, this approach breaks down when handling large, heavy, or irregularly shaped objects where fingertip pinch grasps lack the required torque and contact area.
+
+I formulated a framework for **whole-arm grasping**. Instead of restricting contact to end-effectors, I enabled the robot to use its full kinematic chain—forearms, upper arms, and torso—to envelope, scoop, and cradle unmodeled objects under physical and pose uncertainty.
+
+![Whole-arm grasping experimental setup](/assets/research/swag.jpg)
+*Figure 1: Experimental setup and kinematics for whole-arm grasping on the PR2 platform.*
+
+---
+
+## Technical Approach & Methodology
+
+### 1. Unified Policy Formulation
+* Replaced the decoupled grasp-then-plan paradigm with a policy search formulation that directly maps object states and robot configurations into coordinated multi-joint trajectories.
+* Optimized motions over a distribution of object poses and geometries to ensure robustness without requiring high-precision 3D reconstruction.
+
+### 2. Reinforcement Learning for Whole-Arm Envelopment
+* Formulated the enveloping and lifting sequence as a policy optimization problem.
+* Trained policies in physics simulation to discover dynamic multi-joint motions that cradle objects against the robot's body while managing contact constraints and gravity.
+
+### 3. Bimanual & Torso Coordination
+* Coordinated dual-arm trajectories and torso positioning to execute complex enveloping maneuvers on bulky everyday items (boxes, spheres, and irregular containers).
+* Transferred my learned simulation policies directly to the physical Willow Garage PR2 platform.
+
+![Thesis Key Concepts Word Cloud](/assets/research/thesis_wordle.png)
+*Figure 2: Word cloud highlighting core themes from my MIT S.M. thesis research.*
+
+---
+
+## Reinforcement Learning Simulations
+
+Simulation trials evaluating policy convergence, trajectory generation, and stability across object dimensions and initial offsets:
+
+### Early Point-Contact Formulations (Runs 1-4)
+The earliest phase of the research focused on a simplified model containing discrete point contacts to verify basic force-closure boundaries:
+
+| Phase | Description | Demonstration |
+| :--- | :--- | :--- |
+| **RL Simulation Run 1** | Point contact formulation for basic force-closure boundary verification. | [![Run 1 \| Watch Full Video on YouTube ↗ \| https://www.youtube.com/watch?v=PIhXfWyNPzQ#no-embed](/assets/research/masters-thesis/rl_sim_1.gif#max-w-xs)](https://www.youtube.com/watch?v=PIhXfWyNPzQ#no-embed) |
+| **RL Simulation Run 2** | Static evaluation of discrete MDP value iteration. | [![Run 2 \| Watch Full Video on YouTube ↗ \| https://www.youtube.com/watch?v=M5PbYaPY0RE#no-embed](/assets/research/masters-thesis/rl_sim_2.gif#max-w-xs)](https://www.youtube.com/watch?v=M5PbYaPY0RE#no-embed) |
+| **RL Simulation Run 3** | Multi-contact stability under varying payload offsets. | [![Run 3 \| Watch Full Video on YouTube ↗ \| https://www.youtube.com/watch?v=8TKJiJnDOSo#no-embed](/assets/research/masters-thesis/rl_sim_3.gif#max-w-xs)](https://www.youtube.com/watch?v=8TKJiJnDOSo#no-embed) |
+| **RL Simulation Run 4** | Point contact modeling with frictional boundaries via Sarsa. | [![Run 4 \| Watch Full Video on YouTube ↗ \| https://www.youtube.com/watch?v=lnHDDjkWKfE#no-embed](/assets/research/masters-thesis/rl_sim_4.gif#max-w-xs)](https://www.youtube.com/watch?v=lnHDDjkWKfE#no-embed) |
+
+### Advanced Enveloping & Whole-Arm Grasping (Runs 5-7)
+The subsequent iterations transitioned to whole-arm caging, continuous state space control, and active dual-arm manipulation:
+
+* **RL Simulation Run 5**
+  [![RL Simulation Run 5 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=s1vjsvnPfdc#no-embed](/assets/research/masters-thesis/rl_sim_5.gif#max-w-xl)](https://www.youtube.com/watch?v=s1vjsvnPfdc#no-embed)
+* **RL Simulation Run 6**
+  [![RL Simulation Run 6 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=-V2KtcETAi8#no-embed](/assets/research/masters-thesis/rl_sim_6.gif#max-w-xl)](https://www.youtube.com/watch?v=-V2KtcETAi8#no-embed)
+* **RL Simulation Run 7**
+  [![RL Simulation Run 7 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=gf2vNOKEKXc#no-embed](/assets/research/masters-thesis/rl_sim_7.gif#max-w-xl)](https://www.youtube.com/watch?v=gf2vNOKEKXc#no-embed)
+
+---
+
+## Physical Robot Experiments (PR2 Platform)
+
+Validation of my learned whole-arm manipulation policies on the physical PR2:
+
+* **PR2 Grasping Demonstration 1**
+  [![PR2 Grasping Demonstration 1 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=2mGN3ka_7i0#no-embed](/assets/research/masters-thesis/pr2_grasp_1.gif#max-w-xl)](https://www.youtube.com/watch?v=2mGN3ka_7i0#no-embed)
+* **PR2 Grasping Demonstration 2**
+  [![PR2 Grasping Demonstration 2 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=QgoJKaoZ3dY#no-embed](/assets/research/masters-thesis/pr2_grasp_2.gif#max-w-xl)](https://www.youtube.com/watch?v=QgoJKaoZ3dY#no-embed)
+* **PR2 Grasping Demonstration 3**
+  [![PR2 Grasping Demonstration 3 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=bgHzqflrkCE#no-embed](/assets/research/masters-thesis/pr2_grasp_3.gif#max-w-xl)](https://www.youtube.com/watch?v=bgHzqflrkCE#no-embed)
+
+---
+
+## Key Takeaways
+
+* **Form-Closure Caging Over Precision Points:** Enveloping objects with the full arm structure creates robust form-closure and support surfaces, bypassing the need for exact fingertip friction modeling.
+* **Payload Scaling:** Utilizing the arms and torso distributes load and joint torques, enabling manipulation of items far exceeding standard PR2 gripper payload limits.
+
+---
+
+## Document: RoboCon MIT (robocon-mit)
+# RoboCon MIT
+
+![RoboCon event portal showcase](/assets/research/robocon.jpg)
+
+**RoboCon MIT** was a student-run research conference organized to bring together robotics groups across MIT—including CSAIL, MechE, AeroAstro, and the Media Lab. I co-organized the event and built the conference website at [robocon.mit.edu](http://robocon.mit.edu/), which was one of my first web design projects and remains online today.
+
+---
+
+**Goals**
+
+* **Connect Campus Labs:** Give graduate students and postdocs a shared space to present hardware demos, posters, and talks across departments.
+* **Centralize Event Info:** Provide a single page where attendees could check the schedule, find room locations at the Media Lab, and see submission guidelines.
+
+---
+
+**What I Did**
+
+* **Built the Website:** Designed and wrote the front-end HTML/CSS from scratch to display the multi-track schedule, speaker lists, and event details on a simple, responsive page.
+* **Deployed on Athena:** Hosted and maintained the site files in MIT’s Athena `web_scripts` environment, updating schedules and speaker info as the program came together.
+* **Handled Submissions:** Coordinated the abstract intake for spotlight talks and poster sessions across topics like manipulation, control, and soft robotics.
+* **Helped Run the Event:** Managed day-of logistics, room transitions, and attendee check-in at the Media Lab.
+
+---
+
+**Results**
+
+* Gathered over 150 MIT researchers, students, and local industry attendees for a day of talks and demos.
+* Kept the event logistics and schedule running smoothly through a lightweight site that needed no complex backend maintenance.
+
+---
+
+## Document: Undergraduate Engineering Projects (undergraduate-projects)
+During my undergraduate studies in Computer Engineering at UC Santa Cruz (UCSC), I worked on a wide array of hands-on mechatronics, embedded systems, digital design, and robotics engineering projects. This archive consolidates project demonstrations, technical b-roll footage, and prototype testing videos captured during these foundational years.
+
+---
+
+## CMPE 100: Digital Logic Design
+
+* **Focus:** Fundamental combinational and sequential logic design, gate-level implementations, and hardware verification.
+* **Highlights:** Designed and tested robust digital subsystems, finite state machines, and hardware description language workflows on FPGA development boards.
+
+### Breadboard D Flip-Flop Circuit & Hardware Testing
+
+**Timeline:** Fall 2010 | **Role:** Digital Logic Designer | **Tech Stack:** Breadboard TTL Logic, D Flip-Flops, Oscilloscope, Logic Analyzer
+
+[![Breadboard D Flip-Flop hardware loops. | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=G0uw5PP9fuw#no-embed](/assets/research/undergraduate-projects/flip_flop.gif#max-w-2xl)](https://www.youtube.com/watch?v=G0uw5PP9fuw#no-embed)
+
+---
+
+## CMPE 121: Microprocessor System Design
+
+* **Focus:** Microprocessor architecture, memory mapping, peripheral interfacing, and low-level C and Assembly programming.
+* **Highlights:** Engineered a fully integrated microcontroller-based system, managing custom peripheral drivers, interrupt service routines, and serial communication protocols.
+
+### 68HC11 Microcontroller Board for Mechanical Gripper Control
+
+**Timeline:** Spring 2011 | **Role:** Embedded Systems & Hardware Engineer | **Tech Stack:** Motorola 68HC11, C / Assembly, RS-232 UART, SRAM / EPROM Bus Interfacing, Soldering & Wire-Wrap
+
+For **CMPE-121 Microprocessor System Design** at UC Santa Cruz, we designed, hand-soldered, and programmed a custom embedded computer board based on the **Motorola 68HC11E1 microcontroller**, bringing bare silicon up to full operational capability to control a mechanical gripper without a host computer.
+
+![Complete hardware schematic for the custom Motorola 68HC11E1 microcontroller system board.](/assets/research/report-ce121-microprocessor/68hc11_board_schematic.png#invert-dark#max-w-3xl)
+
+#### Hardware Interfacing & Firmware Engineering
+
+Building the single-board computer required precise hardware timing analysis, manual bus wiring (wire-wrapping and soldering), address decoding, and low-level C/Assembly firmware engineering:
+
+1. **Memory Subsystem Interfacing:** Designed and wired 8KB external SRAM and 8KB EPROM memory ICs with 74HC logic gates for precise address decoding.
+2. **Serial & Peripheral Communication:** Configured RS-232 serial UART communication for terminal debugging alongside SPI interface logic for peripheral expansion.
+3. **Power Regulation & Hardware Diagnostics:** Designed onboard 5V linear power regulation circuitry and integrated LED logic displays for verifying memory read/write cycles.
+
+![Memory address decoding block diagram mapping 8KB SRAM and EPROM windows into the 68HC11 memory space.](/assets/research/report-ce121-microprocessor/memory_address_decoding.png#invert-dark#max-w-xl)
+
+#### Software & Gripper Control Implementation
+
+We structured the software to manage real-time communication and hardware feedback loops using the RS-232 communication protocol:
+
+* **Pseudo-Force Control:** Motor resistance is regulated by specifying direct current levels. We mapped out eight distinct current settings into their hexadecimal representations, creating a structured command look-up table for both opening and closing actions.
+* **Dynamic Lookup System:** When an operator presses a digital push-button, the program measures the active voltage across the potentiometer and uses that value to index the corresponding open or close command from the lookup table.
+
+[![68HC11 Microcontroller Board and Mechanical Gripper hardware loops.](/assets/research/undergraduate-projects/gripper_control.gif#max-w-2xl)](https://www.youtube.com/watch?v=tXif7xeZmGI#no-embed)
+
+#### Engineering Impact & Verification
+
+- **Timing & Bus Validation:** Verified signal setup and hold times across system buses, preventing bus contention during high-speed memory reads.
+- **Prototyping Platform:** Created a reliable embedded hardware platform for real-time sensor data collection and low-level firmware testing.
+
+#### Technical Report Download
+
+* 📄 [Download Microprocessor System Design Report (PDF)](https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_ce121.pdf)
+
+---
+
+## CMPE 118: Introduction to Mechatronics
+
+* **Focus:** Interdisciplinary electromechanical systems blending microcontrollers, analog signal conditioning, DC/stepper motor control, and sensor feedback loops.
+* **Highlights:** Built autonomous embedded robotic platforms capable of real-time environmental navigation, obstacle detection, and precise actuation under tight hardware constraints.
+
+### MAK Attack Autonomous Mechatronic System
+
+**Timeline:** Winter 2012 | **Role:** Systems Engineer, Programming Lead & Circuit Debugger | **Tech Stack:** PIC32 Microcontroller, C, Hierarchical State Machines, IR Sensors, Op-Amp Filters, PWM Motor Control, SolidWorks
+
+In **CMPE-118 Introduction to Mechatronics** at UC Santa Cruz, my team (Matthew Luxton, Kyle Huey, and I) designed, constructed, and programmed **MAK Attack**—an autonomous mobile robot built to solve real-time arena navigation and object manipulation challenges under strict operational deadlines.
+
+![The MAK Attack autonomous mobile robot platform, highlighting optical sensors, bumper switches, and custom motor drive electronics.](/assets/research/report-ce118-mechatronics/mak_attack_robot.png#max-w-2xl)
+
+#### Project Overview & Core Requirements
+
+Designed and engineered an 11" x 11" x 11" fully autonomous robot programmed to navigate an 8' x 8' competitive course, locate and engage an opponent island via infrared beacons, deploy a mechanical projectile system, and return safely to the home island.
+
+#### Engineering Design & Implementation
+
+##### 1. Software Architecture & Control Systems
+
+  * **Hierarchical Finite State Machine (FSM)**: Architected and programmed a complex control structure featuring modular sub-state machines (e.g., dedicated centering algorithms and localized sensor-sampling logic).
+
+![Hierarchical event-driven state machine architecture governing autonomous robot behavior during arena trials.](/assets/research/report-ce118-mechatronics/hierarchical_state_machine.png#max-w-2xl#tall#contain)
+
+  * **Ambient-Resilient Event Detection**: Developed a differential sampling state machine for the robot’s IR tape sensors. By capturing active and passive states sequentially, the software calculated ambient light deltas to stabilize detection thresholds under variable environmental lighting.
+  * **Adaptive Battery Voltage Scaling**: Engineered an algorithmic solution to address supply fluctuations (from a 14.4V dual-battery series configuration). Built continuous PWM duty-cycle scaling code utilizing a 10-bit ADC reference to normalize motor outputs relative to a steady 12V operational baseline, ensuring consistent maneuverability and projectile power.
+
+##### 2. Hardware & Electrical Engineering
+
+  * **Mixed-Signal Circuit Debugging**: Led the integration, isolation, and validation of the robot's sensory circuits, including high-pass and low-pass trans-resistive op-amp filter stages to clean noisy phototransistor signals.
+  * **Sensor & Actuator Integration**: Successfully implemented an active-high IR beacon-tracking filter, basic binary bump-sensor networks, a high-current H-bridge driver circuit, and dedicated TIP122 Darlington transistor circuits to govern mechanical subsystems.
+
+##### 3. Mechanical Design Strategy
+
+  * **Modular Parametric Chassis**: Participated in the collaborative design of a modular CAD framework in SolidWorks. The architecture isolated structural power distribution and drive elements from specialized operational modules, simplifying physical debugging and enabling efficient on-the-fly hardware replacement.
+  * **Servo-Driven Launching Mechanism**: Integrated dual high-velocity toy motors paired with a high-torque servo-actuated feeding mechanism to sequentially chamber and discharge ping-pong projectiles at target vectors.
+
+#### Key Results & Engineering Takeaways
+
+  * **Integration-Driven Development**: Successfully mitigated integration bottlenecks by designing testing harnesses and sub-assembly code in parallel with mechanical builds throughout a 5-week integration runway.
+  * **High-Precision Target Acquisition**: Achieved exceptional accuracy with the projectile launcher, consistently landing multiple impacts on target by relying on dynamic software thresholding to counter complex external ambient light interference.
+  * **Agile Problem Solving**: Overcame a critical, late-stage failure of the robot's primary micro-servos by adapting the physical chassis to house robust, larger-scale servos and utilizing custom ground shielding around signaling lines to eliminate high-current motor noise.
+
+#### Downloads
+
+- 📄 [Download Mechatronics Lab Report (PDF)](https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_ce118.pdf)
+
+#### System & Component Gallery
+
+![MAK Attack Front View | MAK Attack Autonomous Robot Assembly](/assets/research/undergraduate-projects/ce118-001.webp#aspect-4/3#object-cover) ![Sensory & Signal Processing Circuits | Sensory and Signal Processing Circuitry](/assets/research/undergraduate-projects/ce118-007.webp#aspect-4/3#object-cover)
+
+![Chassis Interior | Top-Down Chassis Interior](/assets/research/undergraduate-projects/ce118-008.webp#aspect-4/3#object-cover) ![Chassis SolidWorks Design | CAD Chassis Model & Structural Layout](/assets/research/undergraduate-projects/ce118-009.webp#aspect-4/3#object-cover)
+
+![Complete System Setup | Complete System with Sensor Array](/assets/research/undergraduate-projects/ce118-010.webp#aspect-4/3#object-cover#max-w-2xl)
+
+---
+
+## Standalone Embedded Hardware Projects
+
+* **Focus:** Interactive embedded hardware, custom firmware state machines, and resource-constrained peripheral control.
+* **Highlights:** Developed portable arcade-style embedded hardware projects powered by standalone microcontrollers, featuring custom multiplexed matrix displays, debounced user inputs, and responsive gameplay logic.
+
+### Microcontroller-Based LED Ring Reaction Game for UCSC Engineering Week
+
+**Timeline:** February 2012 | **Role:** Embedded Hardware Developer (Team with Nathan Abercrombie & Julian Dahan) | **Tech Stack:** Microcontroller, C, LED Output Multiplexing, Analog Input Sensing, Serial Communications
+
+We created this interactive arcade game for the Tau Beta Pi student organization during Engineering Week at UC Santa Cruz in February 2012. Built by Ariel Anders, Nathan Abercrombie, and Julian Dahan, the game challenges players to press a large button and stop a fast-moving light on a specific target LED.
+
+We wired an array of 28 individual LEDs across digital output pins 22 through 49. The code lights up one LED at a time with a quick 10ms delay, making the light look like it is spinning in a continuous circle. The game button connects to an analog input pin (A0). The microcontroller constantly reads this pin, and when the button press drops the reading below our set threshold of 500, the movement loop stops completely. This freezes the light, sends the final score data through a 9600 baud Serial pipeline, and keeps the game at the end screen until you press reset to play again.
+
+[![Microcontroller-Based LED Ring Reaction Game hardware loops. | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=p1W5xtdLUWk#no-embed](/assets/research/undergraduate-projects/led_game.gif#max-w-2xl)](https://www.youtube.com/watch?v=p1W5xtdLUWk#no-embed)
+
+---
+
+## Technical Summary & Core Takeaways
+
+These undergraduate endeavors established my core engineering methodology across:
+- **Embedded C & Microcontrollers:** Low-level register configuration, interrupt-driven I/O, and serial protocols.
+- **Mechatronics Integration:** Interfacing analog sensors, shaft encoders, DC motors, and stepper drivers.
+- **Real-Time Control:** PID feedback loops, finite state machine architectures, and hardware-in-the-loop debugging.
+
+---
+
+## Document: VersionTruth: Eliminating Version Hallucinations in Agentic CI (versiontruth)
+When LLMs and autonomous coding agents edit software repositories, they frequently suffer from **out-of-distribution version hallucinations**: when an agent encounters a version tag newer than its training cutoff (for example, `actions/checkout@v6`), it often assumes the tag is invalid and silently downgrades it to an older, cached version (such as `v4`) — a subtle regression that's easy to miss in review.
+
+To eliminate this failure mode, I built and submitted **VersionTruth** at **NandaHack** (MIT Media Lab's agentic-AI hackathon) — a live ground-truth lookup service paired with a standardized `SKILL.md` that lets coding agents verify dependency versions against official registries *before* writing changes.
+
+![VersionTruth Solution](/images/studies/AI_Version_Hallucination_Solution.webp)
+
+VersionTruth operates as an out-of-band ground-truth oracle for AI coding assistants. Instead of trusting its own training data for "is this version real," the agent asks VersionTruth's API, which checks the live upstream registry.
+
+```http
+GET /api/latest-version?ecosystem=gh-action&name=actions/checkout HTTP/1.1
+Host: boomtick.blog
+
+200 OK
+{ "ecosystem": "gh-action", "name": "actions/checkout", "latest": "v6.0.1" }
+```
+
+## Root Cause Incident: The Out-of-Distribution Downgrade
+
+The pattern repeats across three surfaces in modern repositories:
+
+- `package.json` dependency versions
+- `.nvmrc` / `.node-version` / `engines.node`
+- `.github/workflows/*.yml` `uses:` pins
+
+In every case, the failure is the same: an agent's internal sense of "the latest version I know about" silently overrides what's actually true right now.
+
+The catalyst for VersionTruth was a recurring failure in agentic code review workflows. When deploying targeted reviewer agents—designed for low token usage, minimal context, and fast execution—both primary coding and reviewer agents confidently recommended downgrading `actions/checkout` to `@v4`.
+
+For historical context, `v4.1.0` was released in September 2023, while `v5.0.1` launched in November 2025, and subsequent stable releases reached `v7.0.0`.
+
+![AI incorrectly flagging v6 as invalid and suggesting a downgrade to v4](/images/studies/ai-incorrect-v4-suggestion.webp)
+
+This represents a classic out-of-distribution data error. The models encountered version tags (e.g., `v6`) released after their training cutoffs. Lacking real-time registry access, they hallucinated that the unfamiliar version was invalid and suggested reverting to the latest version present in their training data.
+
+
+This failure was not isolated to lightweight models like `gpt-4o-mini`. Testing confirmed that larger reasoning models, including Gemini 3.1 Pro, exhibited the exact same regression behavior, falsely identifying `v4` as the latest stable major release.
+
+
+![GitHub Releases showing v7.0.0, confirming versions beyond v4 are stable](/images/studies/github-checkout-v7-release.webp)
+
+While Agentic DevAI increases engineering velocity, this incident highlights the critical need for deterministic, external validation when handling dynamic infrastructure dependencies.
+
+## The Solution: VersionTruth Architecture
+
+Instead of just diagnosing the failure mode, I packaged the live-registry-lookup logic as a small public API called VersionTruth, along with a hosted `SKILL.md` that tells any agent how to use it. The instruction to the agent is deliberately blunt: if you don't recognize a version string, that's a reason to *check*, not a reason to *revert*. Unfamiliarity isn't evidence of error.
+
+![VersionTruth Solution Architecture](/images/studies/AI_Version_Hallucination_Solution.webp)
+
+The API lives as serverless functions sitting next to an existing Vite SPA—operating with zero changes to primary application codebases.
+
+
+
+```mermaid
+sequenceDiagram
+    autonumber
+
+    actor Agent as AI Coding Agent (Jules / Claude)
+    participant Skill as SKILL.md Specification
+    participant API as VersionTruth API (Vercel Edge)
+    participant Reg as Upstream Registry (npm / GitHub / Node)
+
+    Agent->>Skill: Reads tool definition & endpoints
+    activate Skill
+    Skill-->>Agent: Returns schema & parameters
+    deactivate Skill
+
+    Agent->>+API: GET /api/compare-version (ecosystem=gh-action, candidate=v4)
+
+    API->>+Reg: Fetches real-time releases & tags
+    Reg-->>-API: Returns latest tagged release (v6.0.1)
+
+    API-->>-Agent: 200 OK: candidate="v4", latest="v6.0.1", isOutdated=true
+
+    Agent->>Agent: Retains v6 instead of hallucinated downgrade
+```
+
+
+---
+
+Developers can interactively test the live API and explore the skill definition at [https://boomtick.blog/versiontruth](https://boomtick.blog/versiontruth).
+
+## API & Tool Specification
+
+VersionTruth exposes lightweight HTTP endpoints that accept ecosystem queries and return structured status metadata.
+
+### 1. Latest Version Query
+
+```http
+GET /api/latest-version?ecosystem=gh-action&name=actions/checkout HTTP/1.1
+Host: boomtick.blog
+```
+
+**Response (`200 OK`):**
+```json
+{
+  "ecosystem": "gh-action",
+  "name": "actions/checkout",
+  "latest": "v6.0.1",
+  "updatedAt": "2026-07-08T12:00:00Z"
+}
+```
+
+### 2. Candidate Version Comparison
+
+```http
+GET /api/compare-version?ecosystem=gh-action&name=actions/checkout&candidate=v4 HTTP/1.1
+Host: boomtick.blog
+```
+
+**Response (`200 OK`):**
+```json
+{
+  "candidate": "v4",
+  "latest": "v6.0.1",
+  "isOutdated": true,
+  "isDeprecated": false,
+  "recommendation": "Do not downgrade. v6.0.1 is valid and current."
+}
+```
+
+---
+
+## Step-by-Step Reproduction & Agent Integration Guide
+
+Follow this guide to integrate VersionTruth into your own agentic dev pipeline or AI review agent context.
+
+### Step 1: Add the SKILL.md Definition
+
+In your repository's `.github/skills/versiontruth.md` or system prompt configuration, include the tool directive:
+
+```markdown
+# VersionTruth Agent Skill
+
+When editing dependency files (`package.json`, `.node-version`, GitHub Actions workflows),
+ALWAYS check candidate versions before reverting unfamiliar version strings.
+
+- Oracle API: `https://boomtick.blog/api/compare-version`
+- Ecosystems supported: `npm`, `node`, `gh-action`
+
+Rule: Unfamiliarity is NOT evidence of hallucination.
+If a version exceeds your training context cut-off, query VersionTruth first.
+```
+
+### Step 2: Implement the Deterministic Backstop in CI
+
+Combine the pre-edit agent skill with an explicit post-edit CI check script (`scripts/verify_versions.py`):
+
+```python
+import sys
+import requests
+
+def verify_action_version(action_name, candidate_version):
+    url = (
+        "https://boomtick.blog/api/compare-version"
+        f"?ecosystem=gh-action&name={action_name}&candidate={candidate_version}"
+    )
+    res = requests.get(url, timeout=5).json()
+    if res.get("isOutdated"):
+        print(
+            f"⚠️ Warning: {action_name}@{candidate_version} is outdated.\n"
+            f"Real latest is {res.get('latest')}"
+        )
+        return False
+    return True
+
+if __name__ == "__main__":
+    valid = verify_action_version("actions/checkout", "v4")
+    if not valid:
+        sys.exit(1)
+```
+### What's Next: Handling EOL and Deprecation
+
+While preventing out-of-distribution downgrades is the immediate fix, the next evolution of VersionTruth will address the opposite problem: agents confidently recommending versions that have reached End-of-Life (EOL) or have been explicitly deprecated by maintainers.
+
+Future iterations of the `/api/compare-version` endpoint will expand its upstream registry integrations to query vulnerability databases and deprecation metadata, allowing the `isDeprecated` flag to proactively guide agents away from unmaintained branches (like Node 18) towards current LTS releases.
+
+---
