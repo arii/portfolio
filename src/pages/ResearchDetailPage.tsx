@@ -331,7 +331,8 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
   const firstImage = imgMatch ? imgMatch[1].split('#')[0] : undefined;
   const ogImage = firstImage || matchingTool?.image;
 
-  const primarySection = (post.category || '').toLowerCase().includes('robotics') ? 'research' : 'devai';
+  const researchOnlySlugs = ['bwsi-racecar', 'delivery-bots', 'leac-monitoring-software', 'light-therapy-mit', 'boop-light-detector', 'autonomous-drone-line-following'];
+  const primarySection = ((post.category || '').toLowerCase().includes('robotics') || researchOnlySlugs.includes(post.slug)) ? 'research' : 'devai';
 
   const isScholarly =
     primarySection === 'research' ||
