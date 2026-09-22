@@ -178,7 +178,7 @@ export function generateSitemap() {
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${uniqueEntries
   .map((e) => {
-    let xml = `  <url>\n    <loc>${e.url}</loc>\n    <lastmod>${e.lastmod}</lastmod>`;
+    let xml = `  <url>\n    <loc>${e.url}</loc>`;
     if (e.images && e.images.length > 0) {
       for (const img of e.images) {
         xml += `\n    <image:image>
