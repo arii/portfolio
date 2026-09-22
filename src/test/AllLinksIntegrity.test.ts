@@ -7,7 +7,7 @@ describe('All Links Integrity on /devai and /research', () => {
   it('all /devai flagship canonical paths resolve to valid research posts', () => {
     for (const tool of DEVAI_FLAGSHIPS) {
       if (tool.canonicalPath) {
-        const slug = tool.canonicalPath.replace(/^\/?(devai|research)\//, '').replace(/^\//, '');
+        const slug = tool.canonicalPath.replace(/^\/?(devai|research)\//, '').replace(/^\//, '').replace(/\/+$/, '');
         const post = getResearchPostBySlug(slug);
         expect(post, `Expected markdown post for slug: ${slug} (tool: ${tool.id})`).toBeDefined();
         expect(post?.content.length).toBeGreaterThan(50);
@@ -44,7 +44,7 @@ describe('All Links Integrity on /devai and /research', () => {
   it('all /research thesis tools have valid canonical paths and markdown posts', () => {
     for (const tool of RESEARCH_THESIS) {
       if (tool.canonicalPath) {
-        const slug = tool.canonicalPath.replace(/^\/?(devai|research)\//, '').replace(/^\//, '');
+        const slug = tool.canonicalPath.replace(/^\/?(devai|research)\//, '').replace(/^\//, '').replace(/\/+$/, '');
         const post = getResearchPostBySlug(slug);
         expect(post, `Expected markdown post for slug: ${slug} (tool: ${tool.id})`).toBeDefined();
         expect(post?.content.length).toBeGreaterThan(50);
@@ -55,7 +55,7 @@ describe('All Links Integrity on /devai and /research', () => {
   it('all /research autonomous tools have valid canonical paths and markdown posts', () => {
     for (const tool of RESEARCH_AUTONOMOUS) {
       if (tool.canonicalPath) {
-        const slug = tool.canonicalPath.replace(/^\/?(devai|research)\//, '').replace(/^\//, '');
+        const slug = tool.canonicalPath.replace(/^\/?(devai|research)\//, '').replace(/^\//, '').replace(/\/+$/, '');
         const post = getResearchPostBySlug(slug);
         expect(post, `Expected markdown post for slug: ${slug} (tool: ${tool.id})`).toBeDefined();
         expect(post?.content.length).toBeGreaterThan(50);

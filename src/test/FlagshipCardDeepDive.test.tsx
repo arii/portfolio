@@ -68,10 +68,10 @@ describe('FlagshipCard Deep-Dive Linking', () => {
   it('renders "Deep-Dive" and "Live Demo" for hrm-flagship and navigates correctly', () => {
     const hrmTool = flagshipTools.find((t) => t.id === 'hrm-flagship');
     expect(hrmTool).toBeDefined();
-    expect(hrmTool?.canonicalPath).toBe('/devai/hrm-architecture');
+    expect(hrmTool?.canonicalPath).toBe('/devai/hrm-architecture/');
     expect(hrmTool?.externalUrl).toBe('https://arii.github.io/hrm/');
 
-    verifyDeepDiveNavigation(hrmTool, '/devai/hrm-architecture', 'hrm-architecture');
+    verifyDeepDiveNavigation(hrmTool, '/devai/hrm-architecture/', 'hrm-architecture');
 
     // Also verify Live Demo external link button
     const handleNavigate = vi.fn();

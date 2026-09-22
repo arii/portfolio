@@ -47,5 +47,6 @@ export const getAllResearchPosts = (): ResearchPost[] => {
 };
 
 export const getResearchPostBySlug = (slug: string): ResearchPost | undefined => {
-  return RESEARCH_POSTS.find((post) => post.slug === slug);
+  const cleanSlug = slug.replace(/^\/?(devai|research)\//, '').replace(/^\//, '').replace(/\/+$/, '');
+  return RESEARCH_POSTS.find((post) => post.slug === cleanSlug);
 };

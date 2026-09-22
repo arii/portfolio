@@ -23,7 +23,7 @@ describe('HRM Architecture & Navigation Integration', () => {
   it('hrm-flagship has correct canonicalPath and externalUrl', () => {
     const hrm = flagshipTools.find((t) => t.id === 'hrm-flagship');
     expect(hrm).toBeDefined();
-    expect(hrm?.canonicalPath).toBe('/devai/hrm-architecture');
+    expect(hrm?.canonicalPath).toBe('/devai/hrm-architecture/');
     expect(hrm?.externalUrl).toBe('https://arii.github.io/hrm/');
     expect(hrm?.sourceUrl).toBe('https://github.com/arii/hrm');
     expect(hrm?.externalLinkDisplayLabel).toBe('Live Demo');

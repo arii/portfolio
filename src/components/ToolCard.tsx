@@ -104,7 +104,7 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
   if (isClickable) {
     if (tool.canonicalPath) {
       const isInternal = tool.canonicalPath.startsWith('/research/') || tool.canonicalPath.startsWith('/devai/');
-      const targetSlug = isInternal ? tool.canonicalPath.replace(/^\/?(research|devai)\//, '').replace(/^\//, '') : tool.canonicalPath;
+      const targetSlug = isInternal ? tool.canonicalPath.replace(/^\/?(research|devai)\//, '').replace(/^\//, '').replace(/\/+$/, '') : tool.canonicalPath;
 
       return (
         <div
