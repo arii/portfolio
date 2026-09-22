@@ -16,6 +16,10 @@ inputs:
     description: 'Max number of AI review comment updates before skipping'
     required: false
     default: '3'
+  max_ai_reviews:
+    description: 'Max number of AI reviews allowed per PR'
+    required: false
+    default: '10'
 
 runs:
   using: 'composite'
@@ -125,6 +129,7 @@ runs:
         GEMINI_API_KEY: ${{ inputs.gemini_api_key }}
         JULES_API_KEY: ${{ inputs.jules_api_key }}
         PR_NUMBER: ${{ github.event.pull_request.number }}
+        MAX_AI_REVIEWS: ${{ inputs.max_ai_reviews || inputs.max_reviews || '10' }}
       run: |
         docker run --rm \
           --entrypoint /github/workspace/scripts/resolve-cli.sh \
@@ -133,6 +138,7 @@ runs:
           -e GEMINI_API_KEY="${GEMINI_API_KEY}" \
           -e JULES_API_KEY="${JULES_API_KEY}" \
           -e PR_NUMBER="${PR_NUMBER}" \
+          -e MAX_AI_REVIEWS="${MAX_AI_REVIEWS}" \
           -v "${{ github.workspace }}":/github/workspace \
           -w /github/workspace \
           ghcr.io/arii/boomtick:latest \
