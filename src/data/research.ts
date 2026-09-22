@@ -31,7 +31,7 @@ export const RESEARCH_POSTS: ResearchPost[] = Object.entries(modules).map(([path
     date: String(data.date || ''),
     readingTime: data.readTime ? `${data.readTime} min read` : '5 min read',
     tags: Array.isArray(data.tags) ? data.tags : [],
-    summary: String(data.excerpt || data.summary || ''),
+    summary: String(data.excerpt || data.summary || data.snippet || ''),
     content: content.trim(),
     category: String(data.category || 'DevAI'),
     author: String(data.author || 'Ariel Anders'),

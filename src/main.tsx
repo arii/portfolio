@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, Navigate } from 'react-router-dom';
+import { createBrowserRouter, Navigate, useParams } from 'react-router-dom';
 import App from '@/App';
 import Layout from '@/components/Layout';
 import Home from '@/pages/Home';
@@ -9,6 +9,16 @@ import { registerServiceWorker } from '@/registerServiceWorker';
 import '@/index.css';
 
 registerServiceWorker();
+
+const DevAIDoubleRedirect: React.FC = () => {
+  const { slug } = useParams<{ slug?: string }>();
+  return <Navigate to={slug ? `/devai/${slug}` : '/devai'} replace />;
+};
+
+const ResearchDoubleRedirect: React.FC = () => {
+  const { slug } = useParams<{ slug?: string }>();
+  return <Navigate to={slug ? `/research/${slug}` : '/research'} replace />;
+};
 
 const lazyLoad = (importFn: () => Promise<{ default: React.ComponentType<any> }>) => {
   const Component = lazy(importFn);
@@ -64,12 +74,20 @@ const routes = [
         element: lazyLoad(() => import('@/pages/DevAI')),
       },
       {
+        path: 'devai/devai/:slug',
+        element: <DevAIDoubleRedirect />,
+      },
+      {
         path: 'research',
         element: lazyLoad(() => import('@/pages/Research')),
       },
       {
         path: 'research/:slug',
         element: lazyLoad(() => import('@/pages/Research')),
+      },
+      {
+        path: 'research/research/:slug',
+        element: <ResearchDoubleRedirect />,
       },
       {
         path: 'resume',

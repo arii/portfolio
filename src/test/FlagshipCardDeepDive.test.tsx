@@ -64,4 +64,20 @@ describe('FlagshipCard Deep-Dive Linking', () => {
     impactTool.sourceUrl = undefined;
     verifyDeepDiveNavigation(impactTool, '/research/deployment-impact-analyzer', 'deployment-impact-analyzer');
   });
+
+  it('renders "Deep-Dive" and "Live Demo" for hrm-flagship and navigates correctly', () => {
+    const hrmTool = flagshipTools.find((t) => t.id === 'hrm-flagship');
+    expect(hrmTool).toBeDefined();
+    expect(hrmTool?.canonicalPath).toBe('/devai/hrm-architecture');
+    expect(hrmTool?.externalUrl).toBe('https://arii.github.io/hrm/');
+
+    verifyDeepDiveNavigation(hrmTool, '/devai/hrm-architecture', 'hrm-architecture');
+
+    // Also verify Live Demo external link button
+    const handleNavigate = vi.fn();
+    render(<FlagshipCard tool={hrmTool!} onNavigate={handleNavigate} onImageClick={() => {}} />);
+    const liveDemoLink = screen.getAllByRole('link', { name: /Live Demo/i })[0];
+    expect(liveDemoLink).toBeInTheDocument();
+    expect(liveDemoLink).toHaveAttribute('href', 'https://arii.github.io/hrm/');
+  });
 });

@@ -103,19 +103,19 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
 
   if (isClickable) {
     if (tool.canonicalPath) {
-      const isResearch = tool.canonicalPath.startsWith('/research/');
-      const targetSlug = isResearch ? tool.canonicalPath.replace('/research/', '') : tool.canonicalPath;
+      const isInternal = tool.canonicalPath.startsWith('/research/') || tool.canonicalPath.startsWith('/devai/');
+      const targetSlug = isInternal ? tool.canonicalPath.replace(/^\/?(research|devai)\//, '').replace(/^\//, '') : tool.canonicalPath;
 
       return (
         <div
-          onClick={() => isResearch ? onNavigate(targetSlug) : window.open(targetSlug, '_blank', 'noopener,noreferrer')}
+          onClick={() => isInternal ? onNavigate(targetSlug) : window.open(targetSlug, '_blank', 'noopener,noreferrer')}
           className="block outline-none cursor-pointer"
           role="button"
           tabIndex={0}
           onKeyDown={(e) => {
             if (e.key === 'Enter' || e.key === ' ') {
               if (e.key === ' ') e.preventDefault();
-              isResearch ? onNavigate(targetSlug) : window.open(targetSlug, '_blank', 'noopener,noreferrer');
+              isInternal ? onNavigate(targetSlug) : window.open(targetSlug, '_blank', 'noopener,noreferrer');
             }
           }}
         >
