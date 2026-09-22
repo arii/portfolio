@@ -4,30 +4,30 @@ import { ResearchPost } from '@/types/research';
 
 export interface ResearchCardProps {
   post: ResearchPost;
-  onSelect: (slug: string) => void;
+  onSelect?: (slug: string) => void;
+  basePath?: string;
 }
 
-const ResearchCard: React.FC<ResearchCardProps> = ({ post, onSelect }) => {
-  const handleClick = () => {
-    onSelect(post.slug);
-  };
+const ResearchCard: React.FC<ResearchCardProps> = ({ post, onSelect, basePath }) => {
+  const isRobotics = (post.category || '').toLowerCase().includes('robotics');
+  const pathPrefix = basePath || (isRobotics ? '/research' : '/devai');
+  const targetPath = `${pathPrefix}/${post.slug}`;
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' || e.key === ' ') {
+  const handleClick = (e: React.MouseEvent) => {
+    if (onSelect && !e.metaKey && !e.ctrlKey) {
       e.preventDefault();
       onSelect(post.slug);
     }
   };
 
   return (
-    <article
-      onClick={handleClick}
-      onKeyDown={handleKeyDown}
-      tabIndex={0}
-      role="button"
-      className="group flex flex-col justify-between rounded-xl border border-border bg-card hover:bg-muted/50 p-6 shadow-sm transition-all hover:border-primary/50 hover:shadow-md cursor-pointer overflow-hidden text-foreground"
-    >
-      <div className="flex-grow flex flex-col justify-between">
+    <article className="group flex flex-col justify-between rounded-xl border border-border bg-card hover:bg-muted/50 p-6 shadow-sm transition-all hover:border-primary/50 hover:shadow-md overflow-hidden text-foreground">
+      <a
+        href={targetPath}
+        onClick={handleClick}
+        className="flex-grow flex flex-col justify-between no-underline text-inherit block outline-none cursor-pointer"
+        aria-label={`Read article: ${post.title}`}
+      >
         <div>
           <div className="flex flex-wrap gap-2 mb-3">
             {post.tags.slice(0, 3).map((tag) => (
@@ -65,7 +65,7 @@ const ResearchCard: React.FC<ResearchCardProps> = ({ post, onSelect }) => {
           </div>
           <ArrowRight className="h-4 w-4 text-primary transition-transform group-hover:translate-x-1" />
         </div>
-      </div>
+      </a>
     </article>
   );
 };

@@ -9,6 +9,26 @@ const SITE_URL = 'https://arii.github.io';
 const PUBLIC_DIR = path.resolve(__dirname, '../public');
 const CONTENT_DIR = path.resolve(__dirname, '../src/content/research');
 const LICENSE_URL = 'https://creativecommons.org/licenses/by-nc-nd/4.0/';
+import { execSync } from 'node:child_process';
+
+function getLastMod(filePath, fallbackDate) {
+  try {
+    if (filePath && fs.existsSync(filePath)) {
+      const gitDate = execSync(`git log -1 --format="%cI" -- "${filePath}"`, {
+        encoding: 'utf-8',
+        stdio: ['pipe', 'pipe', 'ignore'],
+      }).trim();
+      if (gitDate) {
+        return gitDate.split('T')[0];
+      }
+      const stat = fs.statSync(filePath);
+      return stat.mtime.toISOString().split('T')[0];
+    }
+  } catch (e) {
+    // ignore git error and fallback
+  }
+  return fallbackDate || new Date().toISOString().split('T')[0];
+}
 
 function parseFrontmatterTitle(content) {
   const match = content.match(/^---\r?\n([\s\S]+?)\r?\n---/);
@@ -120,15 +140,22 @@ export function generateSitemap() {
     license: LICENSE_URL,
   };
 
-  // Core Canonical Pages
-  const corePages = ['/', '/devai/', '/research/', '/about/', '/resume/'];
+  // Core Canonical Pages with dynamic lastmod based on source files
+  const corePages = [
+    { path: '/', file: path.resolve(__dirname, '../src/pages/Home.tsx') },
+    { path: '/devai/', file: path.resolve(__dirname, '../src/pages/DevAIListPage.tsx') },
+    { path: '/research/', file: path.resolve(__dirname, '../src/pages/ResearchListPage.tsx') },
+    { path: '/about/', file: path.resolve(__dirname, '../src/pages/About.tsx') },
+    { path: '/resume/', file: path.resolve(__dirname, '../src/pages/Resume.tsx') },
+  ];
 
-  for (const pagePath of corePages) {
-    const url = `${SITE_URL}${pagePath.startsWith('/') ? '' : '/'}${pagePath}`;
-    const images = (pagePath === '/' || pagePath === '/about/' || pagePath === '/about') ? [heroPortrait] : [];
+  for (const page of corePages) {
+    const url = `${SITE_URL}${page.path.startsWith('/') ? '' : '/'}${page.path}`;
+    const images = (page.path === '/' || page.path === '/about/' || page.path === '/about') ? [heroPortrait] : [];
+    const lastmod = getLastMod(page.file, today);
     entries.push({
       url,
-      lastmod: today,
+      lastmod,
       images,
     });
   }
@@ -142,7 +169,8 @@ export function generateSitemap() {
       const filePath = path.join(CONTENT_DIR, file);
       const content = fs.readFileSync(filePath, 'utf-8');
       const articleTitle = parseFrontmatterTitle(content);
-      const lastmod = parseFrontmatterDate(content);
+      const fmDate = parseFrontmatterDate(content);
+      const lastmod = getLastMod(filePath, fmDate);
       const category = parseFrontmatterCategory(content);
 
       const researchOnlySlugs = ['bwsi-racecar', 'delivery-bots', 'leac-monitoring-software', 'light-therapy-mit', 'boop-light-detector', 'autonomous-drone-line-following'];
@@ -178,7 +206,7 @@ export function generateSitemap() {
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${uniqueEntries
   .map((e) => {
-    let xml = `  <url>\n    <loc>${e.url}</loc>`;
+    let xml = `  <url>\n    <loc>${e.url}</loc>\n    <lastmod>${e.lastmod}</lastmod>`;
     if (e.images && e.images.length > 0) {
       for (const img of e.images) {
         xml += `\n    <image:image>

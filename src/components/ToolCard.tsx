@@ -4,7 +4,7 @@ import SafeImage from '@/components/ui/SafeImage';
 
 interface ToolCardProps {
   tool: ResearchTool;
-  onNavigate: (slug: string) => void;
+  onNavigate?: (slug: string) => void;
 }
 
 const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
@@ -12,6 +12,7 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
 
   const handleParentClick = (e: React.MouseEvent) => {
     e.stopPropagation();
+    e.preventDefault();
     const el = document.getElementById('flagship');
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
@@ -107,24 +108,29 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
       const targetSlug = isInternal ? tool.canonicalPath.replace(/^\/?(research|devai)\//, '').replace(/^\//, '').replace(/\/+$/, '') : tool.canonicalPath;
 
       return (
-        <div
-          onClick={() => isInternal ? onNavigate(targetSlug) : window.open(targetSlug, '_blank', 'noopener,noreferrer')}
-          className="block outline-none cursor-pointer"
-          role="button"
-          tabIndex={0}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              if (e.key === ' ') e.preventDefault();
-              isInternal ? onNavigate(targetSlug) : window.open(targetSlug, '_blank', 'noopener,noreferrer');
+        <a
+          href={tool.canonicalPath}
+          onClick={(e) => {
+            if (isInternal && onNavigate && !e.metaKey && !e.ctrlKey) {
+              e.preventDefault();
+              onNavigate(targetSlug);
             }
           }}
+          target={isInternal ? undefined : '_blank'}
+          rel={isInternal ? undefined : 'noopener noreferrer'}
+          className="block outline-none cursor-pointer no-underline text-inherit"
         >
           {content}
-        </div>
+        </a>
       );
     } else if (tool.externalUrl) {
       return (
-        <a href={tool.externalUrl} target="_blank" rel="noopener noreferrer" className="block outline-none">
+        <a
+          href={tool.externalUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block outline-none cursor-pointer no-underline text-inherit"
+        >
           {content}
         </a>
       );
