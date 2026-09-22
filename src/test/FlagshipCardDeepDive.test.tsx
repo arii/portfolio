@@ -62,7 +62,7 @@ describe('FlagshipCard Deep-Dive Linking', () => {
     const impactTool = { ...systemTools.find((t) => t.id === 'deployment-impact-analyzer')! };
     impactTool.externalUrl = undefined;
     impactTool.sourceUrl = undefined;
-    verifyDeepDiveNavigation(impactTool, '/research/deployment-impact-analyzer', 'deployment-impact-analyzer');
+    verifyDeepDiveNavigation(impactTool, '/research/deployment-impact-analyzer/', 'deployment-impact-analyzer');
   });
 
   it('renders "Deep-Dive" and "Live Demo" for hrm-flagship and navigates correctly', () => {

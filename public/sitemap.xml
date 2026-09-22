@@ -12,13 +12,13 @@
     </image:image>
   </url>
   <url>
-    <loc>https://arii.github.io/devai</loc>
+    <loc>https://arii.github.io/devai/</loc>
   </url>
   <url>
-    <loc>https://arii.github.io/research</loc>
+    <loc>https://arii.github.io/research/</loc>
   </url>
   <url>
-    <loc>https://arii.github.io/about</loc>
+    <loc>https://arii.github.io/about/</loc>
     <image:image>
       <image:loc>https://arii.github.io/assets/roboticist.jpg</image:loc>
       <image:title>Ariel Anders, PhD - AI &amp; Robotics Engineer</image:title>
@@ -27,10 +27,10 @@
     </image:image>
   </url>
   <url>
-    <loc>https://arii.github.io/resume</loc>
+    <loc>https://arii.github.io/resume/</loc>
   </url>
   <url>
-    <loc>https://arii.github.io/devai/ai-experiments</loc>
+    <loc>https://arii.github.io/devai/ai-experiments/</loc>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/ai-experiments/wcs-scraper.png</image:loc>
       <image:title>AI Experiments (In Progress)</image:title>
@@ -51,7 +51,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://arii.github.io/research/boop-light-detector</loc>
+    <loc>https://arii.github.io/research/boop-light-detector/</loc>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/app_testing.jpg</image:loc>
       <image:title>Boop Light Detector App</image:title>
@@ -60,7 +60,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://arii.github.io/research/bwsi-racecar</loc>
+    <loc>https://arii.github.io/research/bwsi-racecar/</loc>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/bw.jpg</image:loc>
       <image:title>BeaverWorks Summer Institute (RACECAR)</image:title>
@@ -99,7 +99,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://arii.github.io/research/cad-cam-dental-workflow</loc>
+    <loc>https://arii.github.io/research/cad-cam-dental-workflow/</loc>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/dental.jpg</image:loc>
       <image:title>CAD/CAM Robotic Dental Crowning Workflow</image:title>
@@ -162,7 +162,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://arii.github.io/research/conformant-planning-manipulation</loc>
+    <loc>https://arii.github.io/research/conformant-planning-manipulation/</loc>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/phd/icra_presentation.gif</image:loc>
       <image:title>Reliably Arranging Objects: Conformant Planning</image:title>
@@ -237,7 +237,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://arii.github.io/research/delivery-bots</loc>
+    <loc>https://arii.github.io/research/delivery-bots/</loc>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/beer.png</image:loc>
       <image:title>Delivery Bots: Multi-Robot Coordination</image:title>
@@ -252,7 +252,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://arii.github.io/devai/deployment-impact-analyzer</loc>
+    <loc>https://arii.github.io/devai/deployment-impact-analyzer/</loc>
     <image:image>
       <image:loc>https://arii.github.io/assets/studies/deployment-impact-analyzer/before.svg</image:loc>
       <image:title>Visual Impact / UX Audit</image:title>
@@ -291,7 +291,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://arii.github.io/research/duckietown</loc>
+    <loc>https://arii.github.io/research/duckietown/</loc>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/duckietown/navigation_1.gif</image:loc>
       <image:title>MIT Duckietown (Autonomous Taxi Fleet)</image:title>
@@ -318,7 +318,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://arii.github.io/devai/gitops-pr-reviewer</loc>
+    <loc>https://arii.github.io/devai/gitops-pr-reviewer/</loc>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/boomtick-devai-tools/boomtick-arch.png</image:loc>
       <image:title>Automating PR Reviews with Gemini &amp; GitHub Actions</image:title>
@@ -345,7 +345,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://arii.github.io/research/graduate-engineering-projects</loc>
+    <loc>https://arii.github.io/research/graduate-engineering-projects/</loc>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/drone_follow.gif</image:loc>
       <image:title>Graduate Engineering Projects</image:title>
@@ -378,7 +378,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://arii.github.io/devai/hrm-architecture</loc>
+    <loc>https://arii.github.io/devai/hrm-architecture/</loc>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/hrm/evolve1.webp</image:loc>
       <image:title>HRM: Real-Time Biometric Telemetry &amp; Workouts</image:title>
@@ -429,7 +429,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://arii.github.io/research/leac-monitoring-software</loc>
+    <loc>https://arii.github.io/research/leac-monitoring-software/</loc>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/leac.jpg</image:loc>
       <image:title>LEAC: Lab Energy Assessment Monitoring Software</image:title>
@@ -438,7 +438,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://arii.github.io/research/light-therapy-mit</loc>
+    <loc>https://arii.github.io/research/light-therapy-mit/</loc>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/light.jpg</image:loc>
       <image:title>Light Therapy at MIT</image:title>
@@ -447,7 +447,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://arii.github.io/research/masters-thesis</loc>
+    <loc>https://arii.github.io/research/masters-thesis/</loc>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/swag.jpg</image:loc>
       <image:title>Learning a Strategy for Whole-Arm Grasping</image:title>
@@ -522,7 +522,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://arii.github.io/research/robocon-mit</loc>
+    <loc>https://arii.github.io/research/robocon-mit/</loc>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/robocon.jpg</image:loc>
       <image:title>RoboCon MIT</image:title>
@@ -531,7 +531,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://arii.github.io/research/undergraduate-projects</loc>
+    <loc>https://arii.github.io/research/undergraduate-projects/</loc>
     <image:image>
       <image:loc>https://arii.github.io/assets/research/undergraduate-projects/flip_flop.gif</image:loc>
       <image:title>Undergraduate Engineering Projects</image:title>
@@ -606,7 +606,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://arii.github.io/devai/versiontruth</loc>
+    <loc>https://arii.github.io/devai/versiontruth/</loc>
     <image:image>
       <image:loc>https://arii.github.io/images/studies/AI_Version_Hallucination_Solution.webp</image:loc>
       <image:title>VersionTruth: Fix Version Hallucinations in CI</image:title>
