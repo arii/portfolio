@@ -29,10 +29,10 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
     : '';
 
   const executePrimaryAction = () => {
-    if (tool.canonicalPath && targetSlug) {
-      onNavigate(targetSlug);
-    } else if (tool.externalUrl) {
+    if (tool.externalUrl) {
       window.open(tool.externalUrl, '_blank', 'noopener,noreferrer');
+    } else if (tool.canonicalPath && targetSlug) {
+      onNavigate(targetSlug);
     } else if (tool.sourceUrl) {
       window.open(tool.sourceUrl, '_blank', 'noopener,noreferrer');
     }
@@ -57,6 +57,7 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
       onKeyDown={handleKeyDown}
       tabIndex={isClickable ? 0 : undefined}
       role={isClickable ? 'button' : undefined}
+      aria-label={tool.title}
       className={`group rounded-3xl border border-line bg-surface p-0 flex flex-col justify-between overflow-hidden transition-all hover:border-accent hover:shadow-glow ${
         isClickable ? 'cursor-pointer' : ''
       }`}
@@ -106,7 +107,17 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
           <div>
             <span className="text-xs text-accent font-semibold block font-sans">{tool.category}</span>
             <h3 className="text-xl font-bold text-text-main mt-1 font-display group-hover:text-accent transition-colors text-balance">
-              {tool.canonicalPath ? (
+              {tool.externalUrl ? (
+                <a
+                  href={tool.externalUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="hover:text-accent transition-colors no-underline text-inherit"
+                >
+                  {tool.title}
+                </a>
+              ) : tool.canonicalPath ? (
                 <a
                   href={tool.canonicalPath}
                   onClick={(e) => {
@@ -116,16 +127,6 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
                       onNavigate(targetSlug);
                     }
                   }}
-                  className="hover:text-accent transition-colors no-underline text-inherit"
-                >
-                  {tool.title}
-                </a>
-              ) : tool.externalUrl ? (
-                <a
-                  href={tool.externalUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e) => e.stopPropagation()}
                   className="hover:text-accent transition-colors no-underline text-inherit"
                 >
                   {tool.title}

@@ -29,9 +29,11 @@ describe('HRM Architecture & Navigation Integration', () => {
     expect(hrm?.externalLinkDisplayLabel).toBe('Live Demo');
   });
 
-  it('FlagshipCard triggers onNavigate with "hrm-architecture" (not nested /devai/devai/)', () => {
+  it('FlagshipCard card click opens live demo (https://arii.github.io/hrm/) and Deep-Dive button navigates to hrm-architecture', () => {
     const hrm = flagshipTools.find((t) => t.id === 'hrm-flagship');
     const handleNavigate = vi.fn();
+    const originalOpen = window.open;
+    window.open = vi.fn();
 
     render(
       <FlagshipCard
@@ -41,11 +43,19 @@ describe('HRM Architecture & Navigation Integration', () => {
       />
     );
 
+    // 1. Clicking the card container opens the live demo URL
+    const card = screen.getByRole('button', { name: /HRM \(Heart Rate Monitor\)/i });
+    fireEvent.click(card);
+    expect(window.open).toHaveBeenCalledWith('https://arii.github.io/hrm/', '_blank', 'noopener,noreferrer');
+    expect(handleNavigate).not.toHaveBeenCalled();
+
+    // 2. Clicking the Deep-Dive button navigates to the deep-dive slug
     const deepDiveBtn = screen.getAllByRole('button', { name: /Deep-Dive/i }).find(btn => btn.textContent?.includes('Deep-Dive'));
     expect(deepDiveBtn).toBeInTheDocument();
     fireEvent.click(deepDiveBtn!);
-
     expect(handleNavigate).toHaveBeenCalledWith('hrm-architecture');
+
+    window.open = originalOpen;
   });
 
   it('renders ResearchDetailPage for hrm-architecture with metadata and actions', () => {
