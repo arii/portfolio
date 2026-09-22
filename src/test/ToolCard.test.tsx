@@ -1,5 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import ToolCard from '@/components/ToolCard';
 import { ResearchTool } from '@/types/research';
 
@@ -19,7 +20,11 @@ describe('ToolCard Component with parentFlagship cross-linking', () => {
 
   it('renders "Part of RepoAuditor" cross-link tag when parentFlagship is provided', () => {
     const onNavigate = vi.fn();
-    render(<ToolCard tool={mockToolWithParent} onNavigate={onNavigate} />);
+    render(
+      <MemoryRouter>
+        <ToolCard tool={mockToolWithParent} onNavigate={onNavigate} />
+      </MemoryRouter>
+    );
 
     expect(screen.getByText('RepoAuditor')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /Part of RepoAuditor flagship project/i })).toBeInTheDocument();
@@ -27,7 +32,11 @@ describe('ToolCard Component with parentFlagship cross-linking', () => {
 
   it('scrolls to #flagship when "Part of RepoAuditor" tag is clicked', () => {
     const onNavigate = vi.fn();
-    render(<ToolCard tool={mockToolWithParent} onNavigate={onNavigate} />);
+    render(
+      <MemoryRouter>
+        <ToolCard tool={mockToolWithParent} onNavigate={onNavigate} />
+      </MemoryRouter>
+    );
 
     const flagshipElem = document.createElement('div');
     flagshipElem.id = 'flagship';

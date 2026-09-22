@@ -307,7 +307,7 @@ const MermaidChart = ({ codeString }: { codeString: string }) => {
 const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack }) => {
   const post = getResearchPostBySlug(slug);
   const matchingTool = RESEARCH_TOOLS.find(
-    (t) => t.id === slug || (t.canonicalPath && t.canonicalPath.replace('/research/', '') === slug)
+    (t) => t.id === slug || (t.canonicalPath && t.canonicalPath.replace(/^\/?(research|devai)\//, '').replace(/^\//, '').replace(/\/+$/, '') === slug)
   );
 
   if (!post) {

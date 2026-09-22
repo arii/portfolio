@@ -11,7 +11,7 @@ export const autonomousTools: ResearchTool[] = [
     tags: ['Robotics & autonomy', 'Computer vision', 'Lane tracking', 'ROS', 'Multi-agent', 'MIT'],
     image: '/assets/research/duckietown.jpg',
     imageAlt: 'Duckietown autonomous vehicles and inaugural MIT 2.166 class',
-    canonicalPath: '/research/duckietown',
+    canonicalPath: '/research/duckietown/',
     videoUrl: 'https://www.youtube.com/watch?v=rPpewHIF2KU',
     externalUrl: 'https://www.duckietown.org/'
   },
@@ -25,7 +25,7 @@ export const autonomousTools: ResearchTool[] = [
     tags: ['Robotics & autonomy', 'Computer vision', 'ISEC 2017', 'Visual servoing', 'Motion planning', 'ROS'],
     image: '/assets/research/bwsi-racecar/racecar_main.gif',
     imageAlt: 'Students programming miniature autonomous vehicles',
-    canonicalPath: '/research/bwsi-racecar',
+    canonicalPath: '/research/bwsi-racecar/',
     videoUrl: 'https://www.youtube.com/watch?v=UjVatZ3NK5U',
     externalUrl: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=NM6SfiEAAAAJ&citation_for_view=NM6SfiEAAAAJ:W7OEmFMy1HYC'
   },
@@ -39,7 +39,7 @@ export const autonomousTools: ResearchTool[] = [
     tags: ['Robotics & autonomy', 'Multi-agent', 'IJRR Journal', 'RSS 2015 Finalist', 'POMDP'],
     image: '/assets/research/delivery-bots/coordination.gif',
     imageAlt: 'Decentralized multi-robot package delivery and coordination under uncertainty',
-    canonicalPath: '/research/delivery-bots',
+    canonicalPath: '/research/delivery-bots/',
     externalUrl: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=NM6SfiEAAAAJ&citation_for_view=NM6SfiEAAAAJ:zYLM7Y9cAGgC'
   },
   {
@@ -53,7 +53,7 @@ export const autonomousTools: ResearchTool[] = [
     tags: ['Robotics', 'Machine learning', 'Hardware acceleration', 'MIT'],
     image: '/assets/research/drone_follow.gif',
     imageAlt: 'Parrot Rolling Spider Drone hovering over path',
-    canonicalPath: '/research/graduate-engineering-projects',
+    canonicalPath: '/research/graduate-engineering-projects/',
     mediaLinks: [
       {
         type: 'video',
@@ -83,7 +83,7 @@ export const autonomousTools: ResearchTool[] = [
     tags: ['iOS', 'Accessibility', 'Audio', 'Mobile'],
     image: '/assets/research/app_testing.jpg',
     imageAlt: 'User testing the Boop Light Detector mobile app',
-    canonicalPath: '/research/boop-light-detector',
+    canonicalPath: '/research/boop-light-detector/',
     externalUrl: 'http://arii.github.io/boop/',
     sourceUrl: 'https://github.com/arii/boop'
   },
@@ -97,7 +97,7 @@ export const autonomousTools: ResearchTool[] = [
     tags: ['MindHandHeart', 'Community', 'Wellness', 'MIT'],
     image: '/assets/research/light.jpg',
     imageAlt: 'Light therapy lamps installed across MIT campus locations',
-    canonicalPath: '/research/light-therapy-mit',
+    canonicalPath: '/research/light-therapy-mit/',
     externalUrl: 'https://arii.github.io/SAD/',
     sourceUrl: 'https://github.com/arii/SAD'
   },
@@ -111,7 +111,7 @@ export const autonomousTools: ResearchTool[] = [
     tags: ['Sustainability', 'Hardware', 'Energy audit', 'MIT Green Labs'],
     image: '/assets/research/leac.jpg',
     imageAlt: 'LEAC server network monitoring interface',
-    canonicalPath: '/research/leac-monitoring-software',
+    canonicalPath: '/research/leac-monitoring-software/',
     externalUrl: 'https://leac-mit.github.io/'
   },
   {
@@ -124,7 +124,7 @@ export const autonomousTools: ResearchTool[] = [
     tags: ['Robotics', 'Conference', 'Web platform', 'MIT'],
     image: '/assets/research/robocon.jpg',
     imageAlt: 'RoboCon event portal showcase',
-    canonicalPath: '/research/robocon-mit',
+    canonicalPath: '/research/robocon-mit/',
     externalUrl: 'http://robocon.mit.edu'
   },
   {
@@ -138,7 +138,7 @@ export const autonomousTools: ResearchTool[] = [
     tags: ['Robotics', 'Medical UI', 'CAD/CAM', 'Bionics Lab UCSC'],
     image: '/assets/research/dental.jpg',
     imageAlt: 'CAD/CAM Robotic Dental Crowning Workflow UI',
-    canonicalPath: '/research/cad-cam-dental-workflow',
+    canonicalPath: '/research/cad-cam-dental-workflow/',
     pdfUrl: 'https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_dental.pdf',
     videoUrl: 'https://www.youtube.com/watch?v=tXif7xeZmGI',
     externalUrl: 'https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_dental.pdf'
@@ -153,6 +153,6 @@ export const autonomousTools: ResearchTool[] = [
     status: 'Completed',
     tags: ['Robotics', 'Mechatronics', 'Embedded systems', 'Digital logic', 'Microcontrollers', 'UCSC', 'Hardware'],
     image: '/assets/research/undergraduate-projects/flip_flop.gif',
-    canonicalPath: '/research/undergraduate-projects'
+    canonicalPath: '/research/undergraduate-projects/'
   }
 ];

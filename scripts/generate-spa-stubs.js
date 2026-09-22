@@ -4,6 +4,9 @@ import { fileURLToPath } from 'node:url';
 
 import { resumeData } from '../src/data/resume/index.ts';
 import { profileData } from '../src/data/aboutData.ts';
+import { heroContent, PHILOSOPHY_TENETS, FEATURE_CALLOUTS } from '../src/data/home.ts';
+import { DEVAI_FLAGSHIPS } from '../src/data/devai-projects.ts';
+import { RESEARCH_AUTONOMOUS, RESEARCH_THESIS } from '../src/data/research-papers.ts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -369,15 +372,47 @@ function getArticleList(contentDir, targetCategory) {
   return articles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
+function renderHomeHtml() {
+  let html = `<main style="max-width:1100px;margin:0 auto;padding:2rem 1rem;">`;
+  html += `<header><h1>${escapeHtml(heroContent.name)}</h1><p><strong>${escapeHtml(heroContent.title)}</strong></p>`;
+  for (const p of heroContent.bioParagraphs) {
+    html += `<p>${escapeHtml(p)}</p>`;
+  }
+  html += `<nav><a href="/devai/">View Agentic DevAI Work</a> | <a href="/research/">View Robotics Research</a></nav></header>`;
+
+  html += `<section><h2>Core Capabilities &amp; Focus</h2><ul>`;
+  for (const callout of FEATURE_CALLOUTS) {
+    html += `<li><strong>${escapeHtml(callout.title)}:</strong> ${escapeHtml(callout.description)}</li>`;
+  }
+  html += `</ul></section>`;
+
+  html += `<section><h2>Engineering Philosophy</h2>`;
+  for (const tenet of PHILOSOPHY_TENETS) {
+    html += `<article><h3>${escapeHtml(tenet.title)}</h3><p>${escapeHtml(tenet.description)}</p></article>`;
+  }
+  html += `</section></main>`;
+  return html;
+}
+
 function renderDevAiHtml(contentDir) {
   const articles = getArticleList(contentDir, 'devai');
 
   let html = `<main style="max-width:1100px;margin:0 auto;padding:2rem 1rem;">`;
   html += `<header><h1>DevAI &amp; Software Systems</h1><p>System architectures, agentic CI/CD pipelines, autonomous developer tooling, and shipped production applications.</p></header>`;
 
-  html += `<section><h2>Agentic Tools & Architecture Deep Dives</h2>`;
+  html += `<section><h2>Products built with DevAI</h2>`;
+  for (const tool of DEVAI_FLAGSHIPS) {
+    const targetUrl = tool.canonicalPath || `/devai/${tool.id}/`;
+    html += `<article><h3><a href="${escapeHtml(targetUrl)}">${escapeHtml(tool.title)}</a></h3>`;
+    html += `<p><strong>${escapeHtml(tool.category)}</strong>${tool.metrics ? ` | <em>${escapeHtml(tool.metrics)}</em>` : ''}</p>`;
+    html += `<p>${escapeHtml(tool.description)}</p>`;
+    html += `</article>`;
+  }
+  html += `</section>`;
+
+  html += `<section><h2>Engineering Deep-Dives</h2>`;
   for (const article of articles) {
-    html += `<article><h3><a href="/devai/${article.slug}">${escapeHtml(article.title)}</a></h3>`;
+    html += `<article><h3><a href="/devai/${article.slug}/">${escapeHtml(article.title)}</a></h3>`;
     html += `<p><em>${escapeHtml(article.date)}</em>${article.tags.length > 0 ? ` | Tags: ${escapeHtml(article.tags.join(', '))}` : ''}</p>`;
     html += `<p>${escapeHtml(article.excerpt)}</p>`;
     html += `</article>`;
@@ -392,9 +427,29 @@ function renderResearchHtml(contentDir) {
   let html = `<main style="max-width:1100px;margin:0 auto;padding:2rem 1rem;">`;
   html += `<header><h1>Robotics &amp; Algorithmic Research</h1><p>Planning under uncertainty, conformant belief-state manipulation, multi-robot coordination, and hardware automation systems.</p></header>`;
 
-  html += `<section><h2>Research Deep Dives & Projects</h2>`;
+  html += `<section><h2>Graduate Theses</h2>`;
+  for (const thesis of RESEARCH_THESIS) {
+    const targetUrl = thesis.canonicalPath || `/research/${thesis.id}/`;
+    html += `<article><h3><a href="${escapeHtml(targetUrl)}">${escapeHtml(thesis.title)}</a></h3>`;
+    html += `<p><strong>${escapeHtml(thesis.category)}</strong></p>`;
+    html += `<p>${escapeHtml(thesis.description)}</p>`;
+    html += `</article>`;
+  }
+  html += `</section>`;
+
+  html += `<section><h2>Robotics and Academic Projects</h2>`;
+  for (const tool of RESEARCH_AUTONOMOUS) {
+    const targetUrl = tool.canonicalPath || `/research/${tool.id}/`;
+    html += `<article><h3><a href="${escapeHtml(targetUrl)}">${escapeHtml(tool.title)}</a></h3>`;
+    html += `<p><strong>${escapeHtml(tool.category)}</strong>${tool.metrics ? ` | <em>${escapeHtml(tool.metrics)}</em>` : ''}</p>`;
+    html += `<p>${escapeHtml(tool.description)}</p>`;
+    html += `</article>`;
+  }
+  html += `</section>`;
+
+  html += `<section><h2>Research Deep Dives &amp; Reports</h2>`;
   for (const article of articles) {
-    html += `<article><h3><a href="/research/${article.slug}">${escapeHtml(article.title)}</a></h3>`;
+    html += `<article><h3><a href="/research/${article.slug}/">${escapeHtml(article.title)}</a></h3>`;
     html += `<p><em>${escapeHtml(article.date)}</em>${article.tags.length > 0 ? ` | Tags: ${escapeHtml(article.tags.join(', '))}` : ''}</p>`;
     html += `<p>${escapeHtml(article.excerpt)}</p>`;
     html += `</article>`;
@@ -443,6 +498,9 @@ function renderArticleHtml(slug, contentDir) {
 
 function getPrerenderedBody(route, meta, contentDir) {
   const safeRoute = route || '';
+  if (!safeRoute) {
+    return `<div id="root">${renderHomeHtml()}</div>`;
+  }
   if (safeRoute === 'resume') {
     return `<div id="root">${renderResumeHtml()}</div>`;
   }
@@ -472,7 +530,7 @@ function getRouteMetadata(route, contentDir) {
       title: 'About & Background | Ariel Anders, PhD',
       description:
         'Learn about Ariel Anders, PhD (MIT CSAIL): roboticist, AI software engineer, research background, current availability, and personal projects.',
-      canonical: `${SITE_URL}/about`,
+      canonical: `${SITE_URL}/about/`,
       heading: 'About Ariel',
       bodyText: 'Robotics background, research history, and personal interests. MIT EECS PhD 2019 · SM 2014.',
       image: DEFAULT_IMAGE,
@@ -485,7 +543,7 @@ function getRouteMetadata(route, contentDir) {
       title: 'DevAI & Agentic Automation | Ariel Anders, PhD',
       description:
         'Explore agentic DevAI tools, multi-agent CI/CD workflows, and developer automation software engineered by Ariel Anders, PhD (MIT CSAIL).',
-      canonical: `${SITE_URL}/devai`,
+      canonical: `${SITE_URL}/devai/`,
       heading: 'DevAI & Software Systems',
       bodyText: 'System architectures, agentic CI/CD pipelines, autonomous developer tooling, and shipped production applications.',
       image: DEFAULT_IMAGE,
@@ -498,7 +556,7 @@ function getRouteMetadata(route, contentDir) {
       title: 'Robotics & Autonomous Research | Ariel Anders, PhD',
       description:
         'Discover robotics software research in conformant planning, belief-state manipulation, and autonomous systems by Ariel Anders, PhD (MIT CSAIL).',
-      canonical: `${SITE_URL}/research`,
+      canonical: `${SITE_URL}/research/`,
       heading: 'Robotics & Algorithmic Research',
       bodyText: 'Planning under uncertainty, conformant belief-state manipulation, multi-robot coordination, and hardware automation systems.',
       image: DEFAULT_IMAGE,
@@ -511,7 +569,7 @@ function getRouteMetadata(route, contentDir) {
       title: 'Resume & Career Highlights | Ariel Anders, PhD',
       description:
         'View the technical resume and experience of Ariel Anders, PhD (MIT CSAIL): expertise in robotics engineering, AI architecture, and software systems.',
-      canonical: `${SITE_URL}/resume`,
+      canonical: `${SITE_URL}/resume/`,
       heading: 'Resume & Career Highlights',
       bodyText: 'Roboticist and Senior Software Engineer with an MIT CSAIL PhD and track record across Waymo, Robust.AI, and Civ Robotics.',
       image: DEFAULT_IMAGE,
@@ -543,7 +601,7 @@ function getRouteMetadata(route, contentDir) {
       return {
         title: cleanTitle,
         description: cleanDesc,
-        canonical: `${SITE_URL}/${route}`,
+        canonical: `${SITE_URL}/${route}/`,
         heading: title || 'Research & Engineering Deep-Dive',
         bodyText: excerpt || '',
         image: fullImageUrl,
@@ -556,8 +614,11 @@ function getRouteMetadata(route, contentDir) {
     }
   }
 
-  const cleanRoutePath = route ? (route.startsWith('/') ? route : `/${route}`) : '/';
-  const canonicalUrl = `${SITE_URL}${cleanRoutePath === '/' ? '/' : cleanRoutePath}`;
+  let cleanRoutePath = route ? (route.startsWith('/') ? route : `/${route}`) : '/';
+  if (cleanRoutePath !== '/' && !cleanRoutePath.endsWith('/') && !/\.[a-z0-9]+$/i.test(cleanRoutePath)) {
+    cleanRoutePath = `${cleanRoutePath}/`;
+  }
+  const canonicalUrl = `${SITE_URL}${cleanRoutePath}`;
 
   return {
     title: 'AI & Robotics Engineering Portfolio | Ariel Anders, PhD',
@@ -771,6 +832,35 @@ function customizeHtmlForRoute(baseHtml, meta, route, contentDir) {
   return customized;
 }
 
+function generateRedirectStub(baseHtml, targetPath, canonicalUrl) {
+  let customized = baseHtml;
+
+  // 1. Strip existing title, description, canonical, OG, and Twitter tags
+  customized = customized.replace(/<title[\s\S]*?<\/title>/gi, '');
+  customized = customized.replace(/<meta\b[^>]*\bname="description"[^>]*\/?>/gi, '');
+  customized = customized.replace(/<link\b[^>]*\brel="canonical"[^>]*\/?>/gi, '');
+  customized = customized.replace(/<meta\b[^>]*\bproperty="og:(?:title|description|url|site_name|type|image)"[^>]*\/?>/gi, '');
+  customized = customized.replace(/<meta\b[^>]*\bname="twitter:(?:card|title|description|image)"[^>]*\/?>/gi, '');
+
+  const redirectHeadTags = [
+    `    <title data-rh="true">Redirecting...</title>`,
+    `    <meta http-equiv="refresh" content="0; url=${targetPath}" />`,
+    `    <link data-rh="true" rel="canonical" href="${canonicalUrl}" />`,
+    `    <meta name="robots" content="noindex, follow" />`,
+  ].join('\n');
+
+  if (/<meta\s+name="viewport"[\s\S]*?\/?>/i.test(customized)) {
+    customized = customized.replace(/(<meta\s+name="viewport"[\s\S]*?\/?>)/i, `$1\n${redirectHeadTags}`);
+  } else {
+    customized = customized.replace('</head>', `${redirectHeadTags}\n  </head>`);
+  }
+
+  const redirectBody = `<div id="root"><main style="max-width:1100px;margin:2rem auto;padding:1rem;text-align:center;"><h1>Redirecting...</h1><p>If you are not redirected automatically, follow this <a href="${targetPath}">link to ${targetPath}</a>.</p></main></div><script>window.location.replace("${targetPath}");</script>`;
+  customized = customized.replace(/<div id="root">[\s\S]*?<\/div>/, redirectBody);
+
+  return customized;
+}
+
 export function generateSpaStubs() {
   const indexHtmlPath = path.join(DIST_DIR, 'index.html');
   if (!fs.existsSync(indexHtmlPath)) {
@@ -805,8 +895,10 @@ export function generateSpaStubs() {
   fs.writeFileSync(fallbackPath, html404Content, 'utf-8');
   console.log(`✅ Generated GitHub Pages fallback at ${fallbackPath}`);
 
-  // 2. Core routes to stub
-  const routes = ['about', 'devai', 'research', 'resume', 'portfolio'];
+  // 2. Core canonical routes to stub (directory/index.html)
+  const canonicalRoutes = ['about', 'devai', 'research', 'resume'];
+  const devaiSlugs = [];
+  const researchSlugs = [];
 
   // 3. Article routes from src/content/research/
   if (fs.existsSync(CONTENT_DIR)) {
@@ -822,14 +914,19 @@ export function generateSpaStubs() {
       const isRobotics = category.toLowerCase().includes('robotics') || researchOnlySlugs.includes(slug);
       const primarySection = isRobotics ? 'research' : 'devai';
 
-      routes.push(`${primarySection}/${slug}`);
+      canonicalRoutes.push(`${primarySection}/${slug}`);
+      if (primarySection === 'devai') {
+        devaiSlugs.push(slug);
+      } else {
+        researchSlugs.push(slug);
+      }
     }
   }
 
-  // Deduplicate routes
-  const uniqueRoutes = Array.from(new Set(routes));
+  // Deduplicate canonical routes
+  const uniqueRoutes = Array.from(new Set(canonicalRoutes));
 
-  // 4. Create directory stub index.html and direct route.html for each route with customized metadata & prerendered content
+  // 4. Create physical directory index.html stubs (enforces GitHub Pages trailing-slash directory redirects)
   let stubCount = 0;
   for (const route of uniqueRoutes) {
     const meta = getRouteMetadata(route, CONTENT_DIR);
@@ -843,21 +940,43 @@ export function generateSpaStubs() {
     const stubFilePath = path.join(routeDir, 'index.html');
     fs.writeFileSync(stubFilePath, customizedContent, 'utf-8');
 
-    // Direct HTML file: /about or /about.html -> 200 OK on GitHub Pages without 301 redirect
-    const directHtmlPath = path.join(DIST_DIR, `${route}.html`);
-    const directParentDir = path.dirname(directHtmlPath);
-    if (!fs.existsSync(directParentDir)) {
-      fs.mkdirSync(directParentDir, { recursive: true });
-    }
-    fs.writeFileSync(directHtmlPath, customizedContent, 'utf-8');
-
     stubCount++;
   }
 
-  console.log(`✅ Generated ${stubCount} SPA 200 OK directory and direct HTML stubs with pre-rendered SEO metadata in dist/`);
+  // 5. Generate redirect stubs with canonical and meta-refresh tags for alias / double-prefixed paths
+  const redirectRoutes = [
+    { from: 'portfolio', to: '/devai/', canonical: `${SITE_URL}/devai/` },
+    { from: 'devai/devai', to: '/devai/', canonical: `${SITE_URL}/devai/` },
+    { from: 'research/research', to: '/research/', canonical: `${SITE_URL}/research/` },
+    ...devaiSlugs.map((slug) => ({
+      from: `devai/devai/${slug}`,
+      to: `/devai/${slug}/`,
+      canonical: `${SITE_URL}/devai/${slug}/`,
+    })),
+    ...researchSlugs.map((slug) => ({
+      from: `research/research/${slug}`,
+      to: `/research/${slug}/`,
+      canonical: `${SITE_URL}/research/${slug}/`,
+    })),
+  ];
+
+  let redirectCount = 0;
+  for (const { from, to, canonical } of redirectRoutes) {
+    const redirectContent = generateRedirectStub(indexHtmlContent, to, canonical);
+    const redirectDir = path.join(DIST_DIR, from);
+    if (!fs.existsSync(redirectDir)) {
+      fs.mkdirSync(redirectDir, { recursive: true });
+    }
+    const redirectFilePath = path.join(redirectDir, 'index.html');
+    fs.writeFileSync(redirectFilePath, redirectContent, 'utf-8');
+    redirectCount++;
+  }
+
+  console.log(`✅ Generated ${stubCount} SPA directory stubs and ${redirectCount} redirect stubs in dist/`);
 }
 
 // Run directly if called as main module
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   generateSpaStubs();
 }
+

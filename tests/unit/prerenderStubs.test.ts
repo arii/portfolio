@@ -87,12 +87,44 @@ describe('Pre-rendered SPA Stubs & Semantic Body Markup', () => {
     expect(fs.existsSync(devAiPath)).toBe(true);
     const devAiHtml = fs.readFileSync(devAiPath, 'utf-8');
     expect(devAiHtml).toContain('DevAI &amp; Software Systems');
-    expect(devAiHtml).toContain('href="/devai/gitops-pr-reviewer"');
+    expect(devAiHtml).toContain('Products built with DevAI');
+    expect(devAiHtml).toContain('HRM (Heart Rate Monitor)');
+    expect(devAiHtml).toContain('RepoAuditor');
+    expect(devAiHtml).toContain('href="/devai/gitops-pr-reviewer/"');
 
     const researchPath = path.join(distDir, 'research/index.html');
     expect(fs.existsSync(researchPath)).toBe(true);
     const researchHtml = fs.readFileSync(researchPath, 'utf-8');
     expect(researchHtml).toContain('Robotics &amp; Algorithmic Research');
-    expect(researchHtml).toContain('href="/research/conformant-planning-manipulation"');
+    expect(researchHtml).toContain('Graduate Theses');
+    expect(researchHtml).toContain('Robotics and Academic Projects');
+    expect(researchHtml).toContain('href="/research/conformant-planning-manipulation/"');
+
+    // 5. Verify root dist/index.html has pre-rendered semantic body content
+    const rootHtml = fs.readFileSync(indexHtmlPath, 'utf-8');
+    expect(rootHtml).toContain('<h1>Ariel Anders, PhD</h1>');
+    expect(rootHtml).toContain('Roboticist &amp; Senior Software Engineer');
+    expect(rootHtml).toContain('View Agentic DevAI Work');
+    expect(rootHtml).toContain('View Robotics Research');
+    expect(rootHtml).toContain('Core Capabilities &amp; Focus');
+    expect(rootHtml).toContain('Engineering Philosophy');
+
+    // 6. Verify redirect stubs (/portfolio, /devai/devai/:slug)
+    const portfolioRedirectPath = path.join(distDir, 'portfolio/index.html');
+    expect(fs.existsSync(portfolioRedirectPath)).toBe(true);
+    const portfolioRedirectHtml = fs.readFileSync(portfolioRedirectPath, 'utf-8');
+    expect(portfolioRedirectHtml).toContain('<meta http-equiv="refresh" content="0; url=/devai/" />');
+    expect(portfolioRedirectHtml).toContain('<link data-rh="true" rel="canonical" href="https://arii.github.io/devai/" />');
+
+    const devAiDoubleRedirectPath = path.join(distDir, 'devai/devai/hrm-architecture/index.html');
+    expect(fs.existsSync(devAiDoubleRedirectPath)).toBe(true);
+    const devAiDoubleRedirectHtml = fs.readFileSync(devAiDoubleRedirectPath, 'utf-8');
+    expect(devAiDoubleRedirectHtml).toContain('<meta http-equiv="refresh" content="0; url=/devai/hrm-architecture/" />');
+    expect(devAiDoubleRedirectHtml).toContain('<link data-rh="true" rel="canonical" href="https://arii.github.io/devai/hrm-architecture/" />');
+
+    // 7. Verify direct .html files (like dist/about.html) are NOT generated to enforce trailing-slash directory redirects on GitHub Pages
+    expect(fs.existsSync(path.join(distDir, 'about.html'))).toBe(false);
+    expect(fs.existsSync(path.join(distDir, 'devai.html'))).toBe(false);
+    expect(fs.existsSync(path.join(distDir, 'research.html'))).toBe(false);
   });
 });

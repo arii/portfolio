@@ -24,13 +24,15 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
   const imageSrc = tool.id === 'hrm-flagship' ? '/assets/research/hrm-flagship.png' : tool.id === 'repo-auditor-ai' ? '/assets/research/repo-auditor-ai.png' : tool.image || null;
 
   const isClickable = !!(tool.externalUrl || tool.sourceUrl || tool.canonicalPath);
-  const targetSlug = tool.canonicalPath ? tool.canonicalPath.replace('/research/', '') : '';
+  const targetSlug = tool.canonicalPath
+    ? tool.canonicalPath.replace(/^\/?(research|devai)\//, '').replace(/^\//, '').replace(/\/+$/, '')
+    : '';
 
   const executePrimaryAction = () => {
-    if (tool.canonicalPath && targetSlug) {
-      onNavigate(targetSlug);
-    } else if (tool.externalUrl) {
+    if (tool.externalUrl) {
       window.open(tool.externalUrl, '_blank', 'noopener,noreferrer');
+    } else if (tool.canonicalPath && targetSlug) {
+      onNavigate(targetSlug);
     } else if (tool.sourceUrl) {
       window.open(tool.sourceUrl, '_blank', 'noopener,noreferrer');
     }
@@ -55,6 +57,7 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
       onKeyDown={handleKeyDown}
       tabIndex={isClickable ? 0 : undefined}
       role={isClickable ? 'button' : undefined}
+      aria-label={tool.title}
       className={`group rounded-3xl border border-line bg-surface p-0 flex flex-col justify-between overflow-hidden transition-all hover:border-accent hover:shadow-glow ${
         isClickable ? 'cursor-pointer' : ''
       }`}
@@ -103,7 +106,45 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
           </div>
           <div>
             <span className="text-xs text-accent font-semibold block font-sans">{tool.category}</span>
-            <h3 className="text-xl font-bold text-text-main mt-1 font-display group-hover:text-accent transition-colors text-balance">{tool.title}</h3>
+            <h3 className="text-xl font-bold text-text-main mt-1 font-display group-hover:text-accent transition-colors text-balance">
+              {tool.externalUrl ? (
+                <a
+                  href={tool.externalUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="hover:text-accent transition-colors no-underline text-inherit"
+                >
+                  {tool.title}
+                </a>
+              ) : tool.canonicalPath ? (
+                <a
+                  href={tool.canonicalPath}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (onNavigate && targetSlug && !e.metaKey && !e.ctrlKey) {
+                      e.preventDefault();
+                      onNavigate(targetSlug);
+                    }
+                  }}
+                  className="hover:text-accent transition-colors no-underline text-inherit"
+                >
+                  {tool.title}
+                </a>
+              ) : tool.sourceUrl ? (
+                <a
+                  href={tool.sourceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="hover:text-accent transition-colors no-underline text-inherit"
+                >
+                  {tool.title}
+                </a>
+              ) : (
+                tool.title
+              )}
+            </h3>
             {tool.subtitle && <p className="text-xs text-accent font-semibold mt-1 text-balance">{tool.subtitle}</p>}
           </div>
           <p className="text-sm text-text-dim leading-relaxed text-pretty">{tool.description}</p>
@@ -118,17 +159,20 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
 
           <div className="flex flex-wrap gap-3" onClick={(e) => e.stopPropagation()}>
             {tool.canonicalPath && (
-              <button
+              <a
+                href={tool.canonicalPath}
+                role="button"
                 onClick={(e) => {
                   e.stopPropagation();
-                  if (targetSlug) {
+                  if (onNavigate && targetSlug && !e.metaKey && !e.ctrlKey) {
+                    e.preventDefault();
                     onNavigate(targetSlug);
                   }
                 }}
-                className="inline-flex items-center space-x-1.5 bg-accent/10 border border-accent/20 px-3.5 py-2 rounded-xl text-xs font-semibold text-accent hover:bg-accent/20 transition-colors min-h-[44px] cursor-pointer"
+                className="inline-flex items-center space-x-1.5 bg-accent/10 border border-accent/20 px-3.5 py-2 rounded-xl text-xs font-semibold text-accent hover:bg-accent/20 transition-colors min-h-[44px] cursor-pointer no-underline"
               >
                 <span>Deep-Dive</span><ArrowRight className="h-3.5 w-3.5" />
-              </button>
+              </a>
             )}
             {tool.videoUrl && (
               <a

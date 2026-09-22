@@ -12,7 +12,8 @@ const DevAI: React.FC<DevAIProps> = () => {
   const navigate = useNavigate();
 
   const handleNavigate = (targetSlug: string) => {
-    navigate(`/devai/${targetSlug}`);
+    const cleanSlug = targetSlug.replace(/^\/?(devai|research)\//, '').replace(/^\//, '').replace(/\/+$/, '');
+    navigate(`/devai/${cleanSlug}`);
   };
 
   const handleBack = () => {

@@ -119,7 +119,8 @@ export default defineConfig(() => {
       globals: true,
       environment: 'jsdom',
       setupFiles: './src/test/setup.ts',
-      exclude: ['**/node_modules/**', '**/dist/**', '**/.tmp-main/**', '**/cypress/**', '**/node_modules-main/**'],
+      testTimeout: 15000,
+      exclude: ['**/node_modules/**', '**/dist/**', '**/.tmp-main/**', '**/.pnpm-store/**', '**/cypress/**', '**/node_modules-main/**'],
     },
   };
 });

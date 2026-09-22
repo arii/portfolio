@@ -12,7 +12,8 @@ const Research: React.FC<ResearchProps> = () => {
   const navigate = useNavigate();
 
   const handleNavigate = (targetSlug: string) => {
-    navigate(`/research/${targetSlug}`);
+    const cleanSlug = targetSlug.replace(/^\/?(devai|research)\//, '').replace(/^\//, '').replace(/\/+$/, '');
+    navigate(`/research/${cleanSlug}`);
   };
 
   const handleBack = () => {
