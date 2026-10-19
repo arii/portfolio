@@ -34,8 +34,8 @@ const SafeImage: React.FC<SafeImageProps> = ({
 
   // Determine WebP source
   let resolvedWebpSrc = resolveAssetUrl(webpSrc);
-  if (!resolvedWebpSrc && src && !disableWebpAutoInfer && /\.(png|jpe?g)$/i.test(src)) {
-    const autoWebp = src.replace(/\.(png|jpe?g)$/i, '.webp');
+  if (!resolvedWebpSrc && src && !disableWebpAutoInfer && /\.(png|jpe?g|gif)$/i.test(src)) {
+    const autoWebp = src.replace(/\.(png|jpe?g|gif)$/i, '.webp');
     resolvedWebpSrc = resolveAssetUrl(autoWebp);
   }
 

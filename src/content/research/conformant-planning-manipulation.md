@@ -16,7 +16,7 @@ summary: "My MIT CSAIL PhD dissertation on conformant planning for robot manipul
 
 This research forms the core of my PhD dissertation at **MIT CSAIL**, advised by **Prof. Leslie Pack Kaelbling** and **Prof. Tomás Lozano-Pérez**, with committee member **Prof. Sertac Karaman**. My work enables general-purpose helper robots to reliably arrange unanchored objects into desired target configurations despite severe pose uncertainty caused by inaccurate sensing, control errors, and unknown physical friction. If you are developing physical automation systems and seeking [autonomous systems advisory](https://arii.github.io/about/), explore my consulting background and engineering experience.
 
-[![Figure 1: Willow Garage PR2 robot performing physical conformant manipulation to arrange blocks into tight arrangements under pose uncertainty without visual feedback. | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=omdHFeBBYZ0#no-embed](/assets/research/phd/icra_presentation.gif#max-w-2xl)](https://www.youtube.com/watch?v=omdHFeBBYZ0#no-embed)
+[![Figure 1: Willow Garage PR2 robot performing physical conformant manipulation to arrange blocks into tight arrangements under pose uncertainty without visual feedback. | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=omdHFeBBYZ0#no-embed](/assets/research/phd/icra_presentation.webp#max-w-2xl)](https://www.youtube.com/watch?v=omdHFeBBYZ0#no-embed)
 
 
 ---
@@ -33,7 +33,7 @@ The belief-state approach is detailed in our **ICRA 2018** paper:
 
 ---
 
-[![Figure 2: ICRA 2018 paper presentation and conference spotlight breakdown. | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=so-9kkQXlxc#no-embed](/assets/research/phd/conformant_demo.gif#max-w-2xl)](https://www.youtube.com/watch?v=so-9kkQXlxc#no-embed)
+[![Figure 2: ICRA 2018 paper presentation and conference spotlight breakdown. | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=so-9kkQXlxc#no-embed](/assets/research/phd/conformant_demo.webp#max-w-2xl)](https://www.youtube.com/watch?v=so-9kkQXlxc#no-embed)
 
 ---
 
@@ -52,7 +52,7 @@ Furthermore, camera lines-of-sight are frequently obstructed by robot end-effect
 
 ### 1. Nominal Trajectory: Plan Improvement with Fixture Placement (1/3)
 
-[![Nominal Trajectory: Plan Improvement with Fixture Placement | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=MBsnNbD18tU#no-embed](/assets/research/phd/belief_1.gif#max-w-2xl)](https://www.youtube.com/watch?v=MBsnNbD18tU#no-embed)
+[![Nominal Trajectory: Plan Improvement with Fixture Placement | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=MBsnNbD18tU#no-embed](/assets/research/phd/belief_1.webp#max-w-2xl)](https://www.youtube.com/watch?v=MBsnNbD18tU#no-embed)
 
 * **Goal:** Execute planar assembly of disjoint block clusters into a single composite structure via non-prehensile pushing and fixturing.
 * **Execution:** A linear pusher translates the lower cluster along an open-loop trajectory to mate seamlessly with the stationary upper target.
@@ -62,7 +62,7 @@ Furthermore, camera lines-of-sight are frequently obstructed by robot end-effect
 
 ### 2. Failure Mode: Open-Loop Drift Under Uncertainty (2/3)
 
-[![Failure Mode: Open-Loop Drift Under Uncertainty | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=yjhySqcgLi4#no-embed](/assets/research/phd/belief_2.gif#max-w-2xl)](https://www.youtube.com/watch?v=yjhySqcgLi4#no-embed)
+[![Failure Mode: Open-Loop Drift Under Uncertainty | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=yjhySqcgLi4#no-embed](/assets/research/phd/belief_2.webp#max-w-2xl)](https://www.youtube.com/watch?v=yjhySqcgLi4#no-embed)
 
 * **Perturbation:** Introduced stochastic noise into initial object poses and actuation dynamics.
 * **Failure Mechanism:** Unconstrained degrees of freedom lead to compounding kinematic drift and premature rotation.
@@ -72,7 +72,7 @@ Furthermore, camera lines-of-sight are frequently obstructed by robot end-effect
 
 ### 3. Robust Execution: Passive Mechanical Funneling via Fixture Placement (3/3)
 
-[![Robust Execution: Passive Mechanical Funneling via Fixture Placement | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=ubUMq8Rnb18#no-embed](/assets/research/phd/refinement.gif#max-w-2xl)](https://www.youtube.com/watch?v=ubUMq8Rnb18#no-embed)
+[![Robust Execution: Passive Mechanical Funneling via Fixture Placement | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=ubUMq8Rnb18#no-embed](/assets/research/phd/refinement.webp#max-w-2xl)](https://www.youtube.com/watch?v=ubUMq8Rnb18#no-embed)
 
 * **Strategy:** Augment the action space with static intermediate fixtures (e.g., L-brackets) along the configuration boundary.
 * **Mechanism:** Fixtures act as physical invariant sets, passively arresting off-axis drift and squaring block orientations upon contact.
@@ -92,7 +92,7 @@ The second core paradigm formulates manipulation as an explicit forward search o
 Support(b_{t+1}) ⊆ Support(b_t)
 ```
 
-![The initial object placement uncertainty for the PR2 robot was modeled as ±0.2 inches in both x and y coordinates and ±15 degrees in rotation based on physical experiment data](/assets/research/phd/sliding_2.gif) ![Six block arrangement task on PR2](/assets/research/phd/sixblock.png)
+![The initial object placement uncertainty for the PR2 robot was modeled as ±0.2 inches in both x and y coordinates and ±15 degrees in rotation based on physical experiment data](/assets/research/phd/sliding_2.webp) ![Six block arrangement task on PR2](/assets/research/phd/sixblock.png)
 *Figure 3 & 4: Precision placement via contact funneling (left) and six-block arrangement setup on PR2 (right).*
 
 
@@ -100,7 +100,7 @@ Support(b_{t+1}) ⊆ Support(b_t)
 ### Belief State Overlay & Action Noise Characterization
 To ground simulated transitions in physical reality, empirical noise characterization and spatial particle overlays visualize contact uncertainty during execution.
 
-![Belief State Overlay Visualization](/assets/research/phd/sliding_1.gif#max-w-xl)
+![Belief State Overlay Visualization](/assets/research/phd/sliding_1.webp#max-w-xl)
 *Figure 10: Algorithm belief-state overlay depicting particle distributions and empirical contact confidence bounds during manipulation.*
 
 ### Table and Board Relative Localization Pipeline
@@ -109,7 +109,7 @@ To ground simulated transitions in physical reality, empirical noise characteriz
 - **Tactile Surface Exploration:** To resolve visual occlusions and calibration offsets, the robot switches to a compliant Cartesian controller, guiding its end-effector/paddle to slide directly against the rigid reference edges (e.g., the sides of the fixture/board).
 - **Pose Registration & Transform Fitting:** By logging the contact trajectory along the physical boundaries, the system fits a rigid geometric transform, producing a high-precision spatial calibration between the PR2 base and the workspace.
 
-[![Table and Board Relative Localization Pipeline | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=bWjzn89H1x4#no-embed](/assets/research/phd/noise_model.gif#max-w-2xl)](https://www.youtube.com/watch?v=bWjzn89H1x4#no-embed)
+[![Table and Board Relative Localization Pipeline | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=bWjzn89H1x4#no-embed](/assets/research/phd/noise_model.webp#max-w-2xl)](https://www.youtube.com/watch?v=bWjzn89H1x4#no-embed)
 
 
 ---

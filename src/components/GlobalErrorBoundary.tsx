@@ -1,4 +1,5 @@
 import { Component, ErrorInfo, ReactNode } from 'react';
+import { logEvent } from '@/utils/telemetry';
 
 interface Props {
   children: ReactNode;
@@ -21,6 +22,7 @@ export class GlobalErrorBoundary extends Component<Props, State> {
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     console.error('Global uncaught error:', error, errorInfo);
+    logEvent('global_uncaught_error', { message: error.message });
 
     const isChunkLoadError = error.message?.match(/Failed to fetch dynamically imported module|error loading dynamically imported module|chunk load/i);
     const hasAttemptedReload = JSON.parse(

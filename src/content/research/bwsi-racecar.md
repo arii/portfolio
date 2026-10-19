@@ -75,7 +75,7 @@ Teaching the transition from low-level control to high-level goals using Robot O
 - **Motion Planning:** Compares the simple online Bug algorithm with optimal, graph-based Visibility Graphs, factoring in robot geometry and obstacle expansion.
 - **Lab Roadmap:** Outlines upcoming hands-on tasks, including AR tag localization, potential field navigation, and a multi-car "leader-follower" demo.
 
-[![Motion Planning Lecture Demonstration](/assets/research/bwsi-racecar/lecture_planning.gif)](https://www.youtube.com/watch?v=CdRs0l9f5WM#no-embed)
+[![Motion Planning Lecture Demonstration](/assets/research/bwsi-racecar/lecture_planning.webp)](https://www.youtube.com/watch?v=CdRs0l9f5WM#no-embed)
 *[Watch Planning Lecture on YouTube ↗](https://www.youtube.com/watch?v=CdRs0l9f5WM#no-embed)*
 
 ---
@@ -96,7 +96,7 @@ Developing OpenCV-based lane detection, color blob tracking, and feedback contro
   - *Line Following:* Modifies the visual servoing approach (e.g., cropping the top half of the image) to keep the car centered on a track.
 - **Practical Tips & OpenCV Tools:** Use **ROS bags** for testing playback, downsample camera resolution to reduce lag, extract custom HSV thresholds directly from your images, and utilize OpenCV functions like `putText`, `findContours`, and `rectangle`.
 
-[![Visual Servoing Lecture Demonstration](/assets/research/bwsi-racecar/lecture_visual_servoing.gif)](https://www.youtube.com/watch?v=bAAatB2IvUM#no-embed)
+[![Visual Servoing Lecture Demonstration](/assets/research/bwsi-racecar/lecture_visual_servoing.webp)](https://www.youtube.com/watch?v=bAAatB2IvUM#no-embed)
 *[Watch Visual Servoing Lecture on YouTube ↗](https://www.youtube.com/watch?v=bAAatB2IvUM#no-embed)*
 
 ---
@@ -106,7 +106,7 @@ Developing OpenCV-based lane detection, color blob tracking, and feedback contro
 The practical side of the RACECAR curriculum culminates in student demonstrations and a high-speed, autonomous racing competition.
 
 ### 🎥 Part A: Line Following Demonstration
-[![Autonomous Navigation & Visual Servoing Behaviors](/assets/research/bwsi-racecar/racecar_behaviors.gif)](https://www.youtube.com/watch?v=0U0pPbWhLVE#no-embed)
+[![Autonomous Navigation & Visual Servoing Behaviors](/assets/research/bwsi-racecar/racecar_behaviors.webp)](https://www.youtube.com/watch?v=0U0pPbWhLVE#no-embed)
 *[Watch Full Demonstration on YouTube ↗](https://www.youtube.com/watch?v=0U0pPbWhLVE#no-embed)*
 
 Closed-loop proportional control tracking paths using monocular camera input.
@@ -114,7 +114,7 @@ Closed-loop proportional control tracking paths using monocular camera input.
 ---
 
 ### 🎥 Part B: Cone Tracking & Visual Servoing
-[![Student Cone Tracking Visual Servoing Demo](/assets/research/bwsi-racecar/racecar_students.gif)](https://www.youtube.com/watch?v=qSe8JmWQnYk#no-embed)
+[![Student Cone Tracking Visual Servoing Demo](/assets/research/bwsi-racecar/racecar_students.webp)](https://www.youtube.com/watch?v=qSe8JmWQnYk#no-embed)
 *[Watch Full Demonstration on YouTube ↗](https://www.youtube.com/watch?v=qSe8JmWQnYk#no-embed)*
 
 Real-time visual tracking, color isolation, and safety-limited collision avoidance.
@@ -124,7 +124,7 @@ Real-time visual tracking, color isolation, and safety-limited collision avoidan
 ### 🎥 Main RACECAR Challenge Demonstration
 An intensive final-day speed loop challenge where 1/10th scale autonomous racecars navigate complex indoor corridors. Vehicles must perform real-time visual servoing, LIDAR-based obstacle avoidance, and precise wall-following to achieve rapid lap times without collision.
 
-[![Main RACECAR Challenge Demonstration](/assets/research/bwsi-racecar/racecar_main.gif)](https://www.youtube.com/watch?v=UjVatZ3NK5U#no-embed)
+[![Main RACECAR Challenge Demonstration](/assets/research/bwsi-racecar/racecar_main.webp)](https://www.youtube.com/watch?v=UjVatZ3NK5U#no-embed)
 *[Watch Full Video Demonstration on YouTube ↗](https://www.youtube.com/watch?v=UjVatZ3NK5U#no-embed)*
 
 ---

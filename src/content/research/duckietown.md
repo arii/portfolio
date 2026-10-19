@@ -11,7 +11,7 @@ tags:
   - MIT
 category: "Robotics & Autonomy"
 summary: "An open-source, low-cost robotics education and research platform for autonomous driving, multi-agent fleet coordination, and lane tracking for rubber ducks."
-videoUrl: "[![Duckietown Autonomous Driving Demonstration 1 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=rPpewHIF2KU#no-embed](/assets/research/duckietown/navigation_1.gif#max-w-2xl)](https://www.youtube.com/watch?v=rPpewHIF2KU#no-embed)"
+videoUrl: "[![Duckietown Autonomous Driving Demonstration 1 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=rPpewHIF2KU#no-embed](/assets/research/duckietown/navigation_1.webp#max-w-2xl)](https://www.youtube.com/watch?v=rPpewHIF2KU#no-embed)"
 ---
 
 ## Duckietown: Autonomous Taxi Fleet
@@ -52,7 +52,7 @@ Every Duckiebot started its journey as a disassembled kit of raw components. Bef
 
 Our initial milestone was the physical assembly and electrical integration of the robot chassis. Once the hardware setup was completed, we focused on calibrating the pulse-width modulation (PWM) signals to align the raw motor outputs, ensuring the robot would drive in a straight line during open-loop tests.
 
-[![First Functional Build Verification (Oreo) | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=YTB2FgN_4zo#no-embed](/assets/research/duckietown/oreo_wheelie.gif#max-w-2xl)](https://www.youtube.com/watch?v=YTB2FgN_4zo#no-embed)
+[![First Functional Build Verification (Oreo) | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=YTB2FgN_4zo#no-embed](/assets/research/duckietown/oreo_wheelie.webp#max-w-2xl)](https://www.youtube.com/watch?v=YTB2FgN_4zo#no-embed)
 
 Initial hardware test of my personal Duckiebot, affectionately named Oreo, immediately following its first complete assembly. The video documents an unexpected wheelie milestone during early open-loop motor calibration.
 
@@ -62,7 +62,7 @@ Initial hardware test of my personal Duckiebot, affectionately named Oreo, immed
 
 With the physical robot calibrated, we transitioned to developing the visual perception pipelines. Before establishing closed-loop control, we isolated and verified our color-segmentation algorithms, tuning visual threshold filters to detect orange features under variable classroom lighting conditions.
 
-[![Standalone Obstacle Isolation | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=HfS5Yj63H34#no-embed](/assets/research/duckietown/navigation_2.gif#max-w-2xl)](https://www.youtube.com/watch?v=HfS5Yj63H34#no-embed)
+[![Standalone Obstacle Isolation | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=HfS5Yj63H34#no-embed](/assets/research/duckietown/navigation_2.webp#max-w-2xl)](https://www.youtube.com/watch?v=HfS5Yj63H34#no-embed)
 
 Demonstration of a custom color-segmentation pipeline originally tuned for orange traffic cones, which successfully cross-detects rubber duck obstacles via their orange beaks.
 
@@ -72,6 +72,6 @@ Demonstration of a custom color-segmentation pipeline originally tuned for orang
 
 This phase showcases the full integration of the individual perception and control stacks driving in closed-loop. The system links the real-time vision-based lane tracking pipeline directly with a proportional-derivative (PD) heading controller, while concurrently running the standalone obstacle detector to trigger a reactive safety override whenever a hazard appears.
 
-[![Fully Integrated Autonomous Lane Following & Avoidance | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=rPpewHIF2KU#no-embed](/assets/research/duckietown/navigation_1.gif#max-w-2xl)](https://www.youtube.com/watch?v=rPpewHIF2KU#no-embed)
+[![Fully Integrated Autonomous Lane Following & Avoidance | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=rPpewHIF2KU#no-embed](/assets/research/duckietown/navigation_1.webp#max-w-2xl)](https://www.youtube.com/watch?v=rPpewHIF2KU#no-embed)
 
 Demonstration of the combined lines-and-obstacle pipeline working in tandem to maintain lane centerlines while reliably executing safety-stops for proximity hazards.

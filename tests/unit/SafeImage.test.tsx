@@ -34,6 +34,22 @@ describe('SafeImage Component', () => {
     expect(source?.getAttribute('srcset')).toBe('/assets/research/sample.webp');
   });
 
+  it('wraps animated image in picture tag with webp source when src is GIF', () => {
+    const { container } = render(
+      <SafeImage
+        src="/assets/research/animation.gif"
+        alt="Animated Demo"
+      />
+    );
+
+    const picture = container.querySelector('picture');
+    expect(picture).toBeInTheDocument();
+
+    const source = container.querySelector('source[type="image/webp"]');
+    expect(source).toBeInTheDocument();
+    expect(source?.getAttribute('srcset')).toBe('/assets/research/animation.webp');
+  });
+
   it('uses custom webpSrc and additional sources when provided', () => {
     const { container } = render(
       <SafeImage
