@@ -13,7 +13,7 @@ const TARGET_DIRS = [
   path.join(rootDir, 'src/assets'),
 ];
 
-function getImagesInDirectory(dirPath, fileList = []) {
+export function getImagesInDirectory(dirPath, fileList = []) {
   if (!fs.existsSync(dirPath)) return fileList;
   const entries = fs.readdirSync(dirPath, { withFileTypes: true });
 
@@ -21,16 +21,17 @@ function getImagesInDirectory(dirPath, fileList = []) {
     const fullPath = path.join(dirPath, entry.name);
     if (entry.isDirectory()) {
       getImagesInDirectory(fullPath, fileList);
-    } else if (/\.(png|jpe?g)$/i.test(entry.name)) {
+    } else if (/\.(png|jpe?g|gif)$/i.test(entry.name)) {
       fileList.push(fullPath);
     }
   }
   return fileList;
 }
 
-async function processImage(imagePath) {
+export async function processImage(imagePath, options = {}) {
   const parsed = path.parse(imagePath);
   const webpPath = path.join(parsed.dir, `${parsed.name}.webp`);
+  const isGif = /\.gif$/i.test(imagePath);
 
   // Skip if webp already exists and is newer than original image
   if (fs.existsSync(webpPath)) {
@@ -42,9 +43,16 @@ async function processImage(imagePath) {
   }
 
   try {
-    await sharp(imagePath)
-      .webp({ quality: 80, effort: 4 })
+    const pipeline = sharp(imagePath, isGif ? { animated: true } : {});
+    await pipeline
+      .webp({ quality: 80, effort: 4, lossless: false })
       .toFile(webpPath);
+
+    if (options.deleteOriginal && isGif && fs.existsSync(webpPath)) {
+      fs.unlinkSync(imagePath);
+      return { status: 'created_and_deleted', path: webpPath, originalDeleted: imagePath };
+    }
+
     return { status: 'created', path: webpPath };
   } catch (err) {
     console.error(`Failed to optimize image: ${imagePath}`, err);
@@ -52,8 +60,9 @@ async function processImage(imagePath) {
   }
 }
 
-async function main() {
+export async function main() {
   console.log('Starting media asset optimization...');
+  const shouldDeleteOriginalGifs = process.argv.includes('--delete-gifs');
   let totalProcessed = 0;
   let totalCreated = 0;
   let totalSkipped = 0;
@@ -62,8 +71,8 @@ async function main() {
     const images = getImagesInDirectory(dir);
     for (const img of images) {
       totalProcessed++;
-      const result = await processImage(img);
-      if (result.status === 'created') totalCreated++;
+      const result = await processImage(img, { deleteOriginal: shouldDeleteOriginalGifs });
+      if (result.status === 'created' || result.status === 'created_and_deleted') totalCreated++;
       if (result.status === 'skipped') totalSkipped++;
     }
   }
@@ -71,7 +80,13 @@ async function main() {
   console.log(`Media optimization complete: ${totalProcessed} checked, ${totalCreated} WebP generated, ${totalSkipped} skipped.`);
 }
 
-main().catch((err) => {
-  console.error('Error optimizing media assets:', err);
-  process.exit(1);
-});
+export { TARGET_DIRS };
+
+const isDirectRun = process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1]);
+if (isDirectRun) {
+  main().catch((err) => {
+    console.error('Error optimizing media assets:', err);
+    process.exit(1);
+  });
+}
+

@@ -23,7 +23,7 @@ export const autonomousTools: ResearchTool[] = [
     category: 'Education',
     status: 'Completed',
     tags: ['Robotics & autonomy', 'Computer vision', 'ISEC 2017', 'Visual servoing', 'Motion planning', 'ROS'],
-    image: '/assets/research/bwsi-racecar/racecar_main.gif',
+    image: '/assets/research/bwsi-racecar/racecar_main.webp',
     imageAlt: 'Students programming miniature autonomous vehicles',
     canonicalPath: '/research/bwsi-racecar/',
     videoUrl: 'https://www.youtube.com/watch?v=UjVatZ3NK5U',
@@ -37,7 +37,7 @@ export const autonomousTools: ResearchTool[] = [
     category: 'Robotics & Autonomy',
     status: 'Completed',
     tags: ['Robotics & autonomy', 'Multi-agent', 'IJRR Journal', 'RSS 2015 Finalist', 'POMDP'],
-    image: '/assets/research/delivery-bots/coordination.gif',
+    image: '/assets/research/delivery-bots/coordination.webp',
     imageAlt: 'Decentralized multi-robot package delivery and coordination under uncertainty',
     canonicalPath: '/research/delivery-bots/',
     externalUrl: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=NM6SfiEAAAAJ&citation_for_view=NM6SfiEAAAAJ:zYLM7Y9cAGgC'
@@ -51,7 +51,7 @@ export const autonomousTools: ResearchTool[] = [
     category: 'Robotics & Hardware',
     status: 'Completed',
     tags: ['Robotics', 'Machine learning', 'Hardware acceleration', 'MIT'],
-    image: '/assets/research/drone_follow.gif',
+    image: '/assets/research/drone_follow.webp',
     imageAlt: 'Parrot Rolling Spider Drone hovering over path',
     canonicalPath: '/research/graduate-engineering-projects/',
     mediaLinks: [
@@ -152,7 +152,7 @@ export const autonomousTools: ResearchTool[] = [
     category: 'Robotics & Hardware',
     status: 'Completed',
     tags: ['Robotics', 'Mechatronics', 'Embedded systems', 'Digital logic', 'Microcontrollers', 'UCSC', 'Hardware'],
-    image: '/assets/research/undergraduate-projects/flip_flop.gif',
+    image: '/assets/research/undergraduate-projects/flip_flop.webp',
     canonicalPath: '/research/undergraduate-projects/'
   }
 ];

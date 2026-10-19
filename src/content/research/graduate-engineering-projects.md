@@ -21,7 +21,7 @@ A showcase of advanced graduate-level engineering systems developed at MIT. Thes
 
 The **Drone Line Following Autonomous Controller** ("Follow the Yellow Brick Road") project was a collaborative effort with teammates Raghav Aggarwal, Julia Sokol, and Patrick Lowe to engineer a real-time computer vision and state feedback control loop for a micro quadrotor (Parrot Rolling Spider) to autonomously detect, align with, and track floor-marked paths.
 
-[![Rolling Spider micro-drone executing closed-loop visual path tracking along yellow floor-marked trajectories. | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=f5l8GA1PHm8#no-embed](/assets/research/drone_follow.gif)](https://www.youtube.com/watch?v=f5l8GA1PHm8#no-embed)
+[![Rolling Spider micro-drone executing closed-loop visual path tracking along yellow floor-marked trajectories. | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=f5l8GA1PHm8#no-embed](/assets/research/drone_follow.webp)](https://www.youtube.com/watch?v=f5l8GA1PHm8#no-embed)
 
 ### System Architecture & Control Loop
 

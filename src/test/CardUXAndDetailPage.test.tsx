@@ -51,9 +51,9 @@ describe('Card UX & Detail Page Navigation Improvements', () => {
     expect(iframes.length).toBe(0); // With #no-embed, no iframes are generated
     const images = Array.from(container.querySelectorAll('img'));
     const imageSrcs = images.map(img => img.getAttribute('src'));
-    expect(imageSrcs).toContain('/assets/research/duckietown/oreo_wheelie.gif');
-    expect(imageSrcs).toContain('/assets/research/duckietown/navigation_2.gif');
-    expect(imageSrcs).toContain('/assets/research/duckietown/navigation_1.gif');
+    expect(imageSrcs).toContain('/assets/research/duckietown/oreo_wheelie.webp');
+    expect(imageSrcs).toContain('/assets/research/duckietown/navigation_2.webp');
+    expect(imageSrcs).toContain('/assets/research/duckietown/navigation_1.webp');
   });
 
   it('renders standardized aspect ratio and object-cover classes for undergraduate projects gallery images', () => {

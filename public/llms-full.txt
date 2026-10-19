@@ -303,7 +303,7 @@ Teaching the transition from low-level control to high-level goals using Robot O
 - **Motion Planning:** Compares the simple online Bug algorithm with optimal, graph-based Visibility Graphs, factoring in robot geometry and obstacle expansion.
 - **Lab Roadmap:** Outlines upcoming hands-on tasks, including AR tag localization, potential field navigation, and a multi-car "leader-follower" demo.
 
-[![Motion Planning Lecture Demonstration](/assets/research/bwsi-racecar/lecture_planning.gif)](https://www.youtube.com/watch?v=CdRs0l9f5WM#no-embed)
+[![Motion Planning Lecture Demonstration](/assets/research/bwsi-racecar/lecture_planning.webp)](https://www.youtube.com/watch?v=CdRs0l9f5WM#no-embed)
 *[Watch Planning Lecture on YouTube ↗](https://www.youtube.com/watch?v=CdRs0l9f5WM#no-embed)*
 
 ---
@@ -324,7 +324,7 @@ Developing OpenCV-based lane detection, color blob tracking, and feedback contro
   - *Line Following:* Modifies the visual servoing approach (e.g., cropping the top half of the image) to keep the car centered on a track.
 - **Practical Tips & OpenCV Tools:** Use **ROS bags** for testing playback, downsample camera resolution to reduce lag, extract custom HSV thresholds directly from your images, and utilize OpenCV functions like `putText`, `findContours`, and `rectangle`.
 
-[![Visual Servoing Lecture Demonstration](/assets/research/bwsi-racecar/lecture_visual_servoing.gif)](https://www.youtube.com/watch?v=bAAatB2IvUM#no-embed)
+[![Visual Servoing Lecture Demonstration](/assets/research/bwsi-racecar/lecture_visual_servoing.webp)](https://www.youtube.com/watch?v=bAAatB2IvUM#no-embed)
 *[Watch Visual Servoing Lecture on YouTube ↗](https://www.youtube.com/watch?v=bAAatB2IvUM#no-embed)*
 
 ---
@@ -334,7 +334,7 @@ Developing OpenCV-based lane detection, color blob tracking, and feedback contro
 The practical side of the RACECAR curriculum culminates in student demonstrations and a high-speed, autonomous racing competition.
 
 ### 🎥 Part A: Line Following Demonstration
-[![Autonomous Navigation & Visual Servoing Behaviors](/assets/research/bwsi-racecar/racecar_behaviors.gif)](https://www.youtube.com/watch?v=0U0pPbWhLVE#no-embed)
+[![Autonomous Navigation & Visual Servoing Behaviors](/assets/research/bwsi-racecar/racecar_behaviors.webp)](https://www.youtube.com/watch?v=0U0pPbWhLVE#no-embed)
 *[Watch Full Demonstration on YouTube ↗](https://www.youtube.com/watch?v=0U0pPbWhLVE#no-embed)*
 
 Closed-loop proportional control tracking paths using monocular camera input.
@@ -342,7 +342,7 @@ Closed-loop proportional control tracking paths using monocular camera input.
 ---
 
 ### 🎥 Part B: Cone Tracking & Visual Servoing
-[![Student Cone Tracking Visual Servoing Demo](/assets/research/bwsi-racecar/racecar_students.gif)](https://www.youtube.com/watch?v=qSe8JmWQnYk#no-embed)
+[![Student Cone Tracking Visual Servoing Demo](/assets/research/bwsi-racecar/racecar_students.webp)](https://www.youtube.com/watch?v=qSe8JmWQnYk#no-embed)
 *[Watch Full Demonstration on YouTube ↗](https://www.youtube.com/watch?v=qSe8JmWQnYk#no-embed)*
 
 Real-time visual tracking, color isolation, and safety-limited collision avoidance.
@@ -352,7 +352,7 @@ Real-time visual tracking, color isolation, and safety-limited collision avoidan
 ### 🎥 Main RACECAR Challenge Demonstration
 An intensive final-day speed loop challenge where 1/10th scale autonomous racecars navigate complex indoor corridors. Vehicles must perform real-time visual servoing, LIDAR-based obstacle avoidance, and precise wall-following to achieve rapid lap times without collision.
 
-[![Main RACECAR Challenge Demonstration](/assets/research/bwsi-racecar/racecar_main.gif)](https://www.youtube.com/watch?v=UjVatZ3NK5U#no-embed)
+[![Main RACECAR Challenge Demonstration](/assets/research/bwsi-racecar/racecar_main.webp)](https://www.youtube.com/watch?v=UjVatZ3NK5U#no-embed)
 *[Watch Full Video Demonstration on YouTube ↗](https://www.youtube.com/watch?v=UjVatZ3NK5U#no-embed)*
 
 ---
@@ -453,7 +453,7 @@ Experimental results verified:
 
 ## Video Demonstrations & Media
 
-[![Dental Robotics Demonstration Video | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=tXif7xeZmGI#no-embed](/assets/research/dental/dental_robotics.gif#max-w-2xl)](https://www.youtube.com/watch?v=tXif7xeZmGI#no-embed)
+[![Dental Robotics Demonstration Video | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=tXif7xeZmGI#no-embed](/assets/research/dental/dental_robotics.webp#max-w-2xl)](https://www.youtube.com/watch?v=tXif7xeZmGI#no-embed)
 
 ---
 
@@ -475,7 +475,7 @@ Experimental results verified:
 
 This research forms the core of my PhD dissertation at **MIT CSAIL**, advised by **Prof. Leslie Pack Kaelbling** and **Prof. Tomás Lozano-Pérez**, with committee member **Prof. Sertac Karaman**. My work enables general-purpose helper robots to reliably arrange unanchored objects into desired target configurations despite severe pose uncertainty caused by inaccurate sensing, control errors, and unknown physical friction.
 
-[![Figure 1: Willow Garage PR2 robot performing physical conformant manipulation to arrange blocks into tight arrangements under pose uncertainty without visual feedback. | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=omdHFeBBYZ0#no-embed](/assets/research/phd/icra_presentation.gif#max-w-2xl)](https://www.youtube.com/watch?v=omdHFeBBYZ0#no-embed)
+[![Figure 1: Willow Garage PR2 robot performing physical conformant manipulation to arrange blocks into tight arrangements under pose uncertainty without visual feedback. | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=omdHFeBBYZ0#no-embed](/assets/research/phd/icra_presentation.webp#max-w-2xl)](https://www.youtube.com/watch?v=omdHFeBBYZ0#no-embed)
 
 
 ---
@@ -492,7 +492,7 @@ The belief-state approach is detailed in our **ICRA 2018** paper:
 
 ---
 
-[![Figure 2: ICRA 2018 paper presentation and conference spotlight breakdown. | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=so-9kkQXlxc#no-embed](/assets/research/phd/conformant_demo.gif#max-w-2xl)](https://www.youtube.com/watch?v=so-9kkQXlxc#no-embed)
+[![Figure 2: ICRA 2018 paper presentation and conference spotlight breakdown. | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=so-9kkQXlxc#no-embed](/assets/research/phd/conformant_demo.webp#max-w-2xl)](https://www.youtube.com/watch?v=so-9kkQXlxc#no-embed)
 
 ---
 
@@ -511,7 +511,7 @@ Furthermore, camera lines-of-sight are frequently obstructed by robot end-effect
 
 ### 1. Nominal Trajectory: Plan Improvement with Fixture Placement (1/3)
 
-[![Nominal Trajectory: Plan Improvement with Fixture Placement | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=MBsnNbD18tU#no-embed](/assets/research/phd/belief_1.gif#max-w-2xl)](https://www.youtube.com/watch?v=MBsnNbD18tU#no-embed)
+[![Nominal Trajectory: Plan Improvement with Fixture Placement | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=MBsnNbD18tU#no-embed](/assets/research/phd/belief_1.webp#max-w-2xl)](https://www.youtube.com/watch?v=MBsnNbD18tU#no-embed)
 
 * **Goal:** Execute planar assembly of disjoint block clusters into a single composite structure via non-prehensile pushing and fixturing.
 * **Execution:** A linear pusher translates the lower cluster along an open-loop trajectory to mate seamlessly with the stationary upper target.
@@ -521,7 +521,7 @@ Furthermore, camera lines-of-sight are frequently obstructed by robot end-effect
 
 ### 2. Failure Mode: Open-Loop Drift Under Uncertainty (2/3)
 
-[![Failure Mode: Open-Loop Drift Under Uncertainty | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=yjhySqcgLi4#no-embed](/assets/research/phd/belief_2.gif#max-w-2xl)](https://www.youtube.com/watch?v=yjhySqcgLi4#no-embed)
+[![Failure Mode: Open-Loop Drift Under Uncertainty | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=yjhySqcgLi4#no-embed](/assets/research/phd/belief_2.webp#max-w-2xl)](https://www.youtube.com/watch?v=yjhySqcgLi4#no-embed)
 
 * **Perturbation:** Introduced stochastic noise into initial object poses and actuation dynamics.
 * **Failure Mechanism:** Unconstrained degrees of freedom lead to compounding kinematic drift and premature rotation.
@@ -531,7 +531,7 @@ Furthermore, camera lines-of-sight are frequently obstructed by robot end-effect
 
 ### 3. Robust Execution: Passive Mechanical Funneling via Fixture Placement (3/3)
 
-[![Robust Execution: Passive Mechanical Funneling via Fixture Placement | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=ubUMq8Rnb18#no-embed](/assets/research/phd/refinement.gif#max-w-2xl)](https://www.youtube.com/watch?v=ubUMq8Rnb18#no-embed)
+[![Robust Execution: Passive Mechanical Funneling via Fixture Placement | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=ubUMq8Rnb18#no-embed](/assets/research/phd/refinement.webp#max-w-2xl)](https://www.youtube.com/watch?v=ubUMq8Rnb18#no-embed)
 
 * **Strategy:** Augment the action space with static intermediate fixtures (e.g., L-brackets) along the configuration boundary.
 * **Mechanism:** Fixtures act as physical invariant sets, passively arresting off-axis drift and squaring block orientations upon contact.
@@ -551,7 +551,7 @@ The second core paradigm formulates manipulation as an explicit forward search o
 Support(b_{t+1}) ⊆ Support(b_t)
 ```
 
-![The initial object placement uncertainty for the PR2 robot was modeled as ±0.2 inches in both x and y coordinates and ±15 degrees in rotation based on physical experiment data](/assets/research/phd/sliding_2.gif) ![Six block arrangement task on PR2](/assets/research/phd/sixblock.png)
+![The initial object placement uncertainty for the PR2 robot was modeled as ±0.2 inches in both x and y coordinates and ±15 degrees in rotation based on physical experiment data](/assets/research/phd/sliding_2.webp) ![Six block arrangement task on PR2](/assets/research/phd/sixblock.png)
 *Figure 3 & 4: Precision placement via contact funneling (left) and six-block arrangement setup on PR2 (right).*
 
 
@@ -559,7 +559,7 @@ Support(b_{t+1}) ⊆ Support(b_t)
 ### Belief State Overlay & Action Noise Characterization
 To ground simulated transitions in physical reality, empirical noise characterization and spatial particle overlays visualize contact uncertainty during execution.
 
-![Belief State Overlay Visualization](/assets/research/phd/sliding_1.gif#max-w-xl)
+![Belief State Overlay Visualization](/assets/research/phd/sliding_1.webp#max-w-xl)
 *Figure 10: Algorithm belief-state overlay depicting particle distributions and empirical contact confidence bounds during manipulation.*
 
 ### Table and Board Relative Localization Pipeline
@@ -568,7 +568,7 @@ To ground simulated transitions in physical reality, empirical noise characteriz
 - **Tactile Surface Exploration:** To resolve visual occlusions and calibration offsets, the robot switches to a compliant Cartesian controller, guiding its end-effector/paddle to slide directly against the rigid reference edges (e.g., the sides of the fixture/board).
 - **Pose Registration & Transform Fitting:** By logging the contact trajectory along the physical boundaries, the system fits a rigid geometric transform, producing a high-precision spatial calibration between the PR2 base and the workspace.
 
-[![Table and Board Relative Localization Pipeline | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=bWjzn89H1x4#no-embed](/assets/research/phd/noise_model.gif#max-w-2xl)](https://www.youtube.com/watch?v=bWjzn89H1x4#no-embed)
+[![Table and Board Relative Localization Pipeline | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=bWjzn89H1x4#no-embed](/assets/research/phd/noise_model.webp#max-w-2xl)](https://www.youtube.com/watch?v=bWjzn89H1x4#no-embed)
 
 
 ---
@@ -628,7 +628,7 @@ To demonstrate the system in action, I converted the MIT CSAIL lab into a miniat
 ### Decentralized Beerbot Handoff & Delivery Demonstration
 The following demonstration showcases the complete decentralized multi-robot coordination pipeline operating in real-time within the MIT CSAIL corridors. A PR2 robotic bartender prepares and hands off a beverage to a Turtlebot delivery agent, which then autonomously navigates dynamic human obstacles to perform a successful delivery:
 
-[![Decentralized Beerbot Delivery Coordination | Watch Full Video on YouTube ↗ | https://www.youtube.com/watch?v=Jfzun9pP74U#no-embed](/assets/research/delivery-bots/coordination.gif#max-w-xl)](https://www.youtube.com/watch?v=Jfzun9pP74U#no-embed)
+[![Decentralized Beerbot Delivery Coordination | Watch Full Video on YouTube ↗ | https://www.youtube.com/watch?v=Jfzun9pP74U#no-embed](/assets/research/delivery-bots/coordination.webp#max-w-xl)](https://www.youtube.com/watch?v=Jfzun9pP74U#no-embed)
 
 ---
 
@@ -866,7 +866,7 @@ Every Duckiebot started its journey as a disassembled kit of raw components. Bef
 
 Our initial milestone was the physical assembly and electrical integration of the robot chassis. Once the hardware setup was completed, we focused on calibrating the pulse-width modulation (PWM) signals to align the raw motor outputs, ensuring the robot would drive in a straight line during open-loop tests.
 
-[![First Functional Build Verification (Oreo) | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=YTB2FgN_4zo#no-embed](/assets/research/duckietown/oreo_wheelie.gif#max-w-2xl)](https://www.youtube.com/watch?v=YTB2FgN_4zo#no-embed)
+[![First Functional Build Verification (Oreo) | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=YTB2FgN_4zo#no-embed](/assets/research/duckietown/oreo_wheelie.webp#max-w-2xl)](https://www.youtube.com/watch?v=YTB2FgN_4zo#no-embed)
 
 Initial hardware test of my personal Duckiebot, affectionately named Oreo, immediately following its first complete assembly. The video documents an unexpected wheelie milestone during early open-loop motor calibration.
 
@@ -876,7 +876,7 @@ Initial hardware test of my personal Duckiebot, affectionately named Oreo, immed
 
 With the physical robot calibrated, we transitioned to developing the visual perception pipelines. Before establishing closed-loop control, we isolated and verified our color-segmentation algorithms, tuning visual threshold filters to detect orange features under variable classroom lighting conditions.
 
-[![Standalone Obstacle Isolation | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=HfS5Yj63H34#no-embed](/assets/research/duckietown/navigation_2.gif#max-w-2xl)](https://www.youtube.com/watch?v=HfS5Yj63H34#no-embed)
+[![Standalone Obstacle Isolation | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=HfS5Yj63H34#no-embed](/assets/research/duckietown/navigation_2.webp#max-w-2xl)](https://www.youtube.com/watch?v=HfS5Yj63H34#no-embed)
 
 Demonstration of a custom color-segmentation pipeline originally tuned for orange traffic cones, which successfully cross-detects rubber duck obstacles via their orange beaks.
 
@@ -886,7 +886,7 @@ Demonstration of a custom color-segmentation pipeline originally tuned for orang
 
 This phase showcases the full integration of the individual perception and control stacks driving in closed-loop. The system links the real-time vision-based lane tracking pipeline directly with a proportional-derivative (PD) heading controller, while concurrently running the standalone obstacle detector to trigger a reactive safety override whenever a hazard appears.
 
-[![Fully Integrated Autonomous Lane Following & Avoidance | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=rPpewHIF2KU#no-embed](/assets/research/duckietown/navigation_1.gif#max-w-2xl)](https://www.youtube.com/watch?v=rPpewHIF2KU#no-embed)
+[![Fully Integrated Autonomous Lane Following & Avoidance | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=rPpewHIF2KU#no-embed](/assets/research/duckietown/navigation_1.webp#max-w-2xl)](https://www.youtube.com/watch?v=rPpewHIF2KU#no-embed)
 
 Demonstration of the combined lines-and-obstacle pipeline working in tandem to maintain lane centerlines while reliably executing safety-stops for proximity hazards.
 
@@ -1160,7 +1160,7 @@ A showcase of advanced graduate-level engineering systems developed at MIT. Thes
 
 The **Drone Line Following Autonomous Controller** ("Follow the Yellow Brick Road") project was a collaborative effort with teammates Raghav Aggarwal, Julia Sokol, and Patrick Lowe to engineer a real-time computer vision and state feedback control loop for a micro quadrotor (Parrot Rolling Spider) to autonomously detect, align with, and track floor-marked paths.
 
-[![Rolling Spider micro-drone executing closed-loop visual path tracking along yellow floor-marked trajectories. | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=f5l8GA1PHm8#no-embed](/assets/research/drone_follow.gif)](https://www.youtube.com/watch?v=f5l8GA1PHm8#no-embed)
+[![Rolling Spider micro-drone executing closed-loop visual path tracking along yellow floor-marked trajectories. | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=f5l8GA1PHm8#no-embed](/assets/research/drone_follow.webp)](https://www.youtube.com/watch?v=f5l8GA1PHm8#no-embed)
 
 ### System Architecture & Control Loop
 
@@ -1509,20 +1509,20 @@ The earliest phase of the research focused on a simplified model containing disc
 
 | Phase | Description | Demonstration |
 | :--- | :--- | :--- |
-| **RL Simulation Run 1** | Point contact formulation for basic force-closure boundary verification. | [![Run 1 \| Watch Full Video on YouTube ↗ \| https://www.youtube.com/watch?v=PIhXfWyNPzQ#no-embed](/assets/research/masters-thesis/rl_sim_1.gif#max-w-xs)](https://www.youtube.com/watch?v=PIhXfWyNPzQ#no-embed) |
-| **RL Simulation Run 2** | Static evaluation of discrete MDP value iteration. | [![Run 2 \| Watch Full Video on YouTube ↗ \| https://www.youtube.com/watch?v=M5PbYaPY0RE#no-embed](/assets/research/masters-thesis/rl_sim_2.gif#max-w-xs)](https://www.youtube.com/watch?v=M5PbYaPY0RE#no-embed) |
-| **RL Simulation Run 3** | Multi-contact stability under varying payload offsets. | [![Run 3 \| Watch Full Video on YouTube ↗ \| https://www.youtube.com/watch?v=8TKJiJnDOSo#no-embed](/assets/research/masters-thesis/rl_sim_3.gif#max-w-xs)](https://www.youtube.com/watch?v=8TKJiJnDOSo#no-embed) |
-| **RL Simulation Run 4** | Point contact modeling with frictional boundaries via Sarsa. | [![Run 4 \| Watch Full Video on YouTube ↗ \| https://www.youtube.com/watch?v=lnHDDjkWKfE#no-embed](/assets/research/masters-thesis/rl_sim_4.gif#max-w-xs)](https://www.youtube.com/watch?v=lnHDDjkWKfE#no-embed) |
+| **RL Simulation Run 1** | Point contact formulation for basic force-closure boundary verification. | [![Run 1 \| Watch Full Video on YouTube ↗ \| https://www.youtube.com/watch?v=PIhXfWyNPzQ#no-embed](/assets/research/masters-thesis/rl_sim_1.webp#max-w-xs)](https://www.youtube.com/watch?v=PIhXfWyNPzQ#no-embed) |
+| **RL Simulation Run 2** | Static evaluation of discrete MDP value iteration. | [![Run 2 \| Watch Full Video on YouTube ↗ \| https://www.youtube.com/watch?v=M5PbYaPY0RE#no-embed](/assets/research/masters-thesis/rl_sim_2.webp#max-w-xs)](https://www.youtube.com/watch?v=M5PbYaPY0RE#no-embed) |
+| **RL Simulation Run 3** | Multi-contact stability under varying payload offsets. | [![Run 3 \| Watch Full Video on YouTube ↗ \| https://www.youtube.com/watch?v=8TKJiJnDOSo#no-embed](/assets/research/masters-thesis/rl_sim_3.webp#max-w-xs)](https://www.youtube.com/watch?v=8TKJiJnDOSo#no-embed) |
+| **RL Simulation Run 4** | Point contact modeling with frictional boundaries via Sarsa. | [![Run 4 \| Watch Full Video on YouTube ↗ \| https://www.youtube.com/watch?v=lnHDDjkWKfE#no-embed](/assets/research/masters-thesis/rl_sim_4.webp#max-w-xs)](https://www.youtube.com/watch?v=lnHDDjkWKfE#no-embed) |
 
 ### Advanced Enveloping & Whole-Arm Grasping (Runs 5-7)
 The subsequent iterations transitioned to whole-arm caging, continuous state space control, and active dual-arm manipulation:
 
 * **RL Simulation Run 5**
-  [![RL Simulation Run 5 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=s1vjsvnPfdc#no-embed](/assets/research/masters-thesis/rl_sim_5.gif#max-w-xl)](https://www.youtube.com/watch?v=s1vjsvnPfdc#no-embed)
+  [![RL Simulation Run 5 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=s1vjsvnPfdc#no-embed](/assets/research/masters-thesis/rl_sim_5.webp#max-w-xl)](https://www.youtube.com/watch?v=s1vjsvnPfdc#no-embed)
 * **RL Simulation Run 6**
-  [![RL Simulation Run 6 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=-V2KtcETAi8#no-embed](/assets/research/masters-thesis/rl_sim_6.gif#max-w-xl)](https://www.youtube.com/watch?v=-V2KtcETAi8#no-embed)
+  [![RL Simulation Run 6 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=-V2KtcETAi8#no-embed](/assets/research/masters-thesis/rl_sim_6.webp#max-w-xl)](https://www.youtube.com/watch?v=-V2KtcETAi8#no-embed)
 * **RL Simulation Run 7**
-  [![RL Simulation Run 7 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=gf2vNOKEKXc#no-embed](/assets/research/masters-thesis/rl_sim_7.gif#max-w-xl)](https://www.youtube.com/watch?v=gf2vNOKEKXc#no-embed)
+  [![RL Simulation Run 7 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=gf2vNOKEKXc#no-embed](/assets/research/masters-thesis/rl_sim_7.webp#max-w-xl)](https://www.youtube.com/watch?v=gf2vNOKEKXc#no-embed)
 
 ---
 
@@ -1531,11 +1531,11 @@ The subsequent iterations transitioned to whole-arm caging, continuous state spa
 Validation of my learned whole-arm manipulation policies on the physical PR2:
 
 * **PR2 Grasping Demonstration 1**
-  [![PR2 Grasping Demonstration 1 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=2mGN3ka_7i0#no-embed](/assets/research/masters-thesis/pr2_grasp_1.gif#max-w-xl)](https://www.youtube.com/watch?v=2mGN3ka_7i0#no-embed)
+  [![PR2 Grasping Demonstration 1 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=2mGN3ka_7i0#no-embed](/assets/research/masters-thesis/pr2_grasp_1.webp#max-w-xl)](https://www.youtube.com/watch?v=2mGN3ka_7i0#no-embed)
 * **PR2 Grasping Demonstration 2**
-  [![PR2 Grasping Demonstration 2 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=QgoJKaoZ3dY#no-embed](/assets/research/masters-thesis/pr2_grasp_2.gif#max-w-xl)](https://www.youtube.com/watch?v=QgoJKaoZ3dY#no-embed)
+  [![PR2 Grasping Demonstration 2 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=QgoJKaoZ3dY#no-embed](/assets/research/masters-thesis/pr2_grasp_2.webp#max-w-xl)](https://www.youtube.com/watch?v=QgoJKaoZ3dY#no-embed)
 * **PR2 Grasping Demonstration 3**
-  [![PR2 Grasping Demonstration 3 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=bgHzqflrkCE#no-embed](/assets/research/masters-thesis/pr2_grasp_3.gif#max-w-xl)](https://www.youtube.com/watch?v=bgHzqflrkCE#no-embed)
+  [![PR2 Grasping Demonstration 3 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=bgHzqflrkCE#no-embed](/assets/research/masters-thesis/pr2_grasp_3.webp#max-w-xl)](https://www.youtube.com/watch?v=bgHzqflrkCE#no-embed)
 
 ---
 
@@ -1592,7 +1592,7 @@ During my undergraduate studies in Computer Engineering at UC Santa Cruz (UCSC),
 
 **Timeline:** Fall 2010 | **Role:** Digital Logic Designer | **Tech Stack:** Breadboard TTL Logic, D Flip-Flops, Oscilloscope, Logic Analyzer
 
-[![Breadboard D Flip-Flop hardware loops. | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=G0uw5PP9fuw#no-embed](/assets/research/undergraduate-projects/flip_flop.gif#max-w-2xl)](https://www.youtube.com/watch?v=G0uw5PP9fuw#no-embed)
+[![Breadboard D Flip-Flop hardware loops. | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=G0uw5PP9fuw#no-embed](/assets/research/undergraduate-projects/flip_flop.webp#max-w-2xl)](https://www.youtube.com/watch?v=G0uw5PP9fuw#no-embed)
 
 ---
 
@@ -1626,7 +1626,7 @@ We structured the software to manage real-time communication and hardware feedba
 * **Pseudo-Force Control:** Motor resistance is regulated by specifying direct current levels. We mapped out eight distinct current settings into their hexadecimal representations, creating a structured command look-up table for both opening and closing actions.
 * **Dynamic Lookup System:** When an operator presses a digital push-button, the program measures the active voltage across the potentiometer and uses that value to index the corresponding open or close command from the lookup table.
 
-[![68HC11 Microcontroller Board and Mechanical Gripper hardware loops.](/assets/research/undergraduate-projects/gripper_control.gif#max-w-2xl)](https://www.youtube.com/watch?v=tXif7xeZmGI#no-embed)
+[![68HC11 Microcontroller Board and Mechanical Gripper hardware loops.](/assets/research/undergraduate-projects/gripper_control.webp#max-w-2xl)](https://www.youtube.com/watch?v=tXif7xeZmGI#no-embed)
 
 #### Engineering Impact & Verification
 
@@ -1710,7 +1710,7 @@ We created this interactive arcade game for the Tau Beta Pi student organization
 
 We wired an array of 28 individual LEDs across digital output pins 22 through 49. The code lights up one LED at a time with a quick 10ms delay, making the light look like it is spinning in a continuous circle. The game button connects to an analog input pin (A0). The microcontroller constantly reads this pin, and when the button press drops the reading below our set threshold of 500, the movement loop stops completely. This freezes the light, sends the final score data through a 9600 baud Serial pipeline, and keeps the game at the end screen until you press reset to play again.
 
-[![Microcontroller-Based LED Ring Reaction Game hardware loops. | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=p1W5xtdLUWk#no-embed](/assets/research/undergraduate-projects/led_game.gif#max-w-2xl)](https://www.youtube.com/watch?v=p1W5xtdLUWk#no-embed)
+[![Microcontroller-Based LED Ring Reaction Game hardware loops. | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=p1W5xtdLUWk#no-embed](/assets/research/undergraduate-projects/led_game.webp#max-w-2xl)](https://www.youtube.com/watch?v=p1W5xtdLUWk#no-embed)
 
 ---
 
