@@ -583,7 +583,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
                 );
               }
               return (
-                <code className="bg-surface text-text-main px-1.5 py-0.5 rounded font-mono text-xs border border-line normal-case" {...props}>
+                <code className="bg-slate-800 text-sky-300 px-1.5 py-0.5 rounded font-mono text-xs border border-slate-700 normal-case" {...props}>
                   {children}
                 </code>
               );
@@ -627,10 +627,41 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
                 textContent = children.map(c => typeof c === 'string' ? c : '').join('');
               }
               const id = textContent.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+
+              const match = textContent.match(/\(([^)]+)\)\s*$/);
+              let cleanChildren = children;
+              let tag = null;
+
+              if (match) {
+                tag = match[1];
+                if (typeof children === 'string') {
+                  cleanChildren = children.replace(/\s*\([^)]+\)\s*$/, '');
+                } else if (Array.isArray(children)) {
+                  // For arrays, we just replace the tag in the last string element
+                  const newChildren = [...children];
+                  for (let i = newChildren.length - 1; i >= 0; i--) {
+                    if (typeof newChildren[i] === 'string') {
+                      newChildren[i] = newChildren[i].replace(/\s*\([^)]+\)\s*$/, '');
+                      break;
+                    }
+                  }
+                  cleanChildren = newChildren;
+                }
+              }
+
               return (
-                <h2 id={id || undefined} className="text-2xl font-bold text-text-main mt-12 mb-4 pb-2 border-b border-line" {...props}>
-                  {children}
-                </h2>
+                <>
+                  <h2 id={id || undefined} className="text-2xl font-bold text-text-main mt-12 mb-4 pb-2 border-b border-line" {...props}>
+                    {cleanChildren}
+                  </h2>
+                  {tag && (
+                    <div className="flex gap-2 mt-3 mb-6">
+                      <span className="px-2.5 py-1 text-xs font-bold rounded-md bg-accent-sky/10 text-accent-sky border border-accent-sky/20">
+                        {tag}
+                      </span>
+                    </div>
+                  )}
+                </>
               );
             },
             h3: ({ children, ...props }) => {
@@ -642,7 +673,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
               }
               const id = textContent.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
               return (
-                <h3 id={id || undefined} className="text-lg font-bold text-text-main mt-8 mb-3" {...props}>
+                <h3 id={id || undefined} className="text-xl font-extrabold text-text-main mt-10 mb-4" {...props}>
                   {children}
                 </h3>
               );
@@ -656,22 +687,42 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
               }
               const id = textContent.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
               return (
-                <h4 id={id || undefined} className="text-base font-bold text-text-main mt-6 mb-2" {...props}>
+                <h4 id={id || undefined} className="text-lg font-semibold text-text-secondary mt-8 mb-3" {...props}>
                   {children}
                 </h4>
               );
             },
             ul: ({ children, ...props }) => (
-              <ul className="list-disc pl-6 my-4 space-y-1.5 text-text-body" {...props}>
+              <ul className="list-disc pl-6 my-4 space-y-1.5 text-text-body [&_ul]:my-2 [&_ul]:pl-6 [&_ol]:my-2 [&_ol]:pl-6" {...props}>
                 {children}
               </ul>
             ),
             ol: ({ children, ...props }) => (
-              <ol className="list-decimal pl-6 my-4 space-y-1.5 text-text-body" {...props}>
+              <ol className="list-decimal pl-6 my-4 space-y-1.5 text-text-body [&_ul]:my-2 [&_ul]:pl-6 [&_ol]:my-2 [&_ol]:pl-6" {...props}>
                 {children}
               </ol>
             ),
             a: ({ href, children, ...props }) => {
+              let textContent = '';
+              if (typeof children === 'string') {
+                textContent = children;
+              } else if (Array.isArray(children)) {
+                textContent = children.map(c => typeof c === 'string' ? c : '').join('');
+              }
+              if (textContent.startsWith('Download')) {
+                return (
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center space-x-2 bg-accent/15 border border-accent/30 text-accent hover:bg-accent/25 px-4 py-2 rounded-xl text-sm font-semibold transition-colors min-h-[44px] mt-2"
+                    {...props}
+                  >
+                    {children}
+                  </a>
+                );
+              }
+
               if (href) {
                 const isNoEmbed = href.includes('no-embed');
                 const cleanHref = href.replace(/[?#]no-embed/, '');
@@ -731,6 +782,14 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
               // Check if paragraph contains media items that should be displayed side-by-side in a grid
               // ReactMarkdown wraps standalone block elements or consecutive links in <p>
               const childrenArray = React.Children.toArray(children);
+
+              if (typeof childrenArray[0] === 'string' && childrenArray[0].startsWith('Jump to:')) {
+                return (
+                  <div className="sticky top-24 z-10 flex flex-wrap gap-4 bg-bg/90 backdrop-blur-md py-3 border-b border-line mb-8 text-sm font-semibold">
+                    {children}
+                  </div>
+                );
+              }
 
               // Detect if all element children are links to YouTube or images
               const isMediaGroup = childrenArray.length > 1 && childrenArray.every((child) => {

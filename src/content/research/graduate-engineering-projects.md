@@ -15,13 +15,15 @@ A showcase of advanced graduate-level engineering systems developed at MIT. Thes
 
 ---
 
+Jump to: [Quadrotor](#1-autonomous-quadrotor-control-mit-16-30-16-31) | [BBox ML](#2-bounding-box-reranking-mit-6-867-machine-learning) | [RSA Accelerator](#3-parameterized-cryptographic-accelerator-mit-6-375-complex-digital-systems)
+
 ## 1. Autonomous Quadrotor Control — MIT 16.30 / 16.31 (C / MATLAB)
 
 ### Designing Closed-Loop Vision Trajectory Tracking for Micro-Quadrotors
 
 The **Drone Line Following Autonomous Controller** ("Follow the Yellow Brick Road") project was a collaborative effort with teammates Raghav Aggarwal, Julia Sokol, and Patrick Lowe to engineer a real-time computer vision and state feedback control loop for a micro quadrotor (Parrot Rolling Spider) to autonomously detect, align with, and track floor-marked paths.
 
-[![Rolling Spider micro-drone executing closed-loop visual path tracking along yellow floor-marked trajectories. | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=f5l8GA1PHm8#no-embed](/assets/research/drone_follow.webp)](https://www.youtube.com/watch?v=f5l8GA1PHm8#no-embed)
+[![Rolling Spider micro-drone executing closed-loop visual path tracking along yellow floor-marked trajectories. | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=f5l8GA1PHm8#no-embed](/assets/research/drone_follow.webp#aspect-video)](https://www.youtube.com/watch?v=f5l8GA1PHm8#no-embed)
 
 ### System Architecture & Control Loop
 
@@ -50,7 +52,7 @@ Autonomous flight using low-cost micro-drones poses severe real-time compute and
 
 In this research project for **6.867 Machine Learning** at MIT CSAIL, my teammate Sanja Popovic and I evaluated learning algorithms to refine object detection ranking and confidence scoring for the **Learning and Intelligent Systems (LIS) group**.
 
-![Distance discrepancy decay functions evaluated to transform spatial offsets into bounding box confidence scores.](/assets/research/report-ml-lis/fig1_score_discrepancy.png)
+![Distance discrepancy decay functions evaluated to transform spatial offsets into bounding box confidence scores.](/assets/research/report-ml-lis/fig1_score_discrepancy.png#invert-dark)
 
 ### Core Problem & Approach
 
@@ -62,7 +64,7 @@ To solve this issue, I focused on formulating learning-to-rank models specifical
 2. **P-Norm Push:** Implemented the P-norm push ranking algorithm, placing higher mathematical penalty on errors at the top of the ranked list so the robot's top choice is correct.
 3. **Experimental Validation:** Evaluated bounding box candidate scoring across real-world cluttered kitchen environments captured by mobile manipulators.
 
-![Performance evaluation showing how our learned weight vectors successfully improve high-precision bounding box candidate scores.](/assets/research/report-ml-lis/fig2_ranking_performance.png)
+![Performance evaluation showing how our learned weight vectors successfully improve high-precision bounding box candidate scores.](/assets/research/report-ml-lis/fig2_ranking_performance.png#invert-dark)
 
 ### Key Results & Takeaways
 
@@ -72,7 +74,7 @@ To solve this issue, I focused on formulating learning-to-rank models specifical
 
 ### Downloads
 
-- 📄 [Download Machine Learning Technical Report (PDF)](https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_ml.pdf)
+[Download Machine Learning Technical Report (PDF) ↗](https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_ml.pdf)
 
 ---
 
@@ -83,6 +85,7 @@ To solve this issue, I focused on formulating learning-to-rank models specifical
 For **MIT 6.375 Complex Digital Systems**, my teammates Timur Balbekov, Neil Forrester, and I engineered a high-performance, parameterized **Hardware RSA Accelerator** using **Bluespec SystemVerilog (BSV)**.
 
 ![System architecture of the RSA accelerator showing memory interface, control rule state machines, and modular exponentiation datapath.](/assets/research/report-6375-rsa/rsa_hardware_architecture.png#invert-dark)
+![Pipelined Montgomery modular multiplication unit designed for high-throughput integer exponentiation.](/assets/research/report-6375-rsa/montgomery_multiplier_datapath.png#invert-dark)
 
 ### Architecture & Hardware Specification
 
@@ -94,8 +97,6 @@ To achieve maximum hardware throughput, I designed and synthesized custom datapa
 2. **Pipelined Datapath Design:** Built a flexible, parameterized bit-width datapath that allows developers to trade off FPGA area against target clock frequency and throughput.
 3. **BSV Guarded Atomic Actions:** Modeled execution concurrency using BSV rule synthesizability, ensuring deadlock-free hardware scheduling and clean control logic.
 
-![Pipelined Montgomery modular multiplication unit designed for high-throughput integer exponentiation.](/assets/research/report-6375-rsa/montgomery_multiplier_datapath.png#invert-dark)
-
 ### Technical Outcomes & Lessons Learned
 
 - **Cycle-Accurate Performance:** Achieved efficient, low-latency execution for multi-hundred bit RSA key processing targeted at FPGA platforms.
@@ -104,4 +105,4 @@ To achieve maximum hardware throughput, I designed and synthesized custom datapa
 
 ### Downloads
 
-- 📄 [Download Hardware RSA Accelerator Report (PDF)](https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_6375.pdf)
+[Download Hardware RSA Accelerator Report (PDF) ↗](https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_6375.pdf)
