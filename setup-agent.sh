@@ -46,8 +46,11 @@ log "Installing Python dependencies..."
 # Upgrade core packaging tools
 "$VENV_PATH/bin/pip" install --upgrade pip setuptools wheel
 
-# Install required python tools
-"$VENV_PATH/bin/pip" install requests python-dotenv pydantic click PyGithub boomtick-cli
+# Install required python tools and standalone td CLI
+"$VENV_PATH/bin/pip" install --upgrade requests python-dotenv pydantic click PyGithub boomtick-cli
+
+# Verify td entrypoint
+"$VENV_PATH/bin/td" --help >/dev/null || warn "td CLI entrypoint verification failed."
 
 # 4. Install Playwright browsers if needed
 if [ "$SKIP_PLAYWRIGHT" = "1" ]; then

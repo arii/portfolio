@@ -18,6 +18,27 @@ To ensure optimal performance and low page load latency across all case studies 
    - Use `OptimizedVideo` (`src/components/ui/OptimizedVideo.tsx`), which renders a `<video autoPlay loop muted playsInline>` tag with appropriate accessibility attributes (`aria-label`, `title`), loading pulse skeletons, and fallback states.
    - Any binary videos (`.mp4`, `.mov`, `.webm`) or serialized model fixtures (`.onnx`, `.bin`, `.parquet`) must be tracked in Git LFS via `.gitattributes`.
 
+# Agent Guidelines & Tool Hierarchy
+
+## Tool Hierarchy
+
+Agents working in this workspace must strictly adhere to the following tool hierarchy:
+
+1. **Tier 1 (MCP Protocol - Primary Interface)**:
+   - When agents run in MCP-compliant hosts (e.g. Claude Code, Cursor), connect to `boomtick-mcp` via `npx @arii/boomtick-mcp` or stdio configuration.
+   - Use strongly typed MCP tools for all codebase auditing, PR analysis, and review workflows.
+
+2. **Tier 2 (CLI Entrypoint - `td`)**:
+   - `td` is the sole, definitive CLI binary entrypoint for terminal execution and fallback automation.
+   - Core structured commands:
+     - `td doctor`: Workspace health check & diagnostic checks.
+     - `td pr detect-conflicts`: Detect and analyze pull request merge conflicts.
+     - `td audit`: Comprehensive code quality and integrity audit.
+   - Agents must never drop down to raw git/bash commands (Tier 3) when a `td` command is available.
+
+3. **Tier 3 (Raw Shell / Git Operations - Fallback Only)**:
+   - Standard bash or git commands should only be used when no higher-tier MCP tool or `td` CLI command exists for the target operation.
+
 # Project-Specific Agent Instructions
 
 This file contains rules and instructions for AI agents working on this portfolio codebase.
