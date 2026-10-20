@@ -44,6 +44,8 @@ jobs:
       - name: Automated AI Code Review
         if: github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch'
         uses: arii/boomtick@main
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
         with:
           github-app-id: ${{ secrets.APP_ID }}
           github-app-private-key: ${{ secrets.APP_PRIVATE_KEY }}
