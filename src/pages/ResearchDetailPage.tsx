@@ -583,7 +583,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
                 );
               }
               return (
-                <code className="bg-slate-800 text-sky-300 px-1.5 py-0.5 rounded font-mono text-xs border border-slate-700 normal-case" {...props}>
+                <code className="bg-surface text-accent-sky px-1.5 py-0.5 rounded font-mono text-xs border border-line normal-case" {...props}>
                   {children}
                 </code>
               );
@@ -655,11 +655,11 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
                     {cleanChildren}
                   </h2>
                   {tag && (
-                    <div className="flex gap-2 mt-3 mb-6">
+                    <Stack direction="row" className="mt-3 mb-6">
                       <span className="px-2.5 py-1 text-xs font-bold rounded-md bg-accent-sky/10 text-accent-sky border border-accent-sky/20">
                         {tag}
                       </span>
-                    </div>
+                    </Stack>
                   )}
                 </>
               );
@@ -785,9 +785,9 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
 
               if (typeof childrenArray[0] === 'string' && childrenArray[0].startsWith('Jump to:')) {
                 return (
-                  <div className="sticky top-24 z-10 flex flex-wrap gap-4 bg-bg/90 backdrop-blur-md py-3 border-b border-line mb-8 text-sm font-semibold">
+                  <Stack direction="row" wrap className="sticky top-24 z-10 gap-4 bg-bg/90 backdrop-blur-md py-3 border-b border-line mb-8 text-sm font-semibold">
                     {children}
-                  </div>
+                  </Stack>
                 );
               }
 
