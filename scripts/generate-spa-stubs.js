@@ -101,11 +101,19 @@ function markdownToHtml(md) {
       return placeholder;
     });
 
-    // 2. Images: ![alt](url) -> <figure><img src="url" alt="alt" /><figcaption>alt</figcaption></figure>
+    // 2. Images: ![alt](url) -> <figure><picture><source srcset="url.webp" type="image/webp" /><img src="url" alt="alt" loading="lazy" decoding="async" /></picture><figcaption>alt</figcaption></figure>
     result = result.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (m, alt, url) => {
       const cleanUrl = url.split('#')[0].trim();
       const cleanAlt = escapeHtml(alt.replace(/^Figure:\s*/i, ''));
-      return `<figure><img src="${escapeHtml(cleanUrl)}" alt="${cleanAlt}" /><figcaption>${cleanAlt}</figcaption></figure>`;
+      const isWebpCandidate = /\.(png|jpe?g|gif)$/i.test(cleanUrl);
+      const webpUrl = isWebpCandidate ? cleanUrl.replace(/\.(png|jpe?g|gif)$/i, '.webp') : null;
+
+      const imgTag = `<img src="${escapeHtml(cleanUrl)}" alt="${cleanAlt}" loading="lazy" decoding="async" />`;
+      const pictureTag = webpUrl
+        ? `<picture><source srcset="${escapeHtml(webpUrl)}" type="image/webp" />${imgTag}</picture>`
+        : imgTag;
+
+      return `<figure>${pictureTag}<figcaption>${cleanAlt}</figcaption></figure>`;
     });
 
     // 3. Links: [text](url)
