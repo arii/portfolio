@@ -55,7 +55,8 @@ const ResearchListPage: React.FC<ResearchListPageProps> = ({ onNavigate }) => {
       <SEO
         title="Robotics & Autonomous Research"
         description="Discover robotics software research in conformant planning, belief-state manipulation, and autonomous systems by Ariel Anders, PhD (MIT CSAIL)."
-        canonicalUrl="/research"
+        canonicalUrl="/research/"
+        ogImage="/assets/research/bwsi-racecar/racecar_main.webp"
         jsonLd={researchSchemas}
       />
 
