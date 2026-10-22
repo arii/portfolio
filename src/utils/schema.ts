@@ -3,15 +3,14 @@ import { NAV_ITEMS } from '@/data/navigation';
 export const SITE_URL = 'https://arii.github.io';
 export const AUTHOR_NAME = 'Ariel Anders, PhD';
 export const AUTHOR_JOB_TITLE = 'Robotics & AI Consulting Engineer';
-export const AUTHOR_JOB_TITLES = ['Robotics Engineer', 'AI/DevAI Engineer', 'Data Analyst'];
-export const AUTHOR_ALUMNI = 'Massachusetts Institute of Technology (MIT CSAIL)';
+export const AUTHOR_ALUMNI = 'Massachusetts Institute of Technology (MIT)';
 export const AUTHOR_EMAIL = 'anders.ariel@gmail.com';
 export const AUTHOR_IMAGE = `${SITE_URL}/assets/roboticist.jpg`;
 export const DEFAULT_LICENSE = 'https://creativecommons.org/licenses/by-nc-nd/4.0/';
 
 export const AUTHOR_SAME_AS = [
-  'https://github.com/arii',
   'https://www.linkedin.com/in/ariel-anders/',
+  'https://github.com/arii',
   'https://scholar.google.com/citations?user=NM6SfiEAAAAJ&hl=en',
   'https://boomtick.blog',
 ];
@@ -171,7 +170,7 @@ export function getPersonAndProfileSchema(canonicalUrl: string = '/') {
     '@id': `${SITE_URL}/about#person`,
     url: `${SITE_URL}/about/`,
     name: AUTHOR_NAME,
-    jobTitle: AUTHOR_JOB_TITLES,
+    jobTitle: AUTHOR_JOB_TITLE,
     email: AUTHOR_EMAIL,
     image: {
       '@type': 'ImageObject',
@@ -185,7 +184,7 @@ export function getPersonAndProfileSchema(canonicalUrl: string = '/') {
     alumniOf: {
       '@type': 'EducationalOrganization',
       name: AUTHOR_ALUMNI,
-      url: 'https://www.csail.mit.edu',
+      url: 'https://www.mit.edu',
     },
     hasCredential: [
       {

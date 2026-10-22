@@ -30,7 +30,7 @@ export const flagshipTools: ResearchTool[] = [
     tags: ['DevAI', 'GitHub API', 'Multi-Agent', 'Workflow'],
     externalUrl: 'https://repo-auditor-ai.vercel.app/',
     externalLinkDisplayLabel: 'Open RepoAuditor App',
-    sourceUrl: 'https://github.com/arii/boomtick',
+    sourceUrl: 'https://github.com/arii/hrm-project-management',
     programmingLanguage: ['TypeScript', 'GitHub API', 'Node.js', 'Google Gemini AI'],
     applicationCategory: 'DeveloperTool',
     isFlagship: true,

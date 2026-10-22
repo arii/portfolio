@@ -660,13 +660,13 @@ function generateJsonLdForRoute(meta) {
     '@id': `${SITE_URL}/about#person`,
     url: `${SITE_URL}/about/`,
     name: AUTHOR_NAME,
-    jobTitle: ['Robotics Engineer', 'AI/DevAI Engineer', 'Data Analyst'],
+    jobTitle: 'Robotics & AI Consulting Engineer',
     email: 'anders.ariel@gmail.com',
     image: DEFAULT_IMAGE,
     alumniOf: {
       '@type': 'EducationalOrganization',
-      name: 'Massachusetts Institute of Technology (MIT CSAIL)',
-      url: 'https://www.csail.mit.edu',
+      name: 'Massachusetts Institute of Technology (MIT)',
+      url: 'https://www.mit.edu',
     },
     knowsAbout: [
       'Artificial Intelligence',
@@ -677,8 +677,8 @@ function generateJsonLdForRoute(meta) {
       'Computer Vision',
     ],
     sameAs: [
-      'https://github.com/arii',
       'https://www.linkedin.com/in/ariel-anders/',
+      'https://github.com/arii',
       'https://scholar.google.com/citations?user=NM6SfiEAAAAJ&hl=en',
       'https://boomtick.blog',
     ],

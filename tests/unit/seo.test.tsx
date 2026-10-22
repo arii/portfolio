@@ -231,7 +231,7 @@ describe('SEO Component & Search Configuration', () => {
     expect(profile['@graph']).toBeDefined();
     const person = profile['@graph'].find((e: any) => e['@type'] === 'Person');
     expect(person.name).toBe('Ariel Anders, PhD');
-    expect(person.jobTitle).toEqual(['Robotics Engineer', 'AI/DevAI Engineer', 'Data Analyst']);
+    expect(person.jobTitle).toBe('Robotics & AI Consulting Engineer');
     expect(person.email).toBe('anders.ariel@gmail.com');
     expect(person.hasCredential).toHaveLength(2);
 
