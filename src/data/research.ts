@@ -35,7 +35,8 @@ export const RESEARCH_POSTS: ResearchPost[] = Object.entries(modules).map(([path
     content: content.trim(),
     category: String(data.category || 'DevAI'),
     author: String(data.author || 'Ariel Anders'),
-    status: String(data.status || 'published')
+    status: String(data.status || 'published'),
+    image: data.image || data.cover ? String(data.image || data.cover) : undefined
   };
 });
 

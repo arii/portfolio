@@ -10,6 +10,7 @@ export interface ResearchPost {
   author?: string;
   readTime?: number;
   status?: string;
+  image?: string;
 }
 
 export interface ResearchTool {

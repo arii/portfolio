@@ -329,10 +329,15 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
 
   const imgMatch = post.content.match(/!\[.*?\]\((.*?)\)/);
   const firstImage = imgMatch ? imgMatch[1].split('#')[0] : undefined;
-  const ogImage = firstImage || matchingTool?.image;
 
   const researchOnlySlugs = ['bwsi-racecar', 'delivery-bots', 'leac-monitoring-software', 'light-therapy-mit', 'boop-light-detector', 'autonomous-drone-line-following'];
   const primarySection = ((post.category || '').toLowerCase().includes('robotics') || researchOnlySlugs.includes(post.slug)) ? 'research' : 'devai';
+
+  const sectionDefaultImg = primarySection === 'research'
+    ? '/assets/research/bwsi-racecar/racecar_main.webp'
+    : '/assets/research/boomtick-devai-tools/boomtick-arch.png';
+
+  const ogImage = post.image || firstImage || matchingTool?.image || sectionDefaultImg;
 
   const isScholarly =
     primarySection === 'research' ||

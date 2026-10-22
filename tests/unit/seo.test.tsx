@@ -175,6 +175,8 @@ describe('SEO Component & Search Configuration', () => {
     const researchStubHtml = fs.readFileSync(path.join(distDir, 'research/index.html'), 'utf-8');
     expect(researchStubHtml).toContain('<link data-rh="true" rel="canonical" href="https://arii.github.io/research/" />');
     expect(researchStubHtml).toContain('<title data-rh="true">Robotics & Autonomous Research | Ariel Anders, PhD</title>');
+    expect(researchStubHtml).toContain('property="og:image" content="https://arii.github.io/assets/research/bwsi-racecar/racecar_main.webp"');
+    expect(researchStubHtml).toContain('name="twitter:image" content="https://arii.github.io/assets/research/bwsi-racecar/racecar_main.webp"');
     expect((researchStubHtml.match(/<title/g) || []).length).toBe(1);
     expect((researchStubHtml.match(/<link\b[^>]*\brel="canonical"/g) || []).length).toBe(1);
     expect((researchStubHtml.match(/<meta\b[^>]*\bname="description"/g) || []).length).toBe(1);
@@ -183,8 +185,14 @@ describe('SEO Component & Search Configuration', () => {
     const devaiStubHtml = fs.readFileSync(path.join(distDir, 'devai/index.html'), 'utf-8');
     expect(devaiStubHtml).toContain('<link data-rh="true" rel="canonical" href="https://arii.github.io/devai/" />');
     expect(devaiStubHtml).toContain('<title data-rh="true">DevAI & Agentic Automation | Ariel Anders, PhD</title>');
+    expect(devaiStubHtml).toContain('property="og:image" content="https://arii.github.io/assets/research/boomtick-devai-tools/boomtick-arch.png"');
+    expect(devaiStubHtml).toContain('name="twitter:image" content="https://arii.github.io/assets/research/boomtick-devai-tools/boomtick-arch.png"');
     expect((devaiStubHtml.match(/<title/g) || []).length).toBe(1);
     expect((devaiStubHtml.match(/<link\b[^>]*\brel="canonical"/g) || []).length).toBe(1);
+
+    const articleStubHtml = fs.readFileSync(path.join(distDir, 'devai/gitops-pr-reviewer/index.html'), 'utf-8');
+    expect(articleStubHtml).toContain('<link data-rh="true" rel="canonical" href="https://arii.github.io/devai/gitops-pr-reviewer/" />');
+    expect(articleStubHtml).toContain('property="og:type" content="article"');
 
     const resumeStubHtml = fs.readFileSync(path.join(distDir, 'resume/index.html'), 'utf-8');
     expect(resumeStubHtml).toContain('<link data-rh="true" rel="canonical" href="https://arii.github.io/resume/" />');
