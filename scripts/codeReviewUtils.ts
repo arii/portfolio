@@ -284,7 +284,13 @@ export function parseCodeReviewStateDetailed(feedback: string): ParsedFindingsRe
       else return { state: undefined, parseError: "invalid_json" };
     }
 
-    if (state && state.findings) {
+    // Normalize empty objects ({}) or naked arrays ([]) to standard CodeReviewState
+    if (state && typeof state === 'object') {
+      if (Array.isArray(state)) {
+        state = { findings: state };
+      } else if (!state.findings || !Array.isArray(state.findings)) {
+        state.findings = [];
+      }
       state.findings = normalizeFindings(state.findings);
     }
 

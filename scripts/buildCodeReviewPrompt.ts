@@ -141,6 +141,13 @@ The JSON must follow this schema:
   ]
 }
 </findings>
+
+If there are no issues or findings to report, you MUST output an empty findings array:
+<findings>
+{
+  "findings": []
+}
+</findings>
 ${STRICT_JSON_VERIFICATION}`;
 
   const basePrompt = `You are an expert software engineer and UI/UX auditor reviewing a pull request.${roleInstruction}
