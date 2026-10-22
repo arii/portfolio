@@ -223,7 +223,7 @@ describe('SEO Component & Search Configuration', () => {
     expect(profile['@graph']).toBeDefined();
     const person = profile['@graph'].find((e: any) => e['@type'] === 'Person');
     expect(person.name).toBe('Ariel Anders, PhD');
-    expect(person.jobTitle).toBe('Robotics & AI Consulting Engineer');
+    expect(person.jobTitle).toEqual(['Robotics Engineer', 'AI/DevAI Engineer', 'Data Analyst']);
     expect(person.email).toBe('anders.ariel@gmail.com');
     expect(person.hasCredential).toHaveLength(2);
 
@@ -257,7 +257,7 @@ describe('SEO Component & Search Configuration', () => {
       description: 'Autonomous AI-powered pull request reviewer.',
       codeRepository: 'https://github.com/arii/portfolio',
     });
-    expect(software['@type']).toBe('SoftwareSourceCode');
+    expect(software['@type']).toEqual(['SoftwareApplication', 'SoftwareSourceCode']);
     expect(software.name).toBe('GitOps PR Reviewer');
     expect(software.author['@id']).toContain('/about#person');
 

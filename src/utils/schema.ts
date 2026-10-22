@@ -3,14 +3,15 @@ import { NAV_ITEMS } from '@/data/navigation';
 export const SITE_URL = 'https://arii.github.io';
 export const AUTHOR_NAME = 'Ariel Anders, PhD';
 export const AUTHOR_JOB_TITLE = 'Robotics & AI Consulting Engineer';
-export const AUTHOR_ALUMNI = 'Massachusetts Institute of Technology (MIT)';
+export const AUTHOR_JOB_TITLES = ['Robotics Engineer', 'AI/DevAI Engineer', 'Data Analyst'];
+export const AUTHOR_ALUMNI = 'Massachusetts Institute of Technology (MIT CSAIL)';
 export const AUTHOR_EMAIL = 'anders.ariel@gmail.com';
 export const AUTHOR_IMAGE = `${SITE_URL}/assets/roboticist.jpg`;
 export const DEFAULT_LICENSE = 'https://creativecommons.org/licenses/by-nc-nd/4.0/';
 
 export const AUTHOR_SAME_AS = [
-  'https://www.linkedin.com/in/ariel-anders/',
   'https://github.com/arii',
+  'https://www.linkedin.com/in/ariel-anders/',
   'https://scholar.google.com/citations?user=NM6SfiEAAAAJ&hl=en',
   'https://boomtick.blog',
 ];
@@ -167,10 +168,10 @@ export function getPersonAndProfileSchema(canonicalUrl: string = '/') {
 
   const personEntity = {
     '@type': 'Person',
-    '@id': `${SITE_URL}/about/#person`,
+    '@id': `${SITE_URL}/about#person`,
     url: `${SITE_URL}/about/`,
     name: AUTHOR_NAME,
-    jobTitle: AUTHOR_JOB_TITLE,
+    jobTitle: AUTHOR_JOB_TITLES,
     email: AUTHOR_EMAIL,
     image: {
       '@type': 'ImageObject',
@@ -184,7 +185,7 @@ export function getPersonAndProfileSchema(canonicalUrl: string = '/') {
     alumniOf: {
       '@type': 'EducationalOrganization',
       name: AUTHOR_ALUMNI,
-      url: 'https://www.mit.edu',
+      url: 'https://www.csail.mit.edu',
     },
     hasCredential: [
       {
@@ -331,21 +332,28 @@ export function getServiceSchema() {
 export function getSoftwareSchema(options: SoftwareSchemaOptions) {
   const codeRepo = options.codeRepository || 'https://github.com/arii/portfolio';
   const cleanId = options.name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  const targetUrl = options.url
+    ? options.url.startsWith('http')
+      ? options.url
+      : `${SITE_URL}${normalizeUrlPath(options.url)}`
+    : `${SITE_URL}/devai/`;
+
   return {
     '@context': 'https://schema.org',
-    '@type': 'SoftwareSourceCode',
-    '@id': (options.url || SITE_URL) + '#software-' + cleanId,
+    '@type': ['SoftwareApplication', 'SoftwareSourceCode'],
+    '@id': targetUrl + '#software-' + cleanId,
     name: options.name,
     description: options.description,
+    url: targetUrl,
     codeRepository: codeRepo,
     programmingLanguage: options.programmingLanguage || 'TypeScript',
     runtimePlatform: 'Linux / Cross-platform',
-    applicationCategory: options.applicationCategory || 'Developer Application',
+    applicationCategory: options.applicationCategory || 'DeveloperApplication',
     author: {
       '@type': 'Person',
       '@id': `${SITE_URL}/about#person`,
       name: AUTHOR_NAME,
-      url: SITE_URL,
+      url: `${SITE_URL}/about/`,
     },
   };
 }

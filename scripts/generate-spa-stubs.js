@@ -635,15 +635,15 @@ function generateJsonLdForRoute(meta) {
   const personEntity = {
     '@type': 'Person',
     '@id': `${SITE_URL}/about#person`,
-    url: `${SITE_URL}/about`,
+    url: `${SITE_URL}/about/`,
     name: AUTHOR_NAME,
-    jobTitle: 'Robotics & AI Consulting Engineer',
+    jobTitle: ['Robotics Engineer', 'AI/DevAI Engineer', 'Data Analyst'],
     email: 'anders.ariel@gmail.com',
     image: DEFAULT_IMAGE,
     alumniOf: {
       '@type': 'EducationalOrganization',
-      name: 'Massachusetts Institute of Technology (MIT)',
-      url: 'https://www.mit.edu',
+      name: 'Massachusetts Institute of Technology (MIT CSAIL)',
+      url: 'https://www.csail.mit.edu',
     },
     knowsAbout: [
       'Artificial Intelligence',
@@ -654,12 +654,60 @@ function generateJsonLdForRoute(meta) {
       'Computer Vision',
     ],
     sameAs: [
-      'https://www.linkedin.com/in/ariel-anders/',
       'https://github.com/arii',
+      'https://www.linkedin.com/in/ariel-anders/',
       'https://scholar.google.com/citations?user=NM6SfiEAAAAJ&hl=en',
       'https://boomtick.blog',
     ],
   };
+
+  if (meta.canonical === `${SITE_URL}/devai/`) {
+    const softwareEntities = DEVAI_FLAGSHIPS.map((tool) => ({
+      '@type': ['SoftwareApplication', 'SoftwareSourceCode'],
+      '@id': `${tool.canonicalPath ? `${SITE_URL}${tool.canonicalPath}` : `${SITE_URL}/devai/`}#software-${tool.id}`,
+      name: tool.title,
+      description: tool.description,
+      url: tool.canonicalPath ? `${SITE_URL}${tool.canonicalPath}` : `${SITE_URL}/devai/`,
+      codeRepository: tool.sourceUrl || 'https://github.com/arii/portfolio',
+      programmingLanguage: tool.programmingLanguage || tool.tags,
+      applicationCategory: tool.applicationCategory || 'DeveloperApplication',
+      author: {
+        '@type': 'Person',
+        '@id': `${SITE_URL}/about#person`,
+        name: AUTHOR_NAME,
+        url: `${SITE_URL}/about/`,
+      },
+    }));
+
+    return {
+      '@context': 'https://schema.org',
+      '@graph': [personEntity, ...softwareEntities],
+    };
+  }
+
+  if (meta.canonical === `${SITE_URL}/research/`) {
+    const softwareEntities = [...RESEARCH_THESIS, ...RESEARCH_AUTONOMOUS].map((tool) => ({
+      '@type': ['SoftwareApplication', 'SoftwareSourceCode'],
+      '@id': `${tool.canonicalPath ? `${SITE_URL}${tool.canonicalPath}` : `${SITE_URL}/research/`}#software-${tool.id}`,
+      name: tool.title,
+      description: tool.description,
+      url: tool.canonicalPath ? `${SITE_URL}${tool.canonicalPath}` : `${SITE_URL}/research/`,
+      codeRepository: tool.sourceUrl || 'https://github.com/arii/portfolio',
+      programmingLanguage: tool.programmingLanguage || tool.tags,
+      applicationCategory: tool.applicationCategory || 'AutonomousSystems',
+      author: {
+        '@type': 'Person',
+        '@id': `${SITE_URL}/about#person`,
+        name: AUTHOR_NAME,
+        url: `${SITE_URL}/about/`,
+      },
+    }));
+
+    return {
+      '@context': 'https://schema.org',
+      '@graph': [personEntity, ...softwareEntities],
+    };
+  }
 
   if (meta.type === 'TechArticle') {
     const articleEntity = {
