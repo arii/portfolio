@@ -62,7 +62,8 @@ describe('Pre-rendered SPA Stubs & Semantic Body Markup', () => {
     expect(devAiArticleHtml).toContain('boomtick-mcp');
     expect(devAiArticleHtml).toContain('td-cli');
     expect(devAiArticleHtml).toContain('<pre><code class="language-mermaid">');
-    expect(devAiArticleHtml).toContain('<figure><img');
+    expect(devAiArticleHtml).toContain('<figure><picture>');
+    expect(devAiArticleHtml).toContain('<img');
     expect(devAiArticleHtml).toContain('<figcaption>');
 
     // 3. Verify Research article deep-dive stub
