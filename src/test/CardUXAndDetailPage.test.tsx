@@ -19,7 +19,7 @@ describe('Card UX & Detail Page Navigation Improvements', () => {
 
     render(<FlagshipCard tool={mockTool} onNavigate={handleNavigate} onImageClick={() => {}} />);
 
-    const cardButton = screen.getByRole('button', { name: /Test Flagship Project/i });
+    const cardButton = screen.getByRole('button', { name: /^Test Flagship Project$/i });
     expect(cardButton).toBeInTheDocument();
 
     fireEvent.click(cardButton);

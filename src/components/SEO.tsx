@@ -35,8 +35,8 @@ const SEO: React.FC<SEOProps> = ({
     }
   }
 
-  let normalizedPath = canonicalUrl ? (canonicalUrl.startsWith('/') ? canonicalUrl : `/${canonicalUrl}`) : '';
-  if (normalizedPath && !normalizedPath.endsWith('/') && !/\.[a-z0-9]+$/i.test(normalizedPath)) {
+  let normalizedPath = canonicalUrl ? (canonicalUrl.startsWith('/') ? canonicalUrl : `/${canonicalUrl}`) : '/';
+  if (!normalizedPath.endsWith('/') && !/\.[a-z0-9]+$/i.test(normalizedPath)) {
     normalizedPath = `${normalizedPath}/`;
   }
   const fullUrl = `${SITE_URL}${normalizedPath}`;

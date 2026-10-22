@@ -162,6 +162,7 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
               <a
                 href={tool.canonicalPath}
                 role="button"
+                aria-label={`Explore ${tool.title} Deep-Dive Architecture`}
                 onClick={(e) => {
                   e.stopPropagation();
                   if (onNavigate && targetSlug && !e.metaKey && !e.ctrlKey) {
@@ -179,6 +180,7 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
                 href={tool.videoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={`Watch video demonstration of ${tool.title}`}
                 onClick={(e) => e.stopPropagation()}
                 className="inline-flex items-center space-x-1.5 bg-surface border border-line px-3.5 py-2 rounded-xl text-xs font-semibold text-text-dim hover:bg-surface-alt hover:text-text-main transition-colors min-h-[44px]"
               >
@@ -190,6 +192,7 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
                 href={tool.externalUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={`${tool.externalLinkDisplayLabel || 'Open'} ${tool.title}`}
                 onClick={(e) => e.stopPropagation()}
                 className={`inline-flex items-center space-x-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold transition-colors min-h-[44px] ${
                   tool.canonicalPath
@@ -205,6 +208,7 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
                 href={tool.playlistUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={`Watch video playlist for ${tool.title}`}
                 onClick={(e) => e.stopPropagation()}
                 className="inline-flex items-center space-x-1.5 bg-surface border border-line px-3.5 py-2 rounded-xl text-xs font-semibold text-text-dim hover:bg-surface-alt hover:text-text-main transition-colors min-h-[44px]"
               >
@@ -217,6 +221,7 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
                 href={tool.sourceUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={`Inspect ${tool.title} source code repository on GitHub`}
                 onClick={(e) => e.stopPropagation()}
                 className="inline-flex items-center space-x-1.5 bg-surface border border-line px-3.5 py-2 rounded-xl text-xs font-semibold text-text-dim hover:bg-surface-alt hover:text-text-main transition-colors min-h-[44px]"
               >

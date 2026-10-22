@@ -9,6 +9,22 @@ interface ToolCardProps {
 
 const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
   const isClickable = !!tool.externalUrl || !!tool.canonicalPath;
+  const isInternal = tool.canonicalPath ? (tool.canonicalPath.startsWith('/research/') || tool.canonicalPath.startsWith('/devai/')) : false;
+  const targetSlug = isInternal && tool.canonicalPath
+    ? tool.canonicalPath.replace(/^\/?(research|devai)\//, '').replace(/^\//, '').replace(/\/+$/, '')
+    : '';
+
+  const handleCardClick = () => {
+    if (tool.canonicalPath) {
+      if (isInternal && onNavigate && targetSlug) {
+        onNavigate(targetSlug);
+      } else {
+        window.location.href = tool.canonicalPath;
+      }
+    } else if (tool.externalUrl) {
+      window.open(tool.externalUrl, '_blank', 'noopener,noreferrer');
+    }
+  };
 
   const handleParentClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -21,8 +37,13 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
     }
   };
 
-  const content = (
-    <div className={`p-4 bg-surface/50 border border-line rounded-2xl transition-all space-y-2 ${isClickable ? 'hover:border-accent cursor-pointer group' : ''}`}>
+  return (
+    <article
+      onClick={handleCardClick}
+      className={`p-4 bg-surface/50 border border-line rounded-2xl transition-all space-y-2 relative group ${
+        isClickable ? 'hover:border-accent cursor-pointer' : ''
+      }`}
+    >
       {tool.image && (
         <div className="relative mb-3 aspect-video w-full overflow-hidden rounded-lg bg-surface border border-line/50">
           <SafeImage
@@ -38,20 +59,49 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
         </div>
       )}
       <div className="flex justify-between items-start gap-2">
-        <h3 className="font-bold text-text-main text-sm font-display group-hover:text-accent transition-colors text-balance">{tool.title}</h3>
-        <span className="text-[8px] bg-accent/10 text-accent px-1.5 py-0.5 rounded border border-accent/20 shrink-0">
+        <h3 className="font-bold text-text-main text-sm font-display group-hover:text-accent transition-colors text-balance">
+          {tool.canonicalPath ? (
+            <a
+              href={tool.canonicalPath}
+              onClick={(e) => {
+                if (isInternal && onNavigate && targetSlug && !e.metaKey && !e.ctrlKey) {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  onNavigate(targetSlug);
+                }
+              }}
+              aria-label={`Explore ${tool.title} detailed documentation`}
+              className="hover:text-accent transition-colors no-underline text-inherit after:absolute after:inset-0 after:z-0"
+            >
+              {tool.title}
+            </a>
+          ) : tool.externalUrl ? (
+            <a
+              href={tool.externalUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Open external link for ${tool.title}`}
+              className="hover:text-accent transition-colors no-underline text-inherit after:absolute after:inset-0 after:z-0"
+            >
+              {tool.title}
+            </a>
+          ) : (
+            tool.title
+          )}
+        </h3>
+        <span className="text-[8px] bg-accent/10 text-accent px-1.5 py-0.5 rounded border border-accent/20 shrink-0 z-10">
           {tool.status}
         </span>
       </div>
 
       {tool.metrics && (
-        <div className="text-[11px] font-semibold text-accent">
+        <div className="text-[11px] font-semibold text-accent z-10 relative">
           {tool.metrics}
         </div>
       )}
 
       {tool.parentFlagship && (
-        <div className="pt-0.5">
+        <div className="pt-0.5 z-10 relative">
           <a
             href="#flagship"
             onClick={handleParentClick}
@@ -65,7 +115,7 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
 
       <p className="text-xs text-text-dim leading-relaxed whitespace-pre-line text-pretty">{tool.description}</p>
 
-      <div className="flex flex-wrap gap-1.5 pt-1">
+      <div className="flex flex-wrap gap-1.5 pt-1 z-10 relative">
         {tool.pdfUrl && (
           <span className="inline-flex items-center gap-1 text-[10px] bg-accent/10 text-accent border border-accent/20 px-2 py-0.5 rounded font-medium">
             📄 PDF Report
@@ -87,6 +137,7 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
             href={link.url}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={`Open media link ${link.label} for ${tool.title}`}
             onClick={(e) => {
               e.stopPropagation();
             }}
@@ -99,45 +150,8 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
           <span key={tag} className="text-[9px] bg-surface px-2 py-0.5 text-text-dim border border-line rounded-md">{tag}</span>
         ))}
       </div>
-    </div>
+    </article>
   );
-
-  if (isClickable) {
-    if (tool.canonicalPath) {
-      const isInternal = tool.canonicalPath.startsWith('/research/') || tool.canonicalPath.startsWith('/devai/');
-      const targetSlug = isInternal ? tool.canonicalPath.replace(/^\/?(research|devai)\//, '').replace(/^\//, '').replace(/\/+$/, '') : tool.canonicalPath;
-
-      return (
-        <a
-          href={tool.canonicalPath}
-          onClick={(e) => {
-            if (isInternal && onNavigate && !e.metaKey && !e.ctrlKey) {
-              e.preventDefault();
-              onNavigate(targetSlug);
-            }
-          }}
-          target={isInternal ? undefined : '_blank'}
-          rel={isInternal ? undefined : 'noopener noreferrer'}
-          className="block outline-none cursor-pointer no-underline text-inherit"
-        >
-          {content}
-        </a>
-      );
-    } else if (tool.externalUrl) {
-      return (
-        <a
-          href={tool.externalUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="block outline-none cursor-pointer no-underline text-inherit"
-        >
-          {content}
-        </a>
-      );
-    }
-  }
-
-  return content;
 };
 
 export default ToolCard;

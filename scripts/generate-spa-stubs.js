@@ -17,6 +17,8 @@ const CONTENT_DIR = path.resolve(__dirname, '../src/content/research');
 const SITE_URL = 'https://arii.github.io';
 const AUTHOR_NAME = 'Ariel Anders, PhD';
 const DEFAULT_IMAGE = `${SITE_URL}/assets/roboticist.jpg`;
+const DEVAI_DEFAULT_IMAGE = `${SITE_URL}/assets/research/boomtick-devai-tools/boomtick-arch.png`;
+const RESEARCH_DEFAULT_IMAGE = `${SITE_URL}/assets/research/bwsi-racecar/racecar_main.webp`;
 const DEFAULT_LICENSE = 'https://creativecommons.org/licenses/by-nc-nd/4.0/';
 
 function escapeHtml(str) {
@@ -101,11 +103,19 @@ function markdownToHtml(md) {
       return placeholder;
     });
 
-    // 2. Images: ![alt](url) -> <figure><img src="url" alt="alt" /><figcaption>alt</figcaption></figure>
+    // 2. Images: ![alt](url) -> <figure><picture><source srcset="url.webp" type="image/webp" /><img src="url" alt="alt" loading="lazy" decoding="async" /></picture><figcaption>alt</figcaption></figure>
     result = result.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (m, alt, url) => {
       const cleanUrl = url.split('#')[0].trim();
       const cleanAlt = escapeHtml(alt.replace(/^Figure:\s*/i, ''));
-      return `<figure><img src="${escapeHtml(cleanUrl)}" alt="${cleanAlt}" /><figcaption>${cleanAlt}</figcaption></figure>`;
+      const isWebpCandidate = /\.(png|jpe?g|gif)$/i.test(cleanUrl);
+      const webpUrl = isWebpCandidate ? cleanUrl.replace(/\.(png|jpe?g|gif)$/i, '.webp') : null;
+
+      const imgTag = `<img src="${escapeHtml(cleanUrl)}" alt="${cleanAlt}" loading="lazy" decoding="async" />`;
+      const pictureTag = webpUrl
+        ? `<picture><source srcset="${escapeHtml(webpUrl)}" type="image/webp" />${imgTag}</picture>`
+        : imgTag;
+
+      return `<figure>${pictureTag}<figcaption>${cleanAlt}</figcaption></figure>`;
     });
 
     // 3. Links: [text](url)
@@ -546,8 +556,9 @@ function getRouteMetadata(route, contentDir) {
       canonical: `${SITE_URL}/devai/`,
       heading: 'DevAI & Software Systems',
       bodyText: 'System architectures, agentic CI/CD pipelines, autonomous developer tooling, and shipped production applications.',
-      image: DEFAULT_IMAGE,
+      image: DEVAI_DEFAULT_IMAGE,
       type: 'collection',
+      ogType: 'website',
     };
   }
 
@@ -559,8 +570,9 @@ function getRouteMetadata(route, contentDir) {
       canonical: `${SITE_URL}/research/`,
       heading: 'Robotics & Algorithmic Research',
       bodyText: 'Planning under uncertainty, conformant belief-state manipulation, multi-robot coordination, and hardware automation systems.',
-      image: DEFAULT_IMAGE,
+      image: RESEARCH_DEFAULT_IMAGE,
       type: 'collection',
+      ogType: 'website',
     };
   }
 
@@ -587,10 +599,20 @@ function getRouteMetadata(route, contentDir) {
       const cleanDesc = excerpt || 'Explore AI consulting, robotics software engineering, and autonomous systems research by Ariel Anders, PhD (MIT).';
 
       const firstMdImg = extractFirstMarkdownImage(content);
+      const section = route.split('/')[0];
+      const defaultSectionImage = section === 'research' ? RESEARCH_DEFAULT_IMAGE : DEVAI_DEFAULT_IMAGE;
+
+      const matchingTool = [...DEVAI_FLAGSHIPS, ...RESEARCH_THESIS, ...RESEARCH_AUTONOMOUS].find(
+        (t) => t.id === slug || (t.canonicalPath && t.canonicalPath.endsWith(`/${slug}/`))
+      );
+      const toolImage = matchingTool?.image
+        ? (matchingTool.image.startsWith('http') ? matchingTool.image : `${SITE_URL}${matchingTool.image.startsWith('/') ? '' : '/'}${matchingTool.image}`)
+        : null;
+
       const rawImage = fmImage || firstMdImg;
       const fullImageUrl = rawImage
         ? (rawImage.startsWith('http') ? rawImage : `${SITE_URL}${rawImage.startsWith('/') ? '' : '/'}${rawImage}`)
-        : DEFAULT_IMAGE;
+        : (toolImage || defaultSectionImage);
 
       const isScholarly =
         category.toLowerCase().includes('robotics') ||
@@ -610,6 +632,7 @@ function getRouteMetadata(route, contentDir) {
         category,
         slug,
         type: isScholarly ? 'ScholarlyArticle' : 'TechArticle',
+        ogType: 'article',
       };
     }
   }
@@ -635,7 +658,7 @@ function generateJsonLdForRoute(meta) {
   const personEntity = {
     '@type': 'Person',
     '@id': `${SITE_URL}/about#person`,
-    url: `${SITE_URL}/about`,
+    url: `${SITE_URL}/about/`,
     name: AUTHOR_NAME,
     jobTitle: 'Robotics & AI Consulting Engineer',
     email: 'anders.ariel@gmail.com',
@@ -660,6 +683,54 @@ function generateJsonLdForRoute(meta) {
       'https://boomtick.blog',
     ],
   };
+
+  if (meta.canonical === `${SITE_URL}/devai/`) {
+    const softwareEntities = DEVAI_FLAGSHIPS.map((tool) => ({
+      '@type': ['SoftwareApplication', 'SoftwareSourceCode'],
+      '@id': `${tool.canonicalPath ? `${SITE_URL}${tool.canonicalPath}` : `${SITE_URL}/devai/`}#software-${tool.id}`,
+      name: tool.title,
+      description: tool.description,
+      url: tool.canonicalPath ? `${SITE_URL}${tool.canonicalPath}` : `${SITE_URL}/devai/`,
+      codeRepository: tool.sourceUrl || 'https://github.com/arii/portfolio',
+      programmingLanguage: tool.programmingLanguage || tool.tags,
+      applicationCategory: tool.applicationCategory || 'DeveloperApplication',
+      author: {
+        '@type': 'Person',
+        '@id': `${SITE_URL}/about#person`,
+        name: AUTHOR_NAME,
+        url: `${SITE_URL}/about/`,
+      },
+    }));
+
+    return {
+      '@context': 'https://schema.org',
+      '@graph': [personEntity, ...softwareEntities],
+    };
+  }
+
+  if (meta.canonical === `${SITE_URL}/research/`) {
+    const softwareEntities = [...RESEARCH_THESIS, ...RESEARCH_AUTONOMOUS].map((tool) => ({
+      '@type': ['SoftwareApplication', 'SoftwareSourceCode'],
+      '@id': `${tool.canonicalPath ? `${SITE_URL}${tool.canonicalPath}` : `${SITE_URL}/research/`}#software-${tool.id}`,
+      name: tool.title,
+      description: tool.description,
+      url: tool.canonicalPath ? `${SITE_URL}${tool.canonicalPath}` : `${SITE_URL}/research/`,
+      codeRepository: tool.sourceUrl || 'https://github.com/arii/portfolio',
+      programmingLanguage: tool.programmingLanguage || tool.tags,
+      applicationCategory: tool.applicationCategory || 'AutonomousSystems',
+      author: {
+        '@type': 'Person',
+        '@id': `${SITE_URL}/about#person`,
+        name: AUTHOR_NAME,
+        url: `${SITE_URL}/about/`,
+      },
+    }));
+
+    return {
+      '@context': 'https://schema.org',
+      '@graph': [personEntity, ...softwareEntities],
+    };
+  }
 
   if (meta.type === 'TechArticle') {
     const articleEntity = {
@@ -779,7 +850,7 @@ function generateJsonLdForRoute(meta) {
   };
 }
 
-function customizeHtmlForRoute(baseHtml, meta, route, contentDir) {
+function customizeHtmlForRoute(baseHtml, meta, route = '', contentDir) {
   let customized = baseHtml;
 
   // 1. Strip ALL existing title, description, canonical, OG, and Twitter tags
@@ -801,7 +872,7 @@ function customizeHtmlForRoute(baseHtml, meta, route, contentDir) {
     `    <meta data-rh="true" property="og:site_name" content="Ariel Anders Portfolio" />`,
     `    <meta data-rh="true" property="og:title" content="${escapedTitle}" />`,
     `    <meta data-rh="true" property="og:description" content="${escapedDesc}" />`,
-    `    <meta data-rh="true" property="og:type" content="website" />`,
+    `    <meta data-rh="true" property="og:type" content="${meta.ogType || (route && route.includes('/') ? 'article' : 'website')}" />`,
     `    <meta data-rh="true" property="og:url" content="${meta.canonical}" />`,
     `    <meta data-rh="true" property="og:image" content="${meta.image || DEFAULT_IMAGE}" />`,
     `    <!-- Twitter Card -->`,

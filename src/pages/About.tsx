@@ -1,9 +1,10 @@
 import React from 'react';
 import roboticistPhoto from '@/assets/roboticist.jpg';
+import roboticistWebp from '@/assets/roboticist.webp';
 import { profileData } from '@/data/aboutData';
 import { CareerHighlightsSection, AtAGlanceSidebar } from '@/components/about/AboutSections';
 import { FAQSection } from '@/components/about/FAQSection';
-import { resolveAssetUrl } from '@/utils/asset';
+import SafeImage from '@/components/ui/SafeImage';
 import SEO from '@/components/SEO';
 import { getPersonAndProfileSchema, getServiceSchema, getFAQSchema } from '@/utils/schema';
 
@@ -70,10 +71,16 @@ const About: React.FC = () => {
         <aside className="lg:col-span-4 space-y-6 sm:space-y-8 order-1 lg:order-2">
           <div className="relative group mx-auto lg:mx-0 max-w-sm rounded-3xl overflow-hidden border border-line bg-surface transition-all duration-300">
             <div className="aspect-[4/3] sm:aspect-square max-h-72 sm:max-h-none w-full overflow-hidden">
-              <img
-                src={resolveAssetUrl(roboticistPhoto)}
+              <SafeImage
+                src={roboticistPhoto}
+                webpSrc={roboticistWebp}
                 alt="Ariel Anders, PhD - Roboticist and DevAI Engineer"
+                width={960}
+                height={949}
+                loading="eager"
+                decoding="async"
                 className="w-full h-full object-cover object-top transition-all duration-500 group-hover:scale-105"
+                containerClassName="w-full h-full"
               />
             </div>
           </div>

@@ -26,7 +26,7 @@ describe('HRM Architecture & Navigation Integration', () => {
     expect(hrm?.canonicalPath).toBe('/devai/hrm-architecture/');
     expect(hrm?.externalUrl).toBe('https://arii.github.io/hrm/');
     expect(hrm?.sourceUrl).toBe('https://github.com/arii/hrm');
-    expect(hrm?.externalLinkDisplayLabel).toBe('Live Demo');
+    expect(hrm?.externalLinkDisplayLabel).toBe('Open HRM App');
   });
 
   it('FlagshipCard card click opens live demo (https://arii.github.io/hrm/) and Deep-Dive button navigates to hrm-architecture', () => {
@@ -44,7 +44,7 @@ describe('HRM Architecture & Navigation Integration', () => {
     );
 
     // 1. Clicking the card container opens the live demo URL
-    const card = screen.getByRole('button', { name: /HRM \(Heart Rate Monitor\)/i });
+    const card = screen.getByRole('button', { name: /^HRM \(Heart Rate Monitor\)$/i });
     fireEvent.click(card);
     expect(window.open).toHaveBeenCalledWith('https://arii.github.io/hrm/', '_blank', 'noopener,noreferrer');
     expect(handleNavigate).not.toHaveBeenCalled();
@@ -68,8 +68,8 @@ describe('HRM Architecture & Navigation Integration', () => {
     // Checks header & content
     expect(screen.getByRole('heading', { level: 1, name: /HRM: Real-Time Biometric Telemetry & Workouts/i })).toBeInTheDocument();
 
-    // Checks matching tool action buttons: Live Demo & Source Repository
-    const liveDemoLink = screen.getByRole('link', { name: /Live Demo/i });
+    // Checks matching tool action buttons: Open HRM App & Source Repository
+    const liveDemoLink = screen.getByRole('link', { name: /Open HRM App/i });
     expect(liveDemoLink).toHaveAttribute('href', 'https://arii.github.io/hrm/');
 
     const sourceLink = screen.getByRole('link', { name: /Source Repository/i });

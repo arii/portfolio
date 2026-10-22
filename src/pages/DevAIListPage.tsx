@@ -69,8 +69,10 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
       getSoftwareSchema({
         name: tool.title,
         description: tool.description,
-        url: tool.canonicalPath ? `https://arii.github.io${tool.canonicalPath}` : undefined,
+        url: tool.canonicalPath ? `https://arii.github.io${tool.canonicalPath}` : tool.externalUrl || `https://arii.github.io/devai/#${tool.id}`,
         codeRepository: tool.sourceUrl,
+        programmingLanguage: tool.programmingLanguage || tool.tags,
+        applicationCategory: tool.applicationCategory || 'DeveloperApplication',
       })
     );
 
@@ -103,7 +105,8 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
       <SEO
         title="DevAI & Agentic Automation"
         description="Explore agentic DevAI tools, multi-agent CI/CD workflows, and developer automation software engineered by Ariel Anders, PhD (MIT CSAIL)."
-        canonicalUrl="/devai"
+        canonicalUrl="/devai/"
+        ogImage="/assets/research/boomtick-devai-tools/boomtick-arch.png"
         jsonLd={devAiSchemas}
       />
 

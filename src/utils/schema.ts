@@ -167,7 +167,7 @@ export function getPersonAndProfileSchema(canonicalUrl: string = '/') {
 
   const personEntity = {
     '@type': 'Person',
-    '@id': `${SITE_URL}/about/#person`,
+    '@id': `${SITE_URL}/about#person`,
     url: `${SITE_URL}/about/`,
     name: AUTHOR_NAME,
     jobTitle: AUTHOR_JOB_TITLE,
@@ -331,21 +331,28 @@ export function getServiceSchema() {
 export function getSoftwareSchema(options: SoftwareSchemaOptions) {
   const codeRepo = options.codeRepository || 'https://github.com/arii/portfolio';
   const cleanId = options.name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  const targetUrl = options.url
+    ? options.url.startsWith('http')
+      ? options.url
+      : `${SITE_URL}${normalizeUrlPath(options.url)}`
+    : `${SITE_URL}/devai/`;
+
   return {
     '@context': 'https://schema.org',
-    '@type': 'SoftwareSourceCode',
-    '@id': (options.url || SITE_URL) + '#software-' + cleanId,
+    '@type': ['SoftwareApplication', 'SoftwareSourceCode'],
+    '@id': targetUrl + '#software-' + cleanId,
     name: options.name,
     description: options.description,
+    url: targetUrl,
     codeRepository: codeRepo,
     programmingLanguage: options.programmingLanguage || 'TypeScript',
     runtimePlatform: 'Linux / Cross-platform',
-    applicationCategory: options.applicationCategory || 'Developer Application',
+    applicationCategory: options.applicationCategory || 'DeveloperApplication',
     author: {
       '@type': 'Person',
       '@id': `${SITE_URL}/about#person`,
       name: AUTHOR_NAME,
-      url: SITE_URL,
+      url: `${SITE_URL}/about/`,
     },
   };
 }
