@@ -26,6 +26,7 @@ export const flagshipTools: ResearchTool[] = [
     category: 'DEVAI TOOLKIT',
     status: 'Live',
     tags: ['DevAI', 'GitHub API', 'Multi-Agent', 'Workflow'],
+    canonicalPath: '/devai/gitops-pr-reviewer/',
     externalUrl: 'https://repo-auditor-ai.vercel.app/',
     externalLinkDisplayLabel: 'Live Demo',
     sourceUrl: 'https://github.com/arii/hrm-project-management',

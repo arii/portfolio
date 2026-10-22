@@ -46,16 +46,12 @@ describe('FlagshipCard Deep-Dive Linking', () => {
     expect(deepDiveBtns.length).toBe(0);
   });
 
-  it('does not render "Deep-Dive" for repo-auditor-ai since canonicalPath is removed', () => {
+  it('renders "Deep-Dive" for repo-auditor-ai and navigates to gitops-pr-reviewer', () => {
     const repoAuditorTool = flagshipTools.find((t) => t.id === 'repo-auditor-ai');
     expect(repoAuditorTool).toBeDefined();
-    expect(repoAuditorTool?.canonicalPath).toBeUndefined();
+    expect(repoAuditorTool?.canonicalPath).toBe('/devai/gitops-pr-reviewer/');
 
-    const handleNavigate = vi.fn();
-    render(<FlagshipCard tool={repoAuditorTool!} onNavigate={handleNavigate} onImageClick={() => {}} />);
-
-    const deepDiveBtns = screen.queryAllByRole('button', { name: /Deep-Dive/i });
-    expect(deepDiveBtns.length).toBe(0);
+    verifyDeepDiveNavigation(repoAuditorTool, '/devai/gitops-pr-reviewer/', 'gitops-pr-reviewer');
   });
 
   it('renders "Deep-Dive" for deployment-impact-analyzer and navigates to deployment-impact-analyzer', () => {
