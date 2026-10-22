@@ -42,8 +42,11 @@ describe('index.html SEO & Accessibility Tags', () => {
     expect(htmlContent).toContain('"@graph":');
     expect(htmlContent).toContain('"@type": "Person"');
     expect(htmlContent).toContain('"name": "Ariel Anders, PhD"');
-    expect(htmlContent).toContain('"jobTitle": "Robotics & AI Consulting Engineer"');
-    expect(htmlContent).toContain('"name": "Massachusetts Institute of Technology (MIT)"');
+    expect(htmlContent).toContain('"jobTitle":');
+    expect(htmlContent).toContain('"Robotics Engineer"');
+    expect(htmlContent).toContain('"AI/DevAI Engineer"');
+    expect(htmlContent).toContain('"Data Analyst"');
+    expect(htmlContent).toContain('"name": "Massachusetts Institute of Technology (MIT CSAIL)"');
     expect(htmlContent).toContain('"@type": "Service"');
   });
 

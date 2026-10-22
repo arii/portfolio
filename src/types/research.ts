@@ -29,6 +29,8 @@ export interface ResearchTool {
   videoUrl?: string;
   playlistUrl?: string;
   sourceUrl?: string;
+  programmingLanguage?: string | string[];
+  applicationCategory?: string;
   isFlagship?: boolean;
   excludeFromEngineeringTools?: boolean;
   image?: string;

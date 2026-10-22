@@ -12,6 +12,7 @@ import {
   DEFAULT_LICENSE,
   getTechArticleSchema,
   getScholarlyArticleSchema,
+  getSoftwareSchema,
   getBreadcrumbSchema,
   getVideoObjectSchema,
 } from '@/utils/schema';
@@ -438,12 +439,27 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
     }
   }
 
-  // Unified @graph structure incorporating TechArticle/ScholarlyArticle, BreadcrumbList, ImageObjects, and VideoObjects
+  const softwareSchemas: any[] = [];
+  if (matchingTool && (matchingTool.sourceUrl || matchingTool.isFlagship)) {
+    softwareSchemas.push(
+      getSoftwareSchema({
+        name: matchingTool.title,
+        description: matchingTool.description || post.summary,
+        url: matchingTool.canonicalPath ? `https://arii.github.io${matchingTool.canonicalPath}` : `https://arii.github.io/${primarySection}/${post.slug}/`,
+        codeRepository: matchingTool.sourceUrl,
+        programmingLanguage: matchingTool.programmingLanguage || matchingTool.tags,
+        applicationCategory: matchingTool.applicationCategory || (primarySection === 'devai' ? 'DeveloperTool' : 'AutonomousSystems'),
+      })
+    );
+  }
+
+  // Unified @graph structure incorporating TechArticle/ScholarlyArticle, BreadcrumbList, SoftwareSchema, ImageObjects, and VideoObjects
   const graphSchema = {
     '@context': 'https://schema.org',
     '@graph': [
       articleSchema,
       breadcrumbSchema,
+      ...softwareSchemas,
       ...imageSchemas,
       ...videoSchemas,
     ],
