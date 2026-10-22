@@ -12,7 +12,7 @@ export const flagshipTools: ResearchTool[] = [
     tags: ['React', 'Web Bluetooth', 'WebSockets', 'Spotify API', 'DevAI Testbed'],
     canonicalPath: '/devai/hrm-architecture/',
     externalUrl: 'https://arii.github.io/hrm/',
-    externalLinkDisplayLabel: 'Live Demo',
+    externalLinkDisplayLabel: 'Open HRM App',
     sourceUrl: 'https://github.com/arii/hrm',
     isFlagship: true,
     imageAlt: 'Screenshot of the HRM heart rate monitor training dashboard with real-time biometric telemetry and Spotify integration'
@@ -27,8 +27,8 @@ export const flagshipTools: ResearchTool[] = [
     status: 'Live',
     tags: ['DevAI', 'GitHub API', 'Multi-Agent', 'Workflow'],
     externalUrl: 'https://repo-auditor-ai.vercel.app/',
-    externalLinkDisplayLabel: 'Live Demo',
-    sourceUrl: 'https://github.com/arii/hrm-project-management',
+    externalLinkDisplayLabel: 'Open RepoAuditor App',
+    sourceUrl: 'https://github.com/arii/boomtick',
     isFlagship: true,
     imageAlt: 'Screenshot of the RepoAuditor workflow console displaying multi-repo pull request audit findings and issue prioritization'
   },
@@ -43,7 +43,7 @@ export const flagshipTools: ResearchTool[] = [
     status: 'In development',
     tags: ['Next.js', 'LLM workflows', 'SEO'],
     externalUrl: 'https://boomtick.blog',
-    externalLinkDisplayLabel: 'Live Demo',
+    externalLinkDisplayLabel: 'Visit BoomTick.blog',
     sourceUrl: 'https://github.com/arii/tech-dancer',
     isFlagship: true,
     customPreview: {
