@@ -785,7 +785,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
 
               if (typeof childrenArray[0] === 'string' && childrenArray[0].startsWith('Jump to:')) {
                 return (
-                  <Stack direction="row" wrap className="sticky top-24 z-10 gap-4 bg-bg/90 backdrop-blur-md py-3 border-b border-line mb-8 text-sm font-semibold">
+                  <Stack direction="row" wrap className="gap-4 py-3 border-b border-line mb-8 text-sm font-semibold">
                     {children}
                   </Stack>
                 );
