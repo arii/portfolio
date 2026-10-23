@@ -388,7 +388,7 @@ function renderHomeHtml() {
   for (const p of heroContent.bioParagraphs) {
     html += `<p>${escapeHtml(p)}</p>`;
   }
-  html += `<nav><a href="/devai/">View Agentic DevAI Work</a> | <a href="/research/">View Robotics Research</a></nav></header>`;
+  html += `<nav><a href="/consulting/">Work With Me — Robotics Consulting</a> | <a href="/devai/">View Agentic DevAI Work</a> | <a href="/research/">View Robotics Research</a></nav></header>`;
 
   html += `<section><h2>Core Capabilities &amp; Focus</h2><ul>`;
   for (const callout of FEATURE_CALLOUTS) {
@@ -535,6 +535,20 @@ function getPrerenderedBody(route, meta, contentDir) {
 }
 
 function getRouteMetadata(route, contentDir) {
+  if (route === 'consulting') {
+    return {
+      title: 'Robotics & AI Consulting | Ariel Anders, PhD',
+      description:
+        'Robotics consultant Ariel Anders, PhD (MIT): navigation and localization reviews, motion-planning architecture, and technical diligence for robotics teams. Fixed-scope audits and advisory retainers.',
+      canonical: `${SITE_URL}/consulting/`,
+      heading: 'Robotics consulting for teams shipping autonomous systems',
+      bodyText:
+        'Robotics consulting services: navigation & localization reviews, motion planning & decision-making, autonomy architecture & system design, technical diligence, AI-assisted engineering, and fractional robotics leadership. Fixed-scope technical audits and advisory retainers.',
+      image: DEFAULT_IMAGE,
+      type: 'service',
+    };
+  }
+
   if (route === 'about') {
     return {
       title: 'About & Background | Ariel Anders, PhD',
@@ -844,6 +858,42 @@ function generateJsonLdForRoute(meta) {
     };
   }
 
+  if (meta.type === 'service') {
+    const serviceEntity = {
+      '@type': 'ProfessionalService',
+      '@id': `${SITE_URL}/consulting#service`,
+      url: `${SITE_URL}/consulting/`,
+      name: 'Ariel Anders Consulting',
+      description: meta.description,
+      provider: {
+        '@id': `${SITE_URL}/about#person`,
+      },
+      areaServed: [
+        {
+          '@type': 'AdministrativeArea',
+          name: 'San Francisco Bay Area',
+        },
+        {
+          '@type': 'Country',
+          name: 'United States',
+        },
+      ],
+    };
+
+    const breadcrumbEntity = {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+        { '@type': 'ListItem', position: 2, name: 'Consulting', item: `${SITE_URL}/consulting/` },
+      ],
+    };
+
+    return {
+      '@context': 'https://schema.org',
+      '@graph': [personEntity, serviceEntity, breadcrumbEntity],
+    };
+  }
+
   return {
     '@context': 'https://schema.org',
     '@graph': [personEntity],
@@ -967,7 +1017,7 @@ export function generateSpaStubs() {
   console.log(`✅ Generated GitHub Pages fallback at ${fallbackPath}`);
 
   // 2. Core canonical routes to stub (directory/index.html)
-  const canonicalRoutes = ['about', 'devai', 'research', 'resume'];
+  const canonicalRoutes = ['about', 'consulting', 'devai', 'research', 'resume'];
   const devaiSlugs = [];
   const researchSlugs = [];
 

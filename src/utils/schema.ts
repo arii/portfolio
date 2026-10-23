@@ -328,6 +328,106 @@ export function getServiceSchema() {
   };
 }
 
+export function getConsultingSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ProfessionalService',
+    '@id': `${SITE_URL}/consulting#service`,
+    name: 'Ariel Anders Consulting',
+    alternateName: 'Ariel Anders AI & Robotics Consulting',
+    url: `${SITE_URL}/consulting/`,
+    description:
+      'Robotics consulting by Ariel Anders, PhD (MIT): navigation and localization reviews, motion-planning architecture, and technical diligence for robotics teams. Fixed-scope audits and advisory retainers.',
+    provider: {
+      '@id': `${SITE_URL}/about#person`,
+    },
+    founder: {
+      '@id': `${SITE_URL}/about#person`,
+    },
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'San Francisco',
+      addressRegion: 'CA',
+      addressCountry: 'US',
+    },
+    areaServed: [
+      {
+        '@type': 'AdministrativeArea',
+        name: 'San Francisco Bay Area',
+      },
+      {
+        '@type': 'Country',
+        name: 'United States',
+      },
+    ],
+    audience: {
+      '@type': 'Audience',
+      audienceType: 'Robotics startups, engineering leaders, and investors evaluating autonomy',
+    },
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Robotics Consulting Services',
+      itemListElement: [
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Navigation & Localization Reviews',
+            description:
+              'ROS 2 navigation stacks, sensor fusion, and localization drift diagnosis.',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Motion Planning & Decision-Making',
+            description:
+              'Onboard planning and behavior for autonomous systems.',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Autonomy Architecture & System Design',
+            description:
+              'How behavior, perception, and localization fit together.',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Technical Diligence',
+            description:
+              'Independent assessment of robotics stacks for investors and acquirers.',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'AI-Assisted Engineering',
+            description:
+              'Agentic CI/CD, RAG-grounded code review, and developer tooling for robotics teams.',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Fractional Robotics Leadership',
+            description:
+              'Interim technical leadership for teams building their first real robot.',
+          },
+        },
+      ],
+    },
+    sameAs: AUTHOR_SAME_AS,
+  };
+}
+
 export function getSoftwareSchema(options: SoftwareSchemaOptions) {
   const codeRepo = options.codeRepository || 'https://github.com/arii/portfolio';
   const cleanId = options.name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
@@ -655,11 +755,11 @@ export function getBreadcrumbSchema(items: BreadcrumbItem[]) {
   };
 }
 
-export function getFAQSchema(faqs: FAQItem[]) {
+export function getFAQSchema(faqs: FAQItem[], idPath: string = '/about') {
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    '@id': `${SITE_URL}/about#faq`,
+    '@id': `${SITE_URL}${idPath}#faq`,
     mainEntity: faqs.map((faq) => ({
       '@type': 'Question',
       name: faq.question,

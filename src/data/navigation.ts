@@ -1,4 +1,4 @@
-import { Activity, Layers, FileText, User, LucideIcon } from 'lucide-react';
+import { Activity, Briefcase, Layers, FileText, User, LucideIcon } from 'lucide-react';
 
 export interface NavItem {
   name: string;
@@ -8,6 +8,7 @@ export interface NavItem {
 
 export const NAV_ITEMS: NavItem[] = [
   { name: 'Overview', path: '/', icon: Activity },
+  { name: 'Consulting', path: '/consulting/', icon: Briefcase },
   { name: 'DevAI', path: '/devai/', icon: Layers },
   { name: 'Research', path: '/research/', icon: Layers },
   { name: 'Resume', path: '/resume/', icon: FileText },

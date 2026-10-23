@@ -2,8 +2,16 @@ import { describe, it, expect } from 'vitest';
 import { FEATURED_CARDS } from '@/config/content';
 
 describe('FEATURED_CARDS Configuration', () => {
-  it('contains exactly three middle-row featured cards', () => {
-    expect(FEATURED_CARDS).toHaveLength(3);
+  it('contains exactly four middle-row featured cards', () => {
+    expect(FEATURED_CARDS).toHaveLength(4);
+  });
+
+  it('renders the consulting card first with a booking CTA', () => {
+    const card = FEATURED_CARDS.find((c) => c.id === 'consulting');
+    expect(card).toBeDefined();
+    expect(card?.title).toBe('Robotics & AI Consulting');
+    expect(card?.ctaText).toBe('Work With Me');
+    expect(card?.href).toBe('/consulting');
   });
 
   it('renders updated copy for Products built with DevAI', () => {

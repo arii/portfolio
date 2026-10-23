@@ -143,6 +143,7 @@ export function generateSitemap() {
   // Core Canonical Pages with dynamic lastmod based on source files
   const corePages = [
     { path: '/', file: path.resolve(__dirname, '../src/pages/Home.tsx') },
+    { path: '/consulting/', file: path.resolve(__dirname, '../src/pages/Consulting.tsx') },
     { path: '/devai/', file: path.resolve(__dirname, '../src/pages/DevAIListPage.tsx') },
     { path: '/research/', file: path.resolve(__dirname, '../src/pages/ResearchListPage.tsx') },
     { path: '/about/', file: path.resolve(__dirname, '../src/pages/About.tsx') },

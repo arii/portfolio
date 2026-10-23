@@ -9,6 +9,7 @@ import { generateSitemap } from '../../scripts/generate-sitemap.js';
 import { generateSpaStubs } from '../../scripts/generate-spa-stubs.js';
 import {
   getPersonAndProfileSchema,
+  getConsultingSchema,
   getServiceSchema,
   getSoftwareSchema,
   getTechArticleSchema,
@@ -196,6 +197,13 @@ describe('SEO Component & Search Configuration', () => {
 
     const resumeStubHtml = fs.readFileSync(path.join(distDir, 'resume/index.html'), 'utf-8');
     expect(resumeStubHtml).toContain('<link data-rh="true" rel="canonical" href="https://arii.github.io/resume/" />');
+
+    const consultingStubHtml = fs.readFileSync(path.join(distDir, 'consulting/index.html'), 'utf-8');
+    expect(consultingStubHtml).toContain('<link data-rh="true" rel="canonical" href="https://arii.github.io/consulting/" />');
+    expect(consultingStubHtml).toContain('<title data-rh="true">Robotics & AI Consulting | Ariel Anders, PhD</title>');
+    expect(consultingStubHtml).toContain('"@type": "ProfessionalService"');
+    expect((consultingStubHtml.match(/<title/g) || []).length).toBe(1);
+    expect((consultingStubHtml.match(/<link\b[^>]*\brel="canonical"/g) || []).length).toBe(1);
   });
 
   it('generates clean public/sitemap.xml containing active canonical routes and Google Image sitemap tags', () => {
@@ -210,6 +218,7 @@ describe('SEO Component & Search Configuration', () => {
     expect(xml).toContain('xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"');
     expect(xml).toContain('xmlns:xhtml="http://www.w3.org/1999/xhtml">');
     expect(xml).toContain('<loc>https://arii.github.io/</loc>');
+    expect(xml).toContain('<loc>https://arii.github.io/consulting/</loc>');
     expect(xml).toContain('<loc>https://arii.github.io/devai/</loc>');
     expect(xml).toContain('<loc>https://arii.github.io/research/</loc>');
     expect(xml).toContain('<loc>https://arii.github.io/about/</loc>');
@@ -256,9 +265,17 @@ describe('SEO Component & Search Configuration', () => {
     expect(org.address.addressLocality).toBe('San Francisco');
 
     const siteNav = getSiteNavigationSchema();
-    expect(siteNav).toHaveLength(5);
+    expect(siteNav).toHaveLength(6);
     expect(siteNav[0].name).toBe('Overview');
     expect(siteNav[0].url).toBe('https://arii.github.io/');
+    expect(siteNav[1].name).toBe('Consulting');
+    expect(siteNav[1].url).toBe('https://arii.github.io/consulting/');
+
+    const consulting = getConsultingSchema();
+    expect(consulting['@type']).toBe('ProfessionalService');
+    expect(consulting.name).toBe('Ariel Anders Consulting');
+    expect(consulting.url).toBe('https://arii.github.io/consulting/');
+    expect(consulting.hasOfferCatalog.itemListElement).toHaveLength(6);
 
     const software = getSoftwareSchema({
       name: 'GitOps PR Reviewer',
@@ -332,6 +349,13 @@ describe('SEO Component & Search Configuration', () => {
     ]);
     expect(faq['@type']).toBe('FAQPage');
     expect(faq.mainEntity).toHaveLength(1);
+
+    const consultingFaq = getFAQSchema(
+      [{ question: 'What does a robotics consultant do?', answer: 'A senior engineer you borrow instead of hire.' }],
+      '/consulting'
+    );
+    expect(consultingFaq['@type']).toBe('FAQPage');
+    expect(consultingFaq['@id']).toBe('https://arii.github.io/consulting#faq');
 
     const video = getVideoObjectSchema({
       name: 'Duckietown Autonomous Driving',

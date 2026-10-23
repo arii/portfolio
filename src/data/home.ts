@@ -37,6 +37,7 @@ export const heroContent: HeroContent = {
   title: 'Roboticist & Senior Software Engineer',
   bioParagraphs: [
     'I build reliable software for robotics and autonomous systems, from motion planning and localization to production infrastructure and AI-assisted development.',
+    'Now booking robotics consulting — technical audits and advisory for teams shipping autonomous systems.',
   ],
 };
 

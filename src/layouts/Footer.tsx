@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import SocialIcons from '@/components/SocialIcons';
 
 export interface FooterProps {
@@ -15,6 +16,15 @@ const Footer: React.FC<FooterProps> = ({ className = '' }) => {
           <div className="flex flex-col gap-1">
             <p className="text-xs text-text-body font-medium">
               &copy; {new Date().getFullYear()} Ariel Anders, PhD
+            </p>
+            <p className="text-xs text-text-body/90">
+              <Link
+                to="/consulting"
+                className="font-semibold text-text-body hover:text-accent transition-colors"
+              >
+                Ariel Anders Consulting
+              </Link>
+              <span className="text-text-dim"> — robotics &amp; AI consulting</span>
             </p>
             <p className="text-xs italic text-text-body/90 font-serif">
               &ldquo;Try to be a rainbow in someone&rsquo;s cloud.&rdquo; &ndash; Maya Angelou
