@@ -9,6 +9,13 @@ export interface FeaturedCardItem {
 
 export const FEATURED_CARDS: FeaturedCardItem[] = [
   {
+    id: 'consulting',
+    title: "Robotics & AI Consulting",
+    description: "Fixed-scope audits and advisory for teams shipping navigation, localization, and autonomy.",
+    ctaText: "Work With Me",
+    href: "/consulting",
+  },
+  {
     id: 'devai-products',
     title: "Products built with DevAI",
     description: "Live full-stack consumer apps and platforms built with autonomous agent workflows.",

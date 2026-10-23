@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowRight, Cpu, Compass, Bot, Server, Cloud, Laptop } from 'lucide-react';
+import { ArrowRight, Bot, Briefcase, Cpu, Compass, Server, Cloud, Laptop } from 'lucide-react';
 import { heroContent, PHILOSOPHY_TENETS, FEATURE_CALLOUTS } from '@/data/home';
 import { FEATURED_CARDS } from '@/config/content';
 import HeroPathCard from '@/components/ui/HeroPathCard';
@@ -78,6 +78,21 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
           {/* CTA Buttons - High Contrast Solid buttons with dark text to fix accessibility */}
           <div className="flex flex-col sm:flex-row lg:flex-col gap-3 w-full sm:w-auto lg:w-56 shrink-0 pt-2 lg:pt-0">
             <Link
+              to="/consulting"
+              onClick={(e) => {
+                if (onNavigate) {
+                   e.preventDefault();
+                   handleNav('consulting');
+                }
+              }}
+              className="inline-flex items-center justify-center gap-2 rounded-md bg-text-main hover:bg-text-body text-bg px-5 py-2.5 w-full max-w-xs sm:max-w-none sm:w-auto lg:w-full text-sm font-bold shadow transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-main min-h-[44px]"
+            >
+              <Briefcase className="w-4 h-4" />
+              <span>Work With Me</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+
+            <Link
               to="/devai"
               onClick={(e) => {
                 if (onNavigate) {
@@ -85,7 +100,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                    handleNav('devai');
                 }
               }}
-              className="inline-flex items-center justify-center gap-2 rounded-md bg-text-main hover:bg-text-body text-bg px-5 py-2.5 w-full max-w-xs sm:max-w-none sm:w-auto lg:w-full text-sm font-bold shadow transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-main min-h-[44px]"
+              className="inline-flex items-center justify-center gap-2 rounded-md border border-border bg-transparent text-text-body hover:text-text-main hover:bg-surface-elevated px-5 py-2.5 w-full max-w-xs sm:max-w-none sm:w-auto lg:w-full text-sm font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-border min-h-[44px]"
             >
               <Bot className="w-4 h-4" />
               <span>View Agentic DevAI Work</span>
@@ -127,7 +142,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* Middle Grid: 3 Featured Cards (Entire surface is clickable) */}
+      {/* Middle Grid: Featured Cards (Entire surface is clickable) */}
       <section className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-6 lg:gap-8 pt-2">
         <h2 className="sr-only">Featured Work</h2>
         {FEATURED_CARDS.map((card) => (

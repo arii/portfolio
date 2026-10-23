@@ -10,6 +10,8 @@ export interface HeroPathCardProps {
 
 const getCredibilityBadge = (id: string) => {
   switch (id) {
+    case 'consulting':
+      return 'Now booking';
     case 'devai-products':
       return '3 live products';
     case 'devai-tools':

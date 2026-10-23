@@ -71,6 +71,10 @@ const routes = [
         element: lazyLoad(() => import('@/pages/About')),
       },
       {
+        path: 'consulting',
+        element: lazyLoad(() => import('@/pages/Consulting')),
+      },
+      {
         path: 'devai',
         element: lazyLoad(() => import('@/pages/DevAI')),
       },
