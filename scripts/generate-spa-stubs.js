@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { resumeData } from '../src/data/resume/index.ts';
 import { profileData } from '../src/data/aboutData.ts';
 import { heroContent, PHILOSOPHY_TENETS, FEATURE_CALLOUTS } from '../src/data/home.ts';
+import { NAV_ITEMS } from '../src/data/navigation.ts';
 import { DEVAI_FLAGSHIPS } from '../src/data/devai-projects.ts';
 import { RESEARCH_AUTONOMOUS, RESEARCH_THESIS } from '../src/data/research-papers.ts';
 
@@ -388,7 +389,10 @@ function renderHomeHtml() {
   for (const p of heroContent.bioParagraphs) {
     html += `<p>${escapeHtml(p)}</p>`;
   }
-  html += `<nav><a href="/consulting/">Work With Me — Robotics Consulting</a> | <a href="/devai/">View Agentic DevAI Work</a> | <a href="/research/">View Robotics Research</a></nav></header>`;
+  const homeNavLinks = NAV_ITEMS.filter((item) => item.path !== '/')
+    .map((item) => `<a href="${item.path}">${escapeHtml(item.stubLabel || item.name)}</a>`)
+    .join(' | ');
+  html += `<nav>${homeNavLinks}</nav></header>`;
 
   html += `<section><h2>Core Capabilities &amp; Focus</h2><ul>`;
   for (const callout of FEATURE_CALLOUTS) {

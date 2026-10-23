@@ -28,6 +28,7 @@ export const IMPACT_CONFIG = {
   ],
   DEFAULT_STATIC_PAGES: [
     '/',
+    '/consulting',
     '/devai',
     '/research',
     '/resume',

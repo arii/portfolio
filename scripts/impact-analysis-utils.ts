@@ -14,6 +14,7 @@ export function getAllRoutes() {
   const slugs = getSlugs();
   const stubs = [
     '/',
+    '/consulting',
     '/devai',
     '/research',
     '/resume',
