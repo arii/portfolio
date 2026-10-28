@@ -52,6 +52,14 @@ log "Installing Python dependencies..."
 # Verify td entrypoint
 "$VENV_PATH/bin/td" --help >/dev/null || warn "td CLI entrypoint verification failed."
 
+# Register boomtick-mcp across agent hosts
+log "Registering boomtick-mcp across agent hosts..."
+"$VENV_PATH/bin/td" mcp install || warn "Failed to run td mcp install."
+
+# Prime agent context
+log "Priming agent context..."
+pnpm run agent:prime || warn "Failed to prime agent context."
+
 # 4. Install Playwright browsers if needed
 if [ "$SKIP_PLAYWRIGHT" = "1" ]; then
   log "SKIP_PLAYWRIGHT=1; skipping playwright browser installation."

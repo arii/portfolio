@@ -215,8 +215,8 @@ runs:
           exit 0
         fi
 
-        # Use td-cli to dispatch Jules
-        docker run --rm -e JULES_API_KEY="$JULES_API_KEY" -e GITHUB_TOKEN="$GITHUB_TOKEN" -e GITHUB_REPOSITORY="${{ github.repository }}" ghcr.io/arii/boomtick:latest td-cli jules fix-ci --issue-number "$ISSUE_NUMBER" --execute
+        # Use td to dispatch Jules
+        docker run --rm -e JULES_API_KEY="$JULES_API_KEY" -e GITHUB_TOKEN="$GITHUB_TOKEN" -e GITHUB_REPOSITORY="${{ github.repository }}" ghcr.io/arii/boomtick:latest td jules fix-ci --issue-number "$ISSUE_NUMBER" --execute
       shell: bash
 
     # --- MANUAL REPAIR MODE ---
@@ -247,5 +247,5 @@ runs:
           echo "::error::Invalid issue_number: must be numeric."
           exit 1
         fi
-        docker run --rm -e JULES_API_KEY="$JULES_API_KEY" -e GITHUB_TOKEN="$GITHUB_TOKEN" -e GITHUB_REPOSITORY="${{ github.repository }}" ghcr.io/arii/boomtick:latest td-cli jules fix-ci --pr-number "$ISSUE_NUMBER" --execute
+        docker run --rm -e JULES_API_KEY="$JULES_API_KEY" -e GITHUB_TOKEN="$GITHUB_TOKEN" -e GITHUB_REPOSITORY="${{ github.repository }}" ghcr.io/arii/boomtick:latest td jules fix-ci --pr-number "$ISSUE_NUMBER" --execute
       shell: bash
