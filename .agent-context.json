@@ -1,0 +1,26 @@
+{
+  "packageName": "portfolio",
+  "version": "0.1.0",
+  "updatedAt": "2026-10-28T21:58:55.344Z",
+  "gitCommit": "5afffb8cd99f4c3a03fed13e5481547c13c7db9a",
+  "config": {
+    "packageName": "portfolio",
+    "github_repo": "arii/portfolio",
+    "vite_base_path": "/",
+    "code_review_chain": {
+      "primary": "gpt-4o",
+      "fallbacks": [
+        "deepseek-r1",
+        "llama-3.3-70b-instruct"
+      ],
+      "max_retries": 3
+    },
+    "triage_chain": {
+      "primary": "gpt-4o-mini",
+      "fallbacks": [
+        "gemini-1.5-flash"
+      ],
+      "max_retries": 2
+    }
+  }
+}

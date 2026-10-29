@@ -70,7 +70,7 @@ runs:
       env:
         ISSUE_NUM: ${{ inputs.issue_number }}
       run: |
-        docker run --rm -e GITHUB_TOKEN="$GITHUB_TOKEN" -e GITHUB_REPOSITORY="${{ github.repository }}" ghcr.io/arii/boomtick:latest td-cli gh validate-issue --issue-number "$ISSUE_NUM" --post-comments --execute
+        docker run --rm -e GITHUB_TOKEN="$GITHUB_TOKEN" -e GITHUB_REPOSITORY="${{ github.repository }}" ghcr.io/arii/boomtick:latest td gh validate-issue --issue-number "$ISSUE_NUM" --post-comments --execute
       shell: bash
 
     # --- CREATE PR ---
@@ -160,7 +160,7 @@ runs:
     - name: Find and Resolve Conflicts via Container
       if: inputs.operation == 'resolve-conflicts'
       run: |
-        docker run --rm -v "${{ github.workspace }}":/github/workspace -w /github/workspace -e GITHUB_TOKEN="$GITHUB_TOKEN" -e GITHUB_REPOSITORY="${{ github.repository }}" -e GEMINI_API_KEY="${{ inputs.gemini_api_key }}" -e JULES_API_KEY="${{ inputs.jules_api_key }}" ghcr.io/arii/boomtick:latest td-cli gh resolve
+        docker run --rm -v "${{ github.workspace }}":/github/workspace -w /github/workspace -e GITHUB_TOKEN="$GITHUB_TOKEN" -e GITHUB_REPOSITORY="${{ github.repository }}" -e GEMINI_API_KEY="${{ inputs.gemini_api_key }}" -e JULES_API_KEY="${{ inputs.jules_api_key }}" ghcr.io/arii/boomtick:latest td gh resolve
       shell: bash
 
     - name: Validate Resolution

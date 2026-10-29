@@ -55,7 +55,7 @@ runs:
         COMMENT_BODY: ${{ inputs.comment_body }}
       run: |
         # security-safe: COMMENT_BODY is mapped safely via env block and wrapped in quotes
-        RESULT=$(docker run --rm -e AUTHOR_ASSOC="$AUTHOR_ASSOC" -e COMMENT_BODY="$COMMENT_BODY" ghcr.io/arii/boomtick:latest td-cli gh parse-comment --author-association "$AUTHOR_ASSOC" --body "$COMMENT_BODY")
+        RESULT=$(docker run --rm -e AUTHOR_ASSOC="$AUTHOR_ASSOC" -e COMMENT_BODY="$COMMENT_BODY" ghcr.io/arii/boomtick:latest td gh parse-comment --author-association "$AUTHOR_ASSOC" --body "$COMMENT_BODY")
         {
           echo "conflict_resolve=$(echo "$RESULT" | jq -r '.actions.conflict_resolve')"
           echo "update_snapshots=$(echo "$RESULT" | jq -r '.actions.update_snapshots')"

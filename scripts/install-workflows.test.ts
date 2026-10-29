@@ -7,9 +7,9 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-function isTdCliAvailable(): boolean {
+function isTdAvailable(): boolean {
   try {
-    execFileSync('which', ['td-cli']);
+    execFileSync('which', ['td']);
     return true;
   } catch {
     return false;
@@ -23,11 +23,11 @@ describe('Workflow Installer Command', () => {
   afterEach(() => { fs.rmSync(tmpDir, { recursive: true, force: true }); });
 
   it('should generate workflow templates in dry-run mode', () => {
-    if (!isTdCliAvailable()) {
-      console.warn('⚠️ td-cli is not installed or available. Skipping workflow installer test.');
+    if (!isTdAvailable()) {
+      console.warn('⚠️ td is not installed or available. Skipping workflow installer test.');
       return;
     }
-    const output = execFileSync('td-cli', ['agent', 'install-workflows', '--target', tmpDir, '--dry-run'], { encoding: 'utf-8' });
+    const output = execFileSync('td', ['agent', 'install-workflows', '--target', tmpDir, '--dry-run'], { encoding: 'utf-8' });
     expect(output).toContain('DRY-RUN');
     expect(output).toContain('impact-analysis.yml');
   });

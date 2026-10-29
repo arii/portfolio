@@ -150,7 +150,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           JULES_API_KEY: ${{ secrets.JULES_API_KEY }}
         run: |
-          docker run --rm -e GITHUB_TOKEN="$GITHUB_TOKEN" -e JULES_API_KEY="$JULES_API_KEY" ghcr.io/arii/boomtick:latest td-cli agent dispatch main "$AUDIT_PROMPT"
+          docker run --rm -e GITHUB_TOKEN="$GITHUB_TOKEN" -e JULES_API_KEY="$JULES_API_KEY" ghcr.io/arii/boomtick:latest td agent dispatch main "$AUDIT_PROMPT"
         shell: bash
 
       - name: Run Local Orchestrator
@@ -162,10 +162,10 @@ jobs:
         run: |
           if [ -z "$PR_NUMBER" ]; then
             echo "No PR number provided. Running local orchestrator for all open PRs..."
-            docker run --rm -v "${{ github.workspace }}":/github/workspace -w /github/workspace -e GITHUB_TOKEN="$GITHUB_TOKEN" -e GEMINI_API_KEY="$GEMINI_API_KEY" -e JULES_API_KEY="$JULES_API_KEY" ghcr.io/arii/boomtick:latest td-cli agent run-local
+            docker run --rm -v "${{ github.workspace }}":/github/workspace -w /github/workspace -e GITHUB_TOKEN="$GITHUB_TOKEN" -e GEMINI_API_KEY="$GEMINI_API_KEY" -e JULES_API_KEY="$JULES_API_KEY" ghcr.io/arii/boomtick:latest td agent run-local
           else
             echo "Running local orchestrator for PR #$PR_NUMBER..."
-            docker run --rm -v "${{ github.workspace }}":/github/workspace -w /github/workspace -e GITHUB_TOKEN="$GITHUB_TOKEN" -e GEMINI_API_KEY="$GEMINI_API_KEY" -e JULES_API_KEY="$JULES_API_KEY" ghcr.io/arii/boomtick:latest td-cli agent run-local --pr "$PR_NUMBER"
+            docker run --rm -v "${{ github.workspace }}":/github/workspace -w /github/workspace -e GITHUB_TOKEN="$GITHUB_TOKEN" -e GEMINI_API_KEY="$GEMINI_API_KEY" -e JULES_API_KEY="$JULES_API_KEY" ghcr.io/arii/boomtick:latest td agent run-local --pr "$PR_NUMBER"
           fi
         shell: bash
 
@@ -450,5 +450,5 @@ jobs:
           ISSUE_NUMBER: ${{ steps.create_issue.outputs.issue_number }}
         run: |
           set -eo pipefail
-          docker run --rm -e GITHUB_TOKEN="$GITHUB_TOKEN" -e GITHUB_REPOSITORY="${{ github.repository }}" -e JULES_API_KEY="${{ secrets.JULES_API_KEY }}" ghcr.io/arii/boomtick:latest td-cli jules dispatch main "Upgrade dependency to fix security vulnerability in issue #$ISSUE_NUMBER"
+          docker run --rm -e GITHUB_TOKEN="$GITHUB_TOKEN" -e GITHUB_REPOSITORY="${{ github.repository }}" -e JULES_API_KEY="${{ secrets.JULES_API_KEY }}" ghcr.io/arii/boomtick:latest td jules dispatch main "Upgrade dependency to fix security vulnerability in issue #$ISSUE_NUMBER"
         shell: bash
