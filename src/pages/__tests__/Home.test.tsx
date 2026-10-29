@@ -113,8 +113,8 @@ describe('Home Page', () => {
       </MemoryRouter>
     );
 
-    const productsLink = screen.getByLabelText(/Products built with DevAI - View Products/);
-    fireEvent.click(productsLink);
+    const devaiLink = screen.getByLabelText(/Build with AI & DevAI Orchestration - Explore DevAI Platform/);
+    fireEvent.click(devaiLink);
     expect(handleNavigate).toHaveBeenCalledWith('/devai');
   });
 });

@@ -143,7 +143,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
       </section>
 
       {/* Middle Grid: Featured Cards (Entire surface is clickable) */}
-      <section className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-6 lg:gap-8 pt-2">
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 pt-2">
         <h2 className="sr-only">Featured Work</h2>
         {FEATURED_CARDS.map((card) => (
           <HeroPathCard key={card.id} card={card} onNavigate={handleNav} />

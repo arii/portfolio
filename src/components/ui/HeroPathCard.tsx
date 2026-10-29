@@ -12,10 +12,10 @@ const getCredibilityBadge = (id: string) => {
   switch (id) {
     case 'consulting':
       return 'Now booking';
+    case 'devai':
     case 'devai-products':
-      return '3 live products';
     case 'devai-tools':
-      return 'Agentic Tooling';
+      return 'Agentic DevAI Platform';
     case 'robotics-research':
       return 'MIT CSAIL · PhD';
     default:

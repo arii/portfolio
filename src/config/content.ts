@@ -16,18 +16,11 @@ export const FEATURED_CARDS: FeaturedCardItem[] = [
     href: "/consulting",
   },
   {
-    id: 'devai-products',
-    title: "Products built with DevAI",
-    description: "Live full-stack consumer apps and platforms built with autonomous agent workflows.",
-    ctaText: "View Products",
+    id: 'devai',
+    title: "Build with AI & DevAI Orchestration",
+    description: "Full-stack apps, multi-agent orchestration, automated code-auditing guardrails, and developer tooling built with autonomous workflows.",
+    ctaText: "Explore DevAI Platform",
     href: "/devai",
-  },
-  {
-    id: 'devai-tools',
-    title: "DevAI Orchestration",
-    description: "How I build: Engineering multi-agent workflows, automated code-auditing guardrails, and agentic CI/CD pipelines to enforce production standards.",
-    ctaText: "Read Articles",
-    href: "/devai#articles",
   },
   {
     id: 'robotics-research',
