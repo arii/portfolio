@@ -28,8 +28,13 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
     ? tool.canonicalPath.replace(/^\/?(research|devai)\//, '').replace(/^\//, '').replace(/\/+$/, '')
     : '';
 
+  const isDSpace = !!tool.externalUrl?.includes('dspace.mit.edu');
+  const preferDeepDive = !!(tool.canonicalPath && targetSlug && (isDSpace || !tool.externalUrl));
+
   const executePrimaryAction = () => {
-    if (tool.externalUrl) {
+    if (preferDeepDive) {
+      onNavigate(targetSlug);
+    } else if (tool.externalUrl) {
       window.open(tool.externalUrl, '_blank', 'noopener,noreferrer');
     } else if (tool.canonicalPath && targetSlug) {
       onNavigate(targetSlug);
@@ -107,13 +112,27 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
           <div>
             <span className="text-xs text-accent font-semibold block font-sans">{tool.category}</span>
             <h3 className="text-xl font-bold text-text-main mt-1 font-display group-hover:text-accent transition-colors text-balance">
-              {tool.externalUrl ? (
+              {preferDeepDive ? (
+                <a
+                  href={tool.canonicalPath}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (onNavigate && targetSlug && !e.metaKey && !e.ctrlKey) {
+                      e.preventDefault();
+                      onNavigate(targetSlug);
+                    }
+                  }}
+                  className="hover:text-accent transition-colors no-underline text-inherit inline-block relative z-10"
+                >
+                  {tool.title}
+                </a>
+              ) : tool.externalUrl ? (
                 <a
                   href={tool.externalUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="hover:text-accent transition-colors no-underline text-inherit"
+                  className="hover:text-accent transition-colors no-underline text-inherit inline-block relative z-10"
                 >
                   {tool.title}
                 </a>
@@ -127,7 +146,7 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
                       onNavigate(targetSlug);
                     }
                   }}
-                  className="hover:text-accent transition-colors no-underline text-inherit"
+                  className="hover:text-accent transition-colors no-underline text-inherit inline-block relative z-10"
                 >
                   {tool.title}
                 </a>
@@ -137,7 +156,7 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="hover:text-accent transition-colors no-underline text-inherit"
+                  className="hover:text-accent transition-colors no-underline text-inherit inline-block relative z-10"
                 >
                   {tool.title}
                 </a>

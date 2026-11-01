@@ -35,19 +35,19 @@ const Navigation: React.FC = () => {
     <>
       <header className="sticky top-0 z-40 w-full border-b border-line bg-bg">
         <div className="mx-auto flex h-14 sm:h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          <Link to="/" className="flex items-center space-x-3 group">
-            <div className="flex flex-col">
-              <span className="text-sm sm:text-base font-bold tracking-tight text-foreground">
+          <Link to="/" className="flex items-center space-x-3 group shrink-0">
+            <div className="flex flex-col justify-center">
+              <span className="text-sm sm:text-base font-bold tracking-tight text-foreground whitespace-nowrap">
                 {heroContent.brandTitle}
               </span>
-              <span className="hidden sm:block text-xs text-muted-foreground ">
+              <span className="hidden xl:block text-xs text-muted-foreground whitespace-nowrap">
                 {heroContent.brandRole}
               </span>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex md:items-center gap-3">
+          <nav className="hidden md:flex md:items-center gap-1 lg:gap-2 xl:gap-3">
             {NAV_ITEMS.map((link) => {
               const Icon = link.icon;
               const active = isActive(link.path);
@@ -55,14 +55,14 @@ const Navigation: React.FC = () => {
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`flex items-center space-x-2 rounded-md px-4 py-2 text-sm font-medium transition-colors min-h-[48px] ${
+                  className={`flex items-center space-x-1.5 lg:space-x-2 rounded-md px-2.5 lg:px-3.5 xl:px-4 py-2 text-xs lg:text-sm font-medium transition-colors min-h-[44px] ${
                     active
                       ? 'bg-secondary text-foreground'
                       : 'text-text-dim hover:bg-muted hover:text-foreground'
                   }`}
                 >
-                  {Icon && <Icon className="h-4 w-4" />}
-                  <span>{link.name}</span>
+                  {Icon && <Icon className="h-4 w-4 shrink-0" />}
+                  <span className="whitespace-nowrap">{link.name}</span>
                 </Link>
               );
             })}

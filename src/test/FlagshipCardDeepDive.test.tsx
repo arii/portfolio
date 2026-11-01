@@ -80,4 +80,44 @@ describe('FlagshipCard Deep-Dive Linking', () => {
     expect(liveDemoLink).toBeInTheDocument();
     expect(liveDemoLink).toHaveAttribute('href', 'https://arii.github.io/hrm/');
   });
+
+  it('clicking Master\'s thesis card navigates to deep-dive instead of opening external DSpace URL', () => {
+    const mastersTool = flagshipTools.find((t) => t.id === 'masters-thesis');
+    expect(mastersTool).toBeDefined();
+    expect(mastersTool?.externalUrl).toContain('dspace.mit.edu');
+
+    const handleNavigate = vi.fn();
+    const originalOpen = window.open;
+    window.open = vi.fn();
+
+    render(<FlagshipCard tool={mastersTool!} onNavigate={handleNavigate} onImageClick={() => {}} />);
+
+    const card = screen.getByRole('button', { name: mastersTool!.title });
+    fireEvent.click(card);
+
+    expect(handleNavigate).toHaveBeenCalledWith('masters-thesis');
+    expect(window.open).not.toHaveBeenCalled();
+
+    window.open = originalOpen;
+  });
+
+  it('clicking PhD thesis card navigates to deep-dive instead of opening external DSpace URL', () => {
+    const phdTool = flagshipTools.find((t) => t.id === 'phd-thesis');
+    expect(phdTool).toBeDefined();
+    expect(phdTool?.externalUrl).toContain('dspace.mit.edu');
+
+    const handleNavigate = vi.fn();
+    const originalOpen = window.open;
+    window.open = vi.fn();
+
+    render(<FlagshipCard tool={phdTool!} onNavigate={handleNavigate} onImageClick={() => {}} />);
+
+    const card = screen.getByRole('button', { name: phdTool!.title });
+    fireEvent.click(card);
+
+    expect(handleNavigate).toHaveBeenCalledWith('conformant-planning-manipulation');
+    expect(window.open).not.toHaveBeenCalled();
+
+    window.open = originalOpen;
+  });
 });
