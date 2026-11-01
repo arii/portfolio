@@ -20,6 +20,8 @@ pdfUrl: "https://raw.githubusercontent.com/arii/arii.github.io/main/reports/repo
 * **Advisors:** Prof. Leslie Pack Kaelbling & Prof. Tomás Lozano-Pérez
 * **Institution:** Massachusetts Institute of Technology (MIT CSAIL)
 
+[![PR2 robot executing whole-arm grasping to envelope, cradle, and secure a bulky payload against its torso under uncertainty. | Watch Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=2mGN3ka_7i0#no-embed](/assets/research/masters-thesis/pr2_grasp_1.webp#max-w-2xl)](https://www.youtube.com/watch?v=2mGN3ka_7i0#no-embed)
+
 ---
 
 ## Project Overview
@@ -86,8 +88,6 @@ Validation of my learned whole-arm manipulation policies on the physical PR2:
   [![PR2 Grasping Demonstration 1 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=2mGN3ka_7i0#no-embed](/assets/research/masters-thesis/pr2_grasp_1.webp#max-w-xl)](https://www.youtube.com/watch?v=2mGN3ka_7i0#no-embed)
 * **PR2 Grasping Demonstration 2**
   [![PR2 Grasping Demonstration 2 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=QgoJKaoZ3dY#no-embed](/assets/research/masters-thesis/pr2_grasp_2.webp#max-w-xl)](https://www.youtube.com/watch?v=QgoJKaoZ3dY#no-embed)
-* **PR2 Grasping Demonstration 3**
-  [![PR2 Grasping Demonstration 3 | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=bgHzqflrkCE#no-embed](/assets/research/masters-thesis/pr2_grasp_3.webp#max-w-xl)](https://www.youtube.com/watch?v=bgHzqflrkCE#no-embed)
 
 ---
 
