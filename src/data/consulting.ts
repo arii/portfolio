@@ -57,14 +57,14 @@ export const CONSULTING_SERVICES: ConsultingService[] = [
     id: 'diligence',
     title: 'Technical Diligence',
     description:
-      'Independent assessment for investors and acquirers: can this robotics stack actually do what the deck claims?',
+      'Independent assessment for investors and acquirers of whether the stack does what the deck claims.',
     iconName: 'search',
   },
   {
     id: 'devai-infra',
     title: 'AI-Assisted Engineering',
     description:
-      'Agentic CI/CD, RAG-grounded code review, and developer tooling that raise engineering throughput without cutting rigor.',
+      'Agentic CI/CD, RAG-grounded code review, and developer tooling that raise engineering throughput and keep rigor intact.',
     iconName: 'cpu',
   },
   {
@@ -81,7 +81,7 @@ export const ENGAGEMENT_FORMATS: EngagementFormat[] = [
     id: 'audit',
     title: 'Technical Audit',
     description:
-      'A 2–4 week deep dive into your navigation, localization, or planning stack. You get a written findings report: what is solid, what is fragile, and what to fix first.',
+      'A 2–4 week review of your navigation, localization, or planning stack. You get a written findings report: what is solid, what is fragile, and what to fix first.',
   },
   {
     id: 'retainer',
@@ -93,7 +93,7 @@ export const ENGAGEMENT_FORMATS: EngagementFormat[] = [
     id: 'calls',
     title: 'Diligence Calls',
     description:
-      'One-off expert calls for investors and teams evaluating a robotics bet — scoped to your questions, no fluff.',
+      'One-off expert calls for investors and teams evaluating a robotics bet — scoped to your questions.',
   },
 ];
 
@@ -111,12 +111,12 @@ export const CONSULTING_FAQS: ConsultingFaq[] = [
   {
     question: 'How much does a robotics consultant cost?',
     answer:
-      'Audits are fixed-price per engagement; advisory is a monthly retainer. For calibration, PhD-level robotics consultants typically run a few hundred dollars an hour. Every engagement starts with a scoped quote, so there are no surprises.',
+      'I price audits per engagement and advisory as a monthly retainer. For calibration, PhD-level robotics consultants typically run a few hundred dollars an hour. Every engagement starts with a scoped quote, so there are no surprises.',
   },
   {
     question: 'Do you work remotely or on-site?',
     answer:
-      'Both. I am based in San Francisco, work remotely worldwide, and travel for on-site audits and diligence in the Bay Area and beyond.',
+      'I am based in San Francisco, work remotely worldwide, and travel for on-site audits and diligence in the Bay Area and beyond.',
   },
   {
     question: 'What stacks do you work with?',

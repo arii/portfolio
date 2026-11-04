@@ -14,7 +14,7 @@ category: "Robotics & Hardware"
 summary: "Archive of foundational undergraduate robotics and embedded hardware projects from UCSC—spanning CMPE 100 logic design, CMPE 121 microprocessor systems, CMPE 118 mechatronics, and custom microcontroller-based LED game side projects."
 ---
 
-During my undergraduate studies in Computer Engineering at UC Santa Cruz (UCSC), I worked on a wide array of hands-on mechatronics, embedded systems, digital design, and robotics engineering projects. This archive consolidates project demonstrations, technical b-roll footage, and prototype testing videos captured during these foundational years.
+During my undergraduate studies in Computer Engineering at UC Santa Cruz (UCSC), I built hands-on mechatronics, embedded systems, digital design, and robotics projects. This archive collects demos, footage, and prototype tests from those years.
 
 ---
 
@@ -34,7 +34,7 @@ During my undergraduate studies in Computer Engineering at UC Santa Cruz (UCSC),
 ## CMPE 121: Microprocessor System Design
 
 * **Focus:** Microprocessor architecture, memory mapping, peripheral interfacing, and low-level C and Assembly programming.
-* **Highlights:** Engineered a fully integrated microcontroller-based system, managing custom peripheral drivers, interrupt service routines, and serial communication protocols.
+* **Highlights:** Built a microcontroller-based system with custom peripheral drivers, interrupt service routines, and serial communication protocols.
 
 ### 68HC11 Microcontroller Board for Mechanical Gripper Control
 
@@ -58,7 +58,7 @@ Building the single-board computer required precise hardware timing analysis, ma
 
 We structured the software to manage real-time communication and hardware feedback loops using the RS-232 communication protocol:
 
-* **Pseudo-Force Control:** Motor resistance is regulated by specifying direct current levels. We mapped out eight distinct current settings into their hexadecimal representations, creating a structured command look-up table for both opening and closing actions.
+* **Pseudo-Force Control:** Pseudo-force control sets motor resistance via direct current levels. We mapped out eight distinct current settings into their hexadecimal representations, creating a structured command look-up table for both opening and closing actions.
 * **Dynamic Lookup System:** When an operator presses a digital push-button, the program measures the active voltage across the potentiometer and uses that value to index the corresponding open or close command from the lookup table.
 
 [![68HC11 Microcontroller Board and Mechanical Gripper hardware loops.](/assets/research/undergraduate-projects/gripper_control.webp#max-w-2xl)](https://www.youtube.com/watch?v=tXif7xeZmGI#no-embed)
@@ -95,28 +95,28 @@ Designed and engineered an 11" x 11" x 11" fully autonomous robot programmed to 
 
 ##### 1. Software Architecture & Control Systems
 
-  * **Hierarchical Finite State Machine (FSM)**: Architected and programmed a complex control structure featuring modular sub-state machines (e.g., dedicated centering algorithms and localized sensor-sampling logic).
+  * **Hierarchical Finite State Machine (FSM)**: Built and programmed a control structure with modular sub-state machines (e.g., dedicated centering algorithms and localized sensor-sampling logic).
 
 ![Hierarchical event-driven state machine architecture governing autonomous robot behavior during arena trials.](/assets/research/report-ce118-mechatronics/hierarchical_state_machine.png#max-w-2xl#tall#contain)
 
   * **Ambient-Resilient Event Detection**: Developed a differential sampling state machine for the robot’s IR tape sensors. By capturing active and passive states sequentially, the software calculated ambient light deltas to stabilize detection thresholds under variable environmental lighting.
-  * **Adaptive Battery Voltage Scaling**: Engineered an algorithmic solution to address supply fluctuations (from a 14.4V dual-battery series configuration). Built continuous PWM duty-cycle scaling code utilizing a 10-bit ADC reference to normalize motor outputs relative to a steady 12V operational baseline, ensuring consistent maneuverability and projectile power.
+  * **Adaptive Battery Voltage Scaling**: Engineered an algorithmic solution to address supply fluctuations (from a 14.4V dual-battery series configuration). Built continuous PWM duty-cycle scaling code using a 10-bit ADC reference to normalize motor outputs relative to a steady 12V operational baseline, ensuring consistent maneuverability and projectile power.
 
 ##### 2. Hardware & Electrical Engineering
 
   * **Mixed-Signal Circuit Debugging**: Led the integration, isolation, and validation of the robot's sensory circuits, including high-pass and low-pass trans-resistive op-amp filter stages to clean noisy phototransistor signals.
-  * **Sensor & Actuator Integration**: Successfully implemented an active-high IR beacon-tracking filter, basic binary bump-sensor networks, a high-current H-bridge driver circuit, and dedicated TIP122 Darlington transistor circuits to govern mechanical subsystems.
+  * **Sensor & Actuator Integration**: Implemented an active-high IR beacon-tracking filter, basic binary bump-sensor networks, a high-current H-bridge driver circuit, and dedicated TIP122 Darlington transistor circuits to govern mechanical subsystems.
 
 ##### 3. Mechanical Design Strategy
 
   * **Modular Parametric Chassis**: Participated in the collaborative design of a modular CAD framework in SolidWorks. The architecture isolated structural power distribution and drive elements from specialized operational modules, simplifying physical debugging and enabling efficient on-the-fly hardware replacement.
-  * **Servo-Driven Launching Mechanism**: Integrated dual high-velocity toy motors paired with a high-torque servo-actuated feeding mechanism to sequentially chamber and discharge ping-pong projectiles at target vectors.
+  * **Servo-Driven Launching Mechanism**: Integrated dual high-velocity toy motors paired with a high-torque servo-actuated feeding mechanism to chamber and discharge ping-pong projectiles at targets.
 
 #### Key Results & Engineering Takeaways
 
-  * **Integration-Driven Development**: Successfully mitigated integration bottlenecks by designing testing harnesses and sub-assembly code in parallel with mechanical builds throughout a 5-week integration runway.
-  * **High-Precision Target Acquisition**: Achieved exceptional accuracy with the projectile launcher, consistently landing multiple impacts on target by relying on dynamic software thresholding to counter complex external ambient light interference.
-  * **Agile Problem Solving**: Overcame a critical, late-stage failure of the robot's primary micro-servos by adapting the physical chassis to house robust, larger-scale servos and utilizing custom ground shielding around signaling lines to eliminate high-current motor noise.
+  * **Integration-Driven Development**: Mitigated integration bottlenecks by designing testing harnesses and sub-assembly code in parallel with mechanical builds throughout a 5-week integration runway.
+  * **High-Precision Target Acquisition**: Consistently landing multiple impacts on target by relying on dynamic software thresholding to counter complex external ambient light interference.
+  * **Agile Problem Solving**: Overcame a critical, late-stage failure of the robot's primary micro-servos by adapting the physical chassis to house robust, larger-scale servos and using custom ground shielding around signaling lines to eliminate high-current motor noise.
 
 #### Downloads
 
@@ -151,7 +151,7 @@ We wired an array of 28 individual LEDs across digital output pins 22 through 49
 
 ## Technical Summary & Core Takeaways
 
-These undergraduate endeavors established my core engineering methodology across:
+These projects built my core engineering approach:
 - **Embedded C & Microcontrollers:** Low-level register configuration, interrupt-driven I/O, and serial protocols.
 - **Mechatronics Integration:** Interfacing analog sensors, shaft encoders, DC motors, and stepper drivers.
 - **Real-Time Control:** PID feedback loops, finite state machine architectures, and hardware-in-the-loop debugging.

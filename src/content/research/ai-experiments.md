@@ -30,7 +30,7 @@ A collection of custom dev tools, background ETL pipelines, and automated UI tes
 
 Tracking regional West Coast Swing event schedules and dancer registries from the [World Swing Dance Council](https://worldwestcoastswingcouncil.com/events/) manually was a headache. Registration links broke often, and dates fell out of sync.
 
-To fix this, I wrote a lightweight scraper using `BeautifulSoup` and `Pydantic`. It ensures HTML table parsing resilience by searching across structural variations (such as both `tr.event-row` and `div.event-item` containers). It also handles missing registry links by creating fallback temporary hashes (`tmp_{hash(name)}`) so valid events never get dropped during ingestion.
+To fix this, I wrote a lightweight scraper using `BeautifulSoup` and `Pydantic`. It ensures HTML table parsing resilience by searching across structural variations (such as both `tr.event-row` and `div.event-item` containers). It also handles missing registry links by creating fallback temporary hashes (`tmp_{hash(name)}`) so every valid event survives ingestion.
 
 ```python
 # etl/scraper.py - Pydantic validation & fallback hashing
@@ -50,7 +50,7 @@ def parse_registry_id(link_tag, event_name: str) -> str:
     return f"tmp_{hash(event_name)}"
 ```
 
-The pipeline runs on a weekly GitHub Actions cron job. Before committing changes to `public/data/event_queue.json`, it checks `git diff --staged` to make sure I don't spam commit logs when event data hasn't changed.
+The pipeline runs on a weekly GitHub Actions cron job. Before committing changes to `public/data/event_queue.json`, it checks `git diff --staged` so commits only land when event data actually changes.
 
 ```yaml
 # .github/workflows/wcs_etl.yml - Git diff guardrail
@@ -85,7 +85,7 @@ export function useWCSData() {
 }
 ```
 
-- **The Result:** The pipeline runs quietly in the background every Wednesday, keeping my frontend JSON data fresh with zero manual maintenance, while the lightweight client fetching prevents initial bundle bloat.
+- The pipeline runs quietly in the background every Wednesday, keeping my frontend JSON data fresh, while the lightweight client fetching prevents initial bundle bloat.
 
 ---
 
@@ -95,7 +95,7 @@ export function useWCSData() {
 
 ![Printful REST API integration console showing automated variant mapping and catalog synchronization](/assets/research/ai-experiments/ecommerce-automation.png)
 
-Setting up products manually on Printful—uploading artwork, recalculating margins, and mapping variants—became incredibly repetitive. To fix this, I built an automated pipeline that ingests source vector files, auto-clips dimensions to stay safely inside print zones, and syncs variants directly via the [Printful API](https://developers.printful.com/docs/).
+Setting up products manually on Printful—uploading artwork, recalculating margins, and mapping variants—got repetitive. To fix this, I built an automated pipeline that ingests source vector files, auto-clips dimensions to stay safely inside print zones, and syncs variants directly via the [Printful API](https://developers.printful.com/docs/).
 
 ```typescript
 // sync/printful.ts - Automated variant payload creation
@@ -115,7 +115,7 @@ export async function syncProductVariant(variantId: number, printFileUrl: string
 }
 ```
 
-- **Why it matters:** It removes the manual merchandising overhead and keeps product pricing and catalog nodes aligned in real time.
+- It removes the manual merchandising overhead and keeps product pricing and catalog nodes aligned in real time.
 
 ---
 
@@ -129,6 +129,6 @@ Drafting technical posts from scratch usually means wasting time fixing inconsis
 
 To speed up my workflow, I built a local RAG tool. It indexes previous Markdown posts into a local vector store, pulling my exact writing style, phrasing preferences, and code conventions straight into the LLM prompts.
 
-- **The Impact:** It hits the right structural hierarchy on the first try, cutting down initial drafting times by roughly 4x while keeping human editorial control.
+- It hits the right structural hierarchy on the first try while keeping human editorial control.
 
 ---

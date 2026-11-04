@@ -19,14 +19,14 @@ summary: "Co-organizing a student-run robotics conference and building its stati
 
 ---
 
-**Goals**
+### Goals
 
 * **Connect Campus Labs:** Give graduate students and postdocs a shared space to present hardware demos, posters, and talks across departments.
 * **Centralize Event Info:** Provide a single page where attendees could check the schedule, find room locations at the Media Lab, and see submission guidelines.
 
 ---
 
-**What I Did**
+### What I Did
 
 * **Built the Website:** Designed and wrote the front-end HTML/CSS from scratch to display the multi-track schedule, speaker lists, and event details on a simple, responsive page.
 * **Deployed on Athena:** Hosted and maintained the site files in MIT’s Athena `web_scripts` environment, updating schedules and speaker info as the program came together.
@@ -35,7 +35,7 @@ summary: "Co-organizing a student-run robotics conference and building its stati
 
 ---
 
-**Results**
+### Results
 
 * Gathered over 150 MIT researchers, students, and local industry attendees for a day of talks and demos.
-* Kept the event logistics and schedule running smoothly through a lightweight site that needed no complex backend maintenance.
+* Kept the event logistics and schedule running smoothly through a lightweight static site.

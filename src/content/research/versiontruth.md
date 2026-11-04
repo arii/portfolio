@@ -42,19 +42,16 @@ For historical context, `v4.1.0` was released in September 2023, while `v5.0.1` 
 
 ![AI incorrectly flagging v6 as invalid and suggesting a downgrade to v4](/images/studies/ai-incorrect-v4-suggestion.webp)
 
-This represents a classic out-of-distribution data error. The models encountered version tags (e.g., `v6`) released after their training cutoffs. Lacking real-time registry access, they hallucinated that the unfamiliar version was invalid and suggested reverting to the latest version present in their training data.
-
-
 This failure was not isolated to lightweight models like `gpt-4o-mini`. Testing confirmed that larger reasoning models, including Gemini 3.1 Pro, exhibited the exact same regression behavior, falsely identifying `v4` as the latest stable major release.
 
 
 ![GitHub Releases showing v7.0.0, confirming versions beyond v4 are stable](/images/studies/github-checkout-v7-release.webp)
 
-While Agentic DevAI increases engineering velocity, this incident highlights the critical need for deterministic, external validation when handling dynamic infrastructure dependencies. Learn more about my [agentic AI tooling consulting](https://arii.github.io/about/) services for developer infrastructure.
+The incident is the case for deterministic, external validation of dynamic infrastructure dependencies.
 
 ## The Solution: VersionTruth Architecture
 
-Instead of just diagnosing the failure mode, I packaged the live-registry-lookup logic as a small public API called VersionTruth, along with a hosted `SKILL.md` that tells any agent how to use it. The instruction to the agent is deliberately blunt: if you don't recognize a version string, that's a reason to *check*, not a reason to *revert*. Unfamiliarity isn't evidence of error.
+I packaged the live-registry-lookup logic as a small public API called VersionTruth, along with a hosted `SKILL.md` that tells any agent how to use it. The instruction to the agent is deliberately blunt: if you don't recognize a version string, that's a reason to *check*, not a reason to *revert*. Unfamiliarity isn't evidence of error.
 
 ![VersionTruth Solution Architecture](/images/studies/AI_Version_Hallucination_Solution.webp)
 
@@ -66,7 +63,7 @@ The API lives as serverless functions sitting next to an existing Vite SPA—ope
 sequenceDiagram
     autonumber
 
-    actor Agent as AI Coding Agent (Jules / Claude)
+    actor Agent as AI Coding Agent (Claude)
     participant Skill as SKILL.md Specification
     participant API as VersionTruth API (Vercel Edge)
     participant Reg as Upstream Registry (npm / GitHub / Node)
@@ -184,4 +181,4 @@ if __name__ == "__main__":
 
 While preventing out-of-distribution downgrades is the immediate fix, the next evolution of VersionTruth will address the opposite problem: agents confidently recommending versions that have reached End-of-Life (EOL) or have been explicitly deprecated by maintainers.
 
-Future iterations of the `/api/compare-version` endpoint will expand its upstream registry integrations to query vulnerability databases and deprecation metadata, allowing the `isDeprecated` flag to proactively guide agents away from unmaintained branches (like Node 18) towards current LTS releases.
+Future iterations of the `/api/compare-version` endpoint will expand its upstream registry integrations to query vulnerability databases and deprecation metadata, so the `isDeprecated` flag steers agents away from unmaintained branches (like Node 18) toward current LTS releases.
