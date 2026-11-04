@@ -12,7 +12,7 @@ describe('Navigation Header Component', () => {
     );
 
     expect(screen.getByText('Ariel Anders Portfolio')).toBeInTheDocument();
-    expect(screen.getByText('Roboticist & Agentic Orchestration Architect')).toBeInTheDocument();
+    expect(screen.getByText('Roboticist & Senior Software Engineer')).toBeInTheDocument();
   });
 
   it('renders standard navigation links', () => {

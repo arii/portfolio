@@ -17,7 +17,7 @@ describe('HRM Architecture & Navigation Integration', () => {
     expect(post?.tags).toContain('Web Bluetooth');
     expect(post?.tags).toContain('WebSockets');
     expect(post?.summary.length).toBeGreaterThan(20);
-    expect(post?.content).toContain('The Heart Rate Monitor (HRM) project');
+    expect(post?.content).toContain('HRM connects consumer fitness hardware to the browser in real time.');
   });
 
   it('hrm-flagship has correct canonicalPath and externalUrl', () => {

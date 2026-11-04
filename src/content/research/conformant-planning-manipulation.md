@@ -14,7 +14,7 @@ summary: "My MIT CSAIL PhD dissertation on conformant planning for robot manipul
 
 ## Overview
 
-This research forms the core of my PhD dissertation at **MIT CSAIL**, advised by **Prof. Leslie Pack Kaelbling** and **Prof. Tomás Lozano-Pérez**, with committee member **Prof. Sertac Karaman**. My work enables general-purpose helper robots to reliably arrange unanchored objects into desired target configurations despite severe pose uncertainty caused by inaccurate sensing, control errors, and unknown physical friction. If you are developing physical automation systems and seeking [autonomous systems advisory](https://arii.github.io/about/), explore my consulting background and engineering experience.
+This research forms the core of my PhD dissertation at **MIT CSAIL**, advised by **Prof. Leslie Pack Kaelbling** and **Prof. Tomás Lozano-Pérez**, with committee member **Prof. Sertac Karaman**. My work enables general-purpose helper robots to reliably arrange unanchored objects into desired target configurations despite severe pose uncertainty caused by inaccurate sensing, control errors, and unknown physical friction.
 
 [![Figure 1: Willow Garage PR2 robot performing physical conformant manipulation to arrange blocks into tight arrangements under pose uncertainty without visual feedback. | Watch Full Video Demonstration on YouTube ↗ | https://www.youtube.com/watch?v=omdHFeBBYZ0#no-embed](/assets/research/phd/icra_presentation.webp#max-w-2xl)](https://www.youtube.com/watch?v=omdHFeBBYZ0#no-embed)
 
@@ -41,7 +41,7 @@ The belief-state approach is detailed in our **ICRA 2018** paper:
 
 When manipulators perform multi-step assembly or packaging tasks—such as placing 1-inch polyomino Tetris blocks into tight grid slots—small position and angle errors accumulate across sequential actions. Open-loop trajectory execution frequently fails because slight misalignments cause binding, jamming, or collision.
 
-Furthermore, camera lines-of-sight are frequently obstructed by robot end-effectors or nearby fixtures. **Conformant planning** overcomes these perception dead-zones by synthesizing control strategies that apply contact mechanics (such as pushing, sliding, and funneling) to systematically reduce state uncertainty purely through physical interactions without requiring continuous visual feedback.
+Camera lines-of-sight are frequently obstructed by robot end-effectors or nearby fixtures. **Conformant planning** overcomes these perception dead-zones with control strategies built on contact mechanics — pushing, sliding, funneling — that reduce state uncertainty through physical interaction alone.
 
 ### Fixture-Augmented Trajectory Optimization
 - **Concept:** Augments open-loop trajectories by introducing **movable fixtures** (fences or guide structures) for the robot to push parts against.
@@ -56,7 +56,7 @@ Furthermore, camera lines-of-sight are frequently obstructed by robot end-effect
 
 * **Goal:** Execute planar assembly of disjoint block clusters into a single composite structure via non-prehensile pushing and fixturing.
 * **Execution:** A linear pusher translates the lower cluster along an open-loop trajectory to mate seamlessly with the stationary upper target.
-* **Outcome:** Demonstrates deterministic nominal kinematics in the absence of initial pose or actuation noise.
+* **Outcome:** Demonstrates deterministic nominal kinematics with exact initial poses and noiseless actuation.
 
 ---
 
@@ -66,7 +66,7 @@ Furthermore, camera lines-of-sight are frequently obstructed by robot end-effect
 
 * **Perturbation:** Introduced stochastic noise into initial object poses and actuation dynamics.
 * **Failure Mechanism:** Unconstrained degrees of freedom lead to compounding kinematic drift and premature rotation.
-* **Outcome:** Assembly fails as the sub-assemblies scatter and miss contact interfaces without active state feedback.
+* **Outcome:** Assembly fails: the sub-assemblies scatter and miss contact interfaces, and the open loop has no state feedback to correct them.
 
 ---
 
@@ -101,7 +101,7 @@ Support(b_{t+1}) ⊆ Support(b_t)
 To ground simulated transitions in physical reality, empirical noise characterization and spatial particle overlays visualize contact uncertainty during execution.
 
 ![Belief State Overlay Visualization](/assets/research/phd/sliding_1.webp#max-w-xl)
-*Figure 10: Algorithm belief-state overlay depicting particle distributions and empirical contact confidence bounds during manipulation.*
+*Figure 5: Algorithm belief-state overlay depicting particle distributions and empirical contact confidence bounds during manipulation.*
 
 ### Table and Board Relative Localization Pipeline
 
@@ -143,7 +143,7 @@ To ground simulated transitions in physical reality, empirical noise characteriz
 ## Defense Presentation & Visuals
 
 ![Eric the Robot Thesis Mascot](/assets/research/phd/eric.png#max-w-md)
-*Figure 12: "Eric", the robot thesis mascot used to visually convey belief-state uncertainty and contact constraints.*
+*Figure 6: "Eric", the robot thesis mascot used to visually convey belief-state uncertainty and contact constraints.*
 
 ### Thesis Mascot: "Eric" the Robot
 To communicate these theoretical planning concepts during the defense presentation and dissertation, I created graphics of **"Eric the red robot"**, a cartoon robot mascot inspired by Leslie's stick figures:
@@ -151,4 +151,4 @@ To communicate these theoretical planning concepts during the defense presentati
 - **"Picketing Eric":** Highlighting edge cases where open-loop trajectories fail due to unexpected friction or rotational torque.
 
 ![Blindfolded Eric mascot illustrating sensorless manipulation](/assets/research/phd/eric2.png#max-w-sm) ![Picketing Eric mascot illustrating open-loop failure modes](/assets/research/phd/eric1.png#max-w-sm)
-*Figure 13 & 14: "Blindfolded Eric" demonstrating sensorless contact funnels (left) and "Picketing Eric" illustrating trajectory failure modes under friction (right).*
+*Figure 7 & 8: "Blindfolded Eric" demonstrating sensorless contact funnels (left) and "Picketing Eric" illustrating trajectory failure modes under friction (right).*

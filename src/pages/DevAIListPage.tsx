@@ -141,7 +141,7 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
               <span>Engineering Deep-Dives</span>
             </h2>
             <p className="text-xs sm:text-sm text-text-dim">
-              How I build: Engineering multi-agent workflows, automated code-auditing guardrails, and agentic CI/CD pipelines to enforce production standards.
+              How I build: multi-agent workflows, automated code-auditing guardrails, and agentic CI/CD pipelines that enforce production standards.
             </p>
           </div>
           <span className="text-sm font-semibold text-text-dim shrink-0">{filteredPosts.length} Articles</span>

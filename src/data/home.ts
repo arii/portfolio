@@ -32,7 +32,7 @@ export interface HeroContent {
 
 export const heroContent: HeroContent = {
   brandTitle: 'Ariel Anders Portfolio',
-  brandRole: 'Roboticist & Agentic Orchestration Architect',
+  brandRole: 'Roboticist & Senior Software Engineer',
   name: 'Ariel Anders, PhD',
   title: 'Roboticist & Senior Software Engineer',
   bioParagraphs: [
@@ -46,7 +46,7 @@ export const PHILOSOPHY_TENETS: PhilosophyTenet[] = [
     id: 'ai-rigor',
     title: 'AI-Accelerated Rigor',
     description:
-      'I build agentic CI/CD workflows and automated code reviews that proactively catch technical debt—accelerating engineering speed without compromising rigor.',
+      'I build agentic CI/CD workflows and automated code reviews that catch technical debt early and keep engineering speed high.',
   },
   {
     id: 'robot-behavior',
@@ -60,13 +60,13 @@ export const FEATURE_CALLOUTS: FeatureCallout[] = [
   {
     id: 'motion-planning',
     title: 'Motion Planning & Autonomy',
-    description: 'Planning and autonomy for reliable real-world robotic systems',
+    description: 'For robots that work in the real world',
     iconName: 'compass',
   },
   {
     id: 'devai-workflows',
     title: 'Agentic DevAI',
-    description: 'AI agents and developer tooling for modern software engineering',
+    description: 'AI agents and developer tooling that survive contact with production',
     iconName: 'workflow',
   },
   {
@@ -78,7 +78,7 @@ export const FEATURE_CALLOUTS: FeatureCallout[] = [
   {
     id: 'deployment-edge',
     title: 'Deployment & Edge Infrastructure',
-    description: 'Docker, CI/CD, cloud, and robotics deployment infrastructure',
+    description: 'Docker, CI/CD, cloud, and getting robots deployed',
     iconName: 'cloud',
   },
 ];

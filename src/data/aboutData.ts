@@ -32,21 +32,21 @@ export const profileData: ProfileData = {
   role: "Roboticist & Senior Software Engineer",
   bio: [
     React.createElement('span', null,
-      "I am an MIT CSAIL roboticist whose work focuses on ",
+      "I am an MIT CSAIL roboticist ",
       React.createElement('strong', { className: 'font-bold text-text-main' }, "building reliable autonomous systems"),
-      ". My research focused on learning physics-based models for planning under uncertainty.  I bring deep experience across research and industry, from ",
+      ". My research: learning physics-based models for planning under uncertainty. I bring deep experience across research and industry, from ",
       React.createElement('strong', { className: 'font-bold text-text-main' }, "robot manipulation to social navigation"),
       " in dynamic indoor environments and autonomous driving."
     ),
     React.createElement('span', null,
-      "Over the past year, I’ve built ",
+      "Over the past year I’ve built ",
       React.createElement('strong', { className: 'font-bold text-text-main' }, "stateful, multi-agent workflows for software development"),
-      ", using AI to engineer feature-rich applications while maintaining code quality and architectural standards, bringing ",
-      React.createElement('strong', { className: 'font-bold text-text-main' }, "robotics-grade reliability to DevAI"),
+      " — AI-assisted engineering that holds code quality and architectural standards, with ",
+      React.createElement('strong', { className: 'font-bold text-text-main' }, "robotics-grade reliability"),
       "."
     ),
     React.createElement('span', null,
-      "Outside of robotics and AI, you’ll usually find me on the dance floor or exploring San Francisco. I am an active West Coast Swing dancer who travels for regional events, perform in improv comedy jams, stay fit with high-intensity workouts, and love a good game of chess. Recently, I combined my technical background with these creative outlets to build boomtick.blog, a lifestyle and community platform featuring West Coast Swing guides, gear recommendations, and custom merchandise."
+      "Outside of robotics and AI, you’ll usually find me on the dance floor or exploring San Francisco. I am an active West Coast Swing dancer traveling for regional events — plus improv comedy jams, high-intensity workouts, and chess. I built boomtick.blog from those two worlds: West Coast Swing guides, gear recommendations, and custom merchandise."
     )
   ],
   details: [
@@ -65,7 +65,7 @@ export const profileData: ProfileData = {
       icon: Award
     }
   ],
-  availability: "Open to Staff/Senior SWE roles, robotics contracts, and DevAI consulting — especially where robotics and AI-assisted engineering overlap.",
+  availability: "Open to robotics contracts and DevAI consulting — especially where robotics and AI-assisted engineering overlap.",
   highlights: [
     {
       period: "2012 – 2019",

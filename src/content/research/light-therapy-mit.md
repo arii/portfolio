@@ -11,8 +11,6 @@ category: "Community Health & Wellness"
 summary: "Campus-wide seasonal affective disorder (SAD) wellness initiative funded by the MindHandHeart Innovation Fund."
 ---
 
-## Light Therapy at MIT
-
 ## Mitigating Seasonal Affective Disorder Across Campus
 
 As a fourth-year PhD student in EECS at the Massachusetts Institute of Technology, I created **Light Therapy at MIT**—a community wellness initiative conceived, funded, and deployed to combat Seasonal Affective Disorder (SAD) and winter depression among students and researchers.
@@ -41,15 +39,15 @@ Supported by the **MIT MindHandHeart Innovation Fund**, I proposed and executed 
 I coordinated with MIT Environment, Health & Safety (EHS) and MIT Medical to establish safety guidelines and provide contact info for campus wellness resources.
 
 ### 2. Strategic Placement and Campus Outreach
-To maximize impact, I reached out to various mailing lists, requesting that project announcements be forwarded to dorms and laboratories. I strategically placed light therapy stations in high-traffic shared spaces across several dorms and residences, in addition to the CSAIL phone booths within the Stata Center.
+To maximize impact, I reached out to various mailing lists, requesting that project announcements be forwarded to dorms and laboratories. I placed light therapy stations in high-traffic shared spaces across several dorms and residences, in addition to the CSAIL phone booths within the Stata Center.
 
 ### 3. User Autonomy and Light Management
-A primary requirement for the project was ensuring that light usage remained strictly voluntary for students. I prioritized user comfort by giving everyone full control to switch the lamps on or off based on their personal preference. Furthermore, I carefully installed the equipment; for instance, inside the Stata Center phone booths, I angled the lamps away from the windows to ensure that passersby were not subjected to unintentional light exposure. I also collected ongoing feedback via suggestion boxes and my project website to evaluate the pilot's success.
+Light usage had to stay strictly voluntary for students. I prioritized user comfort by giving everyone full control to switch the lamps on or off based on their personal preference. I angled the lamps away from the windows so passersby weren't hit with stray light. I also collected ongoing feedback via suggestion boxes and my project website to evaluate the pilot's success.
 
 ---
 
 ## Outcomes & Legacy
 
-- **Institutional Funding:** Successfully secured initial grant funding from MindHandHeart's inaugural Innovation Fund round.
+- **Institutional Funding:** Secured initial grant funding from MindHandHeart's inaugural Innovation Fund round.
 - **Mental Health Awareness:** Educated the campus community about SAD—a condition that Massachusetts residents are particularly vulnerable to during long winter months.
 - **Campus Adoption:** The pilot project served as a template for expanding mental health support and student-led wellness initiatives across MIT dormitories and departments.

@@ -11,11 +11,9 @@ category: "Accessibility & Mobile"
 summary: "iOS accessibility utility translating ambient light intensity into audible frequencies for visually impaired users (6,000+ downloads)."
 ---
 
-## Boop Light Detector App
-
 ## iOS Assistive Technology for Visually Impaired Users
 
-**Boop Light Detector** is an iOS accessibility application designed to translate ambient light levels into audible frequencies and tactile haptic feedback. I developed the app following the **MIT Assistive Technology Hackathon (ATHack 2016)**, and it has served blind and visually impaired users worldwide with over **6,000+ downloads** on the Apple App Store.
+**Boop Light Detector** is an iOS accessibility application designed to translate ambient light levels into audible frequencies and haptic feedback. I developed the app following the **MIT Assistive Technology Hackathon (ATHack 2016)**, and it has served blind and visually impaired users worldwide with **6,000+ downloads** on the Apple App Store.
 
 ![Boop Light Detector app testing during development and user trials](/assets/research/app_testing.jpg)
 
@@ -27,7 +25,7 @@ When I developed this at an assistive technology hackathon in 2016, modern smart
 
 Existing light detection apps were often:
 1. **Expensive or ad-laden**
-2. **Inaccurate**, relying solely on raw camera pixel values without adjusting for automatic camera exposure and sensitivity adjustments.
+2. **Inaccurate**, relying solely on raw camera pixel values, with automatic exposure and sensitivity left unadjusted.
 3. **Slow or unresponsive**, requiring navigation through complex multi-screen UI menus.
 4. **Lacking tactile feedback** for quiet environments like libraries or offices.
 
@@ -56,7 +54,7 @@ This produces a normalized luminescence rating from **0 to 100**, enabling preci
 
 ---
 
-## Community Impact & Outreach
+## Impact
 
 - **6,000+ Downloads:** Published on the Apple App Store as a completely free tool with zero ads, data collection, or tracking.
 - **ATHack 2016 Awardee:** Received Honorable Mention at MIT ATHack 2016 in collaboration with co-creators and blind accessibility advocate Jonathan Gale.

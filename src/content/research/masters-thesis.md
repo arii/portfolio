@@ -39,7 +39,7 @@ I formulated a framework for **whole-arm grasping**. Instead of restricting cont
 
 ### 1. Unified Policy Formulation
 * Replaced the decoupled grasp-then-plan paradigm with a policy search formulation that directly maps object states and robot configurations into coordinated multi-joint trajectories.
-* Optimized motions over a distribution of object poses and geometries to ensure robustness without requiring high-precision 3D reconstruction.
+* Optimized motions over a distribution of object poses and geometries, so policies work from coarse 3D models.
 
 ### 2. Reinforcement Learning for Whole-Arm Envelopment
 * Formulated the enveloping and lifting sequence as a policy optimization problem.
@@ -93,5 +93,5 @@ Validation of my learned whole-arm manipulation policies on the physical PR2:
 
 ## Key Takeaways
 
-* **Form-Closure Caging Over Precision Points:** Enveloping objects with the full arm structure creates robust form-closure and support surfaces, bypassing the need for exact fingertip friction modeling.
-* **Payload Scaling:** Utilizing the arms and torso distributes load and joint torques, enabling manipulation of items far exceeding standard PR2 gripper payload limits.
+* **Form-Closure Caging Over Precision Points:** Enveloping objects with the full arm creates form-closure caging from the arm structure itself — no fingertip friction model needed.
+* **Payload Scaling:** Using the arms and torso distributes load and joint torques, enabling manipulation of items far exceeding standard PR2 gripper payload limits.

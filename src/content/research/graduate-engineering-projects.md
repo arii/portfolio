@@ -11,8 +11,6 @@ category: "Robotics & Hardware"
 summary: "A showcase of advanced graduate-level engineering systems developed at MIT. These projects span real-time computer vision control, ordinal machine learning ranking, and parameterized hardware accelerators built using Bluespec SystemVerilog."
 ---
 
-A showcase of advanced graduate-level engineering systems developed at MIT. These projects span real-time computer vision control, ordinal machine learning ranking, and parameterized hardware accelerators built using Bluespec SystemVerilog.
-
 ---
 
 Jump to: [Quadrotor](#1-autonomous-quadrotor-control-mit-16-30-16-31) | [BBox ML](#2-bounding-box-reranking-mit-6-867-machine-learning) | [RSA Accelerator](#3-parameterized-cryptographic-accelerator-mit-6-375-complex-digital-systems)
@@ -30,7 +28,7 @@ The **Drone Line Following Autonomous Controller** ("Follow the Yellow Brick Roa
 Autonomous flight using low-cost micro-drones poses severe real-time compute and sensor noise constraints. My primary contributions focused on the image processing architecture and integration into the Rolling Spider framework:
 
 #### A. Offline Image Processing & Data Capture Pipeline
-- **Yavta Integration:** Developed custom scripts utilizing the Yet Another V4L2 Test Application (`yavta`) to rapidly capture and download test images directly from the quadcopter.
+- **Yavta Integration:** Developed custom scripts using the Yet Another V4L2 Test Application (`yavta`) to rapidly capture and download test images directly from the quadcopter.
 - **Format Conversion & Testing:** Rendered images in JPEG and raw YUV formats, analyzing luminance (Y) components to separate line targets from varying floor textures without heavy RGB conversion overhead.
 - **Pixel Offset Calculation:** Implemented a lightweight line detection algorithm iterating over pixel arrays to compute the position-wise pixel offset relative to the center line.
 
@@ -42,7 +40,7 @@ Autonomous flight using low-cost micro-drones poses severe real-time compute and
 
 - **Platform:** Parrot Rolling Spider micro quadrotor equipped with a down-facing camera, pressure sensor, and ultrasonic altitude sensor.
 - **Ground Station Interface:** Custom MATLAB/Simulink and Python communication links transmitting control packets at high refresh rates.
-- **Experimental Results:** Successfully achieved closed-loop flight tracking across continuous paths and distinct floor markers (such as yellow or black tape) with reliable state estimation.
+- **Experimental Results:** Achieved closed-loop flight tracking across continuous paths and distinct floor markers (such as yellow or black tape) with reliable state estimation.
 
 ---
 
@@ -64,7 +62,7 @@ To solve this issue, I focused on formulating learning-to-rank models specifical
 2. **P-Norm Push:** Implemented the P-norm push ranking algorithm, placing higher mathematical penalty on errors at the top of the ranked list so the robot's top choice is correct.
 3. **Experimental Validation:** Evaluated bounding box candidate scoring across real-world cluttered kitchen environments captured by mobile manipulators.
 
-![Performance evaluation showing how our learned weight vectors successfully improve high-precision bounding box candidate scores.](/assets/research/report-ml-lis/fig2_ranking_performance.png#invert-dark)
+![Performance evaluation showing how our learned weight vectors improve high-precision bounding box candidate scores.](/assets/research/report-ml-lis/fig2_ranking_performance.png#invert-dark)
 
 ### Key Results & Takeaways
 

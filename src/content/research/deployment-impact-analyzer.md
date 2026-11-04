@@ -12,9 +12,9 @@ status: "published"
 
 LLM code generation introduces unintended visual side effects—hallucinated UI components, modified badge styles, shifted accents, or unintended layout changes. Reviewing these multi-file diffs manually is error-prone, running full end-to-end test suites on every commit is too slow, and standard unit tests completely miss visual artifacts.
 
-I built the **Deployment Impact Analyzer** to catch these discrepancies automatically. The pipeline traces every code modification through the project's dependency graph, identifies which user-facing routes are touched, and triggers targeted Playwright visual diffs using Pixelmatch. By scoping screenshots strictly to impacted views, it flags hallucinated elements and styling shifts directly in the pull request while cutting visual testing volume by up to 90%.
+I built the **Deployment Impact Analyzer** to catch these discrepancies automatically. The pipeline traces every code modification through the project's dependency graph, identifies which user-facing routes are touched, and triggers targeted Playwright visual diffs using Pixelmatch. By scoping screenshots strictly to impacted views, it flags hallucinated elements and styling shifts directly in the pull request while sharply cutting visual testing volume.
 
-## The Architecture
+## How the pipeline fits together
 
 ```mermaid
 flowchart TD
@@ -52,7 +52,7 @@ flowchart TD
 
 ## 1. Import Graph Parsing with dependency-cruiser
 
-I didn't want to test every page if only the "About" section changed. To achieve targeted testing, I use `dependency-cruiser` to analyze the project's import graph.
+I wanted tests scoped to what changed — not every page when only the "About" section changed — so I use `dependency-cruiser` to analyze the project's import graph.
 
 When modifying a file, I trace its dependents up the tree until I reach an entry point (a route or a page component).
 
@@ -92,7 +92,7 @@ If the score exceeds a configurable threshold, the pipeline marks the check as f
 
 ## 4. GitHub Actions Integration
 
-I orchestrated the entire system via GitHub Actions. I've optimized the workflow to use caching for the `dependency-cruiser` graph and parallelize Playwright workers to keep execution times under 5 minutes.
+I ran the whole system on GitHub Actions. I've optimized the workflow to use caching for the `dependency-cruiser` graph and parallelize Playwright workers to keep execution times under 5 minutes.
 
 ```yaml
 name: Deployment Impact Analysis
@@ -114,7 +114,7 @@ jobs:
 
 ### Example Report Output
 
-When opening a PR, the analyzer posts a summary directly to the GitHub conversation. This allows developers to see the impact at a glance without leaving their workflow.
+When opening a PR, the analyzer posts a summary directly to the GitHub conversation. This lets developers see the impact at a glance, right inside their workflow.
 
 | Route | Visual Diff | Severity | Action |
 | :--- | :--- | :--- | :--- |
@@ -128,7 +128,6 @@ When opening a PR, the analyzer posts a summary directly to the GitHub conversat
 | :---: | :---: | :---: |
 | ![Baseline](/assets/studies/deployment-impact-analyzer/before.svg) | ![Current](/assets/studies/deployment-impact-analyzer/after.svg) | ![Visual Delta](/assets/studies/deployment-impact-analyzer/diff.svg) |
 
-*A "sandwich" comparison showing the baseline, the new state, and the highlighted pixel delta.*
 
 ### Real-World Finding: From 404 to Overflow Resolution
 
@@ -149,8 +148,6 @@ I implemented a fix using Tailwind's `truncate` and `flex-wrap` utilities, ensur
 
 *The mobile resolution sequence: from a 404 state to an overflow regression, and finally the resolved responsive layout.*
 
-## Lessons Learned
+Static analysis maps structural vulnerabilities; visual diffing confirms interface integrity. Together they turn visual evaluation into a deterministic check.
 
-The core engineering insight from this project is the value of multi-layered verification. Static analysis maps the system's structural vulnerabilities, but visual diffing provides the actual confirmation of interface integrity. Merging these workflows converts unpredictable visual evaluation into a deterministic, programmatic check.
-
-The next evolution of this tool involves agentic auto-resolution: using LLMs to analyze the visual diff and decide if a change is an intentional improvement or an accidental regression.
+Next: agentic auto-resolution — an LLM reads the visual diff and decides whether the change is intentional or a regression.

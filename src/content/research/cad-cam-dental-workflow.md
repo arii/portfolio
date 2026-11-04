@@ -12,16 +12,14 @@ category: "Medical Robotics"
 summary: "Dynamic registration, kinematic calibration, and interactive UI for autonomous dental crowning."
 ---
 
-## CAD/CAM Robotic Dental Crowning & Dynamic Registration Workflow
-
 ## Autonomous Surgical Robotics at Bionics Lab UCSC
 
-The **CAD/CAM Dental Robotics** project at the **Bionics Lab, University of California, Santa Cruz (UCSC)** focused on the development of an autonomous robotic system for semi-autonomous dental restoration. My research encompassed two primary areas:
+The **CAD/CAM Dental Robotics** project at the **Bionics Lab, University of California, Santa Cruz (UCSC)** built a semi-autonomous robotic system for dental restoration. My research encompassed two primary areas:
 
 1.  **Dental Crowning Preparation:** I developed a workflow to generate milling trajectories from 3D-digitized tooth models, enabling the robotic arm to autonomously mill a boundary around the tooth.
 2.  **Dental Implant Preparation:** I extended this work to execute implant placement procedures. To account for patient movement during the procedure, I designed and implemented **dynamic registration**. This involved using a passive robotic arm (Microscribe MX) as a real-time feedback mechanism to track the position of the jaw.
 
-To facilitate this, I developed surgical control software—integrating Visual Studio, Matlab, and ORiN APIs—to synchronize the active robotic arm (Denso VM-B01G) with real-time positional data, allowing for high-precision milling and drilling aligned with patient-specific intraoral geometry.
+I built the surgical control software—integrating Visual Studio, Matlab, and ORiN APIs—to synchronize the active robotic arm (Denso VM-B01G) with real-time positional data, allowing for high-precision milling and drilling aligned with patient-specific intraoral geometry.
 
 ![CAD/CAM Robotic Dental Crowning Setup](/assets/research/dental.jpg)
 *Figure 1: Robotic dental crowning experimental setup and software user interface at UCSC Bionics Lab.*
@@ -54,7 +52,7 @@ To achieve precise alignment between the robotic tool tip and the target tooth s
 
 ### Homogeneous Transformation Math
 
-I solved the spatial position of the target tooth implant site relative to the robot end-effector `M6_P_ImplantLoc` through the transformation chain:
+I computed the position of the target tooth implant site relative to the robot end-effector `M6_P_ImplantLoc` through the transformation chain:
 
 ```
 T_Implant = T_D6_to_Base * T_Base_to_MXBase * T_MXBase_to_MX6 * P_Tip
@@ -96,6 +94,8 @@ I benchmarked tracking accuracy across simulated patient motion profiles using a
 Experimental results verified:
 - **Mean Spatial Tracking Accuracy:** Sub-millimeter position accuracy (< 0.45 mm) across dynamic movement profiles.
 - **Control Loop Rate:** Real-time compensation loop running at 100 Hz update frequency.
+- Demonstrated real-time dynamic registration for dental implant preparation and crowning.
+- Verified sub-millimeter trajectory execution under clinician-in-the-loop oversight.
 
 ---
 
@@ -109,9 +109,3 @@ Experimental results verified:
 
 - 📄 [Download Dynamic Registration for Dental Robotics Report (PDF)](https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_dental.pdf)
 
----
-
-## Research Significance
-
-- Demonstrated real-time dynamic registration for dental implant preparation and crowning.
-- Verified sub-millimeter trajectory execution under clinician-in-the-loop oversight.
