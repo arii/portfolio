@@ -10,7 +10,10 @@ describe('About Page Content Ownership', () => {
     expect(screen.getByText('Education')).toBeInTheDocument();
     expect(screen.getByText('Honors')).toBeInTheDocument();
     expect(
-      screen.getByText('robotics-grade reliability to DevAI')
+      screen.getByText('stateful, multi-agent workflows for software development')
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText('robotics-grade reliability')
     ).toBeInTheDocument();
 
     expect(

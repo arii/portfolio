@@ -3,6 +3,8 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { HelmetProvider } from 'react-helmet-async';
 import SEO from '@/components/SEO';
+import { NAV_ITEMS } from '@/data/navigation';
+import { CONSULTING_SERVICES } from '@/data/consulting';
 import fs from 'node:fs';
 import path from 'node:path';
 import { generateSitemap } from '../../scripts/generate-sitemap.js';
@@ -368,28 +370,30 @@ describe('SEO Component & Search Configuration', () => {
     expect(video.embedUrl).toBe('https://www.youtube.com/embed/rPpewHIF2KU');
   });
 
-  it('verifies internal linking strategy targeting https://arii.github.io/about in portfolio articles', () => {
+  it('verifies internal linking strategy routes consulting pitches through nav + consulting page, not portfolio articles', () => {
     const researchDir = path.resolve(__dirname, '../../src/content/research');
     const mdFiles = fs.readdirSync(researchDir).filter((file) => file.endsWith('.md'));
 
-    const internalLinks: Array<{ file: string; match: string; anchorText: string }> = [];
+    const articlePitches: Array<{ file: string; match: string }> = [];
 
     for (const file of mdFiles) {
       const content = fs.readFileSync(path.join(researchDir, file), 'utf-8');
       const regex = /\[([^\]]+)\]\((https:\/\/arii\.github\.io\/about\/|\/about\/)\)/g;
       let match: RegExpExecArray | null;
       while ((match = regex.exec(content)) !== null) {
-        internalLinks.push({
-          file,
-          anchorText: match[1],
-          match: match[0],
-        });
+        articlePitches.push({ file, match: match[0] });
       }
     }
 
-    expect(internalLinks.length).toBeGreaterThan(0);
-    const anchorTexts = internalLinks.map((l) => l.anchorText);
-    expect(anchorTexts.some((text) => text.includes('consulting'))).toBe(true);
-    expect(anchorTexts.some((text) => text.includes('advisory'))).toBe(true);
+    // Articles carry no consulting pitches; the consulting page + nav own that linking.
+    expect(articlePitches).toEqual([]);
+
+    // Nav carries the consulting entry point.
+    const consultingNav = NAV_ITEMS.find((item) => item.name === 'Consulting');
+    expect(consultingNav).toBeDefined();
+    expect(consultingNav?.path).toBe('/consulting/');
+
+    // Consulting page owns the pitch copy.
+    expect(CONSULTING_SERVICES.length).toBeGreaterThan(0);
   });
 });
