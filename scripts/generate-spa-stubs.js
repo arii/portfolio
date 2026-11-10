@@ -416,8 +416,10 @@ function renderDevAiHtml(contentDir) {
 
   html += `<section><h2>Products built with DevAI</h2>`;
   for (const tool of DEVAI_FLAGSHIPS) {
-    const targetUrl = tool.canonicalPath || `/devai/${tool.id}/`;
-    html += `<article><h3><a href="${escapeHtml(targetUrl)}">${escapeHtml(tool.title)}</a></h3>`;
+    const targetUrl = tool.canonicalPath || tool.externalUrl || `/devai/#${tool.id}`;
+    const isExternal = !tool.canonicalPath && !!tool.externalUrl;
+    const linkAttrs = isExternal ? ' target="_blank" rel="noopener noreferrer"' : '';
+    html += `<article><h3><a href="${escapeHtml(targetUrl)}"${linkAttrs}>${escapeHtml(tool.title)}</a></h3>`;
     html += `<p><strong>${escapeHtml(tool.category)}</strong>${tool.metrics ? ` | <em>${escapeHtml(tool.metrics)}</em>` : ''}</p>`;
     html += `<p>${escapeHtml(tool.description)}</p>`;
     html += `</article>`;
@@ -443,8 +445,10 @@ function renderResearchHtml(contentDir) {
 
   html += `<section><h2>Graduate Theses</h2>`;
   for (const thesis of RESEARCH_THESIS) {
-    const targetUrl = thesis.canonicalPath || `/research/${thesis.id}/`;
-    html += `<article><h3><a href="${escapeHtml(targetUrl)}">${escapeHtml(thesis.title)}</a></h3>`;
+    const targetUrl = thesis.canonicalPath || thesis.externalUrl || `/research/#${thesis.id}`;
+    const isExternal = !thesis.canonicalPath && !!thesis.externalUrl;
+    const linkAttrs = isExternal ? ' target="_blank" rel="noopener noreferrer"' : '';
+    html += `<article><h3><a href="${escapeHtml(targetUrl)}"${linkAttrs}>${escapeHtml(thesis.title)}</a></h3>`;
     html += `<p><strong>${escapeHtml(thesis.category)}</strong></p>`;
     html += `<p>${escapeHtml(thesis.description)}</p>`;
     html += `</article>`;
@@ -453,8 +457,10 @@ function renderResearchHtml(contentDir) {
 
   html += `<section><h2>Robotics and Academic Projects</h2>`;
   for (const tool of RESEARCH_AUTONOMOUS) {
-    const targetUrl = tool.canonicalPath || `/research/${tool.id}/`;
-    html += `<article><h3><a href="${escapeHtml(targetUrl)}">${escapeHtml(tool.title)}</a></h3>`;
+    const targetUrl = tool.canonicalPath || tool.externalUrl || `/research/#${tool.id}`;
+    const isExternal = !tool.canonicalPath && !!tool.externalUrl;
+    const linkAttrs = isExternal ? ' target="_blank" rel="noopener noreferrer"' : '';
+    html += `<article><h3><a href="${escapeHtml(targetUrl)}"${linkAttrs}>${escapeHtml(tool.title)}</a></h3>`;
     html += `<p><strong>${escapeHtml(tool.category)}</strong>${tool.metrics ? ` | <em>${escapeHtml(tool.metrics)}</em>` : ''}</p>`;
     html += `<p>${escapeHtml(tool.description)}</p>`;
     html += `</article>`;

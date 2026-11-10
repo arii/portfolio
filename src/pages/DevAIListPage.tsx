@@ -80,7 +80,7 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
       ...flagshipTools.map((t) => ({
         name: t.title,
         description: t.description,
-        url: t.canonicalPath || `/devai/${t.id}`,
+        url: t.canonicalPath || t.externalUrl || `/devai/#${t.id}`,
         image: t.image,
       })),
       ...filteredPosts.map((p) => ({
