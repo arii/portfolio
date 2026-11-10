@@ -26,7 +26,7 @@ A collection of custom dev tools, background ETL pipelines, and automated UI tes
 
 **Stack:** React • TypeScript • Python • Pydantic • GitHub Actions • BeautifulSoup
 
-![WCS Telemetry Scraper execution console and schema validation interface](/assets/research/ai-experiments/wcs-scraper.png)
+![WCS Telemetry Scraper execution console and schema validation interface](/assets/research/ai-experiments/wcs-scraper.webp)
 
 Tracking regional West Coast Swing event schedules and dancer registries from the [World Swing Dance Council](https://worldwestcoastswingcouncil.com/events/) manually was a headache. Registration links broke often, and dates fell out of sync.
 
@@ -93,7 +93,7 @@ export function useWCSData() {
 
 **Stack:** TypeScript • Printful REST API • Vector Processing
 
-![Printful REST API integration console showing automated variant mapping and catalog synchronization](/assets/research/ai-experiments/ecommerce-automation.png)
+![Printful REST API integration console showing automated variant mapping and catalog synchronization](/assets/research/ai-experiments/ecommerce-automation.webp)
 
 Setting up products manually on Printful—uploading artwork, recalculating margins, and mapping variants—got repetitive. To fix this, I built an automated pipeline that ingests source vector files, auto-clips dimensions to stay safely inside print zones, and syncs variants directly via the [Printful API](https://developers.printful.com/docs/).
 
@@ -123,7 +123,7 @@ export async function syncProductVariant(variantId: number, printFileUrl: string
 
 **Stack:** Vector DB • LLM • Markdown
 
-![AI Blog Drafter prompt generation and contextual vector retrieval interface](/assets/research/ai-experiments/blog-drafter.png)
+![AI Blog Drafter prompt generation and contextual vector retrieval interface](/assets/research/ai-experiments/blog-drafter.webp)
 
 Drafting technical posts from scratch usually means wasting time fixing inconsistent code formatting or drift from established style guidelines.
 

@@ -92,7 +92,7 @@ The second core paradigm formulates manipulation as an explicit forward search o
 Support(b_{t+1}) ⊆ Support(b_t)
 ```
 
-![The initial object placement uncertainty for the PR2 robot was modeled as ±0.2 inches in both x and y coordinates and ±15 degrees in rotation based on physical experiment data](/assets/research/phd/sliding_2.webp) ![Six block arrangement task on PR2](/assets/research/phd/sixblock.png)
+![The initial object placement uncertainty for the PR2 robot was modeled as ±0.2 inches in both x and y coordinates and ±15 degrees in rotation based on physical experiment data](/assets/research/phd/sliding_2.webp) ![Six block arrangement task on PR2](/assets/research/phd/sixblock.webp)
 *Figure 3 & 4: Precision placement via contact funneling (left) and six-block arrangement setup on PR2 (right).*
 
 
@@ -142,7 +142,7 @@ To ground simulated transitions in physical reality, empirical noise characteriz
 
 ## Defense Presentation & Visuals
 
-![Eric the Robot Thesis Mascot](/assets/research/phd/eric.png#max-w-md)
+![Eric the Robot Thesis Mascot](/assets/research/phd/eric.webp#max-w-md)
 *Figure 6: "Eric", the robot thesis mascot used to visually convey belief-state uncertainty and contact constraints.*
 
 ### Thesis Mascot: "Eric" the Robot
@@ -150,5 +150,5 @@ To communicate these theoretical planning concepts during the defense presentati
 - **"Blindfolded Eric":** Illustrating sensorless manipulation sequences where physical contact boundaries replace visual perception.
 - **"Picketing Eric":** Highlighting edge cases where open-loop trajectories fail due to unexpected friction or rotational torque.
 
-![Blindfolded Eric mascot illustrating sensorless manipulation](/assets/research/phd/eric2.png#max-w-sm) ![Picketing Eric mascot illustrating open-loop failure modes](/assets/research/phd/eric1.png#max-w-sm)
+![Blindfolded Eric mascot illustrating sensorless manipulation](/assets/research/phd/eric2.webp#max-w-sm) ![Picketing Eric mascot illustrating open-loop failure modes](/assets/research/phd/eric1.webp#max-w-sm)
 *Figure 7 & 8: "Blindfolded Eric" demonstrating sensorless contact funnels (left) and "Picketing Eric" illustrating trajectory failure modes under friction (right).*

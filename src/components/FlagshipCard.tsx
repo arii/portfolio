@@ -21,7 +21,7 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
   };
 
   const ToolIcon = getToolIcon(tool);
-  const imageSrc = tool.id === 'hrm-flagship' ? '/assets/research/hrm-flagship.png' : tool.id === 'repo-auditor-ai' ? '/assets/research/repo-auditor-ai.png' : tool.image || null;
+  const imageSrc = tool.id === 'hrm-flagship' ? '/assets/research/hrm-flagship.webp' : tool.id === 'repo-auditor-ai' ? '/assets/research/repo-auditor-ai.webp' : tool.image || null;
 
   const isClickable = !!(tool.externalUrl || tool.sourceUrl || tool.canonicalPath);
   const targetSlug = tool.canonicalPath

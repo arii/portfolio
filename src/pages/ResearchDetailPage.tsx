@@ -336,7 +336,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
 
   const sectionDefaultImg = primarySection === 'research'
     ? '/assets/research/bwsi-racecar/racecar_main.webp'
-    : '/assets/research/boomtick-devai-tools/boomtick-arch.png';
+    : '/assets/research/boomtick-devai-tools/boomtick-arch.webp';
 
   const ogImage = post.image || firstImage || matchingTool?.image || sectionDefaultImg;
 

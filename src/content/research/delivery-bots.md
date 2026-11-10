@@ -11,7 +11,7 @@ category: "Multi-Robot Systems"
 summary: "Decentralized multi-agent package delivery in dynamic human environments (RSS 2015 Best Paper Finalist & IJRR journal publication)."
 ---
 
-![Autonomous Delivery Bot Transporting Item](/assets/research/beer.png)
+![Autonomous Delivery Bot Transporting Item](/assets/research/beer.webp)
 
 ## Decentralized Autonomous Logistics in Dynamic Human Environments
 

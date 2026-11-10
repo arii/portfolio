@@ -21,7 +21,7 @@ The **CAD/CAM Dental Robotics** project at the **Bionics Lab, University of Cali
 
 I built the surgical control software—integrating Visual Studio, Matlab, and ORiN APIs—to synchronize the active robotic arm (Denso VM-B01G) with real-time positional data, allowing for high-precision milling and drilling aligned with patient-specific intraoral geometry.
 
-![CAD/CAM Robotic Dental Crowning Setup](/assets/research/dental.jpg)
+![CAD/CAM Robotic Dental Crowning Setup](/assets/research/dental.webp)
 *Figure 1: Robotic dental crowning experimental setup and software user interface at UCSC Bionics Lab.*
 
 ---
@@ -30,7 +30,7 @@ I built the surgical control software—integrating Visual Studio, Matlab, and O
 
 Traditional dental restoration and implant preparation rely on manual handpieces, impression molds, and mechanical jigs. Integrating industrial 6-DOF robotic arms (such as the Denso VM-B01G) with real-time tracking (via MicroScribe 3D digitization arms) enables sub-millimeter precision during enamel preparation and crown alignment.
 
-![Robotic Dental System Architecture](/assets/research/dental/dental_robotics-000.png)
+![Robotic Dental System Architecture](/assets/research/dental/dental_robotics-000.webp)
 *Figure 2: Architectural diagram of the dynamic registration dental robotics setup, featuring the Denso 6-DOF robot arm, MicroScribe tracking arm, and intraoral jaw model.*
 
 Key engineering challenges included:
@@ -44,10 +44,10 @@ Key engineering challenges included:
 
 To achieve precise alignment between the robotic tool tip and the target tooth site, I established coordinate frames across the arm and tracking sensor:
 
-![Coordinate Frame Mapping](/assets/research/dental/dental_robotics-001.png)
+![Coordinate Frame Mapping](/assets/research/dental/dental_robotics-001.webp)
 *Figure 3: Kinematic coordinate frame mapping between robot base D{0}, end-effector D{6}, tracking base MX{0}, and tracking probe tip MX{6}.*
 
-![Transform Chain Flowchart](/assets/research/dental/dental_robotics-002.png)
+![Transform Chain Flowchart](/assets/research/dental/dental_robotics-002.webp)
 *Figure 4: Kinematic transformation chain flow used to solve for relative tool-to-implant spatial transforms.*
 
 ### Homogeneous Transformation Math
@@ -64,7 +64,7 @@ Where:
 - `T_MXBase_to_MX6`: Joint position readout matrix from the MicroScribe tracking arm.
 - `P_Tip`: Offset vector for the target point relative to the probe tip frame `MX{6}`.
 
-![Implant Target Frame Transformation](/assets/research/dental/dental_robotics-008.png)
+![Implant Target Frame Transformation](/assets/research/dental/dental_robotics-008.webp)
 *Figure 5: Vector transformation diagram mapping target implant location vector M6_P_ImplantLoc within the end-effector frame.*
 
 ---
@@ -73,10 +73,10 @@ Where:
 
 I implemented a closed-loop controller that continuously queries the tracking arm position and adjusts the Denso robot manipulator commands in real time.
 
-![Closed Loop Controller Architecture](/assets/research/dental/dental_robotics-003.png)
+![Closed Loop Controller Architecture](/assets/research/dental/dental_robotics-003.webp)
 *Figure 6: Closed-loop dynamic tracking control system diagram for real-time jaw motion compensation.*
 
-![Real-time Tracking Control Software UI](/assets/research/dental/dental_robotics-004.png)
+![Real-time Tracking Control Software UI](/assets/research/dental/dental_robotics-004.webp)
 *Figure 7: Real-time surgical monitoring software interface showing active frame tracking and toolpath progress.*
 
 ---
@@ -85,10 +85,10 @@ I implemented a closed-loop controller that continuously queries the tracking ar
 
 I benchmarked tracking accuracy across simulated patient motion profiles using anatomical dental phantom models.
 
-![Positional Tracking Error Plot](/assets/research/dental/dental_robotics-006.png)
+![Positional Tracking Error Plot](/assets/research/dental/dental_robotics-006.webp)
 *Figure 8: Measured 3D positional tracking error over time during dynamic compensation testing.*
 
-![Drill Tip Alignment Accuracy Plot](/assets/research/dental/dental_robotics-007.png)
+![Drill Tip Alignment Accuracy Plot](/assets/research/dental/dental_robotics-007.webp)
 *Figure 9: Alignment error distribution across experimental drilling trials, demonstrating sub-millimeter geometric accuracy.*
 
 Experimental results verified:

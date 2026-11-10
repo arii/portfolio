@@ -30,7 +30,7 @@ Traditional robotic grasping separates the problem into two distinct stages: fin
 
 I formulated a framework for **whole-arm grasping**. Instead of restricting contact to end-effectors, I enabled the robot to use its full kinematic chain—forearms, upper arms, and torso—to envelope, scoop, and cradle unmodeled objects under physical and pose uncertainty.
 
-![Whole-arm grasping experimental setup](/assets/research/swag.jpg)
+![Whole-arm grasping experimental setup](/assets/research/swag.webp)
 *Figure 1: Experimental setup and kinematics for whole-arm grasping on the PR2 platform.*
 
 ---
@@ -49,7 +49,7 @@ I formulated a framework for **whole-arm grasping**. Instead of restricting cont
 * Coordinated dual-arm trajectories and torso positioning to execute complex enveloping maneuvers on bulky everyday items (boxes, spheres, and irregular containers).
 * Transferred my learned simulation policies directly to the physical Willow Garage PR2 platform.
 
-![Thesis Key Concepts Word Cloud](/assets/research/thesis_wordle.png)
+![Thesis Key Concepts Word Cloud](/assets/research/thesis_wordle.webp)
 *Figure 2: Word cloud highlighting core themes from my MIT S.M. thesis research.*
 
 ---

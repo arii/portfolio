@@ -60,7 +60,7 @@ flowchart TD
 - **Multi-Tier AI Review System**: Incoming pull requests trigger structural evaluation pipelines where macro-agents use `boomtick-mcp` tools or `td-cli` commands to inspect diffs, verify static analysis artifacts, and render structured review recommendations (`APPROVE`, `REQUEST_CHANGES`, or `COMMENT`).
 - **Strict Tool Hierarchy**: `boomtick-mcp` exposes strongly typed, schema-validated tools to the agent. If the MCP protocol layer is unreachable or running in an isolated environment, the agent or developer falls back to direct `td-cli` command execution.
 
-![Boomtick Ecosystem Architecture Overview](/assets/research/boomtick-devai-tools/boomtick-arch.png)
+![Boomtick Ecosystem Architecture Overview](/assets/research/boomtick-devai-tools/boomtick-arch.webp)
 *Figure 1: High-level system map illustrating the dual-layer flow from macro-agents down to local CLI fallback and GitHub API endpoints.*
 
 ---
@@ -116,7 +116,7 @@ By using JSON Schema definitions for every exposed tool, `boomtick-mcp` prevents
 }
 ```
 
-![Boomtick MCP Integration in Desktop Client](/assets/research/boomtick-devai-tools/boomtick-mcp-desktop.png)
+![Boomtick MCP Integration in Desktop Client](/assets/research/boomtick-devai-tools/boomtick-mcp-desktop.webp)
 *Figure 2: `boomtick-mcp` loaded inside an agentic desktop interface, exposing structured audit and repository analysis tools.*
 
 ---
@@ -138,7 +138,7 @@ $ td-cli gh audit-pr --pr 42
 [SUCCESS] Multi-model review generated: APPROVE
 ```
 
-![td-cli Terminal Execution and Health Check](/assets/research/boomtick-devai-tools/boomtick-cli-audit.png)
+![td-cli Terminal Execution and Health Check](/assets/research/boomtick-devai-tools/boomtick-cli-audit.webp)
 *Figure 3: High-contrast terminal output demonstrating `td-cli gh audit-pr` and `td-cli doctor` health checks in action.*
 
 ---
@@ -233,7 +233,7 @@ Only the deterministic script sets the review state; the model produces findings
 
 For instance, `td-cli ai review` submits the review payload directly to the GitHub API.
 
-![Automated Pull Request Code Review Feedback](/assets/research/gitops-pr-reviewer-comment.png)
+![Automated Pull Request Code Review Feedback](/assets/research/gitops-pr-reviewer-comment.webp)
 *Figure 4: Automated review feedback comment posted directly to a GitHub Pull Request.*
 
 ---

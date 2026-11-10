@@ -27,7 +27,7 @@ Laboratory managers and sustainability teams were flying blind on equipment powe
 
 ## System Architecture & Software Implementation
 
-![LEAC Fume Hood Network Monitoring Interface](/assets/research/leac.jpg)
+![LEAC Fume Hood Network Monitoring Interface](/assets/research/leac.webp)
 
 I built and deployed a monitoring platform for academic labs:
 

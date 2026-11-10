@@ -50,7 +50,7 @@ Autonomous flight using low-cost micro-drones poses severe real-time compute and
 
 In this research project for **6.867 Machine Learning** at MIT CSAIL, my teammate Sanja Popovic and I evaluated learning algorithms to refine object detection ranking and confidence scoring for the **Learning and Intelligent Systems (LIS) group**.
 
-![Distance discrepancy decay functions evaluated to transform spatial offsets into bounding box confidence scores.](/assets/research/report-ml-lis/fig1_score_discrepancy.png#invert-dark)
+![Distance discrepancy decay functions evaluated to transform spatial offsets into bounding box confidence scores.](/assets/research/report-ml-lis/fig1_score_discrepancy.webp#invert-dark)
 
 ### Core Problem & Approach
 
@@ -62,7 +62,7 @@ To solve this issue, I focused on formulating learning-to-rank models specifical
 2. **P-Norm Push:** Implemented the P-norm push ranking algorithm, placing higher mathematical penalty on errors at the top of the ranked list so the robot's top choice is correct.
 3. **Experimental Validation:** Evaluated bounding box candidate scoring across real-world cluttered kitchen environments captured by mobile manipulators.
 
-![Performance evaluation showing how our learned weight vectors improve high-precision bounding box candidate scores.](/assets/research/report-ml-lis/fig2_ranking_performance.png#invert-dark)
+![Performance evaluation showing how our learned weight vectors improve high-precision bounding box candidate scores.](/assets/research/report-ml-lis/fig2_ranking_performance.webp#invert-dark)
 
 ### Key Results & Takeaways
 
@@ -82,8 +82,8 @@ To solve this issue, I focused on formulating learning-to-rank models specifical
 
 For **MIT 6.375 Complex Digital Systems**, my teammates Timur Balbekov, Neil Forrester, and I engineered a high-performance, parameterized **Hardware RSA Accelerator** using **Bluespec SystemVerilog (BSV)**.
 
-![System architecture of the RSA accelerator showing memory interface, control rule state machines, and modular exponentiation datapath.](/assets/research/report-6375-rsa/rsa_hardware_architecture.png#invert-dark)
-![Pipelined Montgomery modular multiplication unit designed for high-throughput integer exponentiation.](/assets/research/report-6375-rsa/montgomery_multiplier_datapath.png#invert-dark)
+![System architecture of the RSA accelerator showing memory interface, control rule state machines, and modular exponentiation datapath.](/assets/research/report-6375-rsa/rsa_hardware_architecture.webp#invert-dark)
+![Pipelined Montgomery modular multiplication unit designed for high-throughput integer exponentiation.](/assets/research/report-6375-rsa/montgomery_multiplier_datapath.webp#invert-dark)
 
 ### Architecture & Hardware Specification
 
