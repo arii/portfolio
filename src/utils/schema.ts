@@ -633,7 +633,18 @@ export function getResumeCareerSchema() {
   const workExperiences = [
     {
       '@type': 'WorkExperience',
-      title: 'Senior Algorithms Developer',
+      title: 'Principal Roboticist & AI Architect',
+      organization: {
+        '@type': 'Organization',
+        name: 'Ariel Anders Consulting',
+        url: `${SITE_URL}/consulting/`,
+      },
+      startDate: '2026',
+      description: 'Provide technical advisory, autonomy architecture audits (ROS 2 navigation, localization, motion planning), and agentic CI/CD infrastructure for teams shipping autonomous systems.',
+    },
+    {
+      '@type': 'WorkExperience',
+      title: 'Senior Algorithms Engineer',
       organization: {
         '@type': 'Organization',
         name: 'Civ Robotics',
@@ -641,18 +652,18 @@ export function getResumeCareerSchema() {
       },
       startDate: '2025-09',
       endDate: '2026-04',
-      description: 'Developing core navigation and localization software for autonomous forklifts using C++, Python, and ROS 2.',
+      description: 'Developed navigation and localization software for autonomous forklifts using C++, Python, and ROS 2, including IMU drivers, GPS filtering, and tilt-compensation for pose estimation.',
     },
     {
       '@type': 'WorkExperience',
-      title: 'Independent AI Engineering & Research',
+      title: 'Selected Robotics & AI Engineering Projects',
       organization: {
         '@type': 'Organization',
-        name: 'Autonomous Fitness Ecosystem & AI DevOps Pipeline',
+        name: 'Independent Projects',
         url: 'https://github.com/arii/hrm',
       },
-      startDate: '2025-01',
-      description: 'Dedicated research & development period focused on agentic AI pipelines and telemetry infrastructure.',
+      startDate: '2020',
+      description: 'Independent robotics prototyping, agentic CI/CD infrastructure, and RAG-grounded developer workflows.',
     },
     {
       '@type': 'WorkExperience',

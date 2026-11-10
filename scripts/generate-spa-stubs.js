@@ -323,7 +323,7 @@ function renderAboutHtml() {
   html += `<section><h2>Executive Biography</h2>`;
   html += `<p>I am an MIT CSAIL roboticist whose work focuses on building reliable autonomous systems. My research focused on learning physics-based models for planning under uncertainty. I bring deep experience across research and industry, from robot manipulation to social navigation in dynamic indoor environments and autonomous driving.</p>`;
   html += `<p>Over the past year, I’ve built stateful, multi-agent workflows for software development, using AI to engineer feature-rich applications while maintaining code quality and architectural standards, bringing robotics-grade reliability to DevAI.</p>`;
-  html += `<p>Outside of robotics and AI, you’ll usually find me on the dance floor or exploring San Francisco. I am an active West Coast Swing dancer who travels for regional events, perform in improv comedy jams, stay fit with high-intensity workouts, and love a good game of chess.</p>`;
+  html += `<p>Outside of robotics and AI, you’ll usually find me on the dance floor or exploring San Francisco. I am an active West Coast Swing dancer traveling for regional events — plus improv comedy jams, high-intensity workouts, and chess. I built boomtick.blog from that community: West Coast Swing guides, gear recommendations, and automated publishing workflows.</p>`;
   html += `</section>`;
 
   html += `<section><h2>Key Details &amp; Availability</h2>`;

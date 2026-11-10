@@ -7,7 +7,7 @@ export const skillsData: ResumeSkillGroup[] = [
   },
   {
     category: "Languages",
-    skills: ["C++", "Python", "TypeScript", "Matlab", "SQL", "Bash"]
+    skills: ["Python", "C++", "Shell", "TypeScript", "JavaScript", "SQL"]
   },
   {
     category: "Tools & robotics",

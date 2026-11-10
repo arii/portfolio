@@ -43,6 +43,7 @@ describe('Resume Page', () => {
     expect(screen.getByRole('heading', { name: /^Impact Projects$/i })).toBeInTheDocument();
 
     // Experience timeline & nested sub-roles
+    expect(screen.getByText('Ariel Anders Consulting')).toBeInTheDocument();
     expect(screen.getByText('Civ Robotics')).toBeInTheDocument();
     expect(screen.getByText('Senior Roboticist / Tech Lead')).toBeInTheDocument();
     expect(screen.getByText('Robust.AI')).toBeInTheDocument();
@@ -50,7 +51,7 @@ describe('Resume Page', () => {
     // Skills badge pills
     expect(screen.getByText('Motion planning')).toBeInTheDocument();
     expect(screen.getByText('C++')).toBeInTheDocument();
-    expect(screen.getByText('Matlab')).toBeInTheDocument();
+    expect(screen.getByText('Shell')).toBeInTheDocument();
     expect(screen.getByText('Gemini API')).toBeInTheDocument();
     expect(screen.getByText('Unix / Mac / Windows')).toBeInTheDocument();
 
