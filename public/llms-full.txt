@@ -65,7 +65,7 @@ A collection of custom dev tools, background ETL pipelines, and automated UI tes
 
 ---
 
-### Quick Status
+## Quick Status
 
 - **[WCS Scraping & ETL](#1-wcs-event-telemetry-scraping-etl-pipeline)** *(Production)* — 100% automated weekly sync with zero manual maintenance.
 - **[Storefront Automation](#2-ecommerce-merchandising-storefront-automation)** *(Active)* — Converts vector art and pushes variant configurations directly to Printful.
