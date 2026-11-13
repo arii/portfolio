@@ -1,3 +1,5 @@
+// fallow-ignore-file unused-file
+// Service worker is fetched at runtime by src/registerServiceWorker.ts — no static import exists
 const CACHE_NAME = 'arii-portfolio-v1';
 
 // Assets that should be cached on service worker installation
