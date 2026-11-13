@@ -8,10 +8,7 @@ import pixelmatch from 'pixelmatch';
 import { PNG } from 'pngjs';
 import sharp from 'sharp';
 import {
-  ARTIFACTS_DIR,
-  DOM_REVIEW_DIR,
   VISUAL_REVIEW_DIR,
-  VISUAL_SUMMARY_PATH,
   ensureDirectory,
   readImpactAnalysis,
   routeToSlug,
@@ -23,7 +20,7 @@ import {
   type LayoutMetrics,
   type LayoutValidation
 } from './impact-review-utils';
-import { DEFAULT_VIEWPORTS, MAX_ROUTES_TO_REVIEW } from './visualReviewConstants';
+import { ARTIFACTS_DIR, DOM_REVIEW_DIR, VISUAL_SUMMARY_PATH, DEFAULT_VIEWPORTS, MAX_ROUTES_TO_REVIEW } from './visualReviewConstants';
 import { whiteCanvas, copyImage } from './image-processing-utils';
 
 const basePort = Number(process.env.IMPACT_BASE_PORT ?? 4173);

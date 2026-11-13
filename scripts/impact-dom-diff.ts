@@ -5,10 +5,7 @@ import path from 'path';
 import { JSDOM, VirtualConsole } from 'jsdom';
 import { logHeartbeat } from './heartbeat';
 import {
-  ARTIFACTS_DIR,
-  DOM_REVIEW_DIR,
   DOM_SUMMARY_PATH,
-  VISUAL_SUMMARY_PATH,
   combinedSeverity,
   domSeverity,
   ensureDirectory,
@@ -16,6 +13,7 @@ import {
   type DomRouteSummary,
   type VisualRouteSummary
 } from './impact-review-utils';
+import { ARTIFACTS_DIR, DOM_REVIEW_DIR, VISUAL_SUMMARY_PATH } from './visualReviewConstants';
 
 const deploymentReviewPath = path.join(ARTIFACTS_DIR, 'deployment-review.md');
 

@@ -39,7 +39,7 @@ jobs:
         run: pnpm run test
 
       - name: Run Fallow Dead Code Audit
-        run: pnpm run audit:fallow || true
+        run: pnpm run audit:fallow
 
       - name: Build Application
         run: pnpm run build

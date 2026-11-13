@@ -94,7 +94,7 @@ export function parseCodeReviewState(feedback: string): CodeReviewState | undefi
  * Validates the findings schema to ensure all required fields are present.
  * Performs deep type checking to avoid runtime crashes on malformed LLM output.
  */
-export function isRecord(value: unknown): value is Record<string, unknown> {
+function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
 
@@ -131,7 +131,7 @@ function validateFindingsSchema(state: CodeReviewState): boolean {
  * Normalizes a list of findings by injecting default values for missing or malformed fields.
  * Ensures the resulting objects adhere to the ReviewFinding interface.
  */
-export function normalizeFindings(findings: unknown[]): ReviewFinding[] {
+function normalizeFindings(findings: unknown[]): ReviewFinding[] {
   if (!Array.isArray(findings)) return [];
   return findings.map((f, idx) => {
     if (!isRecord(f)) {
@@ -334,8 +334,8 @@ export function estimateMaxOutputTokens(
   return Math.min(totalBudget, 8192);
 }
 
-export const EXTERNAL_CONTEXT_TRUNCATED_MESSAGE = '...[TRUNCATED EXTERNAL CONTEXT TO FIT TOKEN LIMIT]';
-export const EXTERNAL_CONTEXT_MINIMUM_BUDGET = 200;
+const EXTERNAL_CONTEXT_TRUNCATED_MESSAGE = '...[TRUNCATED EXTERNAL CONTEXT TO FIT TOKEN LIMIT]';
+const EXTERNAL_CONTEXT_MINIMUM_BUDGET = 200;
 
 export function budgetInputContext(
   systemPrompt: string,
