@@ -88,6 +88,20 @@ export const autonomousTools: ResearchTool[] = [
     sourceUrl: 'https://github.com/arii/boop'
   },
   {
+    id: 'feels',
+    taxonomyBucket: 'product',
+    title: 'Feels',
+    description: 'I co-built an online data collection and training platform that classifies a sealed cup\'s contents — liquid, candy, or screws — from motor torques alone using a lift–swirl–predict routine (86–89% empty detection, no force-torque sensor).',
+    category: 'Robotics & Manipulation',
+    status: 'Completed',
+    tags: ['Robotics', 'Manipulation', 'Machine learning', 'Viam', 'MongoDB'],
+    image: '/assets/research/feels.gif',
+    imageAlt: 'Feels live demo: robot arm lifting and swirling a sealed cup, with the PCA signature space of 110 taught signatures',
+    canonicalPath: '/research/feels/',
+    externalUrl: 'https://arii.github.io/feels',
+    sourceUrl: 'https://github.com/arii/feels'
+  },
+  {
     id: 'light-therapy-mit',
     taxonomyBucket: 'infrastructure',
     title: 'Light Therapy at MIT',

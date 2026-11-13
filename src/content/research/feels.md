@@ -11,14 +11,14 @@ tags:
   - MongoDB
 category: "Robotics & Manipulation"
 summary: "Torque-based object classification from motor torques alone: a robot lifts a sealed cup, swirls it, and predicts the contents — 86–89% empty detection with no added sensors."
-image: "/assets/research/feels.webp"
+image: "/assets/research/feels.gif"
 ---
 
 ## Teaching a Robot to Feel, From Motor Torques Alone
 
 **Feels** is an online data collection and training platform for robot object classification through physical interaction. Built with **Sree Dhyuti Nimmagadda** at the **Viam + MongoDB hackathon (Oct 29–30, 2026)**, it teaches a robot arm to classify the contents of a sealed cup — liquid, candy, or screws — using a three-step routine: **lift, swirl, predict**.
 
-![Feels live dashboard: the Physical AI Cup Inspector running a swirl macro, alongside measured results — 86–89% empty vs. non-empty detection on 21 held-out test cups](/assets/research/feels.webp)
+![Feels live demo: the robot arm lifts and swirls a sealed cup, followed by the signature space — 110 taught signatures projected to 2-D via PCA, colored by material](/assets/research/feels.gif)
 
 ---
 
