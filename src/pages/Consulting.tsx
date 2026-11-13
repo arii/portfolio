@@ -25,7 +25,6 @@ import {
 } from '@/utils/schema';
 import {
   CONSULTING_CREDENTIALS,
-  CONSULTING_CURRENT_BUILD,
   CONSULTING_FAQS,
   CONSULTING_INTRO,
   CONSULTING_SERVICES,
@@ -232,10 +231,18 @@ const Consulting: React.FC = () => {
       <Box as="section" p={6} className="border border-accent/20 bg-accent/5 rounded-3xl sm:p-8 space-y-3">
         <Stack direction="row" align="center" className="text-sm font-semibold text-text-main space-x-1.5">
           <FlaskConical className="w-4 h-4 text-accent" />
-          <span>Currently building</span>
+          <span>Recent Robotics Build</span>
         </Stack>
         <p className="text-sm text-text-body leading-relaxed max-w-3xl">
-          {CONSULTING_CURRENT_BUILD}
+          <a
+            href="https://arii.github.io/feels"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold text-accent hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
+          >
+            Feels (arii.github.io/feels)
+          </a>
+          {' — Built a physical robotic arm proprioception and haptic classification pipeline (Viam, Python, MongoDB) that swirls containers and classifies contents from joint-torque signals.'}
         </p>
       </Box>
 

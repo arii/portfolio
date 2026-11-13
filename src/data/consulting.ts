@@ -81,7 +81,7 @@ export const ENGAGEMENT_FORMATS: EngagementFormat[] = [
     id: 'audit',
     title: 'Technical Audit',
     description:
-      'A 2–4 week review of your navigation, localization, or planning stack. You get a written findings report: what is solid, what is fragile, and what to fix first.',
+      'A 2–4 week review of your navigation, localization, or planning stack. You get a written findings report and prioritized roadmap: what is solid, what is fragile, and what to fix first—often used to scope a follow-on engineering engagement.',
   },
   {
     id: 'retainer',
@@ -111,7 +111,7 @@ export const CONSULTING_FAQS: ConsultingFaq[] = [
   {
     question: 'How much does a robotics consultant cost?',
     answer:
-      'I price audits per engagement and advisory as a monthly retainer. For calibration, PhD-level robotics consultants typically run a few hundred dollars an hour. Every engagement starts with a scoped quote, so there are no surprises.',
+      'I price technical audits as fixed-scope engagements and advisory as a monthly retainer. Every engagement starts with a scoped quote tailored to your system and timeline, so there are no surprises.',
   },
   {
     question: 'Do you work remotely or on-site?',
@@ -121,7 +121,7 @@ export const CONSULTING_FAQS: ConsultingFaq[] = [
   {
     question: 'What stacks do you work with?',
     answer:
-      'ROS 1 and ROS 2, C++, Python, behavior trees, task and motion planning, Docker, Linux, and AWS. The stack matters less than the problem — I start from your system as it exists today.',
+      'Python, C++, ROS 2 (and ROS 1), behavior trees, task and motion planning (TAMP), agentic CI/CD (Gemini, GitHub Actions), Docker, Linux, and AWS. The stack matters less than the problem — I start from your system as it exists today.',
   },
 ];
 
@@ -142,4 +142,4 @@ export const CONSULTING_INTRO =
   'I am a robotics consultant — MIT PhD, ex-Waymo motion planning, first roboticist hired at Robust.AI. I help teams fix navigation and localization, review autonomy architectures, and diligence robotics bets.';
 
 export const CONSULTING_CURRENT_BUILD =
-  'Currently building in the open: a language-conditioned grasping pipeline — VLM grounding to SAM segmentation to grasp synthesis to motion planning, all in MuJoCo simulation.';
+  'Feels (arii.github.io/feels) — Built a physical robotic arm proprioception and haptic classification pipeline (Viam, Python, MongoDB) that swirls containers and classifies contents from joint-torque signals.';

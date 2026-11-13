@@ -38,15 +38,17 @@ describe('About Page Content Ownership', () => {
 
     expect(screen.getByText('MIT EECS PhD 2019 · SM 2014')).toBeInTheDocument();
 
-    expect(screen.getByText('2012 – 2019')).toBeInTheDocument();
-    expect(screen.getByText('2019 – 2022')).toBeInTheDocument();
-    expect(screen.getByText('2022 – 2024')).toBeInTheDocument();
+    expect(screen.getByText('2026 – Present')).toBeInTheDocument();
     expect(screen.getByText('2025 – 2026')).toBeInTheDocument();
+    expect(screen.getByText('2022 – 2024')).toBeInTheDocument();
+    expect(screen.getByText('2019 – 2022')).toBeInTheDocument();
+    expect(screen.getByText('2012 – 2019')).toBeInTheDocument();
 
-    expect(screen.getByText('MIT CSAIL')).toBeInTheDocument();
-    expect(screen.getByText('Robust.AI')).toBeInTheDocument();
-    expect(screen.getByText('Waymo')).toBeInTheDocument();
+    expect(screen.getByText('Ariel Anders Consulting')).toBeInTheDocument();
     expect(screen.getByText('Civ Robotics')).toBeInTheDocument();
+    expect(screen.getByText('Waymo')).toBeInTheDocument();
+    expect(screen.getByText('Robust.AI')).toBeInTheDocument();
+    expect(screen.getByText('MIT CSAIL')).toBeInTheDocument();
 
     expect(
       screen.getByText((content) => content.includes('Learning and Intelligent Systems (LIS) group'))

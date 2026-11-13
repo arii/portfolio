@@ -330,7 +330,7 @@ describe('SEO Component & Search Configuration', () => {
     expect(career.mainEntity.hasOccupation.name).toBe('Senior Software Engineer & Roboticist');
     expect(career.hasPart.length).toBeGreaterThanOrEqual(5);
     expect(career.hasPart[0]['@type']).toBe('WorkExperience');
-    expect(career.hasPart[0].organization.name).toBe('Civ Robotics');
+    expect(career.hasPart[0].organization.name).toBe('Ariel Anders Consulting');
 
     const breadcrumb = getBreadcrumbSchema([
       { name: 'Home', path: '/' },
