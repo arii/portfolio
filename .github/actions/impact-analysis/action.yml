@@ -132,7 +132,6 @@ runs:
         MAX_AI_REVIEWS: ${{ inputs.max_ai_reviews || inputs.max_reviews || '10' }}
       run: |
         docker run --rm \
-          --entrypoint /github/workspace/scripts/resolve-cli.sh \
           -e GITHUB_TOKEN="${GITHUB_TOKEN}" \
           -e GITHUB_REPOSITORY="${GITHUB_REPOSITORY}" \
           -e GEMINI_API_KEY="${GEMINI_API_KEY}" \
@@ -164,9 +163,8 @@ runs:
         MAX_REVIEWS: ${{ inputs.max_reviews || '3' }}
       run: |
         if [ -f "scripts/send-jules-impact.py" ]; then
-          echo "Executing send-jules-impact.py from current workspace via container to inherit dev_tools."
+          echo "Executing send-jules-impact.py from current workspace via container."
           docker run --rm \
-            --entrypoint /github/workspace/scripts/resolve-cli.sh \
             -e GITHUB_TOKEN="${GITHUB_TOKEN}" \
             -e GITHUB_REPOSITORY="${GITHUB_REPOSITORY}" \
             -e JULES_API_KEY="${JULES_API_KEY}" \

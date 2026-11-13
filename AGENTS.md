@@ -29,7 +29,8 @@ Agents working in this workspace must strictly adhere to the following tool hier
    - Use strongly typed MCP tools for all codebase auditing, PR analysis, and review workflows.
 
 2. **Tier 2 (CLI Entrypoint - `td`)**:
-   - `td` is the sole, definitive CLI binary entrypoint for terminal execution and fallback automation.
+   - Install `boomtick-cli` via `pip install --upgrade boomtick-cli` into your virtual environment (or run `./setup-agent.sh`).
+   - `td` is the sole, definitive CLI binary entrypoint for terminal execution and fallback automation, invoked directly without wrappers or shims.
    - Core structured commands:
      - `td doctor`: Workspace health check & diagnostic checks.
      - `td pr detect-conflicts`: Detect and analyze pull request merge conflicts.
