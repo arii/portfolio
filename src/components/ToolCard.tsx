@@ -52,6 +52,7 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
             className="h-full w-full object-cover"
             containerClassName="w-full h-full"
             loading="lazy"
+            disableWebpAutoInfer={tool.image.endsWith('.gif')}
           />
           <span className="absolute top-2 right-2 z-10 rounded-md bg-bg/80 px-2.5 py-0.5 text-[10px] font-semibold text-text-main backdrop-blur-sm border border-line">
             {tool.category}
