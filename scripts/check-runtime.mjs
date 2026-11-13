@@ -25,15 +25,14 @@ const actualPnpm = getPnpmVersion();
 let failed = false;
 
 const isCI = process.env.CI === "true" || process.env.CI === "1" || process.env.VERCEL === "1";
-const isJules = process.env.USER?.toLowerCase().includes("jules") || process.env.JULES_API_KEY;
 const expectedMajorPrefix = expectedNodeExact.split('.')[0] + '.';
 const nodeMatches = isCI
-  ? (actualNode.startsWith(expectedMajorPrefix) || isJules)
+  ? actualNode.startsWith(expectedMajorPrefix)
   : actualNode === expectedNodeExact;
 
 const allowNodeChange = process.env.ALLOW_NODE_VERSION_CHANGE === "true";
 
-if (!nodeMatches && !isJules) {
+if (!nodeMatches) {
   console.error("❌ Node version mismatch");
   console.error(`Expected: ${expectedNodeExact} (or ${expectedMajorPrefix}x in CI)`);
   console.error(`Actual:   ${actualNode}`);
@@ -41,7 +40,7 @@ if (!nodeMatches && !isJules) {
   console.error("Hard block: Node.js version modification is forbidden unless ALLOW_NODE_VERSION_CHANGE=true.");
   console.error("Use the repo-pinned version from .node-version / .nvmrc.");
   failed = true;
-} else if (actualNode !== expectedNodeExact && !isCI && !isJules && !allowNodeChange) {
+} else if (actualNode !== expectedNodeExact && !isCI && !allowNodeChange) {
   console.error("❌ Node version drift detected");
   console.error(`Local: ${actualNode}, Contract: ${expectedNodeExact}`);
   console.error("Hard block: Node.js version modification is forbidden unless ALLOW_NODE_VERSION_CHANGE=true.");

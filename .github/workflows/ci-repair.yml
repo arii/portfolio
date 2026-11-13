@@ -48,5 +48,4 @@ jobs:
         with:
           mode: ${{ steps.resolve.outputs.mode }}
           issue_number: ${{ github.event.inputs.issue_number }}
-          jules_api_key: ${{ secrets.JULES_API_KEY }}
           github_token: ${{ secrets.GITHUB_TOKEN }}

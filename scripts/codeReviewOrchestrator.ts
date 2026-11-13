@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { IMPACT_CONFIG } from '../scripts/impact-analysis.config';
 import { ARTIFACTS_DIR } from './visualReviewConstants';
-import { postPRComment, countExistingReviews, getJulesSessionIdFromPR, sendJulesMessage, getPreviousReviewState } from './visualReviewUtils';
+import { postPRComment, countExistingReviews, getPreviousReviewState } from './visualReviewUtils';
 import { runWithConcurrencyLimit, checkReviewQuota, writeVerdictJson, writeGracefulExitVerdict } from './sharedUtils';
 import { calculateEstimatedTokens, cleanupFeedback, batchFiles, calculateReviewHash, pruneCache, filterLowImpactFiles } from './codeReviewUtils';
 import type { CodeReviewSummary, CodeReviewResult, CodeReviewState, CodeReviewRole } from './codeReviewTypes';
@@ -676,7 +676,7 @@ export async function orchestrateCodeReview(
 
   const findings = finalResult.state?.findings || [];
   if (findings.length === 0) {
-    console.log("No actionable findings or architectural/design violations found. Gracefully exiting without posting PR comment or notifying Jules.");
+    console.log("No actionable findings or architectural/design violations found. Gracefully exiting without posting PR comment.");
     await writeGracefulExitVerdict(client.reportFileName, ARTIFACTS_DIR, finalResult.state, isTruncated, finalSkipReason);
     return;
   }
@@ -684,14 +684,7 @@ export async function orchestrateCodeReview(
   // Post to GitHub PR
   await postPRComment(report, client.reportTitle, finalResult.state, finalResult.llmVerdict);
 
-  // Also alert Jules if this PR is from a Jules session
-  const julesSessionId = await getJulesSessionIdFromPR();
   const isFail = finalResult.llmVerdict === 'fail';
-  if (julesSessionId) {
-    const passFailMsg = isFail ? "FAIL ❌" : ((finalResult.llmVerdict === 'warn' || allResults.length === 0) ? "NEUTRAL ⚪" : "PASS ✅");
-    const julesMessage = `[${client.reportTitle}] posted an aggregated code review (${passFailMsg}). Please read the review comments on the PR, analyze the diff context provided, and fix any failed or warned areas.\n\n<details><summary>Overview</summary>\n\n${report}\n</details>`;
-    await sendJulesMessage(julesSessionId, julesMessage);
-  }
 
   const openHighFindings = finalResult.state?.findings?.filter(f => f.status === 'open' && (f.severity === 'HIGH' || f.severity === 'error')) || [];
   const safeReportFileName = path.basename(client.reportFileName);
@@ -912,7 +905,7 @@ function aggregateReviewResults(
         if (finding.status === 'open' && finding.snippet) {
           if (!diffToVerify.includes(finding.snippet)) {
             finding.status = 'resolved';
-            finding.fixSummary = 'Jules response: snippet no longer present in diff.';
+            finding.fixSummary = 'Snippet no longer present in diff.';
             console.log(`✅ Auto-resolved finding: ${finding.issue}`);
           }
         }
