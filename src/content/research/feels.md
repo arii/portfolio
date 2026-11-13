@@ -72,5 +72,3 @@ The dashboard reports each live prediction with its similarity scores, so operat
 - **Proprioceptive sensing is underrated.** Useful content classification falls out of the motor torques a standard arm already produces, using the sensors the arm ships with.
 - **Nearest-neighbor memory beats small-data training.** With a hackathon-sized dataset, retrieval over an ever-growing signature library classifies new and existing categories online.
 - **The pipeline is reproducible.** The full platform (swirl macro, feature extraction, vector memory, live dashboard) is open source, and a mock mode runs the entire UI on bundled recordings.
-
-This builds directly on my prior manipulation research, including [conformant planning for manipulation](/research/conformant-planning-manipulation/): both explore how much state a robot can infer through physical contact and proprioception rather than vision alone.
