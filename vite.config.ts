@@ -35,7 +35,7 @@ function indexNowPlugin(): Plugin {
   };
 }
 
-export function getBasePath(): string {
+function getBasePath(): string {
   if (process.env.VERCEL === '1' || process.env.VERCEL) return '/';
   if (process.env.VITE_BASE_PATH) {
     return ('/' + process.env.VITE_BASE_PATH + '/').replace(/\/+/g, '/');

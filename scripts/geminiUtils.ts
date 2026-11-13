@@ -1,4 +1,4 @@
-export function extractFinishReason(res: Record<string, any>): string {
+function extractFinishReason(res: Record<string, any>): string {
   const metadata = res?.response_metadata;
   if (metadata?.finishReason) return metadata.finishReason;
   if (metadata?.finish_reason) return metadata.finish_reason;
@@ -10,7 +10,7 @@ export function extractFinishReason(res: Record<string, any>): string {
   return 'UNKNOWN';
 }
 
-export class DirectGeminiModel {
+class DirectGeminiModel {
   model: string;
   maxOutputTokens: number;
   thinkingBudget: number;
@@ -131,7 +131,7 @@ export class DirectGeminiModel {
   }
 }
 
-export async function createGeminiModel(
+async function createGeminiModel(
   modelName: string,
   maxOutputTokens: number,
   thinkingBudget: number
@@ -142,7 +142,7 @@ export async function createGeminiModel(
   return new DirectGeminiModel(modelName, maxOutputTokens, thinkingBudget);
 }
 
-export function getConfiguredTokens(type: 'code' | 'visual'): { maxOutputTokens: number; thinkingBudget: number } {
+function getConfiguredTokens(type: 'code' | 'visual'): { maxOutputTokens: number; thinkingBudget: number } {
   let maxOutputTokens = type === 'code' ? 6000 : 4096;
   let thinkingBudget = type === 'code' ? 2048 : 1024;
 
@@ -159,7 +159,7 @@ export function getConfiguredTokens(type: 'code' | 'visual'): { maxOutputTokens:
   return { maxOutputTokens, thinkingBudget };
 }
 
-export function applyRetryStrategy(currentMax: number, currentThinking: number): { newMax: number; newThinking: number } {
+function applyRetryStrategy(currentMax: number, currentThinking: number): { newMax: number; newThinking: number } {
   const newMax = Math.min(Math.round(currentMax * 1.25), 8192);
   const newThinking = Math.round(currentThinking * 0.5);
   return { newMax, newThinking };

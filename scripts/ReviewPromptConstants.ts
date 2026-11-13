@@ -7,7 +7,7 @@ export const STRICT_JSON_VERIFICATION = `Strict JSON Verification:
 export const SNIPPET_AND_VERIFICATION_RULES = `Snippet and verification rules:
 - STRICT SNIPPET RULE: Quote the entire, exact line from the diff in the "snippet" field.
 - Never assume a line truncated at the edge of a chunk is a syntax error; assume it is valid and continues outside.`;
-export const COMMON_REVIEW_GUIDELINES = `Review ONLY PR changes. Assume original code worked.
+const COMMON_REVIEW_GUIDELINES = `Review ONLY PR changes. Assume original code worked.
 EVIDENCE RULE: A blocking concern must point to a concrete contradiction in the diff itself (e.g. wrong type, nonexistent function/class, wrong arity, or failing test). Cite exact lines + explain runtime consequence + explain why previous code was better.
 FALSE POSITIVE FILTER: No speculation. Concerns phrased with speculative hedging language (e.g., "could", "might", "unless", "if not handled properly") are NOT blocking. Design choices are NOT bugs.
 
