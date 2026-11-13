@@ -1,2 +1,8 @@
 packages:
   - '.'
+
+auditConfig:
+  ignoreGhsa:
+    # GHSA-238p-pmpm-9mq7 (katex <0.18.2, low): mermaid 11.x pins katex ^0.16 and has no
+    # compatible patched release; remove when mermaid is bumped to a version on katex >=0.18.2.
+    - GHSA-238p-pmpm-9mq7

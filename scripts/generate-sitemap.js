@@ -24,7 +24,7 @@ function getLastMod(filePath, fallbackDate) {
       const stat = fs.statSync(filePath);
       return stat.mtime.toISOString().split('T')[0];
     }
-  } catch (e) {
+  } catch (_e) {
     // ignore git error and fallback
   }
   return fallbackDate || new Date().toISOString().split('T')[0];

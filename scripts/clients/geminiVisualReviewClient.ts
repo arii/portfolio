@@ -94,7 +94,6 @@ Your job:
 
     const response = retryResult.response;
     const finishReason = retryResult.finishReason;
-    maxOutputTokens = retryResult.finalMaxOutputTokens;
     thinkingBudget = retryResult.finalThinkingBudget;
 
     const usageMetadata = response.usage_metadata as {

@@ -102,7 +102,7 @@ async function main() {
       let response;
       try {
         response = await page.goto(currentUrl, { waitUntil: 'load', timeout: 15000 });
-      } catch (err) {
+      } catch (_err) {
         console.warn(`⚠️ Navigation timeout on 'load' for ${currentUrl}. Retrying with 'domcontentloaded'...`);
         response = await page.goto(currentUrl, { waitUntil: 'domcontentloaded', timeout: 10000 });
       }

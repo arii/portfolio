@@ -29,7 +29,7 @@ export class GitHubModelFactory {
     }
 
     // Validate GITHUB_TOKEN format strictly to prevent header injection or malicious token values
-    if (!/^[A-Za-z0-9_\-\.]+$/.test(token)) {
+    if (!/^[A-Za-z0-9_.-]+$/.test(token)) {
       throw new Error("Invalid GITHUB_TOKEN format.");
     }
 

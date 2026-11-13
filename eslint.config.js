@@ -8,12 +8,12 @@ import globals from "globals";
 
 export default [
   {
-    ignores: ["dist/**", "node_modules/**", "coverage/**", "build/**", ".venv/**", "scripts/**", "public/**"],
+    ignores: ["dist/**", "node_modules/**", "coverage/**", "build/**", ".venv/**", "public/**"],
   },
   js.configs.recommended,
   securityPlugin.configs.recommended,
   {
-    files: ["**/*.{ts,tsx,js,jsx}"],
+    files: ["**/*.{ts,tsx,js,jsx,mjs,cjs}"],
     languageOptions: {
       parser: tsParser,
       parserOptions: {
@@ -39,7 +39,7 @@ export default [
       "security/detect-object-injection": "off",
       "react/react-in-jsx-scope": "off",
       "no-unused-vars": "off",
-      "@typescript-eslint/no-unused-vars": ["warn"],
+      "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_", "caughtErrors": "all", "caughtErrorsIgnorePattern": "^_" }],
     },
     settings: {
       react: {
