@@ -10,7 +10,7 @@ function getSlugs(): string[] {
     .map(f => f.replace('.md', ''));
 }
 
-export function getAllRoutes() {
+function getAllRoutes() {
   const slugs = getSlugs();
   const stubs = [
     '/',
@@ -66,7 +66,7 @@ export interface ImpactReport {
 /**
  * Checks if a given file path represents a layout file.
  */
-export function isLayoutFile(filePath: string): boolean {
+function isLayoutFile(filePath: string): boolean {
   return filePath.startsWith('src/layouts/') || /Layout\.[jt]sx?$/i.test(filePath);
 }
 
@@ -77,7 +77,7 @@ export function isLayoutFile(filePath: string): boolean {
  *
  * @param filePath The file path to validate.
  */
-export function sanitizeFilePath(filePath: unknown): string | null {
+function sanitizeFilePath(filePath: unknown): string | null {
   if (typeof filePath !== 'string' || !filePath.trim()) {
     return null;
   }
@@ -95,7 +95,7 @@ export function sanitizeFilePath(filePath: unknown): string | null {
 /**
  * Options to customize the behavior of the dependency graph traversal.
  */
-export interface TraversalOptions {
+interface TraversalOptions {
   /**
    * If true, the traversal along a path stops immediately when a match is found
    * (meaning we record the matching file but do not enqueue its ancestors).
@@ -118,7 +118,7 @@ export interface TraversalOptions {
  * @param predicate A callback function to determine if a visited parent should be collected.
  * @param options Traversal options to customize BFS behavior.
  */
-export function traverseDependencyGraph(
+function traverseDependencyGraph(
   startFiles: string[],
   reverseMap: Record<string, ReverseDependency[]>,
   predicate: (filePath: string) => boolean,

@@ -1,6 +1,7 @@
 import { spawn, type ChildProcess } from 'child_process';
 import fs from 'fs';
 import path from 'path';
+import { ARTIFACTS_DIR, DOM_REVIEW_DIR, VISUAL_SUMMARY_PATH } from './visualReviewConstants';
 
 export interface ImpactAnalysisArtifact {
   routes?: string[];
@@ -44,10 +45,6 @@ export interface VisualRouteSummary {
   validation?: LayoutValidation;
 }
 
-export interface VisualSummary {
-  routes: VisualRouteSummary[];
-}
-
 export interface DomRouteSummary {
   route: string;
   slug: string;
@@ -66,11 +63,10 @@ export interface DomRouteSummary {
   severity: 'LOW' | 'MEDIUM' | 'HIGH';
 }
 
-export const ARTIFACTS_DIR = process.env.IMPACT_ARTIFACTS_DIR ?? path.join(process.cwd(), 'artifacts');
+// Shared path constants (ARTIFACTS_DIR, DOM_REVIEW_DIR, VISUAL_SUMMARY_PATH) are imported
+// from visualReviewConstants.ts — the single source of truth.
 export const VISUAL_REVIEW_DIR = path.join(ARTIFACTS_DIR, 'visual-review');
-export const DOM_REVIEW_DIR = path.join(ARTIFACTS_DIR, 'dom-review');
-export const IMPACT_ANALYSIS_PATH = path.join(ARTIFACTS_DIR, 'impact-analysis.json');
-export const VISUAL_SUMMARY_PATH = path.join(VISUAL_REVIEW_DIR, 'summary.json');
+const IMPACT_ANALYSIS_PATH = path.join(ARTIFACTS_DIR, 'impact-analysis.json');
 export const DOM_SUMMARY_PATH = path.join(DOM_REVIEW_DIR, 'summary.json');
 
 import { IMPACT_CONFIG } from './impact-analysis.config';

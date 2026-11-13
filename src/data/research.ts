@@ -2,7 +2,7 @@ import { parse } from 'yaml';
 import { ResearchPost } from '@/types/research';
 export { RESEARCH_TOOLS } from './researchTools';
 
-export function parseFrontmatter(content: string) {
+function parseFrontmatter(content: string) {
   const match = content.match(/^---\r?\n([\s\S]+?)\r?\n---\r?\n([\s\S]*)$/);
   if (!match) return { data: {} as any, content };
 
@@ -20,7 +20,7 @@ export function parseFrontmatter(content: string) {
 
 const modules = (import.meta as any).glob('/src/content/research/*.md', { eager: true, query: '?raw' }) as Record<string, { default: string }>;
 
-export const RESEARCH_POSTS: ResearchPost[] = Object.entries(modules).map(([path, fileModule]) => {
+const RESEARCH_POSTS: ResearchPost[] = Object.entries(modules).map(([path, fileModule]) => {
   const rawContent = fileModule.default;
   const { data, content } = parseFrontmatter(rawContent);
   const slug = path.split('/').pop()?.replace('.md', '') || '';

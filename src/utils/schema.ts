@@ -1,21 +1,21 @@
 import { NAV_ITEMS } from '@/data/navigation';
 
 export const SITE_URL = 'https://arii.github.io';
-export const AUTHOR_NAME = 'Ariel Anders, PhD';
-export const AUTHOR_JOB_TITLE = 'Robotics & AI Consulting Engineer';
-export const AUTHOR_ALUMNI = 'Massachusetts Institute of Technology (MIT)';
+const AUTHOR_NAME = 'Ariel Anders, PhD';
+const AUTHOR_JOB_TITLE = 'Robotics & AI Consulting Engineer';
+const AUTHOR_ALUMNI = 'Massachusetts Institute of Technology (MIT)';
 export const AUTHOR_EMAIL = 'anders.ariel@gmail.com';
-export const AUTHOR_IMAGE = `${SITE_URL}/assets/roboticist.jpg`;
+const AUTHOR_IMAGE = `${SITE_URL}/assets/roboticist.jpg`;
 export const DEFAULT_LICENSE = 'https://creativecommons.org/licenses/by-nc-nd/4.0/';
 
-export const AUTHOR_SAME_AS = [
+const AUTHOR_SAME_AS = [
   'https://www.linkedin.com/in/ariel-anders/',
   'https://github.com/arii',
   'https://scholar.google.com/citations?user=NM6SfiEAAAAJ&hl=en',
   'https://boomtick.blog',
 ];
 
-export const AUTHOR_KNOWS_ABOUT = [
+const AUTHOR_KNOWS_ABOUT = [
   'Artificial Intelligence',
   'Robotics Software Engineering',
   'Autonomous Systems',

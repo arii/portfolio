@@ -46,10 +46,10 @@ importers:
       svg-pan-zoom:
         specifier: ^3.6.2
         version: 3.6.2
+      yaml:
+        specifier: ^2.9.0
+        version: 2.9.0
     devDependencies:
-      '@axe-core/playwright':
-        specifier: ^4.14.0
-        version: 4.14.0(playwright-core@1.62.1)
       '@eslint/js':
         specifier: ^10.0.1
         version: 10.0.1(eslint@10.8.1(jiti@1.21.7))
@@ -131,15 +131,9 @@ importers:
       npm-run-all2:
         specifier: ^9.0.3
         version: 9.0.3
-      openai:
-        specifier: ^7.5.0
-        version: 7.5.0(ws@8.21.3)(zod@4.6.7)
       pixelmatch:
         specifier: ^7.2.0
         version: 7.2.0
-      playwright:
-        specifier: ^1.62.1
-        version: 1.62.1
       pngjs:
         specifier: ^7.0.0
         version: 7.0.0
@@ -167,9 +161,6 @@ importers:
       vitest:
         specifier: ^4.1.12
         version: 4.1.12(@types/node@22.20.1)(jsdom@26.1.0)(vite@6.4.6(@types/node@22.20.1)(jiti@1.21.7)(tsx@4.23.12)(yaml@2.9.0))
-      yaml:
-        specifier: ^2.9.0
-        version: 2.9.0
 
 packages:
 
@@ -185,12 +176,6 @@ packages:
 
   '@asamuzakjp/css-color@3.2.0':
     resolution: {integrity: sha512-K1A6z8tS3XsmCMM86xoWdn7Fkdn9m6RSVtocUrJYIwZnFVkng/PvkEoWtOWmP+Scc6saYWHWZYbndEEXxl24jw==}
-
-  '@axe-core/playwright@4.14.0':
-    resolution: {integrity: sha512-SGUhG5PIHd2eMdpgBF2PyQLOhX+qyDR2PT4cmoS4Qk2ak+jX/rrSvst9l0PGv5WTHolKpUMvVmoHpr4cZgf1RQ==}
-    engines: {node: '>=22.12.0'}
-    peerDependencies:
-      playwright-core: '>= 1.0.0'
 
   '@babel/code-frame@7.29.7':
     resolution: {integrity: sha512-Aup7aUOfpbAUg2ROOJN6Iw5f9DMBlzu0mIkm/malLQFN/YQgO48wCj0Kxa3sEHJvPVFg7siR+qRInwXd2qhQKw==}
@@ -1881,10 +1866,6 @@ packages:
     resolution: {integrity: sha512-wvUjBtSGN7+7SjNpq/9M2Tg350UZD3q62IFZLbRAR1bSMlCo1ZaeW+BJ+D090e4hIIZLBcTDWe4Mh4jvUDajzQ==}
     engines: {node: '>= 0.4'}
 
-  axe-core@4.14.0:
-    resolution: {integrity: sha512-9WTZxEjsZ7b13TH8JPmbV2z8CHbl80/2hm3XPEG4JgNdQLK81IBRXmSxHfMAOkSqQeRxT/0dwNDz2GOm3zzpcQ==}
-    engines: {node: '>=4'}
-
   bail@2.0.2:
     resolution: {integrity: sha512-0xO6mYd7JB2YesxDKplafRpsiOzPt9V02ddPCLbY1xYGPOX24NTyN50qnUxgCPcSoYMhKpAuBTjQoRZCAkUDRw==}
 
@@ -3265,27 +3246,6 @@ packages:
     resolution: {integrity: sha512-NzwMUB6C1D0+Kd+9iMS/H4k+Ck3cTX6Ckyfr/gAGlmvSE1LUQZnEZvWBi4PYmMwH/S5SMeTXnE+9uAz8uF+pWw==}
     engines: {node: '>=20'}
 
-  openai@7.5.0:
-    resolution: {integrity: sha512-ZbDBz8FSB8Mv8fFYIUvzTFMdV5vl93/octp1MdtK2lfYepSpfv/ewmeugpKz/cwGtFSx+YuUM4NwpZ2P55YiPA==}
-    engines: {node: '>=22.0.0'}
-    peerDependencies:
-      '@aws-sdk/credential-provider-node': '>=3.972.0 <4'
-      '@smithy/hash-node': '>=4.3.0 <5'
-      '@smithy/signature-v4': '>=5.4.0 <6'
-      ws: ^8.18.0
-      zod: '>=4.6.6'
-    peerDependenciesMeta:
-      '@aws-sdk/credential-provider-node':
-        optional: true
-      '@smithy/hash-node':
-        optional: true
-      '@smithy/signature-v4':
-        optional: true
-      ws:
-        optional: true
-      zod:
-        optional: true
-
   optionator@0.9.4:
     resolution: {integrity: sha512-6IpQ7mKUxRcZNLIObR0hz7lxsapSSIYNZJwXPGeF0mTVqGKFIXj1DQcMoT22S3ROcLyY/rz0PWaWZ9ayWmad9g==}
     engines: {node: '>= 0.8.0'}
@@ -4218,11 +4178,6 @@ snapshots:
       '@csstools/css-parser-algorithms': 3.0.5(@csstools/css-tokenizer@3.0.4)
       '@csstools/css-tokenizer': 3.0.4
       lru-cache: 10.4.3
-
-  '@axe-core/playwright@4.14.0(playwright-core@1.62.1)':
-    dependencies:
-      axe-core: 4.14.0
-      playwright-core: 1.62.1
 
   '@babel/code-frame@7.29.7':
     dependencies:
@@ -5570,8 +5525,6 @@ snapshots:
   available-typed-arrays@1.0.7:
     dependencies:
       possible-typed-array-names: 1.1.0
-
-  axe-core@4.14.0: {}
 
   bail@2.0.2: {}
 
@@ -7377,11 +7330,6 @@ snapshots:
       is-inside-container: 1.0.0
       powershell-utils: 0.2.0
       wsl-utils: 1.0.0
-
-  openai@7.5.0(ws@8.21.3)(zod@4.6.7):
-    optionalDependencies:
-      ws: 8.21.3
-      zod: 4.6.7
 
   optionator@0.9.4:
     dependencies:

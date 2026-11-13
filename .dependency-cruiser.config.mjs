@@ -1,3 +1,5 @@
+// fallow-ignore-file unused-file
+// Loaded by name at scripts/impact-analysis.ts:61 and passed to depcruise at runtime
 /** @type {import('dependency-cruiser').IConfiguration} */
 export default {
   forbidden: [
