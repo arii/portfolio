@@ -21,6 +21,25 @@ export const flagshipTools: ResearchTool[] = [
     isFlagship: true
   },
   {
+    id: 'sf-promises',
+    taxonomyBucket: 'infrastructure',
+    title: 'SF Promises',
+    subtitle: 'SOURCED VERDICTS ON SF PUBLIC COMMITMENTS',
+    description: 'Agentic verification pipeline that tracks San Francisco public promises against archived official sources: verbatim extraction, adversarial kept/broken advocates, and a deterministic code-only arbitrator with quarantine gating. Winner of "Best Use Of Keenable" at the Archil "Agents need solid ground" Hackathon.',
+    category: 'Agentic AI & Verification',
+    status: 'Live',
+    tags: ['DevAI', 'Agentic AI', 'Verification', 'SQLite', 'Archil'],
+    canonicalPath: '/devai/sf-promises/',
+    image: '/assets/research/sf-promises/verdict-board.webp',
+    imageAlt: 'SF Promises demo verdict board showing the outcome distribution of 54 verified promises across kept, in progress, broken, and undecided',
+    externalUrl: 'https://arii.github.io/sf-promises/',
+    externalLinkDisplayLabel: 'Open SF Promises Demo',
+    sourceUrl: 'https://github.com/arii/sf-promises',
+    programmingLanguage: ['Python', 'SQL', 'Bash'],
+    applicationCategory: 'DeveloperApplication',
+    isFlagship: true
+  },
+  {
     id: 'wcs-navigator',
     taxonomyBucket: 'product',
     title: 'WCS Navigator',
