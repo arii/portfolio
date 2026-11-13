@@ -291,7 +291,6 @@ async function main(): Promise<void> {
     // We use a dynamic import/require pattern to avoid compile-time failure in standalone boomtick
     const viewportPath = path.resolve(process.cwd(), 'src/constants/visual-viewports.ts');
     if (fs.existsSync(viewportPath)) {
-      // eslint-disable-next-line @typescript-eslint/no-require-imports
       const customViewports = require(viewportPath).VIEWPORTS;
       if (Array.isArray(customViewports)) {
         viewports = customViewports;

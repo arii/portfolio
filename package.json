@@ -35,15 +35,19 @@
     "test:smoke": "tsx scripts/run-smoketest.ts"
   },
   "knip": {
+    "entry": [
+      "src/**/*.tsx",
+      "scripts/**/*.ts"
+    ],
     "project": [
-      "src/**/*.{ts,tsx,css}"
+      "src/**/*.{ts,tsx,css}",
+      "scripts/**/*.ts"
     ],
     "ignoreBinaries": [
       "td"
     ],
     "ignoreDependencies": [
       "dependency-cruiser",
-      "openai",
       "@types/diff",
       "@types/pixelmatch"
     ],
@@ -61,6 +65,7 @@
     "svg-pan-zoom": "^3.6.2"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
     "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.62.1",
     "@testing-library/jest-dom": "^6.6.3",
@@ -90,6 +95,7 @@
     "npm-run-all2": "^9.0.3",
     "openai": "^7.5.0",
     "pixelmatch": "^7.2.0",
+    "playwright": "^1.62.1",
     "pngjs": "^7.0.0",
     "postcss": "^8.4.49",
     "rollup-plugin-visualizer": "^7.1.1",
@@ -97,8 +103,21 @@
     "tailwindcss": "^3.4.17",
     "tsx": "^4.23.12",
     "typescript": "^5.7.3",
-    "vite": "^6.1.0",
-    "vitest": "^3.0.5",
+    "vite": "^6.4.6",
+    "vitest": "^4.1.12",
     "yaml": "^2.9.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "brace-expansion@<1.1.21": "1.1.21",
+      "brace-expansion@>=4 <5.0.12": ">=5.0.12",
+      "minimatch@>=7 <11.0.1": ">=11.0.1",
+      "dompurify@<3.4.17": ">=3.4.17",
+      "shell-quote@<1.11.0": ">=1.11.0",
+      "source-map-js@<1.2.2": ">=1.2.2",
+      "postcss-selector-parser@<6.1.5": ">=6.1.5",
+      "smol-toml@<1.9.0": ">=1.9.0",
+      "zod@<4.6.6": ">=4.6.6"
+    }
   }
 }

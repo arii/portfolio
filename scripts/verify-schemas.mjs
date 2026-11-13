@@ -27,7 +27,9 @@ async function verifySchemas() {
       try {
         execSync('command -v td', { stdio: 'ignore' });
         hasTd = true;
-      } catch (_) {}
+      } catch (_) {
+        // td not on PATH — fall back to the .venv path checks below
+      }
     }
 
     if (hasTd) {
@@ -81,7 +83,7 @@ async function verifySchemas() {
   console.log('✅ Schema validation pipeline completed successfully.');
 }
 
-verifySchemas().catch((_error) => {
+verifySchemas().catch((error) => {
   console.error('❌ Unexpected error in schema validation pipeline:', error);
   process.exit(254);
 });

@@ -140,6 +140,3 @@ export const SCHEDULING_URL = 'https://cal.com/ariel-anders/20min';
 
 export const CONSULTING_INTRO =
   'I am a robotics consultant — MIT PhD, ex-Waymo motion planning, first roboticist hired at Robust.AI. I help teams fix navigation and localization, review autonomy architectures, and diligence robotics bets.';
-
-export const CONSULTING_CURRENT_BUILD =
-  'Feels (arii.github.io/feels) — Built a physical robotic arm proprioception and haptic classification pipeline (Viam, Python, MongoDB) that swirls containers and classifies contents from joint-torque signals.';

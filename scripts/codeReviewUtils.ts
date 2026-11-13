@@ -273,13 +273,13 @@ export function parseCodeReviewStateDetailed(feedback: string): ParsedFindingsRe
     let state;
     try {
       state = JSON.parse(sanitizedJsonText) as CodeReviewState;
-    } catch (e) {
+    } catch (_e) {
 
       // Attempt to salvage finding parsing from markdown wrap bugs or prefix bugs
       const salvaged = sanitizedJsonText.match(JSON_PATTERN);
       if (salvaged) {
          try { state = JSON.parse(salvaged[0]); }
-         catch (e2) { return { state: undefined }; }
+         catch (_e2) { return { state: undefined }; }
       }
       else return { state: undefined, parseError: "invalid_json" };
     }
