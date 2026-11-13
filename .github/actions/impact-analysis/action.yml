@@ -9,9 +9,6 @@ inputs:
   gemini_api_key:
     description: 'Gemini API key for AI review synthesis'
     required: false
-  jules_api_key:
-    description: 'Jules API key for agent execution'
-    required: false
   max_reviews:
     description: 'Max number of AI review comment updates before skipping'
     required: false
@@ -24,21 +21,6 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - name: Parse Jules session ID from PR description
-      if: always()
-      id: parse_jules
-      env:
-        PR_BODY: ${{ github.event.pull_request.body }}
-      run: |
-        TASK_ID=$(echo "$PR_BODY" | grep -oP 'jules\.google\.com/task/\K[0-9]+' | head -1 | tr -cd '0-9' || true)
-        if [ -z "$TASK_ID" ]; then
-          echo "No Jules task ID found in PR description. Skipping."
-        else
-          echo "Found Jules task ID: $TASK_ID"
-          echo "task_id=$TASK_ID" >> "$GITHUB_OUTPUT"
-        fi
-      shell: bash
-
     - name: Check Max Reviews Limit
       id: check_reviews
       shell: bash
@@ -127,7 +109,6 @@ runs:
         GITHUB_TOKEN: ${{ inputs.github_token }}
         GITHUB_REPOSITORY: ${{ github.repository }}
         GEMINI_API_KEY: ${{ inputs.gemini_api_key }}
-        JULES_API_KEY: ${{ inputs.jules_api_key }}
         PR_NUMBER: ${{ github.event.pull_request.number }}
         MAX_AI_REVIEWS: ${{ inputs.max_ai_reviews || inputs.max_reviews || '10' }}
       run: |
@@ -135,7 +116,6 @@ runs:
           -e GITHUB_TOKEN="${GITHUB_TOKEN}" \
           -e GITHUB_REPOSITORY="${GITHUB_REPOSITORY}" \
           -e GEMINI_API_KEY="${GEMINI_API_KEY}" \
-          -e JULES_API_KEY="${JULES_API_KEY}" \
           -e PR_NUMBER="${PR_NUMBER}" \
           -e MAX_AI_REVIEWS="${MAX_AI_REVIEWS}" \
           -v "${{ github.workspace }}":/github/workspace \
@@ -149,33 +129,5 @@ runs:
         mkdir -p artifacts
         if [ ! -f artifacts/deployment-review.md ] && [ ! -f artifacts/impact-analysis/impact.md ]; then
           echo "No impact found." > artifacts/deployment-review.md
-        fi
-      shell: bash
-
-    - name: Send impact analysis to Jules session
-      if: always() && steps.check_reviews.outputs.skip != 'true'
-      env:
-        TASK_ID: ${{ steps.parse_jules.outputs.task_id }}
-        JULES_API_KEY: ${{ inputs.jules_api_key }}
-        GITHUB_TOKEN: ${{ inputs.github_token }}
-        PR_NUMBER: ${{ github.event.pull_request.number }}
-        GITHUB_REPOSITORY: ${{ github.repository }}
-        MAX_REVIEWS: ${{ inputs.max_reviews || '3' }}
-      run: |
-        if [ -f "scripts/send-jules-impact.py" ]; then
-          echo "Executing send-jules-impact.py from current workspace via container."
-          docker run --rm \
-            -e GITHUB_TOKEN="${GITHUB_TOKEN}" \
-            -e GITHUB_REPOSITORY="${GITHUB_REPOSITORY}" \
-            -e JULES_API_KEY="${JULES_API_KEY}" \
-            -e TASK_ID="${TASK_ID}" \
-            -e PR_NUMBER="${PR_NUMBER}" \
-            -e MAX_REVIEWS="${MAX_REVIEWS}" \
-            -v "${{ github.workspace }}":/github/workspace \
-            -w /github/workspace \
-            ghcr.io/arii/boomtick:latest \
-            python3 /github/workspace/scripts/send-jules-impact.py || echo "::warning::Failed to send impact to Jules"
-        else
-          echo "⚠️ Skipping: send-jules-impact.py script not found."
         fi
       shell: bash

@@ -53,5 +53,3 @@ jobs:
           github-app-id: ${{ secrets.APP_ID }}
           github-app-private-key: ${{ secrets.APP_PRIVATE_KEY }}
           gemini-api-key: ${{ secrets.GEMINI_API_KEY }}
-          jules-api-key: ${{ secrets.JULES_API_KEY }}
-          send-to-jules: "true"

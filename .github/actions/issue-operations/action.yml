@@ -18,17 +18,11 @@ inputs:
   gemini_api_key:
     description: 'Gemini API Key'
     required: false
-  jules_api_key:
-    description: 'Google Jules API Key'
-    required: false
   app_id:
     description: 'GitHub App ID'
     required: false
   app_private_key:
     description: 'GitHub App Private Key'
-    required: false
-  task_id:
-    description: 'Jules Task ID'
     required: false
 
 runs:
@@ -147,20 +141,17 @@ runs:
       uses: arii/boomtick@main
       env:
         PR_NUMBER: ${{ inputs.issue_number }}
-        TASK_ID: ${{ inputs.task_id }}
       with:
         github-app-id: ${{ inputs.app_id }}
         github-app-private-key: ${{ inputs.app_private_key }}
         gemini-api-key: ${{ inputs.gemini_api_key }}
-        jules-api-key: ${{ inputs.jules_api_key }}
-        send-to-jules: "true"
 
     # --- RESOLVE CONFLICTS ---
 
     - name: Find and Resolve Conflicts via Container
       if: inputs.operation == 'resolve-conflicts'
       run: |
-        docker run --rm -v "${{ github.workspace }}":/github/workspace -w /github/workspace -e GITHUB_TOKEN="$GITHUB_TOKEN" -e GITHUB_REPOSITORY="${{ github.repository }}" -e GEMINI_API_KEY="${{ inputs.gemini_api_key }}" -e JULES_API_KEY="${{ inputs.jules_api_key }}" ghcr.io/arii/boomtick:latest td gh resolve
+        docker run --rm -v "${{ github.workspace }}":/github/workspace -w /github/workspace -e GITHUB_TOKEN="$GITHUB_TOKEN" -e GITHUB_REPOSITORY="${{ github.repository }}" -e GEMINI_API_KEY="${{ inputs.gemini_api_key }}" ghcr.io/arii/boomtick:latest td gh resolve
       shell: bash
 
     - name: Validate Resolution

@@ -87,7 +87,6 @@ jobs:
           comment_body: ${{ github.event.inputs.comment_body }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
-          jules_api_key: ${{ secrets.JULES_API_KEY }}
           app_id: ${{ secrets.APP_ID }}
           app_private_key: ${{ secrets.APP_PRIVATE_KEY }}
 
