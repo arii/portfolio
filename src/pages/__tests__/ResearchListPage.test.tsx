@@ -14,7 +14,7 @@ describe('DevAI and Research List Page Deduplication', () => {
     );
 
     expect(screen.getByText('DevAI & Software Systems')).toBeInTheDocument();
-    expect(screen.getByText('Products built with DevAI')).toBeInTheDocument();
+    expect(screen.queryByText('Products built with DevAI')).not.toBeInTheDocument();
     expect(screen.getByText('Engineering Deep-Dives')).toBeInTheDocument();
     expect(screen.queryByText(/Delivery Bots/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/BeaverWorks/i)).not.toBeInTheDocument();

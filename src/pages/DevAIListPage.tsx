@@ -2,9 +2,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { getAllResearchPosts } from '@/data/research';
 import { DEVAI_FLAGSHIPS } from '@/data/devai-projects';
 import ResearchCard from '@/components/ResearchCard';
-import FlagshipCard from '@/components/FlagshipCard';
-import ImageLightbox from '@/components/ImageLightbox';
-import { Layers } from 'lucide-react';
+import { Layers, Filter } from 'lucide-react';
 import SEO from '@/components/SEO';
 import {
   getPersonAndProfileSchema,
@@ -18,7 +16,7 @@ export interface DevAIListPageProps {
 }
 
 const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
-  const [lightboxImage, setLightboxImage] = useState<string | null>(null);
+  const [activeCategory, setActiveCategory] = useState<string>('All');
 
   useEffect(() => {
     const handleHashScroll = () => {
@@ -44,6 +42,9 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
   const posts = useMemo(() => Array.from(new Map(getAllResearchPosts().map((p) => [p.slug || p.title, p])).values()), []);
   const flagshipTools = useMemo(() => DEVAI_FLAGSHIPS, []);
 
+  // Product URLs stay discoverable here and in the deep-dive article headers
+  // (ResearchDetailPage renders matchingTool external/source links); the
+  // standalone product-card grid was removed as a duplicate surface.
   const filteredPosts = useMemo(() => {
     const researchOnlySlugs = [
       'leac-monitoring-software',
@@ -63,6 +64,16 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
       return !cat.includes('robotics'); // exclude robotics
     });
   }, [posts]);
+
+  const filterCategories = useMemo(
+    () => Array.from(new Set(filteredPosts.map((p) => p.category || '').filter(Boolean))).sort(),
+    [filteredPosts]
+  );
+
+  const visiblePosts = useMemo(
+    () => (activeCategory === 'All' ? filteredPosts : filteredPosts.filter((p) => (p.category || '') === activeCategory)),
+    [filteredPosts, activeCategory]
+  );
 
   const devAiSchemas = useMemo(() => {
     const softwareSchemas = flagshipTools.map((tool) =>
@@ -115,24 +126,6 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
         <p className="text-text-dim text-sm sm:text-base leading-relaxed">System architectures, agentic CI/CD pipelines, autonomous developer tooling, and shipped production applications.</p>
       </header>
 
-      <section className="space-y-8" id="flagship">
-        <div className="border-b border-line pb-3 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
-          <div className="space-y-1">
-            <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-text-main flex items-center space-x-2">
-              <Layers className="h-5 w-5 text-accent" />
-              <span>Products built with DevAI</span>
-            </h2>
-            <p className="text-xs sm:text-sm text-text-dim">
-              Live full-stack consumer apps and platforms built with autonomous agent workflows.
-            </p>
-          </div>
-          <span className="text-sm font-semibold text-text-dim shrink-0">View Products</span>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {flagshipTools.map((tool) => (<FlagshipCard key={tool.id} tool={tool} onNavigate={onNavigate} onImageClick={setLightboxImage} />))}
-        </div>
-      </section>
-
       <section className="space-y-8" id="articles">
         <div className="border-b border-line pb-3 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
           <div className="space-y-1">
@@ -144,15 +137,35 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
               How I build: multi-agent workflows, automated code-auditing guardrails, and agentic CI/CD pipelines that enforce production standards.
             </p>
           </div>
-          <span className="text-sm font-semibold text-text-dim shrink-0">{filteredPosts.length} Articles</span>
+          <span className="text-sm font-semibold text-text-dim shrink-0">{visiblePosts.length} Articles</span>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-2" role="group" aria-label="Filter articles by category">
+          <Filter className="h-4 w-4 text-text-dim" aria-hidden="true" />
+          {['All', ...filterCategories].map((category) => {
+            const isActive = activeCategory === category;
+            return (
+              <button
+                key={category}
+                type="button"
+                onClick={() => setActiveCategory(category)}
+                aria-pressed={isActive}
+                className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-colors cursor-pointer ${
+                  isActive
+                    ? 'bg-accent/15 border-accent/40 text-accent'
+                    : 'bg-surface border-line text-text-dim hover:text-text-main hover:border-accent/30'
+                }`}
+              >
+                {category}
+              </button>
+            );
+          })}
         </div>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {filteredPosts.map((post) => (<ResearchCard key={post.slug} post={post} onSelect={onNavigate} />))}
+          {visiblePosts.map((post) => (<ResearchCard key={post.slug} post={post} onSelect={onNavigate} />))}
         </div>
       </section>
-
-      <ImageLightbox imageSrc={lightboxImage} onClose={() => setLightboxImage(null)} />
     </div>
   );
 };

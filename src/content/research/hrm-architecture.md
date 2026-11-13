@@ -36,7 +36,7 @@ The final architecture moved to a decoupled, multi-client web topology. Browser 
 
 ## The DevAI Catalyst (v1 -> v2 Rewrite)
 
-Refactoring the multi-client WebSocket topology and complex Web Bluetooth mock states in v2 became tedious to verify manually. Managing continuous multi-client refactors directly prompted me to build RepoAuditor and automated PR review bots in GitHub Actions. Using GitHub Actions, Gemini-powered PR reviews, and automated visual regression testing (Playwright), I validated complex Web Bluetooth mock states and UI layout integrity across updates.
+Refactoring the multi-client WebSocket topology and complex Web Bluetooth mock states in v2 became tedious to verify manually. Managing continuous multi-client refactors directly prompted me to build [RepoAuditor](https://repo-auditor-ai.vercel.app/) and automated PR review bots in GitHub Actions. Using GitHub Actions, Gemini-powered PR reviews, and automated visual regression testing (Playwright), I validated complex Web Bluetooth mock states and UI layout integrity across updates.
 
 ## Core Technical Implementation
 

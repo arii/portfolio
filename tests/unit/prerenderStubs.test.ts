@@ -88,9 +88,7 @@ describe('Pre-rendered SPA Stubs & Semantic Body Markup', () => {
     expect(fs.existsSync(devAiPath)).toBe(true);
     const devAiHtml = fs.readFileSync(devAiPath, 'utf-8');
     expect(devAiHtml).toContain('DevAI &amp; Software Systems');
-    expect(devAiHtml).toContain('Products built with DevAI');
-    expect(devAiHtml).toContain('HRM (Heart Rate Monitor)');
-    expect(devAiHtml).toContain('RepoAuditor');
+    expect(devAiHtml).not.toContain('Products built with DevAI');
     expect(devAiHtml).toContain('href="/devai/gitops-pr-reviewer/"');
 
     const researchPath = path.join(distDir, 'research/index.html');

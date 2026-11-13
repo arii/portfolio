@@ -38,11 +38,6 @@ const ResearchCard: React.FC<ResearchCardProps> = ({ post, onSelect, basePath })
                 {tag}
               </span>
             ))}
-            {post.tags.length > 3 && (
-              <span className="rounded-md border border-border bg-background px-2 py-0.5 text-xs font-semibold text-text-main whitespace-nowrap">
-                +{post.tags.length - 3}
-              </span>
-            )}
           </div>
           <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors flex items-start space-x-1">
             <span>{post.title}</span>

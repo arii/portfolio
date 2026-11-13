@@ -415,18 +415,6 @@ function renderDevAiHtml(contentDir) {
   let html = `<main style="max-width:1100px;margin:0 auto;padding:2rem 1rem;">`;
   html += `<header><h1>DevAI &amp; Software Systems</h1><p>System architectures, agentic CI/CD pipelines, autonomous developer tooling, and shipped production applications.</p></header>`;
 
-  html += `<section><h2>Products built with DevAI</h2>`;
-  for (const tool of DEVAI_FLAGSHIPS) {
-    const targetUrl = tool.canonicalPath || tool.externalUrl || `/devai/#${tool.id}`;
-    const isExternal = !tool.canonicalPath && tool.externalUrl;
-    const linkAttrs = isExternal ? ' rel="noopener noreferrer" target="_blank"' : '';
-    html += `<article><h3><a href="${escapeHtml(targetUrl)}"${linkAttrs}>${escapeHtml(tool.title)}</a></h3>`;
-    html += `<p><strong>${escapeHtml(tool.category)}</strong>${tool.metrics ? ` | <em>${escapeHtml(tool.metrics)}</em>` : ''}</p>`;
-    html += `<p>${escapeHtml(tool.description)}</p>`;
-    html += `</article>`;
-  }
-  html += `</section>`;
-
   html += `<section><h2>Engineering Deep-Dives</h2>`;
   for (const article of articles) {
     html += `<article><h3><a href="/devai/${article.slug}/">${escapeHtml(article.title)}</a></h3>`;
