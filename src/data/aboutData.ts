@@ -46,7 +46,7 @@ export const profileData: ProfileData = {
       "."
     ),
     React.createElement('span', null,
-      "Outside of robotics and AI, you’ll usually find me on the dance floor or exploring San Francisco. I am an active West Coast Swing dancer traveling for regional events — plus improv comedy jams, high-intensity workouts, and chess. I built boomtick.blog from those two worlds: West Coast Swing guides, gear recommendations, and custom merchandise."
+      "Outside of robotics and AI, you’ll usually find me on the dance floor or exploring San Francisco. I am an active West Coast Swing dancer traveling for regional events — plus improv comedy jams, high-intensity workouts, and chess. I built boomtick.blog from that community: West Coast Swing guides, gear recommendations, and automated publishing workflows."
     )
   ],
   details: [
@@ -65,17 +65,17 @@ export const profileData: ProfileData = {
       icon: Award
     }
   ],
-  availability: "Open to robotics contracts and DevAI consulting — especially where robotics and AI-assisted engineering overlap.",
+  availability: "Open to Senior/Staff SWE roles, robotics contracts, and DevAI consulting — especially where robotics and AI-assisted engineering overlap.",
   highlights: [
     {
-      period: "2012 – 2019",
-      title: "MIT CSAIL",
-      detail: "Researcher Learning and Intelligent Systems (LIS) group — robot manipulation under sensing/actuation uncertainty."
+      period: "2026 – Present",
+      title: "Ariel Anders Consulting",
+      detail: "Technical audits, autonomy architecture advisory, and agentic CI/CD infrastructure."
     },
     {
-      period: "2019 – 2022",
-      title: "Robust.AI",
-      detail: "First roboticist & behavior lead — real-time indoor social navigation."
+      period: "2025 – 2026",
+      title: "Civ Robotics",
+      detail: "Navigation & localization for autonomous forklifts (C++, Python, ROS 2)."
     },
     {
       period: "2022 – 2024",
@@ -83,9 +83,14 @@ export const profileData: ProfileData = {
       detail: "Senior SWE, Planning team — onboard motion planning & decision-making."
     },
     {
-      period: "2025 – 2026",
-      title: "Civ Robotics",
-      detail: "Navigation & localization for autonomous forklifts (C++, Python, ROS 2)."
+      period: "2019 – 2022",
+      title: "Robust.AI",
+      detail: "First roboticist & behavior lead — real-time indoor social navigation."
+    },
+    {
+      period: "2012 – 2019",
+      title: "MIT CSAIL",
+      detail: "Researcher Learning and Intelligent Systems (LIS) group — robot manipulation under sensing/actuation uncertainty."
     }
   ],
   faqs: [

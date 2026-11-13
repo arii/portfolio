@@ -324,7 +324,7 @@ function renderAboutHtml() {
   html += `<section><h2>Executive Biography</h2>`;
   html += `<p>I am an MIT CSAIL roboticist whose work focuses on building reliable autonomous systems. My research focused on learning physics-based models for planning under uncertainty. I bring deep experience across research and industry, from robot manipulation to social navigation in dynamic indoor environments and autonomous driving.</p>`;
   html += `<p>Over the past year, I’ve built stateful, multi-agent workflows for software development, using AI to engineer feature-rich applications while maintaining code quality and architectural standards, bringing robotics-grade reliability to DevAI.</p>`;
-  html += `<p>Outside of robotics and AI, you’ll usually find me on the dance floor or exploring San Francisco. I am an active West Coast Swing dancer who travels for regional events, perform in improv comedy jams, stay fit with high-intensity workouts, and love a good game of chess.</p>`;
+  html += `<p>Outside of robotics and AI, you’ll usually find me on the dance floor or exploring San Francisco. I am an active West Coast Swing dancer traveling for regional events — plus improv comedy jams, high-intensity workouts, and chess. I built boomtick.blog from that community: West Coast Swing guides, gear recommendations, and automated publishing workflows.</p>`;
   html += `</section>`;
 
   html += `<section><h2>Key Details &amp; Availability</h2>`;
@@ -417,8 +417,10 @@ function renderDevAiHtml(contentDir) {
 
   html += `<section><h2>Products built with DevAI</h2>`;
   for (const tool of DEVAI_FLAGSHIPS) {
-    const targetUrl = tool.canonicalPath || `/devai/${tool.id}/`;
-    html += `<article><h3><a href="${escapeHtml(targetUrl)}">${escapeHtml(tool.title)}</a></h3>`;
+    const targetUrl = tool.canonicalPath || tool.externalUrl || `/devai/#${tool.id}`;
+    const isExternal = !tool.canonicalPath && tool.externalUrl;
+    const linkAttrs = isExternal ? ' rel="noopener noreferrer" target="_blank"' : '';
+    html += `<article><h3><a href="${escapeHtml(targetUrl)}"${linkAttrs}>${escapeHtml(tool.title)}</a></h3>`;
     html += `<p><strong>${escapeHtml(tool.category)}</strong>${tool.metrics ? ` | <em>${escapeHtml(tool.metrics)}</em>` : ''}</p>`;
     html += `<p>${escapeHtml(tool.description)}</p>`;
     html += `</article>`;
@@ -444,8 +446,10 @@ function renderResearchHtml(contentDir) {
 
   html += `<section><h2>Graduate Theses</h2>`;
   for (const thesis of RESEARCH_THESIS) {
-    const targetUrl = thesis.canonicalPath || `/research/${thesis.id}/`;
-    html += `<article><h3><a href="${escapeHtml(targetUrl)}">${escapeHtml(thesis.title)}</a></h3>`;
+    const targetUrl = thesis.canonicalPath || thesis.externalUrl || `/research/#${thesis.id}`;
+    const isExternal = !thesis.canonicalPath && thesis.externalUrl;
+    const linkAttrs = isExternal ? ' rel="noopener noreferrer" target="_blank"' : '';
+    html += `<article><h3><a href="${escapeHtml(targetUrl)}"${linkAttrs}>${escapeHtml(thesis.title)}</a></h3>`;
     html += `<p><strong>${escapeHtml(thesis.category)}</strong></p>`;
     html += `<p>${escapeHtml(thesis.description)}</p>`;
     html += `</article>`;
@@ -454,8 +458,10 @@ function renderResearchHtml(contentDir) {
 
   html += `<section><h2>Robotics and Academic Projects</h2>`;
   for (const tool of RESEARCH_AUTONOMOUS) {
-    const targetUrl = tool.canonicalPath || `/research/${tool.id}/`;
-    html += `<article><h3><a href="${escapeHtml(targetUrl)}">${escapeHtml(tool.title)}</a></h3>`;
+    const targetUrl = tool.canonicalPath || tool.externalUrl || `/research/#${tool.id}`;
+    const isExternal = !tool.canonicalPath && tool.externalUrl;
+    const linkAttrs = isExternal ? ' rel="noopener noreferrer" target="_blank"' : '';
+    html += `<article><h3><a href="${escapeHtml(targetUrl)}"${linkAttrs}>${escapeHtml(tool.title)}</a></h3>`;
     html += `<p><strong>${escapeHtml(tool.category)}</strong>${tool.metrics ? ` | <em>${escapeHtml(tool.metrics)}</em>` : ''}</p>`;
     html += `<p>${escapeHtml(tool.description)}</p>`;
     html += `</article>`;
@@ -1074,6 +1080,8 @@ export function generateSpaStubs() {
     { from: 'portfolio', to: '/devai/', canonical: `${SITE_URL}/devai/` },
     { from: 'devai/devai', to: '/devai/', canonical: `${SITE_URL}/devai/` },
     { from: 'research/research', to: '/research/', canonical: `${SITE_URL}/research/` },
+    { from: 'devai/repo-auditor-ai', to: '/devai/#repo-auditor-ai', canonical: `${SITE_URL}/devai/` },
+    { from: 'devai/boomtick-blog', to: '/devai/#boomtick-blog', canonical: `${SITE_URL}/devai/` },
     ...devaiSlugs.map((slug) => ({
       from: `devai/devai/${slug}`,
       to: `/devai/${slug}/`,

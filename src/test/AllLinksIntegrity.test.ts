@@ -63,6 +63,15 @@ describe('All Links Integrity on /devai and /research', () => {
     }
   });
 
+  it('no tools without canonicalPath link to dead internal /devai/ or /research/ detail pages', () => {
+    for (const tool of DEVAI_FLAGSHIPS) {
+      if (!tool.canonicalPath) {
+        expect(tool.externalUrl).toBeDefined();
+        expect(tool.externalUrl).toMatch(/^https?:\/\//);
+      }
+    }
+  });
+
   it('all external URLs on /devai and /research have valid HTTP/HTTPS protocol format', () => {
     const allTools = [...DEVAI_FLAGSHIPS, ...RESEARCH_THESIS, ...RESEARCH_AUTONOMOUS];
     for (const tool of allTools) {

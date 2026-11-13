@@ -2,28 +2,35 @@ import { ResumeExperience } from './types';
 
 export const experienceData: ResumeExperience[] = [
   {
-    title: "Senior Algorithms Developer",
-    company: "Civ Robotics",
-    period: "Sept 2025 - April 2026",
-    link: "https://www.civrobotics.com/",
+    title: "Principal Roboticist & AI Architect",
+    company: "Ariel Anders Consulting",
+    period: "Present",
+    link: "https://arii.github.io/consulting/",
     points: [
-      "Developing core navigation and localization software for autonomous forklifts using C++, Python, and ROS 2.",
-      "Built and optimized IMU drivers and GPS filtering; implemented tilt-compensation logic to refine pose estimation.",
-      "Led root-cause analysis for critical localization drift, increasing fleet uptime significantly.",
-      "Enhanced CI/CD pipeline with python linting and authored AWS IoT certificate tools for containerized robotics software."
+      "Provide technical advisory, autonomy architecture audits (ROS 2 navigation, localization, motion planning), and agentic CI/CD infrastructure for teams shipping autonomous systems."
     ]
   },
   {
-    title: "Independent AI Engineering & Research",
-    company: "Autonomous Fitness Ecosystem & AI DevOps Pipeline",
-    period: "Jan 2025 – present",
-    link: "https://github.com/arii/hrm",
-    description: "Dedicated research & development period focused on agentic AI pipelines and telemetry infrastructure.",
+    title: "Senior Algorithms Engineer",
+    company: "Civ Robotics",
+    period: "Sept 2025 – Apr 2026",
+    link: "https://www.civrobotics.com/",
     points: [
-      "Real-Time Telemetry: Built Web Bluetooth & WebSocket pipelines streaming live sensor data to multi-client dashboards.",
-      "Agentic CI/CD: Architected automated PR review agents using RAG on Gemini to generate verified patches.",
-      "Contextual Intelligence: Engineered RAG systems to inject project docs and CI logs into AI prompts for targeted code reviews.",
-      "Technical Debt Management: Implemented automated extraction of technical debt into actionable GitHub issues."
+      "Developed navigation and localization software for autonomous forklifts using C++, Python, and ROS 2, including IMU drivers, GPS filtering, and tilt-compensation for pose estimation.",
+      "Diagnosed sensor noise patterns for a critical localization drift issue and deployed a fix that eliminated the drift.",
+      "Enhanced the CI/CD pipeline with Python linting checks and authored AWS IoT certificate tools to streamline the deployment of containerized (Docker) robotics software."
+    ]
+  },
+  {
+    title: "Selected Robotics & AI Engineering Projects",
+    company: "Independent Projects",
+    period: "2020 – present",
+    description: "Independent robotics prototyping, agentic CI/CD infrastructure, and RAG-grounded developer workflows.",
+    points: [
+      "Feels (https://arii.github.io/feels): Built a robotic arm proprioception and haptic classification pipeline (Viam, Python, MongoDB) that swirls physical containers and classifies contents from joint-torque signals.",
+      "Repo Auditor AI (https://repo-auditor-ai.vercel.app): A standalone DevAI console and multi-agent orchestration pipeline for automated GitHub PR auditing, RAG-grounded code review, and technical debt extraction using Gemini API and GitHub Actions.",
+      "BoomTick.blog (https://boomtick.blog): A community platform for West Coast Swing dancers with automated content management, analytics, and SEO-optimized publishing workflows.",
+      "HRM Dashboard (https://github.com/arii/hrm): Built real-time Web Bluetooth and WebSocket streaming pipelines to broadcast live heart rate telemetry across multi-client dashboards."
     ]
   },
   {
@@ -33,8 +40,8 @@ export const experienceData: ResumeExperience[] = [
     link: "https://waymo.com/",
     description: "Roboticist in the Planning team, developing onboard motion planning and decision-making software for safe self-driving technology.",
     points: [
-      "Focused on improving pullover performance, decreasing user walking distance and congestion.",
-      "Applied software engineering, robotics, and machine learning to build autonomous driving capabilities."
+      "Developed onboard motion planning and decision-making software on the Planning team for autonomous pickups, drop-offs, and pullovers.",
+      "Improved pullover performance in dense urban environments, decreasing rider walking distance and traffic congestion."
     ]
   },
   {
@@ -48,18 +55,17 @@ export const experienceData: ResumeExperience[] = [
         title: "Senior Roboticist / Tech Lead",
         period: "May 2021 – Oct 2022",
         points: [
-          "Tech lead for redesigning major architectural components for navigation spanning behavior, perception, and localization.",
-          "Integrated new hardware components into software frameworks and created novel behaviors.",
-          "Wrote production-quality software, tests, and documentation."
+          "Led a 5-month architecture redesign of the core navigation stack spanning behavior, perception, and localization teams.",
+          "Integrated new hardware sensors into the production software framework and architected novel autonomous behaviors, tests, and documentation.",
+          "Behavior Team Lead and managed direct reports."
         ]
       },
       {
         title: "Roboticist",
         period: "July 2019 – May 2021",
         points: [
-          "Developed robust real-time robot behaviors for indoor navigation in dynamic environments with contextual awareness.",
-          "Led social navigation work that helped secure Series A funding.",
-          "Established and executed testing procedures for robot navigation."
+          "Led the social navigation architecture and execution—from initial project proposal to completion—that was pivotal in raising Series A funding.",
+          "Developed real-time indoor navigation behaviors with contextual and social awareness for dynamic human environments, establishing end-to-end testing procedures."
         ]
       }
     ]
@@ -69,7 +75,7 @@ export const experienceData: ResumeExperience[] = [
     company: "Learning and Intelligent Systems, CSAIL MIT",
     period: "2012 – 2019",
     link: "https://www.csail.mit.edu/",
-    description: "Advised by Leslie P. Kaelbling and Tomas Lozano-Perez.",
+    description: "Advised by Leslie P. Kaelbling and Tomás Lozano-Pérez.",
     points: [
       "Research focus: Robot manipulation for household helpers under considerable uncertainty due to inaccurate sensing and imperfect actuation.",
       "Programmed Willow Garage PR2 robot using ROS, Python, and C++.",

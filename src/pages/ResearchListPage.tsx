@@ -38,7 +38,7 @@ const ResearchListPage: React.FC<ResearchListPageProps> = ({ onNavigate }) => {
     const collectionItems = allTools.map((tool) => ({
       name: tool.title,
       description: tool.description,
-      url: tool.canonicalPath || `/research/${tool.id}`,
+      url: tool.canonicalPath || tool.externalUrl || `https://arii.github.io/research/#${tool.id}`,
       image: tool.image,
     }));
 

@@ -8,7 +8,7 @@ export const publicationsData: ResumePublication[] = [
     title: 'Reliably Arranging Objects in Uncertain Domains',
     type: 'Conference Paper',
     year: '2018',
-    authors: ['Ariel S. Anders', 'Leslie P. Kaelbling', 'Tomas Lozano-Perez'],
+    authors: ['Ariel S. Anders', 'Leslie P. Kaelbling', 'Tomás Lozano-Pérez'],
     venue: 'IEEE International Conference on Robotics and Automation (ICRA), pp. 1603–1610',
     category: 'journal_conference',
     link: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=NM6SfiEAAAAJ&citation_for_view=NM6SfiEAAAAJ:MXK_kJrjxJIC'

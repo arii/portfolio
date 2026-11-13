@@ -37,7 +37,7 @@ export const heroContent: HeroContent = {
   title: 'Roboticist & Senior Software Engineer',
   bioParagraphs: [
     'I build reliable software for robotics and autonomous systems, from motion planning and localization to production infrastructure and AI-assisted development.',
-    'Now booking robotics consulting — technical audits and advisory for teams shipping autonomous systems.',
+    'Available for senior/staff engineering leadership, technical audits, and advisory for teams shipping autonomous systems.',
   ],
 };
 
@@ -72,7 +72,7 @@ export const FEATURE_CALLOUTS: FeatureCallout[] = [
   {
     id: 'production-systems',
     title: 'Production Software',
-    description: 'Production C++, Python, and ROS 2 for real-time onboard autonomy',
+    description: 'Production Python, C++, and ROS 2 for real-time onboard autonomy',
     iconName: 'laptop',
   },
   {
