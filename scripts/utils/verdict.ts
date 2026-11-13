@@ -27,7 +27,7 @@ export async function writeMissingApiKeyVerdict(reportFileName: string, reportTi
   );
 }
 
-export async function writeDeprecatedVerdict(reportFileName: string, reportTitle: string, clientName: string): Promise<void> {
+async function writeDeprecatedVerdict(reportFileName: string, reportTitle: string, clientName: string): Promise<void> {
   if (!reportFileName || !reportTitle || !clientName) {
     throw new Error('writeDeprecatedVerdict requires valid non-empty string arguments.');
   }

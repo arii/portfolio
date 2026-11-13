@@ -58,11 +58,11 @@ interface GraphQLResponse {
 
 let cachedPRGoal: string | undefined | null = null;
 
-export function clearCachedPRGoal(): void {
+function clearCachedPRGoal(): void {
   cachedPRGoal = null;
 }
 
-export function formatLinkedIssues(closingIssues: GraphQLIssueNode[], repo: string): string {
+function formatLinkedIssues(closingIssues: GraphQLIssueNode[], repo: string): string {
   const issueParts: string[] = [];
   for (const issue of closingIssues) {
     const labelsList = issue.labels?.nodes?.map(l => l.name) || [];
@@ -80,7 +80,7 @@ export function formatLinkedIssues(closingIssues: GraphQLIssueNode[], repo: stri
   return issueParts.join('\n\n');
 }
 
-export async function fetchPRGoal(): Promise<string | undefined> {
+async function fetchPRGoal(): Promise<string | undefined> {
   if (cachedPRGoal !== null) return cachedPRGoal;
   const token = process.env.GITHUB_TOKEN;
   const repo = process.env.GITHUB_REPOSITORY;
@@ -314,7 +314,7 @@ async function getAIContext(inputData: string): Promise<Record<string, unknown>[
   });
 }
 
-export async function getCodeDiffSummary(targetFiles?: string[]): Promise<CodeReviewSummary> {
+async function getCodeDiffSummary(targetFiles?: string[]): Promise<CodeReviewSummary> {
   try {
     const { diffArgs, nameOnlyArgs, contextBaseRef } = await getGitArgs();
 
@@ -515,7 +515,7 @@ export async function getCodeDiffSummary(targetFiles?: string[]): Promise<CodeRe
   }
 }
 
-export function generateTruncatedReviewMarkdown(
+function generateTruncatedReviewMarkdown(
   summary: CodeReviewSummary,
   client: CodeReviewClientStrategy
 ): string {
@@ -542,7 +542,7 @@ ${statSummary}
 `;
 }
 
-export function generateCodeReviewMarkdown(
+function generateCodeReviewMarkdown(
   result: CodeReviewResult,
   client: CodeReviewClientStrategy
 ): string {
@@ -710,7 +710,7 @@ export async function orchestrateCodeReview(
  * Simple verdict reconciliation: ensures that a FAIL verdict is backed by at least one
  * open finding.
  */
-export function reconcileVerdict(
+function reconcileVerdict(
   result: CodeReviewResult,
   _diffForVerification: string
 ): CodeReviewResult {

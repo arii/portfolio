@@ -18,7 +18,7 @@ export interface ProjectConfig {
   triage_chain?: ModelChainConfig;
 }
 
-export const DEFAULT_CONFIG: ProjectConfig = {
+const DEFAULT_CONFIG: ProjectConfig = {
   core_dirs: ["src/layouts/", "src/components/"],
   monolithic_pr_threshold: 3,
   base_branch: "origin/main",

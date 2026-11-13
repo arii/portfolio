@@ -1,3 +1,5 @@
+// fallow-ignore-file unused-file
+// Executed via execSync('node scripts/detect-antipatterns.mjs') in scripts/impact-visual-diff.ts
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';

@@ -1,3 +1,5 @@
+// fallow-ignore-file unused-file
+// Loaded by public/previews/index.html — a standalone gh-pages dashboard outside the app graph
 /**
  * PREVIEW DASHBOARD LOGIC
  * Standalone utility for Tech Dancer infrastructure.
