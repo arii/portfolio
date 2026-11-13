@@ -13,7 +13,7 @@ summary: "Co-organizing a student-run robotics conference and building its stati
 
 ## RoboCon MIT
 
-![RoboCon event portal showcase](/assets/research/robocon.jpg)
+![RoboCon event portal showcase](/assets/research/robocon.webp)
 
 **RoboCon MIT** was a student-run research conference organized to bring together robotics groups across MIT—including CSAIL, MechE, AeroAstro, and the Media Lab. I co-organized the event and built the conference website at [robocon.mit.edu](http://robocon.mit.edu/), which was one of my first web design projects and remains online today.
 

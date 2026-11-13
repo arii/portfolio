@@ -21,7 +21,7 @@ As a fourth-year PhD student in EECS at the Massachusetts Institute of Technolog
 
 ## Background & Personal Context
 
-![Light therapy campus setup](/assets/research/light.jpg)
+![Light therapy campus setup](/assets/research/light.webp)
 
 Moving to Boston from California, I was initially terrified of the harsh New England winter. During my second winter, working long hours between my office, the lab, and the gym in the Ray and Maria Stata Center, I developed severe wrist pain and fatigue. A doctor diagnosed me with a vitamin D deficiency linked to a lack of sunlight.
 

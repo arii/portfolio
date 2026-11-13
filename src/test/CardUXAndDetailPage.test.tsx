@@ -75,7 +75,7 @@ describe('Card UX & Detail Page Navigation Improvements', () => {
     const { container } = render(<ResearchDetailPage slug="undergraduate-projects" onBack={handleBack} />);
 
     const images = Array.from(container.querySelectorAll('img'));
-    const stateMachineImg = images.find(img => img.getAttribute('src') === '/assets/research/report-ce118-mechatronics/hierarchical_state_machine.png');
+    const stateMachineImg = images.find(img => img.getAttribute('src') === '/assets/research/report-ce118-mechatronics/hierarchical_state_machine.webp');
 
     expect(stateMachineImg).toBeInTheDocument();
     expect(stateMachineImg?.className).toContain('max-h-[500px]');

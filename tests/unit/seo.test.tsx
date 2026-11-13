@@ -188,8 +188,8 @@ describe('SEO Component & Search Configuration', () => {
     const devaiStubHtml = fs.readFileSync(path.join(distDir, 'devai/index.html'), 'utf-8');
     expect(devaiStubHtml).toContain('<link data-rh="true" rel="canonical" href="https://arii.github.io/devai/" />');
     expect(devaiStubHtml).toContain('<title data-rh="true">DevAI & Agentic Automation | Ariel Anders, PhD</title>');
-    expect(devaiStubHtml).toContain('property="og:image" content="https://arii.github.io/assets/research/boomtick-devai-tools/boomtick-arch.png"');
-    expect(devaiStubHtml).toContain('name="twitter:image" content="https://arii.github.io/assets/research/boomtick-devai-tools/boomtick-arch.png"');
+    expect(devaiStubHtml).toContain('property="og:image" content="https://arii.github.io/assets/research/boomtick-devai-tools/boomtick-arch.webp"');
+    expect(devaiStubHtml).toContain('name="twitter:image" content="https://arii.github.io/assets/research/boomtick-devai-tools/boomtick-arch.webp"');
     expect((devaiStubHtml.match(/<title/g) || []).length).toBe(1);
     expect((devaiStubHtml.match(/<link\b[^>]*\brel="canonical"/g) || []).length).toBe(1);
 

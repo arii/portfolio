@@ -106,7 +106,7 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
         title="DevAI & Agentic Automation"
         description="Explore agentic DevAI tools, multi-agent CI/CD workflows, and developer automation software engineered by Ariel Anders, PhD (MIT CSAIL)."
         canonicalUrl="/devai/"
-        ogImage="/assets/research/boomtick-devai-tools/boomtick-arch.png"
+        ogImage="/assets/research/boomtick-devai-tools/boomtick-arch.webp"
         jsonLd={devAiSchemas}
       />
 

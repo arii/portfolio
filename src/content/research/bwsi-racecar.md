@@ -13,7 +13,7 @@ summary: "Instructional curricula and course lead for autonomous miniature racec
 videoUrl: "https://www.youtube.com/watch?v=UjVatZ3NK5U"
 ---
 
-![BeaverWorks RACECAR students and autonomous vehicles](/assets/research/bw.jpg)
+![BeaverWorks RACECAR students and autonomous vehicles](/assets/research/bw.webp)
 
 ## 1. Introduction & Overview
 

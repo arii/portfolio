@@ -18,7 +18,7 @@ const CONTENT_DIR = path.resolve(__dirname, '../src/content/research');
 const SITE_URL = 'https://arii.github.io';
 const AUTHOR_NAME = 'Ariel Anders, PhD';
 const DEFAULT_IMAGE = `${SITE_URL}/assets/roboticist.jpg`;
-const DEVAI_DEFAULT_IMAGE = `${SITE_URL}/assets/research/boomtick-devai-tools/boomtick-arch.png`;
+const DEVAI_DEFAULT_IMAGE = `${SITE_URL}/assets/research/boomtick-devai-tools/boomtick-arch.webp`;
 const RESEARCH_DEFAULT_IMAGE = `${SITE_URL}/assets/research/bwsi-racecar/racecar_main.webp`;
 const DEFAULT_LICENSE = 'https://creativecommons.org/licenses/by-nc-nd/4.0/';
 
@@ -109,7 +109,8 @@ function markdownToHtml(md) {
       const cleanUrl = url.split('#')[0].trim();
       const cleanAlt = escapeHtml(alt.replace(/^Figure:\s*/i, ''));
       const isWebpCandidate = /\.(png|jpe?g|gif)$/i.test(cleanUrl);
-      const webpUrl = isWebpCandidate ? cleanUrl.replace(/\.(png|jpe?g|gif)$/i, '.webp') : null;
+      const isAlreadyWebp = /\.webp$/i.test(cleanUrl);
+      const webpUrl = isWebpCandidate ? cleanUrl.replace(/\.(png|jpe?g|gif)$/i, '.webp') : (isAlreadyWebp ? cleanUrl : null);
 
       const imgTag = `<img src="${escapeHtml(cleanUrl)}" alt="${cleanAlt}" loading="lazy" decoding="async" />`;
       const pictureTag = webpUrl

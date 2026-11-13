@@ -42,7 +42,7 @@ During my undergraduate studies in Computer Engineering at UC Santa Cruz (UCSC),
 
 For **CMPE-121 Microprocessor System Design** at UC Santa Cruz, we designed, hand-soldered, and programmed a custom embedded computer board based on the **Motorola 68HC11E1 microcontroller**, bringing bare silicon up to full operational capability to control a mechanical gripper without a host computer.
 
-![Complete hardware schematic for the custom Motorola 68HC11E1 microcontroller system board.](/assets/research/report-ce121-microprocessor/68hc11_board_schematic.png#invert-dark#max-w-3xl)
+![Complete hardware schematic for the custom Motorola 68HC11E1 microcontroller system board.](/assets/research/report-ce121-microprocessor/68hc11_board_schematic.webp#invert-dark#max-w-3xl)
 
 #### Hardware Interfacing & Firmware Engineering
 
@@ -52,7 +52,7 @@ Building the single-board computer required precise hardware timing analysis, ma
 2. **Serial & Peripheral Communication:** Configured RS-232 serial UART communication for terminal debugging alongside SPI interface logic for peripheral expansion.
 3. **Power Regulation & Hardware Diagnostics:** Designed onboard 5V linear power regulation circuitry and integrated LED logic displays for verifying memory read/write cycles.
 
-![Memory address decoding block diagram mapping 8KB SRAM and EPROM windows into the 68HC11 memory space.](/assets/research/report-ce121-microprocessor/memory_address_decoding.png#invert-dark#max-w-xl)
+![Memory address decoding block diagram mapping 8KB SRAM and EPROM windows into the 68HC11 memory space.](/assets/research/report-ce121-microprocessor/memory_address_decoding.webp#invert-dark#max-w-xl)
 
 #### Software & Gripper Control Implementation
 
@@ -85,7 +85,7 @@ We structured the software to manage real-time communication and hardware feedba
 
 In **CMPE-118 Introduction to Mechatronics** at UC Santa Cruz, my team (Matthew Luxton, Kyle Huey, and I) designed, constructed, and programmed **MAK Attack**—an autonomous mobile robot built to solve real-time arena navigation and object manipulation challenges under strict operational deadlines.
 
-![The MAK Attack autonomous mobile robot platform, highlighting optical sensors, bumper switches, and custom motor drive electronics.](/assets/research/report-ce118-mechatronics/mak_attack_robot.png#max-w-2xl)
+![The MAK Attack autonomous mobile robot platform, highlighting optical sensors, bumper switches, and custom motor drive electronics.](/assets/research/report-ce118-mechatronics/mak_attack_robot.webp#max-w-2xl)
 
 #### Project Overview & Core Requirements
 
@@ -97,7 +97,7 @@ Designed and engineered an 11" x 11" x 11" fully autonomous robot programmed to 
 
   * **Hierarchical Finite State Machine (FSM)**: Built and programmed a control structure with modular sub-state machines (e.g., dedicated centering algorithms and localized sensor-sampling logic).
 
-![Hierarchical event-driven state machine architecture governing autonomous robot behavior during arena trials.](/assets/research/report-ce118-mechatronics/hierarchical_state_machine.png#max-w-2xl#tall#contain)
+![Hierarchical event-driven state machine architecture governing autonomous robot behavior during arena trials.](/assets/research/report-ce118-mechatronics/hierarchical_state_machine.webp#max-w-2xl#tall#contain)
 
   * **Ambient-Resilient Event Detection**: Developed a differential sampling state machine for the robot’s IR tape sensors. By capturing active and passive states sequentially, the software calculated ambient light deltas to stabilize detection thresholds under variable environmental lighting.
   * **Adaptive Battery Voltage Scaling**: Engineered an algorithmic solution to address supply fluctuations (from a 14.4V dual-battery series configuration). Built continuous PWM duty-cycle scaling code using a 10-bit ADC reference to normalize motor outputs relative to a steady 12V operational baseline, ensuring consistent maneuverability and projectile power.

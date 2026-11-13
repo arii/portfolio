@@ -14,7 +14,7 @@ summary: "An open-source, low-cost robotics education and research platform for 
 videoUrl: "https://www.youtube.com/watch?v=rPpewHIF2KU"
 ---
 
-![Inaugural MIT 2.166 Duckietown Class](/assets/research/duckietown.jpg)
+![Inaugural MIT 2.166 Duckietown Class](/assets/research/duckietown.webp)
 
 ## Overview & Inaugural MIT 2.166 Class
 
