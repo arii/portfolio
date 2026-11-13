@@ -328,7 +328,7 @@
     <image:image>
       <image:loc>https://arii.github.io/assets/research/feels.gif</image:loc>
       <image:title>Feels: Teaching a Robot to Feel</image:title>
-      <image:caption>Feels live demo: the robot arm lifts and swirls a sealed cup, followed by the signature space — 110 taught signatures projected to 2-D via PCA, colored by material</image:caption>
+      <image:caption>Feels live demo: the robot arm lifts and swirls a sealed cup, followed by the signature space: 110 taught signatures projected to 2-D via PCA, colored by material</image:caption>
       <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
     </image:image>
   </url>
