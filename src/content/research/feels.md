@@ -10,13 +10,13 @@ tags:
   - Viam
   - MongoDB
 category: "Robotics & Manipulation"
-summary: "Torque-based object classification from motor torques alone: a robot lifts a sealed cup, swirls it, and predicts the contents — 86–89% empty detection with no added sensors."
+summary: "We built a torque-based object classification pipeline that requires zero added sensors: a robot arm lifts a sealed cup, swirls it, and classifies the contents from joint motor torques alone—achieving 86–89% empty detection."
 image: "/assets/research/feels.gif"
 ---
 
 ## Teaching a Robot to Feel, From Motor Torques Alone
 
-**Feels** is an online data collection and training platform for robot object classification through physical interaction. Built with **Sree Dhyuti Nimmagadda** at the **Viam + MongoDB hackathon (Oct 29–30, 2026)**, it teaches a robot arm to classify the contents of a sealed cup — liquid, candy, or screws — using a three-step routine: **lift, swirl, predict**.
+At the **Viam + MongoDB hackathon (Oct 29–30, 2026)**, **Sree Dhyuti Nimmagadda** and I built **Feels**—an online data collection and training platform that teaches a robot arm to classify sealed cup contents (liquid, candy, or screws) through physical interaction using a three-step routine: **lift, swirl, predict**.
 
 ![Feels live demo: the robot arm lifts and swirls a sealed cup, followed by the signature space — 110 taught signatures projected to 2-D via PCA, colored by material](/assets/research/feels.gif)
 
@@ -24,17 +24,17 @@ image: "/assets/research/feels.gif"
 
 ## The Problem & Motivation
 
-Computer vision has expanded what robots can manipulate, but it still fails on containers: a sealed opaque cup looks identical whether it holds water, candy, or screws. Businesses deploying manipulation in unstructured environments — warehouses, households, hospitals — typically respond by adding sensors: force-torque, weight, even X-ray.
+Computer vision has expanded what robots can manipulate, but it fails on opaque containers: a sealed cup looks identical whether it holds water, candy, or screws. Most manipulation stacks solve this by bolting on extra hardware—force-torque sensors, load cells, or even X-ray systems.
 
-The Feels hypothesis is that much of that information is already present in the robot's existing hardware. Every movement the arm makes already produces motor torques that respond to what is inside the gripper. Reading those torques gives a robot tactile "common sense" at **no added sensor cost** — cheaper and faster than bolting on extra hardware. The arm carries **no force-torque sensor**; everything below is inferred from applied joint torques alone.
+Our hypothesis was that the signal is already sitting in the actuator telemetry. Every arm movement generates motor torques that shift with the payload's mass and internal dynamics. Reading those residuals gives a robot tactile intuition at **zero added hardware cost**. Our arm carries **no force-torque sensor**; every prediction below comes strictly from applied joint torques.
 
 ---
 
 ## Approach: Lift → Swirl → Predict
 
-1. **Lift.** The robot picks up the cup using a fixed, repeatable grasp macro.
-2. **Swirl.** It moves the cup in a deterministic swirling motion and places it back — a fixed trajectory designed so that whatever is inside sloshes and shifts in a repeatable way.
-3. **Predict.** Applied joint torques recorded during the swirl are mapped to a physical signature and matched against taught examples.
+1. **Lift.** The arm picks up the cup via a fixed grasp macro.
+2. **Swirl.** It executes a deterministic swirling trajectory before setting the cup down, forcing whatever is inside to slosh or shift in a repeatable pattern.
+3. **Predict.** We map the applied joint torques recorded during the swirl into a physical signature and match it against taught examples.
 
 ### Signature Space
 
@@ -48,20 +48,20 @@ Each swirl produces a **torque-based signature** of the contents. We taught **11
 | Screws | 7 |
 | Candy | 1 |
 
-The projection shows water and solid-weight signatures separating readily, while sparse categories (screws, candy) sit in smaller clusters — a fair picture of what the nearest-neighbor classifier finds easy and hard.
+In our PCA projection, water and solid-weight signatures separate cleanly, while sparse categories (screws, candy) form smaller clusters—accurately reflecting where our nearest-neighbor classifier has high confidence versus where it needs more samples.
 
 ### Online Learning, Not a Frozen Model
 
-Feels is a **data collection and training platform**, not a one-off model. Signatures are stored as embeddings in **MongoDB Atlas Vector Search**, and classification is nearest-neighbor retrieval against everything taught so far. That means new categories — or corrections to existing ones — are taught through the live dashboard ("teach a new item") and become classifiable immediately, no retraining run. The stack: **Viam Python SDK, gRPC, WebRTC, aiohttp**, streaming telemetry over **SSE**, with **PyTorch** and **scipy** in the feature pipeline and a labeled swirl dataset published on **Hugging Face**.
+We designed Feels as a **live data collection and training platform**, not a frozen model. We store torque signatures as embeddings in **MongoDB Atlas Vector Search** and classify via nearest-neighbor retrieval against everything taught so far. Operators can teach new categories—or correct misclassifications—directly from the dashboard ("teach a new item") with zero retraining latency. Our stack runs on **Viam Python SDK, gRPC, WebRTC, and aiohttp**, streaming telemetry over **SSE** with **PyTorch** and **scipy** handling feature extraction, backed by a labeled swirl dataset we published on **Hugging Face**.
 
 ---
 
 ## Results
 
-Measured on the live site's held-out evaluation, on a hackathon-collected dataset:
+Evaluated on our held-out hackathon test set:
 
-- **86–89% empty vs. non-empty detection** across **21 held-out test cups** — the deployable safety signal, e.g. knowing a gripper closed on nothing.
-- **52% on the full 3-way task** (empty / liquid / solid) with the nearest-neighbor baseline — honest headroom over chance (~33%), and a clear roadmap: more taught signatures per category, better feature extraction.
+- **86–89% empty vs. non-empty detection** across **21 held-out test cups**—the core safety signal needed to verify whether a grasp actually succeeded.
+- **52% accuracy on the 3-way classification task** (empty / liquid / solid) using our nearest-neighbor baseline—solid headroom over random chance (~33%), leaving clear room to improve via denser category sampling and richer temporal features.
 
 The dashboard reports each live prediction with its similarity scores, so operators can see *why* a cup was classified as screws and teach a correction when the system is uncertain.
 
@@ -73,4 +73,4 @@ The dashboard reports each live prediction with its similarity scores, so operat
 - **Nearest-neighbor memory beats small-data training.** With a hackathon-sized dataset, retrieval over an ever-growing signature library classifies new and existing categories online.
 - **The pipeline is reproducible.** The full platform — swirl macro, feature extraction, vector memory, live dashboard — is open source, with a mock mode that runs the entire UI on bundled recordings, no hardware required.
 
-This work pairs naturally with our other manipulation research, such as [conformant planning for manipulation](/research/conformant-planning-manipulation/): both ask what a robot can infer about the world from contact and motion rather than cameras.
+This builds directly on my prior manipulation research, including [conformant planning for manipulation](/research/conformant-planning-manipulation/): both explore how much state a robot can infer through physical contact and proprioception rather than vision alone.
