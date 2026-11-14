@@ -52,6 +52,17 @@ runs:
         } >> "$GITHUB_ENV"
       shell: bash
 
+    - name: Set up Python for td CLI
+      if: inputs.operation == 'validate-quality' || inputs.operation == 'resolve-conflicts'
+      uses: actions/setup-python@v5 # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
+      with:
+        python-version: '3.x'
+
+    - name: Install td CLI
+      if: inputs.operation == 'validate-quality' || inputs.operation == 'resolve-conflicts'
+      run: command -v td >/dev/null 2>&1 || pip install boomtick-cli==0.20.2
+      shell: bash
+
     # --- VALIDATE QUALITY ---
     - name: Configure Git Safe Directory
       if: inputs.operation == 'validate-quality' || inputs.operation == 'resolve-conflicts'
@@ -59,12 +70,13 @@ runs:
       shell: bash
 
 
-    - name: Validate Issue via Container
+    - name: Validate Issue via td CLI
       if: inputs.operation == 'validate-quality'
       env:
         ISSUE_NUM: ${{ inputs.issue_number }}
+        GITHUB_REPOSITORY: ${{ github.repository }}
       run: |
-        docker run --rm -e GITHUB_TOKEN="$GITHUB_TOKEN" -e GITHUB_REPOSITORY="${{ github.repository }}" ghcr.io/arii/boomtick:latest td gh validate-issue --issue-number "$ISSUE_NUM" --post-comments --execute
+        td gh validate-issue --issue-number "$ISSUE_NUM" --post-comments --execute
       shell: bash
 
     # --- CREATE PR ---
@@ -148,10 +160,13 @@ runs:
 
     # --- RESOLVE CONFLICTS ---
 
-    - name: Find and Resolve Conflicts via Container
+    - name: Find and Resolve Conflicts via td CLI
       if: inputs.operation == 'resolve-conflicts'
+      env:
+        GITHUB_REPOSITORY: ${{ github.repository }}
+        GEMINI_API_KEY: ${{ inputs.gemini_api_key }}
       run: |
-        docker run --rm -v "${{ github.workspace }}":/github/workspace -w /github/workspace -e GITHUB_TOKEN="$GITHUB_TOKEN" -e GITHUB_REPOSITORY="${{ github.repository }}" -e GEMINI_API_KEY="${{ inputs.gemini_api_key }}" ghcr.io/arii/boomtick:latest td gh resolve
+        td gh resolve
       shell: bash
 
     - name: Validate Resolution
