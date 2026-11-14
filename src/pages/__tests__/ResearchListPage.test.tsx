@@ -14,8 +14,19 @@ describe('DevAI and Research List Page Deduplication', () => {
     );
 
     expect(screen.getByText('DevAI & Software Systems')).toBeInTheDocument();
-    expect(screen.queryByText('Products built with DevAI')).not.toBeInTheDocument();
+    expect(screen.getByText('Products built with DevAI')).toBeInTheDocument();
+    // Image-bearing product cards are the primary presentation.
+    expect(screen.getByText('Boomtick')).toBeInTheDocument();
+    expect(screen.getByText('SF Promises')).toBeInTheDocument();
+    expect(screen.getByText('WCS Navigator')).toBeInTheDocument();
+    expect(screen.getByText('HRM (Heart Rate Monitor)')).toBeInTheDocument();
     expect(screen.getByText('Engineering Deep-Dives')).toBeInTheDocument();
+    // Text-only deep-dive cards whose content the image cards already
+    // represent are removed from the feed.
+    expect(screen.queryByText(/Sourced Verdicts on San Francisco/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Real-Time Biometric Telemetry/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Automating PR Reviews with Gemini/i)).not.toBeInTheDocument();
+    expect(screen.getByText(/Visual Impact \/ UX Audit/i)).toBeInTheDocument();
     expect(screen.queryByText(/Delivery Bots/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/BeaverWorks/i)).not.toBeInTheDocument();
   });
