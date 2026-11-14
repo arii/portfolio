@@ -88,10 +88,16 @@ describe('Pre-rendered SPA Stubs & Semantic Body Markup', () => {
     expect(fs.existsSync(devAiPath)).toBe(true);
     const devAiHtml = fs.readFileSync(devAiPath, 'utf-8');
     expect(devAiHtml).toContain('DevAI &amp; Software Systems');
+    // Image-bearing product cards are the primary presentation.
     expect(devAiHtml).toContain('Products built with DevAI');
-    expect(devAiHtml).toContain('HRM (Heart Rate Monitor)');
-    expect(devAiHtml).toContain('RepoAuditor');
-    expect(devAiHtml).toContain('href="/devai/gitops-pr-reviewer/"');
+    expect(devAiHtml).toContain('<img src="/assets/research/sf-promises/verdict-board.webp"');
+    expect(devAiHtml).toContain('<img src="/assets/research/hrm-flagship.webp"');
+    expect(devAiHtml).toContain('href="/devai/sf-promises/"');
+    expect(devAiHtml).toContain('href="/devai/hrm-architecture/"');
+    // Deep-dive articles represented by image cards are not listed separately.
+    expect(devAiHtml).not.toContain('href="/devai/gitops-pr-reviewer/"');
+    expect(devAiHtml).not.toContain('href="/devai/ai-experiments/"');
+    expect(devAiHtml).toContain('href="/devai/versiontruth/"');
 
     const researchPath = path.join(distDir, 'research/index.html');
     expect(fs.existsSync(researchPath)).toBe(true);

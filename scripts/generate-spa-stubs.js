@@ -19,6 +19,17 @@ const SITE_URL = 'https://arii.github.io';
 const AUTHOR_NAME = 'Ariel Anders, PhD';
 const DEFAULT_IMAGE = `${SITE_URL}/assets/roboticist.jpg`;
 const DEVAI_DEFAULT_IMAGE = `${SITE_URL}/assets/research/boomtick-devai-tools/boomtick-arch.webp`;
+
+// Image-bearing product cards are the primary presentation on /devai/; the
+// text-only deep-dive articles they represent are not listed separately.
+const IMAGE_PRODUCT_IDS = ['boomtick', 'sf-promises', 'wcs-navigator', 'hrm-flagship'];
+const DUPLICATED_ARTICLE_SLUGS = ['sf-promises', 'hrm-architecture', 'gitops-pr-reviewer', 'ai-experiments'];
+
+function getDevAiCardImage(tool) {
+  if (tool.id === 'hrm-flagship') return '/assets/research/hrm-flagship.webp';
+  if (tool.id === 'repo-auditor-ai') return '/assets/research/repo-auditor-ai.webp';
+  return tool.image || null;
+}
 const RESEARCH_DEFAULT_IMAGE = `${SITE_URL}/assets/research/bwsi-racecar/racecar_main.webp`;
 const DEFAULT_LICENSE = 'https://creativecommons.org/licenses/by-nc-nd/4.0/';
 
@@ -410,19 +421,22 @@ function renderHomeHtml() {
 }
 
 function renderDevAiHtml(contentDir) {
-  const articles = getArticleList(contentDir, 'devai');
+  const articles = getArticleList(contentDir, 'devai')
+    .filter((article) => !DUPLICATED_ARTICLE_SLUGS.includes(article.slug));
 
   let html = `<main style="max-width:1100px;margin:0 auto;padding:2rem 1rem;">`;
   html += `<header><h1>DevAI &amp; Software Systems</h1><p>System architectures, agentic CI/CD pipelines, autonomous developer tooling, and shipped production applications.</p></header>`;
 
   html += `<section><h2>Products built with DevAI</h2>`;
-  for (const tool of DEVAI_FLAGSHIPS) {
+  const imageProducts = DEVAI_FLAGSHIPS.filter((tool) => IMAGE_PRODUCT_IDS.includes(tool.id));
+  for (const tool of imageProducts) {
     const targetUrl = tool.canonicalPath || tool.externalUrl || `/devai/#${tool.id}`;
-    const isExternal = !tool.canonicalPath && tool.externalUrl;
-    const linkAttrs = isExternal ? ' rel="noopener noreferrer" target="_blank"' : '';
-    html += `<article><h3><a href="${escapeHtml(targetUrl)}"${linkAttrs}>${escapeHtml(tool.title)}</a></h3>`;
-    html += `<p><strong>${escapeHtml(tool.category)}</strong>${tool.metrics ? ` | <em>${escapeHtml(tool.metrics)}</em>` : ''}</p>`;
-    html += `<p>${escapeHtml(tool.description)}</p>`;
+    const image = getDevAiCardImage(tool);
+    html += `<article><h3><a href="${escapeHtml(targetUrl)}">${escapeHtml(tool.title)}</a> <em>${escapeHtml(tool.status)}</em></h3>`;
+    if (image) {
+      html += `<img src="${escapeHtml(image)}" alt="${escapeHtml(tool.imageAlt || tool.title)}" loading="lazy">`;
+    }
+    html += `<p>${escapeHtml(tool.shortDescription || tool.description)}</p>`;
     html += `</article>`;
   }
   html += `</section>`;

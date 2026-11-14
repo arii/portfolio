@@ -18,6 +18,7 @@ export interface ResearchTool {
   title: string;
   subtitle?: string;
   description: string;
+  shortDescription?: string;
   category: string;
   taxonomyBucket?: 'product' | 'infrastructure';
   status: string;
