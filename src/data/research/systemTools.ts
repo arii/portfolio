@@ -49,7 +49,7 @@ export const systemTools: ResearchTool[] = [
   },
   {
     id: 'versiontruth',
-    inDevMessage: { highlight: '⚠ Hackathon submission (NandaHack, 2026)', rest: '— not yet in production' },
+    inDevMessage: { highlight: '⚠ Hackathon submission (NandaHack, 2026)', rest: '(not yet in production)' },
     taxonomyBucket: 'infrastructure',
     title: 'VersionTruth: Eliminating Version Hallucinations in Agentic CI',
     subtitle: 'The antidote to version hallucinations',

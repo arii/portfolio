@@ -137,7 +137,7 @@ export const flagshipTools: ResearchTool[] = [
     id: 'masters-thesis',
     taxonomyBucket: 'product',
     title: 'Learning a Strategy for Whole-Arm Grasping',
-    subtitle: 'MIT S.M. THESIS — CSAIL',
+    subtitle: 'MIT S.M. THESIS, CSAIL',
     description: 'I investigated reinforcement learning policies for bimanual and whole-arm grasping of bulky, irregular objects under real-world physical uncertainty. I formulated contact-rich control strategies that use compliant arm surfaces and multi-modal feedback to stabilize grasping without prior geometric part models.',
     category: 'Robotics & AI',
     status: 'Completed (2014)',

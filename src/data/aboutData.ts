@@ -41,12 +41,12 @@ export const profileData: ProfileData = {
     React.createElement('span', null,
       "Over the past year I’ve built ",
       React.createElement('strong', { className: 'font-bold text-text-main' }, "stateful, multi-agent workflows for software development"),
-      " — AI-assisted engineering that holds code quality and architectural standards, with ",
+      ": AI-assisted engineering that holds code quality and architectural standards, with ",
       React.createElement('strong', { className: 'font-bold text-text-main' }, "robotics-grade reliability"),
       "."
     ),
     React.createElement('span', null,
-      "Outside of robotics and AI, you’ll usually find me on the dance floor or exploring San Francisco. I am an active West Coast Swing dancer traveling for regional events — plus improv comedy jams, high-intensity workouts, and chess. I built boomtick.blog from that community: West Coast Swing guides, gear recommendations, and automated publishing workflows."
+      "Outside of robotics and AI, you’ll usually find me on the dance floor or exploring San Francisco. I am an active West Coast Swing dancer traveling for regional events. I also do improv comedy jams, high-intensity workouts, and chess. I built boomtick.blog from that community: West Coast Swing guides, gear recommendations, and automated publishing workflows."
     )
   ],
   details: [
@@ -65,7 +65,7 @@ export const profileData: ProfileData = {
       icon: Award
     }
   ],
-  availability: "Open to Senior/Staff SWE roles, robotics contracts, and DevAI consulting — especially where robotics and AI-assisted engineering overlap.",
+  availability: "Open to Senior/Staff SWE roles, robotics contracts, and DevAI consulting, especially where robotics and AI-assisted engineering overlap.",
   highlights: [
     {
       period: "2026 – Present",
@@ -80,17 +80,17 @@ export const profileData: ProfileData = {
     {
       period: "2022 – 2024",
       title: "Waymo",
-      detail: "Senior SWE, Planning team — onboard motion planning & decision-making."
+      detail: "Senior SWE, Planning team: onboard motion planning & decision-making."
     },
     {
       period: "2019 – 2022",
       title: "Robust.AI",
-      detail: "First roboticist & behavior lead — real-time indoor social navigation."
+      detail: "First roboticist & behavior lead: real-time indoor social navigation."
     },
     {
       period: "2012 – 2019",
       title: "MIT CSAIL",
-      detail: "Researcher Learning and Intelligent Systems (LIS) group — robot manipulation under sensing/actuation uncertainty."
+      detail: "Researcher Learning and Intelligent Systems (LIS) group: robot manipulation under sensing/actuation uncertainty."
     }
   ],
   faqs: [
