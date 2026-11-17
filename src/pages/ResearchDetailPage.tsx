@@ -944,7 +944,6 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
                       alt={displayCaption}
                       containerClassName={containerClasses}
                       className={imgClasses}
-                      disableWebpAutoInfer={cleanSrc.endsWith('.gif')}
                       {...props}
                     />
                   </div>
