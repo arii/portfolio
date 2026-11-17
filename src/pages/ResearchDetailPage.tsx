@@ -330,8 +330,9 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
     );
   }
 
-  const imgMatch = post.content.match(/!\[.*?\]\((.*?)\)/);
-  const firstImage = imgMatch ? imgMatch[1].split('#')[0] : undefined;
+  const firstImage = [...post.content.matchAll(/!\[.*?\]\((.*?)\)/g)]
+    .map((m) => m[1].split('#')[0])
+    .find((url) => !/\.(mp4|webm)$/i.test(url));
 
   const primarySection = getPrimarySection(post);
 
@@ -421,6 +422,19 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
     const fullImgUrl = cleanPath.startsWith('http')
       ? cleanPath
       : `${SITE_URL}${cleanPath.startsWith('/') ? '' : '/'}${cleanPath}`;
+
+    if (/\.(mp4|webm)$/i.test(cleanPath)) {
+      videoSchemas.push(
+        getVideoObjectSchema({
+          name: `${post.title} - Video`,
+          description: altText || post.summary,
+          contentUrl: fullImgUrl,
+          thumbnailUrl: ogImage.startsWith('http') ? ogImage : `${SITE_URL}${ogImage}`,
+          uploadDate: post.date,
+        })
+      );
+      continue;
+    }
 
     if (!seenImageUrls.has(fullImgUrl)) {
       seenImageUrls.add(fullImgUrl);
@@ -890,6 +904,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
                         webmSrc={cleanSrc.endsWith('.webm') ? cleanSrc : undefined}
                         poster={post.image}
                         ariaLabel={alt || 'Project video'}
+                        controls
                         containerClassName="w-full aspect-video"
                         className="w-full h-full object-contain rounded-xl"
                       />

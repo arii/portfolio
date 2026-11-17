@@ -128,4 +128,11 @@ describe('Pre-rendered SPA Stubs & Semantic Body Markup', () => {
     expect(fs.existsSync(path.join(distDir, 'devai.html'))).toBe(false);
     expect(fs.existsSync(path.join(distDir, 'research.html'))).toBe(false);
   });
+
+  it('prerenders markdown .mp4 sources as <video>, not <img>', () => {
+    generateSpaStubs();
+    const html = fs.readFileSync(path.resolve(__dirname, '../../dist/research/feels/index.html'), 'utf-8');
+    expect(html).toContain('<video src="https://arii.github.io/feels/images/feels_web.mp4"');
+    expect(html).not.toContain('<img src="https://arii.github.io/feels/images/feels_web.mp4"');
+  });
 });
