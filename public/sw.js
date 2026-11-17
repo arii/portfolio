@@ -1,7 +1,10 @@
 // fallow-ignore-file unused-file
-// Service worker is fetched at runtime by src/registerServiceWorker.ts — no static import exists
+// Service worker is fetched at runtime by src/registerServiceWorker.ts; no static import exists
 // The build-id placeholder is replaced per build by the sw-build-id plugin in vite.config.ts so each deploy drops old caches
-const CACHE_NAME = 'arii-portfolio-__BUILD_ID__';
+// Prefixed by scope so production and /portfolio/preview/* workers never evict each other's caches
+const CACHE_PREFIX = `arii-portfolio:${self.registration.scope}:`;
+const CACHE_NAME = `${CACHE_PREFIX}__BUILD_ID__`;
+const LEGACY_CACHE_NAME = 'arii-portfolio-v1';
 
 // Assets that should be cached on service worker installation
 const PRECACHE_URLS = [
@@ -39,7 +42,7 @@ self.addEventListener('activate', (event) => {
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames.map((cacheName) => {
-          if (cacheName !== CACHE_NAME) {
+          if (cacheName === LEGACY_CACHE_NAME || (cacheName.startsWith(CACHE_PREFIX) && cacheName !== CACHE_NAME)) {
             return caches.delete(cacheName);
           }
           return null;
