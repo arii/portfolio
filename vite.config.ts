@@ -43,7 +43,7 @@ function swBuildIdPlugin(): Plugin {
       const swPath = path.join(process.cwd(), 'dist', 'sw.js');
       if (!fs.existsSync(swPath)) return;
       const buildId = (process.env.GITHUB_SHA || Date.now().toString(36)).slice(0, 12);
-      fs.writeFileSync(swPath, fs.readFileSync(swPath, 'utf-8').replace('__BUILD_ID__', buildId));
+      fs.writeFileSync(swPath, fs.readFileSync(swPath, 'utf-8').replaceAll('__BUILD_ID__', buildId));
     },
   };
 }

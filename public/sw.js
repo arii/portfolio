@@ -1,6 +1,6 @@
 // fallow-ignore-file unused-file
 // Service worker is fetched at runtime by src/registerServiceWorker.ts — no static import exists
-// __BUILD_ID__ is replaced per build by the sw-build-id plugin in vite.config.ts so each deploy drops old caches
+// The build-id placeholder is replaced per build by the sw-build-id plugin in vite.config.ts so each deploy drops old caches
 const CACHE_NAME = 'arii-portfolio-__BUILD_ID__';
 
 // Assets that should be cached on service worker installation
