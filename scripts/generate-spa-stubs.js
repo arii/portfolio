@@ -54,11 +54,13 @@ function parseFrontmatter(content) {
   return { title, excerpt, date, category, image, tags };
 }
 
+const isVideoUrl = (url) => /\.(mp4|webm)$/i.test(url);
+
 function extractFirstMarkdownImage(content) {
-  const match = content.match(/!\[.*?\]\((.*?)\)/);
-  if (!match) return null;
-  const rawUrl = match[1].split('#')[0].trim();
-  return rawUrl || null;
+  const url = [...content.matchAll(/!\[.*?\]\((.*?)\)/g)]
+    .map((m) => m[1].split('#')[0].trim())
+    .find((u) => u && !isVideoUrl(u));
+  return url || null;
 }
 
 function markdownToHtml(md) {
@@ -117,6 +119,9 @@ function markdownToHtml(md) {
     result = result.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (m, alt, url) => {
       const cleanUrl = url.split('#')[0].trim();
       const cleanAlt = escapeHtml(alt.replace(/^Figure:\s*/i, ''));
+      if (isVideoUrl(cleanUrl)) {
+        return `<figure><video src="${escapeHtml(cleanUrl)}" controls muted playsinline preload="metadata" aria-label="${cleanAlt}"></video><figcaption>${cleanAlt}</figcaption></figure>`;
+      }
       const isWebpCandidate = /\.(png|jpe?g|gif)$/i.test(cleanUrl);
       const isAlreadyWebp = /\.webp$/i.test(cleanUrl);
       const webpUrl = isWebpCandidate ? cleanUrl.replace(/\.(png|jpe?g|gif)$/i, '.webp') : (isAlreadyWebp ? cleanUrl : null);
