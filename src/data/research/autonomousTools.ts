@@ -95,7 +95,7 @@ export const autonomousTools: ResearchTool[] = [
     category: 'Robotics & Manipulation',
     status: 'Completed',
     tags: ['Robotics', 'Manipulation', 'Machine learning', 'Viam', 'MongoDB'],
-    image: '/assets/research/feels.gif',
+    image: '/assets/research/feels.webp',
     imageAlt: 'Feels live demo: robot arm lifting and swirling a sealed cup, with the PCA signature space of 110 taught signatures',
     canonicalPath: '/research/feels/',
     externalUrl: 'https://arii.github.io/feels',

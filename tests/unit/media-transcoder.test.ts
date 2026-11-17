@@ -74,3 +74,11 @@ describe('Media Transcoding Pipeline', () => {
     expect(secondResult.status).toBe('skipped');
   });
 });
+
+describe('Committed media assets', () => {
+  it('ships animations as WebP, not raw GIF', () => {
+    const roots = ['public/assets', 'public/images', 'src/assets'].map((dir) => path.resolve(process.cwd(), dir));
+    const gifs = roots.flatMap((dir) => getImagesInDirectory(dir)).filter((file) => /\.gif$/i.test(file));
+    expect(gifs).toEqual([]);
+  });
+});
