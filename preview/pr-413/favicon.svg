@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="100%" height="100%">
+  <!-- Dark High-Contrast Background Container -->
+  <rect x="12" y="12" width="232" height="232" rx="52" fill="#020617" stroke="#1e293b" stroke-width="6"/>
+
+  <!-- Architectural Grid/Guideline Accent -->
+  <line x1="40" y1="144" x2="216" y2="144" stroke="#0f172a" stroke-width="4" stroke-dasharray="6 6"/>
+
+  <!-- Main 'A' Structural Frame (Slate White) -->
+  <path d="M64 198 L128 54 L192 198" fill="none" stroke="#f8fafc" stroke-width="28" stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="6"/>
+
+  <!-- Orchestration Beam (Amber Accent) -->
+  <line x1="72" y1="144" x2="184" y2="144" stroke="#f59e0b" stroke-width="20" stroke-linecap="square"/>
+
+  <!-- Central Agentic Node Junction -->
+  <rect x="116" y="132" width="24" height="24" rx="4" fill="#020617" stroke="#f59e0b" stroke-width="4"/>
+  <circle cx="128" cy="144" r="4" fill="#f59e0b"/>
+
+  <!-- Apex Robotic Joint Accent -->
+  <circle cx="128" cy="38" r="8" fill="#f59e0b"/>
+</svg>
