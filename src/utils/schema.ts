@@ -782,6 +782,10 @@ export function getFAQSchema(faqs: FAQItem[], idPath: string = '/about') {
   };
 }
 
+// Google requires uploadDate as a full ISO 8601 datetime with a timezone.
+const toIsoDateTime = (date: string): string =>
+  /^\d{4}-\d{2}-\d{2}$/.test(date) ? `${date}T00:00:00+00:00` : date;
+
 export function getVideoObjectSchema(options: VideoObjectSchemaOptions) {
   const url = options.embedUrl || options.contentUrl || SITE_URL;
   return {
@@ -791,7 +795,7 @@ export function getVideoObjectSchema(options: VideoObjectSchemaOptions) {
     name: options.name,
     description: options.description,
     thumbnailUrl: options.thumbnailUrl || AUTHOR_IMAGE,
-    uploadDate: options.uploadDate || '2024-01-01',
+    uploadDate: toIsoDateTime(options.uploadDate || '2024-01-01'),
     contentUrl: options.contentUrl,
     embedUrl: options.embedUrl,
   };

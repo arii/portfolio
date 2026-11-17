@@ -23,6 +23,14 @@ const DEVAI_DEFAULT_IMAGE = `${SITE_URL}/assets/research/boomtick-devai-tools/bo
 const RESEARCH_DEFAULT_IMAGE = `${SITE_URL}/assets/research/bwsi-racecar/racecar_main.webp`;
 const DEFAULT_LICENSE = 'https://creativecommons.org/licenses/by-nc-nd/4.0/';
 
+export const LEGACY_REDIRECTS = [
+  { from: 'phd', to: '/research/conformant-planning-manipulation/', canonical: `${SITE_URL}/research/conformant-planning-manipulation/` },
+  { from: 'projects.html', to: '/research/', canonical: `${SITE_URL}/research/` },
+  { from: 'old_sites/2015/projects.html', to: '/research/', canonical: `${SITE_URL}/research/` },
+  { from: 'pics.html', to: '/about/', canonical: `${SITE_URL}/about/` },
+  { from: 'tech-dancer/blog', to: 'https://boomtick.blog/blog', canonical: 'https://boomtick.blog/blog' },
+];
+
 function escapeHtml(str) {
   if (!str) return '';
   return String(str)
@@ -1089,16 +1097,28 @@ export function generateSpaStubs() {
       to: `/research/${slug}/`,
       canonical: `${SITE_URL}/research/${slug}/`,
     })),
+    // Articles linked or indexed under the other section.
+    ...devaiSlugs.map((slug) => ({
+      from: `research/${slug}`,
+      to: `/devai/${slug}/`,
+      canonical: `${SITE_URL}/devai/${slug}/`,
+    })),
+    ...researchSlugs.map((slug) => ({
+      from: `devai/${slug}`,
+      to: `/research/${slug}/`,
+      canonical: `${SITE_URL}/research/${slug}/`,
+    })),
+    // Legacy URLs from earlier versions of the site that Search Console still reports as 404.
+    ...LEGACY_REDIRECTS,
   ];
 
   let redirectCount = 0;
   for (const { from, to, canonical } of redirectRoutes) {
     const redirectContent = generateRedirectStub(indexHtmlContent, to, canonical);
-    const redirectDir = path.join(DIST_DIR, from);
-    if (!fs.existsSync(redirectDir)) {
-      fs.mkdirSync(redirectDir, { recursive: true });
-    }
-    const redirectFilePath = path.join(redirectDir, 'index.html');
+    const redirectFilePath = from.endsWith('.html')
+      ? path.join(DIST_DIR, from)
+      : path.join(DIST_DIR, from, 'index.html');
+    fs.mkdirSync(path.dirname(redirectFilePath), { recursive: true });
     fs.writeFileSync(redirectFilePath, redirectContent, 'utf-8');
     redirectCount++;
   }
