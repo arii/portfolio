@@ -878,7 +878,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
                 {children}
               </li>
             ),
-            img: ({ src, alt, ...props }) => {
+            img: ({ node: _node, src, alt, ...props }) => {
               const cleanSrc = src ? src.split('#')[0] : '';
               const hash = src && src.includes('#') ? src.split('#').slice(1).join('#') : '';
               const shouldInvert = hash.includes('invert-dark') || hash.includes('invert');
