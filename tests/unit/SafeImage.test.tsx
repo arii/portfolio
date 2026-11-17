@@ -86,4 +86,26 @@ describe('SafeImage Component', () => {
     const fallbackImg = screen.getByAltText('Fallback Test');
     expect(fallbackImg.getAttribute('src')).toBe('/fallback.png');
   });
+
+  it('reveals the image and still calls caller onLoad/onError', () => {
+    let loaded = 0;
+    let errored = 0;
+    render(
+      <SafeImage
+        src="/assets/research/sample.png"
+        alt="Handler image"
+        onLoad={() => { loaded += 1; }}
+        onError={() => { errored += 1; }}
+      />
+    );
+
+    const img = screen.getByAltText('Handler image');
+    fireEvent.load(img);
+    expect(loaded).toBe(1);
+    expect(img.className).toContain('opacity-100');
+
+    fireEvent.error(img);
+    expect(errored).toBe(1);
+    expect(screen.getByText('Handler image')).toBeInTheDocument();
+  });
 });

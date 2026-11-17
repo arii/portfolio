@@ -26,6 +26,8 @@ const SafeImage: React.FC<SafeImageProps> = ({
   disableWebpAutoInfer = false,
   loading = 'lazy',
   decoding = 'async',
+  onLoad,
+  onError,
   ...props
 }) => {
   const [hasError, setHasError] = useState(false);
@@ -51,6 +53,7 @@ const SafeImage: React.FC<SafeImageProps> = ({
 
   const imageElement = (
     <img
+      {...props}
       src={resolvedSrc}
       alt={alt}
       loading={loading}
@@ -58,14 +61,13 @@ const SafeImage: React.FC<SafeImageProps> = ({
       className={`transition-opacity duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'} ${className}`}
       onLoad={(e) => {
         setIsLoading(false);
-        if (props.onLoad) props.onLoad(e);
+        onLoad?.(e);
       }}
       onError={(e) => {
         setHasError(true);
         setIsLoading(false);
-        if (props.onError) props.onError(e);
+        onError?.(e);
       }}
-      {...props}
     />
   );
 
@@ -95,12 +97,12 @@ const SafeImage: React.FC<SafeImageProps> = ({
         )
       ) : fallbackSrc ? (
         <img
+          {...props}
           src={resolveAssetUrl(fallbackSrc)}
           alt={alt}
           loading={loading}
           decoding={decoding}
           className={`object-cover ${className}`}
-          {...props}
         />
       ) : (
         <div
