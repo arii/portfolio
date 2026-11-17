@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import OptimizedVideo from '@/components/ui/OptimizedVideo';
 
 describe('OptimizedVideo Component', () => {
@@ -41,5 +41,20 @@ describe('OptimizedVideo Component', () => {
     fireEvent.error(video!);
 
     expect(screen.getByText('Failed to play video')).toBeInTheDocument();
+  });
+
+  it('shows the video when it already has data before onLoadedData is attached', () => {
+    const spy = vi.spyOn(HTMLMediaElement.prototype, 'readyState', 'get').mockReturnValue(4);
+    const { container } = render(<OptimizedVideo mp4Src="/assets/demo.mp4" ariaLabel="Cached" />);
+    expect(container.querySelector('video')?.className).toContain('opacity-100');
+    spy.mockRestore();
+  });
+
+  it('shows the video once it starts playing even if loadeddata was missed', () => {
+    const { container } = render(<OptimizedVideo mp4Src="/assets/demo.mp4" ariaLabel="Playing" />);
+    const video = container.querySelector('video')!;
+    expect(video.className).toContain('opacity-0');
+    fireEvent.playing(video);
+    expect(video.className).toContain('opacity-100');
   });
 });
