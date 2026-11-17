@@ -6,6 +6,11 @@ const CACHE_PREFIX = `arii-portfolio:${self.registration.scope}:`;
 const CACHE_NAME = `${CACHE_PREFIX}__BUILD_ID__`;
 const LEGACY_CACHE_NAME = 'arii-portfolio-v1';
 
+// Look up only this worker's cache; caches.match() would also return stale copies from other scopes' caches
+function matchOwnCache(request) {
+  return caches.open(CACHE_NAME).then((cache) => cache.match(request));
+}
+
 // Assets that should be cached on service worker installation
 const PRECACHE_URLS = [
   '/',
@@ -80,8 +85,8 @@ self.addEventListener('fetch', (event) => {
           return response;
         })
         .catch(() => {
-          return caches.match(request).then((cachedResponse) => {
-            return cachedResponse || caches.match('/index.html');
+          return matchOwnCache(request).then((cachedResponse) => {
+            return cachedResponse || matchOwnCache('/index.html');
           });
         })
     );
@@ -91,7 +96,7 @@ self.addEventListener('fetch', (event) => {
   // Strategy 2: Hashed Bundles -> Cache-First
   if (isHashedAsset(url)) {
     event.respondWith(
-      caches.match(request).then((cachedResponse) => {
+      matchOwnCache(request).then((cachedResponse) => {
         if (cachedResponse) {
           return cachedResponse;
         }
@@ -110,7 +115,7 @@ self.addEventListener('fetch', (event) => {
   // Strategy 3: Static Images / Media / Fonts -> Stale-While-Revalidate
   if (isStaticAsset(url) || url.pathname.startsWith('/assets/') || url.pathname.startsWith('/images/')) {
     event.respondWith(
-      caches.match(request).then((cachedResponse) => {
+      matchOwnCache(request).then((cachedResponse) => {
         const fetchPromise = fetch(request)
           .then((networkResponse) => {
             if (networkResponse && networkResponse.status === 200) {
@@ -137,6 +142,6 @@ self.addEventListener('fetch', (event) => {
         }
         return networkResponse;
       })
-      .catch(() => caches.match(request))
+      .catch(() => matchOwnCache(request))
   );
 });

@@ -7,7 +7,7 @@ type FetchHandler = (event: { request: Request; respondWith: (p: Promise<Respons
 
 function loadWorker(cached: Response | undefined, network: () => Promise<Response>, cacheNames: string[] = []) {
   const handlers: Record<string, FetchHandler> = {};
-  const cache = { put: vi.fn(), addAll: vi.fn(() => Promise.resolve()) };
+  const cache = { put: vi.fn(), addAll: vi.fn(() => Promise.resolve()), match: vi.fn(() => Promise.resolve(cached)) };
   const context = {
     self: {
       location: new URL('https://arii.github.io/sw.js'),
@@ -17,7 +17,7 @@ function loadWorker(cached: Response | undefined, network: () => Promise<Respons
       clients: { claim: vi.fn() },
     },
     caches: {
-      match: vi.fn(() => Promise.resolve(cached)),
+      match: vi.fn(() => Promise.reject(new Error('worker must not read other scopes\' caches'))),
       open: vi.fn(() => Promise.resolve(cache)),
       keys: vi.fn(() => Promise.resolve(cacheNames)),
       delete: vi.fn(),
