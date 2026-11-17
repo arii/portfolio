@@ -103,6 +103,8 @@ const SafeImage: React.FC<SafeImageProps> = ({
           loading={loading}
           decoding={decoding}
           className={`object-cover ${className}`}
+          onLoad={onLoad}
+          onError={onError}
         />
       ) : (
         <div

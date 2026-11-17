@@ -108,4 +108,20 @@ describe('SafeImage Component', () => {
     expect(errored).toBe(1);
     expect(screen.getByText('Handler image')).toBeInTheDocument();
   });
+
+  it('forwards caller onLoad to the fallback image', () => {
+    let loaded = 0;
+    render(
+      <SafeImage
+        src="/missing.png"
+        fallbackSrc="/fallback.png"
+        alt="Fallback image"
+        onLoad={() => { loaded += 1; }}
+      />
+    );
+
+    fireEvent.error(screen.getByAltText('Fallback image'));
+    fireEvent.load(screen.getByAltText('Fallback image'));
+    expect(loaded).toBe(1);
+  });
 });
