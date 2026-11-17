@@ -1,6 +1,15 @@
 // fallow-ignore-file unused-file
-// Service worker is fetched at runtime by src/registerServiceWorker.ts — no static import exists
-const CACHE_NAME = 'arii-portfolio-v1';
+// Service worker is fetched at runtime by src/registerServiceWorker.ts; no static import exists
+// The build-id placeholder is replaced per build by the sw-build-id plugin in vite.config.ts so each deploy drops old caches
+// Prefixed by scope so production and /portfolio/preview/* workers never evict each other's caches
+const CACHE_PREFIX = `arii-portfolio:${self.registration.scope}:`;
+const CACHE_NAME = `${CACHE_PREFIX}__BUILD_ID__`;
+const LEGACY_CACHE_NAME = 'arii-portfolio-v1';
+
+// Look up only this worker's cache; caches.match() would also return stale copies from other scopes' caches
+function matchOwnCache(request) {
+  return caches.open(CACHE_NAME).then((cache) => cache.match(request));
+}
 
 // Assets that should be cached on service worker installation
 const PRECACHE_URLS = [
@@ -14,7 +23,7 @@ const PRECACHE_URLS = [
 
 // Helper to determine if a URL represents a static media asset or font
 function isStaticAsset(url) {
-  return /\.(png|jpe?g|webp|avif|gif|svg|ico|woff2?|ttf|eot|mp3|ogg|pdf|json)(\?.*)?$/i.test(url.pathname);
+  return /\.(png|jpe?g|webp|avif|gif|svg|ico|woff2?|ttf|eot|mp3|ogg|pdf)(\?.*)?$/i.test(url.pathname);
 }
 
 // Helper to determine if a request URL points to a hashed immutable bundle
@@ -38,7 +47,7 @@ self.addEventListener('activate', (event) => {
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames.map((cacheName) => {
-          if (cacheName !== CACHE_NAME) {
+          if (cacheName === LEGACY_CACHE_NAME || (cacheName.startsWith(CACHE_PREFIX) && cacheName !== CACHE_NAME)) {
             return caches.delete(cacheName);
           }
           return null;
@@ -76,8 +85,8 @@ self.addEventListener('fetch', (event) => {
           return response;
         })
         .catch(() => {
-          return caches.match(request).then((cachedResponse) => {
-            return cachedResponse || caches.match('/index.html');
+          return matchOwnCache(request).then((cachedResponse) => {
+            return cachedResponse || matchOwnCache('/index.html');
           });
         })
     );
@@ -87,7 +96,7 @@ self.addEventListener('fetch', (event) => {
   // Strategy 2: Hashed Bundles -> Cache-First
   if (isHashedAsset(url)) {
     event.respondWith(
-      caches.match(request).then((cachedResponse) => {
+      matchOwnCache(request).then((cachedResponse) => {
         if (cachedResponse) {
           return cachedResponse;
         }
@@ -106,7 +115,7 @@ self.addEventListener('fetch', (event) => {
   // Strategy 3: Static Images / Media / Fonts -> Stale-While-Revalidate
   if (isStaticAsset(url) || url.pathname.startsWith('/assets/') || url.pathname.startsWith('/images/')) {
     event.respondWith(
-      caches.match(request).then((cachedResponse) => {
+      matchOwnCache(request).then((cachedResponse) => {
         const fetchPromise = fetch(request)
           .then((networkResponse) => {
             if (networkResponse && networkResponse.status === 200) {
@@ -123,19 +132,16 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Strategy 4: Default -> Cache-First with Network Fallback
+  // Strategy 4: Default -> Network-First with Cache Fallback
   event.respondWith(
-    caches.match(request).then((cachedResponse) => {
-      return (
-        cachedResponse ||
-        fetch(request).then((networkResponse) => {
-          if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
-            const responseClone = networkResponse.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(request, responseClone));
-          }
-          return networkResponse;
-        })
-      );
-    })
+    fetch(request)
+      .then((networkResponse) => {
+        if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
+          const responseClone = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(request, responseClone));
+        }
+        return networkResponse;
+      })
+      .catch(() => matchOwnCache(request))
   );
 });
