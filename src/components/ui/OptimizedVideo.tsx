@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { resolveAssetUrl } from '@/utils/asset';
 
 export interface VideoSource {
@@ -34,6 +34,12 @@ const OptimizedVideo: React.FC<OptimizedVideoProps> = ({
 }) => {
   const [hasError, setHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // A cached video can reach HAVE_CURRENT_DATA before React attaches onLoadedData.
+  useEffect(() => {
+    if ((videoRef.current?.readyState ?? 0) >= HTMLMediaElement.HAVE_CURRENT_DATA) setIsLoading(false);
+  }, []);
 
   const resolvedPoster = resolveAssetUrl(poster);
 
@@ -62,6 +68,7 @@ const OptimizedVideo: React.FC<OptimizedVideoProps> = ({
       )}
       {!hasError ? (
         <video
+          ref={videoRef}
           autoPlay={autoPlay}
           loop={loop}
           muted={muted}
@@ -70,6 +77,7 @@ const OptimizedVideo: React.FC<OptimizedVideoProps> = ({
           aria-label={ariaLabel}
           className={`w-full h-full object-cover transition-opacity duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'} ${className}`}
           onLoadedData={() => setIsLoading(false)}
+          onPlaying={() => setIsLoading(false)}
           onError={() => {
             setHasError(true);
             setIsLoading(false);
