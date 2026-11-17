@@ -130,7 +130,7 @@ const Navigation: React.FC = () => {
 
             <div className="pt-6 border-t border-line">
               <span className="text-xs text-text-dim">
-                {heroContent.name} — {heroContent.brandRole}
+                {heroContent.name} · {heroContent.brandRole}
               </span>
             </div>
           </div>

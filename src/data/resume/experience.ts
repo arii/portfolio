@@ -64,7 +64,7 @@ export const experienceData: ResumeExperience[] = [
         title: "Roboticist",
         period: "July 2019 – May 2021",
         points: [
-          "Led the social navigation architecture and execution—from initial project proposal to completion—that was pivotal in raising Series A funding.",
+          "Led the social navigation architecture and execution, from initial project proposal to completion, that was pivotal in raising Series A funding.",
           "Developed real-time indoor navigation behaviors with contextual and social awareness for dynamic human environments, establishing end-to-end testing procedures."
         ]
       }

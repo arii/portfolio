@@ -161,8 +161,8 @@ const Consulting: React.FC = () => {
             What I help with
           </h2>
           <p className="text-sm sm:text-base text-text-dim leading-relaxed max-w-3xl">
-            Six ways to use a decade of robotics — from MIT CSAIL research to
-            Waymo planning to production forklifts — without hiring one.
+            Six ways to use a decade of robotics, from MIT CSAIL research to
+            Waymo planning to production forklifts, without hiring one.
           </p>
         </Stack>
         <Grid cols={1} md={2} lg={3} gap={5}>
@@ -242,7 +242,7 @@ const Consulting: React.FC = () => {
           >
             Feels (arii.github.io/feels)
           </a>
-          {' — Built a physical robotic arm proprioception and haptic classification pipeline (Viam, Python, MongoDB) that swirls containers and classifies contents from joint-torque signals.'}
+          {': Built a physical robotic arm proprioception and haptic classification pipeline (Viam, Python, MongoDB) that swirls containers and classifies contents from joint-torque signals.'}
         </p>
       </Box>
 
@@ -256,7 +256,7 @@ const Consulting: React.FC = () => {
         </h2>
         <p className="text-sm sm:text-base text-text-body leading-relaxed max-w-2xl mx-auto text-pretty">
           Tell me what it does, where it fails, and what you have tried. I will
-          tell you honestly whether I can help — and what it would take.
+          tell you honestly whether I can help, and what it would take.
         </p>
         <ConsultingCtaGroup
           alignCenter

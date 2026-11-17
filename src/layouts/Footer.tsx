@@ -24,7 +24,7 @@ const Footer: React.FC<FooterProps> = ({ className = '' }) => {
               >
                 Ariel Anders Consulting
               </Link>
-              <span className="text-text-dim"> — robotics &amp; AI consulting</span>
+              <span className="text-text-dim"> · robotics &amp; AI consulting</span>
             </p>
             <p className="text-xs italic text-text-body/90 font-serif">
               &ldquo;Try to be a rainbow in someone&rsquo;s cloud.&rdquo; &ndash; Maya Angelou
