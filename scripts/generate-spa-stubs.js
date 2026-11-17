@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { getPrimarySection } from '../src/data/researchSections.ts';
 
 import { resumeData } from '../src/data/resume/index.ts';
 import { profileData } from '../src/data/aboutData.ts';
@@ -371,9 +372,7 @@ function getArticleList(contentDir, targetCategory) {
       .split(',')
       .map((t) => t.replace(/["']/g, '').trim())
       .filter(Boolean);
-
-    const researchOnlySlugs = ['bwsi-racecar', 'delivery-bots', 'leac-monitoring-software', 'light-therapy-mit', 'boop-light-detector', 'autonomous-drone-line-following'];
-    const isRobotics = category.toLowerCase().includes('robotics') || researchOnlySlugs.includes(slug);
+    const isRobotics = getPrimarySection({ slug, category }) === 'research';
     const primarySection = isRobotics ? 'research' : 'devai';
 
     if ((targetCategory === 'devai' && !isRobotics) || (targetCategory === 'research' && isRobotics)) {
@@ -1041,9 +1040,7 @@ export function generateSpaStubs() {
       const filePath = path.join(CONTENT_DIR, file);
       const content = fs.readFileSync(filePath, 'utf-8');
       const { category = 'DevAI' } = parseFrontmatter(content);
-
-      const researchOnlySlugs = ['bwsi-racecar', 'delivery-bots', 'leac-monitoring-software', 'light-therapy-mit', 'boop-light-detector', 'autonomous-drone-line-following'];
-      const isRobotics = category.toLowerCase().includes('robotics') || researchOnlySlugs.includes(slug);
+      const isRobotics = getPrimarySection({ slug, category }) === 'research';
       const primarySection = isRobotics ? 'research' : 'devai';
 
       canonicalRoutes.push(`${primarySection}/${slug}`);

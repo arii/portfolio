@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { DEVAI_FLAGSHIPS } from '@/data/devai-projects';
 import { RESEARCH_AUTONOMOUS, RESEARCH_THESIS } from '@/data/research-papers';
 import { getAllResearchPosts, getResearchPostBySlug } from '@/data/research';
+import { getPrimarySection } from '@/data/researchSections';
 
 describe('All Links Integrity on /devai and /research', () => {
   it('all /devai flagship canonical paths resolve to valid research posts', () => {
@@ -17,21 +18,7 @@ describe('All Links Integrity on /devai and /research', () => {
 
   it('all /devai filtered posts have valid slugs and non-empty content', () => {
     const allPosts = getAllResearchPosts();
-    const researchOnlySlugs = [
-      'leac-monitoring-software',
-      'light-therapy-mit',
-      'boop-light-detector',
-      'delivery-bots',
-      'bwsi-racecar',
-      'report-6375-rsa',
-      'report-ml-lis',
-      'report-ce118-mechatronics',
-      'graduate-engineering-projects',
-      'autonomous-drone-line-following'
-    ];
-    const devaiPosts = allPosts.filter(
-      (p) => !researchOnlySlugs.includes(p.slug) && !(p.category || '').toLowerCase().includes('robotics')
-    );
+    const devaiPosts = allPosts.filter((p) => getPrimarySection(p) === 'devai');
 
     expect(devaiPosts.length).toBeGreaterThan(0);
     for (const post of devaiPosts) {
