@@ -6,6 +6,7 @@ import { getResearchPostBySlug, RESEARCH_TOOLS } from '@/data/research';
 import { getPrimarySection } from '@/data/researchSections';
 import { GithubIcon } from '@/components/SocialIcons';
 import SafeImage from '@/components/ui/SafeImage';
+import OptimizedVideo from '@/components/ui/OptimizedVideo';
 import { Box, Stack } from '@/components/layout';
 import SEO from '@/components/SEO';
 import {
@@ -880,6 +881,23 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
             ),
             img: ({ node: _node, src, alt, ...props }) => {
               const cleanSrc = src ? src.split('#')[0] : '';
+              if (/\.(mp4|webm)$/i.test(cleanSrc)) {
+                return (
+                  <figure className="my-6 space-y-2">
+                    <div className="overflow-hidden rounded-2xl border border-line bg-surface/40 p-2 shadow-lg">
+                      <OptimizedVideo
+                        mp4Src={cleanSrc.endsWith('.mp4') ? cleanSrc : undefined}
+                        webmSrc={cleanSrc.endsWith('.webm') ? cleanSrc : undefined}
+                        poster={post.image}
+                        ariaLabel={alt || 'Project video'}
+                        containerClassName="w-full aspect-video"
+                        className="w-full h-full object-contain rounded-xl"
+                      />
+                    </div>
+                    {alt && <figcaption className="text-center text-sm text-text-dim">{alt}</figcaption>}
+                  </figure>
+                );
+              }
               const hash = src && src.includes('#') ? src.split('#').slice(1).join('#') : '';
               const shouldInvert = hash.includes('invert-dark') || hash.includes('invert');
 
