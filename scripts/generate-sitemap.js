@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { getPrimarySection } from '../src/data/researchSections.ts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -173,9 +174,7 @@ export function generateSitemap() {
       const fmDate = parseFrontmatterDate(content);
       const lastmod = getLastMod(filePath, fmDate);
       const category = parseFrontmatterCategory(content);
-
-      const researchOnlySlugs = ['bwsi-racecar', 'delivery-bots', 'leac-monitoring-software', 'light-therapy-mit', 'boop-light-detector', 'autonomous-drone-line-following'];
-      const isRobotics = category.toLowerCase().includes('robotics') || researchOnlySlugs.includes(slug);
+      const isRobotics = getPrimarySection({ slug, category }) === 'research';
       const primarySection = isRobotics ? 'research' : 'devai';
 
       const images = extractMarkdownImages(articleTitle, content);

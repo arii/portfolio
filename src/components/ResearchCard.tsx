@@ -1,6 +1,7 @@
 import React from 'react';
 import { Calendar, Clock, ArrowRight } from 'lucide-react';
 import { ResearchPost } from '@/types/research';
+import { getPrimarySection } from '@/data/researchSections';
 
 export interface ResearchCardProps {
   post: ResearchPost;
@@ -9,8 +10,7 @@ export interface ResearchCardProps {
 }
 
 const ResearchCard: React.FC<ResearchCardProps> = ({ post, onSelect, basePath }) => {
-  const isRobotics = (post.category || '').toLowerCase().includes('robotics');
-  const pathPrefix = basePath || (isRobotics ? '/research' : '/devai');
+  const pathPrefix = basePath || `/${getPrimarySection(post)}`;
   const targetPath = `${pathPrefix}/${post.slug}`;
 
   const handleClick = (e: React.MouseEvent) => {

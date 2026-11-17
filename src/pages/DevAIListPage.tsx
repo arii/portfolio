@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { getAllResearchPosts } from '@/data/research';
+import { getPrimarySection } from '@/data/researchSections';
 import { DEVAI_FLAGSHIPS } from '@/data/devai-projects';
 import ResearchCard from '@/components/ResearchCard';
 import FlagshipCard from '@/components/FlagshipCard';
@@ -45,23 +46,7 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
   const flagshipTools = useMemo(() => DEVAI_FLAGSHIPS, []);
 
   const filteredPosts = useMemo(() => {
-    const researchOnlySlugs = [
-      'leac-monitoring-software',
-      'light-therapy-mit',
-      'boop-light-detector',
-      'delivery-bots',
-      'bwsi-racecar',
-      'report-6375-rsa',
-      'report-ml-lis',
-      'report-ce118-mechatronics',
-      'graduate-engineering-projects',
-      'autonomous-drone-line-following'
-    ];
-    return posts.filter((p) => {
-      if (researchOnlySlugs.includes(p.slug)) return false;
-      const cat = (p.category || '').toLowerCase();
-      return !cat.includes('robotics'); // exclude robotics
-    });
+    return posts.filter((p) => getPrimarySection(p) === 'devai');
   }, [posts]);
 
   const devAiSchemas = useMemo(() => {

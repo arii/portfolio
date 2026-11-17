@@ -3,6 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { ArrowLeft, Calendar, Clock, Download, Video, Play, ExternalLink } from 'lucide-react';
 import { getResearchPostBySlug, RESEARCH_TOOLS } from '@/data/research';
+import { getPrimarySection } from '@/data/researchSections';
 import { GithubIcon } from '@/components/SocialIcons';
 import SafeImage from '@/components/ui/SafeImage';
 import { Box, Stack } from '@/components/layout';
@@ -331,8 +332,7 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
   const imgMatch = post.content.match(/!\[.*?\]\((.*?)\)/);
   const firstImage = imgMatch ? imgMatch[1].split('#')[0] : undefined;
 
-  const researchOnlySlugs = ['bwsi-racecar', 'delivery-bots', 'leac-monitoring-software', 'light-therapy-mit', 'boop-light-detector', 'autonomous-drone-line-following'];
-  const primarySection = ((post.category || '').toLowerCase().includes('robotics') || researchOnlySlugs.includes(post.slug)) ? 'research' : 'devai';
+  const primarySection = getPrimarySection(post);
 
   const sectionDefaultImg = primarySection === 'research'
     ? '/assets/research/bwsi-racecar/racecar_main.webp'
