@@ -35,6 +35,19 @@ function indexNowPlugin(): Plugin {
   };
 }
 
+function swBuildIdPlugin(): Plugin {
+  return {
+    name: 'sw-build-id',
+    apply: 'build',
+    closeBundle() {
+      const swPath = path.join(process.cwd(), 'dist', 'sw.js');
+      if (!fs.existsSync(swPath)) return;
+      const buildId = (process.env.GITHUB_SHA || Date.now().toString(36)).slice(0, 12);
+      fs.writeFileSync(swPath, fs.readFileSync(swPath, 'utf-8').replace('__BUILD_ID__', buildId));
+    },
+  };
+}
+
 function getBasePath(): string {
   if (process.env.VERCEL === '1' || process.env.VERCEL) return '/';
   if (process.env.VITE_BASE_PATH) {
@@ -50,6 +63,7 @@ export default defineConfig(() => {
     plugins: [
       react(),
       indexNowPlugin(),
+      swBuildIdPlugin(),
       visualizer({
         filename: 'artifacts/stats.html',
         open: false,

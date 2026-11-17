@@ -1,6 +1,7 @@
 // fallow-ignore-file unused-file
 // Service worker is fetched at runtime by src/registerServiceWorker.ts — no static import exists
-const CACHE_NAME = 'arii-portfolio-v1';
+// __BUILD_ID__ is replaced per build by the sw-build-id plugin in vite.config.ts so each deploy drops old caches
+const CACHE_NAME = 'arii-portfolio-__BUILD_ID__';
 
 // Assets that should be cached on service worker installation
 const PRECACHE_URLS = [
@@ -14,7 +15,7 @@ const PRECACHE_URLS = [
 
 // Helper to determine if a URL represents a static media asset or font
 function isStaticAsset(url) {
-  return /\.(png|jpe?g|webp|avif|gif|svg|ico|woff2?|ttf|eot|mp3|ogg|pdf|json)(\?.*)?$/i.test(url.pathname);
+  return /\.(png|jpe?g|webp|avif|gif|svg|ico|woff2?|ttf|eot|mp3|ogg|pdf)(\?.*)?$/i.test(url.pathname);
 }
 
 // Helper to determine if a request URL points to a hashed immutable bundle
@@ -123,19 +124,16 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Strategy 4: Default -> Cache-First with Network Fallback
+  // Strategy 4: Default -> Network-First with Cache Fallback
   event.respondWith(
-    caches.match(request).then((cachedResponse) => {
-      return (
-        cachedResponse ||
-        fetch(request).then((networkResponse) => {
-          if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
-            const responseClone = networkResponse.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(request, responseClone));
-          }
-          return networkResponse;
-        })
-      );
-    })
+    fetch(request)
+      .then((networkResponse) => {
+        if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
+          const responseClone = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(request, responseClone));
+        }
+        return networkResponse;
+      })
+      .catch(() => caches.match(request))
   );
 });
