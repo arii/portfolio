@@ -31,7 +31,7 @@ permissions:
 jobs:
   validate-quality:
     name: Validate Issue Quality
-    if: github.event_name == 'issues'
+    if: github.event_name == 'issues' && contains(github.event.issue.labels.*.name, 'spec-driven')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
