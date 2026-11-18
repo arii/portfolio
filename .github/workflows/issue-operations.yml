@@ -2,7 +2,7 @@ name: Issue Operations
 
 on:
   issues:
-    types: [opened, edited]
+    types: [opened, edited, labeled]
   workflow_dispatch:
     inputs:
       action:
@@ -31,7 +31,10 @@ permissions:
 jobs:
   validate-quality:
     name: Validate Issue Quality
-    if: github.event_name == 'issues' && contains(github.event.issue.labels.*.name, 'spec-driven')
+    if: |
+      github.event_name == 'issues' &&
+      (github.event.action != 'labeled' || github.event.label.name == 'spec-driven') &&
+      contains(github.event.issue.labels.*.name, 'spec-driven')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -50,6 +53,7 @@ jobs:
     name: Issue to Content PR
     if: |
       github.event_name == 'issues' &&
+      github.event.action != 'labeled' &&
       startsWith(github.event.issue.title, 'Draft') &&
       contains(github.event.issue.title, ':') &&
       (github.event.issue.author_association == 'OWNER' ||
