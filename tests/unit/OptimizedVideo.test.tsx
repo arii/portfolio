@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, act } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import OptimizedVideo from '@/components/ui/OptimizedVideo';
 
@@ -56,5 +56,31 @@ describe('OptimizedVideo Component', () => {
     expect(video.className).toContain('opacity-0');
     fireEvent.playing(video);
     expect(video.className).toContain('opacity-100');
+  });
+
+  it('starts paused with controls for reduced motion and responds to preference changes', () => {
+    const preference = { matches: true, addEventListener: vi.fn(), removeEventListener: vi.fn() };
+    const spy = vi.spyOn(window, 'matchMedia').mockReturnValue(preference as unknown as MediaQueryList);
+    const { container, unmount } = render(<OptimizedVideo src="/demo.mp4" />);
+    const video = container.querySelector('video')!;
+    expect(video.autoplay).toBe(false);
+    expect(video.controls).toBe(true);
+    fireEvent.loadedMetadata(video);
+    expect(video.className).toContain('opacity-100');
+    const listener = preference.addEventListener.mock.calls[0][1];
+    preference.matches = false;
+    act(() => listener());
+    expect(video.autoplay).toBe(true);
+    const paused = vi.spyOn(video, 'paused', 'get').mockReturnValue(false);
+    const pause = vi.spyOn(video, 'pause').mockImplementation(() => {});
+    preference.matches = true;
+    act(() => listener());
+    expect(pause).toHaveBeenCalledOnce();
+    expect(video.autoplay).toBe(false);
+    unmount();
+    expect(preference.removeEventListener).toHaveBeenCalledWith('change', listener);
+    paused.mockRestore();
+    pause.mockRestore();
+    spy.mockRestore();
   });
 });

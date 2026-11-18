@@ -25,7 +25,7 @@ const ResearchCard: React.FC<ResearchCardProps> = ({ post, onSelect, basePath })
       <a
         href={targetPath}
         onClick={handleClick}
-        className="flex-grow flex flex-col justify-between no-underline text-inherit block outline-none cursor-pointer"
+        className="flex-grow flex flex-col justify-between no-underline text-inherit block rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent cursor-pointer"
         aria-label={`Read article: ${post.title}`}
       >
         <div>

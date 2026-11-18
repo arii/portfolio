@@ -38,7 +38,7 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({
         <div className="flex items-center gap-2 flex-wrap">
           <h3 className="text-lg font-bold text-foreground print:text-black leading-tight">{exp.title}</h3>
           {exp.link && (
-            <a href={exp.link} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors print:hidden">
+            <a href={exp.link} target="_blank" rel="noopener noreferrer" aria-label={`Learn more about ${exp.company}`} className="inline-flex min-h-6 min-w-6 items-center justify-center text-muted-foreground hover:text-primary transition-colors print:hidden">
               <ExternalLink className="w-4 h-4" />
             </a>
           )}

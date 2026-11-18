@@ -111,7 +111,6 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
               Live full-stack consumer apps and platforms built with autonomous agent workflows.
             </p>
           </div>
-          <span className="text-sm font-semibold text-text-dim shrink-0">View Products</span>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {flagshipTools.map((tool) => (<FlagshipCard key={tool.id} tool={tool} onNavigate={onNavigate} onImageClick={setLightboxImage} />))}

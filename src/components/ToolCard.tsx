@@ -1,6 +1,7 @@
 import React from 'react';
 import { ResearchTool } from '@/types/research';
 import SafeImage from '@/components/ui/SafeImage';
+import { FileText, Video, ListVideo, ExternalLink } from 'lucide-react';
 
 interface ToolCardProps {
   tool: ResearchTool;
@@ -13,18 +14,6 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
   const targetSlug = isInternal && tool.canonicalPath
     ? tool.canonicalPath.replace(/^\/?(research|devai)\//, '').replace(/^\//, '').replace(/\/+$/, '')
     : '';
-
-  const handleCardClick = () => {
-    if (tool.canonicalPath) {
-      if (isInternal && onNavigate && targetSlug) {
-        onNavigate(targetSlug);
-      } else {
-        window.location.href = tool.canonicalPath;
-      }
-    } else if (tool.externalUrl) {
-      window.open(tool.externalUrl, '_blank', 'noopener,noreferrer');
-    }
-  };
 
   const handleParentClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -39,7 +28,6 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
 
   return (
     <article
-      onClick={handleCardClick}
       className={`p-4 bg-surface/50 border border-line rounded-2xl transition-all space-y-2 relative group ${
         isClickable ? 'hover:border-accent cursor-pointer' : ''
       }`}
@@ -89,7 +77,7 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
             tool.title
           )}
         </h3>
-        <span className="text-[8px] bg-accent/10 text-accent px-1.5 py-0.5 rounded border border-accent/20 shrink-0 z-10">
+        <span className="text-xs bg-accent/10 text-accent px-1.5 py-0.5 rounded border border-accent/20 shrink-0 z-10">
           {tool.status}
         </span>
       </div>
@@ -117,19 +105,19 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
 
       <div className="flex flex-wrap gap-1.5 pt-1 z-10 relative">
         {tool.pdfUrl && (
-          <span className="inline-flex items-center gap-1 text-[10px] bg-accent/10 text-accent border border-accent/20 px-2 py-0.5 rounded font-medium">
-            📄 PDF Report
-          </span>
+          <a href={tool.pdfUrl} target="_blank" rel="noopener noreferrer" aria-label={`Read PDF report for ${tool.title}`} className="inline-flex min-h-6 items-center gap-1 text-xs bg-accent/10 text-accent border border-accent/20 px-2 py-0.5 rounded font-medium">
+            <FileText className="h-3 w-3" /> PDF Report
+          </a>
         )}
         {tool.videoUrl && (
-          <span className="inline-flex items-center gap-1 text-[10px] bg-accent/10 text-accent border border-accent/20 px-2 py-0.5 rounded font-medium">
-            ▶️ Video Demo
-          </span>
+          <a href={tool.videoUrl} target="_blank" rel="noopener noreferrer" aria-label={`Watch video demonstration of ${tool.title}`} className="inline-flex min-h-6 items-center gap-1 text-xs bg-accent/10 text-accent border border-accent/20 px-2 py-0.5 rounded font-medium">
+            <Video className="h-3 w-3" /> Video Demo
+          </a>
         )}
         {tool.playlistUrl && (
-          <span className="inline-flex items-center gap-1 text-[10px] bg-accent/10 text-accent border border-accent/20 px-2 py-0.5 rounded font-medium">
-            📺 Playlist
-          </span>
+          <a href={tool.playlistUrl} target="_blank" rel="noopener noreferrer" aria-label={`Watch video playlist for ${tool.title}`} className="inline-flex min-h-6 items-center gap-1 text-xs bg-accent/10 text-accent border border-accent/20 px-2 py-0.5 rounded font-medium">
+            <ListVideo className="h-3 w-3" /> Playlist
+          </a>
         )}
         {tool.mediaLinks?.map(link => (
           <a
@@ -143,11 +131,11 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
             }}
             className="inline-flex items-center gap-1 text-[10px] bg-accent/10 text-accent border border-accent/20 px-2 py-0.5 rounded font-medium hover:bg-accent/20 transition-colors cursor-pointer"
           >
-            {link.type === 'video' ? '▶️' : link.type === 'pdf' ? '📄' : '🔗'} {link.label}
+            {link.type === 'video' ? <Video className="h-3 w-3" /> : link.type === 'pdf' ? <FileText className="h-3 w-3" /> : <ExternalLink className="h-3 w-3" />} {link.label}
           </a>
         ))}
         {tool.tags.map(tag => (
-          <span key={tag} className="text-[9px] bg-surface px-2 py-0.5 text-text-dim border border-line rounded-md">{tag}</span>
+          <span key={tag} className="text-xs bg-surface px-2 py-0.5 text-text-dim border border-line rounded-md">{tag}</span>
         ))}
       </div>
     </article>

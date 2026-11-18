@@ -3,33 +3,26 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { heroContent } from '@/data/home';
 import { NAV_ITEMS } from '@/data/navigation';
+import ModalDialog from '@/components/ui/ModalDialog';
 
 const Navigation: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
-  const isActive = (path: string) => location.pathname === path;
+  const isActive = (path: string) => path === '/'
+    ? location.pathname === '/'
+    : `${location.pathname.replace(/\/$/, '')}/`.startsWith(path);
+  const currentState = (path: string) => location.pathname.replace(/\/$/, '') === path.replace(/\/$/, '')
+    ? 'page' as const : 'location' as const;
 
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isOpen]);
+    const desktop = window.matchMedia('(min-width: 768px)');
+    const closeOnDesktop = () => { if (desktop.matches) setIsOpen(false); };
+    desktop.addEventListener('change', closeOnDesktop);
+    return () => desktop.removeEventListener('change', closeOnDesktop);
+  }, []);
 
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isOpen) {
-        setIsOpen(false);
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen]);
+  useEffect(() => { setIsOpen(false); }, [location.pathname]);
 
   return (
     <>
@@ -55,6 +48,7 @@ const Navigation: React.FC = () => {
                 <Link
                   key={link.name}
                   to={link.path}
+                  aria-current={active ? currentState(link.path) : undefined}
                   className={`flex items-center space-x-1.5 lg:space-x-2 rounded-md px-2.5 lg:px-3.5 xl:px-4 py-2 text-xs lg:text-sm font-medium transition-colors min-h-[44px] ${
                     active
                       ? 'bg-secondary text-foreground'
@@ -82,16 +76,13 @@ const Navigation: React.FC = () => {
 
       {/* Mobile Fixed Slide-over Modal Drawer */}
       {isOpen && (
-        <div
-          className="fixed inset-0 z-50 flex justify-end bg-bg/80 backdrop-blur-md md:hidden"
-          onClick={() => setIsOpen(false)}
-          role="dialog"
-          aria-modal="true"
-          aria-label="Mobile Navigation Menu"
+        <ModalDialog
+          className="flex justify-end"
+          onClose={() => setIsOpen(false)}
+          label="Mobile Navigation Menu"
         >
           <div
-            className="w-72 h-full bg-bg border-l border-line p-6 shadow-2xl flex flex-col justify-between"
-            onClick={(e) => e.stopPropagation()}
+            className="w-72 h-full overflow-y-auto bg-bg border-l border-line p-6 shadow-2xl flex flex-col justify-between"
           >
             <div className="space-y-6">
               <div className="flex items-center justify-between pb-4 border-b border-line">
@@ -113,6 +104,7 @@ const Navigation: React.FC = () => {
                     <Link
                       key={link.name}
                       to={link.path}
+                      aria-current={active ? currentState(link.path) : undefined}
                       onClick={() => setIsOpen(false)}
                       className={`flex items-center space-x-3 rounded-lg px-4 py-3 text-base font-semibold min-h-[44px] transition-colors ${
                         active
@@ -134,7 +126,7 @@ const Navigation: React.FC = () => {
               </span>
             </div>
           </div>
-        </div>
+        </ModalDialog>
       )}
     </>
   );

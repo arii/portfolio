@@ -43,7 +43,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
               <div className="flex items-center gap-1.5 flex-wrap">
                 <h3 className="text-xs font-bold text-foreground print:text-black">{project.title}</h3>
                 {project.link && (
-                  <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors print:hidden" title="Direct Outbound Link">
+                  <a href={project.link} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-6 min-w-6 items-center justify-center text-muted-foreground hover:text-primary transition-colors print:hidden" aria-label={`Open ${project.title}`}>
                     <ExternalLink className="w-3.5 h-3.5" />
                   </a>
                 )}

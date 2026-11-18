@@ -1,6 +1,7 @@
 import React from 'react';
 import { X } from 'lucide-react';
 import SafeImage from '@/components/ui/SafeImage';
+import ModalDialog from '@/components/ui/ModalDialog';
 
 export interface ImageLightboxProps {
   imageSrc: string | null;
@@ -16,12 +17,13 @@ const ImageLightbox: React.FC<ImageLightboxProps> = ({
   if (!imageSrc) return null;
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-bg/95 cursor-zoom-out p-4 backdrop-blur-sm"
-      onClick={onClose}
+    <ModalDialog
+      label={altText}
+      className="flex items-center justify-center bg-bg/95 cursor-zoom-out p-4"
+      onClose={onClose}
     >
       <button
-        className="absolute top-4 right-4 text-text-main hover:text-accent p-2 transition-colors focus:outline-none cursor-pointer"
+        className="absolute top-4 right-4 z-10 text-text-main hover:text-accent p-2 transition-colors cursor-pointer"
         onClick={onClose}
         aria-label="Close modal"
       >
@@ -35,7 +37,7 @@ const ImageLightbox: React.FC<ImageLightboxProps> = ({
         className="max-w-full max-h-[90vh] object-contain rounded-3xl border border-line shadow-2xl"
         containerClassName="flex items-center justify-center bg-transparent"
       />
-    </div>
+    </ModalDialog>
   );
 };
 
