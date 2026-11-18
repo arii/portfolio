@@ -46,6 +46,7 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
 
     handleHashScroll();
     window.addEventListener('hashchange', handleHashScroll);
+    return () => window.removeEventListener('hashchange', handleHashScroll);
   }, []);
 
   const posts = useMemo(() => Array.from(new Map(getAllResearchPosts().map((p) => [p.slug || p.title, p])).values()), []);

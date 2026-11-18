@@ -26,24 +26,16 @@ const ProductCard: React.FC<ProductCardProps> = ({ tool, onNavigate, onImageClic
     ? tool.canonicalPath.replace(/^\/?(research|devai)\//, '').replace(/^\//, '').replace(/\/+$/, '')
     : '';
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && targetSlug) {
-      onNavigate(targetSlug);
-    }
-  };
-
   return (
     <div
-      onKeyDown={handleKeyDown}
       className="group rounded-3xl border border-line bg-surface p-0 flex flex-col overflow-hidden transition-all hover:border-accent hover:shadow-glow"
     >
       {imageSrc && (
-        <div
-          onClick={(e) => {
-            e.stopPropagation();
-            onImageClick(imageSrc);
-          }}
-          className="relative aspect-[16/10] max-h-48 sm:max-h-64 overflow-hidden bg-bg border-b border-line cursor-zoom-in group/img"
+        <button
+          type="button"
+          aria-label={`Enlarge ${tool.title} preview`}
+          onClick={() => onImageClick(imageSrc)}
+          className="relative block w-full aspect-[16/10] max-h-48 sm:max-h-64 overflow-hidden bg-bg border-b border-line cursor-zoom-in group/img"
         >
           <SafeImage
             src={imageSrc}
@@ -51,7 +43,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ tool, onNavigate, onImageClic
             className="w-full h-full object-cover object-top transition-transform duration-500 group-hover/img:scale-102"
             containerClassName="w-full h-full"
           />
-        </div>
+        </button>
       )}
 
       <div className="p-5 flex-grow flex flex-col space-y-3">
