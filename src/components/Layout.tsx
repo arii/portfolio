@@ -35,7 +35,7 @@ const Layout: React.FC<LayoutProps> = ({ className }) => {
       <Navigation />
 
       {/* Main Outlet Page Container */}
-      <main id="main-content" className="flex-grow w-full relative pb-24 lg:pb-12">
+      <main id="main-content" className="flex-grow w-full relative pb-24 lg:pb-16">
         <div className="max-w-6xl mx-auto px-4 py-8">
           <Outlet />
         </div>

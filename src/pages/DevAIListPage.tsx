@@ -3,7 +3,7 @@ import { getAllResearchPosts } from '@/data/research';
 import { getPrimarySection } from '@/data/researchSections';
 import { DEVAI_FLAGSHIPS } from '@/data/devai-projects';
 import ResearchCard from '@/components/ResearchCard';
-import FlagshipCard from '@/components/FlagshipCard';
+import ProductCard from '@/components/ProductCard';
 import ImageLightbox from '@/components/ImageLightbox';
 import { Layers } from 'lucide-react';
 import SEO from '@/components/SEO';
@@ -17,6 +17,13 @@ import {
 export interface DevAIListPageProps {
   onNavigate: (slug: string) => void;
 }
+
+// Image-bearing product cards are the primary presentation of these products;
+// their text-only deep-dive duplicates are removed from the article feed.
+const IMAGE_PRODUCT_IDS = ['boomtick', 'sf-promises', 'wcs-navigator', 'hrm-flagship'];
+
+// Slugs whose deep-dive article is already entered through an image card above.
+const DUPLICATED_ARTICLE_SLUGS = ['sf-promises', 'hrm-architecture', 'gitops-pr-reviewer', 'ai-experiments'];
 
 const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
@@ -44,9 +51,17 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
 
   const posts = useMemo(() => Array.from(new Map(getAllResearchPosts().map((p) => [p.slug || p.title, p])).values()), []);
   const flagshipTools = useMemo(() => DEVAI_FLAGSHIPS, []);
+  const imageProducts = useMemo(
+    () => IMAGE_PRODUCT_IDS
+      .map((id) => flagshipTools.find((t) => t.id === id))
+      .filter((t): t is NonNullable<typeof t> => Boolean(t)),
+    [flagshipTools]
+  );
 
   const filteredPosts = useMemo(() => {
-    return posts.filter((p) => getPrimarySection(p) === 'devai');
+    return posts.filter(
+      (p) => getPrimarySection(p) === 'devai' && !DUPLICATED_ARTICLE_SLUGS.includes(p.slug) // entered via image cards
+    );
   }, [posts]);
 
   const devAiSchemas = useMemo(() => {
@@ -113,7 +128,7 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {flagshipTools.map((tool) => (<FlagshipCard key={tool.id} tool={tool} onNavigate={onNavigate} onImageClick={setLightboxImage} />))}
+          {imageProducts.map((tool) => (<ProductCard key={tool.id} tool={tool} onNavigate={onNavigate} onImageClick={setLightboxImage} />))}
         </div>
       </section>
 
@@ -131,7 +146,7 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
           <span className="text-sm font-semibold text-text-dim shrink-0">{filteredPosts.length} Articles</span>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {filteredPosts.map((post) => (<ResearchCard key={post.slug} post={post} onSelect={onNavigate} />))}
         </div>
       </section>
