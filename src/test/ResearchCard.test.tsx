@@ -37,7 +37,7 @@ describe('ResearchCard Component', () => {
       </MemoryRouter>
     );
 
-    const link = screen.getByRole('link', { name: /Read article: Test Robotics Title/i });
+    const link = screen.getByRole('link', { name: 'Test Robotics Title' });
     expect(link).toHaveAttribute('href', '/research/test-robotics-post');
     fireEvent.click(link);
 

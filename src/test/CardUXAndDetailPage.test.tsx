@@ -38,6 +38,12 @@ describe('Card UX & Detail Page Navigation Improvements', () => {
     );
   });
 
+  it('lets keyboard users focus scrollable architecture diagrams', () => {
+    render(<ResearchDetailPage slug="gitops-pr-reviewer" onBack={() => {}} />);
+    const diagrams = screen.getAllByRole('region', { name: 'Scrollable diagram' });
+    for (const diagram of diagrams) expect(diagram).toHaveAttribute('tabindex', '0');
+  });
+
   it('renders Duckietown detail page with content and embedded videos', () => {
     const handleBack = vi.fn();
     render(<ResearchDetailPage slug="duckietown" onBack={handleBack} />);

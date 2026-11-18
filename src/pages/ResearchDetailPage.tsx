@@ -300,6 +300,9 @@ const MermaidChart = ({ codeString }: { codeString: string }) => {
       `}</style>
       <div
         ref={ref}
+        tabIndex={0}
+        role="region"
+        aria-label="Scrollable diagram"
         className="mermaid-container flex flex-row justify-center"
         style={{ width: '100%', minHeight: '600px', padding: '1rem' }}
       />

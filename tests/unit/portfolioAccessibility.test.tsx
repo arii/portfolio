@@ -81,18 +81,27 @@ describe('portfolio links', () => {
     expect(onNavigate).not.toHaveBeenCalled();
     fireEvent.click(screen.getByRole('link', { name: /Explore Boomtick Deep-Dive/ }));
     expect(onNavigate).toHaveBeenCalledExactlyOnceWith('gitops-pr-reviewer');
-    expect(screen.queryByRole('link', { name: /Inspect Boomtick source/ })).not.toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: /Source Repo for Boomtick/ })).not.toBeInTheDocument();
   });
 
   it('keeps media actions separate from the case study', () => {
     const tool = { ...flagshipTools[0], videoUrl: 'https://example.com/video', pdfUrl: 'https://example.com/report.pdf' };
     const onNavigate = vi.fn();
     render(<ToolCard tool={tool} onNavigate={onNavigate} />);
-    const video = screen.getByRole('link', { name: `Watch video demonstration of ${tool.title}` });
+    const video = screen.getByRole('link', { name: `Video Demo for ${tool.title}` });
     expect(video).toHaveAttribute('href', tool.videoUrl);
-    expect(screen.getByRole('link', { name: `Read PDF report for ${tool.title}` })).toHaveAttribute('href', tool.pdfUrl);
+    expect(screen.getByRole('link', { name: `PDF Report for ${tool.title}` })).toHaveAttribute('href', tool.pdfUrl);
+    expect(video).toHaveAccessibleName(expect.stringContaining(video.textContent!.trim()));
     fireEvent.click(video);
     expect(onNavigate).not.toHaveBeenCalled();
+  });
+
+  it('includes each visible flagship action label in its accessible name', () => {
+    const tool = { ...flagshipTools[0], videoUrl: 'https://example.com/video', playlistUrl: 'https://example.com/playlist', sourceUrl: 'https://example.com/source', externalUrl: 'https://example.com/app', externalLinkDisplayLabel: undefined };
+    render(<FlagshipCard tool={tool} onNavigate={vi.fn()} onImageClick={vi.fn()} />);
+    for (const link of screen.getAllByRole('link')) {
+      expect(link).toHaveAccessibleName(expect.stringContaining(link.textContent!.trim()));
+    }
   });
 
   it('names resume icon-only links from their own entries', () => {

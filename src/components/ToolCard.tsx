@@ -33,7 +33,7 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
       }`}
     >
       {tool.image && (
-        <div className="relative mb-3 aspect-video w-full overflow-hidden rounded-lg bg-surface border border-line/50">
+        <div className="pointer-events-none relative mb-3 aspect-video w-full overflow-hidden rounded-lg bg-surface border border-line/50">
           <SafeImage
             src={tool.image}
             alt={tool.imageAlt || tool.title}
@@ -77,13 +77,13 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
             tool.title
           )}
         </h3>
-        <span className="text-xs bg-accent/10 text-accent px-1.5 py-0.5 rounded border border-accent/20 shrink-0 z-10">
+        <span className="pointer-events-none text-xs bg-accent/10 text-accent px-1.5 py-0.5 rounded border border-accent/20 shrink-0 z-10">
           {tool.status}
         </span>
       </div>
 
       {tool.metrics && (
-        <div className="text-[11px] font-semibold text-accent z-10 relative">
+        <div className="pointer-events-none text-[11px] font-semibold text-accent z-10 relative">
           {tool.metrics}
         </div>
       )}
@@ -103,19 +103,19 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
 
       <p className="text-xs text-text-dim leading-relaxed whitespace-pre-line text-pretty">{tool.description}</p>
 
-      <div className="flex flex-wrap gap-1.5 pt-1 z-10 relative">
+      <div className="pointer-events-none flex flex-wrap gap-1.5 pt-1 z-10 relative">
         {tool.pdfUrl && (
-          <a href={tool.pdfUrl} target="_blank" rel="noopener noreferrer" aria-label={`Read PDF report for ${tool.title}`} className="inline-flex min-h-6 items-center gap-1 text-xs bg-accent/10 text-accent border border-accent/20 px-2 py-0.5 rounded font-medium">
+          <a href={tool.pdfUrl} target="_blank" rel="noopener noreferrer" aria-label={`PDF Report for ${tool.title}`} className="pointer-events-auto inline-flex min-h-6 items-center gap-1 text-xs bg-accent/10 text-accent border border-accent/20 px-2 py-0.5 rounded font-medium">
             <FileText className="h-3 w-3" /> PDF Report
           </a>
         )}
         {tool.videoUrl && (
-          <a href={tool.videoUrl} target="_blank" rel="noopener noreferrer" aria-label={`Watch video demonstration of ${tool.title}`} className="inline-flex min-h-6 items-center gap-1 text-xs bg-accent/10 text-accent border border-accent/20 px-2 py-0.5 rounded font-medium">
+          <a href={tool.videoUrl} target="_blank" rel="noopener noreferrer" aria-label={`Video Demo for ${tool.title}`} className="pointer-events-auto inline-flex min-h-6 items-center gap-1 text-xs bg-accent/10 text-accent border border-accent/20 px-2 py-0.5 rounded font-medium">
             <Video className="h-3 w-3" /> Video Demo
           </a>
         )}
         {tool.playlistUrl && (
-          <a href={tool.playlistUrl} target="_blank" rel="noopener noreferrer" aria-label={`Watch video playlist for ${tool.title}`} className="inline-flex min-h-6 items-center gap-1 text-xs bg-accent/10 text-accent border border-accent/20 px-2 py-0.5 rounded font-medium">
+          <a href={tool.playlistUrl} target="_blank" rel="noopener noreferrer" aria-label={`Playlist for ${tool.title}`} className="pointer-events-auto inline-flex min-h-6 items-center gap-1 text-xs bg-accent/10 text-accent border border-accent/20 px-2 py-0.5 rounded font-medium">
             <ListVideo className="h-3 w-3" /> Playlist
           </a>
         )}
@@ -129,7 +129,7 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
             onClick={(e) => {
               e.stopPropagation();
             }}
-            className="inline-flex items-center gap-1 text-[10px] bg-accent/10 text-accent border border-accent/20 px-2 py-0.5 rounded font-medium hover:bg-accent/20 transition-colors cursor-pointer"
+            className="pointer-events-auto inline-flex items-center gap-1 text-[10px] bg-accent/10 text-accent border border-accent/20 px-2 py-0.5 rounded font-medium hover:bg-accent/20 transition-colors cursor-pointer"
           >
             {link.type === 'video' ? <Video className="h-3 w-3" /> : link.type === 'pdf' ? <FileText className="h-3 w-3" /> : <ExternalLink className="h-3 w-3" />} {link.label}
           </a>
