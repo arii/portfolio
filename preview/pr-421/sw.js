@@ -3,7 +3,7 @@
 // The build-id placeholder is replaced per build by the sw-build-id plugin in vite.config.ts so each deploy drops old caches
 // Prefixed by scope so production and /portfolio/preview/* workers never evict each other's caches
 const CACHE_PREFIX = `arii-portfolio:${self.registration.scope}:`;
-const CACHE_NAME = `${CACHE_PREFIX}d6a335132e89`;
+const CACHE_NAME = `${CACHE_PREFIX}d3c900a6c30b`;
 const LEGACY_CACHE_NAME = 'arii-portfolio-v1';
 
 // Look up only this worker's cache; caches.match() would also return stale copies from other scopes' caches
