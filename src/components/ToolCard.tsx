@@ -1,6 +1,7 @@
 import React from 'react';
 import { ResearchTool } from '@/types/research';
 import SafeImage from '@/components/ui/SafeImage';
+import { FileText, Video, ListVideo, ExternalLink } from 'lucide-react';
 
 interface ToolCardProps {
   tool: ResearchTool;
@@ -13,18 +14,6 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
   const targetSlug = isInternal && tool.canonicalPath
     ? tool.canonicalPath.replace(/^\/?(research|devai)\//, '').replace(/^\//, '').replace(/\/+$/, '')
     : '';
-
-  const handleCardClick = () => {
-    if (tool.canonicalPath) {
-      if (isInternal && onNavigate && targetSlug) {
-        onNavigate(targetSlug);
-      } else {
-        window.location.href = tool.canonicalPath;
-      }
-    } else if (tool.externalUrl) {
-      window.open(tool.externalUrl, '_blank', 'noopener,noreferrer');
-    }
-  };
 
   const handleParentClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -39,20 +28,18 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
 
   return (
     <article
-      onClick={handleCardClick}
       className={`p-4 bg-surface/50 border border-line rounded-2xl transition-all space-y-2 relative group ${
         isClickable ? 'hover:border-accent cursor-pointer' : ''
       }`}
     >
       {tool.image && (
-        <div className="relative mb-3 aspect-video w-full overflow-hidden rounded-lg bg-surface border border-line/50">
+        <div className="pointer-events-none relative mb-3 aspect-video w-full overflow-hidden rounded-lg bg-surface border border-line/50">
           <SafeImage
             src={tool.image}
             alt={tool.imageAlt || tool.title}
             className="h-full w-full object-cover"
             containerClassName="w-full h-full"
             loading="lazy"
-            disableWebpAutoInfer={tool.image.endsWith('.gif')}
           />
           <span className="absolute top-2 right-2 z-10 rounded-md bg-bg/80 px-2.5 py-0.5 text-[10px] font-semibold text-text-main backdrop-blur-sm border border-line">
             {tool.category}
@@ -90,13 +77,13 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
             tool.title
           )}
         </h3>
-        <span className="text-[8px] bg-accent/10 text-accent px-1.5 py-0.5 rounded border border-accent/20 shrink-0 z-10">
+        <span className="pointer-events-none text-xs bg-accent/10 text-accent px-1.5 py-0.5 rounded border border-accent/20 shrink-0 z-10">
           {tool.status}
         </span>
       </div>
 
       {tool.metrics && (
-        <div className="text-[11px] font-semibold text-accent z-10 relative">
+        <div className="pointer-events-none text-[11px] font-semibold text-accent z-10 relative">
           {tool.metrics}
         </div>
       )}
@@ -116,21 +103,21 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
 
       <p className="text-xs text-text-dim leading-relaxed whitespace-pre-line text-pretty">{tool.description}</p>
 
-      <div className="flex flex-wrap gap-1.5 pt-1 z-10 relative">
+      <div className="pointer-events-none flex flex-wrap gap-1.5 pt-1 z-10 relative">
         {tool.pdfUrl && (
-          <span className="inline-flex items-center gap-1 text-[10px] bg-accent/10 text-accent border border-accent/20 px-2 py-0.5 rounded font-medium">
-            📄 PDF Report
-          </span>
+          <a href={tool.pdfUrl} target="_blank" rel="noopener noreferrer" aria-label={`PDF Report for ${tool.title}`} className="pointer-events-auto inline-flex min-h-6 items-center gap-1 text-xs bg-accent/10 text-accent border border-accent/20 px-2 py-0.5 rounded font-medium">
+            <FileText className="h-3 w-3" /> PDF Report
+          </a>
         )}
         {tool.videoUrl && (
-          <span className="inline-flex items-center gap-1 text-[10px] bg-accent/10 text-accent border border-accent/20 px-2 py-0.5 rounded font-medium">
-            ▶️ Video Demo
-          </span>
+          <a href={tool.videoUrl} target="_blank" rel="noopener noreferrer" aria-label={`Video Demo for ${tool.title}`} className="pointer-events-auto inline-flex min-h-6 items-center gap-1 text-xs bg-accent/10 text-accent border border-accent/20 px-2 py-0.5 rounded font-medium">
+            <Video className="h-3 w-3" /> Video Demo
+          </a>
         )}
         {tool.playlistUrl && (
-          <span className="inline-flex items-center gap-1 text-[10px] bg-accent/10 text-accent border border-accent/20 px-2 py-0.5 rounded font-medium">
-            📺 Playlist
-          </span>
+          <a href={tool.playlistUrl} target="_blank" rel="noopener noreferrer" aria-label={`Playlist for ${tool.title}`} className="pointer-events-auto inline-flex min-h-6 items-center gap-1 text-xs bg-accent/10 text-accent border border-accent/20 px-2 py-0.5 rounded font-medium">
+            <ListVideo className="h-3 w-3" /> Playlist
+          </a>
         )}
         {tool.mediaLinks?.map(link => (
           <a
@@ -142,13 +129,13 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
             onClick={(e) => {
               e.stopPropagation();
             }}
-            className="inline-flex items-center gap-1 text-[10px] bg-accent/10 text-accent border border-accent/20 px-2 py-0.5 rounded font-medium hover:bg-accent/20 transition-colors cursor-pointer"
+            className="pointer-events-auto inline-flex items-center gap-1 text-[10px] bg-accent/10 text-accent border border-accent/20 px-2 py-0.5 rounded font-medium hover:bg-accent/20 transition-colors cursor-pointer"
           >
-            {link.type === 'video' ? '▶️' : link.type === 'pdf' ? '📄' : '🔗'} {link.label}
+            {link.type === 'video' ? <Video className="h-3 w-3" /> : link.type === 'pdf' ? <FileText className="h-3 w-3" /> : <ExternalLink className="h-3 w-3" />} {link.label}
           </a>
         ))}
         {tool.tags.map(tag => (
-          <span key={tag} className="text-[9px] bg-surface px-2 py-0.5 text-text-dim border border-line rounded-md">{tag}</span>
+          <span key={tag} className="text-xs bg-surface px-2 py-0.5 text-text-dim border border-line rounded-md">{tag}</span>
         ))}
       </div>
     </article>

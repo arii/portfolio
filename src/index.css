@@ -27,6 +27,17 @@ body {
   min-height: 100vh;
 }
 
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--raw-color-accent);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-pulse {
+    animation: none;
+  }
+}
+
 @layer utilities {
   .text-glow {
     text-shadow: 0 0 15px rgba(245, 158, 11, 0.3);

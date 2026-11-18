@@ -1,6 +1,7 @@
 import React from 'react';
 import { Calendar, Clock, ArrowRight } from 'lucide-react';
 import { ResearchPost } from '@/types/research';
+import { getPrimarySection } from '@/data/researchSections';
 
 export interface ResearchCardProps {
   post: ResearchPost;
@@ -9,8 +10,7 @@ export interface ResearchCardProps {
 }
 
 const ResearchCard: React.FC<ResearchCardProps> = ({ post, onSelect, basePath }) => {
-  const isRobotics = (post.category || '').toLowerCase().includes('robotics');
-  const pathPrefix = basePath || (isRobotics ? '/research' : '/devai');
+  const pathPrefix = basePath || `/${getPrimarySection(post)}`;
   const targetPath = `${pathPrefix}/${post.slug}`;
 
   const handleClick = (e: React.MouseEvent) => {
@@ -21,13 +21,8 @@ const ResearchCard: React.FC<ResearchCardProps> = ({ post, onSelect, basePath })
   };
 
   return (
-    <article className="group flex flex-col justify-between rounded-xl border border-border bg-card hover:bg-muted/50 p-6 shadow-sm transition-all hover:border-primary/50 hover:shadow-md overflow-hidden text-foreground">
-      <a
-        href={targetPath}
-        onClick={handleClick}
-        className="flex-grow flex flex-col justify-between no-underline text-inherit block outline-none cursor-pointer"
-        aria-label={`Read article: ${post.title}`}
-      >
+    <article className="relative group flex flex-col justify-between rounded-xl border border-border bg-card hover:bg-muted/50 p-6 shadow-sm transition-all hover:border-primary/50 hover:shadow-md overflow-hidden text-foreground">
+      <div className="flex-grow flex flex-col justify-between">
         <div>
           <div className="flex flex-wrap gap-2 mb-3">
             {post.tags.slice(0, 3).map((tag) => (
@@ -40,7 +35,13 @@ const ResearchCard: React.FC<ResearchCardProps> = ({ post, onSelect, basePath })
             ))}
           </div>
           <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors flex items-start space-x-1">
-            <span>{post.title}</span>
+            <a
+              href={targetPath}
+              onClick={handleClick}
+              className="no-underline text-inherit rounded-sm after:absolute after:inset-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+            >
+              {post.title}
+            </a>
           </h3>
           <p className="mt-2 text-sm text-muted-foreground line-clamp-3 leading-relaxed">
             {post.summary}
@@ -60,7 +61,7 @@ const ResearchCard: React.FC<ResearchCardProps> = ({ post, onSelect, basePath })
           </div>
           <ArrowRight className="h-4 w-4 text-primary transition-transform group-hover:translate-x-1" />
         </div>
-      </a>
+      </div>
     </article>
   );
 };

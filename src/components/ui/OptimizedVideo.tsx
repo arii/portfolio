@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { resolveAssetUrl } from '@/utils/asset';
 
 export interface VideoSource {
@@ -30,10 +30,31 @@ const OptimizedVideo: React.FC<OptimizedVideoProps> = ({
   loop = true,
   muted = true,
   playsInline = true,
+  controls = false,
   ...props
 }) => {
   const [hasError, setHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [reducedMotion, setReducedMotion] = useState(() =>
+    typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  );
+
+  useEffect(() => {
+    const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const updateMotion = () => {
+      setReducedMotion(preference.matches);
+      if (preference.matches && videoRef.current && !videoRef.current.paused) videoRef.current.pause();
+    };
+    updateMotion();
+    preference.addEventListener('change', updateMotion);
+    return () => preference.removeEventListener('change', updateMotion);
+  }, []);
+
+  // A cached video can reach HAVE_CURRENT_DATA before React attaches onLoadedData.
+  useEffect(() => {
+    if ((videoRef.current?.readyState ?? 0) >= HTMLMediaElement.HAVE_CURRENT_DATA) setIsLoading(false);
+  }, []);
 
   const resolvedPoster = resolveAssetUrl(poster);
 
@@ -62,7 +83,9 @@ const OptimizedVideo: React.FC<OptimizedVideoProps> = ({
       )}
       {!hasError ? (
         <video
-          autoPlay={autoPlay}
+          ref={videoRef}
+          autoPlay={autoPlay && !reducedMotion}
+          controls={controls || reducedMotion}
           loop={loop}
           muted={muted}
           playsInline={playsInline}
@@ -70,6 +93,8 @@ const OptimizedVideo: React.FC<OptimizedVideoProps> = ({
           aria-label={ariaLabel}
           className={`w-full h-full object-cover transition-opacity duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'} ${className}`}
           onLoadedData={() => setIsLoading(false)}
+          onLoadedMetadata={() => { if (reducedMotion) setIsLoading(false); }}
+          onPlaying={() => setIsLoading(false)}
           onError={() => {
             setHasError(true);
             setIsLoading(false);

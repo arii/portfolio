@@ -43,7 +43,7 @@ export const HonorsSection: React.FC<HonorsSectionProps> = ({
               <div className="flex items-center gap-1.5 flex-wrap">
                 <span className="font-semibold text-foreground print:text-black block leading-snug">{honor.title}</span>
                 {honor.link && (
-                  <a href={honor.link} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors print:hidden">
+                  <a href={honor.link} target="_blank" rel="noopener noreferrer" aria-label={`Learn more about ${honor.title}`} className="inline-flex min-h-6 min-w-6 items-center justify-center text-muted-foreground hover:text-primary transition-colors print:hidden">
                     <ExternalLink className="w-3.5 h-3.5" />
                   </a>
                 )}

@@ -11,14 +11,14 @@ tags:
   - MongoDB
 category: "Robotics & Manipulation"
 summary: "We built a torque-based object classification pipeline that requires zero added sensors: a robot arm lifts a sealed cup, swirls it, and classifies the contents from joint motor torques alone, achieving 86–89% empty detection."
-image: "/assets/research/feels.gif"
+image: "/assets/research/feels.webp"
 ---
 
 ## Teaching a Robot to Feel, From Motor Torques Alone
 
 At the **Viam + MongoDB hackathon (Oct 29–30, 2026)**, **Sree Dhyuti Nimmagadda** and I built **Feels**, an online data collection and training platform that teaches a robot arm to classify sealed cup contents (liquid, candy, or screws) through physical interaction using a three-step routine: **lift, swirl, predict**.
 
-![Feels live demo: the robot arm lifts and swirls a sealed cup, followed by the signature space: 110 taught signatures projected to 2-D via PCA, colored by material](/assets/research/feels.gif)
+![Feels teaser: an xArm lifts and swirls a sealed cup, then predicts the contents from joint torques (30 seconds, silent)](https://arii.github.io/feels/images/feels_web.mp4)
 
 ---
 

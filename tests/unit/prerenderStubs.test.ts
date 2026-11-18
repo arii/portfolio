@@ -94,9 +94,10 @@ describe('Pre-rendered SPA Stubs & Semantic Body Markup', () => {
     expect(devAiHtml).toContain('<img src="/assets/research/hrm-flagship.webp"');
     expect(devAiHtml).toContain('href="/devai/sf-promises/"');
     expect(devAiHtml).toContain('href="/devai/hrm-architecture/"');
-    // Deep-dive articles represented by image cards are not listed separately.
-    expect(devAiHtml).not.toContain('href="/devai/gitops-pr-reviewer/"');
-    expect(devAiHtml).not.toContain('href="/devai/ai-experiments/"');
+    // Deep-dive articles represented by image cards are linked only from their image card.
+    for (const slug of ['gitops-pr-reviewer', 'ai-experiments', 'sf-promises', 'hrm-architecture']) {
+      expect(devAiHtml.split(`href="/devai/${slug}/"`).length - 1).toBe(1);
+    }
     expect(devAiHtml).toContain('href="/devai/versiontruth/"');
 
     const researchPath = path.join(distDir, 'research/index.html');
@@ -133,5 +134,12 @@ describe('Pre-rendered SPA Stubs & Semantic Body Markup', () => {
     expect(fs.existsSync(path.join(distDir, 'about.html'))).toBe(false);
     expect(fs.existsSync(path.join(distDir, 'devai.html'))).toBe(false);
     expect(fs.existsSync(path.join(distDir, 'research.html'))).toBe(false);
+  });
+
+  it('prerenders markdown .mp4 sources as <video>, not <img>', () => {
+    generateSpaStubs();
+    const html = fs.readFileSync(path.resolve(__dirname, '../../dist/research/feels/index.html'), 'utf-8');
+    expect(html).toContain('<video src="https://arii.github.io/feels/images/feels_web.mp4"');
+    expect(html).not.toContain('<img src="https://arii.github.io/feels/images/feels_web.mp4"');
   });
 });

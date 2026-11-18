@@ -18,3 +18,20 @@ describe('Composite Action Manifest', () => {
     expect(stepsStr).not.toContain('actions/create-github-app-token');
   });
 });
+
+describe('Shared workspace setup', () => {
+  for (const workflow of ['ci', 'deploy', 'preview']) {
+    it(`uses the released Node-only setup in ${workflow}`, () => {
+      const workflowPath = path.resolve(`.github/workflows/${workflow}.yml`);
+      const parsed = yaml.parse(fs.readFileSync(workflowPath, 'utf-8'));
+      const setupSteps = Object.values(parsed.jobs as Record<string, { steps?: Record<string, unknown>[] }>)
+        .flatMap(job => job.steps ?? [])
+        .filter(step => step.name === 'Setup Workspace');
+
+      expect(setupSteps).toHaveLength(1);
+      expect(setupSteps[0].uses).toBe('arii/boomtick/.github/actions/setup-workspace@3e970a570aee0a550ec6409de769c201c9a5b900');
+      expect(setupSteps[0].with).toEqual({ 'setup-python': 'false' });
+      expect(fs.existsSync('.github/actions/setup-workspace/action.yml')).toBe(false);
+    });
+  }
+});

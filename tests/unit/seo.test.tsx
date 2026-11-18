@@ -368,6 +368,8 @@ describe('SEO Component & Search Configuration', () => {
     expect(video['@type']).toBe('VideoObject');
     expect(video.name).toBe('Duckietown Autonomous Driving');
     expect(video.embedUrl).toBe('https://www.youtube.com/embed/rPpewHIF2KU');
+    expect(video.uploadDate).toBe('2024-01-01T00:00:00+00:00');
+    expect(getVideoObjectSchema({ name: 'n', description: 'd', uploadDate: '2018-07-01' }).uploadDate).toBe('2018-07-01T00:00:00+00:00');
   });
 
   it('verifies internal linking strategy routes consulting pitches through nav + consulting page, not portfolio articles', () => {

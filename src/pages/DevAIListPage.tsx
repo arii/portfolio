@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { getAllResearchPosts } from '@/data/research';
+import { getPrimarySection } from '@/data/researchSections';
 import { DEVAI_FLAGSHIPS } from '@/data/devai-projects';
 import ResearchCard from '@/components/ResearchCard';
 import ProductCard from '@/components/ProductCard';
@@ -57,24 +58,9 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
   );
 
   const filteredPosts = useMemo(() => {
-    const researchOnlySlugs = [
-      'leac-monitoring-software',
-      'light-therapy-mit',
-      'boop-light-detector',
-      'delivery-bots',
-      'bwsi-racecar',
-      'report-6375-rsa',
-      'report-ml-lis',
-      'report-ce118-mechatronics',
-      'graduate-engineering-projects',
-      'autonomous-drone-line-following'
-    ];
-    return posts.filter((p) => {
-      if (researchOnlySlugs.includes(p.slug)) return false;
-      if (DUPLICATED_ARTICLE_SLUGS.includes(p.slug)) return false; // entered via image cards
-      const cat = (p.category || '').toLowerCase();
-      return !cat.includes('robotics'); // exclude robotics
-    });
+    return posts.filter(
+      (p) => getPrimarySection(p) === 'devai' && !DUPLICATED_ARTICLE_SLUGS.includes(p.slug) // entered via image cards
+    );
   }, [posts]);
 
   const devAiSchemas = useMemo(() => {
@@ -139,7 +125,6 @@ const DevAIListPage: React.FC<DevAIListPageProps> = ({ onNavigate }) => {
               Live full-stack consumer apps and platforms built with autonomous agent workflows.
             </p>
           </div>
-          <span className="text-sm font-semibold text-text-dim shrink-0">View Products</span>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {imageProducts.map((tool) => (<ProductCard key={tool.id} tool={tool} onNavigate={onNavigate} onImageClick={setLightboxImage} />))}

@@ -10,7 +10,7 @@ export const systemTools: ResearchTool[] = [
     category: 'DevAI System',
     status: 'Active',
     tags: ['GitHub Actions', 'MCP', 'CLI', 'Gemini', 'DevAI', 'PR automation'],
-    canonicalPath: '/research/gitops-pr-reviewer/',
+    canonicalPath: '/devai/gitops-pr-reviewer/',
     image: '/assets/research/boomtick-devai-tools/boomtick-cli-audit.webp',
     imageAlt: 'Boomtick CLI audit and health check terminal output',
     sourceUrl: 'https://github.com/arii/boomtick',
@@ -28,7 +28,7 @@ export const systemTools: ResearchTool[] = [
     category: 'DevAI System',
     status: 'Active',
     tags: ['Playwright', 'CI/CD', 'UX Audit', 'Dependency graph', 'Pixelmatch'],
-    canonicalPath: '/research/deployment-impact-analyzer/',
+    canonicalPath: '/devai/deployment-impact-analyzer/',
     image: '/assets/research/ai-experiments/ux-auditor.webp',
     imageAlt: 'Visual impact analysis and UX audit visual diff comparison console',
     sourceUrl: 'https://github.com/arii/boomtick',
@@ -43,13 +43,13 @@ export const systemTools: ResearchTool[] = [
     category: 'AI Experiments',
     status: 'In Progress',
     tags: ['ETL', 'WCS Scraper', 'Printful API', 'LLM', 'RAG', 'Automation'],
-    canonicalPath: '/research/ai-experiments/',
+    canonicalPath: '/devai/ai-experiments/',
     image: '/assets/research/ai-experiments/blog-drafter.webp',
     imageAlt: 'AI Blog Drafter prompt generation and contextual vector retrieval interface'
   },
   {
     id: 'versiontruth',
-    inDevMessage: { highlight: '⚠ Hackathon submission (NandaHack, 2026)', rest: '— not yet in production' },
+    inDevMessage: { highlight: '⚠ Hackathon submission (NandaHack, 2026)', rest: '(not yet in production)' },
     taxonomyBucket: 'infrastructure',
     title: 'VersionTruth: Eliminating Version Hallucinations in Agentic CI',
     subtitle: 'The antidote to version hallucinations',
@@ -57,7 +57,7 @@ export const systemTools: ResearchTool[] = [
     category: 'DevAI Tooling',
     status: 'Active',
     tags: ['Versions', 'CI', 'Dependencies', 'Hallucination-mitigation', 'npm', 'Node', 'GitHub Actions', 'Agents'],
-    canonicalPath: '/research/versiontruth/',
+    canonicalPath: '/devai/versiontruth/',
     sourceUrl: 'https://github.com/arii/tech-dancer/tree/main/api'
   }
 ];

@@ -1,5 +1,5 @@
 /**
- * Consulting page content — single source of truth for services, engagement
+ * Consulting page content: single source of truth for services, engagement
  * formats, FAQs, and credibility lines. The Consulting page owns this copy;
  * teasers elsewhere (Home featured cards, footer) must stay short and never
  * repeat these sentences verbatim.
@@ -36,7 +36,7 @@ export const CONSULTING_SERVICES: ConsultingService[] = [
     id: 'nav-localization',
     title: 'Navigation & Localization Reviews',
     description:
-      'ROS 2 navigation stacks, sensor fusion, and localization drift — the unglamorous work that decides whether a robot survives contact with the real world.',
+      'ROS 2 navigation stacks, sensor fusion, and localization drift: the unglamorous work that decides whether a robot survives contact with the real world.',
     iconName: 'compass',
   },
   {
@@ -81,7 +81,7 @@ export const ENGAGEMENT_FORMATS: EngagementFormat[] = [
     id: 'audit',
     title: 'Technical Audit',
     description:
-      'A 2–4 week review of your navigation, localization, or planning stack. You get a written findings report and prioritized roadmap: what is solid, what is fragile, and what to fix first—often used to scope a follow-on engineering engagement.',
+      'A 2–4 week review of your navigation, localization, or planning stack. You get a written findings report and prioritized roadmap: what is solid, what is fragile, and what to fix first. Teams often use it to scope a follow-on engineering engagement.',
   },
   {
     id: 'retainer',
@@ -93,7 +93,7 @@ export const ENGAGEMENT_FORMATS: EngagementFormat[] = [
     id: 'calls',
     title: 'Diligence Calls',
     description:
-      'One-off expert calls for investors and teams evaluating a robotics bet — scoped to your questions.',
+      'One-off expert calls for investors and teams evaluating a robotics bet, scoped to your questions.',
   },
 ];
 
@@ -101,12 +101,12 @@ export const CONSULTING_FAQS: ConsultingFaq[] = [
   {
     question: 'What does a robotics consultant do?',
     answer:
-      'A robotics consultant is a senior engineer you borrow instead of hire. I review autonomy stacks, diagnose navigation and localization failures, advise on architecture decisions, and assess whether a robotics system is ready for the real world — then I hand you a plan your team can execute.',
+      'A robotics consultant is a senior engineer you borrow instead of hire. I review autonomy stacks, diagnose navigation and localization failures, advise on architecture decisions, and assess whether a robotics system is ready for the real world. Then I hand you a plan your team can execute.',
   },
   {
     question: 'What kinds of robotics work do you take on?',
     answer:
-      'Navigation, localization, motion planning, and decision-making for mobile robots and autonomous vehicles — plus AI-assisted engineering infrastructure (agentic CI/CD, automated code review) for robotics teams. If your robot works in the lab but not in the building, that is my specialty.',
+      'Navigation, localization, motion planning, and decision-making for mobile robots and autonomous vehicles, plus AI-assisted engineering infrastructure (agentic CI/CD, automated code review) for robotics teams. If your robot works in the lab but not in the building, that is my specialty.',
   },
   {
     question: 'How much does a robotics consultant cost?',
@@ -121,22 +121,22 @@ export const CONSULTING_FAQS: ConsultingFaq[] = [
   {
     question: 'What stacks do you work with?',
     answer:
-      'Python, C++, ROS 2 (and ROS 1), behavior trees, task and motion planning (TAMP), agentic CI/CD (Gemini, GitHub Actions), Docker, Linux, and AWS. The stack matters less than the problem — I start from your system as it exists today.',
+      'Python, C++, ROS 2 (and ROS 1), behavior trees, task and motion planning (TAMP), agentic CI/CD (Gemini, GitHub Actions), Docker, Linux, and AWS. The stack matters less than the problem. I start from your system as it exists today.',
   },
 ];
 
 export const CONSULTING_CREDENTIALS: string[] = [
   'MIT PhD, Computer Science',
-  'Ex-Waymo — Motion Planning',
+  'Ex-Waymo Motion Planning',
   'First roboticist at Robust.AI',
-  'Autonomous forklifts — Civ Robotics',
+  'Autonomous forklifts at Civ Robotics',
 ];
 
 /**
  * Scheduling link for consulting calls (e.g. cal.com). Leave empty to hide
- * the "Book a call" buttons — the page falls back to email/LinkedIn CTAs.
+ * the "Book a call" buttons; the page falls back to email/LinkedIn CTAs.
  */
 export const SCHEDULING_URL = 'https://cal.com/ariel-anders/20min';
 
 export const CONSULTING_INTRO =
-  'I am a robotics consultant — MIT PhD, ex-Waymo motion planning, first roboticist hired at Robust.AI. I help teams fix navigation and localization, review autonomy architectures, and diligence robotics bets.';
+  'I am a robotics consultant: MIT PhD, ex-Waymo motion planning, first roboticist hired at Robust.AI. I help teams fix navigation and localization, review autonomy architectures, and diligence robotics bets.';

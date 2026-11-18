@@ -33,7 +33,7 @@ const About: React.FC = () => {
       </header>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
-        <section className="lg:col-span-8 space-y-8 sm:space-y-10 order-2 lg:order-1">
+        <section className="lg:col-span-8 space-y-8 sm:space-y-10">
           <div className="space-y-6 bg-surface p-6 sm:p-8 rounded-3xl border border-line">
             <h2 className="text-xl sm:text-2xl font-bold text-text-main pb-3 border-b border-line/30">
               Biography
@@ -54,7 +54,7 @@ const About: React.FC = () => {
 
           <div className="border border-accent/20 bg-accent/5 rounded-3xl p-6 sm:p-8 space-y-3">
             <span className="text-sm font-semibold text-text-main flex items-center space-x-1.5">
-              <span className="h-2 w-2 rounded-md bg-accent animate-pulse"></span>
+              <span className="h-2 w-2 rounded-md bg-accent"></span>
               <span>Current Availability</span>
             </span>
             <p className="text-sm text-text-body leading-relaxed">
@@ -68,7 +68,7 @@ const About: React.FC = () => {
           <FAQSection faqs={profileData.faqs} />
         </section>
 
-        <aside className="lg:col-span-4 space-y-6 sm:space-y-8 order-1 lg:order-2">
+        <aside className="lg:col-span-4 space-y-6 sm:space-y-8">
           <div className="relative group mx-auto lg:mx-0 max-w-sm rounded-3xl overflow-hidden border border-line bg-surface transition-all duration-300">
             <div className="aspect-[4/3] sm:aspect-square max-h-72 sm:max-h-none w-full overflow-hidden">
               <SafeImage

@@ -112,6 +112,7 @@ describe('IndexNow Integration', () => {
       expect(content).toContain('!public/robots.txt');
       expect(content).toContain('!public/llms.txt');
       expect(content).toContain('!public/llms-full.txt');
+      expect(content).toContain('!public/ads.txt');
     });
   });
 });

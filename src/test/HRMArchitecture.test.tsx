@@ -29,11 +29,9 @@ describe('HRM Architecture & Navigation Integration', () => {
     expect(hrm?.externalLinkDisplayLabel).toBe('Open HRM App');
   });
 
-  it('FlagshipCard card click opens live demo (https://arii.github.io/hrm/) and Deep-Dive button navigates to hrm-architecture', () => {
+  it('links the flagship heading to the live demo and Deep-Dive to hrm-architecture', () => {
     const hrm = flagshipTools.find((t) => t.id === 'hrm-flagship');
     const handleNavigate = vi.fn();
-    const originalOpen = window.open;
-    window.open = vi.fn();
 
     render(
       <FlagshipCard
@@ -43,19 +41,16 @@ describe('HRM Architecture & Navigation Integration', () => {
       />
     );
 
-    // 1. Clicking the card container opens the live demo URL
-    const card = screen.getByRole('button', { name: /^HRM \(Heart Rate Monitor\)$/i });
-    fireEvent.click(card);
-    expect(window.open).toHaveBeenCalledWith('https://arii.github.io/hrm/', '_blank', 'noopener,noreferrer');
+    const card = screen.getByRole('link', { name: /^HRM \(Heart Rate Monitor\)$/i });
+    expect(card).toHaveAttribute('href', 'https://arii.github.io/hrm/');
+    expect(card).toHaveAttribute('target', '_blank');
+    expect(card).toHaveAttribute('rel', 'noopener noreferrer');
     expect(handleNavigate).not.toHaveBeenCalled();
 
-    // 2. Clicking the Deep-Dive button navigates to the deep-dive slug
-    const deepDiveBtn = screen.getAllByRole('button', { name: /Deep-Dive/i }).find(btn => btn.textContent?.includes('Deep-Dive'));
+    const deepDiveBtn = screen.getByRole('link', { name: /Deep-Dive/i });
     expect(deepDiveBtn).toBeInTheDocument();
     fireEvent.click(deepDiveBtn!);
     expect(handleNavigate).toHaveBeenCalledWith('hrm-architecture');
-
-    window.open = originalOpen;
   });
 
   it('renders ResearchDetailPage for hrm-architecture with metadata and actions', () => {

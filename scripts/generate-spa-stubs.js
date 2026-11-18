@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { getPrimarySection } from '../src/data/researchSections.ts';
 
 import { resumeData } from '../src/data/resume/index.ts';
 import { profileData } from '../src/data/aboutData.ts';
@@ -33,6 +34,14 @@ function getDevAiCardImage(tool) {
 const RESEARCH_DEFAULT_IMAGE = `${SITE_URL}/assets/research/bwsi-racecar/racecar_main.webp`;
 const DEFAULT_LICENSE = 'https://creativecommons.org/licenses/by-nc-nd/4.0/';
 
+export const LEGACY_REDIRECTS = [
+  { from: 'phd', to: '/research/conformant-planning-manipulation/', canonical: `${SITE_URL}/research/conformant-planning-manipulation/` },
+  { from: 'projects.html', to: '/research/', canonical: `${SITE_URL}/research/` },
+  { from: 'old_sites/2015/projects.html', to: '/research/', canonical: `${SITE_URL}/research/` },
+  { from: 'pics.html', to: '/about/', canonical: `${SITE_URL}/about/` },
+  { from: 'tech-dancer/blog', to: 'https://boomtick.blog/blog', canonical: 'https://boomtick.blog/blog' },
+];
+
 function escapeHtml(str) {
   if (!str) return '';
   return String(str)
@@ -56,11 +65,13 @@ function parseFrontmatter(content) {
   return { title, excerpt, date, category, image, tags };
 }
 
+const isVideoUrl = (url) => /\.(mp4|webm)$/i.test(url);
+
 function extractFirstMarkdownImage(content) {
-  const match = content.match(/!\[.*?\]\((.*?)\)/);
-  if (!match) return null;
-  const rawUrl = match[1].split('#')[0].trim();
-  return rawUrl || null;
+  const url = [...content.matchAll(/!\[.*?\]\((.*?)\)/g)]
+    .map((m) => m[1].split('#')[0].trim())
+    .find((u) => u && !isVideoUrl(u));
+  return url || null;
 }
 
 function markdownToHtml(md) {
@@ -119,6 +130,9 @@ function markdownToHtml(md) {
     result = result.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (m, alt, url) => {
       const cleanUrl = url.split('#')[0].trim();
       const cleanAlt = escapeHtml(alt.replace(/^Figure:\s*/i, ''));
+      if (isVideoUrl(cleanUrl)) {
+        return `<figure><video src="${escapeHtml(cleanUrl)}" controls muted playsinline preload="metadata" aria-label="${cleanAlt}"></video><figcaption>${cleanAlt}</figcaption></figure>`;
+      }
       const isWebpCandidate = /\.(png|jpe?g|gif)$/i.test(cleanUrl);
       const isAlreadyWebp = /\.webp$/i.test(cleanUrl);
       const webpUrl = isWebpCandidate ? cleanUrl.replace(/\.(png|jpe?g|gif)$/i, '.webp') : (isAlreadyWebp ? cleanUrl : null);
@@ -382,9 +396,7 @@ function getArticleList(contentDir, targetCategory) {
       .split(',')
       .map((t) => t.replace(/["']/g, '').trim())
       .filter(Boolean);
-
-    const researchOnlySlugs = ['bwsi-racecar', 'delivery-bots', 'leac-monitoring-software', 'light-therapy-mit', 'boop-light-detector', 'autonomous-drone-line-following'];
-    const isRobotics = category.toLowerCase().includes('robotics') || researchOnlySlugs.includes(slug);
+    const isRobotics = getPrimarySection({ slug, category }) === 'research';
     const primarySection = isRobotics ? 'research' : 'devai';
 
     if ((targetCategory === 'devai' && !isRobotics) || (targetCategory === 'research' && isRobotics)) {
@@ -1055,9 +1067,7 @@ export function generateSpaStubs() {
       const filePath = path.join(CONTENT_DIR, file);
       const content = fs.readFileSync(filePath, 'utf-8');
       const { category = 'DevAI' } = parseFrontmatter(content);
-
-      const researchOnlySlugs = ['bwsi-racecar', 'delivery-bots', 'leac-monitoring-software', 'light-therapy-mit', 'boop-light-detector', 'autonomous-drone-line-following'];
-      const isRobotics = category.toLowerCase().includes('robotics') || researchOnlySlugs.includes(slug);
+      const isRobotics = getPrimarySection({ slug, category }) === 'research';
       const primarySection = isRobotics ? 'research' : 'devai';
 
       canonicalRoutes.push(`${primarySection}/${slug}`);
@@ -1106,16 +1116,28 @@ export function generateSpaStubs() {
       to: `/research/${slug}/`,
       canonical: `${SITE_URL}/research/${slug}/`,
     })),
+    // Articles linked or indexed under the other section.
+    ...devaiSlugs.map((slug) => ({
+      from: `research/${slug}`,
+      to: `/devai/${slug}/`,
+      canonical: `${SITE_URL}/devai/${slug}/`,
+    })),
+    ...researchSlugs.map((slug) => ({
+      from: `devai/${slug}`,
+      to: `/research/${slug}/`,
+      canonical: `${SITE_URL}/research/${slug}/`,
+    })),
+    // Legacy URLs from earlier versions of the site that Search Console still reports as 404.
+    ...LEGACY_REDIRECTS,
   ];
 
   let redirectCount = 0;
   for (const { from, to, canonical } of redirectRoutes) {
     const redirectContent = generateRedirectStub(indexHtmlContent, to, canonical);
-    const redirectDir = path.join(DIST_DIR, from);
-    if (!fs.existsSync(redirectDir)) {
-      fs.mkdirSync(redirectDir, { recursive: true });
-    }
-    const redirectFilePath = path.join(redirectDir, 'index.html');
+    const redirectFilePath = from.endsWith('.html')
+      ? path.join(DIST_DIR, from)
+      : path.join(DIST_DIR, from, 'index.html');
+    fs.mkdirSync(path.dirname(redirectFilePath), { recursive: true });
     fs.writeFileSync(redirectFilePath, redirectContent, 'utf-8');
     redirectCount++;
   }

@@ -13,25 +13,15 @@ describe('FlagshipCard Deep-Dive Linking', () => {
   ) => {
     expect(tool).toBeDefined();
     expect(tool?.canonicalPath).toBe(expectedPath);
-    // Mock window.open
-    const originalOpen = window.open;
-    window.open = vi.fn();
-
     const handleNavigate = vi.fn();
     const { getAllByRole } = render(<FlagshipCard tool={tool!} onNavigate={handleNavigate} onImageClick={() => {}} />);
 
-    // get the Deep-Dive button explicitly inside the card (not the main card click handler which opens externalUrl)
-    const deepDiveBtn = getAllByRole('button', { name: /Deep-Dive/i }).find(btn => btn.textContent?.includes('Deep-Dive'));
+    const deepDiveBtn = getAllByRole('link', { name: /Deep-Dive/i }).find(btn => btn.textContent?.includes('Deep-Dive'));
     expect(deepDiveBtn).toBeInTheDocument();
 
     fireEvent.click(deepDiveBtn!);
 
-    // Test logic expects handleNavigate to be called with the targetSlug.
-    // Wait, the primary action handles propagation differently now.
     expect(handleNavigate).toHaveBeenCalledWith(expectedSlug);
-
-    // Restore window.open
-    window.open = originalOpen;
   };
 
   it('does not render "Deep-Dive" for boomtick-blog since canonicalPath is removed', () => {
@@ -42,7 +32,7 @@ describe('FlagshipCard Deep-Dive Linking', () => {
     const handleNavigate = vi.fn();
     render(<FlagshipCard tool={boomtickTool!} onNavigate={handleNavigate} onImageClick={() => {}} />);
 
-    const deepDiveBtns = screen.queryAllByRole('button', { name: /Deep-Dive/i });
+    const deepDiveBtns = screen.queryAllByRole('link', { name: /Deep-Dive/i });
     expect(deepDiveBtns.length).toBe(0);
   });
 
@@ -54,7 +44,7 @@ describe('FlagshipCard Deep-Dive Linking', () => {
     const handleNavigate = vi.fn();
     render(<FlagshipCard tool={repoAuditorTool!} onNavigate={handleNavigate} onImageClick={() => {}} />);
 
-    const deepDiveBtns = screen.queryAllByRole('button', { name: /Deep-Dive/i });
+    const deepDiveBtns = screen.queryAllByRole('link', { name: /Deep-Dive/i });
     expect(deepDiveBtns.length).toBe(0);
   });
 
@@ -62,7 +52,7 @@ describe('FlagshipCard Deep-Dive Linking', () => {
     const impactTool = { ...systemTools.find((t) => t.id === 'deployment-impact-analyzer')! };
     impactTool.externalUrl = undefined;
     impactTool.sourceUrl = undefined;
-    verifyDeepDiveNavigation(impactTool, '/research/deployment-impact-analyzer/', 'deployment-impact-analyzer');
+    verifyDeepDiveNavigation(impactTool, '/devai/deployment-impact-analyzer/', 'deployment-impact-analyzer');
   });
 
   it('renders "Deep-Dive" and "Open HRM App" for hrm-flagship and navigates correctly', () => {
@@ -92,7 +82,7 @@ describe('FlagshipCard Deep-Dive Linking', () => {
 
     render(<FlagshipCard tool={mastersTool!} onNavigate={handleNavigate} onImageClick={() => {}} />);
 
-    const card = screen.getByRole('button', { name: mastersTool!.title });
+    const card = screen.getByRole('link', { name: mastersTool!.title });
     fireEvent.click(card);
 
     expect(handleNavigate).toHaveBeenCalledWith('masters-thesis');
@@ -112,7 +102,7 @@ describe('FlagshipCard Deep-Dive Linking', () => {
 
     render(<FlagshipCard tool={phdTool!} onNavigate={handleNavigate} onImageClick={() => {}} />);
 
-    const card = screen.getByRole('button', { name: phdTool!.title });
+    const card = screen.getByRole('link', { name: phdTool!.title });
     fireEvent.click(card);
 
     expect(handleNavigate).toHaveBeenCalledWith('conformant-planning-manipulation');
