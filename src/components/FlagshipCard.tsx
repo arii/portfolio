@@ -23,7 +23,6 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
   const ToolIcon = getToolIcon(tool);
   const imageSrc = tool.id === 'hrm-flagship' ? '/assets/research/hrm-flagship.webp' : tool.id === 'repo-auditor-ai' ? '/assets/research/repo-auditor-ai.webp' : tool.image || null;
 
-  const isClickable = !!(tool.externalUrl || tool.sourceUrl || tool.canonicalPath);
   const targetSlug = tool.canonicalPath
     ? tool.canonicalPath.replace(/^\/?(research|devai)\//, '').replace(/^\//, '').replace(/\/+$/, '')
     : '';
@@ -31,41 +30,9 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
   const isDSpace = !!tool.externalUrl?.includes('dspace.mit.edu');
   const preferDeepDive = !!(tool.canonicalPath && targetSlug && (isDSpace || !tool.externalUrl));
 
-  const executePrimaryAction = () => {
-    if (preferDeepDive) {
-      onNavigate(targetSlug);
-    } else if (tool.externalUrl) {
-      window.open(tool.externalUrl, '_blank', 'noopener,noreferrer');
-    } else if (tool.canonicalPath && targetSlug) {
-      onNavigate(targetSlug);
-    } else if (tool.sourceUrl) {
-      window.open(tool.sourceUrl, '_blank', 'noopener,noreferrer');
-    }
-  };
-
-  const handleCardClick = () => {
-    if (isClickable) {
-      executePrimaryAction();
-    }
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if ((e.key === 'Enter' || e.key === ' ') && isClickable) {
-      if (e.key === ' ') e.preventDefault();
-      executePrimaryAction();
-    }
-  };
-
   return (
-    <div
-      onClick={handleCardClick}
-      onKeyDown={handleKeyDown}
-      tabIndex={isClickable ? 0 : undefined}
-      role={isClickable ? 'button' : undefined}
-      aria-label={tool.title}
-      className={`group rounded-3xl border border-line bg-surface p-0 flex flex-col justify-between overflow-hidden transition-all hover:border-accent hover:shadow-glow ${
-        isClickable ? 'cursor-pointer' : ''
-      }`}
+    <article
+      className="relative group rounded-3xl border border-line bg-surface p-0 flex flex-col justify-between overflow-hidden transition-all hover:border-accent hover:shadow-glow focus-within:ring-2 focus-within:ring-accent"
     >
       {tool.customPreview ? (
         <div className="p-6 bg-bg border-b border-line aspect-[16/10] max-h-48 sm:max-h-64 flex flex-col justify-center space-y-2">
@@ -78,12 +45,11 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
           <div className="text-xs text-text-dim">{tool.customPreview.tagline}</div>
         </div>
       ) : imageSrc ? (
-        <div
-          onClick={(e) => {
-            e.stopPropagation();
-            onImageClick(imageSrc);
-          }}
-          className="relative aspect-[16/10] max-h-48 sm:max-h-64 overflow-hidden bg-bg border-b border-line cursor-zoom-in group/img"
+        <button
+          type="button"
+          aria-label={`Enlarge preview of ${tool.title}`}
+          onClick={() => onImageClick(imageSrc)}
+          className="relative z-10 w-full shrink-0 aspect-[16/10] max-h-48 sm:max-h-64 overflow-hidden bg-bg border-b border-line cursor-zoom-in group/img"
         >
           <SafeImage
             src={imageSrc}
@@ -91,7 +57,7 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
             className="w-full h-full object-cover object-top transition-transform duration-500 group-hover/img:scale-102"
             containerClassName="w-full h-full"
           />
-        </div>
+        </button>
       ) : null}
 
       <div className="p-6 flex-grow flex flex-col justify-between space-y-4">
@@ -122,7 +88,7 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
                       onNavigate(targetSlug);
                     }
                   }}
-                  className="hover:text-accent transition-colors no-underline text-inherit inline-block relative z-10"
+                  className="hover:text-accent transition-colors no-underline text-inherit inline-block after:absolute after:inset-0"
                 >
                   {tool.title}
                 </a>
@@ -132,7 +98,7 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="hover:text-accent transition-colors no-underline text-inherit inline-block relative z-10"
+                  className="hover:text-accent transition-colors no-underline text-inherit inline-block after:absolute after:inset-0"
                 >
                   {tool.title}
                 </a>
@@ -146,7 +112,7 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
                       onNavigate(targetSlug);
                     }
                   }}
-                  className="hover:text-accent transition-colors no-underline text-inherit inline-block relative z-10"
+                  className="hover:text-accent transition-colors no-underline text-inherit inline-block after:absolute after:inset-0"
                 >
                   {tool.title}
                 </a>
@@ -156,7 +122,7 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="hover:text-accent transition-colors no-underline text-inherit inline-block relative z-10"
+                  className="hover:text-accent transition-colors no-underline text-inherit inline-block after:absolute after:inset-0"
                 >
                   {tool.title}
                 </a>
@@ -176,11 +142,10 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
             ))}
           </div>
 
-          <div className="flex flex-wrap gap-3" onClick={(e) => e.stopPropagation()}>
+          <div className="relative z-10 flex flex-wrap gap-3">
             {tool.canonicalPath && (
               <a
                 href={tool.canonicalPath}
-                role="button"
                 aria-label={`Explore ${tool.title} Deep-Dive Architecture`}
                 onClick={(e) => {
                   e.stopPropagation();
@@ -199,7 +164,7 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
                 href={tool.videoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`Watch video demonstration of ${tool.title}`}
+                aria-label={`Watch Video for ${tool.title}`}
                 onClick={(e) => e.stopPropagation()}
                 className="inline-flex items-center space-x-1.5 bg-surface border border-line px-3.5 py-2 rounded-xl text-xs font-semibold text-text-dim hover:bg-surface-alt hover:text-text-main transition-colors min-h-[44px]"
               >
@@ -211,7 +176,7 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
                 href={tool.externalUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`${tool.externalLinkDisplayLabel || 'Open'} ${tool.title}`}
+                aria-label={`${tool.externalLinkDisplayLabel || 'Open Link'}: ${tool.title}`}
                 onClick={(e) => e.stopPropagation()}
                 className={`inline-flex items-center space-x-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold transition-colors min-h-[44px] ${
                   tool.canonicalPath
@@ -227,7 +192,7 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
                 href={tool.playlistUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`Watch video playlist for ${tool.title}`}
+                aria-label={`Watch Playlist for ${tool.title}`}
                 onClick={(e) => e.stopPropagation()}
                 className="inline-flex items-center space-x-1.5 bg-surface border border-line px-3.5 py-2 rounded-xl text-xs font-semibold text-text-dim hover:bg-surface-alt hover:text-text-main transition-colors min-h-[44px]"
               >
@@ -235,12 +200,12 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
                 <span>Watch Playlist</span>
               </a>
             )}
-            {tool.sourceUrl && (
+            {tool.sourceUrl && tool.sourceUrl !== tool.externalUrl && (
               <a
                 href={tool.sourceUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`Inspect ${tool.title} source code repository on GitHub`}
+                aria-label={`Source Repo for ${tool.title} on GitHub`}
                 onClick={(e) => e.stopPropagation()}
                 className="inline-flex items-center space-x-1.5 bg-surface border border-line px-3.5 py-2 rounded-xl text-xs font-semibold text-text-dim hover:bg-surface-alt hover:text-text-main transition-colors min-h-[44px]"
               >
@@ -250,7 +215,7 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
           </div>
         </div>
       </div>
-    </div>
+    </article>
   );
 };
 

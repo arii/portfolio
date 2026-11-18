@@ -128,7 +128,7 @@ export const flagshipTools: ResearchTool[] = [
     applicationCategory: 'AutonomousSystems',
     isFlagship: true,
     canonicalPath: '/research/conformant-planning-manipulation/',
-    image: '/assets/research/phd/icra_presentation.webp',
+    image: '/assets/research/phd/icra_presentation-poster.webp',
     imageAlt: 'PR2 robot executing conformant planning manipulation and reliable block alignment during ICRA presentation',
     externalUrl: 'https://dspace.mit.edu/entities/publication/d489a172-efbf-4e35-b81c-04e4acf3d24d',
     externalLinkDisplayLabel: 'MIT DSpace Thesis'
