@@ -5,7 +5,7 @@ import ResearchDetailPage from '@/pages/ResearchDetailPage';
 import { ResearchTool } from '@/types/research';
 
 describe('Card UX & Detail Page Navigation Improvements', () => {
-  it('navigates to canonical path slug when FlagshipCard container is clicked', () => {
+  it('navigates to the canonical path through the flagship heading link', () => {
     const handleNavigate = vi.fn();
     const mockTool: ResearchTool = {
       id: 'test-flagship',
@@ -19,10 +19,10 @@ describe('Card UX & Detail Page Navigation Improvements', () => {
 
     render(<FlagshipCard tool={mockTool} onNavigate={handleNavigate} onImageClick={() => {}} />);
 
-    const cardButton = screen.getByRole('button', { name: /^Test Flagship Project$/i });
-    expect(cardButton).toBeInTheDocument();
+    const cardLink = screen.getByRole('link', { name: /^Test Flagship Project$/i });
+    expect(cardLink).toHaveAttribute('href', '/research/cad-cam-dental-workflow');
 
-    fireEvent.click(cardButton);
+    fireEvent.click(cardLink);
     expect(handleNavigate).toHaveBeenCalledWith('cad-cam-dental-workflow');
   });
 
