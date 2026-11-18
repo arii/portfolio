@@ -38,7 +38,9 @@ jobs:
 
       - name: Setup Workspace
         if: github.event.action != 'closed'
-        uses: ./.github/actions/setup-workspace
+        uses: arii/boomtick/.github/actions/setup-workspace@cli-v0.20.2
+        with:
+          setup-python: 'false'
 
       - name: Install dependencies
         if: github.event.action != 'closed'
