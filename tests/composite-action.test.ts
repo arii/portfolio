@@ -29,7 +29,7 @@ describe('Shared workspace setup', () => {
         .filter(step => step.name === 'Setup Workspace');
 
       expect(setupSteps).toHaveLength(1);
-      expect(setupSteps[0].uses).toBe('arii/boomtick/.github/actions/setup-workspace@cli-v0.20.2');
+      expect(setupSteps[0].uses).toBe('arii/boomtick/.github/actions/setup-workspace@3e970a570aee0a550ec6409de769c201c9a5b900');
       expect(setupSteps[0].with).toEqual({ 'setup-python': 'false' });
       expect(fs.existsSync('.github/actions/setup-workspace/action.yml')).toBe(false);
     });
