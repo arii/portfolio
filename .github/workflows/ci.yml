@@ -6,10 +6,16 @@ on:
   pull_request:
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  # Cancel superseded PR checks, but let main and manual runs finish.
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   ci:
     name: Build, Lint, Type-Check, Test & Impact Analysis
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     env:
       BOOMTICK_APP_ID: ${{ secrets.APP_ID }}
 
