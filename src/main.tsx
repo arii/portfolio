@@ -102,6 +102,10 @@ const routes = [
         path: 'resume',
         element: lazyLoad(() => import('@/pages/Resume')),
       },
+      {
+        path: '*',
+        element: lazyLoad(() => import('@/pages/NotFound')),
+      },
     ],
   },
 ];
