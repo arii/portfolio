@@ -17,7 +17,7 @@
     "lint": "eslint .",
     "test": "vitest run",
     "doctor": "td doctor",
-    "preinstall": "node -e \"if (process.env.SKIP_BOOMTICK_PKG !== 'true' && process.env.VERCEL !== '1') { try { require('node:child_process').execSync('td doctor', {stdio: 'inherit'}); } catch (e) {} }\"",
+    "preinstall": "node -e \"if (process.env.SKIP_BOOMTICK_PKG !== 'true' && process.env.VERCEL !== '1') { require('node:child_process').spawnSync('td', ['doctor'], {stdio: 'inherit', shell: process.platform === 'win32'}); }\"",
     "agent:prime": "node scripts/agent-prime.mjs",
     "knip": "knip",
     "audit:dead-code": "pnpm exec knip",
