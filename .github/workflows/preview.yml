@@ -27,17 +27,27 @@ jobs:
       - name: Handle PR Closed
         if: github.event.action == 'closed'
         run: |
-          git fetch origin gh-pages || true
-          git checkout gh-pages || exit 0
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if [ -d "preview/pr-${{ github.event.number }}" ]; then
+          # Several PR cleanups can push to gh-pages at the same moment, so a
+          # push can be rejected as non-fast-forward. Re-sync and retry.
+          for attempt in 1 2 3 4 5; do
+            git fetch origin gh-pages || exit 0
+            git checkout -B gh-pages origin/gh-pages || exit 0
+            if [ ! -d "preview/pr-${{ github.event.number }}" ]; then
+              echo "No preview folder found to clean up."
+              exit 0
+            fi
             git rm -rf "preview/pr-${{ github.event.number }}"
             git commit -m "chore: cleanup preview for PR #${{ github.event.number }}"
-            git push origin gh-pages
-          else
-            echo "No preview folder found to clean up."
-          fi
+            if git push origin gh-pages; then
+              exit 0
+            fi
+            echo "Push rejected (attempt $attempt), retrying."
+            sleep $((attempt * 3))
+          done
+          echo "Could not push preview cleanup after 5 attempts." >&2
+          exit 1
 
       - name: Setup Workspace
         if: github.event.action != 'closed'
