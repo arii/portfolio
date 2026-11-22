@@ -48,16 +48,14 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
   const homeSchemas = [getPersonAndProfileSchema('/'), getServiceSchema()];
 
   return (
-    <div className="space-y-8 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+    <div className="space-y-10 sm:space-y-12 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-2 sm:py-6">
       <SEO
         description="Explore AI consulting, robotics software engineering, and autonomous systems research by Ariel Anders, PhD (MIT). View open-source tools and deep dives."
         canonicalUrl="/"
         jsonLd={homeSchemas}
       />
-      {/* Restructured to Balanced Vertical Layout with Optimized Spacing */}
-      <section className="bg-surface/60 border border-line rounded-2xl p-6 sm:p-8 shadow-xl backdrop-blur-sm space-y-6">
-        {/* Top block: Bio and CTAs */}
-        <div className="flex flex-col lg:flex-row lg:justify-between gap-6 lg:gap-8 pb-6 border-b border-line/80">
+      <section aria-label="Introduction" className="space-y-6">
+        <div className="flex flex-col lg:flex-row lg:justify-between gap-6 lg:gap-10">
           <div className="space-y-3 flex-1">
             <div className="space-y-1">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-text-main tracking-tight leading-tight">
@@ -68,15 +66,14 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
               </p>
             </div>
 
-            <div className="text-text-body text-base sm:text-lg leading-relaxed text-pretty">
+            <div className="space-y-3 max-w-3xl text-text-body text-base sm:text-lg leading-relaxed text-pretty">
               {heroContent.bioParagraphs.map((para, idx) => (
                 <p key={idx}>{para}</p>
               ))}
             </div>
           </div>
 
-          {/* CTA Buttons - High Contrast Solid buttons with dark text to fix accessibility */}
-          <div className="flex flex-col sm:flex-row lg:flex-col gap-3 w-full sm:w-auto lg:w-56 shrink-0 pt-2 lg:pt-0">
+          <div className="flex flex-col items-start gap-2 w-full lg:w-56 shrink-0 lg:pt-2">
             <Link
               to="/consulting"
               onClick={(e) => {
@@ -85,7 +82,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                    handleNav('consulting');
                 }
               }}
-              className="inline-flex items-center justify-center gap-2 rounded-md bg-text-main hover:bg-text-body text-bg px-5 py-2.5 w-full max-w-xs sm:max-w-none sm:w-auto lg:w-full text-sm font-bold shadow transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-main min-h-[44px]"
+              className="inline-flex items-center justify-center gap-2 rounded-md bg-text-main hover:bg-text-body text-bg px-5 py-2.5 text-sm font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-main min-h-[44px]"
             >
               <Briefcase className="w-4 h-4" />
               <span>Work With Me</span>
@@ -100,7 +97,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                    handleNav('devai');
                 }
               }}
-              className="inline-flex items-center justify-center gap-2 rounded-md border border-border bg-transparent text-text-body hover:text-text-main hover:bg-surface-elevated px-5 py-2.5 w-full max-w-xs sm:max-w-none sm:w-auto lg:w-full text-sm font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-border min-h-[44px]"
+              className="inline-flex items-center gap-2 text-text-body hover:text-text-main hover:underline underline-offset-4 py-2 text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-main rounded-sm min-h-[44px]"
             >
               <Bot className="w-4 h-4" />
               <span>View Agentic DevAI Work</span>
@@ -115,7 +112,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                   handleNav('research');
                 }
               }}
-              className="inline-flex items-center justify-center gap-2 rounded-md border border-border bg-transparent text-text-body hover:text-text-main hover:bg-surface-elevated px-5 py-2.5 w-full max-w-xs sm:max-w-none sm:w-auto lg:w-full text-sm font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-border min-h-[44px]"
+              className="inline-flex items-center gap-2 text-text-body hover:text-text-main hover:underline underline-offset-4 py-2 text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-main rounded-sm min-h-[44px]"
             >
               <Cpu className="w-4 h-4" />
               <span>View Robotics Research</span>
@@ -124,18 +121,14 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
           </div>
         </div>
 
-        {/* Bottom block: Engineering Philosophy Horizontal Text Blocks (Diminished card style to avoid confusion) */}
-        <div className="space-y-3 bg-surface-alt/40 p-4 rounded-xl border border-line/60">
-          <div className="flex items-center gap-2 pb-1">
-            <Cpu className="w-5 h-5 text-accent" />
-            <h2 className="text-sm font-semibold text-accent">Engineering Philosophy</h2>
-          </div>
+        <div className="space-y-4 pt-6 border-t border-line">
+          <h2 className="text-base font-semibold text-text-main">Engineering Philosophy</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {PHILOSOPHY_TENETS.map((tenet) => (
               <div key={tenet.id} className="space-y-1.5">
                 <h3 className="text-sm sm:text-base font-bold text-text-main text-balance">{tenet.title}</h3>
-                <p className="text-xs sm:text-sm text-text-body leading-relaxed text-pretty">{tenet.description}</p>
+                <p className="text-sm text-text-body leading-relaxed text-pretty">{tenet.description}</p>
               </div>
             ))}
           </div>
@@ -150,8 +143,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
         ))}
       </section>
 
-      {/* Bottom Feature Callouts Row - Quieter Flat Panel and Shrunken Padding */}
-      <section className="bg-surface/40 border border-line rounded-xl p-5 sm:p-6">
+      <section className="border-t border-line pt-6 sm:pt-8">
         <h2 className="sr-only">Core Capabilities</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {FEATURE_CALLOUTS.map((feature) => (
