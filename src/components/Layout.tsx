@@ -32,10 +32,16 @@ const Layout: React.FC<LayoutProps> = ({ className }) => {
 
   return (
     <div className={`min-h-screen flex flex-col bg-background text-muted-foreground relative ${className || ''}`}>
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-background focus:text-foreground focus:ring-2 focus:ring-ring"
+      >
+        Skip to main content
+      </a>
       <Navigation />
 
       {/* Main Outlet Page Container */}
-      <main id="main-content" className="flex-grow w-full relative pb-24 lg:pb-16">
+      <main id="main-content" tabIndex={-1} className="flex-grow w-full relative pb-24 lg:pb-16">
         <div className="max-w-6xl mx-auto px-4 py-8">
           <Outlet />
         </div>
