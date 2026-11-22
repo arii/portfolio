@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
+import 'katex/dist/katex.min.css';
+import { markdownRemarkPlugins, markdownRehypePlugins } from '@/utils/markdownPlugins';
 import { ArrowLeft, Calendar, Clock, Download, Video, Play, ExternalLink } from 'lucide-react';
 import { getResearchPostBySlug, RESEARCH_TOOLS } from '@/data/research';
 import { getPrimarySection } from '@/data/researchSections';
@@ -593,7 +594,8 @@ const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({ slug, onBack })
       {/* Render Markdown content cleanly using elegant, high-fidelity custom components */}
       <div className="prose-editorial">
         <ReactMarkdown
-          remarkPlugins={[remarkGfm]}
+          remarkPlugins={markdownRemarkPlugins}
+          rehypePlugins={markdownRehypePlugins}
           components={{
             code: ({ className, children, ...props }) => {
               const match = /language-(\w+)/.exec(className || '');

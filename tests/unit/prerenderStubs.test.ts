@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import fs from 'node:fs';
 import path from 'node:path';
+import { generateSitemap } from '../../scripts/generate-sitemap.js';
 import { generateSpaStubs } from '../../scripts/generate-spa-stubs.js';
 
 describe('Pre-rendered SPA Stubs & Semantic Body Markup', () => {
@@ -141,5 +142,37 @@ describe('Pre-rendered SPA Stubs & Semantic Body Markup', () => {
     const html = fs.readFileSync(path.resolve(__dirname, '../../dist/research/feels/index.html'), 'utf-8');
     expect(html).toContain('<video src="https://arii.github.io/feels/images/feels_web.mp4"');
     expect(html).not.toContain('<img src="https://arii.github.io/feels/images/feels_web.mp4"');
+  });
+
+  it('gives every generated route stub non-empty #root content', () => {
+    generateSpaStubs();
+    const distDir = path.resolve(__dirname, '../../dist');
+    const contentDir = path.resolve(__dirname, '../../src/content/research');
+    const routes = ['about', 'consulting', 'devai', 'research', 'resume'];
+    for (const file of fs.readdirSync(contentDir).filter((f) => f.endsWith('.md'))) {
+      const slug = file.replace('.md', '');
+      const dir = ['devai', 'research'].find((d) => fs.existsSync(path.join(distDir, d, slug, 'index.html')));
+      expect(dir, `stub for ${slug}`).toBeDefined();
+      routes.push(`${dir}/${slug}`);
+    }
+    for (const route of routes) {
+      const html = fs.readFileSync(path.join(distDir, route, 'index.html'), 'utf-8');
+      const root = html.match(/<div id="root">([\s\S]*?)<\/div>/);
+      expect(root, route).not.toBeNull();
+      expect(root![1].trim().length, route).toBeGreaterThan(0);
+    }
+  });
+
+  it('generates a sitemap with git-derived lastmod and image tags', () => {
+    generateSitemap();
+    const xml = fs.readFileSync(path.resolve(__dirname, '../../public/sitemap.xml'), 'utf-8');
+    const urls = xml.match(/<url>[\s\S]*?<\/url>/g) ?? [];
+    expect(urls.length).toBeGreaterThan(5);
+    for (const url of urls) expect(url).toMatch(/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/);
+    expect(xml).toContain('<image:loc>');
+    expect(xml).toContain('<image:title>');
+    expect(xml).toContain('<image:caption>');
+    expect(xml).toContain('<image:license>');
+    expect(xml).toContain('<loc>https://arii.github.io/research/conformant-planning-manipulation/</loc>');
   });
 });

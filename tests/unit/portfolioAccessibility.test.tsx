@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
+import Layout from '@/components/Layout';
 import Navigation from '@/components/Navigation';
 import ImageLightbox from '@/components/ImageLightbox';
 import FlagshipCard from '@/components/FlagshipCard';
@@ -113,5 +114,16 @@ describe('portfolio links', () => {
     expect(screen.getByRole('link', { name: 'Learn more about Waymo' })).toHaveAttribute('href', 'https://example.com/waymo');
     expect(screen.getByRole('link', { name: 'Learn more about Robotics Award' })).toHaveAttribute('href', 'https://example.com/award');
     expect(screen.getByRole('link', { name: 'Open Navigation' })).toHaveAttribute('href', 'https://example.com/project');
+  });
+});
+
+describe('skip link', () => {
+  it('is the first focusable element and targets the main landmark', () => {
+    const { container } = render(<MemoryRouter><Layout /></MemoryRouter>);
+    const link = screen.getByRole('link', { name: 'Skip to main content' });
+    const firstFocusable = container.querySelector('a[href], button, input, select, textarea, [tabindex]:not([tabindex="-1"])');
+    expect(firstFocusable).toBe(link);
+    expect(link).toHaveAttribute('href', '#main-content');
+    expect(screen.getByRole('main')).toHaveAttribute('id', 'main-content');
   });
 });

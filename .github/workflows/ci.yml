@@ -4,6 +4,9 @@ on:
   push:
     branches: [ main ]
   pull_request:
+    paths-ignore:
+      - '*.md'
+      - 'docs/**'
   workflow_dispatch:
 
 concurrency:
@@ -15,7 +18,7 @@ jobs:
   ci:
     name: Build, Lint, Type-Check, Test & Impact Analysis
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 15
     env:
       BOOMTICK_APP_ID: ${{ secrets.APP_ID }}
 
