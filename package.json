@@ -54,6 +54,7 @@
     "ignoreExportsUsedInFile": true
   },
   "dependencies": {
+    "katex": "^0.19.1",
     "lucide-react": "^1.31.0",
     "mermaid": "^11.17.2",
     "react": "^19.0.0",
@@ -61,7 +62,9 @@
     "react-helmet-async": "^3.0.0",
     "react-markdown": "^10.1.0",
     "react-router-dom": "^7.1.5",
+    "rehype-katex": "^7.0.1",
     "remark-gfm": "^4.0.1",
+    "remark-math": "^6.0.0",
     "svg-pan-zoom": "^3.6.2",
     "yaml": "^2.9.0"
   },
