@@ -11,7 +11,7 @@ tags:
   - MIT CSAIL
 category: "Robotics & AI"
 summary: "My Master's thesis on learning robust whole-arm and bimanual grasping policies to cradle and secure bulky, unmodeled objects under physical and pose uncertainty."
-pdfUrl: "https://raw.githubusercontent.com/arii/arii.github.io/main/reports/report_ml.pdf"
+pdfUrl: "https://dspace.mit.edu/bitstreams/dec014ca-67b1-412c-8b80-952b4b350eca/download"
 ---
 
 ## MIT S.M. Thesis — Computer Science and Artificial Intelligence Laboratory (CSAIL)
