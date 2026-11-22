@@ -1,9 +1,22 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, within } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import Home from '../Home';
 
 describe('Home Page', () => {
+  it('keeps the introduction focused on consulting with both secondary routes available', () => {
+    const onNavigate = vi.fn();
+    render(<MemoryRouter><Home onNavigate={onNavigate} /></MemoryRouter>);
+    const introduction = screen.getByRole('region', { name: 'Introduction' });
+    const links = within(introduction).getAllByRole('link');
+    expect(links.map((link) => link.getAttribute('href'))).toEqual([
+      '/consulting', '/devai', '/research',
+    ]);
+    expect(within(introduction).getByRole('heading', { name: 'Engineering Philosophy' })).toBeInTheDocument();
+    fireEvent.click(links[0]);
+    expect(onNavigate).toHaveBeenCalledWith('consulting');
+  });
+
   it('renders hero title and role hierarchy correctly', () => {
     const handleNavigate = vi.fn();
     render(
