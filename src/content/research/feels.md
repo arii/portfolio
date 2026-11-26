@@ -52,7 +52,7 @@ In our PCA projection, water and solid-weight signatures separate cleanly, while
 
 ### Online Learning and Vector Memory
 
-Feels is a **live data collection and training platform** that improves as operators teach it. We store torque signatures as embeddings in **MongoDB Atlas Vector Search** and classify via nearest-neighbor retrieval against everything taught so far. Operators teach new categories and correct misclassifications directly from the dashboard ("teach a new item"), with zero retraining latency. Our stack runs on **Viam Python SDK, gRPC, WebRTC, and aiohttp**, streaming telemetry over **SSE**, with **PyTorch** and **scipy** in the feature pipeline and a labeled swirl dataset published on **Hugging Face**.
+Feels was a **hackathon data collection and training prototype**; development is inactive. We store torque signatures as embeddings in **MongoDB Atlas Vector Search** and classify via nearest-neighbor retrieval against everything taught so far. Operators teach new categories and correct misclassifications directly from the dashboard ("teach a new item"), with zero retraining latency. Our stack runs on **Viam Python SDK, gRPC, WebRTC, and aiohttp**, streaming telemetry over **SSE**, with **PyTorch** and **scipy** in the feature pipeline and a labeled swirl dataset published on **Hugging Face**.
 
 ---
 

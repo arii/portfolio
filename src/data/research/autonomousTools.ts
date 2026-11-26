@@ -93,10 +93,10 @@ export const autonomousTools: ResearchTool[] = [
     title: 'Feels',
     description: 'I co-built an online data collection and training platform that classifies a sealed cup\'s contents (liquid, candy, or screws) from motor torques alone using a lift–swirl–predict routine, with 86–89% empty detection on the stock arm.',
     category: 'Robotics & Manipulation',
-    status: 'Completed',
+    status: 'Inactive',
     tags: ['Robotics', 'Manipulation', 'Machine learning', 'Viam', 'MongoDB'],
     image: '/assets/research/feels.webp',
-    imageAlt: 'Feels live demo: robot arm lifting and swirling a sealed cup, with the PCA signature space of 110 taught signatures',
+    imageAlt: 'Feels recorded hackathon demo: robot arm lifting and swirling a sealed cup, with the PCA signature space of 110 taught signatures',
     canonicalPath: '/research/feels/',
     externalUrl: 'https://arii.github.io/feels',
     sourceUrl: 'https://github.com/arii/feels'
