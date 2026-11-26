@@ -21,7 +21,7 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
   };
 
   const ToolIcon = getToolIcon(tool);
-  const imageSrc = tool.id === 'hrm-flagship' ? '/assets/research/hrm-flagship.webp' : tool.id === 'repo-auditor-ai' ? '/assets/research/repo-auditor-ai.webp' : tool.image || null;
+  const imageSrc = tool.image || null;
 
   const targetSlug = tool.canonicalPath
     ? tool.canonicalPath.replace(/^\/?(research|devai)\//, '').replace(/^\//, '').replace(/\/+$/, '')
@@ -64,16 +64,14 @@ const FlagshipCard: React.FC<FlagshipCardProps> = ({ tool, onNavigate, onImageCl
         <div className="space-y-3">
           <div className="flex items-center justify-between">
             <div className="h-10 w-10 rounded-2xl bg-accent/10 flex items-center justify-center border border-accent/20"><ToolIcon className="h-5 w-5 text-accent" /></div>
-            {tool.id !== 'phd-thesis' && tool.id !== 'masters-thesis' && (
-              <div className="flex items-center space-x-1.5 bg-surface border border-line px-2 py-1 rounded-md">
-                <span className={`w-2 h-2 rounded-md ${
-                  tool.status === 'Live' ? 'bg-accent' :
-                  tool.status === 'Local only' ? 'bg-accent' :
-                  tool.status === 'In development' ? 'bg-accent-sky' : 'bg-muted-foreground'
-                }`}></span>
-                <span className="text-xs font-semibold text-text-main pr-0.5">{tool.status}</span>
-              </div>
-            )}
+            <div className="flex items-center space-x-1.5 bg-surface border border-line px-2 py-1 rounded-md">
+              <span className={`w-2 h-2 rounded-md ${
+                tool.status === 'Live' ? 'bg-accent' :
+                tool.status === 'Local only' ? 'bg-accent' :
+                tool.status === 'In development' ? 'bg-accent-sky' : 'bg-muted-foreground'
+              }`}></span>
+              <span className="text-xs font-semibold text-text-main pr-0.5">{tool.status}</span>
+            </div>
           </div>
           <div>
             <span className="text-xs text-accent font-semibold block font-sans">{tool.category}</span>
