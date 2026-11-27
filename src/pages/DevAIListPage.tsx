@@ -20,7 +20,7 @@ export interface DevAIListPageProps {
 
 // Image-bearing product cards are the primary presentation of these products;
 // their text-only deep-dive duplicates are removed from the article feed.
-const IMAGE_PRODUCT_IDS = ['boomtick', 'sf-promises', 'wcs-navigator', 'hrm-flagship'];
+const IMAGE_PRODUCT_IDS = ['boomtick', 'sf-promises', 'wcs-navigator', 'hrm-flagship', 'repo-auditor-ai'];
 
 // Slugs whose deep-dive article is already entered through an image card above.
 const DUPLICATED_ARTICLE_SLUGS = ['sf-promises', 'hrm-architecture', 'gitops-pr-reviewer', 'ai-experiments'];

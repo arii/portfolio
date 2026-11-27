@@ -20,6 +20,7 @@ describe('DevAI and Research List Page Deduplication', () => {
     expect(screen.getByText('SF Promises')).toBeInTheDocument();
     expect(screen.getByText('WCS Navigator')).toBeInTheDocument();
     expect(screen.getByText('HRM (Heart Rate Monitor)')).toBeInTheDocument();
+    expect(screen.getByText('RepoAuditor AI')).toBeInTheDocument();
     expect(screen.getByText('Engineering Deep-Dives')).toBeInTheDocument();
     // Text-only deep-dive cards whose content the image cards already
     // represent are removed from the feed.

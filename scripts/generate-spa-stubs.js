@@ -23,7 +23,7 @@ const DEVAI_DEFAULT_IMAGE = `${SITE_URL}/assets/research/boomtick-devai-tools/bo
 
 // Image-bearing product cards are the primary presentation on /devai/; the
 // text-only deep-dive articles they represent are not listed separately.
-const IMAGE_PRODUCT_IDS = ['boomtick', 'sf-promises', 'wcs-navigator', 'hrm-flagship'];
+const IMAGE_PRODUCT_IDS = ['boomtick', 'sf-promises', 'wcs-navigator', 'hrm-flagship', 'repo-auditor-ai'];
 const DUPLICATED_ARTICLE_SLUGS = ['sf-promises', 'hrm-architecture', 'gitops-pr-reviewer', 'ai-experiments'];
 
 function getDevAiCardImage(tool) {
