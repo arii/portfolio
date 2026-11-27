@@ -1,7 +1,8 @@
 import React from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ExternalLink } from 'lucide-react';
 import { ResearchTool } from '@/types/research';
 import SafeImage from '@/components/ui/SafeImage';
+import { GithubIcon } from '@/components/SocialIcons';
 
 export interface ProductCardProps {
   tool: ResearchTool;
@@ -63,7 +64,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ tool, onNavigate, onImageClic
 
         <p className="text-sm text-text-dim leading-relaxed text-pretty">{tool.shortDescription || tool.description}</p>
 
-        {tool.canonicalPath && (
+        {tool.canonicalPath ? (
           <a
             href={tool.canonicalPath}
             role="button"
@@ -78,6 +79,31 @@ const ProductCard: React.FC<ProductCardProps> = ({ tool, onNavigate, onImageClic
           >
             <span>Read the Deep-Dive</span><ArrowRight className="h-3.5 w-3.5" />
           </a>
+        ) : (
+          <div className="mt-auto flex flex-wrap gap-2 pt-2">
+            {tool.externalUrl && (
+              <a
+                href={tool.externalUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${tool.externalLinkDisplayLabel || 'Historical Demo'}: ${tool.title}`}
+                className="inline-flex items-center space-x-1.5 bg-accent/10 border border-accent/20 px-3.5 py-2 rounded-xl text-xs font-semibold text-accent hover:bg-accent/20 transition-colors min-h-[44px] no-underline"
+              >
+                <span>{tool.externalLinkDisplayLabel || 'Historical Demo'}</span><ExternalLink className="h-3.5 w-3.5" />
+              </a>
+            )}
+            {tool.sourceUrl && tool.sourceUrl !== tool.externalUrl && (
+              <a
+                href={tool.sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Source Repo for ${tool.title} on GitHub`}
+                className="inline-flex items-center space-x-1.5 bg-surface border border-line px-3.5 py-2 rounded-xl text-xs font-semibold text-text-dim hover:bg-surface-alt hover:text-text-main transition-colors min-h-[44px] no-underline"
+              >
+                <span>Source Repo</span><GithubIcon className="h-3.5 w-3.5" />
+              </a>
+            )}
+          </div>
         )}
       </div>
     </div>
